@@ -2036,8 +2036,8 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.query.$batch({
-   *   user: { id: true, name: true },
-   *   posts: { title: true, content: true }
+   * user: { id: true, name: true },
+   * posts: { title: true, content: true }
    * })
    * ```
    */
@@ -2051,16 +2051,16 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * @example Single field
    * ```ts
    * const result = await graffle.mutation.createUser({
-   *   id: true,
-   *   name: true
+   * id: true,
+   * name: true
    * })
    * ```
    *
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.mutation.$batch({
-   *   createUser: { id: true, name: true },
-   *   createPost: { id: true, title: true }
+   * createUser: { id: true, name: true },
+   * createPost: { id: true, title: true }
    * })
    * ```
    */

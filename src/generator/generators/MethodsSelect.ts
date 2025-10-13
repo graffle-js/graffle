@@ -2,6 +2,7 @@ import { Tex } from '#lib/tex'
 import { Code } from '#src/lib/Code.js'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
+import { getMethodsSelectDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
@@ -40,18 +41,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
       code(Tex.title1(kindName))
       code``
       for (const type of kind) {
-        const description = type.description
-        if (description) {
-          code(`/**`)
-          description.split('\n').forEach(line => code(` * ${line}`))
-          code(` *`)
-          code(` * Build type-safe selection set for ${type.name}.`)
-          code(` */`)
-        } else {
-          code(`/**`)
-          code(` * Build type-safe selection set for ${type.name}.`)
-          code(` */`)
-        }
+        code(Code.TSDoc(getMethodsSelectDoc(type)))
         code(Code.tsInterface({
           name: type.name,
           block: `

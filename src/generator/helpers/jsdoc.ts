@@ -950,3 +950,46 @@ export const getScalarRegistryTypeDoc = (): string => {
 
   return parts.join('\n')
 }
+
+/**
+ * Generate JSDoc for Select namespace type utilities.
+ * Used in Select.ts for type inference utilities.
+ */
+export const getSelectInferDoc = (
+  type: Grafaid.Schema.NamedTypes,
+  kind: 'operation' | 'selectionSet',
+): string => {
+  const schemaDescription = type.description
+  const parts: string[] = []
+
+  if (schemaDescription) {
+    parts.push(schemaDescription)
+    parts.push('')
+  }
+
+  const text = kind === 'operation'
+    ? `Infer result type for ${type.name} operations.`
+    : `Infer result type for ${type.name} selection sets.`
+
+  parts.push(text)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for MethodsSelect interfaces.
+ * Used in MethodsSelect.ts for selection method interfaces.
+ */
+export const getMethodsSelectDoc = (type: Grafaid.Schema.NamedTypes): string => {
+  const schemaDescription = type.description
+  const parts: string[] = []
+
+  if (schemaDescription) {
+    parts.push(schemaDescription)
+    parts.push('')
+  }
+
+  parts.push(`Build type-safe selection set for ${type.name}.`)
+
+  return parts.join('\n')
+}

@@ -15,3 +15,8 @@ export type * from '../extensions/TransportHttp/TransportHttp.js'
 // export { Data } from '#src/context/fragments/transports/dataType/data.js'
 export * as Preset from './_Preset.js'
 export * as Graffle from './graffle.js'
+
+// The inferred type of 'Date' cannot be named without a reference
+// to './node_modules/graffle/build/types/Schema/$$.js'.
+// This is likely not portable. A type annotation is necessary. (ts 2742)
+export * from '../types/Schema/$$.js'
