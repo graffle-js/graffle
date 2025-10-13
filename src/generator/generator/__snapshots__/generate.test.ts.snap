@@ -163,7 +163,7 @@ export interface RootTypeCustomNameForQueryMethods<
   >;
 
   /**
-   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | \`__typename\`} meta-field.
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | __typename} meta-field.
    *
    * The \`__typename\` field returns the name of the object type. In this case, it will always return \`"RootTypeCustomNameForQuery"\`.
    */
@@ -189,7 +189,7 @@ export interface RootTypeCustomNameForQueryMethods<
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.RootTypeCustomNameForQuery} |
    * | **Path** | \`RootTypeCustomNameForQuery.id\` |
    * | **Nullability** | Optional |
