@@ -17,7 +17,6 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
-import { ModuleGeneratorStringIntrospection } from '../generators/StringIntrospection.js'
 import { ModuleGeneratorTypeInputsIndex } from '../generators/TypeInputsIndex.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
@@ -28,7 +27,6 @@ const moduleGenerators = [
   ModuleGeneratorDocument,
   ModuleGeneratorData,
   ModuleGeneratorScalar,
-  ModuleGeneratorStringIntrospection,
   ModuleGeneratorGql,
   // Packaging Stuff
   ModuleGenerator_internals,

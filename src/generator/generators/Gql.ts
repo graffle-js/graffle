@@ -2,7 +2,6 @@ import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportAll, codeImportNamed } from '../helpers/pathHelpers.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
-import { ModuleGeneratorStringIntrospection } from './StringIntrospection.js'
 
 /**
  * Generates an overloaded gql() function that supports both:

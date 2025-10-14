@@ -9,7 +9,6 @@ import { ModuleGeneratorMethodsRoot } from './MethodsRoot.js'
 import { ModuleGeneratorMethodsSelect } from './MethodsSelect.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
-import { ModuleGeneratorStringIntrospection } from './StringIntrospection.js'
 
 export const ModuleGeneratorGlobal = createModuleGenerator(
   `global`,
@@ -21,8 +20,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorMethodsRoot))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
-    // Import string-introspection as $$Tada for gql-tada compatibility
-    code(codeImportAll(config, { as: '$$Tada', from: './string-introspection', type: true }))
     code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl
@@ -42,7 +39,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
           $Document: `${$.$$SelectionSets}.$Document`,
         },
         argumentsMap: `${$.$$ArgumentsMap}.ArgumentsMap`,
-        stringIntrospection: `${$.$$Tada}.introspection`,
         defaultSchemaUrl: {
           $TS_DOC: defaultSchemaUrlTsDoc,
           $VALUE: config.options.defaultSchemaUrl ? `string` : `null`,
