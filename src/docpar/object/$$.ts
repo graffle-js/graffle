@@ -1,3 +1,4 @@
+export type * as FromObject from './from-object.js'
 export { InferResult } from './InferResult/$.js'
 export { Select } from './Select/$.js'
 export { ToGraphQLDocument } from './ToGraphQLDocument/$.js'
