@@ -21,10 +21,8 @@ export type parseDocument<$Input extends string> = {
 export type getDocumentOperations<
   $Definitions,
   $Schema,
-> = $Definitions extends string
-  ? $Schema extends import('./schema.js').Schema
-    ? ParseDocument<$Definitions, $Schema>
-    : ParseDocument<$Definitions, undefined>
+> = $Definitions extends string ? $Schema extends import('./schema.js').Schema ? ParseDocument<$Definitions, $Schema>
+  : ParseDocument<$Definitions, undefined>
   : never
 
 /**

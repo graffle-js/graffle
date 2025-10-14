@@ -21,8 +21,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorMethodsRoot))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
-    code(importModuleGenerator(config, ModuleGeneratorStringIntrospection, true))
-    // Import string-introspection again as $$Tada for gql-tada compatibility
+    // Import string-introspection as $$Tada for gql-tada compatibility
     code(codeImportAll(config, { as: '$$Tada', from: './string-introspection', type: true }))
     code``
 

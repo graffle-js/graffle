@@ -1,4 +1,3 @@
-import type { Schema as $Schema } from '../$.js'
 import type { lowerCaseObject } from '../objects/lowerCaseObject/$.js'
 import type { lowerCaseObject2 } from '../objects/lowerCaseObject2/$.js'
 

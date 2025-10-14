@@ -328,3 +328,6 @@ export const createGql = <
     return print(result.document) as any
   }) as any
 }
+
+// todo
+// export const gql = createGql()

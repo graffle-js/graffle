@@ -1,4 +1,3 @@
-import type { Schema as $Schema } from '../$.js'
 import type { ErrorOne } from '../objects/ErrorOne/$.js'
 import type { ErrorTwo } from '../objects/ErrorTwo/$.js'
 import type { Object1 } from '../objects/Object1/$.js'

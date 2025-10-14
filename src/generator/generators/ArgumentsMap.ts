@@ -49,8 +49,6 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     const subscriptionType = config.schema.instance.getSubscriptionType()
 
     code(importUtilities(config))
-    code(codeImportAll(config, { as: 'TypeInputsIndex', from: './type-inputs-index', type: true }))
-    code``
 
     // Group types by kind for organized output
     const objectTypes: Grafaid.Schema.ArgsIndex.TypeInfo[] = []
@@ -77,6 +75,13 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     // Generate Input Objects section
     // Input objects are collected from all args in the index
     const inputObjectTypes = collectInputObjectTypes(argsIndex, config.schema.instance)
+
+    // Conditionally import TypeInputsIndex only if there are input objects or types with arguments
+    const needsTypeInputsIndex = inputObjectTypes.length > 0 || objectTypes.length > 0 || interfaceTypes.length > 0
+    if (needsTypeInputsIndex) {
+      code(codeImportAll(config, { as: 'TypeInputsIndex', from: './type-inputs-index', type: true }))
+    }
+    code``
 
     if (inputObjectTypes.length > 0) {
       code(Tex.title1(`InputObject`))

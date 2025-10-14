@@ -1,8 +1,6 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Scalars from '../../scalars/$.js'
-import type * as $Fields from './fields.js'
 
 export type * as DateFilter from './fields.js'
 

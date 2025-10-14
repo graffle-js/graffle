@@ -28,15 +28,12 @@ import { ModuleGeneratorStringIntrospection } from './StringIntrospection.js'
 export const ModuleGeneratorGql = createModuleGenerator(
   `gql`,
   ({ config, code }) => {
-    code(importModuleGenerator(config, ModuleGeneratorStringIntrospection))
     code`
       import { createGql } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`
     code(codeImportNamed(config, { names: 'Schema', from: './schema/$', type: true }))
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
-    // Import string-introspection again as $$Tada for gql-tada compatibility
-    code(codeImportAll(config, { as: '$$Tada', from: './string-introspection', type: true }))
     code`
 
       /**
