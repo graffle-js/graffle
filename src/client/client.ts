@@ -4,7 +4,8 @@ import type { Context } from '#src/context/context.js'
 import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
 import { graffleMappedResultToRequest } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
-import { Select } from '#src/docpar/object/Select/$.js'
+// import { Select } from '#src/docpar/object/Select/$.js'
+import { Docpar } from '#src/docpar/$.js'
 import { SelectionSetGraphqlMapper } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/$.js'
 import { getOperationType } from '#src/lib/grafaid/document.js'
 import type { Exact } from '#src/lib/prelude.js'
@@ -488,7 +489,7 @@ export const createWithContext = <$Context extends Context>(
         let request
         if (normalized.type === 'object') {
           // For document objects: use the full SelectionSetGraphqlMapper flow
-          const documentNormalized = Select.Document.normalizeOrThrow(normalized.document)
+          const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(normalized.document)
           const encoded = SelectionSetGraphqlMapper.toGraphQL(documentNormalized, {
             sddm: context.configuration.schema.current.map,
             scalars: context.scalars.map,
