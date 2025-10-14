@@ -1,6 +1,6 @@
 import { type DeepObjectValue } from '#src/lib/object-utils.js'
 import { Obj } from '@wollybeard/kit'
-import { Var } from '../var/$.js'
+import { Var } from '#src/docpar/object/var/$.js'
 import type { DefaultContext } from './context.js'
 
 export type ArgValue<$Context = DefaultContext> =

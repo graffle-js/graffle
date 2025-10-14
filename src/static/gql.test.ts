@@ -1,4 +1,4 @@
-import { Var } from '#src/extensions/DocumentBuilder/var/$.js'
+import { Var } from '#src/docpar/object/var/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 

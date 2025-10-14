@@ -4,7 +4,7 @@ import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
 import { expect, test } from 'vitest'
-import { Var } from '../extensions/DocumentBuilder/var/$.js'
+import { Var } from '../docpar/object/var/$.js'
 import { createStaticRootType } from './rootField.js'
 
 const $ = Var.$

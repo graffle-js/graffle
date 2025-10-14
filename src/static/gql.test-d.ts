@@ -1,4 +1,4 @@
-import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
+import { $ } from '#src/docpar/object/var/var.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
