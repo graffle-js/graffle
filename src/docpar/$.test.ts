@@ -1,9 +1,10 @@
 import { Docpar } from '#src/docpar/$.js'
-import { Var } from '#src/docpar/object/var/$.js'
 import type * as Doc from '#src/docpar/core/doc.js'
+import { Var } from '#src/docpar/object/var/$.js'
+import type { Grafaid } from '#src/lib/grafaid/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
-import { Test } from '@wollybeard/kit/test'
 import { Ts } from '@wollybeard/kit'
+import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode, parse, print } from 'graphql'
 import { expect, test } from 'vitest'
 
@@ -157,6 +158,108 @@ test('static document builder > SDDM type branding - runtime verification', () =
 // ==================================================================================================
 //                                   Type-Level GQL Tests
 // ==================================================================================================
+
+// ==================================================================================================
+//                                 Static Root Type Builder Type Input Validation
+// ==================================================================================================
+
+test('static root type builder > type input validation', () => {
+  // @ts-expect-error - Builder<1> should not be assignable to Builder<string>
+  Possible.query.stringWithRequiredArg({
+    $: {
+      string: $.default(1),
+    },
+  })
+})
+
+// ==================================================================================================
+//                                 Static Root Type Builder Type Output Inference
+// ==================================================================================================
+
+// dprint-ignore
+test('static root type builder > type output inference', () => {
+  // Nested object args
+  const q0 = Possible.query.objectNestedWithArgs({ object: { $: { int: $ }, id:true}})
+  Ts.Test.exact<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | null | undefined }, true>>()(q0)
+
+  // Scalar fields
+  const q1 = Possible.query.string(true)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ string: string | null }, {}, true>>()(q1)
+
+  const q2 = Possible.query.idNonNull(true)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ idNonNull: string }, {}, true>>()(q2)
+
+  // Custom scalar - without custom scalar codecs defined
+  const q3 = Possible.query.date(true)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ date: Date | null }, {}, true>>()(q3)
+
+  // Lists
+  const q5 = Possible.query.listInt(true)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, {}, true>>()(q5)
+
+  const q6 = Possible.query.listIntNonNull(true)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, {}, true>>()(q6)
+
+  const q7 = Possible.query.listListInt(true)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}, true>>()(q7)
+
+  // Object with fields
+  const q8 = Possible.query.object({ id: true })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ object: { id:string|null } | null }, {}, true>>()(q8)
+
+  // Field with $
+  const q9 = Possible.query.stringWithArgs({ $: { boolean: $ } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | null | undefined }, true>>()(q9)
+
+  // Required argument with $
+  const q10 = Possible.query.stringWithRequiredArg({ $: { string: $ } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }, true>>()(q10) // NOT undefined!
+
+  // Required argument with $ with default
+  const q11 = Possible.query.stringWithRequiredArg({ $: { string: $.default('abc') } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string?: string | undefined }, true>>()(q11)
+
+  // $ with custom name
+  const q12 = Possible.query.stringWithArgs({ $: { boolean: $.name('isActive') } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | null | undefined }, true>>()(q12)
+
+  // $.required() on optional argument
+  const q12b = Possible.query.stringWithArgs({ $: { string: $.required() } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }, true>>()(q12b) // NOT undefined!
+
+  // List argument with $
+  const q13 = Possible.query.stringWithListArg({ $: { ints: $ } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | null | undefined }, true>>()(q13)
+
+  const q14 = Possible.query.stringWithListArgRequired({ $: { ints: $ } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }, true>>()(q14)
+
+  // Multiple $ types
+  const q15 = Possible.query.stringWithArgs({ $: { boolean: $, string: $ } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<
+    { stringWithArgs: string | null },
+    { boolean?: boolean | null | undefined, string?: string | null | undefined },
+    true
+  >>()(q15)
+
+  // Mixed $ and literals
+  const q16 = Possible.query.stringWithArgs({ $: { boolean: true, string: $, int: 42 } })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | null | undefined }, true>>()(q16)
+
+  // Alias with $ on nested object field
+  const q20 = Possible.query.objectNestedWithArgs({
+    object: ['object2', { $: { int: $ }, id:true }]
+    // TODO: this should be a type error! (no fields selected, just $)
+    // object: ['object2', { $: { int: $ } }]
+    // TODO: this should be a type error!
+    // id: ['id2', {$:{filter:$}}]
+  })
+  Ts.Test.exact<Grafaid.Document.Typed.String<
+    { objectNestedWithArgs: { object2: { id: string | null } | null } | null },
+    { int?: number | null | undefined },
+    true
+  >>()(q20)
+})
 
 // ==================================================================================================
 //                                   Single operation, no variables
