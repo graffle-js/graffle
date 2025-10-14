@@ -2,6 +2,7 @@ import { Docpar } from '#src/docpar/$.js'
 import type { Options } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
 import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
+import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
@@ -95,14 +96,17 @@ export type ParseGraphQLString<
 export type ParseGraphQLObject<
   $Context,
   $Document,
-> = Doc.FromObject<
-  InferOperations<
-    $Document,
-    GlobalRegistry.ForContext<$Context>['schema'],
-    GlobalRegistry.ForContext<$Context>['argumentsMap'],
-    $Context
-  >
->
+> =
+  $Document extends object
+    ? Doc.FromObject<
+        InferOperationsInDocument<
+          $Document,
+          GlobalRegistry.ForContext<$Context>['schema'],
+          GlobalRegistry.ForContext<$Context>['argumentsMap'],
+          $Context
+        >
+      >
+    : never
 
 //
 //
@@ -117,76 +121,136 @@ export type ParseGraphQLObject<
 //
 
 /**
- * Infer operation metadata from a full document selection set.
+ * Infer all operations in a document by mapping over operation types (query, mutation, subscription).
  *
- * This utility takes a document object (with query/mutation operations) and infers
- * the result types and variable types for each named operation.
- *
- * Used by generated static document builders to provide type-safe operation inference.
+ * This consolidates the previous separate `InferOperationsFromQuery` and `InferOperationsFromMutation`
+ * utilities into a single unified type that handles all operation types.
  *
  * @example
  * ```ts
- * type Doc = { query: { getUser: { id: true }, getPost: { id: true } } }
- * type Ops = InferOperations<Doc, MySchema, MyArgsMap, MyScalars>
- * // Result: {
- * //   getUser: { result: { id: string }, variables: {} },
- * //   getPost: { result: { id: string }, variables: {} }
- * // }
+ * type Doc = {
+ *   query: { getUser: { id: true }, getPost: { id: true } },
+ *   mutation: { createUser: { id: true } }
+ * }
+ * type Ops = InferOperationsInDocument<Doc, MySchema, MyArgsMap, MyContext>
+ * // Result: getUser | getPost | createUser operations
  * ```
  */
 // dprint-ignore
-type InferOperationsFromQuery<
-  $Query extends object,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery,
-  $Context
-> = {
-  [k_operationName in keyof $Query & string as $Query[k_operationName] extends object ? k_operationName : never]:
-    $Query[k_operationName] extends object
-      ?
-      TypedFullDocument.Operation<
-        k_operationName,
-        RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationQuery<$Query[k_operationName], $Schema>>,
-        RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromQuery<$Query[k_operationName], $ArgumentsMap>>
-      >
-      : never
-}
-
-// dprint-ignore
-type InferOperationsFromMutation<
-  $Mutation extends object,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
-  $Context
-> = {
-  [k_operationName in keyof $Mutation & string as $Mutation[k_operationName] extends object ? k_operationName : never]:
-    $Mutation[k_operationName] extends object
-      ?
-      TypedFullDocument.Operation<
-        k_operationName,
-        RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationMutation<$Mutation[k_operationName], $Schema>>,
-        RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromMutation<$Mutation[k_operationName], $ArgumentsMap>>
-      >
-      : never
-}
-
-// dprint-ignore
-export type InferOperations<
-  $Document,
+export type InferOperationsInDocument<
+  $Document extends object,
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context
 > =
   & ($Document extends { query: infer $Query extends object }
-    ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery
-      ? InferOperationsFromQuery<$Query, $Schema, $ArgumentsMap, $Context>
-      : {}
-    : {})
+      ? {
+          [operationName in keyof $Query]:
+            InferOperation<
+              $Query[operationName],
+              $Schema,
+              $ArgumentsMap,
+              $Context,
+              typeof Grafaid.Document.OperationTypeNode.QUERY,
+              operationName
+            >
+        }
+      : {})
   & ($Document extends { mutation: infer $Mutation extends object }
-    ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation
-      ? InferOperationsFromMutation<$Mutation, $Schema, $ArgumentsMap, $Context>
-      : {}
-    : {})
+      ? {
+          [operationName in keyof $Mutation]:
+            InferOperation<
+              $Mutation[operationName],
+              $Schema,
+              $ArgumentsMap,
+              $Context,
+              typeof Grafaid.Document.OperationTypeNode.MUTATION,
+              operationName
+            >
+        }
+      : {})
+  & ($Document extends { subscription: infer $Subscription extends object }
+      ? {
+          [operationName in keyof $Subscription]:
+            InferOperation<
+              $Subscription[operationName],
+              $Schema,
+              $ArgumentsMap,
+              $Context,
+              typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION,
+              operationName
+            >
+        }
+      : {})
+
+/**
+ * @deprecated Use `InferOperationsInDocument` instead. This alias exists for backwards compatibility.
+ */
+export type InferOperations<
+  $Document,
+  $Schema extends Schema,
+  $ArgumentsMap extends SchemaDrivenDataMap,
+  $Context,
+> = $Document extends object ? InferOperationsInDocument<$Document, $Schema, $ArgumentsMap, $Context>
+  : never
+
+/**
+ * Infer a single operation with the given operation type.
+ *
+ * This replaces the duplication in `InferOperationsFromQuery` and `InferOperationsFromMutation`
+ * by accepting the operation type as a parameter.
+ *
+ * @example
+ * ```ts
+ * type Op = InferOperation<
+ *   { id: true, name: true },
+ *   MySchema,
+ *   MyArgsMap,
+ *   MyContext,
+ *   OperationTypeNode.QUERY,
+ *   'getUser'
+ * >
+ * // Result: TypedFullDocument.Operation<'getUser', { id: string, name: string }, {}>
+ * ```
+ */
+// dprint-ignore
+type InferOperation<
+  $DocOp,
+  $Schema extends Schema,
+  $ArgumentsMap extends SchemaDrivenDataMap,
+  $Context,
+  $OperationType extends Grafaid.Document.OperationTypeNode,
+  $OperationName,
+> =
+  $DocOp extends object
+    ? TypedFullDocument.Operation<
+        $OperationName & string,
+        RequestResult.Simplify<$Context,
+          $OperationType extends typeof Grafaid.Document.OperationTypeNode.QUERY
+            ? DocumentBuilderKit.InferResult.OperationQuery<$DocOp, $Schema>
+            : $OperationType extends typeof Grafaid.Document.OperationTypeNode.MUTATION
+              ? DocumentBuilderKit.InferResult.OperationMutation<$DocOp, $Schema>
+              : $OperationType extends typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION
+                ? DocumentBuilderKit.InferResult.OperationSubscription<$DocOp, $Schema>
+                : never
+        >,
+        RequestResult.Simplify<$Context,
+          $OperationType extends typeof Grafaid.Document.OperationTypeNode.QUERY
+            ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery
+              ? DocumentBuilderKit.Var.InferFromQuery<$DocOp, $ArgumentsMap>
+              : {}
+            : $OperationType extends typeof Grafaid.Document.OperationTypeNode.MUTATION
+              ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation
+                ? DocumentBuilderKit.Var.InferFromMutation<$DocOp, $ArgumentsMap>
+                : {}
+              : $OperationType extends typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION
+                ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription
+                  ? DocumentBuilderKit.Var.InferFromSubscription<$DocOp, $ArgumentsMap>
+                  : {}
+                : {}
+        >
+      >
+    : never
 
 /**
  * Unified `gql` function that accepts either:
@@ -239,21 +303,22 @@ export interface gql<
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): Doc.FromObject<
-    Simplify<
-      InferOperations<
-        $Document,
-        $Schema,
-        $ArgumentsMap,
-        {
-          // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
-          // For now, hardcoded to never since static documents have no runtime extensions
-          typeHookRequestResultDataTypes: never
-          scalars: $Schema['scalarRegistry']
-        }
+  ): $Document extends object ? Doc.FromObject<
+      Simplify<
+        InferOperationsInDocument<
+          $Document,
+          $Schema,
+          $ArgumentsMap,
+          {
+            // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
+            // For now, hardcoded to never since static documents have no runtime extensions
+            typeHookRequestResultDataTypes: never
+            scalars: $Schema['scalarRegistry']
+          }
+        >
       >
     >
-  >
+    : never
 }
 
 /**
