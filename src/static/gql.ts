@@ -1,4 +1,4 @@
-import type { Docpar } from '#lib/docpar'
+import type { Docpar } from '#src/docpar/$.js'
 import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import { Select } from '#src/extensions/DocumentBuilder/Select/$.js'
 import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'

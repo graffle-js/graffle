@@ -1,4 +1,4 @@
-import type { Docpar } from '#lib/docpar'
+import type { Docpar } from '#src/docpar/$.js'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
