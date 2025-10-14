@@ -21,6 +21,8 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorStringIntrospection, true))
+    // Alias for gql-tada compatibility
+    code`type $$Tada = typeof $$StringIntrospection`
     code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl

@@ -35,6 +35,8 @@ export const ModuleGeneratorGql = createModuleGenerator(
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
+    // Alias for gql-tada compatibility
+    code`type $$Tada = typeof $$StringIntrospection`
     code`
 
       /**
