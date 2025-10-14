@@ -72,6 +72,7 @@
     "fix:format": "dprint fmt",
     "fix:lint": "oxlint --fix",
     "check:examples:types": "cd examples && pnpm install && pnpm gen:graffle && pnpm check:types",
+    "check:types:examples": "cd examples && pnpm install && pnpm gen:graffle && pnpm check:types",
     "check:format": "dprint check",
     "check:lint": "oxlint",
     "check:publint": "tsx scripts/check-publint.ts",
