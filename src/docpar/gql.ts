@@ -198,7 +198,7 @@ export type InferOperations<
  * Infer a single operation with the given operation type.
  *
  * This replaces the duplication in `InferOperationsFromQuery` and `InferOperationsFromMutation`
- * by accepting the operation type as a parameter.
+ * by accepting the operation type as a parameter and using the generic `Operation` type.
  *
  * @example
  * ```ts
@@ -226,13 +226,7 @@ type InferOperation<
     ? TypedFullDocument.Operation<
         $OperationName & string,
         RequestResult.Simplify<$Context,
-          $OperationType extends typeof Grafaid.Document.OperationTypeNode.QUERY
-            ? DocumentBuilderKit.InferResult.OperationQuery<$DocOp, $Schema>
-            : $OperationType extends typeof Grafaid.Document.OperationTypeNode.MUTATION
-              ? DocumentBuilderKit.InferResult.OperationMutation<$DocOp, $Schema>
-              : $OperationType extends typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION
-                ? DocumentBuilderKit.InferResult.OperationSubscription<$DocOp, $Schema>
-                : never
+          DocumentBuilderKit.InferResult.Operation<$DocOp, $Schema, $OperationType>
         >,
         RequestResult.Simplify<$Context,
           $OperationType extends typeof Grafaid.Document.OperationTypeNode.QUERY
