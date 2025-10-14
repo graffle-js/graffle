@@ -1,3 +1,4 @@
+// dprint-ignore-file
 /**
  * Type-level tests for the string2 parser (single-pass GraphQL parser)
  */
