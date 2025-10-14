@@ -1,13 +1,8 @@
 // dprint-ignore-file
-/**
- * Type-level tests for the string2 parser (single-pass GraphQL parser)
- */
-
 import type { Possible } from '#test/schema/possible/client/$.js'
 import type { Ts } from '@wollybeard/kit'
 import type { ParseDocument as P } from './parser.js'
 
-// Get the actual schema from Possible client
 type S = Possible.$.Schema
 
 // ==================================================================================================
@@ -18,13 +13,13 @@ type _ = Ts.Test.Cases<
   // Simplest possible query - anonymous query with single scalar field
   Ts.Test.exact<P<'{ id }', S>, { default: { name: 'default'; result: { id: string | null }; variables: {} } }>,
   // Named query with single scalar field
-  Ts.Test.exact<P<'query myQuery { id }', S>, { myQuery: { name: 'myQuery'; result: { id: string | null }; variables: {} } }>,
+  Ts.Test.exact<P<'query q { id }', S>, { q: { name: 'q'; result: { id: string | null }; variables: {} } }>,
   // Multiple scalar fields
   Ts.Test.exact<P<'{ id idNonNull }', S>, { default: { name: 'default'; result: { id: string | null; idNonNull: string }; variables: {} } }>,
   // Query with custom scalar (Date)
   Ts.Test.exact<P<'{ date }', S>, { default: { name: 'default'; result: { date: Date | null }; variables: {} } }>,
   // Query with spaces/formatting
-  Ts.Test.exact<P<'query myQuery { date }', S>, { myQuery: { name: 'myQuery'; result: { date: Date | null }; variables: {} } }>,
+  Ts.Test.exact<P<'query q { date }', S>, { q: { name: 'q'; result: { date: Date | null }; variables: {} } }>,
   // Non-null field
   Ts.Test.exact<P<'{ idNonNull }', S>, { default: { name: 'default'; result: { idNonNull: string }; variables: {} } }>
 >
