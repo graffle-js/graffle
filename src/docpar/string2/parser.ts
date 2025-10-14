@@ -167,11 +167,12 @@ type ParseVariablesRec<
   // Check for closing paren
   $Input extends `)${infer $Rest}` ? { variables: Normalize<$Result>; rest: $Rest }
     // Parse next variable
-    : $Input extends `$${infer $VarNameRest}` ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
-      ? ParseVariableAfterName<$VarName & string, SkipIgnored<$Rest & string>, $Result>
-    : MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
-  : $Input extends '' ? MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
-  : MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
+    : $Input extends `$${infer $VarNameRest}`
+      ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
+        ? ParseVariableAfterName<$VarName & string, SkipIgnored<$Rest & string>, $Result>
+      : MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
+    : $Input extends '' ? MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
+    : MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
 
 /**
  * Parse after variable name: expect colon, then type
@@ -199,10 +200,10 @@ type ParseVariableType<
       $Result & Record<$VarName, MapGraphQLType<$TypeName & string>>
     >
     // Optional variable: { varName?: TSType | null | undefined }
-    : ParseVariablesRec<
-      SkipIgnored<$Rest & string>,
-      $Result & { [K in $VarName]?: MapGraphQLType<$TypeName & string> | null | undefined }
-    >
+  : ParseVariablesRec<
+    SkipIgnored<$Rest & string>,
+    $Result & { [K in $VarName]?: MapGraphQLType<$TypeName & string> | null | undefined }
+  >
   : MakeError<'ExpectedTypeName', { message: 'Expected type name after :' }>
 
 /**
