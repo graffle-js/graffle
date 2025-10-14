@@ -8,18 +8,10 @@ import { show } from '../$/show.js'
 const graffle = Graffle
   .create({ output: Preset.traditionalGraphqlOutput })
   .transport({ url: `http://localhost:3000/graphql` })
-  .anyware(async ({ exchange }) => {
-    return exchange({
-      input: {
-        ...exchange.input,
-        request: {
-          ...exchange.input.request,
-          url: { _tag: 'url', value: new URL('bad') },
-        },
-      },
-    })
-  })
 
+// This example demonstrates that invalid GraphQL documents are caught statically at compile-time.
+// The field 'query' doesn't exist on the Query type - this error is caught before runtime.
+// @ts-expect-error - intentionally invalid document: field 'query' doesn't exist on Query type
 const result = await graffle.gql(`{ query { thisWillError } }`).$send()
 
 show(result)

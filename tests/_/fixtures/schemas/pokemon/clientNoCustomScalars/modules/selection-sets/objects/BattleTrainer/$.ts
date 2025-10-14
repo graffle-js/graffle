@@ -12,7 +12,7 @@ export type * as BattleTrainer from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 5 |
  */
 export interface BattleTrainer<
@@ -24,7 +24,7 @@ export interface BattleTrainer<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$CombatantSinglePokemon} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
    * | **Path** | `BattleTrainer.combatant1` |
    * | **Nullability** | Optional |
@@ -38,7 +38,7 @@ export interface BattleTrainer<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$CombatantSinglePokemon} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
    * | **Path** | `BattleTrainer.combatant2` |
    * | **Nullability** | Optional |
@@ -52,7 +52,7 @@ export interface BattleTrainer<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Float} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
    * | **Path** | `BattleTrainer.date` |
    * | **Nullability** | Optional |
@@ -66,7 +66,7 @@ export interface BattleTrainer<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
    * | **Path** | `BattleTrainer.id` |
    * | **Nullability** | Optional |
@@ -80,7 +80,7 @@ export interface BattleTrainer<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
    * | **Path** | `BattleTrainer.winner` |
    * | **Nullability** | Optional |
@@ -95,13 +95,13 @@ export interface BattleTrainer<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

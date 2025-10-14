@@ -16,18 +16,10 @@ import { Graffle, Preset } from 'graffle'
 const graffle = Graffle
   .create({ output: Preset.traditionalGraphqlOutput })
   .transport({ url: `http://localhost:3000/graphql` })
-  .anyware(async ({ exchange }) => {
-    return exchange({
-      input: {
-        ...exchange.input,
-        request: {
-          ...exchange.input.request,
-          url: { _tag: 'url', value: new URL('bad') },
-        },
-      },
-    })
-  })
 
+// This example demonstrates that invalid GraphQL documents are caught statically at compile-time.
+// The field 'query' doesn't exist on the Query type - this error is caught before runtime.
+// @ts-expect-error - intentionally invalid document: field 'query' doesn't exist on Query type
 const result = await graffle.gql(`{ query { thisWillError } }`).$send()
 
 console.log(result)
@@ -36,34 +28,32 @@ console.log(result)
 
 <!-- dprint-ignore-start -->
 ```txt
-/some/path/to/runPipeline.ts:XX
-          return new ContextualError(message, {
-                 ^
-
-
-ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "exchange".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
-    at async Module.run (/some/path/to/run.ts:XX:XX)
-    at async sendRequest (/some/path/to/send.ts:XX:XX)
-    at async <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX) {
-  context: {
-    hookName: 'exchange',
-    source: 'extension',
-    interceptorName: 'anonymous'
-  },
-  cause: TypeError: Invalid URL
-      at new URL (node:internal/url:825:25)
-      at <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX)
-      at applyBody (/some/path/to/runner.ts:XX:XX) {
-    code: 'ERR_INVALID_URL',
-    input: 'bad'
+{
+  errors: [
+    {
+      message: 'Cannot query field "query" on type "Query".',
+      locations: [ { line: 1, column: 3 } ],
+      extensions: { code: 'GRAPHQL_VALIDATION_FAILED' }
+    }
+  ],
+  response: Response {
+    status: 400,
+    statusText: 'Bad Request',
+    headers: Headers {
+      'content-type': 'application/graphql-response+json; charset=utf-8',
+      'content-length': '160',
+      date: 'Tue, 14 Oct 2025 20:58:18 GMT',
+      connection: 'keep-alive',
+      'keep-alive': 'timeout=5'
+    },
+    body: ReadableStream { locked: true, state: 'closed', supportsBYOB: true },
+    bodyUsed: true,
+    ok: false,
+    redirected: false,
+    type: 'basic',
+    url: 'http://localhost:3000/graphql'
   }
 }
-
-Node.js vXX.XX.XX
 ```
 <!-- dprint-ignore-end -->
 

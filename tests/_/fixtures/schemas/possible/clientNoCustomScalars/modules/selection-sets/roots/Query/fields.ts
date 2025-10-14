@@ -35,6 +35,11 @@ export namespace InputObjectNested {
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectNested<_$Context> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `InputObjectNested` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -73,6 +78,11 @@ export namespace InputObjectNestedNonNull {
     input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectNestedNonNull<_$Context>>
   }
 
+  /**
+   * This is the "expanded" version of the `InputObjectNestedNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -92,6 +102,11 @@ export namespace abcEnum {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `abcEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -132,6 +147,11 @@ export namespace argInputObjectCircular {
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectCircular<_$Context> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `argInputObjectCircular` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -152,6 +172,11 @@ export namespace bigintField {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `bigintField` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -172,6 +197,11 @@ export namespace bigintFieldNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `bigintFieldNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -190,6 +220,11 @@ export namespace date {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `date` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -230,6 +265,11 @@ export namespace dateArg {
     date?: $Scalars.Date<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `dateArg` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -270,6 +310,11 @@ export namespace dateArgInputObject {
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `dateArgInputObject` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -310,6 +355,11 @@ export namespace dateArgList {
     date?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `dateArgList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -348,6 +398,11 @@ export namespace dateArgNonNull {
     date: $Scalars.Date$NonNull<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `dateArgNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -385,6 +440,11 @@ export namespace dateArgNonNullList {
     date: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>>>
   }
 
+  /**
+   * This is the "expanded" version of the `dateArgNonNullList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -422,6 +482,11 @@ export namespace dateArgNonNullListNonNull {
     date: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>>>
   }
 
+  /**
+   * This is the "expanded" version of the `dateArgNonNullListNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -439,6 +504,11 @@ export namespace dateInterface1 {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateInterface1<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `dateInterface1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -458,6 +528,11 @@ export namespace dateList {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `dateList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -478,6 +553,11 @@ export namespace dateListList {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `dateListList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -498,6 +578,11 @@ export namespace dateListNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `dateListNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -518,6 +603,11 @@ export namespace dateNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `dateNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -536,6 +626,11 @@ export namespace dateObject1 {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateObject1<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `dateObject1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -553,6 +648,11 @@ export namespace dateUnion {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateUnion<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `dateUnion` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -590,6 +690,11 @@ export namespace error {
     case?: $Scalars.String<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `error` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -608,6 +713,11 @@ export namespace id {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -628,6 +738,11 @@ export namespace idNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `idNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -645,6 +760,11 @@ namespace $interface {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `interface` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -684,6 +804,11 @@ export namespace interfaceHierarchyChildA {
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ChildAInterfaceHierarchyMember | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyChildA` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -721,6 +846,11 @@ export namespace interfaceHierarchyChildB {
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ChildBInterfaceHierarchyMember | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyChildB` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -758,6 +888,11 @@ export namespace interfaceHierarchyGrandparents {
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.GrandparentInterfaceHierarchyMember | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyGrandparents` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -795,6 +930,11 @@ export namespace interfaceHierarchyParents {
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ParentInterfaceHierarchyMember | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyParents` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -812,6 +952,11 @@ export namespace interfaceNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `interfaceNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -849,6 +994,11 @@ export namespace interfaceWithArgs {
     id: $Scalars.ID$NonNull<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `interfaceWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -868,6 +1018,11 @@ export namespace listInt {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `listInt` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -888,6 +1043,11 @@ export namespace listIntNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `listIntNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -908,6 +1068,11 @@ export namespace listListInt {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `listListInt` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -928,6 +1093,11 @@ export namespace listListIntNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `listListIntNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -946,6 +1116,11 @@ export namespace lowerCaseUnion {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.lowerCaseUnion<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `lowerCaseUnion` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -962,6 +1137,11 @@ namespace $object {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `object` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -981,6 +1161,11 @@ export namespace objectList {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `objectList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -998,6 +1183,11 @@ export namespace objectListNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `objectListNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1015,6 +1205,11 @@ export namespace objectNested {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectNested<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `objectNested` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1032,6 +1227,11 @@ export namespace objectNestedWithArgs {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectNestedWithArgs<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `objectNestedWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1049,6 +1249,11 @@ export namespace objectNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `objectNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1130,6 +1335,11 @@ export namespace objectWithArgs {
     string?: $Scalars.String<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `objectWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1167,6 +1377,11 @@ export namespace result {
     $case: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.Case>
   }
 
+  /**
+   * This is the "expanded" version of the `result` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1204,6 +1419,11 @@ export namespace resultNonNull {
     $case?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.Case | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `resultNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1221,6 +1441,11 @@ namespace $string {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `string` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1263,6 +1488,11 @@ export namespace stringWithArgEnum {
     $ABCEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ABCEnum | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithArgEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1303,6 +1533,11 @@ export namespace stringWithArgInputObject {
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithArgInputObject` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1341,6 +1576,11 @@ export namespace stringWithArgInputObjectEnum {
     input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectEnum<_$Context>>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithArgInputObjectEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1378,6 +1618,11 @@ export namespace stringWithArgInputObjectRequired {
     input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context>>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithArgInputObjectRequired` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1438,6 +1683,8 @@ export namespace stringWithArgs {
      */
     id?: $Scalars.ID<_$Context>
     /**
+     * @deprecated Example of argument deprecation reason here.
+     *
      * # Info
      *
      * | | |
@@ -1464,6 +1711,11 @@ export namespace stringWithArgs {
     string?: $Scalars.String<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1504,6 +1756,11 @@ export namespace stringWithListArg {
     ints?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Int<_$Context>> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithListArg` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1542,6 +1799,11 @@ export namespace stringWithListArgRequired {
     ints: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Int<_$Context>>>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithListArgRequired` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1579,6 +1841,11 @@ export namespace stringWithRequiredArg {
     string: $Scalars.String$NonNull<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `stringWithRequiredArg` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1596,6 +1863,11 @@ export namespace unionFooBar {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `unionFooBar` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1613,6 +1885,11 @@ export namespace unionFooBarNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `unionFooBarNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1650,6 +1927,11 @@ export namespace unionFooBarWithArgs {
     id?: $Scalars.ID<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `unionFooBarWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1667,6 +1949,11 @@ export namespace unionObject {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectUnion<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `unionObject` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -1684,6 +1971,11 @@ export namespace unionObjectNonNull {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectUnion<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `unionObjectNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<

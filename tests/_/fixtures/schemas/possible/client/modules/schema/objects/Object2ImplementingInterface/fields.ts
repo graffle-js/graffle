@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Boolean} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Object2ImplementingInterface} |
  * | **Path** | `Object2ImplementingInterface.boolean` |
  * | **Nullability** | Optional |
@@ -48,7 +48,7 @@ export { type $boolean as boolean }
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Object2ImplementingInterface} |
  * | **Path** | `Object2ImplementingInterface.id` |
  * | **Nullability** | Optional |

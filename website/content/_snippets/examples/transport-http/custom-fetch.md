@@ -24,7 +24,7 @@ const graffle = Graffle
     })
   )
 
-const data = await graffle.gql('{ pokemon { name } }').$send()
+const data = await graffle.gql('{ pokemons { name } }').$send()
 
 console.log(data)
 ```

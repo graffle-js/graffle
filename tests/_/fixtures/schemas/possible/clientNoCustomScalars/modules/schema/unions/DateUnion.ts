@@ -1,4 +1,3 @@
-import type { Schema as $Schema } from '../$.js'
 import type { DateObject1 } from '../objects/DateObject1/$.js'
 import type { DateObject2 } from '../objects/DateObject2/$.js'
 
@@ -9,7 +8,7 @@ import type { DateObject2 } from '../objects/DateObject2/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 2 |
  * | **Types** | {@link $Schema.DateObject1}, {@link $Schema.DateObject2} |
  */

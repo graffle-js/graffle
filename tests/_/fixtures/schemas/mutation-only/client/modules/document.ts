@@ -11,6 +11,7 @@ import type * as $$Schema from './schema/$.js'
 
 /**
  * Context for static document type inference.
+ *
  * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
  */
 interface StaticDocumentContext {
@@ -22,7 +23,7 @@ interface StaticDocumentContext {
  * Static mutation builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL mutation document with:
+ * Each field method generates a fully typed GraphQL mutation document  with:
  * - Type-safe selection sets and input types
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations
@@ -50,7 +51,7 @@ export interface MutationBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.id` |
    * | **Nullability** | Optional |
@@ -87,7 +88,7 @@ export interface MutationBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.idNonNull` |
    * | **Nullability** | Required |
@@ -123,7 +124,7 @@ export interface MutationBuilder {
  * Static mutation builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL mutation document with:
+ * Each field method generates a fully typed GraphQL mutation document  with:
  * - Type-safe selection sets and input types
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations

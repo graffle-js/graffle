@@ -9,7 +9,7 @@ export * as InputObject from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject ↗} |
  * | **Fields** | 5 |
  * | **All Fields Nullable** | Yes |
  */

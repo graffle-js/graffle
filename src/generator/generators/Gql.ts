@@ -2,7 +2,6 @@ import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportAll, codeImportNamed } from '../helpers/pathHelpers.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
-import { ModuleGeneratorTada } from './Tada.js'
 
 /**
  * Generates an overloaded gql() function that supports both:
@@ -28,7 +27,6 @@ import { ModuleGeneratorTada } from './Tada.js'
 export const ModuleGeneratorGql = createModuleGenerator(
   `gql`,
   ({ config, code }) => {
-    code(importModuleGenerator(config, ModuleGeneratorTada))
     code`
       import { createGql } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`
     code(codeImportNamed(config, { names: 'Schema', from: './schema/$', type: true }))
@@ -59,7 +57,6 @@ export const ModuleGeneratorGql = createModuleGenerator(
        * \`\`\`
        */
       export const gql = createGql<
-        $$Tada.introspection,
         Schema,
         $$SelectionSets.$Document,
         $$ArgumentsMap.ArgumentsMap

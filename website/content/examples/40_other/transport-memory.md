@@ -110,7 +110,10 @@ const getAndValidateToken = (request: Request): Token => {
 const database = DatabaseClient.create()
 
 const baseGraffle = Graffle
-  .create()
+  // TODO: The generated Pokemon client shouldn't use "default" as its schema name.
+  // It should use "pokemon" instead, which would prevent it from polluting unrelated clients.
+  // For now, we explicitly configure this client to not use any registered schema.
+  .create({ schema: { name: 'none' as any } })
   .use(TransportMemory)
   .transport(`memory`, { schema })
 
@@ -133,7 +136,7 @@ const handleRequest = async (request: Request) => {
   })
 
   const data = await requestScopedGraffle.gql(`
-    {
+    query GetAccount {
       account
     }
   `).$send()

@@ -1,4 +1,3 @@
-import type { Schema as $Schema } from '../$.js'
 import type { BattleRoyale } from '../objects/BattleRoyale/$.js'
 import type { BattleTrainer } from '../objects/BattleTrainer/$.js'
 import type { BattleWild } from '../objects/BattleWild/$.js'

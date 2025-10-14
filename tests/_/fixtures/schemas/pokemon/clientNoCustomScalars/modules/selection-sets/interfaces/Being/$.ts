@@ -13,7 +13,7 @@ export type * as Being from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Fields** | 2 |
  * | **Implementors** | {@link $Schema.Patron}, {@link $Schema.Pokemon}, {@link $Schema.Trainer} |
  */
@@ -26,7 +26,7 @@ export interface Being<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Being} |
    * | **Path** | `Being.id` |
    * | **Nullability** | Optional |
@@ -40,7 +40,7 @@ export interface Being<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Being} |
    * | **Path** | `Being.name` |
    * | **Nullability** | Optional |
@@ -62,8 +62,8 @@ export interface Being<
    * | **Parent** | {@link $Schema.Being} |
    * | **Path** | `Being -> Patron` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types}
    *
    * @example
    * ```ts
@@ -91,8 +91,8 @@ export interface Being<
    * | **Parent** | {@link $Schema.Being} |
    * | **Path** | `Being -> Pokemon` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types}
    *
    * @example
    * ```ts
@@ -120,8 +120,8 @@ export interface Being<
    * | **Parent** | {@link $Schema.Being} |
    * | **Path** | `Being -> Trainer` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types}
    *
    * @example
    * ```ts
@@ -141,14 +141,14 @@ export interface Being<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
    * the name is one of the implementor type names, whichever is ultimately returned at runtime.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

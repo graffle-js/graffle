@@ -23,9 +23,6 @@ importers:
       es-toolkit:
         specifier: ^1.35.0
         version: 1.35.0
-      gql.tada:
-        specifier: ^1.8.13
-        version: 1.8.13(graphql@16.10.0)(typescript@5.9.3)
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -102,6 +99,9 @@ importers:
       globby:
         specifier: ^14.1.0
         version: 14.1.0
+      gql.tada:
+        specifier: ^1.8.13
+        version: 1.8.13(graphql@16.10.0)(typescript@5.9.3)
       graphql:
         specifier: ^16.10.0
         version: 16.10.0

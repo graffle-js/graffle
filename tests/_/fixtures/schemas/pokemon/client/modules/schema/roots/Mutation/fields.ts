@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Mutation} |
  * | **Path** | `Mutation.addPokemon` |
  * | **Nullability** | Optional |
@@ -79,7 +79,7 @@ export interface addPokemon {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Boolean}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Mutation} |
  * | **Path** | `Mutation.resetData` |
  * | **Nullability** | Required |

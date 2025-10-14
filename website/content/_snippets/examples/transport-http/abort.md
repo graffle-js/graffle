@@ -23,7 +23,7 @@ const resultPromise = graffle
   //                          ^^^^^^^^^^^^^^^
   .gql(`
     {
-      pokemon {
+      pokemons {
         name
       }
     }

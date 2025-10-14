@@ -393,12 +393,19 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
 const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.InputObjectType): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
+  // Analyze what imports are needed
+  const usage = analyzeInputObjectTypeUsage(inputObject)
+
   // Generate fields.ts
   const fieldsCode = Str.Builder()
   fieldsCode(importUtilities(config))
   fieldsCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
-  fieldsCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
-  fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+  if (usage.usesNamedTypes) {
+    fieldsCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
+  }
+  if (usage.usesScalars) {
+    fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+  }
   fieldsCode()
 
   for (const field of Obj.values(inputObject.getFields())) {
@@ -423,10 +430,13 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   // Generate $.ts
   const namespaceCode = Str.Builder()
   namespaceCode(importUtilities(config))
-  namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
   namespaceCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
-  namespaceCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
-  namespaceCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+  if (usage.usesNamedTypes) {
+    namespaceCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
+  }
+  if (usage.usesScalars) {
+    namespaceCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+  }
   namespaceCode()
   // Re-export fields as a type-only namespace to avoid conflicts with the interface
   namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields', type: true }))
@@ -479,12 +489,19 @@ const generateFieldedTypeModule = (
   const isRoot = kind === 'roots'
   const isInterface = Grafaid.Schema.isInterfaceType(type)
 
+  // Analyze what imports are needed for fields.ts (based on field arguments)
+  const usage = analyzeOutputTypeUsage(type)
+
   // Generate fields.ts
   const fieldsCode = Str.Builder()
   fieldsCode(importUtilities(config))
   fieldsCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
-  fieldsCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
-  fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+  if (usage.usesNamedTypes) {
+    fieldsCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
+  }
+  if (usage.usesScalars) {
+    fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+  }
   fieldsCode()
 
   for (const field of fields) {
@@ -832,6 +849,91 @@ const isReservedKeyword = (name: string): boolean => {
  */
 const getSafeName = (name: string): string => {
   return isReservedKeyword(name) ? `$${name}` : name
+}
+
+/**
+ * Analyze a GraphQL type recursively to determine what imports are needed
+ */
+interface TypeUsageAnalysis {
+  usesScalars: boolean
+  usesNamedTypes: boolean // enums, input objects, other object types
+}
+
+const analyzeTypeUsage = (type: Grafaid.Schema.InputTypes): TypeUsageAnalysis => {
+  const result: TypeUsageAnalysis = {
+    usesScalars: false,
+    usesNamedTypes: false,
+  }
+
+  const analyzeRecursive = (t: Grafaid.Schema.InputTypes): void => {
+    const nakedType = Grafaid.Schema.getNullableType(t)
+
+    if (Grafaid.Schema.isListType(nakedType)) {
+      analyzeRecursive(nakedType.ofType)
+      return
+    }
+
+    if (Grafaid.Schema.isScalarType(nakedType)) {
+      result.usesScalars = true
+      return
+    }
+
+    // Enums, InputObjects
+    result.usesNamedTypes = true
+  }
+
+  analyzeRecursive(type)
+  return result
+}
+
+/**
+ * Analyze all fields in an input object to determine what imports are needed
+ */
+const analyzeInputObjectTypeUsage = (inputObject: Grafaid.Schema.InputObjectType): TypeUsageAnalysis => {
+  const result: TypeUsageAnalysis = {
+    usesScalars: false,
+    usesNamedTypes: false,
+  }
+
+  for (const field of Obj.values(inputObject.getFields())) {
+    const fieldAnalysis = analyzeTypeUsage(field.type)
+    result.usesScalars = result.usesScalars || fieldAnalysis.usesScalars
+    result.usesNamedTypes = result.usesNamedTypes || fieldAnalysis.usesNamedTypes
+  }
+
+  return result
+}
+
+/**
+ * Analyze all fields and their arguments in an output type to determine what imports are needed
+ */
+const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType): TypeUsageAnalysis => {
+  const result: TypeUsageAnalysis = {
+    usesScalars: false,
+    usesNamedTypes: false,
+  }
+
+  for (const field of Object.values(type.getFields())) {
+    // Check if field return type is an object-like type (object, interface, union)
+    // These get referenced via $Named in the field namespace's extends clause
+    const fieldNamedType = Grafaid.Schema.getNamedType(field.type)
+    const isHasObjectLikeTypeReference = Grafaid.Schema.isObjectType(fieldNamedType)
+      || Grafaid.Schema.isInterfaceType(fieldNamedType)
+      || Grafaid.Schema.isUnionType(fieldNamedType)
+
+    if (isHasObjectLikeTypeReference) {
+      result.usesNamedTypes = true
+    }
+
+    // Analyze field arguments
+    for (const arg of field.args) {
+      const argAnalysis = analyzeTypeUsage(arg.type)
+      result.usesScalars = result.usesScalars || argAnalysis.usesScalars
+      result.usesNamedTypes = result.usesNamedTypes || argAnalysis.usesNamedTypes
+    }
+  }
+
+  return result
 }
 
 const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {

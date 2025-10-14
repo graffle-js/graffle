@@ -1,5 +1,4 @@
 import type * as $ from '#graffle/utilities-for-generated'
-import type { Schema as $Schema } from '../$.js'
 import type { DateObject1 } from '../objects/DateObject1/$.js'
 import type { DateObject2 } from '../objects/DateObject2/$.js'
 

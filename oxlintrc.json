@@ -13,7 +13,8 @@
     "no-extra-semi": "warn",
     "no-irregular-whitespace": "warn",
     "no-undef": "off",
-    "no-redeclare": "off"
+    "no-redeclare": "off",
+    "no-empty-pattern": "off"
   },
   "ignorePatterns": [
     "build/**/*",

@@ -18,7 +18,7 @@ export * as InterfaceGrandparent from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Fields** | 1 |
  * | **Implementors** | {@link $Schema.ObjectChildA}, {@link $Schema.ObjectChildB}, {@link $Schema.ObjectGrandparent}, {@link $Schema.ObjectParent}, {@link $Schema.InterfaceChildA}, {@link $Schema.InterfaceChildB}, {@link $Schema.InterfaceParent} |
  */

@@ -1,4 +1,3 @@
-import type { Schema as $Schema } from '../$.js'
 import type { ErrorOne } from '../objects/ErrorOne/$.js'
 import type { ErrorTwo } from '../objects/ErrorTwo/$.js'
 import type { Object1 } from '../objects/Object1/$.js'
@@ -10,7 +9,7 @@ import type { Object1 } from '../objects/Object1/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 3 |
  * | **Types** | {@link $Schema.ErrorOne}, {@link $Schema.ErrorTwo}, {@link $Schema.Object1} |
  */

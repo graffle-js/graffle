@@ -1,5 +1,3 @@
-import * as $$Tada from './tada.js'
-
 import { createGql } from 'graffle/extensions/document-builder'
 import type * as $$ArgumentsMap from './arguments-map.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
@@ -28,7 +26,6 @@ import type * as $$SelectionSets from './selection-sets/$.js'
  * ```
  */
 export const gql = createGql<
-  $$Tada.introspection,
   Schema,
   $$SelectionSets.$Document,
   $$ArgumentsMap.ArgumentsMap

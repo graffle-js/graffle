@@ -40,15 +40,19 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
  *
  * This type provides the `scalar`, `persisted`, and `__name` properties that GraphQLSP LSP
  * looks for to identify gql-tada functions and determine which schema to use in multi-schema mode.
+ *
+ * Returns `any` when no GlobalRegistry is available (dynamic clients).
  */
 // dprint-ignore
-type TadaAPIFromContext<$Context> = Docpar.GraphQLTadaAPI<
-  Docpar.schemaOfSetup<{
-    introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-    scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
-  }>,
-  { isMaskingDisabled: false }
->
+type TadaAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
+  ? any
+  : Docpar.GraphQLTadaAPI<
+      Docpar.schemaOfSetup<{
+        introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
+        scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
+      }>,
+      { isMaskingDisabled: false }
+    >
 
 /**
  * Check if GlobalRegistry is configured for this context.
@@ -117,7 +121,13 @@ export interface GqlMethod<$Context extends Context.Context> {
                                                             UntypedSender<$Context> :
   $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
-                                                            ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context>
+                                                            ? ParseGraphQLString<$Context, $doc> extends infer $Parsed
+                                                              ? $Parsed extends { __typename: 'ParserError' }
+                                                                ? $Parsed
+                                                                : $Parsed extends TypedFullDocument.TypedFullDocument
+                                                                  ? DocumentSender<$Parsed, $Context>
+                                                                  : never
+                                                              : never
                                                             : UntypedSender<$Context> :
   $doc extends Grafaid.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
                                                           never
@@ -125,7 +135,13 @@ export interface GqlMethod<$Context extends Context.Context> {
   // Overload: Inline document builder object (must be last as it's least specific)
   <$Document extends DocumentObjectConstraint<$Context>>(
     document: $Document
-  ): DocumentSender<ParseGraphQLObject<$Context, $Document>, $Context>
+  ): ParseGraphQLObject<$Context, $Document> extends infer $Parsed
+    ? $Parsed extends { __typename: 'ParserError' }
+      ? $Parsed
+      : $Parsed extends TypedFullDocument.TypedFullDocument
+        ? DocumentSender<$Parsed, $Context>
+        : never
+    : never
 
   /**
    * LSP detection property - identifies the schema name for multi-schema support.

@@ -32,7 +32,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
 
   /**
-   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | __typename} meta-field.
    *
    * The `__typename` field returns the name of the object type. In this case, it will always return `"Query"`.
    */
@@ -54,7 +54,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Battle}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.battles` |
    * | **Nullability** | Required |
@@ -84,7 +84,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Being}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.beings` |
    * | **Nullability** | Required |
@@ -114,7 +114,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.pokemonByName` |
    * | **Nullability** | Optional |
@@ -148,7 +148,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.pokemons` |
    * | **Nullability** | Optional |
@@ -179,7 +179,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.trainerByName` |
    * | **Nullability** | Optional |
@@ -212,7 +212,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Trainer}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.trainers` |
    * | **Nullability** | Optional |
@@ -267,7 +267,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
 
   /**
-   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | __typename} meta-field.
    *
    * The `__typename` field returns the name of the object type. In this case, it will always return `"Mutation"`.
    */
@@ -289,7 +289,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Pokemon} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.addPokemon` |
    * | **Nullability** | Optional |
@@ -322,7 +322,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Boolean}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.resetData` |
    * | **Nullability** | Required |
@@ -360,12 +360,11 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```ts
    * const user = await graffle.query.user({ id: true, name: true })
    * ```
-   *
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.query.$batch({
-   *   user: { id: true, name: true },
-   *   posts: { title: true, content: true }
+   * user: { id: true, name: true },
+   * posts: { title: true, content: true }
    * })
    * ```
    */
@@ -379,16 +378,15 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * @example Single field
    * ```ts
    * const result = await graffle.mutation.createUser({
-   *   id: true,
-   *   name: true
+   * id: true,
+   * name: true
    * })
    * ```
-   *
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.mutation.$batch({
-   *   createUser: { id: true, name: true },
-   *   createPost: { id: true, title: true }
+   * createUser: { id: true, name: true },
+   * createPost: { id: true, title: true }
    * })
    * ```
    */

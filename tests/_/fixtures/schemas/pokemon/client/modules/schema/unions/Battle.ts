@@ -1,4 +1,3 @@
-import type { Schema as $Schema } from '../$.js'
 import type { BattleRoyale } from '../objects/BattleRoyale/$.js'
 import type { BattleTrainer } from '../objects/BattleTrainer/$.js'
 import type { BattleWild } from '../objects/BattleWild/$.js'
@@ -10,7 +9,7 @@ import type { BattleWild } from '../objects/BattleWild/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 3 |
  * | **Types** | {@link $Schema.BattleRoyale}, {@link $Schema.BattleTrainer}, {@link $Schema.BattleWild} |
  */

@@ -144,7 +144,6 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     const dir = isRoot ? 'roots' : 'objects'
     code(codeImportNamed(config, { names: member.name, from: `../${dir}/${member.name}/$`, type: true }))
   }
-  code(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../$', type: true }))
   code()
 
   code(Code.tsInterface({

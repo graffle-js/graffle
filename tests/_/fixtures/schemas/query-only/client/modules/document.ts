@@ -11,6 +11,7 @@ import type * as $$Schema from './schema/$.js'
 
 /**
  * Context for static document type inference.
+ *
  * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
  */
 interface StaticDocumentContext {
@@ -22,7 +23,7 @@ interface StaticDocumentContext {
  * Static query builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL document string with:
+ * Each field method generates a fully typed GraphQL  document string with:
  * - Type-safe selection sets matching your schema
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
@@ -61,7 +62,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.id` |
    * | **Nullability** | Optional |
@@ -96,7 +97,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.idNonNull` |
    * | **Nullability** | Required |
@@ -132,7 +133,7 @@ export interface QueryBuilder {
  * Static query builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL document string with:
+ * Each field method generates a fully typed GraphQL  document string with:
  * - Type-safe selection sets matching your schema
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections

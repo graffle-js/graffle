@@ -9,6 +9,7 @@ import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { Simplify } from 'type-fest'
+import * as Doc from './core/doc.js'
 
 //
 //
@@ -27,7 +28,7 @@ import type { Simplify } from 'type-fest'
  *
  * For plain strings:
  * 1. Parses the GraphQL string into an AST using `parseDocument`
- * 2. Extracts introspection data from the context's GlobalRegistry
+ * 2. Extracts introspection data from the context's GlobalRegistry (or uses schema-less mode if unavailable)
  * 3. Uses `schemaOfSetup` to combine introspection with scalar mappings into a `SchemaLike`
  * 4. Extracts ALL operations from the document using `getDocumentOperations`
  * 5. Wraps the result in `TypedFullDocument.FromObject` to produce either SingleOperation or MultiOperation
@@ -51,17 +52,27 @@ import type { Simplify } from 'type-fest'
 export type ParseGraphQLString<
   $Context,
   $Input extends string,
-> = TypedFullDocument.FromObject<
-  Simplify<
-    Docpar.getDocumentOperations<
-      Docpar.parseDocument<$Input>['definitions'],
-      Docpar.schemaOfSetup<{
-        introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-        scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
-      }>
+> = GlobalRegistry.ForContext<$Context> extends never
+  ? Doc.FromObject<
+      Simplify<
+        Docpar.getDocumentOperations<
+          Docpar.parseDocument<$Input>['definitions'],
+          Docpar.schemaOfSetup<{
+            schema: undefined
+          }>
+        >
+      >
     >
-  >
->
+  : Doc.FromObject<
+      Simplify<
+        Docpar.getDocumentOperations<
+          Docpar.parseDocument<$Input>['definitions'],
+          Docpar.schemaOfSetup<{
+            schema: GlobalRegistry.ForContext<$Context>['schema']
+          }>
+        >
+      >
+    >
 
 /**
  * Type-level utility that parses a document builder object and returns the typed document.
@@ -84,7 +95,7 @@ export type ParseGraphQLString<
 export type ParseGraphQLObject<
   $Context,
   $Document,
-> = TypedFullDocument.FromObject<
+> = Doc.FromObject<
   InferOperations<
     $Document,
     GlobalRegistry.ForContext<$Context>['schema'],
@@ -206,7 +217,6 @@ export type InferOperations<
  * This interface unifies static and instance-level typings using Graffle's own type system.
  */
 export interface gql<
-  $Introspection extends Docpar.AbstractSetupSchema['introspection'],
   $Schema extends Schema,
   $DocumentObjectConstraint,
   $ArgumentsMap extends SchemaDrivenDataMap,
@@ -214,13 +224,12 @@ export interface gql<
   // Override string signature to return TypedFullDocument instead of TadaDocumentNode
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): TypedFullDocument.FromObject<
+  ): Doc.FromObject<
     Simplify<
       Docpar.getDocumentOperations<
         Docpar.parseDocument<$Input>['definitions'],
         Docpar.schemaOfSetup<{
-          introspection: $Introspection
-          scalars: $Schema['scalarRegistry']['map']
+          schema: $Schema
         }>
       >
     >
@@ -230,7 +239,7 @@ export interface gql<
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): TypedFullDocument.FromObject<
+  ): Doc.FromObject<
     Simplify<
       InferOperations<
         $Document,
@@ -291,13 +300,12 @@ export const defaults: Partial<Options> = {
 }
 
 export const createGql = <
-  $Introspection extends Docpar.AbstractSetupSchema['introspection'],
   $Schema extends Schema,
   $DocumentObjectConstraint,
   $ArgumentsMap extends SchemaDrivenDataMap,
 >(config: {
   sddm: $ArgumentsMap
-}): gql<$Introspection, $Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
+}): gql<$Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
   return ((...args: Gql.Arguments) => {
     const normalized = Gql.normalizeArguments(args)
 
@@ -321,3 +329,6 @@ export const createGql = <
     return print(result.document) as any
   }) as any
 }
+
+// todo
+// export const gql = createGql()

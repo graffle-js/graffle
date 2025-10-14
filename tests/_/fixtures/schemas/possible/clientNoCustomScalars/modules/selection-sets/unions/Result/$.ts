@@ -12,7 +12,7 @@ export type * as Result from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 3 |
  * | **Types** | {@link $Schema.ErrorOne}, {@link $Schema.ErrorTwo}, {@link $Schema.Object1} |
  */
@@ -23,7 +23,7 @@ export interface Result<
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
    * the name is one of the member type names, whichever is ultimately returned at runtime.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
@@ -44,8 +44,8 @@ export interface Result<
    * | **Parent** | {@link $Schema.Result} |
    * | **Path** | `Result -> ErrorOne` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types}
    *
    * @example
    * ```ts
@@ -72,8 +72,8 @@ export interface Result<
    * | **Parent** | {@link $Schema.Result} |
    * | **Path** | `Result -> ErrorTwo` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types}
    *
    * @example
    * ```ts
@@ -100,8 +100,8 @@ export interface Result<
    * | **Parent** | {@link $Schema.Result} |
    * | **Path** | `Result -> Object1` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types}
    *
    * @example
    * ```ts
@@ -120,7 +120,7 @@ export interface Result<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
 }

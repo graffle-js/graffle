@@ -8,13 +8,11 @@ import { examplePaths } from './paths.generated.js'
 const toString = S.encodeSync(FsLoc.FsLoc)
 
 describe('examples', () => {
-  // Reset the database before each test using Graffle client
+  // Reset database before each example to ensure consistent state
   beforeEach(async () => {
-    const url = process.env['POKEMON_SCHEMA_URL']
-    if (url) {
-      const graffle = Graffle.create().transport({ url })
-      await graffle.gql('mutation { resetData }').$send()
-    }
+    const pokemonServerUrl = process.env['POKEMON_SCHEMA_URL'] || 'http://localhost:3000/graphql'
+    const graffle = Graffle.create({ schema: { name: 'none' } }).transport({ url: pokemonServerUrl })
+    await graffle.gql('mutation { resetData }').$send()
   })
 
   test.for(examplePaths)('%s', async (loc) => {

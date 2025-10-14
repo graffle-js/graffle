@@ -8,7 +8,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.StringFilter} |
  * | **Path** | `StringFilter.contains` |
  * | **Nullability** | Optional |
@@ -28,7 +28,7 @@ export interface contains {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.StringFilter} |
  * | **Path** | `StringFilter.in` |
  * | **Nullability** | Optional |

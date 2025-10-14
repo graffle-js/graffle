@@ -17,11 +17,9 @@ No client needed (•̀ᴗ•́)و
 import './graffle/modules/global.js'
 // ---cut---
 
-import { $ } from 'graffle'
-//       ^
+import { $, Graffle as PlainGraffle } from 'graffle'
+//                                ^
 // Variable marker with flexible API
-
-import { Graffle as PlainGraffle } from 'graffle'
 import { Graffle } from './graffle/$.js'
 
 /*
