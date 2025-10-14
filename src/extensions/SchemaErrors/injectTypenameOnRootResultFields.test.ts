@@ -33,10 +33,10 @@ test.each<CasesQuery>([
     { resultNonNull: [`x`, {}] },
     { resultNonNull: [`x`, { __typename: true }] }],
 ])(`Query %s`, (_, queryWithoutTypenameInput, queryWithTypenameInput) => {
-  const docWithout = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
+  const docWithout = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
    DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { x: queryWithoutTypenameInput as any } }),
   )
-  const docWith = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
+  const docWith = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
    DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { x: queryWithTypenameInput as any } }),
   )
   injectTypenameOnRootResultFields({

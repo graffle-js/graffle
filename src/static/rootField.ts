@@ -4,8 +4,8 @@ import { isSymbol } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
-import type { Options } from '../extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
-import { toGraphQLDocument } from '../extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
+import type { Options } from '../docpar/object/ToGraphQLDocument/nodes/1_Document.js'
+import { toGraphQLDocument } from '../docpar/object/ToGraphQLDocument/nodes/1_Document.js'
 import { defaults as packageLevelDefaults } from '../extensions/DocumentBuilder/staticBuilderDefaults.js'
 
 //

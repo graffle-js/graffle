@@ -1,6 +1,6 @@
+import type { Select } from '#src/docpar/object/Select/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { Obj } from '@wollybeard/kit'
-import type { Select } from '#src/docpar/object/Select/$.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore

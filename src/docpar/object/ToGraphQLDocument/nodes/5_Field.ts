@@ -1,7 +1,7 @@
+import { Select } from '#src/docpar/object/Select/$.js'
 import { Var } from '#src/docpar/object/var/$.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
-import { Select } from '#src/docpar/object/Select/$.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toGraphQLArgument } from './Argument.js'

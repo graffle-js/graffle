@@ -1,7 +1,7 @@
+import type { Select } from '#src/docpar/object/Select/$.js'
 import type { UnionMerge, ValuesOrEmptyObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { Tup } from '@wollybeard/kit'
-import type { Select } from '#src/docpar/object/Select/$.js'
 import type { OutputField } from './OutputField.js'
 
 // dprint-ignore

@@ -1,9 +1,9 @@
 import { Grafaid } from '#lib/grafaid'
+import { Select } from '#src/docpar/object/Select/$.js'
+import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { Var } from './$$.js'
-import { Select } from '#src/docpar/object/Select/$.js'
-import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
 
 const $ = Var.$
 

@@ -1,8 +1,8 @@
 import type { Grafaid } from '#lib/grafaid'
+import { Select } from '#src/docpar/object/Select/$.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import { Schema } from '#src/types/Schema/$.js'
 import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
-import { Select } from '#src/docpar/object/Select/$.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 
