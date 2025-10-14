@@ -38,7 +38,7 @@ importers:
         version: 0.71.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       graffle:
         specifier: file:..
-        version: file:..(@effect/platform@0.92.1(effect@3.18.4))(@opentelemetry/api@1.9.0)(effect@3.18.4)(graphql@16.11.0)(typescript@5.9.3)
+        version: file:..(@effect/platform@0.92.1(effect@3.18.4))(@opentelemetry/api@1.9.0)(effect@3.18.4)(graphql@16.11.0)
       tsx:
         specifier: ^4.19.3
         version: 4.20.6
@@ -1418,14 +1418,13 @@ snapshots:
       - '@gql.tada/vue-support'
       - graphql
 
-  graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(@opentelemetry/api@1.9.0)(effect@3.18.4)(graphql@16.11.0)(typescript@5.9.3):
+  graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(@opentelemetry/api@1.9.0)(effect@3.18.4)(graphql@16.11.0):
     dependencies:
       '@0no-co/graphql.web': 1.2.0(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       '@molt/command': 0.9.0
       '@wollybeard/kit': 0.78.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.40.0
-      gql.tada: 1.8.13(graphql@16.11.0)(typescript@5.9.3)
       graphql: 16.11.0
       is-plain-obj: 4.1.0
       type-fest: 4.41.0
@@ -1433,10 +1432,7 @@ snapshots:
       '@opentelemetry/api': 1.9.0
     transitivePeerDependencies:
       - '@effect/platform'
-      - '@gql.tada/svelte-support'
-      - '@gql.tada/vue-support'
       - effect
-      - typescript
 
   graphql@16.11.0: {}
 
