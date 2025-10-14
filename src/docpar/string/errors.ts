@@ -66,4 +66,3 @@ export type AnyError =
   | ErrorFieldNotFound
   | ErrorInvalidSelectionOnScalar
   | ErrorInvalidSelectionSet
-

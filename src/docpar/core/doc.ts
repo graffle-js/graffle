@@ -5,7 +5,7 @@
 import type { Operation, Operations } from './operation.js'
 
 // Re-export operation types for convenience
-export type { Operation, OperationName, OperationResult, OperationVariables, Operations } from './operation.js'
+export type { Operation, OperationName, OperationResult, Operations, OperationVariables } from './operation.js'
 
 // ================================
 // Untyped Document (Plain Strings)
