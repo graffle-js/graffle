@@ -1,6 +1,7 @@
 import { Code } from '#src/lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { codeImportAll } from '../helpers/pathHelpers.js'
 import { ModuleGeneratorArgumentsMap } from './ArgumentsMap.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsDocument } from './MethodsDocument.js'
@@ -21,8 +22,8 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorStringIntrospection, true))
-    // Alias for gql-tada compatibility
-    code`type $$Tada = typeof $$StringIntrospection`
+    // Import string-introspection again as $$Tada for gql-tada compatibility
+    code(codeImportAll(config, { as: '$$Tada', from: './string-introspection', type: true }))
     code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl
