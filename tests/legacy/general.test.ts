@@ -38,6 +38,7 @@ test(`minimal raw query with response headers`, async () => {
 
 test(`basic error`, async () => {
   ctx.res({ body: { errors } })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const res = await request(ctx.url, `x`).catch((x: unknown) => x)
   expect(res).toMatchInlineSnapshot(
     `[Error: GraphQL Error (Code: 200): {"response":{"errors":{"message":"Syntax Error GraphQL request (1:1) Unexpected Name \\"x\\"\\n\\n1: x\\n   ^\\n","locations":[{"line":1,"column":1}]},"status":200,"headers":{}},"request":{"query":"x"}}]`,
@@ -373,6 +374,7 @@ describe(`excludeOperationName`, () => {
 
 test(`should not throw error when errors property is an empty array (occurred when using UltraGraphQL)`, async () => {
   ctx.res({ body: { data: { test: `test` }, errors: [] } })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const res = await new GraphQLClient(ctx.url).request(`{ test }`)
   expect(res).toEqual(expect.objectContaining({ test: `test` }))
 })

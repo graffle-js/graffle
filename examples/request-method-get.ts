@@ -28,5 +28,6 @@ const variables = {
   title: `Inception`,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const data = await graphQLClient.request(query, variables)
 console.log(data)

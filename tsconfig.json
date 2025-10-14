@@ -29,5 +29,5 @@
     "isolatedModules": false
   },
   "include": ["src", "tests", "examples"],
-  "exclude": ["build"]
+  "exclude": ["build", "tsup.config.ts"]
 }

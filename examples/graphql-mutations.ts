@@ -22,5 +22,6 @@ const variables = {
   releaseDate: 2010,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const data = await graphQLClient.request(mutation, variables)
 console.log(data)

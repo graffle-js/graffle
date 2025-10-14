@@ -2,6 +2,7 @@
 
 import { run } from 'node:test'
 import { expectTypeOf, test } from 'vitest'
+// @ts-expect-error this file is not tracked in the repo and is used for testing
 import { Result } from '../../../tests/_/schema/generated/SchemaRuntime.js'
 import { ContextualError } from '../errors/ContextualError.js'
 import { MaybePromise } from '../prelude.js'
