@@ -4,7 +4,7 @@ import type { Context } from '#src/context/context.js'
 import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
 import { Docpar } from '#src/docpar/$.js'
-import { graffleMappedResultToRequest } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
+import { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import { getOperationType } from '#src/lib/grafaid/document.js'
 import type { Exact } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
@@ -494,7 +494,7 @@ export const createWithContext = <$Context extends Context>(
           })
 
           // Reuse the shared helper that handles variable extraction and operation analysis
-          request = graffleMappedResultToRequest(encoded, operationName)
+          request = DocumentBuilderKit.graffleMappedResultToRequest(encoded, operationName)
         } else {
           // For TypedDocumentLike (strings): manually build the request
           const query = normalized.document as string

@@ -1,6 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Select } from '#src/docpar/object/Select/$.js'
-import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
+import { Docpar } from '#src/docpar/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { Var } from './$$.js'
@@ -77,7 +76,7 @@ Test
     { objectNested: { object: { string: true, id: true, int: false } } },
   ])
   .test(({ input, matrix }) => {
-    const documentNormalized = Select.Document.createDocumentNormalizedFromQuerySelection(input)
-    const { document } = toGraphQLDocument(documentNormalized, matrix)
+    const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(input)
+    const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, matrix)
     return Grafaid.Document.print(document)
   })
