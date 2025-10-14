@@ -61,7 +61,6 @@ export const ModuleGeneratorGql = createModuleGenerator(
        * \`\`\`
        */
       export const gql = createGql<
-        $$Tada.introspection,
         Schema,
         $$SelectionSets.$Document,
         $$ArgumentsMap.ArgumentsMap

@@ -29,7 +29,6 @@ import type * as $$Tada from './string-introspection.js'
  * ```
  */
 export const gql = createGql<
-  $$Tada.introspection,
   Schema,
   $$SelectionSets.$Document,
   $$ArgumentsMap.ArgumentsMap
