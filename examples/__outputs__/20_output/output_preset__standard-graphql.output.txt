@@ -13,7 +13,7 @@
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
       'content-length': '160',
-      date: 'Tue, 14 Oct 2025 20:57:22 GMT',
+      date: 'Tue, 14 Oct 2025 20:58:18 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },
