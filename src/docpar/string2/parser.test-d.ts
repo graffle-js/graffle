@@ -27,7 +27,6 @@ type _ = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 2: Named query with single scalar field
   Ts.Test.exact<
     ParseDocument<'query myQuery { id }', PossibleSchema>,
@@ -41,7 +40,6 @@ type _ = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 3: Multiple scalar fields
   Ts.Test.exact<
     ParseDocument<'{ id idNonNull }', PossibleSchema>,
@@ -56,7 +54,6 @@ type _ = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 4: Query with custom scalar (Date)
   Ts.Test.exact<
     ParseDocument<'{ date }', PossibleSchema>,
@@ -70,7 +67,6 @@ type _ = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 5: Query with spaces/formatting (from actual gql test)
   Ts.Test.exact<
     ParseDocument<'query myQuery { date }', PossibleSchema>,
@@ -84,7 +80,6 @@ type _ = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 6: Non-null field
   Ts.Test.exact<
     ParseDocument<'{ idNonNull }', PossibleSchema>,
@@ -120,7 +115,6 @@ type _Nested = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 2: Nested object with multiple fields
   Ts.Test.exact<
     ParseDocument<'{ object { id string } }', PossibleSchema>,
@@ -137,7 +131,6 @@ type _Nested = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 3: Multiple nested objects at same level
   Ts.Test.exact<
     ParseDocument<'{ object { id } objectNested { id } }', PossibleSchema>,
@@ -156,7 +149,6 @@ type _Nested = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 4: Deep nesting (3 levels)
   Ts.Test.exact<
     ParseDocument<'{ objectNested { object { id } } }', PossibleSchema>,
@@ -194,7 +186,6 @@ type _Arguments = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 2: Field with required argument
   Ts.Test.exact<
     ParseDocument<'{ stringWithRequiredArg(string: "required") }', PossibleSchema>,
@@ -208,7 +199,6 @@ type _Arguments = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 3: Field with multiple arguments - TODO: Add test when we have a field with multiple args
   // Ts.Test.exact<
   //   ParseDocument<'{ fieldWithMultiArgs(arg1: "a", arg2: 42) }', PossibleSchema>,
@@ -257,7 +247,6 @@ type _MultiOp = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 2: Query and mutation
   Ts.Test.exact<
     ParseDocument<'query GetId { id } mutation SetId { idNonNull }', PossibleSchema>,
@@ -298,7 +287,6 @@ type _Mutations = Ts.Test.Cases<
       }
     }
   >,
-
   // Test 2: Named mutation
   Ts.Test.exact<
     ParseDocument<'mutation SetId { idNonNull }', PossibleSchema>,
@@ -332,10 +320,8 @@ type _SpecialTypes = Ts.Test.Cases<
       }
     }
   >
-
-  // TODO: Add union and interface tests when parser supports them
-  // Ts.Test.exact<
-  //   ParseDocument<'{ unionFooBar { ... on Foo { id } } }', PossibleSchema>,
-  //   { ... }
-  // >
->
+> // TODO: Add union and interface tests when parser supports them
+// Ts.Test.exact<
+//   ParseDocument<'{ unionFooBar { ... on Foo { id } } }', PossibleSchema>,
+//   { ... }
+// >

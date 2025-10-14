@@ -1,6 +1,7 @@
 # String2: Rewrite Plan
 
 ## Goal
+
 Rewrite gql-tada string document parser to work with Graffle's schema format instead of introspection format.
 
 ## Key Differences from String (gql-tada)
@@ -8,6 +9,7 @@ Rewrite gql-tada string document parser to work with Graffle's schema format ins
 ### Schema Format
 
 **Old (introspection):**
+
 ```typescript
 type Schema = {
   'Query': {
@@ -18,7 +20,7 @@ type Schema = {
           kind: 'NON_NULL'
           ofType: {
             kind: 'LIST'
-            ofType: { kind: 'OBJECT', name: 'Battle', ofType: null }
+            ofType: { kind: 'OBJECT'; name: 'Battle'; ofType: null }
           }
         }
       }
@@ -28,6 +30,7 @@ type Schema = {
 ```
 
 **New (Graffle):**
+
 ```typescript
 interface Query {
   kind: 'Object'
@@ -42,14 +45,14 @@ interface battles {
   kind: 'OutputField'
   name: 'battles'
   arguments: {}
-  type: {                    // NEW: Direct nested structure
+  type: { // NEW: Direct nested structure
     kind: 'NonNull'
     ofType: {
       kind: 'List'
-      ofType: $Schema.Battle  // NEW: Direct reference at terminal
+      ofType: $Schema.Battle // NEW: Direct reference at terminal
     }
   }
-  namedType: $Schema.Battle   // NEW: Direct access to base type
+  namedType: $Schema.Battle // NEW: Direct access to base type
 }
 ```
 
@@ -86,27 +89,32 @@ interface battles {
 ## Implementation Plan
 
 ### Phase 1: Setup & Schema Types
+
 - [ ] Create basic file structure
 - [ ] Define new `SchemaLike` interface for Graffle schema
 - [ ] Define `AbstractSetupSchema` for Graffle schema input
 - [ ] Create `schemaOfSetup` type utility
 
 ### Phase 2: Type Traversal
+
 - [ ] Implement field type unwrapping (NonNull/List via `type` field)
 - [ ] Implement type resolution (using `namedType` shortcut)
 - [ ] Test with simple scalar fields
 
 ### Phase 3: Selection Inference
+
 - [ ] Rewrite `getDocumentType` for Graffle schema
 - [ ] Rewrite `getDocumentOperations`
 - [ ] Test with simple queries
 
 ### Phase 4: Variables & Arguments
+
 - [ ] Rewrite `getVariablesType`
 - [ ] Handle argument types
 - [ ] Test with parameterized queries
 
 ### Phase 5: Integration
+
 - [ ] Create $$. exports
 - [ ] Wire into gql.ts
 - [ ] Run test suite

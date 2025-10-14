@@ -29,7 +29,7 @@ export interface ErrorInvalidOperation extends ParserError {
  */
 export interface ErrorOperationNotAvailable extends ParserError {
   error: 'OperationNotAvailable'
-  message: string  // e.g., "Mutation operation not available in schema"
+  message: string // e.g., "Mutation operation not available in schema"
   operationType: 'query' | 'mutation' | 'subscription'
 }
 
@@ -38,7 +38,7 @@ export interface ErrorOperationNotAvailable extends ParserError {
  */
 export interface ErrorFieldNotFound extends ParserError {
   error: 'FieldNotFound'
-  message: string  // e.g., "Field 'xyz' does not exist on type 'Query'"
+  message: string // e.g., "Field 'xyz' does not exist on type 'Query'"
   fieldName: string
   parentType: string
   availableFields?: string[]
@@ -50,7 +50,7 @@ export interface ErrorFieldNotFound extends ParserError {
  */
 export interface ErrorInvalidSelectionOnScalar extends ParserError {
   error: 'InvalidSelectionOnScalar'
-  message: string  // e.g., "Cannot select fields on scalar type 'String'"
+  message: string // e.g., "Cannot select fields on scalar type 'String'"
   fieldName: string
   fieldType: string
   path: string

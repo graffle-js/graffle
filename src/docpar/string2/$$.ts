@@ -5,20 +5,14 @@
 import type { ParseDocument } from './parser.js'
 
 export type { ParseDocument } from './parser.js'
-export type {
-  AbstractSetupSchema,
-  Schema,
-  SchemaOfSetup,
-  OutputObject,
-  OutputField,
-} from './schema.js'
+export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSetup } from './schema.js'
 
 /**
  * parseDocument - for compatibility with string/$$.
  * In string2, we capture the input string to pass to getDocumentOperations.
  */
 export type parseDocument<$Input extends string> = {
-  definitions: $Input  // Capture input for single-pass parsing
+  definitions: $Input // Capture input for single-pass parsing
 }
 
 /**
@@ -28,10 +22,8 @@ export type parseDocument<$Input extends string> = {
 export type getDocumentOperations<
   $Definitions,
   $Schema,
-> = $Definitions extends string
-  ? $Schema extends import('./schema.js').Schema
-    ? ParseDocument<$Definitions, $Schema>
-    : never
+> = $Definitions extends string ? $Schema extends import('./schema.js').Schema ? ParseDocument<$Definitions, $Schema>
+  : never
   : never
 
 /**

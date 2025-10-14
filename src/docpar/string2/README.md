@@ -5,11 +5,13 @@ Rewrite of the gql-tada string document parser to work with Graffle's schema for
 ## Current Status
 
 ### ✅ Done
+
 - [x] Schema type definitions (`schema.ts`)
 - [x] Type traversal utilities (`typeTraversal.ts`)
 - [x] Plan document
 
 ### 🚧 In Progress
+
 - [ ] Selection inference (main type inference logic)
 - [ ] Variable type inference
 - [ ] Export API
@@ -23,8 +25,8 @@ Rewrite of the gql-tada string document parser to work with Graffle's schema for
 
 ```typescript
 // gql-tada (two-pass)
-type Doc = ParseDocument<'query { user { id } }'>  // → DocumentNode
-type Result = InferFromDocument<Doc, Schema>       // → { user: { id: string } }
+type Doc = ParseDocument<'query { user { id } }'> // → DocumentNode
+type Result = InferFromDocument<Doc, Schema> // → { user: { id: string } }
 
 // string2 (single-pass)
 type Result = ParseDocument<'query { user { id } }', Schema>
@@ -34,6 +36,7 @@ type Result = ParseDocument<'query { user { id } }', Schema>
 As we pattern match the string, we **immediately look up types in the schema** and build the result. No intermediate AST.
 
 **Benefits:**
+
 - Faster (fewer type instantiations)
 - Less memory (no DocumentNode in type system)
 - Symmetric with object builder (both are single-pass)
@@ -45,14 +48,14 @@ Fields now have both `type` (for traversal) and `namedType` (for direct access):
 ```typescript
 interface battles {
   kind: 'OutputField'
-  type: {                    // Traverse wrappers
+  type: { // Traverse wrappers
     kind: 'NonNull'
     ofType: {
       kind: 'List'
-      ofType: $Schema.Battle  // Terminal = direct reference
+      ofType: $Schema.Battle // Terminal = direct reference
     }
   }
-  namedType: $Schema.Battle   // Shortcut to base type
+  namedType: $Schema.Battle // Shortcut to base type
 }
 ```
 
@@ -62,16 +65,14 @@ Much simpler than gql-tada's introspection approach:
 
 ```typescript
 // Unwrap NonNull
-type UnwrapNonNull<$Type> =
-  $Type extends { kind: 'NonNull'; ofType: infer $Inner }
-    ? $Inner
-    : $Type
+type UnwrapNonNull<$Type> = $Type extends
+  { kind: 'NonNull'; ofType: infer $Inner } ? $Inner
+  : $Type
 
 // Get named type (recursively unwrap all wrappers)
-type GetNamedType<$Type> =
-  $Type extends { kind: 'NonNull' | 'List'; ofType: infer $Inner }
-    ? GetNamedType<$Inner>
-    : $Type  // Terminal is already the named type reference
+type GetNamedType<$Type> = $Type extends
+  { kind: 'NonNull' | 'List'; ofType: infer $Inner } ? GetNamedType<$Inner>
+  : $Type // Terminal is already the named type reference
 ```
 
 No decoding step needed - just pattern match on the structure.
@@ -87,7 +88,8 @@ No decoding step needed - just pattern match on the structure.
 
 1. **Implement selection.ts** - Core type inference from GraphQL selections
 2. **Implement variables.ts** - Variable type inference from operation definitions
-3. **Create $$.ts** - Export API matching string/$$. format
+3. **Create $$.ts** - Export API matching string/$$
+   . format
 4. **Wire into gql.ts** - Replace `Docpar.parseDocument` and `Docpar.getDocumentOperations`
 5. **Run tests** - Verify feature parity
 
