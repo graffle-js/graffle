@@ -1,6 +1,6 @@
 import type { Docpar } from '#src/docpar/$.js'
 import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
-import { Select } from '#src/extensions/DocumentBuilder/Select/$.js'
+import { Select } from '#src/docpar/object/Select/$.js'
 import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'

@@ -6,8 +6,8 @@
  * using the ArgumentsMap literal types to determine proper types for each variable.
  */
 
-import type { PropertySignature } from '#src/extensions/DocumentBuilder/PropertySignature.js'
-import type { Select } from '#src/extensions/DocumentBuilder/Select/$.js'
+import type { PropertySignature } from '#src/lib/prelude.js'
+import type { Select } from '../Select/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Simplify, UnionToIntersection } from 'type-fest'
 import type { ExtractFromOperation } from './extract.js'

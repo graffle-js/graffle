@@ -1,6 +1,6 @@
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
-import { Select } from '../../Select/$.js'
+import { Select } from '#src/docpar/object/Select/$.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLValue } from './Value.js'
 

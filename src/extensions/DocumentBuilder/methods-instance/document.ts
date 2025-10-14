@@ -2,7 +2,7 @@ import type { HandleOutput } from '#src/client/handle.js'
 import type { IsTupleMultiple } from '#src/lib/prelude.js'
 import type { UnionToTuple } from 'type-fest'
 import type { InferResult } from '../InferResult/$.js'
-import type { Select } from '../Select/$.js'
+import type { Select } from '#src/docpar/object/Select/$.js'
 
 // dprint-ignore
 export type DocumentRunner<

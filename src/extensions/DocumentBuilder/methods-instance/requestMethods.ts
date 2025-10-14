@@ -4,7 +4,7 @@ import { type Context } from '#src/context/context.js'
 import { getOperationDefinition } from '#src/lib/grafaid/document.js'
 import { isSymbol } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
-import { Select } from '../Select/$.js'
+import { Select } from '#src/docpar/object/Select/$.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/$.js'
 
 export const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {

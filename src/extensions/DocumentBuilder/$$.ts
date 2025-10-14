@@ -1,6 +1,6 @@
 export { Var } from '#src/docpar/object/var/$.js'
+export { Select } from '#src/docpar/object/Select/$.js'
 export * from './InferResult/$.js'
 export * from './methods-instance/document.js'
 export * from './methods-instance/requestMethods.js'
-export * from './Select/$.js'
 export * from './SelectGraphQLMapper/$.js'

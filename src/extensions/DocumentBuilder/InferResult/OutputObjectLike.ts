@@ -2,7 +2,7 @@ import type { AssertExtendsObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
-import type { Select } from '../Select/$.js'
+import type { Select } from '#src/docpar/object/Select/$.js'
 import type { Alias } from './Alias.js'
 import type {
   IsArgumentsOrDirectiveKey,
