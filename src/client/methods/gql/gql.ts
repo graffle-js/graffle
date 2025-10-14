@@ -44,7 +44,7 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 // dprint-ignore
 type TadaAPIFromContext<$Context> = Docpar.GraphQLTadaAPI<
   Docpar.schemaOfSetup<{
-    introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
+    introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
     scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
   }>,
   { isMaskingDisabled: false }

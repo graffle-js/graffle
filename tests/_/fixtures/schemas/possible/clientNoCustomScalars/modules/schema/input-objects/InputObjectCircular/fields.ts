@@ -8,7 +8,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.InputObjectCircular} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject ↗} |
  * | **Parent** | {@link $Schema.InputObjectCircular} |
  * | **Path** | `InputObjectCircular.circular` |
  * | **Nullability** | Optional |
@@ -28,7 +28,7 @@ export interface circular {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.InputObjectCircular} |
  * | **Path** | `InputObjectCircular.date` |
  * | **Nullability** | Optional |

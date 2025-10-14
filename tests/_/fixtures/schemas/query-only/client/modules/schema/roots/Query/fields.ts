@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.id` |
  * | **Nullability** | Optional |
@@ -47,7 +47,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.idNonNull` |
  * | **Nullability** | Required |

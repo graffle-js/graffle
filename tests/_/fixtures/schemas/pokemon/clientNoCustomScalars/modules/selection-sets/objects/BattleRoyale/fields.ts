@@ -13,6 +13,11 @@ export namespace combatants {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.CombatantMultiPokemon<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `combatants` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -30,6 +35,11 @@ export namespace date {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `date` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -48,6 +58,11 @@ export namespace id {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -66,6 +81,11 @@ export namespace winner {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Trainer<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `winner` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<

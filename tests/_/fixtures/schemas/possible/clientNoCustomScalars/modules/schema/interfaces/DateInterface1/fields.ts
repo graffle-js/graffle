@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.DateInterface1} |
  * | **Path** | `DateInterface1.date1` |
  * | **Nullability** | Optional |

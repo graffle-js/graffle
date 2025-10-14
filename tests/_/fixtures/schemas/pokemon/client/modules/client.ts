@@ -1,7 +1,7 @@
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
-import * as $$Tada from './tada.js'
+import * as $$StringIntrospection from './string-introspection.js'
 
 import { DocumentBuilder } from '#graffle/extensions/document-builder'
 import { TransportHttp } from '#graffle/extensions/transport-http'

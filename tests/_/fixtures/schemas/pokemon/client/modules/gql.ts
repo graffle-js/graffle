@@ -1,4 +1,4 @@
-import * as $$Tada from './tada.js'
+import * as $$StringIntrospection from './string-introspection.js'
 
 import { createGql } from '#graffle/extensions/document-builder'
 import type * as $$ArgumentsMap from './arguments-map.js'

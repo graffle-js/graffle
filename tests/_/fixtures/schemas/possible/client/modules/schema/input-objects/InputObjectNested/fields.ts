@@ -8,7 +8,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.InputObject} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject ↗} |
  * | **Parent** | {@link $Schema.InputObjectNested} |
  * | **Path** | `InputObjectNested.InputObject` |
  * | **Nullability** | Optional |

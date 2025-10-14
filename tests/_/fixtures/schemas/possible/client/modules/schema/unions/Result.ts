@@ -10,7 +10,7 @@ import type { Object1 } from '../objects/Object1/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 3 |
  * | **Types** | {@link $Schema.ErrorOne}, {@link $Schema.ErrorTwo}, {@link $Schema.Object1} |
  */

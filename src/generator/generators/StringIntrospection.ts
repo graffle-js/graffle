@@ -10,11 +10,15 @@ import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportNamed } from '../helpers/pathHelpers.js'
 
 /**
- * Generates introspection types for type-safe GraphQL syntax support.
+ * Generates introspection types for type-safe GraphQL string syntax support.
  *
- * This generator creates a TypeScript module that exports schema introspection types,
- * enabling full type inference for GraphQL documents using standard GraphQL syntax
+ * This generator creates a TypeScript module that exports schema introspection types
+ * in a format compatible with the docpar string parser (vendored from gql-tada).
+ * This enables full type inference for GraphQL documents using standard GraphQL syntax
  * via the generated client's `.gql()` method.
+ *
+ * The introspection format matches the structure expected by the string parser, allowing
+ * compile-time type inference without requiring the full GraphQL.js schema at runtime.
  *
  * Generated clients automatically provide a type-safe `gql` method that supports:
  * - Full IDE autocomplete for fields, arguments, and types
@@ -38,8 +42,8 @@ import { codeImportNamed } from '../helpers/pathHelpers.js'
  * `).send({ id: '123' })
  * ```
  */
-export const ModuleGeneratorTada = createModuleGenerator(
-  `tada`,
+export const ModuleGeneratorStringIntrospection = createModuleGenerator(
+  `stringIntrospection`,
   ({ config, code }) => {
     const kindMap = config.schema.kindMap
 
@@ -80,7 +84,7 @@ export const ModuleGeneratorTada = createModuleGenerator(
         }'; name: '${type.name}'; fields: {`
 
         for (const field of fields) {
-          const fieldType = renderTadaType(field.type)
+          const fieldType = renderStringIntrospectionType(field.type)
           code`    '${field.name}': { name: '${field.name}'; type: ${fieldType} };`
         }
 
@@ -109,7 +113,7 @@ export const ModuleGeneratorTada = createModuleGenerator(
         code`  '${type.name}': { kind: 'INPUT_OBJECT'; name: '${type.name}'; isOneOf: false; inputFields: [`
 
         for (const field of fields) {
-          const fieldType = renderTadaType(field.type)
+          const fieldType = renderStringIntrospectionType(field.type)
           const defaultValue = field.defaultValue !== undefined ? JSON.stringify(field.defaultValue) : 'null'
           code`    { name: '${field.name}'; type: ${fieldType}; defaultValue: ${defaultValue} },`
         }
@@ -137,13 +141,16 @@ export const ModuleGeneratorTada = createModuleGenerator(
 )
 
 /**
- * Renders a GraphQL type reference into gql-tada's introspection format.
+ * Renders a GraphQL type reference into string introspection format.
  *
  * This helper function transforms GraphQL type system objects (from graphql-js)
- * into the nested type descriptor format that gql-tada expects for introspection.
+ * into the nested type descriptor format expected by the docpar string parser.
+ *
+ * The format is compatible with the introspection structure used by the vendored
+ * gql-tada parser in docpar/string/.
  *
  * @param type - A GraphQL type from graphql-js (e.g., GraphQLObjectType, GraphQLNonNull)
- * @returns A string representation of the type in gql-tada's introspection format
+ * @returns A string representation of the type in string introspection format
  *
  * @example
  * ```ts
@@ -151,12 +158,12 @@ export const ModuleGeneratorTada = createModuleGenerator(
  * // { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'String'; ofType: null } }
  * ```
  */
-function renderTadaType(type: any): string {
+function renderStringIntrospectionType(type: any): string {
   if (Grafaid.Schema.isNonNullType(type)) {
-    return `{ kind: 'NON_NULL'; name: never; ofType: ${renderTadaType(type.ofType)} }`
+    return `{ kind: 'NON_NULL'; name: never; ofType: ${renderStringIntrospectionType(type.ofType)} }`
   }
   if (Grafaid.Schema.isListType(type)) {
-    return `{ kind: 'LIST'; name: never; ofType: ${renderTadaType(type.ofType)} }`
+    return `{ kind: 'LIST'; name: never; ofType: ${renderStringIntrospectionType(type.ofType)} }`
   }
   if (Grafaid.Schema.isScalarType(type)) {
     return `{ kind: 'SCALAR'; name: '${type.name}'; ofType: null; }`

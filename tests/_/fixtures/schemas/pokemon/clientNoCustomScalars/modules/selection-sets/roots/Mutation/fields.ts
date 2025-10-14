@@ -77,6 +77,11 @@ export namespace addPokemon {
     $type: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.PokemonType>
   }
 
+  /**
+   * This is the "expanded" version of the `addPokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -96,6 +101,11 @@ export namespace resetData {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
   }
 
+  /**
+   * This is the "expanded" version of the `resetData` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<

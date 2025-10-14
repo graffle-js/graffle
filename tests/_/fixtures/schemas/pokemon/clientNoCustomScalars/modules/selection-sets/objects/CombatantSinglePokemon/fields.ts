@@ -13,6 +13,11 @@ export namespace pokemon {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Pokemon<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `pokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -30,6 +35,11 @@ export namespace trainer {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Trainer<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `trainer` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<

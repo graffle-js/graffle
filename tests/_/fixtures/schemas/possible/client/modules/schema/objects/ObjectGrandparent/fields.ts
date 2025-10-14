@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectGrandparent} |
  * | **Path** | `ObjectGrandparent.a` |
  * | **Nullability** | Required |
@@ -47,7 +47,7 @@ export interface a {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectGrandparent} |
  * | **Path** | `ObjectGrandparent.me` |
  * | **Nullability** | Required |

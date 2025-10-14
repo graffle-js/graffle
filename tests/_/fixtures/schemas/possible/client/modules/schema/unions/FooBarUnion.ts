@@ -11,7 +11,7 @@ import type { Foo } from '../objects/Foo/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 2 |
  * | **Types** | {@link $Schema.Bar}, {@link $Schema.Foo} |
  */

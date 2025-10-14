@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.TrainerClass} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.class` |
  * | **Nullability** | Optional |
@@ -48,7 +48,7 @@ export { type $class as class }
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Patron}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.fans` |
  * | **Nullability** | Optional |
@@ -70,7 +70,7 @@ export interface fans {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.id` |
  * | **Nullability** | Optional |
@@ -91,7 +91,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.name` |
  * | **Nullability** | Optional |
@@ -112,7 +112,7 @@ export interface name {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.pokemon` |
  * | **Nullability** | Optional |

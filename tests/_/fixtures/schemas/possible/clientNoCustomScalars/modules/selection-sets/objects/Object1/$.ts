@@ -12,7 +12,7 @@ export type * as Object1 from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 6 |
  */
 export interface Object1<
@@ -24,7 +24,7 @@ export interface Object1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ABCEnum} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
    * | **Parent** | {@link $NamedTypes.$Object1} |
    * | **Path** | `Object1.ABCEnum` |
    * | **Nullability** | Optional |
@@ -38,7 +38,7 @@ export interface Object1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Boolean} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Object1} |
    * | **Path** | `Object1.boolean` |
    * | **Nullability** | Optional |
@@ -52,7 +52,7 @@ export interface Object1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Float} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Object1} |
    * | **Path** | `Object1.float` |
    * | **Nullability** | Optional |
@@ -66,7 +66,7 @@ export interface Object1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Object1} |
    * | **Path** | `Object1.id` |
    * | **Nullability** | Optional |
@@ -80,7 +80,7 @@ export interface Object1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Int} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Object1} |
    * | **Path** | `Object1.int` |
    * | **Nullability** | Optional |
@@ -94,7 +94,7 @@ export interface Object1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Object1} |
    * | **Path** | `Object1.string` |
    * | **Nullability** | Optional |
@@ -109,13 +109,13 @@ export interface Object1<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

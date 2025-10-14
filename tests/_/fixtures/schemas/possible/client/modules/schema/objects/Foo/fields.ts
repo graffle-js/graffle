@@ -30,7 +30,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Foo} |
  * | **Path** | `Foo.id` |
  * | **⚠ Deprecated** | Field a is deprecated. |

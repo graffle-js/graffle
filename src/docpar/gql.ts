@@ -56,8 +56,7 @@ export type ParseGraphQLString<
     Docpar.getDocumentOperations<
       Docpar.parseDocument<$Input>['definitions'],
       Docpar.schemaOfSetup<{
-        introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-        scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
+        schema: GlobalRegistry.ForContext<$Context>['schema']
       }>
     >
   >
@@ -206,7 +205,6 @@ export type InferOperations<
  * This interface unifies static and instance-level typings using Graffle's own type system.
  */
 export interface gql<
-  $Introspection extends Docpar.AbstractSetupSchema['introspection'],
   $Schema extends Schema,
   $DocumentObjectConstraint,
   $ArgumentsMap extends SchemaDrivenDataMap,
@@ -219,8 +217,7 @@ export interface gql<
       Docpar.getDocumentOperations<
         Docpar.parseDocument<$Input>['definitions'],
         Docpar.schemaOfSetup<{
-          introspection: $Introspection
-          scalars: $Schema['scalarRegistry']['map']
+          schema: $Schema
         }>
       >
     >
@@ -291,13 +288,12 @@ export const defaults: Partial<Options> = {
 }
 
 export const createGql = <
-  $Introspection extends Docpar.AbstractSetupSchema['introspection'],
   $Schema extends Schema,
   $DocumentObjectConstraint,
   $ArgumentsMap extends SchemaDrivenDataMap,
 >(config: {
   sddm: $ArgumentsMap
-}): gql<$Introspection, $Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
+}): gql<$Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
   return ((...args: Gql.Arguments) => {
     const normalized = Gql.normalizeArguments(args)
 

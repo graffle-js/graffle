@@ -17,7 +17,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.InputObjectNested` |
    * | **Nullability** | Optional |
@@ -32,7 +32,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.InputObjectNestedNonNull` |
    * | **Nullability** | Optional |
@@ -49,7 +49,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ABCEnum} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.abcEnum` |
    * | **Nullability** | Optional |
@@ -63,7 +63,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.argInputObjectCircular` |
    * | **Nullability** | Optional |
@@ -78,7 +78,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$bigint} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.bigintField` |
    * | **Nullability** | Optional |
@@ -92,7 +92,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$bigint}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.bigintFieldNonNull` |
    * | **Nullability** | Required |
@@ -106,7 +106,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.date` |
    * | **Nullability** | Optional |
@@ -120,7 +120,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateArg` |
    * | **Nullability** | Optional |
@@ -135,7 +135,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateArgInputObject` |
    * | **Nullability** | Optional |
@@ -150,7 +150,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateArgList` |
    * | **Nullability** | Optional |
@@ -165,7 +165,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateArgNonNull` |
    * | **Nullability** | Optional |
@@ -180,7 +180,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateArgNonNullList` |
    * | **Nullability** | Optional |
@@ -195,7 +195,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateArgNonNullListNonNull` |
    * | **Nullability** | Optional |
@@ -210,7 +210,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$DateInterface1} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateInterface1` |
    * | **Nullability** | Optional |
@@ -224,7 +224,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateList` |
    * | **Nullability** | Optional |
@@ -239,7 +239,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateListList` |
    * | **Nullability** | Optional |
@@ -254,7 +254,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateListNonNull` |
    * | **Nullability** | Required |
@@ -269,7 +269,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateNonNull` |
    * | **Nullability** | Required |
@@ -283,7 +283,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$DateObject1} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateObject1` |
    * | **Nullability** | Optional |
@@ -297,7 +297,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$DateUnion} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.dateUnion` |
    * | **Nullability** | Optional |
@@ -311,7 +311,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.error` |
    * | **Nullability** | Optional |
@@ -326,7 +326,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.id` |
    * | **Nullability** | Optional |
@@ -340,7 +340,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.idNonNull` |
    * | **Nullability** | Required |
@@ -354,7 +354,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Interface} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interface` |
    * | **Nullability** | Optional |
@@ -368,7 +368,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$InterfaceChildA}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interfaceHierarchyChildA` |
    * | **Nullability** | Required |
@@ -384,7 +384,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$InterfaceChildB}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interfaceHierarchyChildB` |
    * | **Nullability** | Required |
@@ -400,7 +400,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$InterfaceGrandparent}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interfaceHierarchyGrandparents` |
    * | **Nullability** | Required |
@@ -416,7 +416,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$InterfaceParent}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interfaceHierarchyParents` |
    * | **Nullability** | Required |
@@ -432,7 +432,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Interface}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interfaceNonNull` |
    * | **Nullability** | Required |
@@ -446,7 +446,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Interface} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.interfaceWithArgs` |
    * | **Nullability** | Optional |
@@ -461,7 +461,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Int}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.listInt` |
    * | **Nullability** | Optional |
@@ -476,7 +476,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Int}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.listIntNonNull` |
    * | **Nullability** | Required |
@@ -491,7 +491,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Int}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.listListInt` |
    * | **Nullability** | Optional |
@@ -506,7 +506,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Int}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.listListIntNonNull` |
    * | **Nullability** | Required |
@@ -521,7 +521,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$lowerCaseUnion} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.lowerCaseUnion` |
    * | **Nullability** | Optional |
@@ -535,7 +535,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Object1} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.object` |
    * | **Nullability** | Optional |
@@ -549,7 +549,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Object1}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.objectList` |
    * | **Nullability** | Optional |
@@ -564,7 +564,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Object1}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.objectListNonNull` |
    * | **Nullability** | Required |
@@ -579,7 +579,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ObjectNested} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.objectNested` |
    * | **Nullability** | Optional |
@@ -593,7 +593,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ObjectNestedWithArgs} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.objectNestedWithArgs` |
    * | **Nullability** | Optional |
@@ -607,7 +607,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Object1}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.objectNonNull` |
    * | **Nullability** | Required |
@@ -621,7 +621,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Object1} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.objectWithArgs` |
    * | **Nullability** | Optional |
@@ -636,7 +636,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Result} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.result` |
    * | **Nullability** | Optional |
@@ -651,7 +651,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Result}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.resultNonNull` |
    * | **Nullability** | Required |
@@ -666,7 +666,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.string` |
    * | **Nullability** | Optional |
@@ -680,7 +680,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithArgEnum` |
    * | **Nullability** | Optional |
@@ -695,7 +695,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithArgInputObject` |
    * | **Nullability** | Optional |
@@ -710,7 +710,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithArgInputObjectEnum` |
    * | **Nullability** | Optional |
@@ -725,7 +725,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithArgInputObjectRequired` |
    * | **Nullability** | Optional |
@@ -742,7 +742,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithArgs` |
    * | **Nullability** | Optional |
@@ -757,7 +757,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithListArg` |
    * | **Nullability** | Optional |
@@ -772,7 +772,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithListArgRequired` |
    * | **Nullability** | Optional |
@@ -787,7 +787,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.stringWithRequiredArg` |
    * | **Nullability** | Optional |
@@ -802,7 +802,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$FooBarUnion} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.unionFooBar` |
    * | **Nullability** | Optional |
@@ -816,7 +816,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$FooBarUnion}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.unionFooBarNonNull` |
    * | **Nullability** | Required |
@@ -830,7 +830,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$FooBarUnion} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.unionFooBarWithArgs` |
    * | **Nullability** | Optional |
@@ -845,7 +845,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ObjectUnion} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.unionObject` |
    * | **Nullability** | Optional |
@@ -859,7 +859,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ObjectUnion}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.unionObjectNonNull` |
    * | **Nullability** | Required |
@@ -874,13 +874,13 @@ export interface Query<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

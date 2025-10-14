@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.attack` |
  * | **Nullability** | Required |
@@ -47,7 +47,7 @@ export interface attack {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.birthday` |
  * | **Nullability** | Required |
@@ -68,7 +68,7 @@ export interface birthday {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.defense` |
  * | **Nullability** | Required |
@@ -89,7 +89,7 @@ export interface defense {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.hp` |
  * | **Nullability** | Required |
@@ -110,7 +110,7 @@ export interface hp {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.id` |
  * | **Nullability** | Required |
@@ -131,7 +131,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.name` |
  * | **Nullability** | Required |
@@ -152,7 +152,7 @@ export interface name {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.trainer` |
  * | **Nullability** | Optional |
@@ -173,7 +173,7 @@ export interface trainer {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.PokemonType}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Parent** | {@link $Schema.Pokemon} |
  * | **Path** | `Pokemon.type` |
  * | **Nullability** | Required |

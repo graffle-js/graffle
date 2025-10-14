@@ -12,7 +12,7 @@ export type * as ObjectParent from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 3 |
  * | **Implements** | {@link $Schema.InterfaceGrandparent}, {@link $Schema.InterfaceParent} |
  */
@@ -25,7 +25,7 @@ export interface ObjectParent<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectParent} |
    * | **Path** | `ObjectParent.a` |
    * | **Nullability** | Required |
@@ -39,7 +39,7 @@ export interface ObjectParent<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectParent} |
    * | **Path** | `ObjectParent.b` |
    * | **Nullability** | Required |
@@ -53,7 +53,7 @@ export interface ObjectParent<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectParent} |
    * | **Path** | `ObjectParent.me` |
    * | **Nullability** | Required |
@@ -68,13 +68,13 @@ export interface ObjectParent<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

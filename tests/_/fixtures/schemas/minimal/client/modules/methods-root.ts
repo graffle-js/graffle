@@ -32,7 +32,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
 
   /**
-   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | __typename} meta-field.
    *
    * The `__typename` field returns the name of the object type. In this case, it will always return `"Query"`.
    */
@@ -54,7 +54,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.id1` |
    * | **Nullability** | Required |
@@ -89,12 +89,11 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```ts
    * const user = await graffle.query.user({ id: true, name: true })
    * ```
-   *
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.query.$batch({
-   *   user: { id: true, name: true },
-   *   posts: { title: true, content: true }
+   * user: { id: true, name: true },
+   * posts: { title: true, content: true }
    * })
    * ```
    */

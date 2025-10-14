@@ -12,7 +12,7 @@ export type * as lowerCaseUnion from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 2 |
  * | **Types** | {@link $Schema.lowerCaseObject}, {@link $Schema.lowerCaseObject2} |
  */
@@ -23,7 +23,7 @@ export interface lowerCaseUnion<
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
    * the name is one of the member type names, whichever is ultimately returned at runtime.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
@@ -44,8 +44,8 @@ export interface lowerCaseUnion<
    * | **Parent** | {@link $Schema.lowerCaseUnion} |
    * | **Path** | `lowerCaseUnion -> lowerCaseObject` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types}
    *
    * @example
    * ```ts
@@ -72,8 +72,8 @@ export interface lowerCaseUnion<
    * | **Parent** | {@link $Schema.lowerCaseUnion} |
    * | **Path** | `lowerCaseUnion -> lowerCaseObject2` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types}
    *
    * @example
    * ```ts
@@ -92,7 +92,7 @@ export interface lowerCaseUnion<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
 }

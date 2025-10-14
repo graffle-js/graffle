@@ -8,7 +8,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ABCEnum} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Parent** | {@link $Schema.InputObjectEnum} |
  * | **Path** | `InputObjectEnum.abcEnum` |
  * | **Nullability** | Optional |

@@ -3,7 +3,7 @@ import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleG
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
-import { ModuleGeneratorTada } from './Tada.js'
+import { ModuleGeneratorStringIntrospection } from './StringIntrospection.js'
 
 export const ModuleGeneratorClient = createModuleGenerator(
   `client`,
@@ -11,7 +11,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
-    code(importModuleGenerator(config, ModuleGeneratorTada))
+    code(importModuleGenerator(config, ModuleGeneratorStringIntrospection))
     code`
       import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'

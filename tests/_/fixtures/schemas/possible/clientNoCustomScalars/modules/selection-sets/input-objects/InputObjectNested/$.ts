@@ -13,7 +13,7 @@ export type * as InputObjectNested from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject ↗} |
  * | **Fields** | 1 |
  * | **All Fields Nullable** | Yes |
  */

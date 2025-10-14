@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.CombatantSinglePokemon} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.combatant1` |
  * | **Nullability** | Optional |
@@ -47,7 +47,7 @@ export interface combatant1 {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.CombatantSinglePokemon} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.combatant2` |
  * | **Nullability** | Optional |
@@ -68,7 +68,7 @@ export interface combatant2 {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.date` |
  * | **Nullability** | Optional |
@@ -89,7 +89,7 @@ export interface date {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.id` |
  * | **Nullability** | Optional |
@@ -110,7 +110,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.winner` |
  * | **Nullability** | Optional |

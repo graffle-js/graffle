@@ -10,7 +10,7 @@ import type { BattleWild } from '../objects/BattleWild/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 3 |
  * | **Types** | {@link $Schema.BattleRoyale}, {@link $Schema.BattleTrainer}, {@link $Schema.BattleWild} |
  */

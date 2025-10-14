@@ -26,7 +26,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Battle}[]! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.battles` |
  * | **Nullability** | Required |
@@ -48,7 +48,7 @@ export interface battles {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Being}[]! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.beings` |
  * | **Nullability** | Required |
@@ -70,7 +70,7 @@ export interface beings {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.pokemonByName` |
  * | **Nullability** | Optional |
@@ -100,7 +100,7 @@ export interface pokemonByName {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.pokemons` |
  * | **Nullability** | Optional |
@@ -130,7 +130,7 @@ export interface pokemons {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.trainerByName` |
  * | **Nullability** | Optional |
@@ -159,7 +159,7 @@ export interface trainerByName {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.trainers` |
  * | **Nullability** | Optional |

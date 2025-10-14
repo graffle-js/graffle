@@ -32,7 +32,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
 
   /**
-   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | __typename} meta-field.
    *
    * The `__typename` field returns the name of the object type. In this case, it will always return `"Mutation"`.
    */
@@ -54,7 +54,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.id` |
    * | **Nullability** | Optional |
@@ -83,7 +83,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.idNonNull` |
    * | **Nullability** | Required |
@@ -120,16 +120,15 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * @example Single field
    * ```ts
    * const result = await graffle.mutation.createUser({
-   *   id: true,
-   *   name: true
+   * id: true,
+   * name: true
    * })
    * ```
-   *
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.mutation.$batch({
-   *   createUser: { id: true, name: true },
-   *   createPost: { id: true, title: true }
+   * createUser: { id: true, name: true },
+   * createPost: { id: true, title: true }
    * })
    * ```
    */

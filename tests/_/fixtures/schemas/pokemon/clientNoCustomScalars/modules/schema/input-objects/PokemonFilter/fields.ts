@@ -8,7 +8,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.DateFilter} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject ↗} |
  * | **Parent** | {@link $Schema.PokemonFilter} |
  * | **Path** | `PokemonFilter.birthday` |
  * | **Nullability** | Optional |
@@ -28,7 +28,7 @@ export interface birthday {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.StringFilter} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject ↗} |
  * | **Parent** | {@link $Schema.PokemonFilter} |
  * | **Path** | `PokemonFilter.name` |
  * | **Nullability** | Optional |
@@ -48,7 +48,7 @@ export interface name {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.PokemonType} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Parent** | {@link $Schema.PokemonFilter} |
  * | **Path** | `PokemonFilter.type` |
  * | **Nullability** | Optional |

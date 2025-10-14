@@ -13,7 +13,7 @@ export type * as DateInterface1 from './$$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Fields** | 1 |
  * | **Implementors** | {@link $Schema.DateObject1} |
  */
@@ -26,7 +26,7 @@ export interface DateInterface1<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Date} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
    * | **Parent** | {@link $NamedTypes.$DateInterface1} |
    * | **Path** | `DateInterface1.date1` |
    * | **Nullability** | Optional |
@@ -48,8 +48,8 @@ export interface DateInterface1<
    * | **Parent** | {@link $Schema.DateInterface1} |
    * | **Path** | `DateInterface1 -> DateObject1` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types}
    *
    * @example
    * ```ts
@@ -69,14 +69,14 @@ export interface DateInterface1<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
    * the name is one of the implementor type names, whichever is ultimately returned at runtime.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

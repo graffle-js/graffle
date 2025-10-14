@@ -1,9 +1,9 @@
 import { Grafaid } from '#lib/grafaid'
 import { expect, test } from 'vitest'
 import { createConfig } from '../config/config.js'
-import { ModuleGeneratorTada } from './Tada.js'
+import { ModuleGeneratorStringIntrospection } from './StringIntrospection.js'
 
-test('generates gql-tada compatible introspection types', async () => {
+test('generates string introspection types', async () => {
   // Create a simple test schema
   const schema = Grafaid.Schema.buildSchema(`
     type Query {
@@ -32,8 +32,8 @@ test('generates gql-tada compatible introspection types', async () => {
     currentWorkingDirectory: process.cwd(),
   })
 
-  // Generate tada module
-  const result = ModuleGeneratorTada.generate(config)
+  // Generate string introspection module
+  const result = ModuleGeneratorStringIntrospection.generate(config)
 
   // Type guard: createModuleGenerator always returns a single module, never an array
   if (Array.isArray(result)) throw new Error('Expected single module')
@@ -96,7 +96,7 @@ test('handles interface types with implementations', async () => {
     currentWorkingDirectory: process.cwd(),
   })
 
-  const result = ModuleGeneratorTada.generate(config)
+  const result = ModuleGeneratorStringIntrospection.generate(config)
 
   // Type guard: createModuleGenerator always returns a single module, never an array
   if (Array.isArray(result)) throw new Error('Expected single module')
@@ -138,7 +138,7 @@ test('handles union types', async () => {
     currentWorkingDirectory: process.cwd(),
   })
 
-  const result = ModuleGeneratorTada.generate(config)
+  const result = ModuleGeneratorStringIntrospection.generate(config)
 
   // Type guard: createModuleGenerator always returns a single module, never an array
   if (Array.isArray(result)) throw new Error('Expected single module')
