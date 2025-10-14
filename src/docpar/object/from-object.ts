@@ -2,8 +2,8 @@
  * Type transformer that converts an operations object into the appropriate TypedFullDocument variant.
  */
 
-import type { Operation, Operations } from '../core/operation.js'
 import type { MultiOperation, SingleOperation, UntypedDocument } from '../core/doc.js'
+import type { Operation, Operations } from '../core/operation.js'
 
 // ================================
 // Type Inference Helpers
