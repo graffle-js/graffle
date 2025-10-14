@@ -34,10 +34,10 @@ test('gql() returns plain string compatible with standard GraphQL APIs', () => {
   expect(typeof stringDoc).toBe('string')
   expect(typeof objectDoc).toBe('string')
 
-  // Verify they can be parsed by standard GraphQL parse function
-  // Cast to string to work with the branded type
-  const stringAst = parse(String(stringDoc))
-  const objectAst = parse(String(objectDoc))
+  // Documents are string intersection types (string & { ... })
+  // This makes them directly assignable to string parameters
+  const stringAst = parse(stringDoc)
+  const objectAst = parse(objectDoc)
 
   expect(stringAst.kind).toBe('Document')
   expect(objectAst.kind).toBe('Document')
@@ -60,9 +60,8 @@ test('gql() string documents work with any GraphQL client', () => {
     },
   }
 
-  // At runtime, documents are plain strings (they extend String interface)
-  // String() converts the branded type to a plain string
-  mockGraphQLClient.request(String(doc))
+  // Documents are string & { ... }, so they work directly where strings are expected
+  mockGraphQLClient.request(doc)
 })
 
 // ==================================================================================================

@@ -23,7 +23,7 @@ export type { Operation, OperationName, OperationResult, Operations, OperationVa
  * client.gql('query { id }').$send('anyName', { any: 'vars' })
  * ```
  */
-export interface UntypedDocument extends String {
+export type UntypedDocument = string & {
   readonly __operations: {} // Empty - no type information available
   readonly __untyped: true
 }
@@ -45,7 +45,7 @@ export interface UntypedDocument extends String {
  * client.gql(doc).MyOperation() // or .$send()
  * ```
  */
-export interface SingleOperation<$Operation extends Operation> extends String {
+export type SingleOperation<$Operation extends Operation> = string & {
   readonly __operations: Record<$Operation['name'] & string, $Operation>
   readonly __operation: $Operation // Shortcut to access the single operation
   readonly __operationCount: 'single'
@@ -68,7 +68,7 @@ export interface SingleOperation<$Operation extends Operation> extends String {
  * client.gql(doc).$send('ListUsers')
  * ```
  */
-export interface MultiOperation<$Operations extends Operations> extends String {
+export type MultiOperation<$Operations extends Operations> = string & {
   readonly __operations: $Operations
   readonly __operation: never // Multi-operation docs don't have a single operation
   readonly __operationCount: 'multi'
