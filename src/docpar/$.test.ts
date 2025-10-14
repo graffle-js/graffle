@@ -1,7 +1,9 @@
 import { Docpar } from '#src/docpar/$.js'
 import { Var } from '#src/docpar/object/var/$.js'
+import type * as Doc from '#src/docpar/core/doc.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
+import { Ts } from '@wollybeard/kit'
 import { OperationTypeNode, parse, print } from 'graphql'
 import { expect, test } from 'vitest'
 
@@ -151,3 +153,123 @@ test('static document builder > SDDM type branding - runtime verification', () =
   // Runtime: document is a string
   expect(typeof generatedDoc).toBe('string')
 })
+
+// ==================================================================================================
+//                                   Type-Level GQL Tests
+// ==================================================================================================
+
+// ==================================================================================================
+//                                   Single operation, no variables
+// ==================================================================================================
+
+type SingleOpNoVars = Doc.SingleOperation<
+  Doc.Operation<'myQuery', { date: Date | null }, {}>
+>
+
+Ts.Test.exact<SingleOpNoVars>()(Possible.gql(`query myQuery { date }`))
+Ts.Test.exact<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } } }))
+
+// ==================================================================================================
+//                                 Single operation, required variables
+// ==================================================================================================
+
+type SingleOpRequiredVars = Doc.SingleOperation<
+  Doc.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
+>
+
+Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
+// dprint-ignore
+Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
+
+// ==================================================================================================
+//                                 Single operation, optional variables
+// ==================================================================================================
+
+type SingleOpOptionalVars = Doc.SingleOperation<
+  Doc.Operation<'search', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+>
+
+Ts.Test.exact<SingleOpOptionalVars>()(
+  Possible.gql(`query search($string: String) { stringWithArgs(string: $string) }`),
+)
+Ts.Test.exact<SingleOpOptionalVars>()(
+  Possible.gql({ query: { search: { stringWithArgs: { $: { string: $ }, __typename: true } } } }),
+)
+
+// ==================================================================================================
+//                                   Anonymous operation (no name)
+// ==================================================================================================
+
+type DefaultOpNoVars = Doc.SingleOperation<
+  Doc.Operation<'default', { id: string | null }, {}>
+>
+
+type DefaultOpWithScalar = Doc.SingleOperation<
+  Doc.Operation<'default', { date: Date | null }, {}>
+>
+
+type DefaultOpOptionalVars = Doc.SingleOperation<
+  Doc.Operation<'default', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+>
+
+Ts.Test.exact<DefaultOpNoVars>()(Possible.gql(`{ id }`))
+Ts.Test.exact<DefaultOpNoVars>()(Possible.gql({ query: { default: { id: true } } }))
+
+Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql(`{ date }`))
+Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql({ query: { default: { date: true } } }))
+
+Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
+Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
+
+// ==================================================================================================
+//                                   Multiple operations, no variables
+// ==================================================================================================
+
+type MultiOpNoVars = Doc.MultiOperation<{
+  getUser: Doc.Operation<'getUser', { id: string | null }, {}>
+  addId: Doc.Operation<'addId', { id: string | null }, {}>
+}>
+
+Ts.Test.exact<MultiOpNoVars>()(Possible.gql(`
+  query getUser { id }
+  mutation addId { id }
+`))
+Ts.Test.exact<MultiOpNoVars>()(Possible.gql({
+  query: { getUser: { id: true } },
+  mutation: { addId: { id: true } },
+}))
+
+// ==================================================================================================
+//                                   Multiple operations with variables
+// ==================================================================================================
+
+type MultiOpWithVars = Doc.MultiOperation<{
+  getById: Doc.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
+  setId: Doc.Operation<'setId', { idNonNull: string }, {}>
+}>
+
+Ts.Test.exact<MultiOpWithVars>()(
+  Possible.gql(`
+    query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }
+    mutation setId { idNonNull }
+  `),
+)
+Ts.Test.exact<MultiOpWithVars>()(
+  Possible.gql({
+    query: {
+      getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } },
+    },
+    mutation: {
+      setId: { idNonNull: true },
+    },
+  }),
+)
+
+// ==================================================================================================
+//                                           Error cases
+// ==================================================================================================
+
+// @ts-expect-error - invalid document object
+Possible.gql({ query: { foo: true } })
+// If GQL LSP is running, this will be an error in IDE, but its not a TS error e.g. we cannot use expect-error here
+// Possible.gql(`query { foo }`)
