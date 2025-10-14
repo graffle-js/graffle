@@ -12,7 +12,6 @@
     "@opentelemetry/sdk-trace-base": "^1.30.0",
     "@opentelemetry/sdk-trace-node": "^1.30.0",
     "gql.tada": "^1.8.13",
-    "graffle": "file:..",
     "graphql": "^16.10.0",
     "typescript": "^5.7.2"
   },
@@ -20,6 +19,7 @@
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5",
     "@wollybeard/kit": "^0.71.0",
+    "graffle": "file:..",
     "tsx": "^4.19.3",
     "vitest": "^3.1.1"
   },

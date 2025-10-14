@@ -20,9 +20,6 @@ importers:
       gql.tada:
         specifier: ^1.8.13
         version: 1.8.13(graphql@16.10.0)(typescript@5.7.2)
-      graffle:
-        specifier: file:..
-        version: file:..(@effect/platform@0.91.1(effect@3.17.14))(@opentelemetry/api@1.9.0)(effect@3.17.14)(graphql@16.10.0)(typescript@5.7.2)
       graphql:
         specifier: ^16.10.0
         version: 16.10.0
@@ -39,6 +36,9 @@ importers:
       '@wollybeard/kit':
         specifier: ^0.71.0
         version: 0.71.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+      graffle:
+        specifier: file:..
+        version: file:..(@effect/platform@0.91.1(effect@3.17.14))(@opentelemetry/api@1.9.0)(effect@3.17.14)(graphql@16.10.0)(typescript@5.7.2)
       tsx:
         specifier: ^4.19.3
         version: 4.19.3
@@ -571,9 +571,6 @@ packages:
 
   es-module-lexer@1.6.0:
     resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
-
-  es-toolkit@1.35.0:
-    resolution: {integrity: sha512-kVHyrRoC0eLc1hWJ6npG8nNFtOG+nWfcMI+XE0RaFO0gxd6Ions8r0O/U64QyZgY7IeidUnS5oZlRZYUgMGCAg==}
 
   es-toolkit@1.39.10:
     resolution: {integrity: sha512-E0iGnTtbDhkeczB0T+mxmoVlT4YNweEKBLq7oaU4p11mecdsZpNWOglI4895Vh4usbQ+LsJiuLuI2L0Vdmfm2w==}
@@ -1322,8 +1319,6 @@ snapshots:
 
   es-module-lexer@1.6.0: {}
 
-  es-toolkit@1.35.0: {}
-
   es-toolkit@1.39.10: {}
 
   esbuild@0.25.2:
@@ -1403,7 +1398,7 @@ snapshots:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
       '@wollybeard/kit': 0.78.3(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
-      es-toolkit: 1.35.0
+      es-toolkit: 1.39.10
       gql.tada: 1.8.13(graphql@16.10.0)(typescript@5.7.2)
       graphql: 16.10.0
       is-plain-obj: 4.1.0
