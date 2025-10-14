@@ -40,15 +40,19 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
  *
  * This type provides the `scalar`, `persisted`, and `__name` properties that GraphQLSP LSP
  * looks for to identify gql-tada functions and determine which schema to use in multi-schema mode.
+ *
+ * Returns `any` when no GlobalRegistry is available (dynamic clients).
  */
 // dprint-ignore
-type TadaAPIFromContext<$Context> = Docpar.GraphQLTadaAPI<
-  Docpar.schemaOfSetup<{
-    introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
-    scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
-  }>,
-  { isMaskingDisabled: false }
->
+type TadaAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
+  ? any
+  : Docpar.GraphQLTadaAPI<
+      Docpar.schemaOfSetup<{
+        introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
+        scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
+      }>,
+      { isMaskingDisabled: false }
+    >
 
 /**
  * Check if GlobalRegistry is configured for this context.

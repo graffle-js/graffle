@@ -16,12 +16,15 @@ export type parseDocument<$Input extends string> = {
 
 /**
  * getDocumentOperations - performs single-pass parsing with the schema.
+ * Supports both schema-driven and schema-less modes.
  */
 export type getDocumentOperations<
   $Definitions,
   $Schema,
-> = $Definitions extends string ? $Schema extends import('./schema.js').Schema ? ParseDocument<$Definitions, $Schema>
-  : never
+> = $Definitions extends string
+  ? $Schema extends import('./schema.js').Schema
+    ? ParseDocument<$Definitions, $Schema>
+    : ParseDocument<$Definitions, undefined>
   : never
 
 /**

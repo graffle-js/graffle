@@ -27,7 +27,7 @@ import type { Simplify } from 'type-fest'
  *
  * For plain strings:
  * 1. Parses the GraphQL string into an AST using `parseDocument`
- * 2. Extracts introspection data from the context's GlobalRegistry
+ * 2. Extracts introspection data from the context's GlobalRegistry (or uses schema-less mode if unavailable)
  * 3. Uses `schemaOfSetup` to combine introspection with scalar mappings into a `SchemaLike`
  * 4. Extracts ALL operations from the document using `getDocumentOperations`
  * 5. Wraps the result in `TypedFullDocument.FromObject` to produce either SingleOperation or MultiOperation
@@ -51,16 +51,27 @@ import type { Simplify } from 'type-fest'
 export type ParseGraphQLString<
   $Context,
   $Input extends string,
-> = TypedFullDocument.FromObject<
-  Simplify<
-    Docpar.getDocumentOperations<
-      Docpar.parseDocument<$Input>['definitions'],
-      Docpar.schemaOfSetup<{
-        schema: GlobalRegistry.ForContext<$Context>['schema']
-      }>
+> = GlobalRegistry.ForContext<$Context> extends never
+  ? TypedFullDocument.FromObject<
+      Simplify<
+        Docpar.getDocumentOperations<
+          Docpar.parseDocument<$Input>['definitions'],
+          Docpar.schemaOfSetup<{
+            schema: undefined
+          }>
+        >
+      >
     >
-  >
->
+  : TypedFullDocument.FromObject<
+      Simplify<
+        Docpar.getDocumentOperations<
+          Docpar.parseDocument<$Input>['definitions'],
+          Docpar.schemaOfSetup<{
+            schema: GlobalRegistry.ForContext<$Context>['schema']
+          }>
+        >
+      >
+    >
 
 /**
  * Type-level utility that parses a document builder object and returns the typed document.
