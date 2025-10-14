@@ -1,5 +1,4 @@
 import type * as $ from '#graffle/utilities-for-generated'
-import type { Schema as $Schema } from '../$.js'
 import type { Bar } from '../objects/Bar/$.js'
 import type { Foo } from '../objects/Foo/$.js'
 
