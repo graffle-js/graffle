@@ -14,85 +14,18 @@ type S = Possible.$.Schema
 // ==================================================================================================
 
 type _ = Ts.Test.Cases<
-  // Test 1: Simplest possible query - anonymous query with single scalar field
-  Ts.Test.exact<
-    P<'{ id }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          id: string | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 2: Named query with single scalar field
-  Ts.Test.exact<
-    P<'query myQuery { id }', S>,
-    {
-      myQuery: {
-        name: 'myQuery'
-        result: {
-          id: string | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 3: Multiple scalar fields
-  Ts.Test.exact<
-    P<'{ id idNonNull }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          id: string | null
-          idNonNull: string
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 4: Query with custom scalar (Date)
-  Ts.Test.exact<
-    P<'{ date }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          date: Date | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 5: Query with spaces/formatting (from actual gql test)
-  Ts.Test.exact<
-    P<'query myQuery { date }', S>,
-    {
-      myQuery: {
-        name: 'myQuery'
-        result: {
-          date: Date | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 6: Non-null field
-  Ts.Test.exact<
-    P<'{ idNonNull }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          idNonNull: string
-        }
-        variables: {}
-      }
-    }
-  >
+  // Simplest possible query - anonymous query with single scalar field
+  Ts.Test.exact<P<'{ id }', S>, { default: { name: 'default'; result: { id: string | null }; variables: {} } }>,
+  // Named query with single scalar field
+  Ts.Test.exact<P<'query myQuery { id }', S>, { myQuery: { name: 'myQuery'; result: { id: string | null }; variables: {} } }>,
+  // Multiple scalar fields
+  Ts.Test.exact<P<'{ id idNonNull }', S>, { default: { name: 'default'; result: { id: string | null; idNonNull: string }; variables: {} } }>,
+  // Query with custom scalar (Date)
+  Ts.Test.exact<P<'{ date }', S>, { default: { name: 'default'; result: { date: Date | null }; variables: {} } }>,
+  // Query with spaces/formatting
+  Ts.Test.exact<P<'query myQuery { date }', S>, { myQuery: { name: 'myQuery'; result: { date: Date | null }; variables: {} } }>,
+  // Non-null field
+  Ts.Test.exact<P<'{ idNonNull }', S>, { default: { name: 'default'; result: { idNonNull: string }; variables: {} } }>
 >
 
 // ==================================================================================================
@@ -100,72 +33,14 @@ type _ = Ts.Test.Cases<
 // ==================================================================================================
 
 type _Nested = Ts.Test.Cases<
-  // Test 1: Single nested object with one field
-  Ts.Test.exact<
-    P<'{ object { id } }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          object: {
-            id: string | null
-          } | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 2: Nested object with multiple fields
-  Ts.Test.exact<
-    P<'{ object { id string } }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          object: {
-            id: string | null
-            string: string | null
-          } | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 3: Multiple nested objects at same level
-  Ts.Test.exact<
-    P<'{ object { id } objectNested { id } }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          object: {
-            id: string | null
-          } | null
-          objectNested: {
-            id: string | null
-          } | null
-        }
-        variables: {}
-      }
-    }
-  >,
-  // Test 4: Deep nesting (3 levels)
-  Ts.Test.exact<
-    P<'{ objectNested { object { id } } }', S>,
-    {
-      default: {
-        name: 'default'
-        result: {
-          objectNested: {
-            object: {
-              id: string | null
-            } | null
-          } | null
-        }
-        variables: {}
-      }
-    }
-  >
+  // Single nested object with one field
+  Ts.Test.exact<P<'{ object { id } }', S>, { default: { name: 'default'; result: { object: { id: string | null } | null }; variables: {} } }>,
+  // Nested object with multiple fields
+  Ts.Test.exact<P<'{ object { id string } }', S>, { default: { name: 'default'; result: { object: { id: string | null; string: string | null } | null }; variables: {} } }>,
+  // Multiple nested objects at same level
+  Ts.Test.exact<P<'{ object { id } objectNested { id } }', S>, { default: { name: 'default'; result: { object: { id: string | null } | null; objectNested: { id: string | null } | null }; variables: {} } }>,
+  // Deep nesting (3 levels)
+  Ts.Test.exact<P<'{ objectNested { object { id } } }', S>, { default: { name: 'default'; result: { objectNested: { object: { id: string | null } | null } | null }; variables: {} } }>
 >
 
 // ==================================================================================================
