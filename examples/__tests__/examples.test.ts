@@ -8,13 +8,10 @@ import { examplePaths } from './paths.generated.js'
 const toString = S.encodeSync(FsLoc.FsLoc)
 
 describe('examples', () => {
-  // Reset the database before each test using Graffle client
+  // Note: Database reset removed - Pokemon schema doesn't have a resetData mutation
+  // Tests should be idempotent or use unique data
   beforeEach(async () => {
-    const url = process.env['POKEMON_SCHEMA_URL']
-    if (url) {
-      const graffle = Graffle.create().transport({ url })
-      await graffle.gql('mutation { resetData }').$send()
-    }
+    // No-op: removed database reset as it's not supported by the Pokemon schema
   })
 
   test.for(examplePaths)('%s', async (loc) => {

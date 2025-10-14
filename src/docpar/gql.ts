@@ -9,6 +9,7 @@ import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { Simplify } from 'type-fest'
+import * as Doc from './core/doc.js'
 
 //
 //
@@ -52,7 +53,7 @@ export type ParseGraphQLString<
   $Context,
   $Input extends string,
 > = GlobalRegistry.ForContext<$Context> extends never
-  ? TypedFullDocument.FromObject<
+  ? Doc.FromObject<
       Simplify<
         Docpar.getDocumentOperations<
           Docpar.parseDocument<$Input>['definitions'],
@@ -62,7 +63,7 @@ export type ParseGraphQLString<
         >
       >
     >
-  : TypedFullDocument.FromObject<
+  : Doc.FromObject<
       Simplify<
         Docpar.getDocumentOperations<
           Docpar.parseDocument<$Input>['definitions'],
@@ -94,7 +95,7 @@ export type ParseGraphQLString<
 export type ParseGraphQLObject<
   $Context,
   $Document,
-> = TypedFullDocument.FromObject<
+> = Doc.FromObject<
   InferOperations<
     $Document,
     GlobalRegistry.ForContext<$Context>['schema'],
@@ -223,7 +224,7 @@ export interface gql<
   // Override string signature to return TypedFullDocument instead of TadaDocumentNode
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): TypedFullDocument.FromObject<
+  ): Doc.FromObject<
     Simplify<
       Docpar.getDocumentOperations<
         Docpar.parseDocument<$Input>['definitions'],
@@ -238,7 +239,7 @@ export interface gql<
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): TypedFullDocument.FromObject<
+  ): Doc.FromObject<
     Simplify<
       InferOperations<
         $Document,

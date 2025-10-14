@@ -11,7 +11,7 @@
  */
 
 import type { GetDecoded } from '#src/types/Schema/nodes/Scalar/helpers.js'
-import type { MakeError } from './errors.js'
+import type { MakeError } from '../core/error.js'
 import type { Enum, Interface, OutputField, OutputObject, Scalar, Schema } from './schema.js'
 import type { ApplyInlineType } from './typeTraversal.js'
 
@@ -382,7 +382,7 @@ type ParseFieldByName<
   : MakeError<'FieldNotFound', {
     message: `Field '${$FieldName}' does not exist on type '${$ParentType['name']}'`
     fieldName: $FieldName
-    parentType: $ParentType['name']
+    parentName: $ParentType['name']
     availableFields: keyof $ParentType['fields']
   }>
 

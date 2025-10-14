@@ -1,19 +1,11 @@
 /**
- * Type-level error reporting for the parser.
+ * Type-level error reporting for the string parser.
  *
  * Instead of returning `never`, we return structured error objects
  * that tell you exactly what went wrong and where.
  */
 
-/**
- * Base error type with common fields.
- */
-export interface ParserError {
-  __typename: 'ParserError'
-  error: string
-  message: string
-  context?: any
-}
+import type { ParserError } from '../core/error.js'
 
 /**
  * Failed to parse operation keyword (query/mutation/subscription).
@@ -40,7 +32,7 @@ export interface ErrorFieldNotFound extends ParserError {
   error: 'FieldNotFound'
   message: string // e.g., "Field 'xyz' does not exist on type 'Query'"
   fieldName: string
-  parentType: string
+  parentName: string
   availableFields?: string[]
   path: string
 }
@@ -75,10 +67,3 @@ export type AnyError =
   | ErrorInvalidSelectionOnScalar
   | ErrorInvalidSelectionSet
 
-/**
- * Helper to create error objects.
- */
-export type MakeError<$ErrorType extends string, $Context = {}> = {
-  __typename: 'ParserError'
-  error: $ErrorType
-} & $Context
