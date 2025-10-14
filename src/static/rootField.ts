@@ -1,9 +1,9 @@
+import { Docpar } from '#src/docpar/$.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
 import { isSymbol } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
-import { Select } from '../docpar/object/Select/$.js'
 import type { Options } from '../extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '../extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { defaults as packageLevelDefaults } from '../extensions/DocumentBuilder/staticBuilderDefaults.js'
@@ -147,14 +147,14 @@ export const createStaticRootField = (
   fieldName: string,
   factoryLevelDefaults?: Options,
 ) => {
-  return (selection?: Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
+  return (selection?: Docpar.Object.Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
     // Create root type selection set with the field
     const rootTypeSelectionSet = {
       [fieldName]: selection ?? true,
     }
 
     // Create normalized document from root type selection
-    const documentNormalized = Select.Document.createDocumentNormalizedFromRootTypeSelection(
+    const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
       operationType,
       rootTypeSelectionSet,
     )

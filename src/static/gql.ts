@@ -1,6 +1,5 @@
-import type { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/$.js'
 import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
-import { Select } from '#src/docpar/object/Select/$.js'
 import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
@@ -264,14 +263,14 @@ export const createStaticRootField = (
   fieldName: string,
   factoryLevelDefaults?: Options,
 ) => {
-  return (selection?: Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
+  return (selection?: Docpar.Object.Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
     // Create root type selection set with the field
     const rootTypeSelectionSet = {
       [fieldName]: selection ?? true,
     }
 
     // Create normalized document from root type selection
-    const documentNormalized = Select.Document.createDocumentNormalizedFromRootTypeSelection(
+    const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
       operationType,
       rootTypeSelectionSet,
     )
@@ -460,7 +459,7 @@ export namespace Gql {
    */
   export type Arguments =
     | [graphqlDocument: string]
-    | [objectDocument: Select.Document.DocumentObject, options?: Options]
+    | [objectDocument: Docpar.Object.Select.Document.DocumentObject, options?: Options]
 
   export const normalizeArguments = (args: Arguments) => {
     const [first, second] = args
@@ -477,7 +476,7 @@ export namespace Gql {
     // Document builder object
     return {
       type: 'object' as const,
-      document: first as Select.Document.DocumentObject,
+      document: first as Docpar.Object.Select.Document.DocumentObject,
       options: second,
     }
   }
@@ -501,7 +500,7 @@ export const createGql = <
     }
 
     // Normalize the document object into internal representation
-    const documentNormalized = Select.Document.normalizeOrThrow(normalized.document)
+    const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(normalized.document)
 
     // Convert to GraphQL document
     const result = toGraphQLDocument(documentNormalized, {
