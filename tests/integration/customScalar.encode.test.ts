@@ -43,7 +43,7 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
     .use(RequestSpy)
     .scalar(DateScalar)
 
-  const { document, operationsVariables } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
+  const { document, operationsVariables } = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
     DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {
       sddm: Possible.schemaMap,

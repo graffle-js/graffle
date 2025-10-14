@@ -1,11 +1,11 @@
 import type { Grafaid } from '#lib/grafaid'
 import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
+import { Select } from '#src/docpar/object/Select/$.js'
+import { ToGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/$.js'
 import { getOperationDefinition } from '#src/lib/grafaid/document.js'
 import { isSymbol } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
-import { Select } from '../Select/$.js'
-import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/$.js'
 
 export const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {
   const documentNormalized = Select.Document.normalizeOrThrow(document)
@@ -71,7 +71,7 @@ const executeDocument = async (
   operationName?: string,
 ) => {
   const request = graffleMappedResultToRequest(
-    SelectionSetGraphqlMapper.toGraphQL(document, {
+    ToGraphQLDocument.toGraphQL(document, {
       sddm: context.configuration.schema.current.map,
       // todo test that when custom scalars are used they are mapped correctly
       scalars: context.scalars.map,
@@ -83,7 +83,7 @@ const executeDocument = async (
 }
 
 export const graffleMappedResultToRequest = (
-  { document, operationsVariables }: SelectionSetGraphqlMapper.Encoded,
+  { document, operationsVariables }: ToGraphQLDocument.Encoded,
   operationName?: string,
 ): Grafaid.RequestAnalyzedDocumentNodeInput => {
   // We get back variables for every operation in the Graffle document.

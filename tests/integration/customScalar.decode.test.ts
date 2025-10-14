@@ -31,7 +31,7 @@ const withGqlDocument: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
-    const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
+    const { document } = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
       DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
     expect(await possible.scalar(DateScalar).gql(document).$send()).toEqual(expectedData)
@@ -43,7 +43,7 @@ const withGqlString: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
-    const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
+    const { document } = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
       DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
     expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).$send()).toEqual(expectedData)
@@ -124,7 +124,7 @@ describe(`gql string`, () => {
   //   async ([_, query, responseData, __], { fetch, kitchenSinkHttp: kitchenSink }) => {
   //     fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
 
-  //     const document = SelectionSetGraphqlMapper.toGraphQL({
+  //     const document = ToGraphQLDocument.toGraphQL({
   //       document: Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
   //     })
   //     expect(await kitchenSink.gql(print(document)).send()).toEqual(responseData)

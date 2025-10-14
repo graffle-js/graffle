@@ -41,7 +41,6 @@
       "#lib/config-manager": ["./src/lib/config-manager/$.ts"],
       "#lib/errors": ["./src/lib/errors/$.ts"],
       "#lib/grafaid": ["./src/lib/grafaid/$.ts"],
-      "#lib/docpar": ["./src/lib/docpar/$.ts"],
       "#lib/md-jsdoc": ["./src/lib/md-jsdoc/$.ts"],
       "#lib/tex": ["./src/lib/tex/$.ts"],
       "#lib/type-function": ["./src/lib/type-function/$.ts"],
