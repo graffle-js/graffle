@@ -1,344 +1,636 @@
-import type { Kind, OperationTypeNode } from '@0no-co/graphql.web'
-import type { Token, tokenize } from './tokenizer.js'
+/**
+ * Single-pass GraphQL string parser with character-by-character matching.
+ *
+ * Unlike span-based parsing which suffers from greedy template literal matching,
+ * this parser checks one character at a time, avoiding all ambiguity.
+ *
+ * Architecture:
+ * - Parse GraphQL string character-by-character
+ * - Look up types in schema as we go
+ * - Build result type directly (no intermediate tokens or DocumentNode)
+ */
 
-export interface _match<Out, In extends any[]> {
-  out: Out
-  in: In
+import type { GetDecoded } from '#src/types/Schema/nodes/Scalar/helpers.js'
+import type { MakeError } from './errors.js'
+import type { Enum, Interface, OutputField, OutputObject, Scalar, Schema } from './schema.js'
+import type { ApplyInlineType } from './typeTraversal.js'
+
+// ============================================================================
+// Schema-less Mode Support
+// ============================================================================
+
+/**
+ * Fallback field type when field is not found in schema (schema-less mode).
+ * Returns unknown to allow parsing to continue without type information.
+ *
+ * Note: Defined as OutputField to satisfy type constraints properly.
+ * InlineType is [0] where 0 = Nullable (InlineType.Nullable = 0)
+ */
+type UnknownField = OutputField<string, null, readonly [0], UnknownScalar>
+
+/**
+ * Fallback scalar type for unknown fields.
+ */
+type UnknownScalar = Scalar & {
+  name: 'Unknown'
+  decoded: unknown
 }
 
-export interface _match2<Out1, Out2, In extends any[]> {
-  out1: Out1
-  out2: Out2
-  in: In
+/**
+ * Universal object type for schema-less mode.
+ * Accepts any field name and returns UnknownField.
+ */
+type UniversalObject = OutputObject & {
+  name: 'Universal'
+  fields: {
+    [fieldName: string]: UnknownField
+  }
 }
 
-type takeOptionalName<In extends any[]> = In extends [
-  { kind: Token.Name; name: infer Name },
-  ...infer In,
-] ? _match<{ kind: Kind.NAME; value: Name }, In>
-  : _match<undefined, In>
+/**
+ * Parse a GraphQL document string and infer its type in one pass.
+ *
+ * @param $Schema - Schema for type inference. Use `undefined` for schema-less mode.
+ *   - Real Schema: Strict mode - unknown fields cause errors
+ *   - `undefined`: Loose mode - unknown fields type as `unknown`
+ */
+export type ParseDocument<
+  $Input extends string,
+  $Schema extends Schema | undefined,
+> = ParseOperations<SkipIgnored<$Input>, $Schema, {}>
 
-// prettier-ignore
-export type takeValue<In extends any[], Const extends boolean> = In extends [Token.Float, ...infer In]
-  ? _match<{ kind: Kind.FLOAT; value: string }, In>
-  : In extends [Token.Integer, ...infer In] ? _match<{ kind: Kind.INT; value: string }, In>
-  : In extends [Token.String, ...infer In] ? _match<{ kind: Kind.STRING; value: string; block: false }, In>
-  : In extends [Token.BlockString, ...infer In] ? _match<{ kind: Kind.STRING; value: string; block: true }, In>
-  : In extends [{ kind: Token.Name; name: 'null' }, ...infer In] ? _match<{ kind: Kind.NULL }, In>
-  : In extends [{ kind: Token.Name; name: 'true' | 'false' }, ...infer In]
-    ? _match<{ kind: Kind.BOOLEAN; value: boolean }, In>
-  : In extends [{ kind: Token.Name; name: infer Name }, ...infer In] ? _match<{ kind: Kind.ENUM; value: Name }, In>
-  : In extends [Token.BracketOpen, ...infer In] ? takeListRec<[], In, Const>
-  : In extends [Token.BraceOpen, ...infer In] ? takeObjectRec<[], In, Const>
-  : Const extends false
-    ? In extends [{ kind: Token.Var; name: infer Name }, ...infer In]
-      ? _match<{ kind: Kind.VARIABLE; name: { kind: Kind.NAME; value: Name } }, In>
-    : void
-  : void
-
-export type takeString<In extends any[]> = In extends [Token.String, ...infer In]
-  ? _match<{ kind: Kind.STRING; value: string; block: false }, In>
-  : In extends [Token.BlockString, ...infer In] ? _match<{ kind: Kind.STRING; value: string; block: true }, In>
-  : void
-
-type takeListRec<Nodes extends any[], In extends any[], Const extends boolean> = In extends [
-  Token.BracketClose,
-  ...infer In,
-] ? _match<{ kind: Kind.LIST; values: Nodes }, In>
-  : takeValue<In, Const> extends _match<infer Node, infer In> ? takeListRec<[...Nodes, Node], In, Const>
-  : void
-
-type takeObjectField<In extends any[], Const extends boolean> = In extends [
-  { kind: Token.Name; name: infer FieldName },
-  Token.Colon,
-  ...infer In,
-] ? takeValue<In, Const> extends _match<infer Value, infer In> ? _match<
-      { kind: Kind.OBJECT_FIELD; name: { kind: Kind.NAME; value: FieldName }; value: Value },
-      In
-    >
-  : void
-  : void
-
-export type takeObjectRec<
-  Fields extends any[],
-  In extends any[],
-  Const extends boolean,
-> = In extends [Token.BraceClose, ...infer In] ? _match<{ kind: Kind.OBJECT; fields: Fields }, In>
-  : takeObjectField<In, Const> extends _match<infer Field, infer In> ? takeObjectRec<[...Fields, Field], In, Const>
-  : void
-
-type takeArgument<In extends any[], Const extends boolean> = In extends [
-  { kind: Token.Name; name: infer ArgName },
-  Token.Colon,
-  ...infer In,
-]
-  ? takeValue<In, Const> extends _match<infer Value, infer In>
-    ? _match<{ kind: Kind.ARGUMENT; name: { kind: Kind.NAME; value: ArgName }; value: Value }, In>
-  : void
-  : void
-
-type _takeArgumentsRec<
-  Arguments extends any[],
-  In extends any[],
-  Const extends boolean,
-> = In extends [Token.ParenClose, ...infer In] ? _match<Arguments, In>
-  : takeArgument<In, Const> extends _match<infer Argument, infer In>
-    ? _takeArgumentsRec<[...Arguments, Argument], In, Const>
-  : void
-export type takeArguments<In extends any[], Const extends boolean> = In extends [
-  Token.ParenOpen,
-  ...infer In,
-] ? _takeArgumentsRec<[], In, Const>
-  : _match<[], In>
-
-export type takeDirective<In extends any[], Const extends boolean> = In extends [
-  { kind: Token.Directive; name: infer DirectiveName },
-  ...infer In,
-] ? takeArguments<In, Const> extends _match<infer Arguments, infer In> ? _match<
-      {
-        kind: Kind.DIRECTIVE
-        name: { kind: Kind.NAME; value: DirectiveName }
-        arguments: Arguments
-      },
-      In
-    >
-  : void
-  : void
-
-export type takeDirectives<In extends any[], Const extends boolean, Directives extends any[] = []> =
-  takeDirective<In, Const> extends _match<infer Directive, infer In>
-    ? takeDirectives<In, Const, [...Directives, Directive]>
-    : _match<Directives, In>
-
-type _takeFieldName<In extends any[]> = In extends [
-  { kind: Token.Name; name: infer MaybeAlias },
-  ...infer In,
-]
-  ? In extends [Token.Colon, { kind: Token.Name; name: infer Name }, ...infer In]
-    ? _match2<{ kind: Kind.NAME; value: MaybeAlias }, { kind: Kind.NAME; value: Name }, In>
-  : _match2<undefined, { kind: Kind.NAME; value: MaybeAlias }, In>
-  : void
-
-type _takeField<In extends any[]> = _takeFieldName<In> extends _match2<infer Alias, infer Name, infer In>
-  ? takeArguments<In, false> extends _match<infer Arguments, infer In>
-    ? takeDirectives<In, false> extends _match<infer Directives, infer In>
-      ? takeSelectionSet<In> extends _match<infer SelectionSet, infer In> ? _match<
-          {
-            kind: Kind.FIELD
-            alias: Alias
-            name: Name
-            arguments: Arguments
-            directives: Directives
-            selectionSet: SelectionSet
-          },
-          In
-        >
-      : _match<
-        {
-          kind: Kind.FIELD
-          alias: Alias
-          name: Name
-          arguments: Arguments
-          directives: Directives
-          selectionSet: undefined
-        },
-        In
-      >
-    : void
-  : void
-  : void
-
-export type takeType<In extends any[]> = In extends [Token.BracketOpen, ...infer In]
-  ? takeType<In> extends _match<infer Subtype, infer In>
-    ? In extends [Token.BracketClose, ...infer In]
-      ? In extends [Token.Exclam, ...infer In]
-        ? _match<{ kind: Kind.NON_NULL_TYPE; type: { kind: Kind.LIST_TYPE; type: Subtype } }, In>
-      : _match<{ kind: Kind.LIST_TYPE; type: Subtype }, In>
-    : void
-  : void
-  : In extends [{ kind: Token.Name; name: infer Name }, ...infer In] ? In extends [Token.Exclam, ...infer In] ? _match<
-        {
-          kind: Kind.NON_NULL_TYPE
-          type: { kind: Kind.NAMED_TYPE; name: { kind: Kind.NAME; value: Name } }
-        },
-        In
-      >
-    : _match<{ kind: Kind.NAMED_TYPE; name: { kind: Kind.NAME; value: Name } }, In>
-  : void
-
-type _takeFragmentSpread<In extends any[]> = In extends [
-  Token.Spread,
-  { kind: Token.Name; name: 'on' },
-  { kind: Token.Name; name: infer Type },
-  ...infer In,
-]
-  ? takeDirectives<In, false> extends _match<infer Directives, infer In>
-    ? takeSelectionSet<In> extends _match<infer SelectionSet, infer In> ? _match<
-        {
-          kind: Kind.INLINE_FRAGMENT
-          typeCondition: { kind: Kind.NAMED_TYPE; name: { kind: Kind.NAME; value: Type } }
-          directives: Directives
-          selectionSet: SelectionSet
-        },
-        In
-      >
-    : void
-  : void
-  : In extends [Token.Spread, { kind: Token.Name; name: infer Name }, ...infer In]
-    ? takeDirectives<In, false> extends _match<infer Directives, infer In> ? _match<
-        {
-          kind: Kind.FRAGMENT_SPREAD
-          name: { kind: Kind.NAME; value: Name }
-          directives: Directives
-        },
-        In
-      >
-    : void
-  : In extends [Token.Spread, ...infer In]
-    ? takeDirectives<In, false> extends _match<infer Directives, infer In>
-      ? takeSelectionSet<In> extends _match<infer SelectionSet, infer In> ? _match<
-          {
-            kind: Kind.INLINE_FRAGMENT
-            typeCondition: undefined
-            directives: Directives
-            selectionSet: SelectionSet
-          },
-          In
-        >
-      : void
-    : void
-  : void
-
-type _takeSelectionRec<Selections extends any[], In extends any[]> = _takeField<In> extends
-  _match<infer Selection, infer In> ? _takeSelectionRec<[...Selections, Selection], In>
-  : _takeFragmentSpread<In> extends _match<infer Selection, infer In>
-    ? _takeSelectionRec<[...Selections, Selection], In>
-  : In extends [Token.BraceClose, ...infer In] ? _match<{ kind: Kind.SELECTION_SET; selections: Selections }, In>
-  : void
-
-export type takeSelectionSet<In extends any[]> = In extends [Token.BraceOpen, ...infer In] ? _takeSelectionRec<[], In>
-  : void
-
-export type takeVarDefinition<In extends any[]> = In extends [
-  { kind: Token.Var; name: infer VarName },
-  Token.Colon,
-  ...infer In,
-]
-  ? takeType<In> extends _match<infer Type, infer In>
-    ? In extends [Token.Equal, ...infer In]
-      ? takeValue<In, true> extends _match<infer DefaultValue, infer In>
-        ? takeDirectives<In, true> extends _match<infer Directives, infer In> ? _match<
-            {
-              kind: Kind.VARIABLE_DEFINITION
-              variable: { kind: Kind.VARIABLE; name: { kind: Kind.NAME; value: VarName } }
-              type: Type
-              defaultValue: DefaultValue
-              directives: Directives
-            },
-            In
-          >
-        : void
-      : void
-    : takeDirectives<In, true> extends _match<infer Directives, infer In> ? _match<
-        {
-          kind: Kind.VARIABLE_DEFINITION
-          variable: { kind: Kind.VARIABLE; name: { kind: Kind.NAME; value: VarName } }
-          type: Type
-          defaultValue: undefined
-          directives: Directives
-        },
-        In
-      >
-    : void
-  : void
-  : void
-
-type _takeVarDefinitionRec<Definitions extends any[], In extends any[]> = In extends [
-  Token.ParenClose,
-  ...infer In,
-] ? _match<Definitions, In>
-  : takeVarDefinition<In> extends _match<infer Definition, infer In>
-    ? _takeVarDefinitionRec<[...Definitions, Definition], In>
-  : takeString<In> extends _match<infer _, infer In> ? _takeVarDefinitionRec<[...Definitions], In>
-  : _match<Definitions, In>
-
-export type takeVarDefinitions<In extends any[]> = In extends [Token.ParenOpen, ...infer In]
-  ? _takeVarDefinitionRec<[], In>
-  : _match<[], In>
-
-export type takeFragmentDefinition<In extends any[]> = In extends [
-  { kind: Token.Name; name: 'fragment' },
-  { kind: Token.Name; name: infer Name },
-  { kind: Token.Name; name: 'on' },
-  { kind: Token.Name; name: infer Type },
-  ...infer In,
-]
-  ? takeDirectives<In, true> extends _match<infer Directives, infer In>
-    ? takeSelectionSet<In> extends _match<infer SelectionSet, infer In> ? _match<
-        {
-          kind: Kind.FRAGMENT_DEFINITION
-          name: { kind: Kind.NAME; value: Name }
-          typeCondition: { kind: Kind.NAMED_TYPE; name: { kind: Kind.NAME; value: Type } }
-          directives: Directives
-          selectionSet: SelectionSet
-        },
-        In
-      >
-    : void
-  : void
-  : void
-
-type takeOperation<In extends any[]> = In extends [{ kind: Token.Name; name: 'query' }, ...infer In]
-  ? _match<OperationTypeNode.QUERY, In>
-  : In extends [{ kind: Token.Name; name: 'mutation' }, ...infer In] ? _match<OperationTypeNode.MUTATION, In>
-  : In extends [{ kind: Token.Name; name: 'subscription' }, ...infer In] ? _match<OperationTypeNode.SUBSCRIPTION, In>
-  : void
-
-export type takeOperationDefinition<In extends any[]> = takeOperation<In> extends _match<infer Operation, infer In>
-  ? takeOptionalName<In> extends _match<infer Name, infer In>
-    ? takeVarDefinitions<In> extends _match<infer VarDefinitions, infer In>
-      ? takeDirectives<In, false> extends _match<infer Directives, infer In>
-        ? takeSelectionSet<In> extends _match<infer SelectionSet, infer In> ? _match<
-            {
-              kind: Kind.OPERATION_DEFINITION
-              operation: Operation
-              name: Name
-              variableDefinitions: VarDefinitions
-              directives: Directives
-              selectionSet: SelectionSet
-            },
-            In
-          >
-        : void
-      : void
-    : void
-  : void
-  : takeSelectionSet<In> extends _match<infer SelectionSet, infer In> ? _match<
-      {
-        kind: Kind.OPERATION_DEFINITION
-        operation: OperationTypeNode.QUERY
-        name: undefined
-        variableDefinitions: []
-        directives: []
-        selectionSet: SelectionSet
-      },
-      In
-    >
-  : void
-
-type _takeDocumentRec<Definitions extends any[], In extends any[]> = takeFragmentDefinition<In> extends
-  _match<infer Definition, infer In> ? _takeDocumentRec<[...Definitions, Definition], In>
-  : takeOperationDefinition<In> extends _match<infer Definition, infer In>
-    ? _takeDocumentRec<[...Definitions, Definition], In>
-  : takeString<In> extends _match<infer _, infer In> ? _takeDocumentRec<[...Definitions], In>
-  : _match<Definitions, In>
-
-export type parseDocument<In extends string> = _takeDocumentRec<[], tokenize<In>> extends
-  _match<[...infer Definitions], any> ? Definitions extends [] ? never
-  : { kind: Kind.DOCUMENT; definitions: Definitions }
+/**
+ * Parse multiple operations and accumulate them
+ */
+type ParseOperations<
+  $Input extends string,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+> = $Input extends '' ? Normalize<$Result>
+  : ParseSingleOperation<$Input, $Schema> extends infer $OpResult
+    ? $OpResult extends { operation: infer $Op; rest: infer $Rest }
+      ? ParseOperations<SkipIgnored<$Rest & string>, $Schema, $Result & $Op>
+    : $OpResult // Error
   : never
 
-export type DocumentNodeLike = {
-  kind: Kind.DOCUMENT
-  definitions: readonly any[]
-}
+/**
+ * Parse a single operation and return { operation: {...}, rest: string }
+ */
+type ParseSingleOperation<
+  $Input extends string,
+  $Schema extends Schema | undefined,
+> = $Schema extends Schema
+  // Schema provided - use strict mode
+  ? ParseSingleOperationWithSchema<$Input, $Schema>
+  // Schema-less mode - use UniversalObject as root
+  : ParseSingleOperationSchemaLess<$Input, $Schema>
+
+/**
+ * Parse a single operation with schema (strict mode)
+ */
+type ParseSingleOperationWithSchema<
+  $Input extends string,
+  $Schema extends Schema,
+> =
+  // Shorthand: { ... } (anonymous query) - check this FIRST before keywords
+  $Input extends `{${infer _}`
+    ? $Schema['Root']['query'] extends OutputObject
+      ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema, {}>
+    : MakeError<'OperationNotAvailable', { message: 'Query operation not available in schema' }>
+    // query keyword
+    : $Input extends `query${infer $Rest}`
+      ? IsWordBoundary<$Rest> extends true
+        ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, $Schema['Root']['query'], $Schema, 'query'>
+      : never
+    // mutation keyword
+    : $Input extends `mutation${infer $Rest}`
+      ? IsWordBoundary<$Rest> extends true
+        ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, $Schema['Root']['mutation'], $Schema, 'mutation'>
+      : never
+    // subscription keyword
+    : $Input extends `subscription${infer $Rest}`
+      ? IsWordBoundary<$Rest> extends true
+        ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, $Schema['Root']['subscription'], $Schema, 'subscription'>
+      : never
+    : MakeError<'InvalidOperation', {
+      message: 'Expected operation keyword or selection set'
+      input: $Input
+    }>
+
+/**
+ * Parse a single operation in schema-less mode.
+ * All operations use UniversalObject as root.
+ */
+type ParseSingleOperationSchemaLess<
+  $Input extends string,
+  $Schema extends Schema | undefined,
+> =
+  // Shorthand: { ... } (anonymous query)
+  $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, UniversalObject, $Schema, {}>
+    // query keyword
+    : $Input extends `query${infer $Rest}`
+      ? IsWordBoundary<$Rest> extends true
+        ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, UniversalObject, $Schema, 'query'>
+      : never
+    // mutation keyword
+    : $Input extends `mutation${infer $Rest}`
+      ? IsWordBoundary<$Rest> extends true
+        ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, UniversalObject, $Schema, 'mutation'>
+      : never
+    // subscription keyword
+    : $Input extends `subscription${infer $Rest}`
+      ? IsWordBoundary<$Rest> extends true
+        ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, UniversalObject, $Schema, 'subscription'>
+      : never
+    : MakeError<'InvalidOperation', {
+      message: 'Expected operation keyword or selection set'
+      input: $Input
+    }>
+
+/**
+ * Check if next character is a word boundary (space, brace, paren, EOF)
+ */
+type IsWordBoundary<$Input extends string> = $Input extends ` ${string}` ? true
+  : $Input extends `\n${string}` ? true
+  : $Input extends `\t${string}` ? true
+  : $Input extends `{${string}` ? true
+  : $Input extends `(${string}` ? true
+  : $Input extends '' ? true
+  : false
+
+/**
+ * Parse after operation keyword: optional name, optional variables, then selection set
+ */
+type ParseOperationAfterKeyword<
+  $Input extends string,
+  $RootType extends OutputObject | null,
+  $Schema extends Schema | undefined,
+  $OperationType extends string,
+> = $RootType extends OutputObject
+  // Try to extract operation name
+  ? TakeName<$Input> extends { name: infer $Name; rest: infer $Rest }
+    // Has name
+    ? ParseAfterOperationName<$Name & string, SkipIgnored<$Rest & string>, $RootType, $Schema>
+    // No name - check for variables or selection set
+  : $Input extends `(${infer $VarsContent}`
+    ? ParseVariables<$VarsContent, $Schema> extends { variables: infer $Variables; rest: infer $Rest }
+      ? ParseSelectionSetForOperation<'default', SkipIgnored<$Rest & string>, $RootType, $Schema, $Variables>
+    : ParseVariables<$VarsContent, $Schema> // Error
+  : $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, $RootType, $Schema, {}>
+  : MakeError<'ExpectedSelectionSet', {
+    message: 'Expected selection set after operation keyword'
+    input: $Input
+  }>
+  : MakeError<'OperationNotAvailable', {
+    message: `${Capitalize<$OperationType>} operation not available in schema`
+  }>
+
+/**
+ * Parse after operation name: optional variables, then selection set
+ */
+type ParseAfterOperationName<
+  $Name extends string,
+  $Input extends string,
+  $RootType extends OutputObject,
+  $Schema extends Schema | undefined,
+> =
+  // Check for variables
+  $Input extends `(${infer $VarsContent}`
+    ? ParseVariables<$VarsContent, $Schema> extends { variables: infer $Variables; rest: infer $Rest }
+      ? ParseSelectionSetForOperation<$Name, SkipIgnored<$Rest & string>, $RootType, $Schema, $Variables>
+    : ParseVariables<$VarsContent, $Schema> // Error
+    // No variables - must be selection set
+    : ParseSelectionSetForOperation<$Name, $Input, $RootType, $Schema, {}>
+
+/**
+ * Parse selection set and wrap in operation metadata
+ */
+type ParseSelectionSetForOperation<
+  $Name extends string,
+  $Input extends string,
+  $RootType extends OutputObject,
+  $Schema extends Schema | undefined,
+  $Variables,
+> = ParseSelectionSet<$Input, $RootType, $Schema> extends { result: infer $Result; rest: infer $Rest } ? {
+    operation: WrapOperationResult<$Name, $Result, $Variables>
+    rest: $Rest
+  }
+  : ParseSelectionSet<$Input, $RootType, $Schema> // Error
+
+/**
+ * Wrap a result in operation metadata with dynamic key
+ */
+type WrapOperationResult<$Name extends string, $Result, $Variables> = $Name extends 'default'
+  ? { default: { name: 'default'; result: $Result; variables: $Variables } }
+  : $Name extends string ? { [K in $Name]: { name: $Name; result: $Result; variables: $Variables } }
+  : never
+
+// ============================================================================
+// Variable Parsing
+// ============================================================================
+
+/**
+ * Parse variable definitions: ($varName: Type, $var2: Type!)
+ * Returns: { variables: {...}, rest: string }
+ */
+type ParseVariables<$Input extends string, $Schema extends Schema | undefined> = ParseVariablesRec<
+  SkipIgnored<$Input>,
+  $Schema,
+  {}
+>
+
+/**
+ * Parse variables recursively, accumulating them into a result object
+ */
+type ParseVariablesRec<
+  $Input extends string,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+> =
+  // Check for closing paren
+  $Input extends `)${infer $Rest}` ? { variables: Normalize<$Result>; rest: $Rest }
+    // Parse next variable
+    : $Input extends `$${infer $VarNameRest}`
+      ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
+        ? ParseVariableAfterName<$VarName & string, SkipIgnored<$Rest & string>, $Schema, $Result>
+      : MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
+    : $Input extends '' ? MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
+    : MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
+
+/**
+ * Parse after variable name: expect colon, then type
+ */
+type ParseVariableAfterName<
+  $VarName extends string,
+  $Input extends string,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+> = $Input extends `:${infer $Rest}` ? ParseVariableType<SkipIgnored<$Rest>, $VarName, $Schema, $Result>
+  : MakeError<'ExpectedColon', { message: 'Expected : after variable name' }>
+
+/**
+ * Parse variable type: Type or Type!
+ */
+type ParseVariableType<
+  $Input extends string,
+  $VarName extends string,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+> = TakeName<$Input> extends { name: infer $TypeName; rest: infer $Rest }
+  // Check for ! (non-null)
+  ? SkipIgnored<$Rest & string> extends `!${infer $RestAfterBang}`
+    // Required variable: { varName: TSType }
+    ? ParseVariablesRec<
+      SkipIgnored<$RestAfterBang>,
+      $Schema,
+      $Result & Record<$VarName, MapGraphQLType<$TypeName & string, $Schema>>
+    >
+    // Optional variable: { varName?: TSType | null | undefined }
+  : ParseVariablesRec<
+    SkipIgnored<$Rest & string>,
+    $Schema,
+    $Result & { [K in $VarName]?: MapGraphQLType<$TypeName & string, $Schema> | null | undefined }
+  >
+  : MakeError<'ExpectedTypeName', { message: 'Expected type name after :' }>
+
+/**
+ * Map GraphQL scalar types to TypeScript types.
+ * Handles built-in scalars and looks up custom scalars from schema.
+ */
+type MapGraphQLType<$TypeName extends string, $Schema extends Schema | undefined> =
+  // Built-in GraphQL scalars
+  $TypeName extends 'String' ? string
+    : $TypeName extends 'Int' ? number
+    : $TypeName extends 'Float' ? number
+    : $TypeName extends 'Boolean' ? boolean
+    : $TypeName extends 'ID' ? string
+    // Look up custom scalars from schema
+    : $Schema extends Schema
+      ? $TypeName extends keyof $Schema['scalars']
+        ? $Schema['scalars'][$TypeName] extends Scalar ? GetDecoded<$Schema['scalars'][$TypeName]>
+        : unknown
+      : unknown // Input types or unknown scalars
+    : unknown // Schema-less mode - no custom scalar mapping
+
+/**
+ * Parse a selection set: { field1 field2 { nested } }
+ * Returns: { result: {...}, rest: string }
+ */
+type ParseSelectionSet<
+  $Input extends string,
+  $ParentType extends OutputObject | Interface,
+  $Schema extends Schema | undefined,
+> = $Input extends `{${infer $Rest}` ? ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, {}, 1>
+  : MakeError<'ExpectedSelectionSet', {
+    message: 'Expected opening brace for selection set'
+    input: $Input
+  }>
+
+/**
+ * Parse fields within a selection set, tracking brace depth
+ * Returns: { result: {...}, rest: string }
+ */
+type ParseFieldsInSelectionSet<
+  $Input extends string,
+  $ParentType extends OutputObject | Interface,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+  $Depth extends number,
+> =
+  // Check for closing brace
+  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Normalize<$Result>; rest: $Rest } // End - normalize result
+    : ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, $Result, Decrement<$Depth>>
+    // Parse next field
+    : TakeName<$Input> extends { name: infer $FieldName; rest: infer $Rest } ? ParseFieldByName<
+        $FieldName & string,
+        SkipIgnored<$Rest & string>,
+        $ParentType,
+        $Schema,
+        $Result,
+        $Depth
+      >
+    : $Input extends '' ? MakeError<'UnmatchedBrace', { message: 'Unexpected end of input in selection set' }>
+    : MakeError<'UnexpectedInput', { message: 'Expected field name'; input: $Input }>
+
+/**
+ * Parse a field by its name.
+ * Behavior depends on schema mode:
+ * - Schema provided: Strict - field must exist or error
+ * - Schema is undefined: Loose - unknown fields type as unknown
+ */
+type ParseFieldByName<
+  $FieldName extends string,
+  $Input extends string,
+  $ParentType extends OutputObject | Interface,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+  $Depth extends number,
+> = $FieldName extends keyof $ParentType['fields'] ? ParseFieldAfterName<
+    $FieldName,
+    $Input,
+    $ParentType['fields'][$FieldName],
+    $ParentType,
+    $Schema,
+    $Result,
+    $Depth
+  >
+  // Field not in parent type - check mode
+  : $Schema extends undefined
+  // Schema-less mode: field not found → use UnknownField
+    ? ParseFieldAfterName<$FieldName, $Input, UnknownField, $ParentType, $Schema, $Result, $Depth>
+  // Strict mode: field not found → error
+  : MakeError<'FieldNotFound', {
+    message: `Field '${$FieldName}' does not exist on type '${$ParentType['name']}'`
+    fieldName: $FieldName
+    parentType: $ParentType['name']
+    availableFields: keyof $ParentType['fields']
+  }>
+
+/**
+ * Parse after field name: check for arguments, nested selection, or continue
+ */
+type ParseFieldAfterName<
+  $FieldName extends string,
+  $Input extends string,
+  $Field extends OutputField,
+  $ParentType extends OutputObject | Interface,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+  $Depth extends number,
+> =
+  // Check for arguments
+  $Input extends `(${infer _}`
+    ? SkipUntilCloseParen<$Input, 0> extends { rest: infer $Rest } ? ParseFieldAfterArguments<
+        $FieldName,
+        SkipIgnored<$Rest & string>,
+        $Field,
+        $ParentType,
+        $Schema,
+        $Result,
+        $Depth
+      >
+    : MakeError<'UnmatchedParen', { message: `Unmatched parenthesis in field '${$FieldName}' arguments` }>
+    // Check for nested selection
+    : $Input extends `{${infer _}`
+      ? ParseFieldWithNestedSelection<$FieldName, $Input, $Field, $ParentType, $Schema, $Result, $Depth>
+    // Scalar field - add to result and continue
+    : ParseFieldsInSelectionSet<
+      $Input,
+      $ParentType,
+      $Schema,
+      & $Result
+      & Record<$FieldName, ApplyInlineType<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
+      $Depth
+    >
+
+/**
+ * Parse after field arguments
+ */
+type ParseFieldAfterArguments<
+  $FieldName extends string,
+  $Input extends string,
+  $Field extends OutputField,
+  $ParentType extends OutputObject | Interface,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+  $Depth extends number,
+> =
+  // Check for nested selection
+  $Input extends `{${infer _}`
+    ? ParseFieldWithNestedSelection<$FieldName, $Input, $Field, $ParentType, $Schema, $Result, $Depth>
+    // Scalar field - add to result and continue
+    : ParseFieldsInSelectionSet<
+      $Input,
+      $ParentType,
+      $Schema,
+      & $Result
+      & Record<$FieldName, ApplyInlineType<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
+      $Depth
+    >
+
+/**
+ * Parse field with nested selection
+ */
+type ParseFieldWithNestedSelection<
+  $FieldName extends string,
+  $Input extends string,
+  $Field extends OutputField,
+  $ParentType extends OutputObject | Interface,
+  $Schema extends Schema | undefined,
+  $Result extends Record<string, any>,
+  $Depth extends number,
+> = $Field['namedType'] extends OutputObject | Interface
+  ? ParseSelectionSet<$Input, $Field['namedType'], $Schema> extends { result: infer $NestedResult; rest: infer $Rest }
+    ? ParseFieldsInSelectionSet<
+      SkipIgnored<$Rest & string>,
+      $ParentType,
+      $Schema,
+      $Result & Record<$FieldName, ApplyInlineType<$Field['inlineType'], $NestedResult>>,
+      $Depth
+    >
+  : ParseSelectionSet<$Input, $Field['namedType'], $Schema> // Error
+  // Schema-less mode: allow nested selection with UniversalObject
+  : $Schema extends undefined
+    ? ParseSelectionSet<$Input, UniversalObject, $Schema> extends { result: infer $NestedResult; rest: infer $Rest }
+      ? ParseFieldsInSelectionSet<
+        SkipIgnored<$Rest & string>,
+        $ParentType,
+        $Schema,
+        $Result & Record<$FieldName, ApplyInlineType<$Field['inlineType'], $NestedResult>>,
+        $Depth
+      >
+    : ParseSelectionSet<$Input, UniversalObject, $Schema> // Error
+  : MakeError<'InvalidFieldType', {
+    message: `Field '${$FieldName}' is not an object type and cannot have nested selection`
+    fieldName: $FieldName
+  }>
+
+/**
+ * Resolve a named type to its TypeScript type (for scalars/enums).
+ * Handles UnknownScalar for schema-less mode.
+ */
+type ResolveNamedType<$Type, $Schema extends Schema | undefined> = $Type extends UnknownScalar ? unknown
+  : $Type extends Scalar ? GetDecoded<$Type>
+  : $Type extends OutputObject ? $Type // Objects need nested selection
+  : $Type extends { kind: 'Interface' } ? $Type
+  : $Type extends { kind: 'Union' } ? $Type
+  : $Type extends Enum ? $Type['membersUnion']
+  : unknown
+
+// ============================================================================
+// Character-by-character utilities
+// ============================================================================
+
+/**
+ * Skip ignored characters (whitespace, commas, comments)
+ */
+type SkipIgnored<$Input extends string> = $Input extends ` ${infer $Rest}` ? SkipIgnored<$Rest>
+  : $Input extends `\n${infer $Rest}` ? SkipIgnored<$Rest>
+  : $Input extends `\t${infer $Rest}` ? SkipIgnored<$Rest>
+  : $Input extends `\r${infer $Rest}` ? SkipIgnored<$Rest>
+  : $Input extends `,${infer $Rest}` ? SkipIgnored<$Rest>
+  : $Input extends `#${infer $Comment}\n${infer $Rest}` ? SkipIgnored<$Rest>
+  : $Input extends `#${infer $Comment}` ? ''
+  : $Input
+
+/**
+ * Take a name (alphanumeric + underscore)
+ * Returns: { name: string, rest: string } or void
+ */
+type TakeName<$Input extends string> = $Input extends `${infer $First}${infer $Rest}`
+  ? $First extends Letter | '_' ? TakeNameRest<$First, $Rest>
+  : void
+  : void
+
+type TakeNameRest<$Acc extends string, $Input extends string> = $Input extends `${infer $Char}${infer $Rest}`
+  ? $Char extends Letter | Digit | '_' ? TakeNameRest<`${$Acc}${$Char}`, $Rest>
+  : { name: $Acc; rest: $Input }
+  : { name: $Acc; rest: $Input }
+
+/**
+ * Skip until closing parenthesis, tracking depth
+ */
+type SkipUntilCloseParen<$Input extends string, $Depth extends number> = $Input extends `(${infer $Rest}`
+  ? $Depth extends 0 ? SkipUntilCloseParen<$Rest, 1>
+  : SkipUntilCloseParen<$Rest, Increment<$Depth>>
+  : $Input extends `)${infer $Rest}` ? $Depth extends 1 ? { rest: $Rest }
+    : SkipUntilCloseParen<$Rest, Decrement<$Depth>>
+  : $Input extends `${infer _}${infer $Rest}` ? SkipUntilCloseParen<$Rest, $Depth>
+  : void
+
+// ============================================================================
+// Utility types
+// ============================================================================
+
+type Letter =
+  | 'A'
+  | 'B'
+  | 'C'
+  | 'D'
+  | 'E'
+  | 'F'
+  | 'G'
+  | 'H'
+  | 'I'
+  | 'J'
+  | 'K'
+  | 'L'
+  | 'M'
+  | 'N'
+  | 'O'
+  | 'P'
+  | 'Q'
+  | 'R'
+  | 'S'
+  | 'T'
+  | 'U'
+  | 'V'
+  | 'W'
+  | 'X'
+  | 'Y'
+  | 'Z'
+  | 'a'
+  | 'b'
+  | 'c'
+  | 'd'
+  | 'e'
+  | 'f'
+  | 'g'
+  | 'h'
+  | 'i'
+  | 'j'
+  | 'k'
+  | 'l'
+  | 'm'
+  | 'n'
+  | 'o'
+  | 'p'
+  | 'q'
+  | 'r'
+  | 's'
+  | 't'
+  | 'u'
+  | 'v'
+  | 'w'
+  | 'x'
+  | 'y'
+  | 'z'
+
+type Digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+type Increment<$N extends number> = $N extends 0 ? 1
+  : $N extends 1 ? 2
+  : $N extends 2 ? 3
+  : $N extends 3 ? 4
+  : $N extends 4 ? 5
+  : $N extends 5 ? 6
+  : $N extends 6 ? 7
+  : $N extends 7 ? 8
+  : $N extends 8 ? 9
+  : $N extends 9 ? 10
+  : never
+
+type Decrement<$N extends number> = $N extends 10 ? 9
+  : $N extends 9 ? 8
+  : $N extends 8 ? 7
+  : $N extends 7 ? 6
+  : $N extends 6 ? 5
+  : $N extends 5 ? 4
+  : $N extends 4 ? 3
+  : $N extends 3 ? 2
+  : $N extends 2 ? 1
+  : $N extends 1 ? 0
+  : never
+
+type Capitalize<$S extends string> = $S extends `${infer $First}${infer $Rest}` ? `${Uppercase<$First>}${$Rest}`
+  : $S
+
+/**
+ * Normalize a type to a clean object literal
+ * Converts Record<...> & Record<...> to { ... }
+ */
+type Normalize<$T> =
+  & {
+    [K in keyof $T]: $T[K]
+  }
+  & {}

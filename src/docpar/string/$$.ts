@@ -1,31 +1,53 @@
-export { graphql, initGraphQLTada, maskFragments, parse, readFragment, unsafe_readResult } from './api.js'
+/**
+ * Single-pass GraphQL string parser exports
+ */
 
-export type {
-  AbstractSetupCache,
-  AbstractSetupSchema,
-  configOfSetup,
-  FragmentOf,
-  getDocumentNode,
-  GraphQLTadaAPI,
-  parseDocument,
-  ResultOf,
-  schemaOfSetup,
-  setupCache,
-  setupSchema,
-  VariablesOf,
-} from './api.js'
+import type { ParseDocument } from './parser.js'
 
-export type { DocumentDecoration } from './utils.js'
+export type { ParseDocument } from './parser.js'
+export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSetup } from './schema.js'
 
-// NOTE: This must be exported for `isolatedModules: true`
-export type {
-  addIntrospectionScalars,
-  IntrospectionLikeInput,
-  mapIntrospection,
-  mapType as __mapType,
-  ScalarsLike,
-  SchemaLike,
-} from './introspection.js'
-export type { $tada } from './namespace.js'
+/**
+ * parseDocument - captures the input string to pass to getDocumentOperations.
+ */
+export type parseDocument<$Input extends string> = {
+  definitions: $Input // Capture input for single-pass parsing
+}
 
-export type { getDocumentOperations } from './selection.js'
+/**
+ * getDocumentOperations - performs single-pass parsing with the schema.
+ */
+export type getDocumentOperations<
+  $Definitions,
+  $Schema,
+> = $Definitions extends string ? $Schema extends import('./schema.js').Schema ? ParseDocument<$Definitions, $Schema>
+  : never
+  : never
+
+/**
+ * schemaOfSetup - transform setup config into schema.
+ * For Graffle, this is mostly a passthrough.
+ */
+export type schemaOfSetup<$Setup extends import('./schema.js').AbstractSetupSchema> =
+  import('./schema.js').SchemaOfSetup<$Setup>
+
+/**
+ * GraphQLTadaAPI - type for the gql function.
+ * Minimal stub for compatibility.
+ */
+export interface GraphQLTadaAPI<$Schema, $Config> {
+  readonly __name: string
+  scalar: any
+  persisted: any
+}
+
+/**
+ * Abstract setup cache - not used in string2
+ */
+export interface AbstractSetupCache {
+  readonly __cacheDisabled: unknown
+  [key: string]: unknown
+}
+
+// Re-export commonly used types
+export type { GetFieldOutputType } from './typeTraversal.js'
