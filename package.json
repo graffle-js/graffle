@@ -65,6 +65,7 @@
     "graphql": "14 - 16"
   },
   "devDependencies": {
+    "dprint": "^0.50.2",
     "@arethetypeswrong/cli": "^0.15.3",
     "@pothos/core": "^3.41.1",
     "@pothos/plugin-simple-objects": "^3.7.0",
