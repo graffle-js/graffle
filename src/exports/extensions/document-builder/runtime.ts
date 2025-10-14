@@ -1,5 +1,5 @@
-export { DocumentBuilder } from '#src/extensions/DocumentBuilder/DocumentBuilder.js'
 export { Var } from '#src/docpar/object/var/$.js'
+export { DocumentBuilder } from '#src/extensions/DocumentBuilder/DocumentBuilder.js'
 export {
   type Config,
   createGql,
