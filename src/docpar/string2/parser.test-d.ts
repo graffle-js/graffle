@@ -4,10 +4,10 @@
 
 import type { Possible } from '#test/schema/possible/client/$.js'
 import type { Ts } from '@wollybeard/kit'
-import type { ParseDocument } from './parser.js'
+import type { ParseDocument as P } from './parser.js'
 
 // Get the actual schema from Possible client
-type PossibleSchema = Possible.$.Schema
+type S = Possible.$.Schema
 
 // ==================================================================================================
 //                                   Basic Field Selection
@@ -16,7 +16,7 @@ type PossibleSchema = Possible.$.Schema
 type _ = Ts.Test.Cases<
   // Test 1: Simplest possible query - anonymous query with single scalar field
   Ts.Test.exact<
-    ParseDocument<'{ id }', PossibleSchema>,
+    P<'{ id }', S>,
     {
       default: {
         name: 'default'
@@ -29,7 +29,7 @@ type _ = Ts.Test.Cases<
   >,
   // Test 2: Named query with single scalar field
   Ts.Test.exact<
-    ParseDocument<'query myQuery { id }', PossibleSchema>,
+    P<'query myQuery { id }', S>,
     {
       myQuery: {
         name: 'myQuery'
@@ -42,7 +42,7 @@ type _ = Ts.Test.Cases<
   >,
   // Test 3: Multiple scalar fields
   Ts.Test.exact<
-    ParseDocument<'{ id idNonNull }', PossibleSchema>,
+    P<'{ id idNonNull }', S>,
     {
       default: {
         name: 'default'
@@ -56,7 +56,7 @@ type _ = Ts.Test.Cases<
   >,
   // Test 4: Query with custom scalar (Date)
   Ts.Test.exact<
-    ParseDocument<'{ date }', PossibleSchema>,
+    P<'{ date }', S>,
     {
       default: {
         name: 'default'
@@ -69,7 +69,7 @@ type _ = Ts.Test.Cases<
   >,
   // Test 5: Query with spaces/formatting (from actual gql test)
   Ts.Test.exact<
-    ParseDocument<'query myQuery { date }', PossibleSchema>,
+    P<'query myQuery { date }', S>,
     {
       myQuery: {
         name: 'myQuery'
@@ -82,7 +82,7 @@ type _ = Ts.Test.Cases<
   >,
   // Test 6: Non-null field
   Ts.Test.exact<
-    ParseDocument<'{ idNonNull }', PossibleSchema>,
+    P<'{ idNonNull }', S>,
     {
       default: {
         name: 'default'
@@ -102,7 +102,7 @@ type _ = Ts.Test.Cases<
 type _Nested = Ts.Test.Cases<
   // Test 1: Single nested object with one field
   Ts.Test.exact<
-    ParseDocument<'{ object { id } }', PossibleSchema>,
+    P<'{ object { id } }', S>,
     {
       default: {
         name: 'default'
@@ -117,7 +117,7 @@ type _Nested = Ts.Test.Cases<
   >,
   // Test 2: Nested object with multiple fields
   Ts.Test.exact<
-    ParseDocument<'{ object { id string } }', PossibleSchema>,
+    P<'{ object { id string } }', S>,
     {
       default: {
         name: 'default'
@@ -133,7 +133,7 @@ type _Nested = Ts.Test.Cases<
   >,
   // Test 3: Multiple nested objects at same level
   Ts.Test.exact<
-    ParseDocument<'{ object { id } objectNested { id } }', PossibleSchema>,
+    P<'{ object { id } objectNested { id } }', S>,
     {
       default: {
         name: 'default'
@@ -151,7 +151,7 @@ type _Nested = Ts.Test.Cases<
   >,
   // Test 4: Deep nesting (3 levels)
   Ts.Test.exact<
-    ParseDocument<'{ objectNested { object { id } } }', PossibleSchema>,
+    P<'{ objectNested { object { id } } }', S>,
     {
       default: {
         name: 'default'
@@ -175,7 +175,7 @@ type _Nested = Ts.Test.Cases<
 type _Arguments = Ts.Test.Cases<
   // Test 1: Field with single argument
   Ts.Test.exact<
-    ParseDocument<'{ stringWithArgs(string: "hello") }', PossibleSchema>,
+    P<'{ stringWithArgs(string: "hello") }', S>,
     {
       default: {
         name: 'default'
@@ -188,7 +188,7 @@ type _Arguments = Ts.Test.Cases<
   >,
   // Test 2: Field with required argument
   Ts.Test.exact<
-    ParseDocument<'{ stringWithRequiredArg(string: "required") }', PossibleSchema>,
+    P<'{ stringWithRequiredArg(string: "required") }', S>,
     {
       default: {
         name: 'default'
@@ -207,7 +207,7 @@ type _Arguments = Ts.Test.Cases<
 
   // Test 4: Nested object with arguments
   Ts.Test.exact<
-    ParseDocument<'{ objectWithArgs(id: "123") { id } }', PossibleSchema>,
+    P<'{ objectWithArgs(id: "123") { id } }', S>,
     {
       default: {
         name: 'default'
@@ -229,7 +229,7 @@ type _Arguments = Ts.Test.Cases<
 type _MultiOp = Ts.Test.Cases<
   // Test 1: Two queries
   Ts.Test.exact<
-    ParseDocument<'query A { id } query B { string }', PossibleSchema>,
+    P<'query A { id } query B { string }', S>,
     {
       A: {
         name: 'A'
@@ -249,7 +249,7 @@ type _MultiOp = Ts.Test.Cases<
   >,
   // Test 2: Query and mutation
   Ts.Test.exact<
-    ParseDocument<'query GetId { id } mutation SetId { idNonNull }', PossibleSchema>,
+    P<'query GetId { id } mutation SetId { idNonNull }', S>,
     {
       GetId: {
         name: 'GetId'
@@ -276,7 +276,7 @@ type _MultiOp = Ts.Test.Cases<
 type _Mutations = Ts.Test.Cases<
   // Test 1: Simple mutation
   Ts.Test.exact<
-    ParseDocument<'mutation { id }', PossibleSchema>,
+    P<'mutation { id }', S>,
     {
       default: {
         name: 'default'
@@ -289,7 +289,7 @@ type _Mutations = Ts.Test.Cases<
   >,
   // Test 2: Named mutation
   Ts.Test.exact<
-    ParseDocument<'mutation SetId { idNonNull }', PossibleSchema>,
+    P<'mutation SetId { idNonNull }', S>,
     {
       SetId: {
         name: 'SetId'
@@ -309,7 +309,7 @@ type _Mutations = Ts.Test.Cases<
 type _SpecialTypes = Ts.Test.Cases<
   // Test 1: Enum field
   Ts.Test.exact<
-    ParseDocument<'{ abcEnum }', PossibleSchema>,
+    P<'{ abcEnum }', S>,
     {
       default: {
         name: 'default'
@@ -325,3 +325,60 @@ type _SpecialTypes = Ts.Test.Cases<
 //   ParseDocument<'{ unionFooBar { ... on Foo { id } } }', PossibleSchema>,
 //   { ... }
 // >
+
+// ==================================================================================================
+//                                   Variable Definitions
+// ==================================================================================================
+
+type _Variables = Ts.Test.Cases<
+  // Required ID variable
+  Ts.Test.exact<
+    P<'query q($a: ID!) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { a: string } } }
+  >,
+  // Optional String variable
+  Ts.Test.exact<
+    P<'query q($s: String) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { s?: string | null | undefined } } }
+  >,
+  // Multiple variables (required + optional)
+  Ts.Test.exact<
+    P<'query q($a: ID!, $s: String) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { a: string; s?: string | null | undefined } } }
+  >,
+  // Required String variable
+  Ts.Test.exact<
+    P<'query q($s: String!) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { s: string } } }
+  >,
+  // Optional Int variable
+  Ts.Test.exact<
+    P<'query q($n: Int) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { n?: number | null | undefined } } }
+  >,
+  // Required Boolean variable
+  Ts.Test.exact<
+    P<'query q($b: Boolean!) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { b: boolean } } }
+  >,
+  // Multiple required variables
+  Ts.Test.exact<
+    P<'query q($a: ID!, $s: String!, $n: Int!) { id }', S>,
+    { q: { name: 'q'; result: { id: string | null }; variables: { a: string; s: string; n: number } } }
+  >,
+  // Mutation with variable
+  Ts.Test.exact<
+    P<'mutation m($a: ID!) { id }', S>,
+    { m: { name: 'm'; result: { id: string | null }; variables: { a: string } } }
+  >,
+  // Anonymous query with variable
+  Ts.Test.exact<
+    P<'query($a: ID!) { id }', S>,
+    { default: { name: 'default'; result: { id: string | null }; variables: { a: string } } }
+  >,
+  // Variable used in field argument with nested selection (the actual failing case)
+  Ts.Test.exact<
+    P<'query q($a: ID!) { interfaceWithArgs(id: $a) { id } }', S>,
+    { q: { name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { a: string } } }
+  >
+>

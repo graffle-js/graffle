@@ -12,7 +12,7 @@
 
 import type { GetDecoded } from '#src/types/Schema/nodes/Scalar/helpers.js'
 import type { MakeError } from './errors.js'
-import type { Enum, OutputField, OutputObject, Scalar, Schema } from './schema.js'
+import type { Enum, Interface, OutputField, OutputObject, Scalar, Schema } from './schema.js'
 import type { ApplyInlineType } from './typeTraversal.js'
 
 /**
@@ -47,7 +47,7 @@ type ParseSingleOperation<
   // Shorthand: { ... } (anonymous query) - check this FIRST before keywords
   $Input extends `{${infer _}`
     ? $Schema['Root']['query'] extends OutputObject
-      ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema>
+      ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema, {}>
     : MakeError<'OperationNotAvailable', { message: 'Query operation not available in schema' }>
     // query keyword
     : $Input extends `query${infer $Rest}`
@@ -93,8 +93,12 @@ type ParseOperationAfterKeyword<
   ? TakeName<$Input> extends { name: infer $Name; rest: infer $Rest }
     // Has name
     ? ParseAfterOperationName<$Name & string, SkipIgnored<$Rest & string>, $RootType, $Schema>
-    // No name - must be selection set
-  : $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, $RootType, $Schema>
+    // No name - check for variables or selection set
+  : $Input extends `(${infer $VarsContent}`
+    ? ParseVariables<$VarsContent> extends { variables: infer $Variables; rest: infer $Rest }
+      ? ParseSelectionSetForOperation<'default', SkipIgnored<$Rest & string>, $RootType, $Schema, $Variables>
+    : ParseVariables<$VarsContent> // Error
+  : $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, $RootType, $Schema, {}>
   : MakeError<'ExpectedSelectionSet', {
     message: 'Expected selection set after operation keyword'
     input: $Input
@@ -113,12 +117,12 @@ type ParseAfterOperationName<
   $Schema extends Schema,
 > =
   // Check for variables
-  $Input extends `(${infer _}`
-    ? SkipUntilCloseParen<$Input, 0> extends { rest: infer $Rest }
-      ? ParseSelectionSetForOperation<$Name, SkipIgnored<$Rest & string>, $RootType, $Schema>
-    : MakeError<'UnmatchedParen', { message: 'Unmatched parenthesis in variables' }>
+  $Input extends `(${infer $VarsContent}`
+    ? ParseVariables<$VarsContent> extends { variables: infer $Variables; rest: infer $Rest }
+      ? ParseSelectionSetForOperation<$Name, SkipIgnored<$Rest & string>, $RootType, $Schema, $Variables>
+    : ParseVariables<$VarsContent> // Error
     // No variables - must be selection set
-    : ParseSelectionSetForOperation<$Name, $Input, $RootType, $Schema>
+    : ParseSelectionSetForOperation<$Name, $Input, $RootType, $Schema, {}>
 
 /**
  * Parse selection set and wrap in operation metadata
@@ -128,8 +132,9 @@ type ParseSelectionSetForOperation<
   $Input extends string,
   $RootType extends OutputObject,
   $Schema extends Schema,
+  $Variables,
 > = ParseSelectionSet<$Input, $RootType, $Schema> extends { result: infer $Result; rest: infer $Rest } ? {
-    operation: WrapOperationResult<$Name, $Result>
+    operation: WrapOperationResult<$Name, $Result, $Variables>
     rest: $Rest
   }
   : ParseSelectionSet<$Input, $RootType, $Schema> // Error
@@ -137,10 +142,78 @@ type ParseSelectionSetForOperation<
 /**
  * Wrap a result in operation metadata with dynamic key
  */
-type WrapOperationResult<$Name extends string, $Result> = $Name extends 'default'
-  ? { default: { name: 'default'; result: $Result; variables: {} } }
-  : $Name extends string ? { [K in $Name]: { name: $Name; result: $Result; variables: {} } }
+type WrapOperationResult<$Name extends string, $Result, $Variables> = $Name extends 'default'
+  ? { default: { name: 'default'; result: $Result; variables: $Variables } }
+  : $Name extends string ? { [K in $Name]: { name: $Name; result: $Result; variables: $Variables } }
   : never
+
+// ============================================================================
+// Variable Parsing
+// ============================================================================
+
+/**
+ * Parse variable definitions: ($varName: Type, $var2: Type!)
+ * Returns: { variables: {...}, rest: string }
+ */
+type ParseVariables<$Input extends string> = ParseVariablesRec<SkipIgnored<$Input>, {}>
+
+/**
+ * Parse variables recursively, accumulating them into a result object
+ */
+type ParseVariablesRec<
+  $Input extends string,
+  $Result extends Record<string, any>,
+> =
+  // Check for closing paren
+  $Input extends `)${infer $Rest}` ? { variables: Normalize<$Result>; rest: $Rest }
+    // Parse next variable
+    : $Input extends `$${infer $VarNameRest}` ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
+      ? ParseVariableAfterName<$VarName & string, SkipIgnored<$Rest & string>, $Result>
+    : MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
+  : $Input extends '' ? MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
+  : MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
+
+/**
+ * Parse after variable name: expect colon, then type
+ */
+type ParseVariableAfterName<
+  $VarName extends string,
+  $Input extends string,
+  $Result extends Record<string, any>,
+> = $Input extends `:${infer $Rest}` ? ParseVariableType<SkipIgnored<$Rest>, $VarName, $Result>
+  : MakeError<'ExpectedColon', { message: 'Expected : after variable name' }>
+
+/**
+ * Parse variable type: Type or Type!
+ */
+type ParseVariableType<
+  $Input extends string,
+  $VarName extends string,
+  $Result extends Record<string, any>,
+> = TakeName<$Input> extends { name: infer $TypeName; rest: infer $Rest }
+  // Check for ! (non-null)
+  ? SkipIgnored<$Rest & string> extends `!${infer $RestAfterBang}`
+    // Required variable: { varName: TSType }
+    ? ParseVariablesRec<
+      SkipIgnored<$RestAfterBang>,
+      $Result & Record<$VarName, MapGraphQLType<$TypeName & string>>
+    >
+    // Optional variable: { varName?: TSType | null | undefined }
+    : ParseVariablesRec<
+      SkipIgnored<$Rest & string>,
+      $Result & { [K in $VarName]?: MapGraphQLType<$TypeName & string> | null | undefined }
+    >
+  : MakeError<'ExpectedTypeName', { message: 'Expected type name after :' }>
+
+/**
+ * Map GraphQL scalar types to TypeScript types
+ */
+type MapGraphQLType<$TypeName extends string> = $TypeName extends 'String' ? string
+  : $TypeName extends 'Int' ? number
+  : $TypeName extends 'Float' ? number
+  : $TypeName extends 'Boolean' ? boolean
+  : $TypeName extends 'ID' ? string
+  : unknown // Custom scalars/input types - fall back to unknown
 
 /**
  * Parse a selection set: { field1 field2 { nested } }
@@ -148,7 +221,7 @@ type WrapOperationResult<$Name extends string, $Result> = $Name extends 'default
  */
 type ParseSelectionSet<
   $Input extends string,
-  $ParentType extends OutputObject,
+  $ParentType extends OutputObject | Interface,
   $Schema extends Schema,
 > = $Input extends `{${infer $Rest}` ? ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, {}, 1>
   : MakeError<'ExpectedSelectionSet', {
@@ -162,7 +235,7 @@ type ParseSelectionSet<
  */
 type ParseFieldsInSelectionSet<
   $Input extends string,
-  $ParentType extends OutputObject,
+  $ParentType extends OutputObject | Interface,
   $Schema extends Schema,
   $Result extends Record<string, any>,
   $Depth extends number,
@@ -188,7 +261,7 @@ type ParseFieldsInSelectionSet<
 type ParseFieldByName<
   $FieldName extends string,
   $Input extends string,
-  $ParentType extends OutputObject,
+  $ParentType extends OutputObject | Interface,
   $Schema extends Schema,
   $Result extends Record<string, any>,
   $Depth extends number,
@@ -215,7 +288,7 @@ type ParseFieldAfterName<
   $FieldName extends string,
   $Input extends string,
   $Field extends OutputField,
-  $ParentType extends OutputObject,
+  $ParentType extends OutputObject | Interface,
   $Schema extends Schema,
   $Result extends Record<string, any>,
   $Depth extends number,
@@ -252,7 +325,7 @@ type ParseFieldAfterArguments<
   $FieldName extends string,
   $Input extends string,
   $Field extends OutputField,
-  $ParentType extends OutputObject,
+  $ParentType extends OutputObject | Interface,
   $Schema extends Schema,
   $Result extends Record<string, any>,
   $Depth extends number,
@@ -277,11 +350,11 @@ type ParseFieldWithNestedSelection<
   $FieldName extends string,
   $Input extends string,
   $Field extends OutputField,
-  $ParentType extends OutputObject,
+  $ParentType extends OutputObject | Interface,
   $Schema extends Schema,
   $Result extends Record<string, any>,
   $Depth extends number,
-> = $Field['namedType'] extends OutputObject
+> = $Field['namedType'] extends OutputObject | Interface
   ? ParseSelectionSet<$Input, $Field['namedType'], $Schema> extends { result: infer $NestedResult; rest: infer $Rest }
     ? ParseFieldsInSelectionSet<
       SkipIgnored<$Rest & string>,
