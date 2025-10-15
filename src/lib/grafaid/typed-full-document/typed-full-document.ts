@@ -13,6 +13,3 @@ export type {
   TypedFullDocument,
   UntypedDocument,
 } from '#src/docpar/core/doc.js'
-
-// Re-export type guards for convenience
-export type { IsMultiOperation, IsSingleOperation, IsUntyped } from '#src/docpar/core/doc.js'

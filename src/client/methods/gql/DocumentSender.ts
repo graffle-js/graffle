@@ -1,5 +1,6 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
+import type { Docpar } from '#src/docpar/$.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
 import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
@@ -186,7 +187,7 @@ type SenderStatic<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
 > = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
-  ? TypedFullDocument.IsSingleOperation<$Doc> extends true
+  ? Docpar.Doc.IsSingleOperation<$Doc> extends true
     ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
   : { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
   : never

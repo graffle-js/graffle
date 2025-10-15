@@ -53,12 +53,7 @@ export type InferOperationsInDocument<
           $Schema,
           $ArgumentsMap,
           $Context,
-          (
-              operationType extends 'mutation' ? typeof Grafaid.Document.OperationTypeNode.MUTATION
-            : operationType extends 'subscription' ? typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION
-            : operationType extends 'query' ?  typeof Grafaid.Document.OperationTypeNode.QUERY
-            : never
-          ),
+          Grafaid.Document.OperationTypeNode.FromString<operationType & string>,
           operationName
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
@@ -79,9 +74,6 @@ export type InferOperations<
 
 /**
  * Infer a single operation with the given operation type.
- *
- * This replaces the duplication in `InferOperationsFromQuery` and `InferOperationsFromMutation`
- * by accepting the operation type as a parameter and using the generic `Operation` type.
  *
  * @example
  * ```ts
