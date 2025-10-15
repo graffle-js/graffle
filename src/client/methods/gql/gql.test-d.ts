@@ -1,6 +1,8 @@
 import type { Grafaid } from '#lib/grafaid'
-import { $ } from '#src/docpar/object/var/var.js'
+import { Docpar } from '#src/docpar/$.js'
 import { Graffle } from '#src/exports/index.js'
+
+const $ = Docpar.Var.$
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 

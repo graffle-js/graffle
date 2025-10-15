@@ -1,7 +1,4 @@
 import { Docpar } from '#src/docpar/$.js'
-import type { Options } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
-import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
-import type { Parse } from '#src/docpar/parse.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
@@ -33,13 +30,13 @@ export interface gql<
   // String GraphQL document overload
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): Parse<$Input, $Schema>
+  ): Docpar.Parse<$Input, $Schema>
 
   // Document object overload
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
-    options?: Options,
-  ): $Document extends object ? Parse<
+    options?: Docpar.Object.ToGraphQLDocument.Options,
+  ): $Document extends object ? Docpar.Parse<
       $Document,
       $Schema,
       $ArgumentsMap,
@@ -69,7 +66,7 @@ export namespace Gql {
    */
   export type Arguments =
     | [graphqlDocument: string]
-    | [objectDocument: Docpar.Object.Select.Document.DocumentObject, options?: Options]
+    | [objectDocument: Docpar.Object.Select.Document.DocumentObject, options?: Docpar.Object.ToGraphQLDocument.Options]
 
   export const normalizeArguments = (args: Arguments) => {
     const [first, second] = args
@@ -92,7 +89,7 @@ export namespace Gql {
   }
 }
 
-export const defaults: Partial<Options> = {
+export const defaults: Partial<Docpar.Object.ToGraphQLDocument.Options> = {
   hoistArguments: true,
 }
 
@@ -116,7 +113,7 @@ export const createGql = <
     const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(normalized.document)
 
     // Convert to GraphQL document
-    const result = toGraphQLDocument(documentNormalized, {
+    const result = Docpar.Object.ToGraphQLDocument.toGraphQLDocument(documentNormalized, {
       ...defaults,
       ...normalized.options,
       sddm: config.sddm,
@@ -162,8 +159,8 @@ export type ParseGraphQLString<
   $Context,
   $Input extends string,
 > = GlobalRegistry.ForContext<$Context> extends never
-  ? Parse<$Input, undefined>
-  : Parse<$Input, GlobalRegistry.ForContext<$Context>['schema']>
+  ? Docpar.Parse<$Input, undefined>
+  : Docpar.Parse<$Input, GlobalRegistry.ForContext<$Context>['schema']>
 
 /**
  * Type-level utility that parses a document builder object and returns the typed document.
@@ -183,7 +180,7 @@ export type ParseGraphQLString<
 export type ParseGraphQLObject<
   $Context,
   $Document,
-> = Parse<
+> = Docpar.Parse<
   $Document,
   GlobalRegistry.ForContext<$Context>['schema'],
   GlobalRegistry.ForContext<$Context>['argumentsMap'],

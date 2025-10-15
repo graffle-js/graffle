@@ -1,5 +1,5 @@
 /**
- * Re-export document types from docpar/core/doc with error handling support.
+ * Re-export document types from Docpar.Doc with error handling support.
  *
  * This module serves as a compatibility layer, re-exporting the core document types
  * from the docpar module to maintain backward compatibility with existing code.

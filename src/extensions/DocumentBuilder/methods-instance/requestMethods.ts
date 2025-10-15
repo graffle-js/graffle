@@ -1,14 +1,13 @@
 import type { Grafaid } from '#lib/grafaid'
 import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
-import { Select } from '#src/docpar/object/Select/$.js'
-import { ToGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/$.js'
+import { Docpar } from '#src/docpar/$.js'
 import { getOperationDefinition } from '#src/lib/grafaid/document.js'
 import { isSymbol } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
 
-export const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {
-  const documentNormalized = Select.Document.normalizeOrThrow(document)
+export const createMethodDocument = (state: Context) => (document: Docpar.Object.Select.Document.DocumentObject) => {
+  const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(document)
   return {
     run: async (maybeOperationName?: string) => {
       return await executeDocument(state, documentNormalized, maybeOperationName)
@@ -22,11 +21,11 @@ export const createMethodOperationType = (state: Context, operationType: Operati
       if (isSymbol(key)) throw new Error(`Symbols not supported.`)
 
       if (key.startsWith(`$batch`)) {
-        return async (selectionSetOrIndicator: Select.SelectionSet.AnySelectionSet) =>
+        return async (selectionSetOrIndicator: Docpar.Object.Select.SelectionSet.AnySelectionSet) =>
           executeOperation(state, operationType, selectionSetOrIndicator)
       } else {
         const fieldName = key
-        return (selectionSetOrArgs: Select.SelectionSet.AnySelectionSet) =>
+        return (selectionSetOrArgs: Docpar.Object.Select.SelectionSet.AnySelectionSet) =>
           executeRootField(state, operationType, fieldName, selectionSetOrArgs)
       }
     },
@@ -37,7 +36,7 @@ const executeRootField = async (
   context: Context,
   operationType: OperationTypeNode,
   rootFieldName: string,
-  rootFieldSelectionSet?: Select.SelectionSet.AnySelectionSet,
+  rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
   const result = await executeOperation(context, operationType, {
     [rootFieldName]: rootFieldSelectionSet ?? {},
@@ -54,11 +53,11 @@ const executeRootField = async (
 const executeOperation = async (
   context: Context,
   operationType: OperationTypeNode,
-  rootTypeSelectionSet: Select.SelectionSet.AnySelectionSet,
+  rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
   return executeDocument(
     context,
-    Select.Document.createDocumentNormalizedFromRootTypeSelection(
+    Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
       operationType,
       rootTypeSelectionSet,
     ),
@@ -67,11 +66,11 @@ const executeOperation = async (
 
 const executeDocument = async (
   context: Context,
-  document: Select.Document.DocumentNormalized,
+  document: Docpar.Object.Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {
   const request = graffleMappedResultToRequest(
-    ToGraphQLDocument.toGraphQL(document, {
+    Docpar.Object.ToGraphQLDocument.toGraphQL(document, {
       sddm: context.configuration.schema.current.map,
       // todo test that when custom scalars are used they are mapped correctly
       scalars: context.scalars.map,
@@ -83,7 +82,7 @@ const executeDocument = async (
 }
 
 export const graffleMappedResultToRequest = (
-  { document, operationsVariables }: ToGraphQLDocument.Encoded,
+  { document, operationsVariables }: Docpar.Object.ToGraphQLDocument.Encoded,
   operationName?: string,
 ): Grafaid.RequestAnalyzedDocumentNodeInput => {
   // We get back variables for every operation in the Graffle document.

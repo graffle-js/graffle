@@ -1,6 +1,5 @@
 import type { HandleOutput } from '#src/client/handle.js'
-import type { InferResult } from '#src/docpar/object/InferResult/$.js'
-import type { Select } from '#src/docpar/object/Select/$.js'
+import type { Docpar } from '#src/docpar/$.js'
 import type { IsTupleMultiple } from '#src/lib/prelude.js'
 import type { UnionToTuple } from 'type-fest'
 
@@ -8,8 +7,8 @@ import type { UnionToTuple } from 'type-fest'
 export type DocumentRunner<
   $$Context,
   $$Schema,
-  $$Document extends Select.Document.SomeDocument,
-  $$Name extends Select.Document.GetOperationNames<$$Document> = Select.Document.GetOperationNames<$$Document>
+  $$Document extends Docpar.Object.Select.Document.SomeDocument,
+  $$Name extends Docpar.Object.Select.Document.GetOperationNames<$$Document> = Docpar.Object.Select.Document.GetOperationNames<$$Document>
 > = {
   run: <
     $Params extends (IsTupleMultiple<UnionToTuple<$$Name>> extends true ? [name: $$Name] : []),
@@ -19,10 +18,10 @@ export type DocumentRunner<
       & ({} | null)
       & HandleOutput<
           $$Context,
-          InferResult.Operation<
-            Select.Document.GetOperation<$$Document, $Name>,
+          Docpar.Object.InferResult.Operation<
+            Docpar.Object.Select.Document.GetOperation<$$Document, $Name>,
             $$Schema,
-            Select.Document.GetOperationType<$$Document, $Name>
+            Docpar.Object.Select.Document.GetOperationType<$$Document, $Name>
           >
         >
     >
