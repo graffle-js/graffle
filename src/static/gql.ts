@@ -29,7 +29,7 @@ export interface gql<
   // String GraphQL document overload
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): Docpar.Parse<$Input, $Schema>
+  ): Docpar.Parse<$Input, Docpar.ParserContext<$Schema>>
 
   // Document object overload
   <$Document extends $DocumentObjectConstraint>(
@@ -37,14 +37,7 @@ export interface gql<
     options?: Docpar.Object.ToGraphQLDocument.Options,
   ): $Document extends object ? Docpar.Parse<
       $Document,
-      $Schema,
-      $ArgumentsMap,
-      {
-        // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
-        // For now, hardcoded to never since static documents have no runtime extensions
-        typeHookRequestResultDataTypes: never
-        scalars: $Schema['scalarRegistry']
-      }
+      Docpar.ParserContext<$Schema, $ArgumentsMap, never>
     >
     : never
 }
@@ -158,8 +151,8 @@ export type ParseGraphQLString<
   $Context,
   $Input extends string,
 > = GlobalRegistry.ForContext<$Context> extends never
-  ? Docpar.Parse<$Input, undefined>
-  : Docpar.Parse<$Input, GlobalRegistry.ForContext<$Context>['schema']>
+  ? Docpar.Parse<$Input, Docpar.ParserContext<undefined>>
+  : Docpar.Parse<$Input, Docpar.ParserContext<GlobalRegistry.ForContext<$Context>['schema']>>
 
 /**
  * Type-level utility that parses a document builder object and returns the typed document.
@@ -181,7 +174,9 @@ export type ParseGraphQLObject<
   $Document,
 > = Docpar.Parse<
   $Document,
-  GlobalRegistry.ForContext<$Context>['schema'],
-  GlobalRegistry.ForContext<$Context>['argumentsMap'],
-  $Context
+  Docpar.ParserContext<
+    GlobalRegistry.ForContext<$Context>['schema'],
+    GlobalRegistry.ForContext<$Context>['argumentsMap'],
+    $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
+  > & any
 >

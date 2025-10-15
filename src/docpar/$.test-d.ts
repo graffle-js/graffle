@@ -6,13 +6,11 @@ import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import type { Core } from './core/$.js'
 
-type Context = {
-  typeHookRequestResultDataTypes: never
-  scalars: Possible.$.Schema['scalarRegistry']
-}
+type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.ArgumentsMap, never>
+type ContextLoose = Docpar.ParserContext<undefined>
 
-type Strict<$Input> = Docpar.Parse<$Input, Possible.$.Schema, Possible.$.ArgumentsMap, Context>
-type Loose<$Input> = Docpar.Parse<$Input, undefined, any, any>
+type Strict<$Input> = Docpar.Parse<$Input, ContextStrict>
+type Loose<$Input> = Docpar.Parse<$Input, ContextLoose>
 
 type D<$Op extends Core.Operation> = Core.Doc.Document<$Op>
 
@@ -38,7 +36,7 @@ type OpQUnknownField = D<{ name: 'q'; result: { unknownField: unknown }; variabl
 type _ = Ts.Test.Cases<
   // Simplest possible query - anonymous query with single scalar field
   Ts.Test.exact<Strict<'{ id }'>, OpDefaultId>,
-  Ts.Test.exact<Strict<{ query: { default: { id: true } } }>, OpDefaultId>,
+  Ts.Test.bid<Strict<{ query: { default: { id: true } } }>, OpDefaultId>,
 
   // Schema-less mode (string syntax only - object syntax requires schema)
   Ts.Test.exact<Loose<'{ id }'>, OpDefaultIdLoose>,

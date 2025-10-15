@@ -1,3 +1,4 @@
+export * from './Context.js'
 export * from './doc.js'
 export * as Doc from './doc.js'
 export * from './error.js'

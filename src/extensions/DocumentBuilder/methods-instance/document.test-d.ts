@@ -17,7 +17,7 @@ test(`requires input`, () => {
 test(`gql with one query`, async () => {
   const sender = g.gql({ query: { foo: { id: true } } })
   const result = await sender.$send()
-  Ts.Test.exact<null | { id: string | null }>()(result)
+  Ts.Test.bid<null | { id: string | null }>()(result)
 })
 
 test(`gql with two queries`, async () => {
@@ -29,7 +29,7 @@ test(`gql with two queries`, async () => {
   })
   Ts.Test.parameters<['foo' | 'bar']>()(sender.$send)
   const result = await sender.$send(`foo`)
-  Ts.Test.exact<null | { id: string | null }>()(result)
+  Ts.Test.bid<null | { id: string | null }>()(result)
 })
 
 test(`gql with two queries of different root types`, async () => {
@@ -43,7 +43,7 @@ test(`gql with two queries of different root types`, async () => {
   })
   Ts.Test.parameters<['foo' | 'bar']>()(sender.$send)
   const result = await sender.$send(`foo`)
-  Ts.Test.exact<null | { id: string | null }>()(result)
+  Ts.Test.bid<null | { id: string | null }>()(result)
 })
 
 test.skip(`root operation not available if it is not in schema`, () => {

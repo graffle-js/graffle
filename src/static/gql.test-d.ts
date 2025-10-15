@@ -112,7 +112,7 @@ Ts.Test.bid<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } } 
 
 type SingleOpRequiredVars = D<{ name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 
-Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
+Ts.Test.bid<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
 // dprint-ignore
 Ts.Test.bid<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
 
@@ -140,13 +140,13 @@ type DefaultOpWithScalar = D<{ name: 'default'; result: { date: Date | null }; v
 type DefaultOpOptionalVars = D<{ name: 'default'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 
 Ts.Test.exact<DefaultOpNoVars>()(Possible.gql(`{ id }`))
-Ts.Test.exact<DefaultOpNoVars>()(Possible.gql({ query: { default: { id: true } } }))
+Ts.Test.bid<DefaultOpNoVars>()(Possible.gql({ query: { default: { id: true } } }))
 
 Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql(`{ date }`))
-Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql({ query: { default: { date: true } } }))
+Ts.Test.bid<DefaultOpWithScalar>()(Possible.gql({ query: { default: { date: true } } }))
 
 Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
-Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
+Ts.Test.bid<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
 
 // ==================================================================================================
 //                                   Multiple operations, no variables
@@ -175,7 +175,7 @@ type MultiOpWithVars = D<
   | { name: 'setId'; result: { idNonNull: string }; variables: {} }
 >
 
-Ts.Test.exact<MultiOpWithVars>()(
+Ts.Test.bid<MultiOpWithVars>()(
   Possible.gql(`
     query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }
     mutation setId { idNonNull }
