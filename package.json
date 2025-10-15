@@ -1,6 +1,6 @@
 {
   "name": "graphql-request",
-  "version": "7.2.0",
+  "version": "7.3.0",
   "packageManager": "pnpm@9.4.0",
   "type": "module",
   "main": "./build/entrypoints/main.js",
