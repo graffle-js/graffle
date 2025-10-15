@@ -1,10 +1,7 @@
 import { Docpar } from '#src/docpar/$.js'
+import type { InferOperationsInDocument } from '#src/docpar/object/InferOperations.js'
 import type { Options } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
-import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
-import type { Grafaid } from '#src/lib/grafaid/$.js'
-import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
-import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
@@ -22,114 +19,6 @@ import * as Doc from './core/doc.js'
 //
 //
 //
-
-/**
- * Infer all operations in a document by mapping over operation types (query, mutation, subscription).
- *
- * Returns a union of all operations for improved TypeScript performance.
- *
- * @example
- * ```ts
- * type Doc = {
- *   query: { getUser: { id: true }, getPost: { id: true } },
- *   mutation: { createUser: { id: true } }
- * }
- * type Ops = InferOperationsInDocument<Doc, MySchema, MyArgsMap, MyContext>
- * // Result: Operation<'getUser', ...> | Operation<'getPost', ...> | Operation<'createUser', ...>
- * ```
- */
-// dprint-ignore
-export type InferOperationsInDocument<
-  $Document extends object,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context extends object
-> =
-  {
-    [operationType in keyof $Document]: {
-      [operationName in keyof $Document[operationType]]:
-        InferOperation<
-          $Document[operationType][operationName],
-          $Schema,
-          $ArgumentsMap,
-          $Context,
-          Grafaid.Document.OperationTypeNode.FromString<operationType & string>,
-          operationName
-        >
-    }[keyof $Document[operationType] & string]  // Extract union from operation names
-  }[keyof $Document] // Extract union from operation types
-
-/**
- * @deprecated Use `InferOperationsInDocument` instead. This alias exists for backwards compatibility.
- */
-export type InferOperations<
-  $Document,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context,
-> = $Document extends object
-  ? $Context extends object ? InferOperationsInDocument<$Document, $Schema, $ArgumentsMap, $Context>
-  : never
-  : never
-
-/**
- * Infer a single operation with the given operation type.
- *
- * @example
- * ```ts
- * type Op = InferOperation<
- *   { id: true, name: true },
- *   MySchema,
- *   MyArgsMap,
- *   MyContext,
- *   OperationTypeNode.QUERY,
- *   'getUser'
- * >
- * // Result: TypedFullDocument.Operation<'getUser', { id: string, name: string }, {}>
- * ```
- */
-// dprint-ignore
-type InferOperation<
-  $DocOp,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context,
-  $OperationType extends Grafaid.Document.OperationTypeNode,
-  $OperationName,
-> =
-  $DocOp extends object
-    ? TypedFullDocument.Operation<
-        $OperationName & string,
-        RequestResult.Simplify<$Context,
-          DocumentBuilderKit.InferResult.Operation<$DocOp, $Schema, $OperationType>
-        >,
-        RequestResult.Simplify<$Context,
-          DocumentBuilderKit.Var.InferFromOperation<$DocOp, $ArgumentsMap, $OperationType>
-        >
-      >
-    : never
-
-/**
- * Unified `gql` function that accepts either:
- * - A GraphQL string with full type inference
- * - A document object for document builder
- *
- * @example GraphQL string syntax
- * ```ts
- * const doc = gql(`query { user { id } }`)
- * // Returns: TypedFullDocument.SingleOperation<{ user: { id: string } }, {}>
- * ```
- *
- * @example Document object syntax
- * ```ts
- * const doc = gql({
- *   query: {
- *     getUser: { user: { id: true, name: true } }
- *   }
- * })
- * // Returns: TypedFullDocument.SingleOperation with operation metadata
- * ```
- */
 /**
  * Unified gql function interface that handles both:
  * - GraphQL string inputs (parsed via document parser)

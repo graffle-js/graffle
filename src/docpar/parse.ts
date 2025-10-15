@@ -3,7 +3,7 @@ import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Simplify } from 'type-fest'
 import * as Doc from './core/doc.js'
-import type { InferOperationsInDocument } from './gql.js'
+import type { InferOperationsInDocument } from './object/InferOperations.js'
 import type { String } from './string/$.js'
 
 /**

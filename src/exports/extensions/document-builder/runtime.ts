@@ -1,4 +1,4 @@
-export { createGql, type InferOperations } from '#src/docpar/gql.js'
+export { createGql, type InferOperationsInDocument as InferOperations } from '#src/docpar/gql.js'
 export {
   type Config,
   createStaticRootType,

@@ -1,3 +1,4 @@
+export type { InferOperation, InferOperations, InferOperationsInDocument } from './InferOperations.js'
 export { InferResult } from './InferResult/$.js'
 export * as Static from './rootType.js'
 export { Select } from './Select/$.js'
