@@ -17,9 +17,9 @@ export type * as InputObject from './fields.js'
  * | **All Fields Nullable** | Yes |
  */
 export interface InputObject<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  $abcEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ABCEnum | null | undefined>
+  $abcEnum?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ABCEnum | null | undefined>
   date?: $Scalars.Date<_$Context>
   dateRequired: $Scalars.Date$NonNull<_$Context>
   id?: $Scalars.ID<_$Context>

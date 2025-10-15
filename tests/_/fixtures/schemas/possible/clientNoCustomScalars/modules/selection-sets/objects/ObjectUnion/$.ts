@@ -16,8 +16,8 @@ export type * as ObjectUnion from './$$.js'
  * | **Fields** | 1 |
  */
 export interface ObjectUnion<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -31,7 +31,7 @@ export interface ObjectUnion<
    */
   fooBarUnion?:
     | $Fields.fooBarUnion.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.fooBarUnion<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.fooBarUnion<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -48,8 +48,8 @@ export interface ObjectUnion<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

@@ -17,8 +17,8 @@ export type * as DateObject1 from './$$.js'
  * | **Implements** | {@link $Schema.DateInterface1} |
  */
 export interface DateObject1<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -32,7 +32,7 @@ export interface DateObject1<
    */
   date1?:
     | $Fields.date1.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date1<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -49,8 +49,8 @@ export interface DateObject1<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

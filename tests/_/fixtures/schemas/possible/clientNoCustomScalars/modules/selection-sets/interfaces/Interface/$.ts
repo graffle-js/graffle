@@ -18,8 +18,8 @@ export type * as Interface from './$$.js'
  * | **Implementors** | {@link $Schema.Object1ImplementingInterface}, {@link $Schema.Object2ImplementingInterface} |
  */
 export interface Interface<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -31,9 +31,7 @@ export interface Interface<
    * | **Path** | `Interface.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * Inline fragment selection for {@link $Schema.Object1ImplementingInterface} implementor.
    *
@@ -108,8 +106,8 @@ export interface Interface<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

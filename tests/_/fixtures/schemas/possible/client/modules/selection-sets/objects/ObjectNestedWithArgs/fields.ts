@@ -3,14 +3,14 @@ import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Scalars from '../../scalars/$.js'
 
-export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+export type id<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | id.$SelectionSet<_$Context>
 
 export namespace id {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base {
     /**
      * Arguments for `id` field. No arguments are required so you may omit this.
      */
@@ -18,7 +18,7 @@ export namespace id {
   }
 
   export interface $Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -39,20 +39,20 @@ export namespace id {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $SelectionSet<_$Context>
   >
 }
 
-type $object<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
+type $object<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   $object.$SelectionSet<_$Context>
 
 namespace $object {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base, $Named.Object1<_$Context> {
     /**
      * Arguments for `object` field. No arguments are required so you may omit this.
      */
@@ -60,7 +60,7 @@ namespace $object {
   }
 
   export interface $Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -114,7 +114,7 @@ namespace $object {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $SelectionSet<_$Context>
   >

@@ -16,8 +16,8 @@ export type * as StringFilter from './fields.js'
  * | **All Fields Nullable** | Yes |
  */
 export interface StringFilter<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
   contains?: $Scalars.String<_$Context>
-  in?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.String<_$Context>> | null | undefined>
+  in?: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.String<_$Context>> | null | undefined>
 }

@@ -1,14 +1,14 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 
-export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+export type id<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | id.$SelectionSet<_$Context>
 
 export namespace id {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base {
   }
 
   /**
@@ -17,9 +17,9 @@ export namespace id {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $SelectionSet<_$Context>
   >
 }

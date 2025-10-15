@@ -1,14 +1,14 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 
-export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+export type a<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | a.$SelectionSet<_$Context>
 
 export namespace a {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base {
   }
 
   /**
@@ -17,21 +17,21 @@ export namespace a {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $SelectionSet<_$Context>
   >
 }
 
-export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+export type b<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | b.$SelectionSet<_$Context>
 
 export namespace b {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base {
   }
 
   /**
@@ -40,21 +40,21 @@ export namespace b {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $SelectionSet<_$Context>
   >
 }
 
-export type c1<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+export type c1<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | c1.$SelectionSet<_$Context>
 
 export namespace c1 {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base {
   }
 
   /**
@@ -63,9 +63,9 @@ export namespace c1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $SelectionSet<_$Context>
   >
 }

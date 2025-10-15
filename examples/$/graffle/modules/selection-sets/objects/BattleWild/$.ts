@@ -18,8 +18,8 @@ export type * as BattleWild from './$$.js'
  * | **Fields** | 6 |
  */
 export interface BattleWild<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * The date when this battle took place, stored as a Unix timestamp.
    *
@@ -39,7 +39,7 @@ export interface BattleWild<
    */
   date?:
     | $Fields.date.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * The unique identifier for this battle.
    *
@@ -57,9 +57,7 @@ export interface BattleWild<
    * | **Path** | `BattleWild.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The trainer's Pokemon that participated in this battle.
    *
@@ -90,7 +88,7 @@ export interface BattleWild<
    */
   pokemon?:
     | $Fields.pokemon.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
   /**
    * The outcome of this wild Pokemon battle.
    *
@@ -116,7 +114,7 @@ export interface BattleWild<
    */
   result?:
     | $Fields.result.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.result<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.result<_$Context>>
   /**
    * The trainer who engaged in this wild battle.
    *
@@ -144,7 +142,7 @@ export interface BattleWild<
    */
   trainer?:
     | $Fields.trainer.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
   /**
    * The wild Pokemon encountered in this battle.
    *
@@ -176,7 +174,7 @@ export interface BattleWild<
    */
   wildPokemons?:
     | $Fields.wildPokemons.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.wildPokemons<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.wildPokemons<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -193,8 +191,8 @@ export interface BattleWild<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

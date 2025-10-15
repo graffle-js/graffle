@@ -1,6 +1,6 @@
 import type { GetDecoded } from '#src/types/Schema/nodes/Scalar/helpers.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
-import type { Core } from '../core/$.js'
+import type { Core, ParserContext } from '../core/$.js'
 import type { Enum, Interface, OutputField, OutputObject, Scalar, Schema } from './schema.js'
 import type { ApplyInlineType } from './typeTraversal.js'
 
@@ -39,14 +39,14 @@ type UniversalObject = OutputObject & {
 /**
  * Parse a GraphQL document string and infer its type in one pass.
  *
- * @param $Schema - Schema for type inference. Use `undefined` for schema-less mode.
- *   - Real Schema: Strict mode - unknown fields cause errors
- *   - `undefined`: Loose mode - unknown fields type as `unknown`
+ * @param $Context - Parser context containing schema and configuration.
+ *   - With Schema: Strict mode - unknown fields cause errors
+ *   - Schema-less: Loose mode - unknown fields type as `unknown`
  */
 export type ParseDocument<
   $Input extends string,
-  $Schema extends Schema | undefined,
-> = ParseOperations<SkipIgnored<$Input>, $Schema, {}>
+  $Context extends ParserContext<any>,
+> = ParseOperations<SkipIgnored<$Input>, $Context['schema'], {}>
 
 /**
  * Parse multiple operations and accumulate them

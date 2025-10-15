@@ -18,8 +18,8 @@ export type * as InterfaceGrandparent from './$$.js'
  * | **Implementors** | {@link $Schema.ObjectChildA}, {@link $Schema.ObjectChildB}, {@link $Schema.ObjectGrandparent}, {@link $Schema.ObjectParent}, {@link $Schema.InterfaceChildA}, {@link $Schema.InterfaceChildB}, {@link $Schema.InterfaceParent} |
  */
 export interface InterfaceGrandparent<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -31,9 +31,7 @@ export interface InterfaceGrandparent<
    * | **Path** | `InterfaceGrandparent.a` |
    * | **Nullability** | Required |
    */
-  a?:
-    | $Fields.a.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+  a?: $Fields.a.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
   /**
    * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
    *
@@ -253,8 +251,8 @@ export interface InterfaceGrandparent<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

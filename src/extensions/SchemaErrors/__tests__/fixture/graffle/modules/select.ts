@@ -79,7 +79,7 @@ export namespace Select {
   /**
    * Infer result type for Query operations.
    */
-  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilderKit.InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
     OperationTypeNode.QUERY
@@ -88,7 +88,7 @@ export namespace Select {
    * Infer result type for Mutation operations.
    */
   export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> =
-    $$Utilities.DocumentBuilderKit.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
+    $$Utilities.Docpar.Object.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
 
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
@@ -97,17 +97,16 @@ export namespace Select {
   /**
    * Infer result type for Bar selection sets.
    */
-  export type Bar<$SelectionSet extends $$SelectionSets.Bar> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
-      $SelectionSet,
-      $$Schema.Schema,
-      $$Schema.Schema['allTypes']['Bar']
-    >
+  export type Bar<$SelectionSet extends $$SelectionSets.Bar> = $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Bar']
+  >
   /**
    * Infer result type for DateObject1 selection sets.
    */
   export type DateObject1<$SelectionSet extends $$SelectionSets.DateObject1> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['DateObject1']
@@ -116,7 +115,7 @@ export namespace Select {
    * Infer result type for DateObject2 selection sets.
    */
   export type DateObject2<$SelectionSet extends $$SelectionSets.DateObject2> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['DateObject2']
@@ -125,7 +124,7 @@ export namespace Select {
    * Infer result type for ErrorOne selection sets.
    */
   export type ErrorOne<$SelectionSet extends $$SelectionSets.ErrorOne> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ErrorOne']
@@ -134,7 +133,7 @@ export namespace Select {
    * Infer result type for ErrorTwo selection sets.
    */
   export type ErrorTwo<$SelectionSet extends $$SelectionSets.ErrorTwo> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ErrorTwo']
@@ -144,17 +143,16 @@ export namespace Select {
    *
    * Infer result type for Foo selection sets.
    */
-  export type Foo<$SelectionSet extends $$SelectionSets.Foo> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
-      $SelectionSet,
-      $$Schema.Schema,
-      $$Schema.Schema['allTypes']['Foo']
-    >
+  export type Foo<$SelectionSet extends $$SelectionSets.Foo> = $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Foo']
+  >
   /**
    * Infer result type for Object1 selection sets.
    */
   export type Object1<$SelectionSet extends $$SelectionSets.Object1> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object1']
@@ -163,7 +161,7 @@ export namespace Select {
    * Infer result type for Object1ImplementingInterface selection sets.
    */
   export type Object1ImplementingInterface<$SelectionSet extends $$SelectionSets.Object1ImplementingInterface> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object1ImplementingInterface']
@@ -172,7 +170,7 @@ export namespace Select {
    * Infer result type for Object2ImplementingInterface selection sets.
    */
   export type Object2ImplementingInterface<$SelectionSet extends $$SelectionSets.Object2ImplementingInterface> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object2ImplementingInterface']
@@ -181,7 +179,7 @@ export namespace Select {
    * Infer result type for ObjectChildA selection sets.
    */
   export type ObjectChildA<$SelectionSet extends $$SelectionSets.ObjectChildA> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectChildA']
@@ -190,7 +188,7 @@ export namespace Select {
    * Infer result type for ObjectChildB selection sets.
    */
   export type ObjectChildB<$SelectionSet extends $$SelectionSets.ObjectChildB> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectChildB']
@@ -199,7 +197,7 @@ export namespace Select {
    * Infer result type for ObjectGrandparent selection sets.
    */
   export type ObjectGrandparent<$SelectionSet extends $$SelectionSets.ObjectGrandparent> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectGrandparent']
@@ -208,7 +206,7 @@ export namespace Select {
    * Infer result type for ObjectNested selection sets.
    */
   export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectNested']
@@ -217,7 +215,7 @@ export namespace Select {
    * Infer result type for ObjectNestedWithArgs selection sets.
    */
   export type ObjectNestedWithArgs<$SelectionSet extends $$SelectionSets.ObjectNestedWithArgs> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectNestedWithArgs']
@@ -226,7 +224,7 @@ export namespace Select {
    * Infer result type for ObjectParent selection sets.
    */
   export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectParent']
@@ -235,7 +233,7 @@ export namespace Select {
    * Infer result type for ObjectUnion selection sets.
    */
   export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectUnion']
@@ -244,7 +242,7 @@ export namespace Select {
    * Infer result type for lowerCaseObject selection sets.
    */
   export type lowerCaseObject<$SelectionSet extends $$SelectionSets.lowerCaseObject> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['lowerCaseObject']
@@ -253,7 +251,7 @@ export namespace Select {
    * Infer result type for lowerCaseObject2 selection sets.
    */
   export type lowerCaseObject2<$SelectionSet extends $$SelectionSets.lowerCaseObject2> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['lowerCaseObject2']
@@ -266,19 +264,18 @@ export namespace Select {
   /**
    * Infer result type for DateUnion selection sets.
    */
-  export type DateUnion<$SelectionSet extends $$SelectionSets.DateUnion> =
-    $$Utilities.DocumentBuilderKit.InferResult.Union<
-      $SelectionSet,
-      $$Schema.Schema,
-      $$Schema.Schema['allTypes']['DateUnion']
-    >
+  export type DateUnion<$SelectionSet extends $$SelectionSets.DateUnion> = $$Utilities.Docpar.Object.InferResult.Union<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['DateUnion']
+  >
   /**
    * Union documentation.
    *
    * Infer result type for FooBarUnion selection sets.
    */
   export type FooBarUnion<$SelectionSet extends $$SelectionSets.FooBarUnion> =
-    $$Utilities.DocumentBuilderKit.InferResult.Union<
+    $$Utilities.Docpar.Object.InferResult.Union<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['FooBarUnion']
@@ -286,7 +283,7 @@ export namespace Select {
   /**
    * Infer result type for Result selection sets.
    */
-  export type Result<$SelectionSet extends $$SelectionSets.Result> = $$Utilities.DocumentBuilderKit.InferResult.Union<
+  export type Result<$SelectionSet extends $$SelectionSets.Result> = $$Utilities.Docpar.Object.InferResult.Union<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Result']
@@ -295,7 +292,7 @@ export namespace Select {
    * Infer result type for lowerCaseUnion selection sets.
    */
   export type lowerCaseUnion<$SelectionSet extends $$SelectionSets.lowerCaseUnion> =
-    $$Utilities.DocumentBuilderKit.InferResult.Union<
+    $$Utilities.Docpar.Object.InferResult.Union<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['lowerCaseUnion']
@@ -309,7 +306,7 @@ export namespace Select {
    * Infer result type for DateInterface1 selection sets.
    */
   export type DateInterface1<$SelectionSet extends $$SelectionSets.DateInterface1> =
-    $$Utilities.DocumentBuilderKit.InferResult.Interface<
+    $$Utilities.Docpar.Object.InferResult.Interface<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['DateInterface1']
@@ -317,7 +314,7 @@ export namespace Select {
   /**
    * Infer result type for Error selection sets.
    */
-  export type Error<$SelectionSet extends $$SelectionSets.Error> = $$Utilities.DocumentBuilderKit.InferResult.Interface<
+  export type Error<$SelectionSet extends $$SelectionSets.Error> = $$Utilities.Docpar.Object.InferResult.Interface<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Error']
@@ -326,7 +323,7 @@ export namespace Select {
    * Infer result type for Interface selection sets.
    */
   export type Interface<$SelectionSet extends $$SelectionSets.Interface> =
-    $$Utilities.DocumentBuilderKit.InferResult.Interface<
+    $$Utilities.Docpar.Object.InferResult.Interface<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Interface']
@@ -335,7 +332,7 @@ export namespace Select {
    * Infer result type for InterfaceChildA selection sets.
    */
   export type InterfaceChildA<$SelectionSet extends $$SelectionSets.InterfaceChildA> =
-    $$Utilities.DocumentBuilderKit.InferResult.Interface<
+    $$Utilities.Docpar.Object.InferResult.Interface<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['InterfaceChildA']
@@ -344,7 +341,7 @@ export namespace Select {
    * Infer result type for InterfaceChildB selection sets.
    */
   export type InterfaceChildB<$SelectionSet extends $$SelectionSets.InterfaceChildB> =
-    $$Utilities.DocumentBuilderKit.InferResult.Interface<
+    $$Utilities.Docpar.Object.InferResult.Interface<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['InterfaceChildB']
@@ -353,7 +350,7 @@ export namespace Select {
    * Infer result type for InterfaceGrandparent selection sets.
    */
   export type InterfaceGrandparent<$SelectionSet extends $$SelectionSets.InterfaceGrandparent> =
-    $$Utilities.DocumentBuilderKit.InferResult.Interface<
+    $$Utilities.Docpar.Object.InferResult.Interface<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['InterfaceGrandparent']
@@ -362,7 +359,7 @@ export namespace Select {
    * Infer result type for InterfaceParent selection sets.
    */
   export type InterfaceParent<$SelectionSet extends $$SelectionSets.InterfaceParent> =
-    $$Utilities.DocumentBuilderKit.InferResult.Interface<
+    $$Utilities.Docpar.Object.InferResult.Interface<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['InterfaceParent']

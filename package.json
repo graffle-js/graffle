@@ -20,7 +20,6 @@
     "./presets/minimal": "./build/exports/presets/minimal.js",
     "./generator-helpers/standard-scalar-types": "./build/exports/generator-helpers/standardScalarTypes.js",
     "./extensions/introspection": "./build/exports/extensions/introspection/runtime.js",
-    "./extensions/document-builder/kit": "./build/exports/extensions/document-builder/kit.js",
     "./extensions/document-builder": "./build/exports/extensions/document-builder/runtime.js",
     "./extensions/throws": "./build/exports/extensions/throws/runtime.js",
     "./extensions/opentelemetry": "./build/exports/extensions/opentelemetry/runtime.js",

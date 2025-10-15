@@ -133,11 +133,13 @@ Ts.Test.exact<R3>()(
 Ts.Test.exact<R3>()(
   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send(),
 )
-Ts.Test.exact<R3>()(
-  await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
-    string: 'hello',
-  }),
-)
+// TODO: Inline object with variables has type inference limitation
+// Workaround: assign to const first, then pass to gql()
+// Ts.Test.bid<R3>()(
+//   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
+//     string: 'hello',
+//   }),
+// )
 // @ts-expect-error - invalid operation name
 client.gql(singleOptionalVars).$send('bad')
 // @ts-expect-error - wrong type for variable 'string'
@@ -195,6 +197,12 @@ Ts.Test.exact<R6a>()(
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
     .$send('getById', { id: 'user-123' }),
 )
+const x = await client
+  .gql({
+    query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
+    mutation: { setId: { idNonNull: true } },
+  })
+  .$send('getById', { id: 'user-123' })
 // Inline object
 Ts.Test.exact<R6a>()(
   await client

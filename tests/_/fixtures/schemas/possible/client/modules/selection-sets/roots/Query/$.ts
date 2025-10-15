@@ -8,9 +8,9 @@ export type * as Query from './$$.js'
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
  */
-export interface Query<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.RootObjectLike {
+export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext>
+  extends $$Utilities.Docpar.Object.Select.Bases.RootObjectLike
+{
   /**
    * # Info
    *
@@ -25,7 +25,7 @@ export interface Query<
    */
   InputObjectNested?:
     | $Fields.InputObjectNested.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.InputObjectNested<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.InputObjectNested<_$Context>>
   /**
    * # Info
    *
@@ -40,7 +40,7 @@ export interface Query<
    */
   InputObjectNestedNonNull?:
     | $Fields.InputObjectNestedNonNull<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.InputObjectNestedNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.InputObjectNestedNonNull<_$Context>>
   /**
    * Query enum field documentation.
    *
@@ -56,7 +56,7 @@ export interface Query<
    */
   abcEnum?:
     | $Fields.abcEnum.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.abcEnum<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.abcEnum<_$Context>>
   /**
    * # Info
    *
@@ -71,7 +71,7 @@ export interface Query<
    */
   argInputObjectCircular?:
     | $Fields.argInputObjectCircular.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.argInputObjectCircular<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.argInputObjectCircular<_$Context>>
   /**
    * # Info
    *
@@ -85,7 +85,7 @@ export interface Query<
    */
   bigintField?:
     | $Fields.bigintField.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.bigintField<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.bigintField<_$Context>>
   /**
    * # Info
    *
@@ -99,7 +99,7 @@ export interface Query<
    */
   bigintFieldNonNull?:
     | $Fields.bigintFieldNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.bigintFieldNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.bigintFieldNonNull<_$Context>>
   /**
    * # Info
    *
@@ -113,7 +113,7 @@ export interface Query<
    */
   date?:
     | $Fields.date.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * # Info
    *
@@ -128,7 +128,7 @@ export interface Query<
    */
   dateArg?:
     | $Fields.dateArg.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArg<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArg<_$Context>>
   /**
    * # Info
    *
@@ -143,7 +143,7 @@ export interface Query<
    */
   dateArgInputObject?:
     | $Fields.dateArgInputObject.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgInputObject<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgInputObject<_$Context>>
   /**
    * # Info
    *
@@ -158,7 +158,7 @@ export interface Query<
    */
   dateArgList?:
     | $Fields.dateArgList.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgList<_$Context>>
   /**
    * # Info
    *
@@ -173,7 +173,7 @@ export interface Query<
    */
   dateArgNonNull?:
     | $Fields.dateArgNonNull<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgNonNull<_$Context>>
   /**
    * # Info
    *
@@ -188,7 +188,7 @@ export interface Query<
    */
   dateArgNonNullList?:
     | $Fields.dateArgNonNullList<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgNonNullList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgNonNullList<_$Context>>
   /**
    * # Info
    *
@@ -203,7 +203,7 @@ export interface Query<
    */
   dateArgNonNullListNonNull?:
     | $Fields.dateArgNonNullListNonNull<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgNonNullListNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgNonNullListNonNull<_$Context>>
   /**
    * # Info
    *
@@ -217,7 +217,7 @@ export interface Query<
    */
   dateInterface1?:
     | $Fields.dateInterface1.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateInterface1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateInterface1<_$Context>>
   /**
    * # Info
    *
@@ -232,7 +232,7 @@ export interface Query<
    */
   dateList?:
     | $Fields.dateList.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateList<_$Context>>
   /**
    * # Info
    *
@@ -247,7 +247,7 @@ export interface Query<
    */
   dateListList?:
     | $Fields.dateListList.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateListList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateListList<_$Context>>
   /**
    * # Info
    *
@@ -262,7 +262,7 @@ export interface Query<
    */
   dateListNonNull?:
     | $Fields.dateListNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateListNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateListNonNull<_$Context>>
   /**
    * # Info
    *
@@ -276,7 +276,7 @@ export interface Query<
    */
   dateNonNull?:
     | $Fields.dateNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateNonNull<_$Context>>
   /**
    * # Info
    *
@@ -290,7 +290,7 @@ export interface Query<
    */
   dateObject1?:
     | $Fields.dateObject1.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateObject1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateObject1<_$Context>>
   /**
    * # Info
    *
@@ -304,7 +304,7 @@ export interface Query<
    */
   dateUnion?:
     | $Fields.dateUnion.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateUnion<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateUnion<_$Context>>
   /**
    * # Info
    *
@@ -319,7 +319,7 @@ export interface Query<
    */
   error?:
     | $Fields.error.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.error<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.error<_$Context>>
   /**
    * # Info
    *
@@ -331,9 +331,7 @@ export interface Query<
    * | **Path** | `Query.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
    *
@@ -347,7 +345,7 @@ export interface Query<
    */
   idNonNull?:
     | $Fields.idNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.idNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.idNonNull<_$Context>>
   /**
    * # Info
    *
@@ -361,7 +359,7 @@ export interface Query<
    */
   interface?:
     | $Fields.interface.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interface<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interface<_$Context>>
   /**
    * # Info
    *
@@ -377,7 +375,7 @@ export interface Query<
    */
   interfaceHierarchyChildA?:
     | $Fields.interfaceHierarchyChildA.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyChildA<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyChildA<_$Context>>
   /**
    * # Info
    *
@@ -393,7 +391,7 @@ export interface Query<
    */
   interfaceHierarchyChildB?:
     | $Fields.interfaceHierarchyChildB.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyChildB<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyChildB<_$Context>>
   /**
    * # Info
    *
@@ -409,7 +407,7 @@ export interface Query<
    */
   interfaceHierarchyGrandparents?:
     | $Fields.interfaceHierarchyGrandparents.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyGrandparents<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyGrandparents<_$Context>>
   /**
    * # Info
    *
@@ -425,7 +423,7 @@ export interface Query<
    */
   interfaceHierarchyParents?:
     | $Fields.interfaceHierarchyParents.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyParents<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyParents<_$Context>>
   /**
    * # Info
    *
@@ -439,7 +437,7 @@ export interface Query<
    */
   interfaceNonNull?:
     | $Fields.interfaceNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interfaceNonNull<_$Context>>
   /**
    * # Info
    *
@@ -454,7 +452,7 @@ export interface Query<
    */
   interfaceWithArgs?:
     | $Fields.interfaceWithArgs<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceWithArgs<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.interfaceWithArgs<_$Context>>
   /**
    * # Info
    *
@@ -469,7 +467,7 @@ export interface Query<
    */
   listInt?:
     | $Fields.listInt.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listInt<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listInt<_$Context>>
   /**
    * # Info
    *
@@ -484,7 +482,7 @@ export interface Query<
    */
   listIntNonNull?:
     | $Fields.listIntNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listIntNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listIntNonNull<_$Context>>
   /**
    * # Info
    *
@@ -499,7 +497,7 @@ export interface Query<
    */
   listListInt?:
     | $Fields.listListInt.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listListInt<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listListInt<_$Context>>
   /**
    * # Info
    *
@@ -514,7 +512,7 @@ export interface Query<
    */
   listListIntNonNull?:
     | $Fields.listListIntNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listListIntNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listListIntNonNull<_$Context>>
   /**
    * # Info
    *
@@ -528,7 +526,7 @@ export interface Query<
    */
   lowerCaseUnion?:
     | $Fields.lowerCaseUnion.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.lowerCaseUnion<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.lowerCaseUnion<_$Context>>
   /**
    * # Info
    *
@@ -542,7 +540,7 @@ export interface Query<
    */
   object?:
     | $Fields.object.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.object<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.object<_$Context>>
   /**
    * # Info
    *
@@ -557,7 +555,7 @@ export interface Query<
    */
   objectList?:
     | $Fields.objectList.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.objectList<_$Context>>
   /**
    * # Info
    *
@@ -572,7 +570,7 @@ export interface Query<
    */
   objectListNonNull?:
     | $Fields.objectListNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectListNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.objectListNonNull<_$Context>>
   /**
    * # Info
    *
@@ -586,7 +584,7 @@ export interface Query<
    */
   objectNested?:
     | $Fields.objectNested.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectNested<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.objectNested<_$Context>>
   /**
    * # Info
    *
@@ -600,7 +598,7 @@ export interface Query<
    */
   objectNestedWithArgs?:
     | $Fields.objectNestedWithArgs.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectNestedWithArgs<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.objectNestedWithArgs<_$Context>>
   /**
    * # Info
    *
@@ -614,7 +612,7 @@ export interface Query<
    */
   objectNonNull?:
     | $Fields.objectNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.objectNonNull<_$Context>>
   /**
    * # Info
    *
@@ -629,7 +627,7 @@ export interface Query<
    */
   objectWithArgs?:
     | $Fields.objectWithArgs.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectWithArgs<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.objectWithArgs<_$Context>>
   /**
    * # Info
    *
@@ -644,7 +642,7 @@ export interface Query<
    */
   result?:
     | $Fields.result<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.result<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.result<_$Context>>
   /**
    * # Info
    *
@@ -659,7 +657,7 @@ export interface Query<
    */
   resultNonNull?:
     | $Fields.resultNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.resultNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.resultNonNull<_$Context>>
   /**
    * # Info
    *
@@ -673,7 +671,7 @@ export interface Query<
    */
   string?:
     | $Fields.string.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
   /**
    * # Info
    *
@@ -688,7 +686,7 @@ export interface Query<
    */
   stringWithArgEnum?:
     | $Fields.stringWithArgEnum.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgEnum<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgEnum<_$Context>>
   /**
    * # Info
    *
@@ -703,7 +701,7 @@ export interface Query<
    */
   stringWithArgInputObject?:
     | $Fields.stringWithArgInputObject.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObject<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObject<_$Context>>
   /**
    * # Info
    *
@@ -718,7 +716,7 @@ export interface Query<
    */
   stringWithArgInputObjectEnum?:
     | $Fields.stringWithArgInputObjectEnum<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObjectEnum<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObjectEnum<_$Context>>
   /**
    * # Info
    *
@@ -733,7 +731,7 @@ export interface Query<
    */
   stringWithArgInputObjectRequired?:
     | $Fields.stringWithArgInputObjectRequired<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObjectRequired<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObjectRequired<_$Context>>
   /**
    * The given arguments are reflected back as a JSON string.
    *
@@ -750,7 +748,7 @@ export interface Query<
    */
   stringWithArgs?:
     | $Fields.stringWithArgs.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgs<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgs<_$Context>>
   /**
    * # Info
    *
@@ -765,7 +763,7 @@ export interface Query<
    */
   stringWithListArg?:
     | $Fields.stringWithListArg.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithListArg<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithListArg<_$Context>>
   /**
    * # Info
    *
@@ -780,7 +778,7 @@ export interface Query<
    */
   stringWithListArgRequired?:
     | $Fields.stringWithListArgRequired<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithListArgRequired<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithListArgRequired<_$Context>>
   /**
    * # Info
    *
@@ -795,7 +793,7 @@ export interface Query<
    */
   stringWithRequiredArg?:
     | $Fields.stringWithRequiredArg<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithRequiredArg<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithRequiredArg<_$Context>>
   /**
    * # Info
    *
@@ -809,7 +807,7 @@ export interface Query<
    */
   unionFooBar?:
     | $Fields.unionFooBar.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionFooBar<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.unionFooBar<_$Context>>
   /**
    * # Info
    *
@@ -823,7 +821,7 @@ export interface Query<
    */
   unionFooBarNonNull?:
     | $Fields.unionFooBarNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionFooBarNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.unionFooBarNonNull<_$Context>>
   /**
    * # Info
    *
@@ -838,7 +836,7 @@ export interface Query<
    */
   unionFooBarWithArgs?:
     | $Fields.unionFooBarWithArgs.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionFooBarWithArgs<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.unionFooBarWithArgs<_$Context>>
   /**
    * # Info
    *
@@ -852,7 +850,7 @@ export interface Query<
    */
   unionObject?:
     | $Fields.unionObject.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionObject<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.unionObject<_$Context>>
   /**
    * # Info
    *
@@ -866,7 +864,7 @@ export interface Query<
    */
   unionObjectNonNull?:
     | $Fields.unionObjectNonNull.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionObjectNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.unionObjectNonNull<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -883,8 +881,8 @@ export interface Query<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

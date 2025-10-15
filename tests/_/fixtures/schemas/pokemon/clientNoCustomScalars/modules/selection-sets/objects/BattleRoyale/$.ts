@@ -16,8 +16,8 @@ export type * as BattleRoyale from './$$.js'
  * | **Fields** | 4 |
  */
 export interface BattleRoyale<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -32,7 +32,7 @@ export interface BattleRoyale<
    */
   combatants?:
     | $Fields.combatants.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatants<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.combatants<_$Context>>
   /**
    * # Info
    *
@@ -46,7 +46,7 @@ export interface BattleRoyale<
    */
   date?:
     | $Fields.date.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * # Info
    *
@@ -58,9 +58,7 @@ export interface BattleRoyale<
    * | **Path** | `BattleRoyale.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
    *
@@ -74,7 +72,7 @@ export interface BattleRoyale<
    */
   winner?:
     | $Fields.winner.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -91,8 +89,8 @@ export interface BattleRoyale<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

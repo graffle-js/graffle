@@ -19,7 +19,7 @@ export type * as FooBarUnion from './$$.js'
  * | **Types** | {@link $Schema.Bar}, {@link $Schema.Foo} |
  */
 export interface FooBarUnion<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -28,9 +28,9 @@ export interface FooBarUnion<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
   /**
    * Inline fragment selection for {@link $Schema.Bar} member.

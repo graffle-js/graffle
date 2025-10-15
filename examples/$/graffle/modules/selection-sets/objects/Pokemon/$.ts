@@ -18,9 +18,9 @@ export type * as Pokemon from './$$.js'
  * | **Fields** | 8 |
  * | **Implements** | {@link $Schema.Being} |
  */
-export interface Pokemon<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+export interface Pokemon<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext>
+  extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike
+{
   /**
    * The attack power of this Pokemon.
    *
@@ -40,7 +40,7 @@ export interface Pokemon<
    */
   attack?:
     | $Fields.attack.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.attack<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.attack<_$Context>>
   /**
    * The date this Pokemon was born or caught.
    *
@@ -62,7 +62,7 @@ export interface Pokemon<
    */
   birthday?:
     | $Fields.birthday.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.birthday<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.birthday<_$Context>>
   /**
    * The defense power of this Pokemon.
    *
@@ -82,7 +82,7 @@ export interface Pokemon<
    */
   defense?:
     | $Fields.defense.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.defense<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.defense<_$Context>>
   /**
    * The health points (HP) of this Pokemon.
    *
@@ -100,9 +100,7 @@ export interface Pokemon<
    * | **Path** | `Pokemon.hp` |
    * | **Nullability** | Required |
    */
-  hp?:
-    | $Fields.hp.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.hp<_$Context>>
+  hp?: $Fields.hp.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.hp<_$Context>>
   /**
    * The unique identifier for this Pokemon.
    *
@@ -120,9 +118,7 @@ export interface Pokemon<
    * | **Path** | `Pokemon.id` |
    * | **Nullability** | Required |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The name of this Pokemon.
    *
@@ -142,7 +138,7 @@ export interface Pokemon<
    */
   name?:
     | $Fields.name.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
   /**
    * The trainer who owns this Pokemon, if any.
    *
@@ -170,7 +166,7 @@ export interface Pokemon<
    */
   trainer?:
     | $Fields.trainer.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
   /**
    * The elemental type of this Pokemon.
    *
@@ -198,7 +194,7 @@ export interface Pokemon<
    */
   type?:
     | $Fields.type.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.type<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.type<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -215,8 +211,8 @@ export interface Pokemon<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

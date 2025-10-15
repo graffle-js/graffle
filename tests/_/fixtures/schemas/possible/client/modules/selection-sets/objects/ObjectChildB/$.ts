@@ -17,8 +17,8 @@ export type * as ObjectChildB from './$$.js'
  * | **Implements** | {@link $Schema.InterfaceChildB}, {@link $Schema.InterfaceGrandparent}, {@link $Schema.InterfaceParent} |
  */
 export interface ObjectChildB<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -30,9 +30,7 @@ export interface ObjectChildB<
    * | **Path** | `ObjectChildB.a` |
    * | **Nullability** | Required |
    */
-  a?:
-    | $Fields.a.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+  a?: $Fields.a.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
   /**
    * # Info
    *
@@ -44,9 +42,7 @@ export interface ObjectChildB<
    * | **Path** | `ObjectChildB.b` |
    * | **Nullability** | Required |
    */
-  b?:
-    | $Fields.b.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
+  b?: $Fields.b.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
   /**
    * # Info
    *
@@ -58,9 +54,7 @@ export interface ObjectChildB<
    * | **Path** | `ObjectChildB.c2` |
    * | **Nullability** | Required |
    */
-  c2?:
-    | $Fields.c2.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.c2<_$Context>>
+  c2?: $Fields.c2.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.c2<_$Context>>
   /**
    * # Info
    *
@@ -73,9 +67,7 @@ export interface ObjectChildB<
    * | **Nullability** | Required |
    * | **List** | Yes |
    */
-  me?:
-    | $Fields.me.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
+  me?: $Fields.me.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -92,8 +84,8 @@ export interface ObjectChildB<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

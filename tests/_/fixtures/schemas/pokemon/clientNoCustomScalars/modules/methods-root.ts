@@ -23,7 +23,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -69,7 +69,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { battles: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -99,7 +99,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { beings: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -133,7 +133,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { pokemonByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -164,7 +164,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { pokemons: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -197,7 +197,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { trainerByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -227,7 +227,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { trainers: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -258,7 +258,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -307,7 +307,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
           { addPokemon: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -339,7 +339,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
           { resetData: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,

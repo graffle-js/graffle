@@ -1,18 +1,14 @@
 // dprint-ignore-file
-import type { Grafaid } from '#lib/grafaid'
-import { test } from 'vitest'
 import type { Docpar } from './$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import type { Core } from './core/$.js'
 
-type Context = {
-  typeHookRequestResultDataTypes: never
-  scalars: Possible.$.Schema['scalarRegistry']
-}
+type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.ArgumentsMap, never>
+type ContextLoose = Docpar.ParserContext<undefined>
 
-type Strict<$Input> = Docpar.Parse<$Input, Possible.$.Schema, Possible.$.ArgumentsMap, Context>
-type Loose<$Input> = Docpar.Parse<$Input, undefined, any, any>
+type Strict<$Input> = Docpar.Parse<$Input, ContextStrict>
+type Loose<$Input> = Docpar.Parse<$Input, ContextLoose>
 
 type D<$Op extends Core.Operation> = Core.Doc.Document<$Op>
 
@@ -46,7 +42,7 @@ type _ = Ts.Test.Cases<
 
   // Named query with single scalar field
   Ts.Test.exact<Strict<'query q { id }'>, OpQId>,
-  Ts.Test.bid<Strict<{ query: { q: { id: true } } }>, OpQId>,
+  Ts.Test.exact<Strict<{ query: { q: { id: true } } }>, OpQId>,
   Ts.Test.exact<Loose<'query q { unknownField }'>, OpQUnknownField>,
 
   // Multiple scalar fields

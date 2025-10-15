@@ -3,7 +3,7 @@ import type { $DefaultSelectionContext } from './_context.js'
 import type { Query } from './roots/Query/$.js'
 
 export interface $Document<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
   query?: Record<string, Query<_$Context>>
 }

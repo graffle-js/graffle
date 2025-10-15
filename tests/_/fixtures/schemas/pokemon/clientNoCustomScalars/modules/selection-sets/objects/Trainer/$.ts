@@ -16,9 +16,9 @@ export type * as Trainer from './$$.js'
  * | **Fields** | 5 |
  * | **Implements** | {@link $Schema.Being} |
  */
-export interface Trainer<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+export interface Trainer<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext>
+  extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike
+{
   /**
    * # Info
    *
@@ -32,7 +32,7 @@ export interface Trainer<
    */
   class?:
     | $Fields.class.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.class<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.class<_$Context>>
   /**
    * # Info
    *
@@ -47,7 +47,7 @@ export interface Trainer<
    */
   fans?:
     | $Fields.fans.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.fans<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.fans<_$Context>>
   /**
    * # Info
    *
@@ -59,9 +59,7 @@ export interface Trainer<
    * | **Path** | `Trainer.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
    *
@@ -75,7 +73,7 @@ export interface Trainer<
    */
   name?:
     | $Fields.name.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
   /**
    * # Info
    *
@@ -90,7 +88,7 @@ export interface Trainer<
    */
   pokemon?:
     | $Fields.pokemon.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -107,8 +105,8 @@ export interface Trainer<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

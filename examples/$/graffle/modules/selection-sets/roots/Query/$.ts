@@ -10,9 +10,9 @@ export type * as Query from './$$.js'
  *
  * Root query type for fetching Pokemon data.
  */
-export interface Query<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.RootObjectLike {
+export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext>
+  extends $$Utilities.Docpar.Object.Select.Bases.RootObjectLike
+{
   /**
    * Retrieve all battles that have occurred.
    *
@@ -35,7 +35,7 @@ export interface Query<
    */
   battles?:
     | $Fields.battles.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.battles<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.battles<_$Context>>
   /**
    * Retrieve all beings (Pokemon, Trainers, and Patrons).
    *
@@ -61,7 +61,7 @@ export interface Query<
    */
   beings?:
     | $Fields.beings.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.beings<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.beings<_$Context>>
   /**
    * Find Pokemon by their name.
    *
@@ -94,7 +94,7 @@ export interface Query<
    */
   pokemonByName?:
     | $Fields.pokemonByName<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemonByName<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.pokemonByName<_$Context>>
   /**
    * Retrieve all Pokemon, optionally filtered.
    *
@@ -127,7 +127,7 @@ export interface Query<
    */
   pokemons?:
     | $Fields.pokemons.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemons<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.pokemons<_$Context>>
   /**
    * Find a trainer by their name.
    *
@@ -156,7 +156,7 @@ export interface Query<
    */
   trainerByName?:
     | $Fields.trainerByName<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainerByName<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.trainerByName<_$Context>>
   /**
    * Retrieve all trainers.
    *
@@ -185,7 +185,7 @@ export interface Query<
    */
   trainers?:
     | $Fields.trainers.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainers<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.trainers<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -202,8 +202,8 @@ export interface Query<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

@@ -1,11 +1,11 @@
+import { Docpar } from '#src/docpar/$.js'
+import { GraffleBasic } from '#src/exports/presets/basic.js'
+import { Grafaid } from '#src/lib/grafaid/$.js'
+import type { Schema } from '#src/types/Schema/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
 import { expect } from 'vitest'
-import { DocumentBuilderKit } from '../../src/exports/extensions/document-builder/kit.js'
-import { GraffleBasic } from '../../src/exports/presets/basic.js'
-import { Grafaid } from '../../src/lib/grafaid/$.js'
-import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { test } from '../_/helpers.js'
 import { RequestSpy } from '../_/SpyExtension.js'
@@ -43,8 +43,8 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
     .use(RequestSpy)
     .scalar(DateScalar)
 
-  const { document, operationsVariables } = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
-    DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
+  const { document, operationsVariables } = Docpar.Object.ToGraphQLDocument.toGraphQL(
+    Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {
       sddm: Possible.schemaMap,
       scalars: { Date: DateScalar },

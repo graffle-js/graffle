@@ -1,9 +1,10 @@
-import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { Core } from '../core/$.js'
+import type { Core, ParserContext } from '../core/$.js'
 import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
+import type { InferResult } from './InferResult/$.js'
+import type { Var } from './var/$.js'
 
 /**
  * Parse GraphQL document object into operations.
@@ -11,9 +12,7 @@ import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
  * Returns a union of operations without Doc.Document wrapper.
  *
  * @param $Document - The document builder object
- * @param $Schema - Schema for type-safe parsing
- * @param $ArgumentsMap - SDDM arguments map
- * @param $Context - Client context
+ * @param $Context - Parser context containing schema and configuration
  *
  * @example
  * ```ts
@@ -21,24 +20,20 @@ import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
  *   query: { getUser: { id: true }, getPost: { id: true } },
  *   mutation: { createUser: { id: true } }
  * }
- * type Ops = Parse<Doc, MySchema, MyArgsMap, MyContext>
+ * type Ops = Parse<Doc, MyContext>
  * // Result: Operation<'getUser', ...> | Operation<'getPost', ...> | Operation<'createUser', ...>
  * ```
  */
 // dprint-ignore
 export type Parse<
   $Document extends object,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context extends object
+  $Context
 > =
   {
     [operationType in keyof $Document]: {
       [operationName in keyof $Document[operationType]]:
         InferOperation<
           $Document[operationType][operationName],
-          $Schema,
-          $ArgumentsMap,
           $Context,
           Grafaid.Document.OperationTypeNode.FromString<operationType & string>,
           operationName
@@ -54,7 +49,14 @@ export type InferOperationsInDocument<
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context extends object,
-> = Parse<$Document, $Schema, $ArgumentsMap, $Context>
+> = Parse<
+  $Document,
+  ParserContext<
+    $Schema,
+    $ArgumentsMap,
+    $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
+  > & ParserContext
+>
 
 /**
  * @deprecated Use `Parse` instead. This alias exists for backwards compatibility.
@@ -64,7 +66,14 @@ export type InferOperations<
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context,
-> = $Document extends object ? $Context extends object ? Parse<$Document, $Schema, $ArgumentsMap, $Context>
+> = $Document extends object ? $Context extends object ? Parse<
+      $Document,
+      ParserContext<
+        $Schema,
+        $ArgumentsMap,
+        $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
+      > & ParserContext
+    >
   : never
   : never
 
@@ -75,8 +84,6 @@ export type InferOperations<
  * ```ts
  * type Op = InferOperation<
  *   { id: true, name: true },
- *   MySchema,
- *   MyArgsMap,
  *   MyContext,
  *   OperationTypeNode.QUERY,
  *   'getUser'
@@ -87,20 +94,28 @@ export type InferOperations<
 // dprint-ignore
 export type InferOperation<
   $DocOp,
-  $Schema extends Schema,
-  $ArgumentsMap extends SchemaDrivenDataMap,
   $Context,
   $OperationType extends Grafaid.Document.OperationTypeNode,
   $OperationName,
 > =
   $DocOp extends object
-    ? Core.Operation<
-        $OperationName & string,
-        RequestResult.Simplify<$Context,
-          DocumentBuilderKit.InferResult.Operation<$DocOp, $Schema, $OperationType>
-        >,
-        RequestResult.Simplify<$Context,
-          DocumentBuilderKit.Var.InferFromOperation<$DocOp, $ArgumentsMap, $OperationType>
+    ? $Context extends { schema: infer $Schema; sddm: infer $SDDM extends SchemaDrivenDataMap }
+      ? Core.Operation<
+          $OperationName & string,
+          RequestResult.Simplify<$Context,
+            [InferResult.Operation<
+              $DocOp,
+              $Schema,
+              $OperationType
+            >][0]
+          >,
+          RequestResult.Simplify<$Context,
+            [Var.InferFromOperation<
+              $DocOp,
+              $SDDM,
+              $OperationType
+            >][0]
+          >
         >
-      >
+      : never
     : never

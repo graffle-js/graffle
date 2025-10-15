@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest'
-import { DocumentBuilderKit } from '../DocumentBuilder/$.js'
+import { Docpar } from '../../docpar/$.js'
+import { graffleMappedResultToRequest } from '../DocumentBuilder/methods-instance/requestMethods.js'
 import { GraffleSchemaErrors } from './__tests__/fixture/graffle/$.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
@@ -33,14 +34,14 @@ test.each<CasesQuery>([
     { resultNonNull: [`x`, {}] },
     { resultNonNull: [`x`, { __typename: true }] }],
 ])(`Query %s`, (_, queryWithoutTypenameInput, queryWithTypenameInput) => {
-  const docWithout = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
-   DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { x: queryWithoutTypenameInput as any } }),
+  const docWithout = Docpar.Object.ToGraphQLDocument.toGraphQL(
+   Docpar.Object.Select.Document.normalizeOrThrow({ query: { x: queryWithoutTypenameInput as any } }),
   )
-  const docWith = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
-   DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { x: queryWithTypenameInput as any } }),
+  const docWith = Docpar.Object.ToGraphQLDocument.toGraphQL(
+   Docpar.Object.Select.Document.normalizeOrThrow({ query: { x: queryWithTypenameInput as any } }),
   )
   injectTypenameOnRootResultFields({
-    request: DocumentBuilderKit.graffleMappedResultToRequest(docWithout),
+    request: graffleMappedResultToRequest(docWithout),
     sddm: GraffleSchemaErrors.schemaMap,
   })
   expect(docWithout.document).toMatchObject(docWith.document)

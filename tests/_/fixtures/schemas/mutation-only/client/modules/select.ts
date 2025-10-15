@@ -80,7 +80,7 @@ export namespace Select {
    * Infer result type for Mutation operations.
    */
   export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> =
-    $$Utilities.DocumentBuilderKit.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
+    $$Utilities.Docpar.Object.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
 
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------

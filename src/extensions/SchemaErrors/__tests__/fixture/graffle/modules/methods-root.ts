@@ -23,7 +23,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -72,7 +72,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { InputObjectNested: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -105,7 +105,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { InputObjectNestedNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -136,7 +136,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { abcEnum: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -169,7 +169,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { argInputObjectCircular: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -201,7 +201,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { bigintField: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -233,7 +233,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { bigintFieldNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -262,7 +262,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { date: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -292,7 +292,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateArg: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -325,7 +325,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateArgInputObject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -358,7 +358,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateArgList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -391,7 +391,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateArgNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -424,7 +424,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateArgNonNullList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -457,7 +457,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -489,7 +489,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateInterface1: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -519,7 +519,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -552,7 +552,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateListList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -585,7 +585,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateListNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -617,7 +617,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -649,7 +649,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateObject1: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -678,7 +678,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { dateUnion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -708,7 +708,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { error: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -737,7 +737,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -769,7 +769,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { idNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -798,7 +798,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interface: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -832,7 +832,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interfaceHierarchyChildA: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -866,7 +866,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interfaceHierarchyChildB: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -900,7 +900,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -934,7 +934,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interfaceHierarchyParents: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -966,7 +966,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interfaceNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -999,7 +999,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { interfaceWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1029,7 +1029,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { listInt: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1062,7 +1062,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { listIntNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1095,7 +1095,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { listListInt: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1128,7 +1128,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { listListIntNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1160,7 +1160,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { lowerCaseUnion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1189,7 +1189,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { object: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1222,7 +1222,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { objectList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1255,7 +1255,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { objectListNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1287,7 +1287,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { objectNested: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1319,7 +1319,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { objectNestedWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1351,7 +1351,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { objectNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1384,7 +1384,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { objectWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1414,7 +1414,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { result: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1447,7 +1447,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { resultNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1476,7 +1476,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { string: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1509,7 +1509,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithArgEnum: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1542,7 +1542,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithArgInputObject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1575,7 +1575,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1608,7 +1608,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1643,7 +1643,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1676,7 +1676,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithListArg: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1709,7 +1709,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithListArgRequired: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1742,7 +1742,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { stringWithRequiredArg: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1774,7 +1774,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { unionFooBar: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1806,7 +1806,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { unionFooBarNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1839,7 +1839,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { unionFooBarWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1871,7 +1871,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { unionObject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1903,7 +1903,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { unionObjectNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1934,7 +1934,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -1979,7 +1979,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2011,7 +2011,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
           { idNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
