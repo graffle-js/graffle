@@ -1,7 +1,7 @@
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
-import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/$.js'
+import { Docpar } from '../../src/docpar/$.js'
 import { Grafaid } from '../../src/lib/grafaid/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
@@ -31,8 +31,8 @@ const withGqlDocument: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
-    const { document } = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
-      DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
+    const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(
+      Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
     expect(await possible.scalar(DateScalar).gql(document).$send()).toEqual(expectedData)
   },
@@ -43,8 +43,8 @@ const withGqlString: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
-    const { document } = DocumentBuilderKit.ToGraphQLDocument.toGraphQL(
-      DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
+    const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(
+      Docpar.Object.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
     expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).$send()).toEqual(expectedData)
   },

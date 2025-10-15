@@ -61,20 +61,16 @@ export interface MutationBuilder {
    * const doc = mutation.id()
    * ```
    */
-  id: <
-    const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['id'],
-  >(
+  id: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<
         { id: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -100,18 +96,18 @@ export interface MutationBuilder {
    */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['idNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >

@@ -72,18 +72,16 @@ export interface QueryBuilder {
    * const doc = query.id1()
    * ```
    */
-  id1: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id1'],
-  >(
+  id1: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id1']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id1: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ id1: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { id1: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >

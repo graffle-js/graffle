@@ -23,7 +23,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -68,7 +68,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
           { id1: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,

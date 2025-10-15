@@ -75,18 +75,18 @@ export interface QueryBuilder {
    */
   InputObjectNested: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['InputObjectNested'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNested: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -113,21 +113,18 @@ export interface QueryBuilder {
    */
   InputObjectNestedNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['InputObjectNestedNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { InputObjectNestedNonNull: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ InputObjectNestedNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNestedNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -154,19 +151,17 @@ export interface QueryBuilder {
    * ```
    */
   abcEnum: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['abcEnum'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['abcEnum'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ abcEnum: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ abcEnum: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { abcEnum: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -193,21 +188,18 @@ export interface QueryBuilder {
    */
   argInputObjectCircular: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['argInputObjectCircular'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { argInputObjectCircular: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ argInputObjectCircular: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { argInputObjectCircular: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -233,18 +225,18 @@ export interface QueryBuilder {
    */
   bigintField: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['bigintField'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ bigintField: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ bigintField: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { bigintField: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -270,18 +262,18 @@ export interface QueryBuilder {
    */
   bigintFieldNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['bigintFieldNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ bigintFieldNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ bigintFieldNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { bigintFieldNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -306,17 +298,17 @@ export interface QueryBuilder {
    * ```
    */
   date: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['date'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['date'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ date: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ date: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { date: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -342,19 +334,17 @@ export interface QueryBuilder {
    * ```
    */
   dateArg: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['dateArg'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['dateArg'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArg: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArg: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArg: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -381,18 +371,18 @@ export interface QueryBuilder {
    */
   dateArgInputObject: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateArgInputObject'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgInputObject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -419,18 +409,18 @@ export interface QueryBuilder {
    */
   dateArgList: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateArgList'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgList: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgList: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -457,18 +447,18 @@ export interface QueryBuilder {
    */
   dateArgNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateArgNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -495,18 +485,18 @@ export interface QueryBuilder {
    */
   dateArgNonNullList: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateArgNonNullList'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -533,21 +523,21 @@ export interface QueryBuilder {
    */
   dateArgNonNullListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateArgNonNullListNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<
         { dateArgNonNullListNonNull: $SelectionSet },
         $$Schema.Schema
       >
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullListNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -578,18 +568,18 @@ export interface QueryBuilder {
    */
   dateInterface1: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateInterface1'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateInterface1: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -615,19 +605,17 @@ export interface QueryBuilder {
    * ```
    */
   dateList: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['dateList'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['dateList'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateList: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateList: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -654,18 +642,18 @@ export interface QueryBuilder {
    */
   dateListList: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateListList'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateListList: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateListList: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateListList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -692,18 +680,18 @@ export interface QueryBuilder {
    */
   dateListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateListNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateListNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -729,18 +717,18 @@ export interface QueryBuilder {
    */
   dateNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -768,18 +756,18 @@ export interface QueryBuilder {
    */
   dateObject1: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['dateObject1'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateObject1: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateObject1: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateObject1: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -809,19 +797,17 @@ export interface QueryBuilder {
    * ```
    */
   dateUnion: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['dateUnion'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['dateUnion'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateUnion: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateUnion: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateUnion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -847,19 +833,17 @@ export interface QueryBuilder {
    * ```
    */
   error: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['error'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['error'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ error: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ error: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { error: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -883,21 +867,16 @@ export interface QueryBuilder {
    * const doc = query.id()
    * ```
    */
-  id: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
-  >(
+  id: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
-        { id: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
-      >
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>
     >,
     true
   >
@@ -919,19 +898,17 @@ export interface QueryBuilder {
    * ```
    */
   idNonNull: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['idNonNull'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['idNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -961,19 +938,17 @@ export interface QueryBuilder {
    * ```
    */
   interface: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['interface'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['interface'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ interface: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interface: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interface: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1006,21 +981,18 @@ export interface QueryBuilder {
    */
   interfaceHierarchyChildA: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['interfaceHierarchyChildA'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { interfaceHierarchyChildA: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceHierarchyChildA: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildA: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1053,21 +1025,18 @@ export interface QueryBuilder {
    */
   interfaceHierarchyChildB: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['interfaceHierarchyChildB'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { interfaceHierarchyChildB: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceHierarchyChildB: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildB: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1100,21 +1069,21 @@ export interface QueryBuilder {
    */
   interfaceHierarchyGrandparents: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['interfaceHierarchyGrandparents'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<
         { interfaceHierarchyGrandparents: $SelectionSet },
         $$Schema.Schema
       >
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyGrandparents: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1147,21 +1116,21 @@ export interface QueryBuilder {
    */
   interfaceHierarchyParents: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['interfaceHierarchyParents'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<
         { interfaceHierarchyParents: $SelectionSet },
         $$Schema.Schema
       >
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyParents: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1192,18 +1161,18 @@ export interface QueryBuilder {
    */
   interfaceNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['interfaceNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1235,18 +1204,18 @@ export interface QueryBuilder {
    */
   interfaceWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['interfaceWithArgs'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1272,19 +1241,17 @@ export interface QueryBuilder {
    * ```
    */
   listInt: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['listInt'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['listInt'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listInt: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listInt: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listInt: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1311,18 +1278,18 @@ export interface QueryBuilder {
    */
   listIntNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['listIntNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listIntNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1349,18 +1316,18 @@ export interface QueryBuilder {
    */
   listListInt: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['listListInt'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listListInt: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listListInt: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listListInt: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1387,18 +1354,18 @@ export interface QueryBuilder {
    */
   listListIntNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['listListIntNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listListIntNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1429,18 +1396,18 @@ export interface QueryBuilder {
    */
   lowerCaseUnion: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['lowerCaseUnion'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { lowerCaseUnion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1470,19 +1437,17 @@ export interface QueryBuilder {
    * ```
    */
   object: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['object'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['object'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ object: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ object: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { object: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1514,18 +1479,18 @@ export interface QueryBuilder {
    */
   objectList: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['objectList'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectList: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectList: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1557,18 +1522,18 @@ export interface QueryBuilder {
    */
   objectListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['objectListNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectListNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1597,18 +1562,18 @@ export interface QueryBuilder {
    */
   objectNested: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['objectNested'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectNested: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectNested: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNested: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1637,21 +1602,18 @@ export interface QueryBuilder {
    */
   objectNestedWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['objectNestedWithArgs'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { objectNestedWithArgs: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectNestedWithArgs: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNestedWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1682,18 +1644,18 @@ export interface QueryBuilder {
    */
   objectNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['objectNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1726,18 +1688,18 @@ export interface QueryBuilder {
    */
   objectWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['objectWithArgs'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1768,19 +1730,17 @@ export interface QueryBuilder {
    * ```
    */
   result: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['result'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['result'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ result: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ result: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { result: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1812,18 +1772,18 @@ export interface QueryBuilder {
    */
   resultNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['resultNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { resultNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1848,19 +1808,17 @@ export interface QueryBuilder {
    * ```
    */
   string: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['string'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['string'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ string: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ string: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { string: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1887,18 +1845,18 @@ export interface QueryBuilder {
    */
   stringWithArgEnum: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithArgEnum'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgEnum: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1925,21 +1883,18 @@ export interface QueryBuilder {
    */
   stringWithArgInputObject: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithArgInputObject'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { stringWithArgInputObject: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithArgInputObject: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -1966,21 +1921,21 @@ export interface QueryBuilder {
    */
   stringWithArgInputObjectEnum: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithArgInputObjectEnum'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<
         { stringWithArgInputObjectEnum: $SelectionSet },
         $$Schema.Schema
       >
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2007,21 +1962,21 @@ export interface QueryBuilder {
    */
   stringWithArgInputObjectRequired: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithArgInputObjectRequired'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<
         { stringWithArgInputObjectRequired: $SelectionSet },
         $$Schema.Schema
       >
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectRequired: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2050,18 +2005,18 @@ export interface QueryBuilder {
    */
   stringWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithArgs'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2088,18 +2043,18 @@ export interface QueryBuilder {
    */
   stringWithListArg: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithListArg'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArg: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2126,21 +2081,21 @@ export interface QueryBuilder {
    */
   stringWithListArgRequired: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithListArgRequired'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<
         { stringWithListArgRequired: $SelectionSet },
         $$Schema.Schema
       >
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArgRequired: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2167,21 +2122,18 @@ export interface QueryBuilder {
    */
   stringWithRequiredArg: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['stringWithRequiredArg'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-        { stringWithRequiredArg: $SelectionSet },
-        $$Schema.Schema
-      >
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithRequiredArg: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithRequiredArg: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2212,18 +2164,18 @@ export interface QueryBuilder {
    */
   unionFooBar: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['unionFooBar'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionFooBar: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2254,18 +2206,18 @@ export interface QueryBuilder {
    */
   unionFooBarNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['unionFooBarNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionFooBarNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2297,18 +2249,18 @@ export interface QueryBuilder {
    */
   unionFooBarWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['unionFooBarWithArgs'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionFooBarWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2336,18 +2288,18 @@ export interface QueryBuilder {
    */
   unionObject: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['unionObject'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionObject: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionObject: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionObject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2375,18 +2327,18 @@ export interface QueryBuilder {
    */
   unionObjectNonNull: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['unionObjectNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionObjectNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2474,20 +2426,16 @@ export interface MutationBuilder {
    * const doc = mutation.id()
    * ```
    */
-  id: <
-    const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['id'],
-  >(
+  id: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<
         { id: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -2513,18 +2461,18 @@ export interface MutationBuilder {
    */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['idNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >

@@ -72,21 +72,16 @@ export interface QueryBuilder {
    * const doc = query.id()
    * ```
    */
-  id: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
-  >(
+  id: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
-        { id: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
-      >
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>
     >,
     true
   >
@@ -108,19 +103,17 @@ export interface QueryBuilder {
    * ```
    */
   idNonNull: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['idNonNull'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['idNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >

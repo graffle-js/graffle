@@ -79,19 +79,17 @@ export interface QueryBuilder {
    * ```
    */
   battles: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['battles'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['battles'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { battles: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -122,19 +120,17 @@ export interface QueryBuilder {
    * ```
    */
   beings: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['beings'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['beings'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { beings: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -168,18 +164,18 @@ export interface QueryBuilder {
    */
   pokemonByName: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['pokemonByName'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { pokemonByName: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -212,19 +208,17 @@ export interface QueryBuilder {
    * ```
    */
   pokemons: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['pokemons'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['pokemons'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { pokemons: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -257,18 +251,18 @@ export interface QueryBuilder {
    */
   trainerByName: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['trainerByName'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { trainerByName: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -299,19 +293,17 @@ export interface QueryBuilder {
    * ```
    */
   trainers: <
-    const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
-    >['trainers'],
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['trainers'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
         { trainers: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -408,18 +400,18 @@ export interface MutationBuilder {
    */
   addPokemon: <
     const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['addPokemon'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<
         { addPokemon: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
@@ -445,18 +437,18 @@ export interface MutationBuilder {
    */
   resetData: <
     const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+      $$Utilities.Docpar.Object.Select.StaticBuilderContext
     >['resetData'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ resetData: $SelectionSet }, $$Schema.Schema>
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ resetData: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<
         { resetData: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >

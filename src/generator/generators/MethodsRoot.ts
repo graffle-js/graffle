@@ -74,7 +74,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
               & (null | {})
               & ${$.$$Utilities}.HandleOutput<
                   $Context,
-                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
+                  ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
                 >
             >
         >
@@ -127,7 +127,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
-                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                  ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                   '${field.name}'
                 >
             >

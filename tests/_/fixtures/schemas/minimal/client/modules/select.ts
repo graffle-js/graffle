@@ -79,7 +79,7 @@ export namespace Select {
   /**
    * Infer result type for Query operations.
    */
-  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilderKit.InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
     OperationTypeNode.QUERY

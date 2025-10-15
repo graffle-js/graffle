@@ -74,7 +74,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
+        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
           enumMemberName[operationType]
         }>`,
       )
@@ -86,7 +86,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
+        }> = ${$.$$Utilities}.Docpar.Object.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
       )
     }
     code``
@@ -96,7 +96,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
+        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
       )
     }
     code``
@@ -106,7 +106,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
+        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
       )
     }
 

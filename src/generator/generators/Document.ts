@@ -69,11 +69,11 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         Obj.values(queryType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, queryType, 'query')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
-          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
+          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationQuery<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
             true
           >`
         }).join('\n\n          ')
@@ -112,11 +112,11 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         Obj.values(mutationType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, mutationType, 'mutation')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
-          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
+          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationMutation<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
             true
           >`
         }).join('\n\n          ')
@@ -155,11 +155,11 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         Obj.values(subscriptionType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, subscriptionType, 'subscription')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
-          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
+          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationSubscription<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
             true
           >`
         }).join('\n\n          ')

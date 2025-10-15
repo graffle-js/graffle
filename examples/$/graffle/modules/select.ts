@@ -81,7 +81,7 @@ export namespace Select {
    *
    * Infer result type for Query operations.
    */
-  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilderKit.InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
     OperationTypeNode.QUERY
@@ -92,7 +92,7 @@ export namespace Select {
    * Infer result type for Mutation operations.
    */
   export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> =
-    $$Utilities.DocumentBuilderKit.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
+    $$Utilities.Docpar.Object.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
 
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ export namespace Select {
    * Infer result type for BattleRoyale selection sets.
    */
   export type BattleRoyale<$SelectionSet extends $$SelectionSets.BattleRoyale> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['BattleRoyale']
@@ -115,7 +115,7 @@ export namespace Select {
    * Infer result type for BattleTrainer selection sets.
    */
   export type BattleTrainer<$SelectionSet extends $$SelectionSets.BattleTrainer> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['BattleTrainer']
@@ -126,7 +126,7 @@ export namespace Select {
    * Infer result type for BattleWild selection sets.
    */
   export type BattleWild<$SelectionSet extends $$SelectionSets.BattleWild> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['BattleWild']
@@ -137,7 +137,7 @@ export namespace Select {
    * Infer result type for CombatantMultiPokemon selection sets.
    */
   export type CombatantMultiPokemon<$SelectionSet extends $$SelectionSets.CombatantMultiPokemon> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['CombatantMultiPokemon']
@@ -148,7 +148,7 @@ export namespace Select {
    * Infer result type for CombatantSinglePokemon selection sets.
    */
   export type CombatantSinglePokemon<$SelectionSet extends $$SelectionSets.CombatantSinglePokemon> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['CombatantSinglePokemon']
@@ -159,7 +159,7 @@ export namespace Select {
    * Infer result type for Patron selection sets.
    */
   export type Patron<$SelectionSet extends $$SelectionSets.Patron> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Patron']
@@ -170,7 +170,7 @@ export namespace Select {
    * Infer result type for Pokemon selection sets.
    */
   export type Pokemon<$SelectionSet extends $$SelectionSets.Pokemon> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Pokemon']
@@ -181,7 +181,7 @@ export namespace Select {
    * Infer result type for Trainer selection sets.
    */
   export type Trainer<$SelectionSet extends $$SelectionSets.Trainer> =
-    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+    $$Utilities.Docpar.Object.InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Trainer']
@@ -196,7 +196,7 @@ export namespace Select {
    *
    * Infer result type for Battle selection sets.
    */
-  export type Battle<$SelectionSet extends $$SelectionSets.Battle> = $$Utilities.DocumentBuilderKit.InferResult.Union<
+  export type Battle<$SelectionSet extends $$SelectionSets.Battle> = $$Utilities.Docpar.Object.InferResult.Union<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Battle']
@@ -211,7 +211,7 @@ export namespace Select {
    *
    * Infer result type for Being selection sets.
    */
-  export type Being<$SelectionSet extends $$SelectionSets.Being> = $$Utilities.DocumentBuilderKit.InferResult.Interface<
+  export type Being<$SelectionSet extends $$SelectionSets.Being> = $$Utilities.Docpar.Object.InferResult.Interface<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Being']
