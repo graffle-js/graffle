@@ -6,9 +6,14 @@ import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Core } from '../core/$.js'
 
 /**
- * Infer all operations in a document by mapping over operation types (query, mutation, subscription).
+ * Parse GraphQL document object into operations.
  *
- * Returns a union of all operations for improved TypeScript performance.
+ * Returns a union of operations without Doc.Document wrapper.
+ *
+ * @param $Document - The document builder object
+ * @param $Schema - Schema for type-safe parsing
+ * @param $ArgumentsMap - SDDM arguments map
+ * @param $Context - Client context
  *
  * @example
  * ```ts
@@ -16,12 +21,12 @@ import type { Core } from '../core/$.js'
  *   query: { getUser: { id: true }, getPost: { id: true } },
  *   mutation: { createUser: { id: true } }
  * }
- * type Ops = InferOperationsInDocument<Doc, MySchema, MyArgsMap, MyContext>
+ * type Ops = Parse<Doc, MySchema, MyArgsMap, MyContext>
  * // Result: Operation<'getUser', ...> | Operation<'getPost', ...> | Operation<'createUser', ...>
  * ```
  */
 // dprint-ignore
-export type InferOperationsInDocument<
+export type Parse<
   $Document extends object,
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
@@ -42,15 +47,24 @@ export type InferOperationsInDocument<
   }[keyof $Document] // Extract union from operation types
 
 /**
- * @deprecated Use `InferOperationsInDocument` instead. This alias exists for backwards compatibility.
+ * @deprecated Use `Parse` instead. This alias exists for backwards compatibility.
+ */
+export type InferOperationsInDocument<
+  $Document extends object,
+  $Schema extends Schema,
+  $ArgumentsMap extends SchemaDrivenDataMap,
+  $Context extends object,
+> = Parse<$Document, $Schema, $ArgumentsMap, $Context>
+
+/**
+ * @deprecated Use `Parse` instead. This alias exists for backwards compatibility.
  */
 export type InferOperations<
   $Document,
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context,
-> = $Document extends object
-  ? $Context extends object ? InferOperationsInDocument<$Document, $Schema, $ArgumentsMap, $Context>
+> = $Document extends object ? $Context extends object ? Parse<$Document, $Schema, $ArgumentsMap, $Context>
   : never
   : never
 
