@@ -36,24 +36,29 @@ type _ = Ts.Test.Cases<
   Ts.Test.exact<Strict<'{ id }'>, OpDefaultId>,
   Ts.Test.exact<Strict<{ query: { default: { id: true } } }>, OpDefaultId>,
 
-  // Schema-less mode (string syntax only - object syntax requires schema)
+  // Schema-less mode - both string and object syntax
   Ts.Test.exact<Loose<'{ id }'>, OpDefaultIdLoose>,
+  Ts.Test.exact<Loose<{ query: { default: { id: true } } }>, OpDefaultIdLoose>,
   Ts.Test.exact<Loose<'{ unknownField }'>, OpDefaultUnknownField>,
+  Ts.Test.exact<Loose<{ query: { default: { unknownField: true } } }>, OpDefaultUnknownField>,
 
   // Named query with single scalar field
   Ts.Test.exact<Strict<'query q { id }'>, OpQId>,
   Ts.Test.exact<Strict<{ query: { q: { id: true } } }>, OpQId>,
   Ts.Test.exact<Loose<'query q { unknownField }'>, OpQUnknownField>,
+  Ts.Test.exact<Loose<{ query: { q: { unknownField: true } } }>, OpQUnknownField>,
 
   // Multiple scalar fields
   Ts.Test.exact<Strict<'{ id idNonNull }'>, OpDefaultIdAndIdNonNull>,
-  Ts.Test.bid<Strict<{ query: { default: { id: true; idNonNull: true } } }>, OpDefaultIdAndIdNonNull>,
+  Ts.Test.exact<Strict<{ query: { default: { id: true; idNonNull: true } } }>, OpDefaultIdAndIdNonNull>,
   Ts.Test.exact<Loose<'{ id unknownField }'>, OpDefaultIdAndUnknownField>,
+  Ts.Test.exact<Loose<{ query: { default: { id: true; unknownField: true } } }>, OpDefaultIdAndUnknownField>,
 
   // Query with custom scalar (Date)
   Ts.Test.exact<Strict<'{ date }'>, OpDefaultDate>,
-  Ts.Test.bid<Strict<{ query: { default: { date: true } } }>, OpDefaultDate>,
+  Ts.Test.exact<Strict<{ query: { default: { date: true } } }>, OpDefaultDate>,
   Ts.Test.exact<Loose<'{ date }'>, OpDefaultDateLoose>,
+  Ts.Test.exact<Loose<{ query: { default: { date: true } } }>, OpDefaultDateLoose>,
 
   // Query with spaces/formatting
   Ts.Test.exact<Strict<'query q { date }'>, OpQDate>,
@@ -80,21 +85,24 @@ type OpDefaultThreeLevelUnknown = D<{ name: 'default'; result: { level1: { level
 type _Nested = Ts.Test.Cases<
   // Single nested object with one field
   Ts.Test.exact<Strict<'{ object { id } }'>, OpDefaultObjectWithId>,
-  Ts.Test.bid<Strict<{ query: { default: { object: { id: true } } } }>, OpDefaultObjectWithId>,
+  Ts.Test.exact<Strict<{ query: { default: { object: { id: true } } } }>, OpDefaultObjectWithId>,
   Ts.Test.exact<Loose<'{ unknownObj { unknownField } }'>, OpDefaultUnknownObjWithUnknownField>,
+  Ts.Test.exact<Loose<{ query: { default: { unknownObj: { unknownField: true } } } }>, OpDefaultUnknownObjWithUnknownField>,
 
   // Nested object with multiple fields
   Ts.Test.exact<Strict<'{ object { id string } }'>, OpDefaultObjectWithIdAndString>,
-  Ts.Test.bid<Strict<{ query: { default: { object: { id: true; string: true } } } }>, OpDefaultObjectWithIdAndString>,
+  Ts.Test.exact<Strict<{ query: { default: { object: { id: true; string: true } } } }>, OpDefaultObjectWithIdAndString>,
   Ts.Test.exact<Loose<'{ obj { field1 field2 } }'>, OpDefaultUnknownObjWithTwoFields>,
+  Ts.Test.exact<Loose<{ query: { default: { obj: { field1: true; field2: true } } } }>, OpDefaultUnknownObjWithTwoFields>,
 
   // Multiple nested objects at same level
   Ts.Test.exact<Strict<'{ object { id } objectNested { id } }'>, OpDefaultTwoObjectsWithId>,
 
   // Deep nesting (3 levels)
   Ts.Test.exact<Strict<'{ objectNested { object { id } } }'>, OpDefaultDeepNested>,
-  Ts.Test.bid<Strict<{ query: { default: { objectNested: { object: { id: true } } } } }>, OpDefaultDeepNested>,
-  Ts.Test.exact<Loose<'{ level1 { level2 { level3 } } }'>, OpDefaultThreeLevelUnknown>
+  Ts.Test.exact<Strict<{ query: { default: { objectNested: { object: { id: true } } } } }>, OpDefaultDeepNested>,
+  Ts.Test.exact<Loose<'{ level1 { level2 { level3 } } }'>, OpDefaultThreeLevelUnknown>,
+  Ts.Test.exact<Loose<{ query: { default: { level1: { level2: { level3: true } } } } }>, OpDefaultThreeLevelUnknown>
 >
 
 // ==================================================================================================
@@ -114,6 +122,7 @@ type _Arguments = Ts.Test.Cases<
   // Field with single argument
   Ts.Test.exact<Strict<'{ stringWithArgs(string: "hello") }'>, OpDefaultStringWithArgs>,
   Ts.Test.exact<Loose<'{ unknownField(arg: "value") }'>, OpDefaultUnknownFieldWithArgs>,
+  // Note: Object syntax with $ for arguments will be tested in future (requires argument parsing in object builder)
 
   // Field with required argument
   Ts.Test.exact<Strict<'{ stringWithRequiredArg(string: "required") }'>, OpDefaultStringWithRequiredArg>,
@@ -149,13 +158,15 @@ type OpMultiQueryAndMutationLoose = D<
 
 type _MultiOp = Ts.Test.Cases<
   // Two queries
-  Ts.Test.bid<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,
+  Ts.Test.exact<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,
   Ts.Test.exact<Loose<'query A { field1 } query B { field2 }'>, OpMultiTwoQueriesLoose>,
+  Ts.Test.exact<Loose<{ query: { A: { field1: true }; B: { field2: true } } }>, OpMultiTwoQueriesLoose>,
 
   // Query and mutation
   Ts.Test.exact<Strict<'query GetId { id } mutation SetId { idNonNull }'>, OpMultiQueryAndMutation>,
-  Ts.Test.bid<Strict<{ query: { GetId: { id: true } }; mutation: { SetId: { idNonNull: true } } }>, OpMultiQueryAndMutation>,
-  Ts.Test.exact<Loose<'query Get { data } mutation Set { updated }'>, OpMultiQueryAndMutationLoose>
+  Ts.Test.exact<Strict<{ query: { GetId: { id: true } }; mutation: { SetId: { idNonNull: true } } }>, OpMultiQueryAndMutation>,
+  Ts.Test.exact<Loose<'query Get { data } mutation Set { updated }'>, OpMultiQueryAndMutationLoose>,
+  Ts.Test.exact<Loose<{ query: { Get: { data: true } }; mutation: { Set: { updated: true } } }>, OpMultiQueryAndMutationLoose>
 >
 
 // ==================================================================================================
@@ -172,13 +183,15 @@ type OpCreateCreated = D<{ name: 'Create'; result: { created: unknown }; variabl
 type _Mutations = Ts.Test.Cases<
   // Simple mutation (reuses OpDefaultId)
   Ts.Test.exact<Strict<'mutation { id }'>, OpDefaultId>,
-  Ts.Test.bid<Strict<{ mutation: { default: { id: true } } }>, OpDefaultId>,
+  Ts.Test.exact<Strict<{ mutation: { default: { id: true } } }>, OpDefaultId>,
   Ts.Test.exact<Loose<'mutation { update }'>, OpDefaultUpdate>,
+  Ts.Test.exact<Loose<{ mutation: { default: { update: true } } }>, OpDefaultUpdate>,
 
   // Named mutation
   Ts.Test.exact<Strict<'mutation SetId { idNonNull }'>, OpSetIdIdNonNull>,
-  Ts.Test.bid<Strict<{ mutation: { SetId: { idNonNull: true } } }>, OpSetIdIdNonNull>,
-  Ts.Test.exact<Loose<'mutation Create { created }'>, OpCreateCreated>
+  Ts.Test.exact<Strict<{ mutation: { SetId: { idNonNull: true } } }>, OpSetIdIdNonNull>,
+  Ts.Test.exact<Loose<'mutation Create { created }'>, OpCreateCreated>,
+  Ts.Test.exact<Loose<{ mutation: { Create: { created: true } } }>, OpCreateCreated>
 >
 
 // ==================================================================================================
@@ -194,8 +207,9 @@ type OpDefaultStatus = D<{ name: 'default'; result: { status: unknown }; variabl
 type _SpecialTypes = Ts.Test.Cases<
   // Enum field
   Ts.Test.exact<Strict<'{ abcEnum }'>, OpDefaultAbcEnum>,
-  Ts.Test.bid<Strict<{ query: { default: { abcEnum: true } } }>, OpDefaultAbcEnum>,
-  Ts.Test.exact<Loose<'{ status }'>, OpDefaultStatus>
+  Ts.Test.exact<Strict<{ query: { default: { abcEnum: true } } }>, OpDefaultAbcEnum>,
+  Ts.Test.exact<Loose<'{ status }'>, OpDefaultStatus>,
+  Ts.Test.exact<Loose<{ query: { default: { status: true } } }>, OpDefaultStatus>
 >
 // ==================================================================================================
 //                                   Variable Definitions
@@ -277,9 +291,9 @@ type DocError = {
 }
 
 type _ErrorCases = Ts.Test.Cases<
-  Ts.Test.bid<Strict<'{ bad }'>, DocError>
+  Ts.Test.exact<Strict<'{ bad }'>, DocError>
   // TODO: Object parser produces different error format than string parser
-  // Ts.Test.bid<Strict<{ query: { default: { bad: true } } }>, DocError>
+  // Ts.Test.exact<Strict<{ query: { default: { bad: true } } }>, DocError>
 >
 
 // TODO: Object parser produces different error format - needs unification with string parser error format
