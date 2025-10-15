@@ -48,7 +48,14 @@ export type InferOperationsInDocument<
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context extends object,
-> = Parse<$Document, ParserContext<$Schema, $ArgumentsMap, $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never> & ParserContext>
+> = Parse<
+  $Document,
+  ParserContext<
+    $Schema,
+    $ArgumentsMap,
+    $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
+  > & ParserContext
+>
 
 /**
  * @deprecated Use `Parse` instead. This alias exists for backwards compatibility.
@@ -58,7 +65,14 @@ export type InferOperations<
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context,
-> = $Document extends object ? $Context extends object ? Parse<$Document, ParserContext<$Schema, $ArgumentsMap, $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never> & ParserContext>
+> = $Document extends object ? $Context extends object ? Parse<
+      $Document,
+      ParserContext<
+        $Schema,
+        $ArgumentsMap,
+        $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
+      > & ParserContext
+    >
   : never
   : never
 

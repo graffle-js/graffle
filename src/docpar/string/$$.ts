@@ -54,7 +54,7 @@ export type getDocumentOperations<
 > = $Definitions extends string
   ? $Schema extends import('./schema.js').Schema
     ? ParseDocument<$Definitions, import('../core/Context.js').ParserContext<$Schema>>
-    : ParseDocument<$Definitions, import('../core/Context.js').ParserContext<undefined>>
+  : ParseDocument<$Definitions, import('../core/Context.js').ParserContext<undefined>>
   : never
 
 /**

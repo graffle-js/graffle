@@ -32,11 +32,9 @@ import type { Schema } from '#src/types/Schema/$.js'
 export type ParserContext<
   $Schema = Schema,
   $SDDM = any,
-  $TypeHooks = never
-> =
-  $Schema extends Schema
-    ? ParserContext.WithSchema<$Schema, $SDDM, $TypeHooks>
-    : ParserContext.SchemaLess
+  $TypeHooks = never,
+> = $Schema extends Schema ? ParserContext.WithSchema<$Schema, $SDDM, $TypeHooks>
+  : ParserContext.SchemaLess
 
 export namespace ParserContext {
   /**
@@ -45,7 +43,7 @@ export namespace ParserContext {
   export interface WithSchema<
     $Schema extends Schema,
     $SDDM,
-    $TypeHooks
+    $TypeHooks,
   > {
     /** The GraphQL schema providing type definitions */
     readonly schema: $Schema
