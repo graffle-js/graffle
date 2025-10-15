@@ -160,9 +160,13 @@ export interface gql<
           schema: $Schema
         }>
       >
-    > extends infer $Operations
-      ? $Operations extends Doc.Operation
-        ? Doc.Document<$Operations>
+    > extends infer $OperationsRecord
+      ? $OperationsRecord extends Record<string, any>
+        ? $OperationsRecord[keyof $OperationsRecord] extends infer $Op
+          ? $Op extends Doc.Operation
+            ? Doc.Document<$Op>
+            : string
+          : string
         : string
       : string
 

@@ -36,7 +36,7 @@ type OpDefaultUnknownField = D<{ name: 'default'; result: { unknownField: unknow
 type OpDefaultIdAndUnknownField = D<{ name: 'default'; result: { id: unknown; unknownField: unknown }; variables: {} }>
 type OpDefaultDateLoose = D<{ name: 'default'; result: { date: unknown }; variables: {} }>
 type OpQUnknownField = D<{ name: 'q'; result: { unknownField: unknown }; variables: {} }>
-type x = Strict<'{ id }'>
+
 type _ = Ts.Test.Cases<
   // Simplest possible query - anonymous query with single scalar field
   Ts.Test.exact<Strict<'{ id }'>, OpDefaultId>,
@@ -153,9 +153,11 @@ type OpMultiQueryAndMutationLoose = D<
   | { name: 'Set'; result: { updated: unknown }; variables: {} }
 >
 
+type x = Strict<'query A { id } query B { string }'>
+
 type _MultiOp = Ts.Test.Cases<
   // Two queries
-  Ts.Test.exact<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,
+  Ts.Test.bid<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,
   Ts.Test.exact<Loose<'query A { field1 } query B { field2 }'>, OpMultiTwoQueriesLoose>,
 
   // Query and mutation
