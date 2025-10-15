@@ -1,4 +1,3 @@
-export type * as FromObject from './from-object.js'
 export { InferResult } from './InferResult/$.js'
 export * as Static from './rootType.js'
 export { Select } from './Select/$.js'

@@ -41,7 +41,7 @@ export type Parse<
       ? $Schema extends Schema
         ? $ArgumentsMap extends SchemaDrivenDataMap
           ? $Context extends object
-            ? Doc.FromObject<Simplify<InferOperationsInDocument<$Input, $Schema, $ArgumentsMap, $Context>>>
+            ? Doc.Document<Simplify<InferOperationsInDocument<$Input, $Schema, $ArgumentsMap, $Context>>>
             : never
           : never
         : never

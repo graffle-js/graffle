@@ -26,8 +26,7 @@ import * as Doc from './core/doc.js'
 /**
  * Infer all operations in a document by mapping over operation types (query, mutation, subscription).
  *
- * This consolidates the previous separate `InferOperationsFromQuery` and `InferOperationsFromMutation`
- * utilities into a single unified type that handles all operation types.
+ * Returns a union of all operations for improved TypeScript performance.
  *
  * @example
  * ```ts
@@ -36,7 +35,7 @@ import * as Doc from './core/doc.js'
  *   mutation: { createUser: { id: true } }
  * }
  * type Ops = InferOperationsInDocument<Doc, MySchema, MyArgsMap, MyContext>
- * // Result: getUser | getPost | createUser operations
+ * // Result: Operation<'getUser', ...> | Operation<'getPost', ...> | Operation<'createUser', ...>
  * ```
  */
 // dprint-ignore
@@ -46,36 +45,24 @@ export type InferOperationsInDocument<
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context extends object
 > =
-  & ($Document extends { query: infer $Query extends object }
-      ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery
-        ? {
-            [operationName in keyof $Query & string as $Query[operationName] extends object ? operationName : never]:
-              InferOperation<
-                $Query[operationName],
-                $Schema,
-                $ArgumentsMap,
-                $Context,
-                typeof Grafaid.Document.OperationTypeNode.QUERY,
-                operationName
-              >
-          }
-        : {}
-      : {})
-  & ($Document extends { mutation: infer $Mutation extends object }
-      ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation
-        ? {
-            [operationName in keyof $Mutation & string as $Mutation[operationName] extends object ? operationName : never]:
-              InferOperation<
-                $Mutation[operationName],
-                $Schema,
-                $ArgumentsMap,
-                $Context,
-                typeof Grafaid.Document.OperationTypeNode.MUTATION,
-                operationName
-              >
-          }
-        : {}
-      : {})
+  {
+    [operationType in keyof $Document]: {
+      [operationName in keyof $Document[operationType]]:
+        InferOperation<
+          $Document[operationType][operationName],
+          $Schema,
+          $ArgumentsMap,
+          $Context,
+          (
+              operationType extends 'mutation' ? typeof Grafaid.Document.OperationTypeNode.MUTATION
+            : operationType extends 'subscription' ? typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION
+            : operationType extends 'query' ?  typeof Grafaid.Document.OperationTypeNode.QUERY
+            : never
+          ),
+          operationName
+        >
+    }[keyof $Document[operationType] & string]  // Extract union from operation names
+  }[keyof $Document]  // Extract union from operation types
 
 /**
  * @deprecated Use `InferOperationsInDocument` instead. This alias exists for backwards compatibility.
@@ -166,37 +153,40 @@ export interface gql<
   // Override string signature to return TypedFullDocument instead of TadaDocumentNode
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): Doc.FromObject<
-    Simplify<
+  ): Simplify<
       Docpar.getDocumentOperations<
         Docpar.parseDocument<$Input>['definitions'],
         Docpar.schemaOfSetup<{
           schema: $Schema
         }>
       >
-    >
-  >
+    > extends infer $Operations
+      ? $Operations extends Doc.Operation
+        ? Doc.Document<$Operations>
+        : string
+      : string
 
   // Document object overload
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): $Document extends object ? Doc.FromObject<
-      Simplify<
-        InferOperationsInDocument<
-          $Document,
-          $Schema,
-          $ArgumentsMap,
-          {
-            // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
-            // For now, hardcoded to never since static documents have no runtime extensions
-            typeHookRequestResultDataTypes: never
-            scalars: $Schema['scalarRegistry']
-          }
+  ): $Document extends object
+      ? Doc.Document<
+          Simplify<
+            InferOperationsInDocument<
+              $Document,
+              $Schema,
+              $ArgumentsMap,
+              {
+                // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
+                // For now, hardcoded to never since static documents have no runtime extensions
+                typeHookRequestResultDataTypes: never
+                scalars: $Schema['scalarRegistry']
+              }
+            >
+          >
         >
-      >
-    >
-    : never
+      : never
 }
 
 /**

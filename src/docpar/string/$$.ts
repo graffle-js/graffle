@@ -24,14 +24,17 @@ export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSe
  * // Returns: TypedFullDocument.SingleOperation<{ result: { id: string }, variables: {} }>
  * ```
  */
-export type Parse<$Input extends string, $Schema> = Doc.FromObject<
+export type Parse<$Input extends string, $Schema> =
   Simplify<
     getDocumentOperations<
       parseDocument<$Input>['definitions'],
       $Schema
     >
-  >
->
+  > extends infer $Operations
+    ? $Operations extends Doc.Operation
+      ? Doc.Document<$Operations>
+      : string
+    : string
 
 /**
  * parseDocument - captures the input string to pass to getDocumentOperations.

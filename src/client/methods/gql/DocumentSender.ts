@@ -77,17 +77,18 @@ export interface UntypedStaticExecutor {
 /**
  * Multi-op static executor using generic signature with conditional types.
  * This approach allows proper discrimination based on operation name.
+ * Works with union of operations using Extract pattern.
  */
-export interface MultiOpStaticExecutor<$Operations extends TypedFullDocument.Operations, $Context> {
-  <$OpName extends keyof $Operations & string>(
+export interface MultiOpStaticExecutor<$Operations extends TypedFullDocument.Operation, $Context> {
+  <$OpName extends $Operations['name']>(
     operationName: $OpName,
     // @ts-expect-error - todo: loosen constraint on vars
-    ...variables: GetVariablesInputKind<$Operations[$OpName]['variables']> extends 'none' ? []
+    ...variables: GetVariablesInputKind<Extract<$Operations, { name: $OpName }>['variables']> extends 'none' ? []
       // @ts-expect-error - todo: loosen constraint on vars
-      : GetVariablesInputKind<$Operations[$OpName]['variables']> extends 'optional'
-        ? [variables?: $Operations[$OpName]['variables']]
-      : [variables: $Operations[$OpName]['variables']]
-  ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Operations[$OpName]['result']>>>
+      : GetVariablesInputKind<Extract<$Operations, { name: $OpName }>['variables']> extends 'optional'
+        ? [variables?: Extract<$Operations, { name: $OpName }>['variables']]
+      : [variables: Extract<$Operations, { name: $OpName }>['variables']]
+  ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, Extract<$Operations, { name: $OpName }>['result']>>>
 }
 
 // ================================================================================================
@@ -181,21 +182,23 @@ type Sender<
 type SenderStatic<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
-> = $Doc extends TypedFullDocument.SingleOperation<infer $Op extends TypedFullDocument.Operation>
-  ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Op, $Context>> }
-  : $Doc extends TypedFullDocument.MultiOperation<infer $Operations extends TypedFullDocument.Operations>
+> = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
+  ? TypedFullDocument.IsMultiOperation<$Doc> extends true
     ? { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
+    : { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
   : never
 
 type SenderNamed<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
-> = {
-  [k in keyof $Doc['__operations']]: Configuration.Check.Preflight<
-    $Context,
-    OperationToNamedExecutor<$Doc['__operations'][k], $Context>
-  >
-}
+> = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
+  ? {
+      [k in $Operations['name'] & string]: Configuration.Check.Preflight<
+        $Context,
+        OperationToNamedExecutor<Extract<$Operations, { name: k }>, $Context>
+      >
+    }
+  : never
 
 /**
  * Sender for untyped documents (plain GraphQL strings).

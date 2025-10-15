@@ -5,17 +5,14 @@
  * from the docpar module to maintain backward compatibility with existing code.
  */
 export type {
-  MultiOperation,
+  Document,
   Operation,
   OperationName,
   OperationResult,
-  Operations,
   OperationVariables,
-  SingleOperation,
   TypedFullDocument,
   UntypedDocument,
 } from '#src/docpar/core/doc.js'
-export type { FromObject } from '#src/docpar/core/doc.js'
 
 // Re-export type guards for convenience
 export type { IsMultiOperation, IsSingleOperation, IsUntyped } from '#src/docpar/core/doc.js'

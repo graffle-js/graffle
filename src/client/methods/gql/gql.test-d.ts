@@ -51,7 +51,7 @@ Ts.Test.exact<R10>()(await client.gql(untypedDoc).$send('anyName', { any: 'vars'
 // ==================================================================================================
 //                            SINGLE OPERATION - NO VARIABLES
 // ==================================================================================================
-type R1 = typeof singleNoVars['__operation']['result'] | null
+type R1 = typeof singleNoVars['operations']['result'] | null
 
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send('myQuery'))
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send())
@@ -74,7 +74,7 @@ client.gql(singleNoVarsTada).$send({})
 // ==================================================================================================
 //                          SINGLE OPERATION - REQUIRED VARIABLES
 // ==================================================================================================
-type R2 = typeof singleRequiredVars['__operation']['result'] | null
+type R2 = typeof singleRequiredVars['operations']['result'] | null
 
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
@@ -108,7 +108,7 @@ client.gql(singleRequiredVarsTada).$send({ id: 0 })
 // ==================================================================================================
 //                          SINGLE OPERATION - OPTIONAL VARIABLES
 // ==================================================================================================
-type R3 = typeof singleOptionalVars['__operation']['result'] | null
+type R3 = typeof singleOptionalVars['operations']['result'] | null
 
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send('search'))
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send('search', {}))
@@ -146,8 +146,8 @@ client.gql(singleOptionalVarsTada).$send({ string: 0 })
 // ==================================================================================================
 //                            MULTI OPERATION - NO VARIABLES
 // ==================================================================================================
-type R4 = typeof multiNoVars['__operations']['getUser']['result'] | null
-type R5 = typeof multiNoVars['__operations']['addId']['result'] | null
+type R4 = Extract<typeof multiNoVars['operations'], { name: 'getUser' }>['result'] | null
+type R5 = Extract<typeof multiNoVars['operations'], { name: 'addId' }>['result'] | null
 
 Ts.Test.exact<R4>()(await client.gql(multiNoVars).$send('getUser'))
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).$send('addId'))
@@ -178,8 +178,8 @@ client.gql(multiNoVarsTada).$send('getUser', {})
 // ==================================================================================================
 //                            MULTI OPERATION - WITH VARIABLES
 // ==================================================================================================
-type R6a = typeof multiRequiredVars['__operations']['getById']['result'] | null
-type R6b = typeof multiRequiredVars['__operations']['setId']['result'] | null
+type R6a = Extract<typeof multiRequiredVars['operations'], { name: 'getById' }>['result'] | null
+type R6b = Extract<typeof multiRequiredVars['operations'], { name: 'setId' }>['result'] | null
 
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).$send('getById', { id: 'user-123' }))
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).$send('setId'))

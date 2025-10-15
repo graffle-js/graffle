@@ -2,10 +2,10 @@
  * GraphQL document types representing parsed documents with type information.
  */
 
-import type { Operation, Operations } from './operation.js'
+import type { Operation } from './operation.js'
 
 // Re-export operation types for convenience
-export type { Operation, OperationName, OperationResult, Operations, OperationVariables } from './operation.js'
+export type { Operation, OperationName, OperationResult, OperationVariables } from './operation.js'
 
 // ================================
 // Untyped Document (Plain Strings)
@@ -23,55 +23,37 @@ export type { Operation, OperationName, OperationResult, Operations, OperationVa
  * client.gql('query { id }').$send('anyName', { any: 'vars' })
  * ```
  */
-export type UntypedDocument = string & {
-  readonly __operations: {} // Empty - no type information available
-  readonly __untyped: true
-}
+export type UntypedDocument = string
 
 // ================================
 // Typed Documents
 // ================================
 
 /**
- * A typed GraphQL document with a single operation.
+ * A typed GraphQL document containing one or more operations.
  *
- * The operation is accessible via both `__operations[name]` and `__operation` (shortcut).
- * Variable requirements determine which variant this resolves to.
+ * Operations are stored as a union type for improved TypeScript performance.
+ * Named operation methods and `$send` method are derived from this union.
  *
- * @example
+ * @example Single operation
  * ```ts
- * // From gql-tada or TypedDocumentNode
- * const doc: SingleOperation<{ result: { id: string }, variables: {} }> = ...
- * client.gql(doc).MyOperation() // or .$send()
+ * const doc: Document<Operation<'GetUser', { id: string }, { id: string }>> = ...
+ * client.gql(doc).GetUser({ id: '123' })
+ * client.gql(doc).$send()
  * ```
- */
-export type SingleOperation<$Operation extends Operation> = string & {
-  readonly __operations: Record<$Operation['name'] & string, $Operation>
-  readonly __operation: $Operation // Shortcut to access the single operation
-  readonly __operationCount: 'single'
-}
-
-/**
- * A typed GraphQL document with multiple operations.
  *
- * Each operation must be executed by name using `.$send('operationName', variables)`.
- * Operation methods are also available via Proxy.
- *
- * @example
+ * @example Multiple operations
  * ```ts
- * const doc: MultiOperation<{
- *   GetUser: { result: User, variables: { id: string } },
- *   ListUsers: { result: User[], variables: {} }
- * }> = ...
- *
+ * const doc: Document<
+ *   | Operation<'GetUser', User, { id: string }>
+ *   | Operation<'ListUsers', User[], {}>
+ * > = ...
  * client.gql(doc).GetUser({ id: '123' })
  * client.gql(doc).$send('ListUsers')
  * ```
  */
-export type MultiOperation<$Operations extends Operations> = string & {
-  readonly __operations: $Operations
-  readonly __operation: never // Multi-operation docs don't have a single operation
-  readonly __operationCount: 'multi'
+export type Document<$Operations extends Operation> = string & {
+  readonly operations: $Operations
 }
 
 // ================================
@@ -82,21 +64,13 @@ export type MultiOperation<$Operations extends Operations> = string & {
  * Union of all TypedFullDocument variants.
  *
  * Plain GraphQL strings (no type info) are also accepted downstream and handled via
- * conditional checks for `__operations` property.
- *
- * - {@link SingleOperation} - Typed documents with one operation
- * - {@link MultiOperation} - Typed documents with multiple operations
+ * conditional checks for `operations` property.
  */
-export type TypedFullDocument =
-  | SingleOperation<Operation>
-  | MultiOperation<Operations>
+export type TypedFullDocument = Document<Operation>
 
 // ================================
 // Type Transformers
 // ================================
-
-// Re-export FromObject transformer from object module
-export type { FromObject } from '../object/from-object.js'
 
 /**
  * Check if a document is untyped (plain string).
@@ -104,11 +78,25 @@ export type { FromObject } from '../object/from-object.js'
 export type IsUntyped<$Doc> = $Doc extends UntypedDocument ? true : false
 
 /**
- * Check if a document is a single operation.
+ * Helper to detect if a type is a union.
  */
-export type IsSingleOperation<$Doc> = $Doc extends SingleOperation<any> ? true : false
+type IsUnion<$T> = [($T extends any ? ($arg: $T) => void : never)] extends [($arg: infer $U) => void] ? [$U] extends [$T]
+  ? false
+  : true
+  : false
 
 /**
- * Check if a document is multi-operation.
+ * Check if a document contains a single operation.
  */
-export type IsMultiOperation<$Doc> = $Doc extends MultiOperation<any> ? true : false
+export type IsSingleOperation<$Doc> = $Doc extends Document<infer $Operations> ? IsUnion<$Operations> extends false
+    ? true
+    : false
+  : false
+
+/**
+ * Check if a document contains multiple operations.
+ */
+export type IsMultiOperation<$Doc> = $Doc extends Document<infer $Operations> ? IsUnion<$Operations> extends true
+    ? true
+    : false
+  : false

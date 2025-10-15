@@ -16,31 +16,26 @@ type Context = {
 type Strict<$Input> = Docpar.Parse<$Input, Possible.$.Schema, Possible.$.ArgumentsMap, Context>
 type Loose<$Input> = Docpar.Parse<$Input, undefined, any, any>
 
-type DocSingleOp<$Op extends Operation.Operation> = Doc.SingleOperation<$Op>
-type DocMultiOp<$Operations extends Operation.Operations> = Doc.MultiOperation<$Operations>
+type D<$Op extends Operation.Operation> = Doc.Document<$Op>
 
 // ==================================================================================================
 //                                   Basic Field Selection
 // ==================================================================================================
 
 // Expected operation types
-type OpDefaultId = DocSingleOp<{ name: 'default'; result: { id: string | null }; variables: {} }>
-type OpDefaultIdAndIdNonNull = DocSingleOp<{ name: 'default'; result: { id: string | null; idNonNull: string }; variables: {} }>
-type OpDefaultDate = DocSingleOp<{ name: 'default'; result: { date: Date | null }; variables: {} }>
-type OpDefaultIdNonNull = DocSingleOp<{ name: 'default'; result: { idNonNull: string }; variables: {} }>
-type OpQId = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: {} }>
-type OpQDate = DocSingleOp<{ name: 'q'; result: { date: Date | null }; variables: {} }>
+type OpDefaultId = D<{ name: 'default'; result: { id: string | null }; variables: {} }>
+type OpDefaultIdAndIdNonNull = D<{ name: 'default'; result: { id: string | null; idNonNull: string }; variables: {} }>
+type OpDefaultDate = D<{ name: 'default'; result: { date: Date | null }; variables: {} }>
+type OpDefaultIdNonNull = D<{ name: 'default'; result: { idNonNull: string }; variables: {} }>
+type OpQId = D<{ name: 'q'; result: { id: string | null }; variables: {} }>
+type OpQDate = D<{ name: 'q'; result: { date: Date | null }; variables: {} }>
 
 // Loose mode operation types
-type OpDefaultIdLoose = DocSingleOp<{ name: 'default'; result: { id: unknown }; variables: {} }>
-type OpDefaultUnknownField = DocSingleOp<{ name: 'default'; result: { unknownField: unknown }; variables: {} }>
-type OpDefaultIdAndUnknownField = DocSingleOp<{ name: 'default'; result: { id: unknown; unknownField: unknown }; variables: {} }>
-type OpDefaultDateLoose = DocSingleOp<{ name: 'default'; result: { date: unknown }; variables: {} }>
-type OpQUnknownField = DocSingleOp<{ name: 'q'; result: { unknownField: unknown }; variables: {} }>
-
-type x  = Strict<{ query: { default: { id: true } } }>
-declare const x: Strict<{ query: { default: { id: true } } }>
-type y = Ts.Test.sub<Strict<{ query: { default: { id: true } } }>, OpDefaultId>
+type OpDefaultIdLoose = D<{ name: 'default'; result: { id: unknown }; variables: {} }>
+type OpDefaultUnknownField = D<{ name: 'default'; result: { unknownField: unknown }; variables: {} }>
+type OpDefaultIdAndUnknownField = D<{ name: 'default'; result: { id: unknown; unknownField: unknown }; variables: {} }>
+type OpDefaultDateLoose = D<{ name: 'default'; result: { date: unknown }; variables: {} }>
+type OpQUnknownField = D<{ name: 'q'; result: { unknownField: unknown }; variables: {} }>
 
 type _ = Ts.Test.Cases<
   // Simplest possible query - anonymous query with single scalar field
@@ -78,15 +73,15 @@ type _ = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types
-type OpDefaultObjectWithId = DocSingleOp<{ name: 'default'; result: { object: { id: string | null } | null }; variables: {} }>
-type OpDefaultObjectWithIdAndString = DocSingleOp<{ name: 'default'; result: { object: { id: string | null; string: string | null } | null }; variables: {} }>
-type OpDefaultTwoObjectsWithId = DocSingleOp<{ name: 'default'; result: { object: { id: string | null } | null; objectNested: { id: string | null } | null }; variables: {} }>
-type OpDefaultDeepNested = DocSingleOp<{ name: 'default'; result: { objectNested: { object: { id: string | null } | null } | null }; variables: {} }>
+type OpDefaultObjectWithId = D<{ name: 'default'; result: { object: { id: string | null } | null }; variables: {} }>
+type OpDefaultObjectWithIdAndString = D<{ name: 'default'; result: { object: { id: string | null; string: string | null } | null }; variables: {} }>
+type OpDefaultTwoObjectsWithId = D<{ name: 'default'; result: { object: { id: string | null } | null; objectNested: { id: string | null } | null }; variables: {} }>
+type OpDefaultDeepNested = D<{ name: 'default'; result: { objectNested: { object: { id: string | null } | null } | null }; variables: {} }>
 
 // Loose mode operation types
-type OpDefaultUnknownObjWithUnknownField = DocSingleOp<{ name: 'default'; result: { unknownObj: { unknownField: unknown } | null }; variables: {} }>
-type OpDefaultUnknownObjWithTwoFields = DocSingleOp<{ name: 'default'; result: { obj: { field1: unknown; field2: unknown } | null }; variables: {} }>
-type OpDefaultThreeLevelUnknown = DocSingleOp<{ name: 'default'; result: { level1: { level2: { level3: unknown } | null } | null }; variables: {} }>
+type OpDefaultUnknownObjWithUnknownField = D<{ name: 'default'; result: { unknownObj: { unknownField: unknown } | null }; variables: {} }>
+type OpDefaultUnknownObjWithTwoFields = D<{ name: 'default'; result: { obj: { field1: unknown; field2: unknown } | null }; variables: {} }>
+type OpDefaultThreeLevelUnknown = D<{ name: 'default'; result: { level1: { level2: { level3: unknown } | null } | null }; variables: {} }>
 
 type _Nested = Ts.Test.Cases<
   // Single nested object with one field
@@ -113,13 +108,13 @@ type _Nested = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types
-type OpDefaultStringWithArgs = DocSingleOp<{ name: 'default'; result: { stringWithArgs: string | null }; variables: {} }>
-type OpDefaultStringWithRequiredArg = DocSingleOp<{ name: 'default'; result: { stringWithRequiredArg: string | null }; variables: {} }>
-type OpDefaultObjectWithArgs = DocSingleOp<{ name: 'default'; result: { objectWithArgs: { id: string | null } | null }; variables: {} }>
+type OpDefaultStringWithArgs = D<{ name: 'default'; result: { stringWithArgs: string | null }; variables: {} }>
+type OpDefaultStringWithRequiredArg = D<{ name: 'default'; result: { stringWithRequiredArg: string | null }; variables: {} }>
+type OpDefaultObjectWithArgs = D<{ name: 'default'; result: { objectWithArgs: { id: string | null } | null }; variables: {} }>
 
 // Loose mode operation types
-type OpDefaultUnknownFieldWithArgs = DocSingleOp<{ name: 'default'; result: { unknownField: unknown }; variables: {} }>
-type OpDefaultUnknownObjWithArgs = DocSingleOp<{ name: 'default'; result: { unknownObj: { field: unknown } | null }; variables: {} }>
+type OpDefaultUnknownFieldWithArgs = D<{ name: 'default'; result: { unknownField: unknown }; variables: {} }>
+type OpDefaultUnknownObjWithArgs = D<{ name: 'default'; result: { unknownObj: { field: unknown } | null }; variables: {} }>
 
 type _Arguments = Ts.Test.Cases<
   // Field with single argument
@@ -139,12 +134,24 @@ type _Arguments = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types
-type OpMultiTwoQueries = DocMultiOp<{ A: { name: 'A'; result: { id: string | null }; variables: {} }; B: { name: 'B'; result: { string: string | null }; variables: {} } }>
-type OpMultiQueryAndMutation = DocMultiOp<{ GetId: { name: 'GetId'; result: { id: string | null }; variables: {} }; SetId: { name: 'SetId'; result: { idNonNull: string }; variables: {} } }>
+type OpMultiTwoQueries = D<
+  | { name: 'A'; result: { id: string | null }; variables: {} }
+  | { name: 'B'; result: { string: string | null }; variables: {} }
+>
+type OpMultiQueryAndMutation = D<
+  | { name: 'GetId'; result: { id: string | null }; variables: {} }
+  | { name: 'SetId'; result: { idNonNull: string }; variables: {} }
+>
 
 // Loose mode operation types
-type OpMultiTwoQueriesLoose = DocMultiOp<{ A: { name: 'A'; result: { field1: unknown }; variables: {} }; B: { name: 'B'; result: { field2: unknown }; variables: {} } }>
-type OpMultiQueryAndMutationLoose = DocMultiOp<{ Get: { name: 'Get'; result: { data: unknown }; variables: {} }; Set: { name: 'Set'; result: { updated: unknown }; variables: {} } }>
+type OpMultiTwoQueriesLoose = D<
+  | { name: 'A'; result: { field1: unknown }; variables: {} }
+  | { name: 'B'; result: { field2: unknown }; variables: {} }
+>
+type OpMultiQueryAndMutationLoose = D<
+  | { name: 'Get'; result: { data: unknown }; variables: {} }
+  | { name: 'Set'; result: { updated: unknown }; variables: {} }
+>
 
 type _MultiOp = Ts.Test.Cases<
   // Two queries
@@ -162,11 +169,11 @@ type _MultiOp = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types (reuse OpDefaultId from earlier)
-type OpSetIdIdNonNull = DocSingleOp<{ name: 'SetId'; result: { idNonNull: string }; variables: {} }>
+type OpSetIdIdNonNull = D<{ name: 'SetId'; result: { idNonNull: string }; variables: {} }>
 
 // Loose mode operation types
-type OpDefaultUpdate = DocSingleOp<{ name: 'default'; result: { update: unknown }; variables: {} }>
-type OpCreateCreated = DocSingleOp<{ name: 'Create'; result: { created: unknown }; variables: {} }>
+type OpDefaultUpdate = D<{ name: 'default'; result: { update: unknown }; variables: {} }>
+type OpCreateCreated = D<{ name: 'Create'; result: { created: unknown }; variables: {} }>
 
 type _Mutations = Ts.Test.Cases<
   // Simple mutation (reuses OpDefaultId)
@@ -185,10 +192,10 @@ type _Mutations = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types
-type OpDefaultAbcEnum = DocSingleOp<{ name: 'default'; result: { abcEnum: 'A' | 'B' | 'C' | null }; variables: {} }>
+type OpDefaultAbcEnum = D<{ name: 'default'; result: { abcEnum: 'A' | 'B' | 'C' | null }; variables: {} }>
 
 // Loose mode operation types
-type OpDefaultStatus = DocSingleOp<{ name: 'default'; result: { status: unknown }; variables: {} }>
+type OpDefaultStatus = D<{ name: 'default'; result: { status: unknown }; variables: {} }>
 
 type _SpecialTypes = Ts.Test.Cases<
   // Enum field
@@ -201,25 +208,25 @@ type _SpecialTypes = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types
-type OpQIdWithVarA = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { a: string } }>
-type OpQIdWithVarS_Optional = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { s?: string | null | undefined } }>
-type OpQIdWithVarD = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { d: Date } }>
-type OpQIdWithMultiVars = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { a: string; s?: string | null | undefined } }>
-type OpQIdWithVarS = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { s: string } }>
-type OpQIdWithVarN_Optional = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { n?: number | null | undefined } }>
-type OpQIdWithVarB = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { b: boolean } }>
-type OpQIdWithMultiRequiredVars = DocSingleOp<{ name: 'q'; result: { id: string | null }; variables: { a: string; s: string; n: number } }>
-type OpMIdWithVarA = DocSingleOp<{ name: 'm'; result: { id: string | null }; variables: { a: string } }>
-type OpDefaultIdWithVarA = DocSingleOp<{ name: 'default'; result: { id: string | null }; variables: { a: string } }>
-type OpQInterfaceWithArgsWithVarA = DocSingleOp<{ name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { a: string } }>
+type OpQIdWithVarA = D<{ name: 'q'; result: { id: string | null }; variables: { a: string } }>
+type OpQIdWithVarS_Optional = D<{ name: 'q'; result: { id: string | null }; variables: { s?: string | null | undefined } }>
+type OpQIdWithVarD = D<{ name: 'q'; result: { id: string | null }; variables: { d: Date } }>
+type OpQIdWithMultiVars = D<{ name: 'q'; result: { id: string | null }; variables: { a: string; s?: string | null | undefined } }>
+type OpQIdWithVarS = D<{ name: 'q'; result: { id: string | null }; variables: { s: string } }>
+type OpQIdWithVarN_Optional = D<{ name: 'q'; result: { id: string | null }; variables: { n?: number | null | undefined } }>
+type OpQIdWithVarB = D<{ name: 'q'; result: { id: string | null }; variables: { b: boolean } }>
+type OpQIdWithMultiRequiredVars = D<{ name: 'q'; result: { id: string | null }; variables: { a: string; s: string; n: number } }>
+type OpMIdWithVarA = D<{ name: 'm'; result: { id: string | null }; variables: { a: string } }>
+type OpDefaultIdWithVarA = D<{ name: 'default'; result: { id: string | null }; variables: { a: string } }>
+type OpQInterfaceWithArgsWithVarA = D<{ name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { a: string } }>
 
 // Loose mode operation types
-type OpQFieldWithVarA = DocSingleOp<{ name: 'q'; result: { field: unknown }; variables: { a: string } }>
-type OpQFieldWithVarS_Optional = DocSingleOp<{ name: 'q'; result: { field: unknown }; variables: { s?: string | null | undefined } }>
-type OpQFieldWithVarD = DocSingleOp<{ name: 'q'; result: { field: unknown }; variables: { d: unknown } }>
-type OpQFieldWithMultiVars = DocSingleOp<{ name: 'q'; result: { field: unknown }; variables: { id: string; name?: string | null | undefined } }>
-type OpDefaultFieldWithVarA = DocSingleOp<{ name: 'default'; result: { field: unknown }; variables: { a: string } }>
-type OpQObjWithVarId = DocSingleOp<{ name: 'q'; result: { obj: { nested: unknown } | null }; variables: { id: string } }>
+type OpQFieldWithVarA = D<{ name: 'q'; result: { field: unknown }; variables: { a: string } }>
+type OpQFieldWithVarS_Optional = D<{ name: 'q'; result: { field: unknown }; variables: { s?: string | null | undefined } }>
+type OpQFieldWithVarD = D<{ name: 'q'; result: { field: unknown }; variables: { d: unknown } }>
+type OpQFieldWithMultiVars = D<{ name: 'q'; result: { field: unknown }; variables: { id: string; name?: string | null | undefined } }>
+type OpDefaultFieldWithVarA = D<{ name: 'default'; result: { field: unknown }; variables: { a: string } }>
+type OpQObjWithVarId = D<{ name: 'q'; result: { obj: { nested: unknown } | null }; variables: { id: string } }>
 
 type _Variables = Ts.Test.Cases<
   // Required ID variable
@@ -266,36 +273,36 @@ type _Variables = Ts.Test.Cases<
 //                                   Variable Definitions (with gql function)
 // ==================================================================================================
 
-type SingleOpNoVars = DocSingleOp<{ name: 'myQuery'; result: { date: Date | null }; variables: {} }>
+type SingleOpNoVars = D<{ name: 'myQuery'; result: { date: Date | null }; variables: {} }>
 
 Ts.Test.exact<SingleOpNoVars>()(Possible.gql(`query myQuery { date }`))
 Ts.Test.bid<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } } }))
 
-type SingleOpRequiredVars = DocSingleOp<{ name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
+type SingleOpRequiredVars = D<{ name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 
 Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
 // dprint-ignore
 Ts.Test.bid<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
 
-type SingleOpOptionalVars = DocSingleOp<{ name: 'search'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
+type SingleOpOptionalVars = D<{ name: 'search'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 
 Ts.Test.exact<SingleOpOptionalVars>()(Possible.gql(`query search($string: String) { stringWithArgs(string: $string) }`))
 Ts.Test.bid<SingleOpOptionalVars>()(Possible.gql({ query: { search: { stringWithArgs: { $: { string: $ }, __typename: true } } } }))
 
-type DefaultOpWithScalar = DocSingleOp<{ name: 'default'; result: { date: Date | null }; variables: {} }>
+type DefaultOpWithScalar = D<{ name: 'default'; result: { date: Date | null }; variables: {} }>
 
 Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql(`{ date }`))
 Ts.Test.bid<DefaultOpWithScalar>()(Possible.gql({ query: { default: { date: true } } }))
 
-type DefaultOpOptionalVars = DocSingleOp<{ name: 'default'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
+type DefaultOpOptionalVars = D<{ name: 'default'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 
 Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
 Ts.Test.bid<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
 
-type MultiOpNoVars = DocMultiOp<{
-  getUser: { name: 'getUser'; result: { id: string | null }; variables: {} }
-  addId: { name: 'addId'; result: { id: string | null }; variables: {} }
-}>
+type MultiOpNoVars = D<
+  | { name: 'getUser'; result: { id: string | null }; variables: {} }
+  | { name: 'addId'; result: { id: string | null }; variables: {} }
+>
 
 Ts.Test.exact<MultiOpNoVars>()(Possible.gql(`
   query getUser { id }
@@ -306,10 +313,10 @@ Ts.Test.bid<MultiOpNoVars>()(Possible.gql({
   mutation: { addId: { id: true } },
 }))
 
-type MultiOpWithVars = DocMultiOp<{
-  getById: { name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }
-  setId: { name: 'setId'; result: { idNonNull: string }; variables: {} }
-}>
+type MultiOpWithVars = D<
+  | { name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }
+  | { name: 'setId'; result: { idNonNull: string }; variables: {} }
+>
 
 Ts.Test.exact<MultiOpWithVars>()(
   Possible.gql(`
