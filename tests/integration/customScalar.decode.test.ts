@@ -1,8 +1,8 @@
+import { Docpar } from '#src/docpar/$.js'
+import { Grafaid } from '#src/lib/grafaid/$.js'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
-import { Docpar } from '../../src/docpar/$.js'
-import { Grafaid } from '../../src/lib/grafaid/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
 
