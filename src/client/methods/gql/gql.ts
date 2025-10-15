@@ -2,8 +2,8 @@ import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { Docpar } from '#src/docpar/$.js'
-import type { ParseGraphQLObject, ParseGraphQLString } from '#src/docpar/gql.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
+import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
 import type { DocumentNode } from '@0no-co/graphql.web'
@@ -36,18 +36,18 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
 export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 
 /**
- * Extract GraphQLTadaAPI type from context for LSP detection.
+ * Extract GraphQLStringAPI type from context for LSP detection.
  *
  * This type provides the `scalar`, `persisted`, and `__name` properties that GraphQLSP LSP
- * looks for to identify gql-tada functions and determine which schema to use in multi-schema mode.
+ * looks for to identify gql functions and determine which schema to use in multi-schema mode.
  *
  * Returns `any` when no GlobalRegistry is available (dynamic clients).
  */
 // dprint-ignore
-type TadaAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
+type StringAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
   ? any
-  : Docpar.GraphQLTadaAPI<
-      Docpar.schemaOfSetup<{
+  : Docpar.String.GraphQLStringAPI<
+      Docpar.String.schemaOfSetup<{
         introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
         scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
       }>,
@@ -79,7 +79,7 @@ type DocumentObjectConstraint<$Context> =
  * Execute a GraphQL document using GraphQL syntax or document builder.
  *
  * Accepts:
- * - Typed GraphQL documents (from gql-tada, codegen, or static builders)
+ * - Typed GraphQL documents (from codegen or static builders)
  * - Inline document builder objects
  *
  * Returns a {@link DocumentSender} with operation methods.
@@ -89,7 +89,7 @@ type DocumentObjectConstraint<$Context> =
  *
  * @example
  * ```ts
- * // GraphQL document string (with gql-tada type inference)
+ * // GraphQL document string (with type inference)
  * const builder = graffle.gql('{ pokemons { name } }')
  * const data = await builder.myQuery()
  * ```
@@ -157,22 +157,22 @@ export interface GqlMethod<$Context extends Context.Context> {
   /**
    * LSP detection property - validates scalar/enum values against schema types.
    *
-   * This property is required by GraphQLSP LSP to identify this as a gql-tada function.
+   * This property is required by GraphQLSP LSP to identify this as a gql function.
    * The LSP checks for the existence of both `scalar` and `persisted` properties.
    *
    * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L19-L32
    */
-  scalar: TadaAPIFromContext<$Context>['scalar']
+  scalar: StringAPIFromContext<$Context>['scalar']
 
   /**
    * LSP detection property - creates persisted document nodes.
    *
-   * This property is required by GraphQLSP LSP to identify this as a gql-tada function.
+   * This property is required by GraphQLSP LSP to identify this as a gql function.
    * The LSP checks for the existence of both `scalar` and `persisted` properties.
    *
    * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L19-L32
    */
-  persisted: TadaAPIFromContext<$Context>['persisted']
+  persisted: StringAPIFromContext<$Context>['persisted']
 }
 
 export namespace GqlMethod {
@@ -180,7 +180,7 @@ export namespace GqlMethod {
    * Arguments accepted by the instance gql method.
    *
    * Can be either:
-   * - TypedDocumentLike (gql-tada, TypedDocumentNode, etc.)
+   * - TypedDocumentLike (TypedDocumentNode, TypedDocumentString, etc.)
    * - Document builder object
    */
   export type Arguments =
@@ -197,7 +197,7 @@ export namespace GqlMethod {
     // TypedDocumentLike documents are strings or have specific properties
     const isTypedDocumentLike = typeof first === 'string'
       || 'definitions' in first // DocumentNode
-      || '__meta__' in first // TadaDocumentNode
+      || '__meta__' in first // TypedDocumentNode
 
     if (isTypedDocumentLike) {
       return {

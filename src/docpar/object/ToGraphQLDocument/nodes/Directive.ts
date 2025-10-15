@@ -1,6 +1,6 @@
-import type { SchemaDrivenDataMap } from '#graffle/utilities-for-generated'
 import type { Select } from '#src/docpar/object/Select/$.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLValue } from './Value.js'
 

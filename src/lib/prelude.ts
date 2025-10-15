@@ -64,6 +64,21 @@ export namespace Objekt {
  */
 export type UnionExpanded<$Union> = $Union
 
+/**
+ * Check if a type is a union (has multiple members).
+ * Returns true if the type is a union, false otherwise.
+ *
+ * Uses UnionToIntersection: if a type equals its intersection form, it's not a union.
+ * Wrapped in tuples to prevent distribution.
+ */
+// dprint-ignore
+export type IsUnion<$Type> =
+  [$Type] extends [never]
+    ? false
+    : [$Type] extends [Ts.Union.ToIntersection<$Type>]
+      ? false
+      : true
+
 export const identityProxy = new Proxy({}, {
   get: () => (value: unknown) => value,
 })

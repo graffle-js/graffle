@@ -69,8 +69,7 @@ To enable it:
    }
 ${sdlSetupStep}
 Documentation:
-- Installation: https://gql-tada.0no.co/get-started/installation
-- Editor setup: https://gql-tada.0no.co/get-started/editor-setup
+- https://github.com/0no-co/GraphQLSP
 
 To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
 `)
@@ -151,8 +150,7 @@ To enable it:
    }
 ${sdlSetupStep}
 Documentation:
-- Installation: https://gql-tada.0no.co/get-started/installation
-- Editor setup: https://gql-tada.0no.co/get-started/editor-setup
+- https://github.com/0no-co/GraphQLSP
 
 To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
 `)

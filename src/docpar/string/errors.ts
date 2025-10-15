@@ -5,12 +5,12 @@
  * that tell you exactly what went wrong and where.
  */
 
-import type { ParserError } from '../core/error.js'
+import type { Core } from '../core/$.js'
 
 /**
  * Failed to parse operation keyword (query/mutation/subscription).
  */
-export interface ErrorInvalidOperation extends ParserError {
+export interface ErrorInvalidOperation extends Core.ParserError {
   error: 'InvalidOperation'
   message: 'Expected operation keyword (query/mutation/subscription) or selection set'
   input: string
@@ -19,7 +19,7 @@ export interface ErrorInvalidOperation extends ParserError {
 /**
  * Operation type not available in schema (e.g., no mutation defined).
  */
-export interface ErrorOperationNotAvailable extends ParserError {
+export interface ErrorOperationNotAvailable extends Core.ParserError {
   error: 'OperationNotAvailable'
   message: string // e.g., "Mutation operation not available in schema"
   operationType: 'query' | 'mutation' | 'subscription'
@@ -28,7 +28,7 @@ export interface ErrorOperationNotAvailable extends ParserError {
 /**
  * Field not found on parent type.
  */
-export interface ErrorFieldNotFound extends ParserError {
+export interface ErrorFieldNotFound extends Core.ParserError {
   error: 'FieldNotFound'
   message: string // e.g., "Field 'xyz' does not exist on type 'Query'"
   fieldName: string
@@ -40,7 +40,7 @@ export interface ErrorFieldNotFound extends ParserError {
 /**
  * Expected object/interface type for nested selection, got scalar/enum instead.
  */
-export interface ErrorInvalidSelectionOnScalar extends ParserError {
+export interface ErrorInvalidSelectionOnScalar extends Core.ParserError {
   error: 'InvalidSelectionOnScalar'
   message: string // e.g., "Cannot select fields on scalar type 'String'"
   fieldName: string
@@ -51,7 +51,7 @@ export interface ErrorInvalidSelectionOnScalar extends ParserError {
 /**
  * Failed to parse selection set (missing braces, etc.).
  */
-export interface ErrorInvalidSelectionSet extends ParserError {
+export interface ErrorInvalidSelectionSet extends Core.ParserError {
   error: 'InvalidSelectionSet'
   message: string
   input: string

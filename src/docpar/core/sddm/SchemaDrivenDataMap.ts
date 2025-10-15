@@ -1,6 +1,7 @@
 import type { Grafaid } from '#lib/grafaid'
 import { Str } from '@wollybeard/kit'
-import { Schema } from '../Schema/$.js'
+// TODO: Invert this dependency - Schema.Scalar should implement Core.SDDM.Scalar
+import { Schema } from '#src/types/Schema/$.js'
 import type { InlineType } from './InlineType.js'
 
 export * from './InlineType.js'
@@ -192,6 +193,33 @@ export type Scalar = Schema.Scalar
 export type CustomScalarName = string
 
 export type ArgumentOrInputField = GraffleGlobal.SchemaDrivenDataMap.ArgumentOrInputField
+
+// Create a namespace so types can be accessed as SchemaDrivenDataMap.OutputField
+export namespace SchemaDrivenDataMap {
+  export type SchemaDrivenDataMap = GraffleGlobal.SchemaDrivenDataMap
+  export type SchemaDrivenDataMapWithQuery = GraffleGlobal.SchemaDrivenDataMapWithQuery
+  export type SchemaDrivenDataMapWithMutation = GraffleGlobal.SchemaDrivenDataMapWithMutation
+  export type SchemaDrivenDataMapWithSubscription = GraffleGlobal.SchemaDrivenDataMapWithSubscription
+  export type OutputObject = GraffleGlobal.SchemaDrivenDataMap.OutputObject
+  export type OutputField = GraffleGlobal.SchemaDrivenDataMap.OutputField
+  export type InputObject = GraffleGlobal.SchemaDrivenDataMap.InputObject
+  export type Enum = GraffleGlobal.SchemaDrivenDataMap.Enum
+  export type ArgumentsOrInputObjectFields = GraffleGlobal.SchemaDrivenDataMap.ArgumentsOrInputObjectFields
+  export type ArgumentOrInputField = GraffleGlobal.SchemaDrivenDataMap.ArgumentOrInputField
+  export type OutputNodes = Scalar | OutputObject | Enum | CustomScalarName
+  export type InputNodes = ScalarLikeNodes | InputObject | Enum
+  export type ScalarLikeNodes = Scalar | CustomScalarName
+  export type Node =
+    | OutputObject
+    | InputObject
+    | ArgumentsOrInputObjectFields
+    | ArgumentOrInputField
+    | InlineType
+    | SchemaDrivenDataMap
+    | Scalar
+    | Enum
+    | CustomScalarName
+}
 
 /**
  * Property name keys used throughout the Schema-Driven Data Map (SDDM).

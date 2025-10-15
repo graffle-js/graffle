@@ -6,49 +6,46 @@
  * using the ArgumentsMap literal types to determine proper types for each variable.
  */
 
+import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { PropertySignature } from '#src/lib/prelude.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Simplify, UnionToIntersection } from 'type-fest'
+import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Select } from '../Select/$.js'
 import type { ExtractFromOperation } from './extract.js'
 
 /**
  * Infer variables from a query operation selection set.
  */
-// dprint-ignore
 export type InferFromQuery<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery,
-  // @ts-expect-error todo
-  ___$OperationMap = $ArgsMap['operations']['query']
-> =
-  ___$OperationMap extends SchemaDrivenDataMap.OutputObject
-    ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
-    : {}
+> = InferFromOperation<$SS, $ArgsMap, typeof Grafaid.Document.OperationTypeNode.QUERY>
 
 /**
  * Infer variables from a mutation operation selection set.
  */
-// dprint-ignore
 export type InferFromMutation<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
-  // @ts-expect-error todo
-  ___$OperationMap = $ArgsMap['operations']['mutation']
-> =
-  ___$OperationMap extends SchemaDrivenDataMap.OutputObject
-    ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
-    : {}
+> = InferFromOperation<$SS, $ArgsMap, typeof Grafaid.Document.OperationTypeNode.MUTATION>
+
+/**
+ * Infer variables from a subscription operation selection set.
+ */
+export type InferFromSubscription<
+  $SS extends object,
+  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription,
+> = InferFromOperation<$SS, $ArgsMap, typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION>
 
 /**
  * Infer variables from a subscription operation selection set.
  */
 // dprint-ignore
-export type InferFromSubscription<
+export type InferFromOperation<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription,
-  // @ts-expect-error todo
-  ___$OperationMap = $ArgsMap['operations']['subscription']
+  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMap,
+  $OperationType extends Grafaid.Document.OperationTypeNode,
+  ___$OperationMap = $ArgsMap['operations'][$OperationType],
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>

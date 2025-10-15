@@ -3,7 +3,7 @@ import { Errors } from '#lib/errors'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
 import { Rec, Str } from '@wollybeard/kit'
 
-import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
+import { Docpar } from '#src/docpar/$.js'
 // import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
@@ -45,7 +45,7 @@ export const SchemaErrors = Extension
       if (!Str.Type.is(__typename)) continue
 
       const sddmNode = sddm.types[__typename]
-      const isErrorObject = SchemaDrivenDataMap.isOutputObject(sddmNode) && Boolean(sddmNode.e)
+      const isErrorObject = Docpar.isOutputObject(sddmNode) && Boolean(sddmNode.e)
       if (!isErrorObject) continue
 
       // todo extract message

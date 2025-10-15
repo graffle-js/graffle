@@ -1,5 +1,6 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
+import type { Docpar } from '#src/docpar/$.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
 import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
@@ -15,16 +16,19 @@ export type DocumentInput =
 
 /**
  * Convert an operation to its static executor type (for `$send` method).
- * Distributes over unions to create overloads.
+ * Uses tuple wrapping to prevent distribution over unions.
  */
 type OperationToStaticExecutor<
   $Op extends TypedFullDocument.Operation,
   $Context,
+> = [$Op] extends [infer $O extends TypedFullDocument.Operation]
   // @ts-expect-error - todo: loosen constraint on vars
-  ___$VarKind = GetVariablesInputKind<$Op['variables']>,
-> = ___$VarKind extends 'none' ? SingleOpNoVarsStaticExecutor<$Op, $Context>
-  : ___$VarKind extends 'optional' ? SingleOpOptionalVarsStaticExecutor<$Op, $Context>
-  : ___$VarKind extends 'required' ? SingleOpRequiredVarsStaticExecutor<$Op, $Context>
+  ? GetVariablesInputKind<$O['variables']> extends infer ___$VarKind
+    ? ___$VarKind extends 'none' ? SingleOpNoVarsStaticExecutor<$O, $Context>
+    : ___$VarKind extends 'optional' ? SingleOpOptionalVarsStaticExecutor<$O, $Context>
+    : ___$VarKind extends 'required' ? SingleOpRequiredVarsStaticExecutor<$O, $Context>
+    : never
+  : never
   : never
 
 /**
@@ -77,17 +81,18 @@ export interface UntypedStaticExecutor {
 /**
  * Multi-op static executor using generic signature with conditional types.
  * This approach allows proper discrimination based on operation name.
+ * Works with union of operations using Extract pattern.
  */
-export interface MultiOpStaticExecutor<$Operations extends TypedFullDocument.Operations, $Context> {
-  <$OpName extends keyof $Operations & string>(
+export interface MultiOpStaticExecutor<$Operations extends TypedFullDocument.Operation, $Context> {
+  <$OpName extends $Operations['name']>(
     operationName: $OpName,
     // @ts-expect-error - todo: loosen constraint on vars
-    ...variables: GetVariablesInputKind<$Operations[$OpName]['variables']> extends 'none' ? []
+    ...variables: GetVariablesInputKind<Extract<$Operations, { name: $OpName }>['variables']> extends 'none' ? []
       // @ts-expect-error - todo: loosen constraint on vars
-      : GetVariablesInputKind<$Operations[$OpName]['variables']> extends 'optional'
-        ? [variables?: $Operations[$OpName]['variables']]
-      : [variables: $Operations[$OpName]['variables']]
-  ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Operations[$OpName]['result']>>>
+      : GetVariablesInputKind<Extract<$Operations, { name: $OpName }>['variables']> extends 'optional'
+        ? [variables?: Extract<$Operations, { name: $OpName }>['variables']]
+      : [variables: Extract<$Operations, { name: $OpName }>['variables']]
+  ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, Extract<$Operations, { name: $OpName }>['result']>>>
 }
 
 // ================================================================================================
@@ -147,7 +152,7 @@ export interface RequiredVarsNamedExecutor<
 /**
  * Object returned from `client.gql()` that provides operation methods.
  *
- * - For **typed documents** (gql-tada, TypedDocumentNode), each operation becomes a method
+ * - For **typed documents** (TypedDocumentNode, TypedDocumentString), each operation becomes a method
  * - For **untyped documents** (plain strings), only `.$send()` is available with generic signature
  *
  * @example
@@ -181,21 +186,22 @@ type Sender<
 type SenderStatic<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
-> = $Doc extends TypedFullDocument.SingleOperation<infer $Op extends TypedFullDocument.Operation>
-  ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Op, $Context>> }
-  : $Doc extends TypedFullDocument.MultiOperation<infer $Operations extends TypedFullDocument.Operations>
-    ? { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
+> = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
+  ? Docpar.Doc.IsSingleOperation<$Doc> extends true
+    ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
+  : { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
   : never
 
 type SenderNamed<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
-> = {
-  [k in keyof $Doc['__operations']]: Configuration.Check.Preflight<
-    $Context,
-    OperationToNamedExecutor<$Doc['__operations'][k], $Context>
-  >
-}
+> = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation> ? {
+    [k in $Operations['name'] & string]: Configuration.Check.Preflight<
+      $Context,
+      OperationToNamedExecutor<Extract<$Operations, { name: k }>, $Context>
+    >
+  }
+  : never
 
 /**
  * Sender for untyped documents (plain GraphQL strings).
@@ -205,11 +211,11 @@ export interface UntypedSender<$Context = any> {
 }
 
 // ================================================================================================
-// TYPED DOCUMENT LIKE SENDER (gql-tada, TypedDocumentNode)
+// TYPED DOCUMENT LIKE SENDER (TypedDocumentNode, TypedDocumentString)
 // ================================================================================================
 
 /**
- * Sender for TypedDocumentLike (gql-tada, TypedDocumentNode).
+ * Sender for TypedDocumentLike (TypedDocumentNode, TypedDocumentString).
  * These have result and variable types but no operation names in the type system.
  * Only `.$send()` is available (no named operation methods).
  */

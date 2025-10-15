@@ -5,16 +5,15 @@ import { ModuleGeneratorScalar } from './Scalar.js'
 
 /**
  * Generates an overloaded gql() function that supports both:
- * - Template strings with gql-tada type inference
+ * - Template strings with type inference
  * - Document objects with document builder
  *
  * The generated function provides:
- * - Type-only imports from gql-tada (no runtime bundling)
  * - Full type inference for GraphQL queries from strings
  * - Document builder support for object syntax
  * - Uses graphql-js parse for runtime (already a Graffle dependency)
  *
- * @example Template string (gql-tada)
+ * @example Template string
  * ```ts
  * const doc = gql(`query { user { id } }`)
  * ```

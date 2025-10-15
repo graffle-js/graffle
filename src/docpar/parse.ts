@@ -1,8 +1,7 @@
 import type { Schema } from '#src/types/Schema/$.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
-import type { Simplify } from 'type-fest'
-import * as Doc from './core/doc.js'
-import type { InferOperations } from './gql.js'
+import type { Core } from './core/$.js'
+import type { SchemaDrivenDataMap } from './core/sddm/SchemaDrivenDataMap.js'
+import type { Object } from './object/$.js'
 import type { String } from './string/$.js'
 
 /**
@@ -11,9 +10,12 @@ import type { String } from './string/$.js'
  * - String inputs are parsed via the string parser (uses only $Schema)
  * - Object inputs are parsed via the object parser (uses all 4 parameters)
  *
- * Both produce equivalent TypedFullDocument types.
+ * Both produce equivalent Document<Operation> types.
  *
  * Supports both schema-driven and schema-less modes (pass `undefined` for $Schema).
+ *
+ * This is a pure parser - it doesn't know about GlobalRegistry or client context.
+ * For context-aware parsing, see `ParseGraphQLString` and `ParseGraphQLObject` in `#src/static/gql.js`.
  *
  * @example
  * ```ts
@@ -34,10 +36,11 @@ export type Parse<
   $ArgumentsMap = any,
   $Context = any,
 > =
-  $Input extends string
-    ? String.Parse<$Input, $Schema>
-    : $Schema extends Schema
-      ? $ArgumentsMap extends SchemaDrivenDataMap
-        ? Doc.FromObject<Simplify<InferOperations<$Input, $Schema, $ArgumentsMap, $Context>>>
-        : never
-      : never
+  $Input extends string         ? String.Parse<$Input, $Schema> extends Core.ParserError      ? String.Parse<$Input, $Schema>
+                                  : String.Parse<$Input, $Schema> extends Core.Doc.Operation   ? Core.Doc.Document<String.Parse<$Input, $Schema>>
+                                  :                                                               never
+  : $Input extends object        ? $Schema extends Schema                                      ? $ArgumentsMap extends SchemaDrivenDataMap ? $Context extends object ? Core.Doc.Document<Object.Parse<$Input, $Schema, $ArgumentsMap, $Context>>
+                                  :                                                               never
+                                  :                                                               never
+                                  :                                                               never
+  :                                                                                               never

@@ -4,8 +4,8 @@ import { isSymbol } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
-import type { Options } from '../ToGraphQLDocument/nodes/1_Document.js'
-import { toGraphQLDocument } from '../ToGraphQLDocument/nodes/1_Document.js'
+import type { Options } from './ToGraphQLDocument/nodes/1_Document.js'
+import { toGraphQLDocument } from './ToGraphQLDocument/nodes/1_Document.js'
 
 export const defaults: Partial<Options> = {
   hoistArguments: true,

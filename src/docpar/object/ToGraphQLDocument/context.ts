@@ -2,7 +2,8 @@ import { Grafaid } from '#lib/grafaid'
 import { Select } from '#src/docpar/object/Select/$.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
+import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Options } from './nodes/1_Document.js'
 
 /**
@@ -123,7 +124,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
         context.variables.data.push({
           name: potentialVariableName,
           type: input.sddmArgument
-            ? SchemaDrivenDataMap.argumentTypeToSyntax(input.sddmArgument)
+            ? SDDM.argumentTypeToSyntax(input.sddmArgument)
             : Grafaid.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
           value: processedValue,
           defaultValue: processedDefaultValue,

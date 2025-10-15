@@ -1,4 +1,6 @@
-import type { InlineType } from '../../SchemaDrivenDataMap/InlineType.js'
+import type { Docpar } from '#src/docpar/$.js'
+
+type InlineType = Docpar.InlineType
 import type { NamedInputTypes } from '../typeGroups.js'
 
 export interface InputField<

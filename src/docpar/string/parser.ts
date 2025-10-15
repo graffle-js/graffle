@@ -1,17 +1,6 @@
-/**
- * Single-pass GraphQL string parser with character-by-character matching.
- *
- * Unlike span-based parsing which suffers from greedy template literal matching,
- * this parser checks one character at a time, avoiding all ambiguity.
- *
- * Architecture:
- * - Parse GraphQL string character-by-character
- * - Look up types in schema as we go
- * - Build result type directly (no intermediate tokens or DocumentNode)
- */
-
 import type { GetDecoded } from '#src/types/Schema/nodes/Scalar/helpers.js'
-import type { MakeError } from '../core/error.js'
+import type { Num, Str, Ts } from '@wollybeard/kit'
+import type { Core } from '../core/$.js'
 import type { Enum, Interface, OutputField, OutputObject, Scalar, Schema } from './schema.js'
 import type { ApplyInlineType } from './typeTraversal.js'
 
@@ -66,7 +55,7 @@ type ParseOperations<
   $Input extends string,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-> = $Input extends '' ? Normalize<$Result>
+> = $Input extends '' ? Ts.Simplify<$Result>
   : ParseSingleOperation<$Input, $Schema> extends infer $OpResult
     ? $OpResult extends { operation: infer $Op; rest: infer $Rest }
       ? ParseOperations<SkipIgnored<$Rest & string>, $Schema, $Result & $Op>
@@ -96,7 +85,7 @@ type ParseSingleOperationWithSchema<
   $Input extends `{${infer _}`
     ? $Schema['Root']['query'] extends OutputObject
       ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema, {}>
-    : MakeError<'OperationNotAvailable', { message: 'Query operation not available in schema' }>
+    : Core.MakeError<'OperationNotAvailable', { message: 'Query operation not available in schema' }>
     // query keyword
     : $Input extends `query${infer $Rest}`
       ? IsWordBoundary<$Rest> extends true
@@ -112,7 +101,7 @@ type ParseSingleOperationWithSchema<
       ? IsWordBoundary<$Rest> extends true
         ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, $Schema['Root']['subscription'], $Schema, 'subscription'>
       : never
-    : MakeError<'InvalidOperation', {
+    : Core.MakeError<'InvalidOperation', {
       message: 'Expected operation keyword or selection set'
       input: $Input
     }>
@@ -142,7 +131,7 @@ type ParseSingleOperationSchemaLess<
       ? IsWordBoundary<$Rest> extends true
         ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, UniversalObject, $Schema, 'subscription'>
       : never
-    : MakeError<'InvalidOperation', {
+    : Core.MakeError<'InvalidOperation', {
       message: 'Expected operation keyword or selection set'
       input: $Input
     }>
@@ -177,11 +166,11 @@ type ParseOperationAfterKeyword<
       ? ParseSelectionSetForOperation<'default', SkipIgnored<$Rest & string>, $RootType, $Schema, $Variables>
     : ParseVariables<$VarsContent, $Schema> // Error
   : $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, $RootType, $Schema, {}>
-  : MakeError<'ExpectedSelectionSet', {
+  : Core.MakeError<'ExpectedSelectionSet', {
     message: 'Expected selection set after operation keyword'
     input: $Input
   }>
-  : MakeError<'OperationNotAvailable', {
+  : Core.MakeError<'OperationNotAvailable', {
     message: `${Capitalize<$OperationType>} operation not available in schema`
   }>
 
@@ -248,14 +237,14 @@ type ParseVariablesRec<
   $Result extends Record<string, any>,
 > =
   // Check for closing paren
-  $Input extends `)${infer $Rest}` ? { variables: Normalize<$Result>; rest: $Rest }
+  $Input extends `)${infer $Rest}` ? { variables: Ts.Simplify<$Result>; rest: $Rest }
     // Parse next variable
     : $Input extends `$${infer $VarNameRest}`
       ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
         ? ParseVariableAfterName<$VarName & string, SkipIgnored<$Rest & string>, $Schema, $Result>
-      : MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
-    : $Input extends '' ? MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
-    : MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
+      : Core.MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
+    : $Input extends '' ? Core.MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
+    : Core.MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
 
 /**
  * Parse after variable name: expect colon, then type
@@ -266,7 +255,7 @@ type ParseVariableAfterName<
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
 > = $Input extends `:${infer $Rest}` ? ParseVariableType<SkipIgnored<$Rest>, $VarName, $Schema, $Result>
-  : MakeError<'ExpectedColon', { message: 'Expected : after variable name' }>
+  : Core.MakeError<'ExpectedColon', { message: 'Expected : after variable name' }>
 
 /**
  * Parse variable type: Type or Type!
@@ -291,7 +280,7 @@ type ParseVariableType<
     $Schema,
     $Result & { [K in $VarName]?: MapGraphQLType<$TypeName & string, $Schema> | null | undefined }
   >
-  : MakeError<'ExpectedTypeName', { message: 'Expected type name after :' }>
+  : Core.MakeError<'ExpectedTypeName', { message: 'Expected type name after :' }>
 
 /**
  * Map GraphQL scalar types to TypeScript types.
@@ -321,7 +310,7 @@ type ParseSelectionSet<
   $ParentType extends OutputObject | Interface,
   $Schema extends Schema | undefined,
 > = $Input extends `{${infer $Rest}` ? ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, {}, 1>
-  : MakeError<'ExpectedSelectionSet', {
+  : Core.MakeError<'ExpectedSelectionSet', {
     message: 'Expected opening brace for selection set'
     input: $Input
   }>
@@ -338,8 +327,8 @@ type ParseFieldsInSelectionSet<
   $Depth extends number,
 > =
   // Check for closing brace
-  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Normalize<$Result>; rest: $Rest } // End - normalize result
-    : ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, $Result, Decrement<$Depth>>
+  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Ts.Simplify<$Result>; rest: $Rest } // End - simplify result
+    : ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, $Result, Num.MinusOne<$Depth>>
     // Parse next field
     : TakeName<$Input> extends { name: infer $FieldName; rest: infer $Rest } ? ParseFieldByName<
         $FieldName & string,
@@ -349,8 +338,8 @@ type ParseFieldsInSelectionSet<
         $Result,
         $Depth
       >
-    : $Input extends '' ? MakeError<'UnmatchedBrace', { message: 'Unexpected end of input in selection set' }>
-    : MakeError<'UnexpectedInput', { message: 'Expected field name'; input: $Input }>
+    : $Input extends '' ? Core.MakeError<'UnmatchedBrace', { message: 'Unexpected end of input in selection set' }>
+    : Core.MakeError<'UnexpectedInput', { message: 'Expected field name'; input: $Input }>
 
 /**
  * Parse a field by its name.
@@ -379,7 +368,7 @@ type ParseFieldByName<
   // Schema-less mode: field not found → use UnknownField
     ? ParseFieldAfterName<$FieldName, $Input, UnknownField, $ParentType, $Schema, $Result, $Depth>
   // Strict mode: field not found → error
-  : MakeError<'FieldNotFound', {
+  : Core.MakeError<'FieldNotFound', {
     message: `Field '${$FieldName}' does not exist on type '${$ParentType['name']}'`
     fieldName: $FieldName
     parentName: $ParentType['name']
@@ -409,7 +398,7 @@ type ParseFieldAfterName<
         $Result,
         $Depth
       >
-    : MakeError<'UnmatchedParen', { message: `Unmatched parenthesis in field '${$FieldName}' arguments` }>
+    : Core.MakeError<'UnmatchedParen', { message: `Unmatched parenthesis in field '${$FieldName}' arguments` }>
     // Check for nested selection
     : $Input extends `{${infer _}`
       ? ParseFieldWithNestedSelection<$FieldName, $Input, $Field, $ParentType, $Schema, $Result, $Depth>
@@ -480,7 +469,7 @@ type ParseFieldWithNestedSelection<
         $Depth
       >
     : ParseSelectionSet<$Input, UniversalObject, $Schema> // Error
-  : MakeError<'InvalidFieldType', {
+  : Core.MakeError<'InvalidFieldType', {
     message: `Field '${$FieldName}' is not an object type and cannot have nested selection`
     fieldName: $FieldName
   }>
@@ -518,12 +507,12 @@ type SkipIgnored<$Input extends string> = $Input extends ` ${infer $Rest}` ? Ski
  * Returns: { name: string, rest: string } or void
  */
 type TakeName<$Input extends string> = $Input extends `${infer $First}${infer $Rest}`
-  ? $First extends Letter | '_' ? TakeNameRest<$First, $Rest>
+  ? $First extends Str.Char.Letter | '_' ? TakeNameRest<$First, $Rest>
   : void
   : void
 
 type TakeNameRest<$Acc extends string, $Input extends string> = $Input extends `${infer $Char}${infer $Rest}`
-  ? $Char extends Letter | Digit | '_' ? TakeNameRest<`${$Acc}${$Char}`, $Rest>
+  ? $Char extends Str.Char.Letter | Str.Char.Digit | '_' ? TakeNameRest<`${$Acc}${$Char}`, $Rest>
   : { name: $Acc; rest: $Input }
   : { name: $Acc; rest: $Input }
 
@@ -532,105 +521,8 @@ type TakeNameRest<$Acc extends string, $Input extends string> = $Input extends `
  */
 type SkipUntilCloseParen<$Input extends string, $Depth extends number> = $Input extends `(${infer $Rest}`
   ? $Depth extends 0 ? SkipUntilCloseParen<$Rest, 1>
-  : SkipUntilCloseParen<$Rest, Increment<$Depth>>
+  : SkipUntilCloseParen<$Rest, Num.PlusOne<$Depth>>
   : $Input extends `)${infer $Rest}` ? $Depth extends 1 ? { rest: $Rest }
-    : SkipUntilCloseParen<$Rest, Decrement<$Depth>>
+    : SkipUntilCloseParen<$Rest, Num.MinusOne<$Depth>>
   : $Input extends `${infer _}${infer $Rest}` ? SkipUntilCloseParen<$Rest, $Depth>
   : void
-
-// ============================================================================
-// Utility types
-// ============================================================================
-
-type Letter =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'E'
-  | 'F'
-  | 'G'
-  | 'H'
-  | 'I'
-  | 'J'
-  | 'K'
-  | 'L'
-  | 'M'
-  | 'N'
-  | 'O'
-  | 'P'
-  | 'Q'
-  | 'R'
-  | 'S'
-  | 'T'
-  | 'U'
-  | 'V'
-  | 'W'
-  | 'X'
-  | 'Y'
-  | 'Z'
-  | 'a'
-  | 'b'
-  | 'c'
-  | 'd'
-  | 'e'
-  | 'f'
-  | 'g'
-  | 'h'
-  | 'i'
-  | 'j'
-  | 'k'
-  | 'l'
-  | 'm'
-  | 'n'
-  | 'o'
-  | 'p'
-  | 'q'
-  | 'r'
-  | 's'
-  | 't'
-  | 'u'
-  | 'v'
-  | 'w'
-  | 'x'
-  | 'y'
-  | 'z'
-
-type Digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-
-type Increment<$N extends number> = $N extends 0 ? 1
-  : $N extends 1 ? 2
-  : $N extends 2 ? 3
-  : $N extends 3 ? 4
-  : $N extends 4 ? 5
-  : $N extends 5 ? 6
-  : $N extends 6 ? 7
-  : $N extends 7 ? 8
-  : $N extends 8 ? 9
-  : $N extends 9 ? 10
-  : never
-
-type Decrement<$N extends number> = $N extends 10 ? 9
-  : $N extends 9 ? 8
-  : $N extends 8 ? 7
-  : $N extends 7 ? 6
-  : $N extends 6 ? 5
-  : $N extends 5 ? 4
-  : $N extends 4 ? 3
-  : $N extends 3 ? 2
-  : $N extends 2 ? 1
-  : $N extends 1 ? 0
-  : never
-
-type Capitalize<$S extends string> = $S extends `${infer $First}${infer $Rest}` ? `${Uppercase<$First>}${$Rest}`
-  : $S
-
-/**
- * Normalize a type to a clean object literal
- * Converts Record<...> & Record<...> to { ... }
- */
-type Normalize<$T> =
-  & {
-    [K in keyof $T]: $T[K]
-  }
-  & {}

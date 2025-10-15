@@ -10,28 +10,32 @@ export type { ParseDocument } from './parser.js'
 export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSetup } from './schema.js'
 
 /**
- * Top-level Parse utility for GraphQL strings.
+ * Parse GraphQL string into operations (raw, unwrapped).
  *
- * Parses a GraphQL string and returns a TypedFullDocument with all operations.
- * This is the main entrypoint for string parsing - use this in tests and public APIs.
+ * Returns a union of operations without Doc.Document wrapper.
+ * For the wrapped version, use the unified Parse in docpar/parse.ts.
  *
  * @param $Input - The GraphQL document string to parse
  * @param $Schema - Optional schema for type-safe parsing (undefined for schema-less mode)
  *
  * @example
  * ```ts
- * type Doc = Parse<'{ id }', MySchema>
- * // Returns: TypedFullDocument.SingleOperation<{ result: { id: string }, variables: {} }>
+ * type Ops = Parse<'{ id }', MySchema>
+ * // Returns: Operation<'default', { id: string }, {}> (raw operation, no Document wrapper)
  * ```
  */
-export type Parse<$Input extends string, $Schema> = Doc.FromObject<
-  Simplify<
-    getDocumentOperations<
-      parseDocument<$Input>['definitions'],
-      $Schema
-    >
+export type Parse<$Input extends string, $Schema> = Simplify<
+  getDocumentOperations<
+    parseDocument<$Input>['definitions'],
+    $Schema
   >
->
+> extends infer $OperationsRecord ? $OperationsRecord extends { __typename: 'ParserError' } ? $OperationsRecord
+  : [$OperationsRecord] extends [Record<string, any>]
+    ? [$OperationsRecord[keyof $OperationsRecord]] extends [infer $Op] ? [$Op] extends [Doc.Operation] ? $Op
+      : string
+    : string
+  : string
+  : string
 
 /**
  * parseDocument - captures the input string to pass to getDocumentOperations.
@@ -59,10 +63,10 @@ export type schemaOfSetup<$Setup extends import('./schema.js').AbstractSetupSche
   import('./schema.js').SchemaOfSetup<$Setup>
 
 /**
- * GraphQLTadaAPI - type for the gql function.
- * Minimal stub for compatibility.
+ * GraphQLStringAPI - type for the gql function.
+ * Minimal stub for LSP compatibility.
  */
-export interface GraphQLTadaAPI<$Schema, $Config> {
+export interface GraphQLStringAPI<$Schema, $Config> {
   readonly __name: string
   scalar: any
   persisted: any
