@@ -1,8 +1,10 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
+import { Docpar } from '#src/docpar/$.js'
 import { Code } from '#src/lib/Code.js'
-import { propertyNames } from '#src/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import { Obj } from '@wollybeard/kit'
+
+const propertyNames = Docpar.propertyNames
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'

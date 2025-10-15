@@ -1,6 +1,6 @@
 import type { Schema } from '#src/types/Schema/$.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Core } from './core/$.js'
+import type { SchemaDrivenDataMap } from './core/sddm/SchemaDrivenDataMap.js'
 import type { Object } from './object/$.js'
 import type { String } from './string/$.js'
 

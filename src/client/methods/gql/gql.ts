@@ -46,8 +46,8 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 // dprint-ignore
 type TadaAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
   ? any
-  : Docpar.GraphQLTadaAPI<
-      Docpar.schemaOfSetup<{
+  : Docpar.String.GraphQLTadaAPI<
+      Docpar.String.schemaOfSetup<{
         introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
         scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
       }>,

@@ -1,7 +1,8 @@
 import { Select } from '#src/docpar/object/Select/$.js'
 import { Var } from '#src/docpar/object/var/$.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
-import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
+import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toGraphQLArgument } from './Argument.js'
@@ -88,7 +89,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
       }
       default: {
         // dprint-ignore
-        if (SchemaDrivenDataMap.isScalarLike(sddm?.nt) || SchemaDrivenDataMap.isOutputField(sddm?.nt) || SchemaDrivenDataMap.isEnum(sddm?.nt)) throw new Error(`schema map scalar on non-scalar graffle selection.`)
+        if (SDDM.isScalarLike(sddm?.nt) || SDDM.isOutputField(sddm?.nt) || SDDM.isEnum(sddm?.nt)) throw new Error(`schema map scalar on non-scalar graffle selection.`)
         collectForInlineFragmentLike(context, sddm?.nt, keyParsed, {
           directives,
           selections,

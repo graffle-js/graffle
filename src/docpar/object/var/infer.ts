@@ -8,8 +8,8 @@
 
 import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { PropertySignature } from '#src/lib/prelude.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Simplify, UnionToIntersection } from 'type-fest'
+import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Select } from '../Select/$.js'
 import type { ExtractFromOperation } from './extract.js'
 

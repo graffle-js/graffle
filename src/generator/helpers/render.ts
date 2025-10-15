@@ -1,7 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
+import { Docpar } from '#src/docpar/$.js'
 import { Code } from '#src/lib/Code.js'
-import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 import type { Config } from '../config/config.js'
 
 export const renderInlineType = (type: Grafaid.Schema.Types): string => {
@@ -10,8 +10,8 @@ export const renderInlineType = (type: Grafaid.Schema.Types): string => {
     : [type, false]
 
   const nullFlag = nonNull
-    ? SchemaDrivenDataMap.nullabilityFlags.nonNull
-    : SchemaDrivenDataMap.nullabilityFlags.nullable
+    ? Docpar.nullabilityFlags.nonNull
+    : Docpar.nullabilityFlags.nullable
 
   const rest = Grafaid.Schema.isListType(ofType)
     ? renderInlineType(ofType.ofType)

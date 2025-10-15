@@ -1,6 +1,6 @@
 import type { Schema } from '#src/types/Schema/$.js'
-import type { InlineType } from '#src/types/SchemaDrivenDataMap/InlineType.js'
 import type { Ts } from '@wollybeard/kit'
+import type { InlineType } from '../../core/sddm/InlineType.js'
 import type { Interface } from './Interface.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 import type { Union } from './Union.js'

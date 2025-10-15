@@ -2,8 +2,8 @@ import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Core } from '../core/$.js'
+import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
 
 /**
  * Parse GraphQL document object into operations.

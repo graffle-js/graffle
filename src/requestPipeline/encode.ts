@@ -1,6 +1,8 @@
 import { Schema } from '#graffle/schema'
 import { Grafaid } from '#lib/grafaid'
-import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/$.js'
+import { Docpar } from '#src/docpar/$.js'
+
+type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
   sddm: SchemaDrivenDataMap
@@ -34,7 +36,7 @@ const encodeInputFieldLike = (
   args: Record<string, any>,
   argName: any,
   argValue: any,
-  sddmNode: SchemaDrivenDataMap.InputNodes,
+  sddmNode: Docpar.InputNodes,
   scalars: Schema.Scalar.ScalarMap,
 ) => {
   /**
@@ -53,18 +55,18 @@ const encodeInputFieldLike = (
    * repeating use of the same custom scalar.
    */
 
-  if (SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
+  if (Docpar.isCustomScalarName(sddmNode)) {
     const scalar = Schema.Scalar.lookupCustomScalarOrFallbackToString(scalars, sddmNode)
     args[argName] = Schema.Scalar.applyCodec(scalar.codec.encode, argValue)
     return
   }
 
-  if (SchemaDrivenDataMap.isScalar(sddmNode)) {
+  if (Docpar.isScalar(sddmNode)) {
     args[argName] = Schema.Scalar.applyCodec(sddmNode.codec.encode, argValue)
     return
   }
 
-  if (SchemaDrivenDataMap.isInputObject(sddmNode)) {
+  if (Docpar.isInputObject(sddmNode)) {
     // We could iterate here by two strategies:
     // 1. The number of fields in the variables object given to execute against the document operation.
     // 2. The number of custom scalar fields (direct or transient) on this schema object.

@@ -1,6 +1,8 @@
 import type { Grafaid } from '#lib/grafaid'
+import type { Docpar } from '#src/docpar/$.js'
 import { Nodes } from '#src/lib/grafaid/graphql.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
+
+type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 export const injectTypenameOnRootResultFields = (
   { request, sddm }: {

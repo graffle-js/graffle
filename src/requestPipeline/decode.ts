@@ -1,7 +1,9 @@
 import { Schema } from '#graffle/schema'
 import type { Grafaid } from '#lib/grafaid'
+import { Docpar } from '#src/docpar/$.js'
 import { Kind } from 'graphql'
-import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/$.js'
+
+type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 /**
  * If a document is given then aliases will be decoded as well.
@@ -51,7 +53,7 @@ const decodeResultValue = (input: {
       index: number
     }
   value: Grafaid.SomeFieldData
-  sddmNode: SchemaDrivenDataMap.OutputNodes
+  sddmNode: Docpar.OutputNodes
   documentPart: null | Grafaid.Document.SelectionSetNode
   scalars: Schema.Scalar.ScalarMap
 }): void => {
@@ -73,7 +75,7 @@ const decodeResultValue = (input: {
       })
     })
   } else if (typeof value === `object`) {
-    if (!SchemaDrivenDataMap.isOutputObject(sddmNode)) {
+    if (!Docpar.isOutputObject(sddmNode)) {
       return
       // something went wrong
       // todo in strict mode throw error that sddmNode is inconsistent with data shape.
@@ -100,14 +102,14 @@ const decodeResultValue = (input: {
       // Should be impossible. Strict mode could error here.
       return
     }
-    if (SchemaDrivenDataMap.isScalar(sddmNode)) {
+    if (Docpar.isScalar(sddmNode)) {
       const decodedValue = Schema.Scalar.applyCodec(sddmNode.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {
         parentContext.object[parentContext.index] = decodedValue
       }
-    } else if (SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
+    } else if (Docpar.isCustomScalarName(sddmNode)) {
       const scalar = Schema.Scalar.lookupCustomScalarOrFallbackToString(scalars, sddmNode)
       const decodedValue = Schema.Scalar.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {

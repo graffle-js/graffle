@@ -1,7 +1,6 @@
 import { Docpar } from '#src/docpar/$.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
 
 //
@@ -25,7 +24,7 @@ import { print } from '@0no-co/graphql.web'
 export interface gql<
   $Schema extends Schema,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends SchemaDrivenDataMap,
+  $ArgumentsMap extends Docpar.SchemaDrivenDataMap,
 > {
   // String GraphQL document overload
   <const $Input extends string>(
@@ -96,7 +95,7 @@ export const defaults: Partial<Docpar.Object.ToGraphQLDocument.Options> = {
 export const createGql = <
   $Schema extends Schema,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends SchemaDrivenDataMap,
+  $ArgumentsMap extends Docpar.SchemaDrivenDataMap,
 >(config: {
   sddm: $ArgumentsMap
 }): gql<$Schema, $DocumentObjectConstraint, $ArgumentsMap> => {

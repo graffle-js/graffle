@@ -2,7 +2,8 @@ import type { Grafaid } from '#lib/grafaid'
 import { Select } from '#src/docpar/object/Select/$.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import { Schema } from '#src/types/Schema/$.js'
-import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
+import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 
@@ -11,14 +12,14 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
   // const hookResult = context.hooks?.value?.(context, index, value)
   // if (hookResult) return hookResult
 
-  if (SchemaDrivenDataMap.isScalarLike(sddm?.nt)) {
-    const scalar = SchemaDrivenDataMap.isScalar(sddm.nt)
+  if (SDDM.isScalarLike(sddm?.nt)) {
+    const scalar = SDDM.isScalar(sddm.nt)
       ? sddm.nt
       : Schema.Scalar.lookupCustomScalarOrFallbackToString(context.scalars, sddm.nt)
     return applyScalar(context, scalar, value)
   }
 
-  if (SchemaDrivenDataMap.isEnum(sddm?.nt)) {
+  if (SDDM.isEnum(sddm?.nt)) {
     return Nodes.EnumValue({ value: String(value) })
   }
 

@@ -1,6 +1,8 @@
+import type { Docpar } from '#src/docpar/$.js'
 import { Configurator as C } from '#src/lib/configurator/configurator.js'
 import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+
+type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.
