@@ -5,8 +5,7 @@ import type { Docpar } from './$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import { $ } from './object/var/var.js'
-import type * as Doc from './core/doc.js'
-import type * as Operation from './core/operation.js'
+import type { Core } from './core/$.js'
 
 type Context = {
   typeHookRequestResultDataTypes: never
@@ -16,7 +15,7 @@ type Context = {
 type Strict<$Input> = Docpar.Parse<$Input, Possible.$.Schema, Possible.$.ArgumentsMap, Context>
 type Loose<$Input> = Docpar.Parse<$Input, undefined, any, any>
 
-type D<$Op extends Operation.Operation> = Doc.Document<$Op>
+type D<$Op extends Core.Operation> = Core.Doc.Document<$Op>
 
 // ==================================================================================================
 //                                   Basic Field Selection

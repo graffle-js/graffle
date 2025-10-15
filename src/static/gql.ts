@@ -1,12 +1,11 @@
 import { Docpar } from '#src/docpar/$.js'
-import type { InferOperationsInDocument } from '#src/docpar/object/InferOperations.js'
 import type { Options } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_Document.js'
+import type { Parse } from '#src/docpar/parse.js'
+import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
-import type { Simplify } from 'type-fest'
-import * as Doc from './core/doc.js'
 
 //
 //
@@ -31,43 +30,25 @@ export interface gql<
   $DocumentObjectConstraint,
   $ArgumentsMap extends SchemaDrivenDataMap,
 > {
-  // Override string signature to return TypedFullDocument instead of TadaDocumentNode
+  // String GraphQL document overload
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): Simplify<
-    Docpar.getDocumentOperations<
-      Docpar.parseDocument<$Input>['definitions'],
-      Docpar.schemaOfSetup<{
-        schema: $Schema
-      }>
-    >
-  > extends infer $OperationsRecord ? $OperationsRecord extends { __typename: 'ParserError' } ? $OperationsRecord
-    : [$OperationsRecord] extends [Record<string, any>]
-      ? [$OperationsRecord[keyof $OperationsRecord]] extends [infer $Op]
-        ? [$Op] extends [Doc.Operation] ? Doc.Document<$Op>
-        : string
-      : string
-    : string
-    : string
+  ): Parse<$Input, $Schema>
 
   // Document object overload
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): $Document extends object ? Doc.Document<
-      Simplify<
-        InferOperationsInDocument<
-          $Document,
-          $Schema,
-          $ArgumentsMap,
-          {
-            // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
-            // For now, hardcoded to never since static documents have no runtime extensions
-            typeHookRequestResultDataTypes: never
-            scalars: $Schema['scalarRegistry']
-          }
-        >
-      >
+  ): $Document extends object ? Parse<
+      $Document,
+      $Schema,
+      $ArgumentsMap,
+      {
+        // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
+        // For now, hardcoded to never since static documents have no runtime extensions
+        typeHookRequestResultDataTypes: never
+        scalars: $Schema['scalarRegistry']
+      }
     >
     : never
 }
@@ -148,3 +129,63 @@ export const createGql = <
 
 // todo
 // export const gql = createGql()
+
+//
+//
+//
+//
+// ==================================================================================================
+//                                    Context-Aware Parse Helpers
+// ==================================================================================================
+//
+//
+//
+//
+
+/**
+ * Type-level utility that parses GraphQL string documents and returns a typed document with all operations.
+ *
+ * Extracts schema information from the context's GlobalRegistry and parses the GraphQL string accordingly.
+ * If no GlobalRegistry is available, uses schema-less mode.
+ *
+ * @typeParam $Context - The client context containing schema introspection via GlobalRegistry
+ * @typeParam $Input - The GraphQL document string to parse
+ *
+ * @example
+ * ```ts
+ * type Doc = ParseGraphQLString<MyContext, 'query MyQuery { id }'>
+ * // Result: Document<Operation<'MyQuery', { id: string }, {}>>
+ * ```
+ */
+// dprint-ignore
+export type ParseGraphQLString<
+  $Context,
+  $Input extends string,
+> = GlobalRegistry.ForContext<$Context> extends never
+  ? Parse<$Input, undefined>
+  : Parse<$Input, GlobalRegistry.ForContext<$Context>['schema']>
+
+/**
+ * Type-level utility that parses a document builder object and returns the typed document.
+ *
+ * Extracts schema and arguments map from the context's GlobalRegistry and infers operation types.
+ *
+ * @typeParam $Context - The client context containing schema and configuration via GlobalRegistry
+ * @typeParam $Document - The document builder object to parse
+ *
+ * @example
+ * ```ts
+ * type Doc = ParseGraphQLObject<MyContext, { query: { myQuery: { id: true } } }>
+ * // Result: Document with operation metadata
+ * ```
+ */
+// dprint-ignore
+export type ParseGraphQLObject<
+  $Context,
+  $Document,
+> = Parse<
+  $Document,
+  GlobalRegistry.ForContext<$Context>['schema'],
+  GlobalRegistry.ForContext<$Context>['argumentsMap'],
+  $Context
+>

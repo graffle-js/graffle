@@ -1,4 +1,3 @@
-export * from './gql.js'
 export * from './string/$$.js'
 
 export { Object } from './object/$.js'

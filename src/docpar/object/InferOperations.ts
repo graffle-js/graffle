@@ -3,7 +3,7 @@ import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
-import type { Operation } from '../core/operation.js'
+import type { Core } from '../core/$.js'
 
 /**
  * Infer all operations in a document by mapping over operation types (query, mutation, subscription).
@@ -80,7 +80,7 @@ export type InferOperation<
   $OperationName,
 > =
   $DocOp extends object
-    ? Operation<
+    ? Core.Operation<
         $OperationName & string,
         RequestResult.Simplify<$Context,
           DocumentBuilderKit.InferResult.Operation<$DocOp, $Schema, $OperationType>
