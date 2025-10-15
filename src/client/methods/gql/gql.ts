@@ -180,7 +180,7 @@ export namespace GqlMethod {
    * Arguments accepted by the instance gql method.
    *
    * Can be either:
-   * - TypedDocumentLike (gql-tada, TypedDocumentNode, etc.)
+   * - TypedDocumentLike (TypedDocumentNode, TypedDocumentString, etc.)
    * - Document builder object
    */
   export type Arguments =
@@ -197,7 +197,7 @@ export namespace GqlMethod {
     // TypedDocumentLike documents are strings or have specific properties
     const isTypedDocumentLike = typeof first === 'string'
       || 'definitions' in first // DocumentNode
-      || '__meta__' in first // TadaDocumentNode
+      || '__meta__' in first // TypedDocumentNode
 
     if (isTypedDocumentLike) {
       return {

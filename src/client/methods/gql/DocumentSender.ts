@@ -152,7 +152,7 @@ export interface RequiredVarsNamedExecutor<
 /**
  * Object returned from `client.gql()` that provides operation methods.
  *
- * - For **typed documents** (gql-tada, TypedDocumentNode), each operation becomes a method
+ * - For **typed documents** (TypedDocumentNode, TypedDocumentString), each operation becomes a method
  * - For **untyped documents** (plain strings), only `.$send()` is available with generic signature
  *
  * @example
@@ -211,11 +211,11 @@ export interface UntypedSender<$Context = any> {
 }
 
 // ================================================================================================
-// TYPED DOCUMENT LIKE SENDER (gql-tada, TypedDocumentNode)
+// TYPED DOCUMENT LIKE SENDER (TypedDocumentNode, TypedDocumentString)
 // ================================================================================================
 
 /**
- * Sender for TypedDocumentLike (gql-tada, TypedDocumentNode).
+ * Sender for TypedDocumentLike (TypedDocumentNode, TypedDocumentString).
  * These have result and variable types but no operation names in the type system.
  * Only `.$send()` is available (no named operation methods).
  */

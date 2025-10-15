@@ -59,7 +59,7 @@ Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send('myQuery'))
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send())
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).myQuery())
 Ts.Test.exact<R1>()(await client.gql(singleNoVarsString).$send())
-// Inline tada (plain string)
+// Inline string
 Ts.Test.exact<R1>()(await client.gql(`query myQuery { id }`).$send())
 
 // Inline object
@@ -70,7 +70,7 @@ client.gql(singleNoVars).bad()
 client.gql(singleNoVars).$send('bad')
 // @ts-expect-error - unexpected variables
 client.gql(singleNoVars).$send({})
-// @ts-expect-error - unexpected variables (tada)
+// @ts-expect-error - unexpected variables (string)
 client.gql(singleNoVarsString).$send({})
 
 // ==================================================================================================
@@ -82,7 +82,7 @@ Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: 
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).getById({ id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVarsString).$send({ id: '' }))
-// Inline tada (plain string)
+// Inline string
 Ts.Test.exact<R2>()(
   await client.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`).$send({ id: '' }),
 )
@@ -102,9 +102,9 @@ client.gql(singleRequiredVars).$send('getById', { id: 0 })
 client.gql(singleRequiredVars).$send({ id: 0 })
 // @ts-expect-error - missing required variable 'id'
 client.gql(singleRequiredVars).getById()
-// @ts-expect-error - missing required variable 'id' (tada)
+// @ts-expect-error - missing required variable 'id' (string)
 client.gql(singleRequiredVarsString).$send()
-// @ts-expect-error - wrong type for variable 'id' (tada)
+// @ts-expect-error - wrong type for variable 'id' (string)
 client.gql(singleRequiredVarsString).$send({ id: 0 })
 
 // ==================================================================================================
@@ -124,7 +124,7 @@ Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search({ string: 'hello
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send())
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send({}))
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
-// Inline tada (plain string)
+// Inline string
 Ts.Test.exact<R3>()(await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send())
 Ts.Test.exact<R3>()(
   await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send({ string: 'hello' }),
@@ -142,7 +142,7 @@ Ts.Test.exact<R3>()(
 client.gql(singleOptionalVars).$send('bad')
 // @ts-expect-error - wrong type for variable 'string'
 client.gql(singleOptionalVars).$send('search', { string: 0 })
-// @ts-expect-error - wrong type for variable 'string' (tada)
+// @ts-expect-error - wrong type for variable 'string' (string)
 client.gql(singleOptionalVarsString).$send({ string: 0 })
 
 // ==================================================================================================
@@ -155,9 +155,9 @@ Ts.Test.exact<R4>()(await client.gql(multiNoVars).$send('getUser'))
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).$send('addId'))
 Ts.Test.exact<R4>()(await client.gql(multiNoVars).getUser())
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).addId())
-// Multi-op tada documents require operation name
+// Multi-op string documents require operation name
 Ts.Test.exact<R4>()(await client.gql(multiNoVarsString).$send('getUser'))
-// Inline tada (plain string) - multi-op requires operation name
+// Inline string - multi-op requires operation name
 Ts.Test.exact<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
 // Inline object
 Ts.Test.exact<R4>()(
@@ -174,7 +174,7 @@ client.gql(multiNoVars).$send('bad')
 client.gql(multiNoVars).$send('getUser', {})
 // @ts-expect-error - name required
 client.gql(multiNoVars).$send()
-// @ts-expect-error - unexpected variables (tada multi-op)
+// @ts-expect-error - unexpected variables (string multi-op)
 client.gql(multiNoVarsString).$send('getUser', {})
 
 // ==================================================================================================
@@ -187,9 +187,9 @@ Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).$send('getById', { id: 
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).$send('setId'))
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).setId())
-// Multi-op tada documents require operation name
+// Multi-op string documents require operation name
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
-// Inline tada (plain string) - multi-op requires operation name
+// Inline string - multi-op requires operation name
 Ts.Test.exact<R6a>()(
   await client
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
@@ -220,9 +220,9 @@ client.gql(multiRequiredVars).$send('getById')
 client.gql(multiRequiredVars).$send('getById', { id: 0 })
 // @ts-expect-error - name required
 client.gql(multiNoVars).$send()
-// @ts-expect-error - missing required variable 'id' (tada multi-op)
+// @ts-expect-error - missing required variable 'id' (string multi-op)
 client.gql(multiRequiredVarsString).$send('getById')
-// @ts-expect-error - wrong type for variable 'id' (tada multi-op)
+// @ts-expect-error - wrong type for variable 'id' (string multi-op)
 client.gql(multiRequiredVarsString).$send('getById', { id: 0 })
 
 // ==================================================================================================

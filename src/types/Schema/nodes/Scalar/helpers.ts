@@ -16,7 +16,7 @@ export type GetDecoded<$Scalar extends Scalar> =
     : never
 
 /**
- * Extract decoded types from a scalar map for use with gql-tada.
+ * Extract decoded types from a scalar map for type-safe GraphQL operations.
  *
  * Transforms `{ DateTime: Scalar<'DateTime', Date, string> }` into `{ DateTime: Date }`.
  */
