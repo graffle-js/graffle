@@ -45,6 +45,8 @@ type _ = Ts.Test.Cases<
   // Named query with single scalar field
   Ts.Test.exact<Strict<'query q { id }'>, OpQId>,
   Ts.Test.exact<Strict<{ query: { q: { id: true } } }>, OpQId>,
+  Ts.Test.exact<Loose<'query q { id }'>, D<{ name: 'q'; result: { id: unknown }; variables: {} }>>,
+  Ts.Test.exact<Loose<{ query: { q: { id: true } } }>, D<{ name: 'q'; result: { id: unknown }; variables: {} }>>,
   Ts.Test.exact<Loose<'query q { unknownField }'>, OpQUnknownField>,
   Ts.Test.exact<Loose<{ query: { q: { unknownField: true } } }>, OpQUnknownField>,
 
@@ -60,11 +62,17 @@ type _ = Ts.Test.Cases<
   Ts.Test.exact<Loose<'{ date }'>, OpDefaultDateLoose>,
   Ts.Test.exact<Loose<{ query: { default: { date: true } } }>, OpDefaultDateLoose>,
 
-  // Query with spaces/formatting
+  // Query with spaces/formatting - tests parser handles whitespace
   Ts.Test.exact<Strict<'query q { date }'>, OpQDate>,
+  Ts.Test.exact<Strict<{ query: { q: { date: true } } }>, OpQDate>,
+  Ts.Test.exact<Loose<'query q { date }'>, D<{ name: 'q'; result: { date: unknown }; variables: {} }>>,
+  Ts.Test.exact<Loose<{ query: { q: { date: true } } }>, D<{ name: 'q'; result: { date: unknown }; variables: {} }>>,
 
   // Non-null field
-  Ts.Test.exact<Strict<'{ idNonNull }'>, OpDefaultIdNonNull>
+  Ts.Test.exact<Strict<'{ idNonNull }'>, OpDefaultIdNonNull>,
+  Ts.Test.exact<Strict<{ query: { default: { idNonNull: true } } }>, OpDefaultIdNonNull>,
+  Ts.Test.exact<Loose<'{ idNonNull }'>, D<{ name: 'default'; result: { idNonNull: unknown }; variables: {} }>>,
+  Ts.Test.exact<Loose<{ query: { default: { idNonNull: true } } }>, D<{ name: 'default'; result: { idNonNull: unknown }; variables: {} }>>
 >
 
 // ==================================================================================================
@@ -97,6 +105,9 @@ type _Nested = Ts.Test.Cases<
 
   // Multiple nested objects at same level
   Ts.Test.exact<Strict<'{ object { id } objectNested { id } }'>, OpDefaultTwoObjectsWithId>,
+  Ts.Test.exact<Strict<{ query: { default: { object: { id: true }; objectNested: { id: true } } } }>, OpDefaultTwoObjectsWithId>,
+  Ts.Test.exact<Loose<'{ obj1 { field } obj2 { field } }'>, D<{ name: 'default'; result: { obj1: { field: unknown } | null; obj2: { field: unknown } | null }; variables: {} }>>,
+  Ts.Test.exact<Loose<{ query: { default: { obj1: { field: true }; obj2: { field: true } } } }>, D<{ name: 'default'; result: { obj1: { field: unknown } | null; obj2: { field: unknown } | null }; variables: {} }>>,
 
   // Deep nesting (3 levels)
   Ts.Test.exact<Strict<'{ objectNested { object { id } } }'>, OpDefaultDeepNested>,
@@ -126,6 +137,7 @@ type _Arguments = Ts.Test.Cases<
 
   // Field with required argument
   Ts.Test.exact<Strict<'{ stringWithRequiredArg(string: "required") }'>, OpDefaultStringWithRequiredArg>,
+  Ts.Test.exact<Loose<'{ unknownField(required: "value") }'>, OpDefaultUnknownFieldWithArgs>,
 
   // Nested object with arguments
   Ts.Test.exact<Strict<'{ objectWithArgs(id: "123") { id } }'>, OpDefaultObjectWithArgs>,
@@ -159,6 +171,7 @@ type OpMultiQueryAndMutationLoose = D<
 type _MultiOp = Ts.Test.Cases<
   // Two queries
   Ts.Test.exact<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,
+  Ts.Test.exact<Strict<{ query: { A: { id: true }; B: { string: true } } }>, OpMultiTwoQueries>,
   Ts.Test.exact<Loose<'query A { field1 } query B { field2 }'>, OpMultiTwoQueriesLoose>,
   Ts.Test.exact<Loose<{ query: { A: { field1: true }; B: { field2: true } } }>, OpMultiTwoQueriesLoose>,
 
@@ -255,18 +268,23 @@ type _Variables = Ts.Test.Cases<
 
   // Required String variable
   Ts.Test.exact<Strict<'query q($s: String!) { id }'>, OpQIdWithVarS>,
+  Ts.Test.exact<Loose<'query q($s: String!) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { s: string } }>>,
 
   // Optional Int variable
   Ts.Test.exact<Strict<'query q($n: Int) { id }'>, OpQIdWithVarN_Optional>,
+  Ts.Test.exact<Loose<'query q($n: Int) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { n?: number | null | undefined } }>>,
 
   // Required Boolean variable
   Ts.Test.exact<Strict<'query q($b: Boolean!) { id }'>, OpQIdWithVarB>,
+  Ts.Test.exact<Loose<'query q($b: Boolean!) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { b: boolean } }>>,
 
   // Multiple required variables
   Ts.Test.exact<Strict<'query q($a: ID!, $s: String!, $n: Int!) { id }'>, OpQIdWithMultiRequiredVars>,
+  Ts.Test.exact<Loose<'query q($a: ID!, $s: String!, $n: Int!) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { a: string; s: string; n: number } }>>,
 
   // Mutation with variable
   Ts.Test.exact<Strict<'mutation m($a: ID!) { id }'>, OpMIdWithVarA>,
+  Ts.Test.exact<Loose<'mutation m($a: ID!) { field }'>, D<{ name: 'm'; result: { field: unknown }; variables: { a: string } }>>,
 
   // Anonymous query with variable
   Ts.Test.exact<Strict<'query($a: ID!) { id }'>, OpDefaultIdWithVarA>,
