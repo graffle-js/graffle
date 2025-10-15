@@ -2,7 +2,7 @@ import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { Docpar } from '#src/docpar/$.js'
-import type { ParseGraphQLObject, ParseGraphQLString } from '#src/docpar/gql.js'
+import type { ParseGraphQLObject, ParseGraphQLString } from '#src/docpar/parse.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 

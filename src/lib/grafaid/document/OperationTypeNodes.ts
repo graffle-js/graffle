@@ -7,3 +7,10 @@ import type { OperationTypeNode as GraphQLOperationTypeNode } from 'graphql'
 export const QUERY = `query` as GraphQLOperationTypeNode.QUERY
 export const MUTATION = `mutation` as GraphQLOperationTypeNode.MUTATION
 export const SUBSCRIPTION = `subscription` as GraphQLOperationTypeNode.SUBSCRIPTION
+
+// dprint-ignore
+export type OperationTypeStringToNode<$OperationTypeString extends string> =
+    $OperationTypeString extends 'mutation' ? typeof GraphQLOperationTypeNode.MUTATION
+  : $OperationTypeString extends 'subscription' ? typeof GraphQLOperationTypeNode.SUBSCRIPTION
+  : $OperationTypeString extends 'query' ?  typeof GraphQLOperationTypeNode.QUERY
+  : never

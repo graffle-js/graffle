@@ -1,28 +1,5 @@
-import type { Ts } from '@wollybeard/kit'
+import type { IsUnion } from '#src/lib/prelude.js'
 import type { Core } from '../core/$.js'
-
-// ================================
-// Type Inference Helpers
-// ================================
-
-/**
- * Check if a type is a union (has multiple members).
- * Returns true if the type is a union, false otherwise.
- *
- * Uses UnionToIntersection: if a type equals its intersection form, it's not a union.
- * Wrapped in tuples to prevent distribution.
- */
-// dprint-ignore
-type IsUnion<$Type> =
-  [$Type] extends [never]
-    ? false
-    : [$Type] extends [Ts.Union.ToIntersection<$Type>]
-      ? false
-      : true
-
-// ================================
-// Main Transformer
-// ================================
 
 /**
  * Infer the correct TypedFullDocument variant from an operations object.

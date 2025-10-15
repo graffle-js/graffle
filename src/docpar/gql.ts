@@ -4,109 +4,12 @@ import { toGraphQLDocument } from '#src/docpar/object/ToGraphQLDocument/nodes/1_
 import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
-import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { Simplify } from 'type-fest'
 import * as Doc from './core/doc.js'
-
-//
-//
-//
-//
-// ==================================================================================================
-//                                   Type-Level GraphQL Parsing
-// ==================================================================================================
-//
-//
-//
-//
-
-/**
- * Type-level utility that parses GraphQL documents (strings or typed documents) and returns a typed document with all operations.
- *
- * For plain strings:
- * 1. Parses the GraphQL string into an AST using `parseDocument`
- * 2. Extracts introspection data from the context's GlobalRegistry (or uses schema-less mode if unavailable)
- * 3. Uses `schemaOfSetup` to combine introspection with scalar mappings into a `SchemaLike`
- * 4. Extracts ALL operations from the document using `getDocumentOperations`
- * 5. Wraps the result in `TypedFullDocument.FromObject` to produce either SingleOperation or MultiOperation
- *
- * For typed documents (TypedDocumentString, TypedFullDocument):
- * - Extracts and preserves the existing type information
- *
- * @typeParam $Context - The client context containing schema introspection
- * @typeParam $Input - The GraphQL document (string or typed document) to parse
- *
- * @example
- * ```ts
- * type Doc = ParseGraphQLString<MyContext, 'query MyQuery { id }'>
- * // Result: TypedFullDocument.SingleOperation<Operation<'MyQuery', { id: string }, {}>>
- *
- * type Doc2 = ParseGraphQLString<MyContext, 'query Q1 { id } mutation M1 { id }'>
- * // Result: TypedFullDocument.MultiOperation<{ Q1: Operation<...>, M1: Operation<...> }>
- * ```
- */
-// dprint-ignore
-export type ParseGraphQLString<
-  $Context,
-  $Input extends string,
-> = GlobalRegistry.ForContext<$Context> extends never
-  ? Doc.FromObject<
-      Simplify<
-        Docpar.getDocumentOperations<
-          Docpar.parseDocument<$Input>['definitions'],
-          Docpar.schemaOfSetup<{
-            schema: undefined
-          }>
-        >
-      >
-    >
-  : Doc.FromObject<
-      Simplify<
-        Docpar.getDocumentOperations<
-          Docpar.parseDocument<$Input>['definitions'],
-          Docpar.schemaOfSetup<{
-            schema: GlobalRegistry.ForContext<$Context>['schema']
-          }>
-        >
-      >
-    >
-
-/**
- * Type-level utility that parses a document builder object and returns the typed document.
- *
- * This utility:
- * 1. Extracts schema and arguments map from the context's GlobalRegistry
- * 2. Uses `InferOperations` to infer result and variable types for each operation
- * 3. Wraps the result in `TypedFullDocument.FromObject` for use with document senders
- *
- * @typeParam $Context - The client context containing schema and configuration
- * @typeParam $Document - The document builder object to parse
- *
- * @example
- * ```ts
- * type Doc = ParseGraphQLObject<MyContext, { query: { myQuery: { id: true } } }>
- * // Result: TypedFullDocument with operation metadata
- * ```
- */
-// dprint-ignore
-export type ParseGraphQLObject<
-  $Context,
-  $Document,
-> =
-  $Document extends object
-    ? Doc.FromObject<
-        InferOperationsInDocument<
-          $Document,
-          GlobalRegistry.ForContext<$Context>['schema'],
-          GlobalRegistry.ForContext<$Context>['argumentsMap'],
-          $Context
-        >
-      >
-    : never
 
 //
 //
@@ -141,46 +44,37 @@ export type InferOperationsInDocument<
   $Document extends object,
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context
+  $Context extends object
 > =
   & ($Document extends { query: infer $Query extends object }
-      ? {
-          [operationName in keyof $Query]:
-            InferOperation<
-              $Query[operationName],
-              $Schema,
-              $ArgumentsMap,
-              $Context,
-              typeof Grafaid.Document.OperationTypeNode.QUERY,
-              operationName
-            >
-        }
+      ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery
+        ? {
+            [operationName in keyof $Query & string as $Query[operationName] extends object ? operationName : never]:
+              InferOperation<
+                $Query[operationName],
+                $Schema,
+                $ArgumentsMap,
+                $Context,
+                typeof Grafaid.Document.OperationTypeNode.QUERY,
+                operationName
+              >
+          }
+        : {}
       : {})
   & ($Document extends { mutation: infer $Mutation extends object }
-      ? {
-          [operationName in keyof $Mutation]:
-            InferOperation<
-              $Mutation[operationName],
-              $Schema,
-              $ArgumentsMap,
-              $Context,
-              typeof Grafaid.Document.OperationTypeNode.MUTATION,
-              operationName
-            >
-        }
-      : {})
-  & ($Document extends { subscription: infer $Subscription extends object }
-      ? {
-          [operationName in keyof $Subscription]:
-            InferOperation<
-              $Subscription[operationName],
-              $Schema,
-              $ArgumentsMap,
-              $Context,
-              typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION,
-              operationName
-            >
-        }
+      ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation
+        ? {
+            [operationName in keyof $Mutation & string as $Mutation[operationName] extends object ? operationName : never]:
+              InferOperation<
+                $Mutation[operationName],
+                $Schema,
+                $ArgumentsMap,
+                $Context,
+                typeof Grafaid.Document.OperationTypeNode.MUTATION,
+                operationName
+              >
+          }
+        : {}
       : {})
 
 /**
@@ -191,7 +85,9 @@ export type InferOperations<
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context,
-> = $Document extends object ? InferOperationsInDocument<$Document, $Schema, $ArgumentsMap, $Context>
+> = $Document extends object
+  ? $Context extends object ? InferOperationsInDocument<$Document, $Schema, $ArgumentsMap, $Context>
+  : never
   : never
 
 /**
@@ -229,19 +125,7 @@ type InferOperation<
           DocumentBuilderKit.InferResult.Operation<$DocOp, $Schema, $OperationType>
         >,
         RequestResult.Simplify<$Context,
-          $OperationType extends typeof Grafaid.Document.OperationTypeNode.QUERY
-            ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery
-              ? DocumentBuilderKit.Var.InferFromQuery<$DocOp, $ArgumentsMap>
-              : {}
-            : $OperationType extends typeof Grafaid.Document.OperationTypeNode.MUTATION
-              ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation
-                ? DocumentBuilderKit.Var.InferFromMutation<$DocOp, $ArgumentsMap>
-                : {}
-              : $OperationType extends typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION
-                ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription
-                  ? DocumentBuilderKit.Var.InferFromSubscription<$DocOp, $ArgumentsMap>
-                  : {}
-                : {}
+          DocumentBuilderKit.Var.InferFromOperation<$DocOp, $ArgumentsMap, $OperationType>
         >
       >
     : never
