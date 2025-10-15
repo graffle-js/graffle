@@ -48,7 +48,7 @@ features:
     icon: 🎲
   # Row 3
   - title: Static Document Builder
-    details: Generate typed GraphQL documents at compile-time without a client instance. Perfect for passing to other GraphQL clients or building tools. Zero runtime overhead.
+    details: Generate typed GraphQL documents statically without a client instance. Perfect for passing to other GraphQL clients or building tools. Zero runtime overhead.
     icon: 📄
   - title: Output Modes
     details: Control error handling patterns with envelope mode (wrap results), return-error mode (errors as values), or throw mode. Configure globally or per-request.
@@ -117,7 +117,7 @@ console.log(data)
 <div class="feature-row">
   <div class="feature-text">
     <h3>Document Builder</h3>
-    <p>Optional generated TypeScript API for building type-safe queries. Get full IntelliSense and compile-time safety with a native TypeScript interface instead of GraphQL strings.</p>
+    <p>Optional generated TypeScript API for building type-safe queries. Get full IntelliSense and static type safety with a native TypeScript interface instead of GraphQL strings.</p>
     <div class="feature-links">
       <a href="/guides/generation/document-builder">Learn more</a>
       <a href="https://github.com/graffle-js/graffle/blob/main/examples/55_document-builder/document-builder_root-field.ts">Full example</a>

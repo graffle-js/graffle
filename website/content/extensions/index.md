@@ -12,7 +12,7 @@ Build type-safe GraphQL documents using TypeScript instead of GQL syntax. Includ
 
 - Type-safe document construction
 - Automatic result type inference
-- Static document builder (compile-time, no runtime client needed)
+- Static document builder (no runtime client needed)
 - Variable extraction with `$var` markers
 - Full support for aliases, arguments, and nested selections
 

@@ -4,7 +4,7 @@
 
 ## Overview
 
-The static document builder lets you build GraphQL documents at **compile-time without needing a client instance**. It supports two syntaxes:
+The static document builder lets you build GraphQL documents **statically without needing a client instance**. It supports two syntaxes:
 
 - **String** - GraphQL syntax with type inference
 - **Object** - TypeScript objects with type-safe selection sets
