@@ -178,5 +178,5 @@ export type ParseGraphQLObject<
     GlobalRegistry.ForContext<$Context>['schema'],
     GlobalRegistry.ForContext<$Context>['argumentsMap'],
     $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
-  > & any
+  >
 >

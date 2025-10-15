@@ -26,7 +26,7 @@ import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
 // dprint-ignore
 export type Parse<
   $Document extends object,
-  $Context extends ParserContext<any>
+  $Context
 > =
   {
     [operationType in keyof $Document]: {
@@ -93,26 +93,28 @@ export type InferOperations<
 // dprint-ignore
 export type InferOperation<
   $DocOp,
-  $Context extends ParserContext<any>,
+  $Context,
   $OperationType extends Grafaid.Document.OperationTypeNode,
   $OperationName,
 > =
   $DocOp extends object
-    ? Core.Operation<
-        $OperationName & string,
-        RequestResult.Simplify<$Context,
-          [DocumentBuilderKit.InferResult.Operation<
-            $DocOp,
-            $Context['schema'],
-            $OperationType
-          >][0]
-        >,
-        RequestResult.Simplify<$Context,
-          [DocumentBuilderKit.Var.InferFromOperation<
-            $DocOp,
-            $Context['sddm'],
-            $OperationType
-          >][0]
+    ? $Context extends { schema: infer $Schema; sddm: infer $SDDM extends SchemaDrivenDataMap }
+      ? Core.Operation<
+          $OperationName & string,
+          RequestResult.Simplify<$Context,
+            [DocumentBuilderKit.InferResult.Operation<
+              $DocOp,
+              $Schema,
+              $OperationType
+            >][0]
+          >,
+          RequestResult.Simplify<$Context,
+            [DocumentBuilderKit.Var.InferFromOperation<
+              $DocOp,
+              $SDDM,
+              $OperationType
+            >][0]
+          >
         >
-      >
+      : never
     : never

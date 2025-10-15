@@ -30,10 +30,14 @@ import type { String } from './string/$.js'
 // dprint-ignore
 export type Parse<
   $Input,
-  $Context extends ParserContext<any>,
+  $Context,
 > =
-  $Input extends string         ? String.Parse<$Input, $Context['schema']> extends Core.ParserError      ? String.Parse<$Input, $Context['schema']>
-                                  : String.Parse<$Input, $Context['schema']> extends Core.Doc.Operation   ? Core.Doc.Document<String.Parse<$Input, $Context['schema']>>
-                                  :                                                               never
-  : $Input extends object        ? Core.Doc.Document<Object.Parse<$Input, $Context>>
+  $Input extends string         ? $Context extends { schema: infer $Schema }
+                                    ? String.Parse<$Input, $Schema> extends Core.ParserError      ? String.Parse<$Input, $Schema>
+                                      : String.Parse<$Input, $Schema> extends Core.Doc.Operation   ? Core.Doc.Document<String.Parse<$Input, $Schema>>
+                                      :                                                               never
+                                    : never
+  : $Input extends object        ? $Context extends { schema: any; sddm: any; scalars: any; typeHookRequestResultDataTypes: any }
+                                    ? Core.Doc.Document<Object.Parse<$Input, $Context>>
+                                    : never
   :                                                                                               never
