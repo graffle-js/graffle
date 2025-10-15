@@ -63,10 +63,10 @@ export type schemaOfSetup<$Setup extends import('./schema.js').AbstractSetupSche
   import('./schema.js').SchemaOfSetup<$Setup>
 
 /**
- * GraphQLTadaAPI - type for the gql function.
- * Minimal stub for compatibility.
+ * GraphQLStringAPI - type for the gql function.
+ * Minimal stub for LSP compatibility.
  */
-export interface GraphQLTadaAPI<$Schema, $Config> {
+export interface GraphQLStringAPI<$Schema, $Config> {
   readonly __name: string
   scalar: any
   persisted: any

@@ -34,7 +34,7 @@ importers:
         version: 14.0.2
       graffle:
         specifier: file:..
-        version: file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.10.0)(typescript@5.7.2)
+        version: file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.10.0)
       graphql:
         specifier: ^16.10.0
         version: 16.10.0
@@ -64,12 +64,6 @@ packages:
     peerDependenciesMeta:
       graphql:
         optional: true
-
-  '@0no-co/graphqlsp@1.15.0':
-    resolution: {integrity: sha512-SReJAGmOeXrHGod+9Odqrz4s43liK0b2DFUetb/jmYvxFpWmeNfFYo0seCh0jz8vG3p1pnYMav0+Tm7XwWtOJw==}
-    peerDependencies:
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
-      typescript: ^5.0.0
 
   '@algolia/autocomplete-core@1.17.7':
     resolution: {integrity: sha512-BjiPOW6ks90UKl7TwMv7oNQMnzU+t/wk9mgIDi6b1tXpUek7MW0lbNOUHpvam9pe3lVCf4xPFT+lK7s+e+fs7Q==}
@@ -478,26 +472,6 @@ packages:
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
-
-  '@gql.tada/cli-utils@1.7.1':
-    resolution: {integrity: sha512-wg5ysZNQxtNQm67T3laVWmZzLpGb7QfyYWZdaUD2r1OjDj5Bgftq7eQlplmH+hsdffjuUyhJw/b5XAjeE2mJtg==}
-    peerDependencies:
-      '@0no-co/graphqlsp': ^1.12.13
-      '@gql.tada/svelte-support': 1.0.1
-      '@gql.tada/vue-support': 1.0.1
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      '@gql.tada/svelte-support':
-        optional: true
-      '@gql.tada/vue-support':
-        optional: true
-
-  '@gql.tada/internal@1.0.8':
-    resolution: {integrity: sha512-XYdxJhtHC5WtZfdDqtKjcQ4d7R1s0d1rnlSs3OcBEUbYiPoJJfZU7tWsVXuv047Z6msvmr4ompJ7eLSK5Km57g==}
-    peerDependencies:
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
-      typescript: ^5.0.0
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -1130,12 +1104,6 @@ packages:
     resolution: {integrity: sha512-s3Fq41ZVh7vbbe2PN3nrW7yC7U7MFVc5c98/iTl9c2GawNMKx/J648KQRW6WKkuU8GIbbh2IXfIRQjOZnXcTnw==}
     engines: {node: '>=18'}
 
-  gql.tada@1.8.13:
-    resolution: {integrity: sha512-fYoorairdPgxtE7Sf1X9/6bSN9Kt2+PN8KLg3hcF8972qFnawwUgs1OLVU8efZMHwL7EBHhhKBhrsGPlOs2lZQ==}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-
   graffle@file:..:
     resolution: {directory: .., type: directory}
     hasBin: true
@@ -1746,12 +1714,6 @@ snapshots:
     optionalDependencies:
       graphql: 16.10.0
 
-  '@0no-co/graphqlsp@1.15.0(graphql@16.10.0)(typescript@5.7.2)':
-    dependencies:
-      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.7.2)
-      graphql: 16.10.0
-      typescript: 5.7.2
-
   '@algolia/autocomplete-core@1.17.7(@algolia/client-search@5.18.0)(algoliasearch@5.18.0)(search-insights@2.17.3)':
     dependencies:
       '@algolia/autocomplete-plugin-algolia-insights': 1.17.7(@algolia/client-search@5.18.0)(algoliasearch@5.18.0)(search-insights@2.17.3)
@@ -2051,19 +2013,6 @@ snapshots:
       '@floating-ui/core': 1.6.8
 
   '@floating-ui/utils@0.2.8': {}
-
-  '@gql.tada/cli-utils@1.7.1(@0no-co/graphqlsp@1.15.0(graphql@16.10.0)(typescript@5.7.2))(graphql@16.10.0)(typescript@5.7.2)':
-    dependencies:
-      '@0no-co/graphqlsp': 1.15.0(graphql@16.10.0)(typescript@5.7.2)
-      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.7.2)
-      graphql: 16.10.0
-      typescript: 5.7.2
-
-  '@gql.tada/internal@1.0.8(graphql@16.10.0)(typescript@5.7.2)':
-    dependencies:
-      '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
-      graphql: 16.10.0
-      typescript: 5.7.2
 
   '@graphql-typed-document-node/core@3.2.0(graphql@16.10.0)':
     dependencies:
@@ -2750,35 +2699,19 @@ snapshots:
       slash: 5.1.0
       unicorn-magic: 0.1.0
 
-  gql.tada@1.8.13(graphql@16.10.0)(typescript@5.7.2):
-    dependencies:
-      '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
-      '@0no-co/graphqlsp': 1.15.0(graphql@16.10.0)(typescript@5.7.2)
-      '@gql.tada/cli-utils': 1.7.1(@0no-co/graphqlsp@1.15.0(graphql@16.10.0)(typescript@5.7.2))(graphql@16.10.0)(typescript@5.7.2)
-      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.7.2)
-      typescript: 5.7.2
-    transitivePeerDependencies:
-      - '@gql.tada/svelte-support'
-      - '@gql.tada/vue-support'
-      - graphql
-
-  graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.10.0)(typescript@5.7.2):
+  graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.10.0):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
       '@wollybeard/kit': 0.78.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.36.0
-      gql.tada: 1.8.13(graphql@16.10.0)(typescript@5.7.2)
       graphql: 16.10.0
       is-plain-obj: 4.1.0
       type-fest: 4.40.0
     transitivePeerDependencies:
       - '@effect/platform'
-      - '@gql.tada/svelte-support'
-      - '@gql.tada/vue-support'
       - effect
-      - typescript
 
   graphql@16.10.0: {}
 
