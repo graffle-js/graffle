@@ -6,6 +6,8 @@
   "main": "./build/entrypoints/main.js",
   "exports": {
     ".": {
+      "import": "./build/entrypoints/main.js",
+      "require": "./build/entrypoints/main.cjs",
       "default": "./build/entrypoints/main.js"
     }
   },
@@ -46,8 +48,8 @@
     "check:publint": "publint run --strict",
     "prepublishOnly": "pnpm build",
     "build:docs": "doctoc README.md --notitle && dprint fmt README.md",
-    "build": "pnpm clean && pnpm tsc --project tsconfig.build.json",
     "clean": "tsc --build --clean && rm -rf build",
+    "build": "pnpm clean && pnpm tsc --project tsconfig.build.json && pnpm tsup",
     "test": "vitest",
     "test:web": "vitest --environment jsdom",
     "test:types": "vitest --typecheck",
@@ -63,6 +65,7 @@
     "graphql": "14 - 16"
   },
   "devDependencies": {
+    "dprint": "^0.50.2",
     "@arethetypeswrong/cli": "^0.15.3",
     "@pothos/core": "^3.41.1",
     "@pothos/plugin-simple-objects": "^3.7.0",
@@ -94,6 +97,7 @@
     "jsdom": "^24.1.0",
     "json-bigint": "^1.0.0",
     "publint": "^0.2.8",
+    "tsup": "^8.5.0",
     "tsx": "^4.15.7",
     "type-fest": "^4.20.1",
     "typescript": "^5.5.2",

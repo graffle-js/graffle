@@ -26,6 +26,7 @@ test(`is used for parsing response body`, async () => {
     jsonSerializer: createMockSerializer(),
     fetch: createMockFetch(),
   })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const result = await client.request(`{ test { name } }`)
   expect(result).toEqual(testData.data)
   expect(client.requestConfig.jsonSerializer?.parse).toBeCalledTimes(1)

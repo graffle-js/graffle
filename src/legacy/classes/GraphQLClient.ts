@@ -27,7 +27,7 @@ export class GraphQLClient {
    * Send a GraphQL query to the server.
    */
   rawRequest: RawRequestMethod = async <
-    T,
+    T = any,
     $Variables extends Variables = Variables,
   >(
     ...args: RawRequestMethodArgs<$Variables>
@@ -93,9 +93,9 @@ export class GraphQLClient {
    * Send a GraphQL document to the server.
    */
   // dprint-ignore
-  async request<T, V extends Variables = Variables>(document: RequestDocument | TypedDocumentNode<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T>
-  async request<T, V extends Variables = Variables>(options: RequestOptions<V, T>): Promise<T>
-  async request<T, V extends Variables = Variables>(
+  async request<T = any, V extends Variables = Variables>(document: RequestDocument | TypedDocumentNode<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T>
+  async request<T = any, V extends Variables = Variables>(options: RequestOptions<V, T>): Promise<T>
+  async request<T = any, V extends Variables = Variables>(
     documentOrOptions:
       | RequestDocument
       | TypedDocumentNode<T, V>
@@ -268,7 +268,7 @@ export class GraphQLClient {
 }
 
 interface RawRequestMethod {
-  <T, V extends Variables = Variables>(
+  <T = any, V extends Variables = Variables>(
     query: string,
     variables?: V,
     requestHeaders?: HeadersInit,

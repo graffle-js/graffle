@@ -17,5 +17,6 @@ const query = gql`
   }
 `
 // Function saved in the client runs and calculates fresh headers before each request
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const data = await client.request(query)
 console.log(data)
