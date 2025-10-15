@@ -15,9 +15,9 @@ export type * as Object1 from './$$.js'
  * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 6 |
  */
-export interface Object1<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+export interface Object1<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext>
+  extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike
+{
   /**
    * # Info
    *
@@ -31,7 +31,7 @@ export interface Object1<
    */
   ABCEnum?:
     | $Fields.ABCEnum.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.ABCEnum<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.ABCEnum<_$Context>>
   /**
    * # Info
    *
@@ -45,7 +45,7 @@ export interface Object1<
    */
   boolean?:
     | $Fields.boolean.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.boolean<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.boolean<_$Context>>
   /**
    * # Info
    *
@@ -59,7 +59,7 @@ export interface Object1<
    */
   float?:
     | $Fields.float.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.float<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.float<_$Context>>
   /**
    * # Info
    *
@@ -71,9 +71,7 @@ export interface Object1<
    * | **Path** | `Object1.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
    *
@@ -87,7 +85,7 @@ export interface Object1<
    */
   int?:
     | $Fields.int.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.int<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.int<_$Context>>
   /**
    * # Info
    *
@@ -101,7 +99,7 @@ export interface Object1<
    */
   string?:
     | $Fields.string.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -118,8 +116,8 @@ export interface Object1<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

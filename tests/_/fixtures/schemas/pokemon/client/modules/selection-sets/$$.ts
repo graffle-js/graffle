@@ -32,7 +32,7 @@ import type * as $$Schema from '../schema/$.js'
  * Given a selection set object, this type computes the exact TypeScript type
  * of the data that will be returned from executing the Query operation.
  */
-export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+export type Query$Infer<$SelectionSet extends object> = $$Utilities.Docpar.Object.InferResult.OperationQuery<
   $SelectionSet,
   $$Schema.Schema
 >
@@ -50,7 +50,7 @@ export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be r
  * Given a selection set object, this type computes the exact TypeScript type
  * of the data that will be returned from executing the Mutation operation.
  */
-export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.Docpar.Object.InferResult.OperationMutation<
   $SelectionSet,
   $$Schema.Schema
 >

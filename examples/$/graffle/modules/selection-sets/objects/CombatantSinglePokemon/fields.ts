@@ -2,14 +2,13 @@ import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 
-export type pokemon<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = pokemon.$SelectionSet<_$Context>
+export type pokemon<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  pokemon.$SelectionSet<_$Context>
 
 export namespace pokemon {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Pokemon<_$Context> {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base, $Named.Pokemon<_$Context> {
   }
 
   /**
@@ -18,20 +17,19 @@ export namespace pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $SelectionSet<_$Context>
   >
 }
 
-export type trainer<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = trainer.$SelectionSet<_$Context>
+export type trainer<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  trainer.$SelectionSet<_$Context>
 
 export namespace trainer {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Trainer<_$Context> {
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.Docpar.Object.Select.Bases.Base, $Named.Trainer<_$Context> {
   }
 
   /**
@@ -40,7 +38,7 @@ export namespace trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $SelectionSet<_$Context>
   >

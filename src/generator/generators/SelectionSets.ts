@@ -5,7 +5,7 @@ import { Grafaid } from '#lib/grafaid'
 import { Code } from '#src/lib/Code.js'
 import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
-import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
+import { Docpar } from '../../docpar/$.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -44,7 +44,7 @@ const i = {
   _$Context: `_$Context`,
 }
 const $ContextTypeParameter =
-  `${i._$Context} extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext`
+  `${i._$Context} extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`
 
 export const ModuleGeneratorSelectionSets = {
   name: `selection-sets/$`,
@@ -105,7 +105,7 @@ const generateContextModule = (config: Config): GeneratedModule => {
   code(importUtilities(config))
   code(codeImportAll(config, { as: $.$$Scalar, from: '../scalar', type: true }))
   code()
-  code(`export interface $DefaultSelectionContext extends ${$.$$Utilities}.DocumentBuilderKit.Select.Context {`)
+  code(`export interface $DefaultSelectionContext extends ${$.$$Utilities}.Docpar.Object.Select.Context {`)
   code(`  scalars: ${$.$$Scalar}.$Registry`)
   code(`}`)
 
@@ -208,7 +208,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode(`export type $Scalar<`)
   scalarsCode(`  $ScalarName extends string,`)
   scalarsCode(
-    `  $Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext`,
+    `  $Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`,
   )
   scalarsCode(`> = ${$.$$Utilities}.Schema.Scalar.GetDecoded<`)
   scalarsCode(`  ${$.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<`)
@@ -220,20 +220,20 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
 
   // Generate wrapper utilities
   scalarsCode(Code.TSDoc(getScalarNullableDoc()))
-  scalarsCode(`export type Nullable<$Type> = ${$.$$Utilities}.DocumentBuilderKit.Var.Maybe<$Type | null | undefined>`)
+  scalarsCode(`export type Nullable<$Type> = ${$.$$Utilities}.Docpar.Object.Var.Maybe<$Type | null | undefined>`)
   scalarsCode()
 
   scalarsCode(Code.TSDoc(getScalarNonNullDoc()))
-  scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.DocumentBuilderKit.Var.Maybe<$Type>`)
+  scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.Docpar.Object.Var.Maybe<$Type>`)
   scalarsCode()
 
   // Generate standard scalar types (nullable + non-null variants)
   for (const scalarName of standardScalars) {
     scalarsCode(
-      `export type ${scalarName}<$Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalarName}', $Context>>`,
+      `export type ${scalarName}<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalarName}', $Context>>`,
     )
     scalarsCode(
-      `export type ${scalarName}$NonNull<$Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalarName}', $Context>>`,
+      `export type ${scalarName}$NonNull<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalarName}', $Context>>`,
     )
   }
 
@@ -242,17 +242,17 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
     // Skip scalars that conflict with TypeScript built-in types
     if (scalar.name === 'bigint' || scalar.name === 'symbol' || scalar.name === 'undefined' || scalar.name === 'null') {
       scalarsCode(
-        `export type $${scalar.name}<$Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
+        `export type $${scalar.name}<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
       )
       scalarsCode(
-        `export type $${scalar.name}$NonNull<$Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
+        `export type $${scalar.name}$NonNull<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
       )
     } else {
       scalarsCode(
-        `export type ${scalar.name}<$Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
+        `export type ${scalar.name}<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
       )
       scalarsCode(
-        `export type ${scalar.name}$NonNull<$Context extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
+        `export type ${scalar.name}$NonNull<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
       )
     }
   }
@@ -361,7 +361,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
 
   const fragmentsInlineType = unionType.getTypes().map((memberType) => {
     const doc = Code.TSDoc(getInlineFragmentDoc(memberType, unionType, 'union'))
-    const field = `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
+    const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
       H.namedTypesReference(memberType)
     }`
     return `${doc}\n${field}`
@@ -578,7 +578,7 @@ const generateFieldedTypeModule = (
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
       const doc = Code.TSDoc(getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'))
-      const field = `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
+      const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
       }`
       return `${doc}\n${field}`
@@ -586,8 +586,8 @@ const generateFieldedTypeModule = (
   }
 
   const extendsClause = isRoot
-    ? `${$.$$Utilities}.DocumentBuilderKit.Select.Bases.RootObjectLike`
-    : `${$.$$Utilities}.DocumentBuilderKit.Select.Bases.ObjectLike`
+    ? `${$.$$Utilities}.Docpar.Object.Select.Bases.RootObjectLike`
+    : `${$.$$Utilities}.Docpar.Object.Select.Bases.ObjectLike`
 
   let operationType: 'query' | 'mutation' | 'subscription' | null = null
   if (isRoot) {
@@ -640,7 +640,7 @@ const renderOutputFieldForFields = (
   const isCanBeIndicator = (Grafaid.Schema.isScalarType(fieldNamedType) || Grafaid.Schema.isEnumType(fieldNamedType))
     && argsAnalysis.isAllNullable
   const indicator = isCanBeIndicator
-    ? `${$.$$Utilities}.DocumentBuilderKit.Select.Indicator.NoArgsIndicator`
+    ? `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
     : ``
 
   // Main field type - references the namespace's $SelectionSet
@@ -665,7 +665,7 @@ const renderOutputFieldForFields = (
     ? H.namedTypesReference(fieldNamedType)
     : null
 
-  const extendsClause = [`${$.$$Utilities}.DocumentBuilderKit.Select.Bases.Base`, objectLikeTypeReference].filter(
+  const extendsClause = [`${$.$$Utilities}.Docpar.Object.Select.Bases.Base`, objectLikeTypeReference].filter(
     Boolean,
   )
 
@@ -731,7 +731,7 @@ const renderFieldPropertyArguments = (
       ? `${lead} are required so you may omit this.`
       : `${lead} are required so you must include this.`
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-    return Code.field(DocumentBuilderKit.Select.Arguments.key, argFieldsRendered, {
+    return Code.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
       tsDoc,
     })
@@ -791,7 +791,7 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   if (config.schema.kindMap.index.Root.query) {
     code(Code.TSDoc(getOperationInferDoc('Query')))
     code(
-      `export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
+      `export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
     code(Code.TSDoc(getOperationVariablesDoc('Query')))
@@ -804,7 +804,7 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   if (config.schema.kindMap.index.Root.mutation) {
     code(Code.TSDoc(getOperationInferDoc('Mutation')))
     code(
-      `export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
+      `export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
     code(Code.TSDoc(getOperationVariablesDoc('Mutation')))
@@ -949,7 +949,7 @@ const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argume
 
 const getInputFieldKey = (inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
   return Grafaid.Schema.isEnumType(Grafaid.Schema.getNamedType(inputFieldLike.type))
-    ? DocumentBuilderKit.Select.Arguments.enumKeyPrefix + inputFieldLike.name
+    ? Docpar.Object.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 
@@ -962,7 +962,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
     const innerTypeRendered = renderArgumentType(innerType)
     const arrayType = `Array<${innerTypeRendered}>`
     const fullType = isNullable ? `${arrayType} | null | undefined` : arrayType
-    return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
+    return `${i.$$Utilities}.Docpar.Object.Var.Maybe<${fullType}>`
   }
 
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
@@ -980,7 +980,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   // For non-scalar types (enums, input objects), use $Named
   const baseType = H.namedTypesReference(sansNullabilityType)
   const fullType = isNullable ? `${baseType} | null | undefined` : baseType
-  return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
+  return `${i.$$Utilities}.Docpar.Object.Var.Maybe<${fullType}>`
 }
 
 // ===== Helper Namespace =====
@@ -1013,13 +1013,13 @@ namespace H {
     aliasable: boolean = true,
     isHasExpanded: boolean = true,
   ) => {
-    const isReference = type !== `${$.$$Utilities}.DocumentBuilderKit.Select.Indicator.NoArgsIndicator`
+    const isReference = type !== `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
     // For namespace-qualified types like Query.pokemons, append .$Expanded and <_$Context> directly
     const typeReferenced = isReference
       ? (isHasExpanded ? `${type}.$Expanded<${i._$Context}>` : reference(type))
       : type
     const aliasType = aliasable
-      ? `| ${$.$$Utilities}.DocumentBuilderKit.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`
+      ? `| ${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`
       : ``
     return `${name}?: ${typeReferenced}${aliasType}`
   }
@@ -1027,7 +1027,7 @@ namespace H {
   export const __typenameField = (kind: 'union' | 'interface' | 'object') => {
     const doc = __typenameDoc(kind)
     return `${doc}\n${
-      outputFieldKey(`__typename`, `${$.$$Utilities}.DocumentBuilderKit.Select.Indicator.NoArgsIndicator`, true, false)
+      outputFieldKey(`__typename`, `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`, true, false)
     }`
   }
 
@@ -1048,7 +1048,7 @@ namespace H {
       parameters: $ContextTypeParameter,
       extends: [
         forwardTypeParameter$Context(node),
-        `${$.$$Utilities}.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields`,
+        `${$.$$Utilities}.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields`,
       ],
       block: {},
     })

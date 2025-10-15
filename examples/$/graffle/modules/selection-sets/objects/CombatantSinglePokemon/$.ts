@@ -18,8 +18,8 @@ export type * as CombatantSinglePokemon from './$$.js'
  * | **Fields** | 2 |
  */
 export interface CombatantSinglePokemon<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * The Pokemon used by this combatant.
    *
@@ -50,7 +50,7 @@ export interface CombatantSinglePokemon<
    */
   pokemon?:
     | $Fields.pokemon.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
   /**
    * The trainer commanding this Pokemon.
    *
@@ -78,7 +78,7 @@ export interface CombatantSinglePokemon<
    */
   trainer?:
     | $Fields.trainer.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -95,8 +95,8 @@ export interface CombatantSinglePokemon<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

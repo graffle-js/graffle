@@ -3,9 +3,9 @@ import type { $DefaultSelectionContext } from '../../_context.js'
 import type { Object2ImplementingInterface } from './$.js'
 
 export interface $FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   Object2ImplementingInterface<_$Context>,
-  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
+  $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields
 {
 }

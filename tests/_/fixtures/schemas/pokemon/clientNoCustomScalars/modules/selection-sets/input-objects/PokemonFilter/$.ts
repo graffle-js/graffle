@@ -16,9 +16,9 @@ export type * as PokemonFilter from './fields.js'
  * | **All Fields Nullable** | Yes |
  */
 export interface PokemonFilter<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  birthday?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.DateFilter<_$Context> | null | undefined>
-  name?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.StringFilter<_$Context> | null | undefined>
-  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.PokemonType | null | undefined>
+  birthday?: $$Utilities.Docpar.Object.Var.Maybe<$Named.DateFilter<_$Context> | null | undefined>
+  name?: $$Utilities.Docpar.Object.Var.Maybe<$Named.StringFilter<_$Context> | null | undefined>
+  $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.PokemonType | null | undefined>
 }

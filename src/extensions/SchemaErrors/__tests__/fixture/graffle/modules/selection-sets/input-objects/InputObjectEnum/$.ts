@@ -16,7 +16,7 @@ export type * as InputObjectEnum from './fields.js'
  * | **All Fields Nullable** | Yes |
  */
 export interface InputObjectEnum<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  $abcEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ABCEnum | null | undefined>
+  $abcEnum?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ABCEnum | null | undefined>
 }

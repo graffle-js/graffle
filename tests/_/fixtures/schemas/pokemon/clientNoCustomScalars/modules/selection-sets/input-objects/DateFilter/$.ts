@@ -16,7 +16,7 @@ export type * as DateFilter from './fields.js'
  * | **All Fields Nullable** | Yes |
  */
 export interface DateFilter<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
   gte?: $Scalars.Date<_$Context>
   lte?: $Scalars.Date<_$Context>

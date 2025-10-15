@@ -1,9 +1,10 @@
-import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { Core, ParserContext } from '../core/$.js'
 import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
+import type { InferResult } from './InferResult/$.js'
+import type { Var } from './var/$.js'
 
 /**
  * Parse GraphQL document object into operations.
@@ -102,14 +103,14 @@ export type InferOperation<
       ? Core.Operation<
           $OperationName & string,
           RequestResult.Simplify<$Context,
-            [DocumentBuilderKit.InferResult.Operation<
+            [InferResult.Operation<
               $DocOp,
               $Schema,
               $OperationType
             >][0]
           >,
           RequestResult.Simplify<$Context,
-            [DocumentBuilderKit.Var.InferFromOperation<
+            [Var.InferFromOperation<
               $DocOp,
               $SDDM,
               $OperationType

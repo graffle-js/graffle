@@ -18,8 +18,8 @@ export type * as BattleTrainer from './$$.js'
  * | **Fields** | 5 |
  */
 export interface BattleTrainer<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.Docpar.Object.Select.Bases.ObjectLike {
   /**
    * The first combatant in this trainer battle.
    *
@@ -44,7 +44,7 @@ export interface BattleTrainer<
    */
   combatant1?:
     | $Fields.combatant1.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatant1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.combatant1<_$Context>>
   /**
    * The second combatant in this trainer battle.
    *
@@ -69,7 +69,7 @@ export interface BattleTrainer<
    */
   combatant2?:
     | $Fields.combatant2.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatant2<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.combatant2<_$Context>>
   /**
    * The date when this battle took place, stored as a Unix timestamp.
    *
@@ -89,7 +89,7 @@ export interface BattleTrainer<
    */
   date?:
     | $Fields.date.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * The unique identifier for this battle.
    *
@@ -107,9 +107,7 @@ export interface BattleTrainer<
    * | **Path** | `BattleTrainer.id` |
    * | **Nullability** | Optional |
    */
-  id?:
-    | $Fields.id.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The trainer who won this battle.
    *
@@ -137,7 +135,7 @@ export interface BattleTrainer<
    */
   winner?:
     | $Fields.winner.$Expanded<_$Context>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -154,8 +152,8 @@ export interface BattleTrainer<
    * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
-    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
+      $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
 }

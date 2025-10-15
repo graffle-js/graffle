@@ -16,7 +16,7 @@ export type * as InputObjectNestedNonNull from './fields.js'
  * | **All Fields Nullable** | No |
  */
 export interface InputObjectNestedNonNull<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  InputObject: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context>>
+  InputObject: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObject<_$Context>>
 }
