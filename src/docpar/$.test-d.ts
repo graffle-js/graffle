@@ -36,7 +36,7 @@ type OpDefaultUnknownField = D<{ name: 'default'; result: { unknownField: unknow
 type OpDefaultIdAndUnknownField = D<{ name: 'default'; result: { id: unknown; unknownField: unknown }; variables: {} }>
 type OpDefaultDateLoose = D<{ name: 'default'; result: { date: unknown }; variables: {} }>
 type OpQUnknownField = D<{ name: 'q'; result: { unknownField: unknown }; variables: {} }>
-
+type x = Strict<'{ id }'>
 type _ = Ts.Test.Cases<
   // Simplest possible query - anonymous query with single scalar field
   Ts.Test.exact<Strict<'{ id }'>, OpDefaultId>,
