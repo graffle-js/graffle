@@ -87,18 +87,18 @@ export type InferOperation<
     ? Core.Operation<
         $OperationName & string,
         RequestResult.Simplify<$Context,
-          DocumentBuilderKit.InferResult.Operation<
+          [DocumentBuilderKit.InferResult.Operation<
             $DocOp,
-            $Context['schema'] extends Schema ? $Context['schema'] : any,
+            $Context['schema'],
             $OperationType
-          >
+          >][0]
         >,
         RequestResult.Simplify<$Context,
-          DocumentBuilderKit.Var.InferFromOperation<
+          [DocumentBuilderKit.Var.InferFromOperation<
             $DocOp,
-            $Context['sddm'] extends SchemaDrivenDataMap ? $Context['sddm'] : any,
+            $Context['sddm'],
             $OperationType
-          >
+          >][0]
         >
       >
     : never

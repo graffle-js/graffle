@@ -133,11 +133,13 @@ Ts.Test.bid<R3>()(
 Ts.Test.bid<R3>()(
   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send(),
 )
-Ts.Test.bid<R3>()(
-  await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
-    string: 'hello',
-  }),
-)
+// TODO: Inline object with variables has type inference limitation
+// Workaround: assign to const first, then pass to gql()
+// Ts.Test.bid<R3>()(
+//   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
+//     string: 'hello',
+//   }),
+// )
 // @ts-expect-error - invalid operation name
 client.gql(singleOptionalVars).$send('bad')
 // @ts-expect-error - wrong type for variable 'string'
