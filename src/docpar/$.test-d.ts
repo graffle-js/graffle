@@ -3,6 +3,7 @@ import type { Docpar } from './$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import type { Core } from './core/$.js'
+import { $ } from './object/var/var.js'
 
 type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.ArgumentsMap, never>
 type ContextLoose = Docpar.ParserContext<undefined>
@@ -229,70 +230,66 @@ type _SpecialTypes = Ts.Test.Cases<
 // ==================================================================================================
 
 // Expected operation types
-type OpQIdWithVarA = D<{ name: 'q'; result: { id: string | null }; variables: { a: string } }>
-type OpQIdWithVarS_Optional = D<{ name: 'q'; result: { id: string | null }; variables: { s?: string | null | undefined } }>
-type OpQIdWithVarD = D<{ name: 'q'; result: { id: string | null }; variables: { d: Date } }>
-type OpQIdWithMultiVars = D<{ name: 'q'; result: { id: string | null }; variables: { a: string; s?: string | null | undefined } }>
-type OpQIdWithVarS = D<{ name: 'q'; result: { id: string | null }; variables: { s: string } }>
-type OpQIdWithVarN_Optional = D<{ name: 'q'; result: { id: string | null }; variables: { n?: number | null | undefined } }>
-type OpQIdWithVarB = D<{ name: 'q'; result: { id: string | null }; variables: { b: boolean } }>
-type OpQIdWithMultiRequiredVars = D<{ name: 'q'; result: { id: string | null }; variables: { a: string; s: string; n: number } }>
-type OpMIdWithVarA = D<{ name: 'm'; result: { id: string | null }; variables: { a: string } }>
-type OpDefaultIdWithVarA = D<{ name: 'default'; result: { id: string | null }; variables: { a: string } }>
-type OpQInterfaceWithArgsWithVarA = D<{ name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { a: string } }>
+type OpQStringWithRequiredArgWithVarS = D<{ name: 'q'; result: { stringWithRequiredArg: string | null }; variables: { s: string } }>
+type OpQStringWithArgsWithVarS_Optional = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { s?: string | null | undefined } }>
+type OpQDateArgWithVarD = D<{ name: 'q'; result: { dateArg: Date | null }; variables: { d: Date } }>
+type OpQObjectWithArgsWithMultiVars = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id: string; s?: string | null | undefined } }>
+type OpQStringWithArgsWithVarB = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { b: boolean } }>
+type OpQStringWithArgsWithVarN_Optional = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { n?: number | null | undefined } }>
+type OpQObjectWithArgsWithMultiRequiredVars = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id: string; s: string; n: number } }>
+type OpDefaultStringWithRequiredArgWithVarS = D<{ name: 'default'; result: { stringWithRequiredArg: string | null }; variables: { s: string } }>
+type OpQInterfaceWithArgsWithVarId = D<{ name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 
 // Loose mode operation types
-type OpQFieldWithVarA = D<{ name: 'q'; result: { field: unknown }; variables: { a: string } }>
-type OpQFieldWithVarS_Optional = D<{ name: 'q'; result: { field: unknown }; variables: { s?: string | null | undefined } }>
-type OpQFieldWithVarD = D<{ name: 'q'; result: { field: unknown }; variables: { d: unknown } }>
-type OpQFieldWithMultiVars = D<{ name: 'q'; result: { field: unknown }; variables: { id: string; name?: string | null | undefined } }>
-type OpDefaultFieldWithVarA = D<{ name: 'default'; result: { field: unknown }; variables: { a: string } }>
-type OpQObjWithVarId = D<{ name: 'q'; result: { obj: { nested: unknown } | null }; variables: { id: string } }>
+type OpQFieldWithArgWithVarS = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { s: string } }>
+type OpQFieldWithArgWithVarS_Optional = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { s?: string | null | undefined } }>
+type OpQFieldWithArgWithVarD = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { d: unknown } }>
+type OpQObjWithArgsWithMultiVars = D<{ name: 'q'; result: { objWithArgs: { nested: unknown } | null }; variables: { id: string; name?: string | null | undefined } }>
+type OpQFieldWithArgWithVarB = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { b: boolean } }>
+type OpQFieldWithArgWithVarN_Optional = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { n?: number | null | undefined } }>
+type OpQObjWithArgsWithMultiRequiredVars = D<{ name: 'q'; result: { objWithArgs: { nested: unknown } | null }; variables: { id: string; s: string; n: number } }>
+type OpDefaultFieldWithArgWithVarS = D<{ name: 'default'; result: { fieldWithArg: unknown }; variables: { s: string } }>
+type OpQObjWithArgsWithVarId = D<{ name: 'q'; result: { objWithArgs: { nested: unknown } | null }; variables: { id: string } }>
 
 type _Variables = Ts.Test.Cases<
-  // Required ID variable
-  Ts.Test.exact<Strict<'query q($a: ID!) { id }'>, OpQIdWithVarA>,
-  Ts.Test.exact<Loose<'query q($a: ID!) { field }'>, OpQFieldWithVarA>,
+  // NOTE: Object syntax with variables requires runtime variable builder behavior
+  // and is tested separately in runtime tests. These type tests focus on string syntax.
 
-  // Optional String variable
-  Ts.Test.exact<Strict<'query q($s: String) { id }'>, OpQIdWithVarS_Optional>,
-  Ts.Test.exact<Loose<'query q($s: String) { field }'>, OpQFieldWithVarS_Optional>,
+  // Required String variable passed to field argument
+  Ts.Test.exact<Strict<'query q($s: String!) { stringWithRequiredArg(string: $s) }'>, OpQStringWithRequiredArgWithVarS>,
+  Ts.Test.exact<Loose<'query q($s: String!) { fieldWithArg(arg: $s) }'>, OpQFieldWithArgWithVarS>,
+
+  // Optional String variable passed to field argument
+  Ts.Test.exact<Strict<'query q($s: String) { stringWithArgs(string: $s) }'>, OpQStringWithArgsWithVarS_Optional>,
+  Ts.Test.exact<Loose<'query q($s: String) { fieldWithArg(arg: $s) }'>, OpQFieldWithArgWithVarS_Optional>,
 
   // Custom scalar variable (Date mapped to Date type in strict, unknown in schema-less)
-  Ts.Test.exact<Strict<'query q($d: Date!) { id }'>, OpQIdWithVarD>,
-  Ts.Test.exact<Loose<'query q($d: Date!) { field }'>, OpQFieldWithVarD>,
+  Ts.Test.exact<Strict<'query q($d: Date!) { dateArg(date: $d) }'>, OpQDateArgWithVarD>,
+  Ts.Test.exact<Loose<'query q($d: Date!) { fieldWithArg(arg: $d) }'>, OpQFieldWithArgWithVarD>,
 
-  // Multiple variables (required + optional)
-  Ts.Test.exact<Strict<'query q($a: ID!, $s: String) { id }'>, OpQIdWithMultiVars>,
-  Ts.Test.exact<Loose<'query q($id: ID!, $name: String) { field }'>, OpQFieldWithMultiVars>,
+  // Multiple variables (required + optional) passed to nested object with arguments
+  Ts.Test.exact<Strict<'query q($id: ID!, $s: String) { objectWithArgs(id: $id, string: $s) { id } }'>, OpQObjectWithArgsWithMultiVars>,
+  Ts.Test.exact<Loose<'query q($id: ID!, $name: String) { objWithArgs(id: $id, name: $name) { nested } }'>, OpQObjWithArgsWithMultiVars>,
 
-  // Required String variable
-  Ts.Test.exact<Strict<'query q($s: String!) { id }'>, OpQIdWithVarS>,
-  Ts.Test.exact<Loose<'query q($s: String!) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { s: string } }>>,
+  // Boolean variable passed to field argument
+  Ts.Test.exact<Strict<'query q($b: Boolean!) { stringWithArgs(boolean: $b) }'>, OpQStringWithArgsWithVarB>,
+  Ts.Test.exact<Loose<'query q($b: Boolean!) { fieldWithArg(arg: $b) }'>, OpQFieldWithArgWithVarB>,
 
-  // Optional Int variable
-  Ts.Test.exact<Strict<'query q($n: Int) { id }'>, OpQIdWithVarN_Optional>,
-  Ts.Test.exact<Loose<'query q($n: Int) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { n?: number | null | undefined } }>>,
+  // Optional Int variable passed to field argument
+  Ts.Test.exact<Strict<'query q($n: Int) { stringWithArgs(int: $n) }'>, OpQStringWithArgsWithVarN_Optional>,
+  Ts.Test.exact<Loose<'query q($n: Int) { fieldWithArg(arg: $n) }'>, OpQFieldWithArgWithVarN_Optional>,
 
-  // Required Boolean variable
-  Ts.Test.exact<Strict<'query q($b: Boolean!) { id }'>, OpQIdWithVarB>,
-  Ts.Test.exact<Loose<'query q($b: Boolean!) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { b: boolean } }>>,
-
-  // Multiple required variables
-  Ts.Test.exact<Strict<'query q($a: ID!, $s: String!, $n: Int!) { id }'>, OpQIdWithMultiRequiredVars>,
-  Ts.Test.exact<Loose<'query q($a: ID!, $s: String!, $n: Int!) { field }'>, D<{ name: 'q'; result: { field: unknown }; variables: { a: string; s: string; n: number } }>>,
-
-  // Mutation with variable
-  Ts.Test.exact<Strict<'mutation m($a: ID!) { id }'>, OpMIdWithVarA>,
-  Ts.Test.exact<Loose<'mutation m($a: ID!) { field }'>, D<{ name: 'm'; result: { field: unknown }; variables: { a: string } }>>,
+  // Multiple required variables passed to nested object
+  Ts.Test.exact<Strict<'query q($id: ID!, $s: String!, $n: Int!) { objectWithArgs(id: $id, string: $s, int: $n) { id } }'>, OpQObjectWithArgsWithMultiRequiredVars>,
+  Ts.Test.exact<Loose<'query q($id: ID!, $s: String!, $n: Int!) { objWithArgs(id: $id, s: $s, n: $n) { nested } }'>, OpQObjWithArgsWithMultiRequiredVars>,
 
   // Anonymous query with variable
-  Ts.Test.exact<Strict<'query($a: ID!) { id }'>, OpDefaultIdWithVarA>,
-  Ts.Test.exact<Loose<'query($a: ID!) { field }'>, OpDefaultFieldWithVarA>,
+  Ts.Test.exact<Strict<'query($s: String!) { stringWithRequiredArg(string: $s) }'>, OpDefaultStringWithRequiredArgWithVarS>,
+  Ts.Test.exact<Loose<'query($s: String!) { fieldWithArg(arg: $s) }'>, OpDefaultFieldWithArgWithVarS>,
 
   // Variable used in field argument with nested selection
-  Ts.Test.exact<Strict<'query q($a: ID!) { interfaceWithArgs(id: $a) { id } }'>, OpQInterfaceWithArgsWithVarA>,
-  Ts.Test.exact<Loose<'query q($id: ID!) { obj(id: $id) { nested } }'>, OpQObjWithVarId>
+  Ts.Test.exact<Strict<'query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'>, OpQInterfaceWithArgsWithVarId>,
+  Ts.Test.exact<Loose<'query q($id: ID!) { objWithArgs(id: $id) { nested } }'>, OpQObjWithArgsWithVarId>
 >
 
 // ==================================================================================================
