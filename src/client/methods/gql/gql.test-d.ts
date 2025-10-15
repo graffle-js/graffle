@@ -58,12 +58,12 @@ type R1 = typeof singleNoVars['operations']['result'] | null
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send('myQuery'))
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send())
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).myQuery())
-Ts.Test.bid<R1>()(await client.gql(singleNoVarsString).$send())
+Ts.Test.exact<R1>()(await client.gql(singleNoVarsString).$send())
 // Inline string
-Ts.Test.bid<R1>()(await client.gql(`query myQuery { id }`).$send())
+Ts.Test.exact<R1>()(await client.gql(`query myQuery { id }`).$send())
 
 // Inline object
-Ts.Test.bid<R1>()(await client.gql({ query: { myQuery: { id: true } } }).$send())
+Ts.Test.exact<R1>()(await client.gql({ query: { myQuery: { id: true } } }).$send())
 // @ts-expect-error - invalid operation name
 client.gql(singleNoVars).bad()
 // @ts-expect-error - invalid operation name
@@ -81,13 +81,13 @@ type R2 = typeof singleRequiredVars['operations']['result'] | null
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).getById({ id: '' }))
-Ts.Test.bid<R2>()(await client.gql(singleRequiredVarsString).$send({ id: '' }))
+Ts.Test.exact<R2>()(await client.gql(singleRequiredVarsString).$send({ id: '' }))
 // Inline string
-Ts.Test.bid<R2>()(
+Ts.Test.exact<R2>()(
   await client.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`).$send({ id: '' }),
 )
 // Inline object
-Ts.Test.bid<R2>()(
+Ts.Test.exact<R2>()(
   await client.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }).$send({
     id: '',
   }),
@@ -121,16 +121,16 @@ Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send({ string: 'hello'
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search())
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search({}))
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search({ string: 'hello' }))
-Ts.Test.bid<R3>()(await client.gql(singleOptionalVarsString).$send())
-Ts.Test.bid<R3>()(await client.gql(singleOptionalVarsString).$send({}))
-Ts.Test.bid<R3>()(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
+Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send())
+Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send({}))
+Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
 // Inline string
-Ts.Test.bid<R3>()(await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send())
-Ts.Test.bid<R3>()(
+Ts.Test.exact<R3>()(await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send())
+Ts.Test.exact<R3>()(
   await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send({ string: 'hello' }),
 )
 // Inline object
-Ts.Test.bid<R3>()(
+Ts.Test.exact<R3>()(
   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send(),
 )
 // TODO: Inline object with variables has type inference limitation
@@ -158,14 +158,14 @@ Ts.Test.exact<R5>()(await client.gql(multiNoVars).$send('addId'))
 Ts.Test.exact<R4>()(await client.gql(multiNoVars).getUser())
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).addId())
 // Multi-op string documents require operation name
-Ts.Test.bid<R4>()(await client.gql(multiNoVarsString).$send('getUser'))
+Ts.Test.exact<R4>()(await client.gql(multiNoVarsString).$send('getUser'))
 // Inline string - multi-op requires operation name
-Ts.Test.bid<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
+Ts.Test.exact<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
 // Inline object
-Ts.Test.bid<R4>()(
+Ts.Test.exact<R4>()(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('getUser'),
 )
-Ts.Test.bid<R5>()(
+Ts.Test.exact<R5>()(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('addId'),
 )
 // @ts-expect-error - invalid operation name
@@ -190,15 +190,21 @@ Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).$send('setId'))
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).setId())
 // Multi-op string documents require operation name
-Ts.Test.bid<R6a>()(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
+Ts.Test.exact<R6a>()(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
 // Inline string - multi-op requires operation name
-Ts.Test.bid<R6a>()(
+Ts.Test.exact<R6a>()(
   await client
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
     .$send('getById', { id: 'user-123' }),
 )
+const x = await client
+  .gql({
+    query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
+    mutation: { setId: { idNonNull: true } },
+  })
+  .$send('getById', { id: 'user-123' })
 // Inline object
-Ts.Test.bid<R6a>()(
+Ts.Test.exact<R6a>()(
   await client
     .gql({
       query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
@@ -206,7 +212,7 @@ Ts.Test.bid<R6a>()(
     })
     .$send('getById', { id: 'user-123' }),
 )
-Ts.Test.bid<R6b>()(
+Ts.Test.exact<R6b>()(
   await client
     .gql({
       query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },

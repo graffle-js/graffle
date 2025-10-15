@@ -1,6 +1,4 @@
 // dprint-ignore-file
-import type { Grafaid } from '#lib/grafaid'
-import { test } from 'vitest'
 import type { Docpar } from './$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
@@ -36,7 +34,7 @@ type OpQUnknownField = D<{ name: 'q'; result: { unknownField: unknown }; variabl
 type _ = Ts.Test.Cases<
   // Simplest possible query - anonymous query with single scalar field
   Ts.Test.exact<Strict<'{ id }'>, OpDefaultId>,
-  Ts.Test.bid<Strict<{ query: { default: { id: true } } }>, OpDefaultId>,
+  Ts.Test.exact<Strict<{ query: { default: { id: true } } }>, OpDefaultId>,
 
   // Schema-less mode (string syntax only - object syntax requires schema)
   Ts.Test.exact<Loose<'{ id }'>, OpDefaultIdLoose>,
@@ -44,7 +42,7 @@ type _ = Ts.Test.Cases<
 
   // Named query with single scalar field
   Ts.Test.exact<Strict<'query q { id }'>, OpQId>,
-  Ts.Test.bid<Strict<{ query: { q: { id: true } } }>, OpQId>,
+  Ts.Test.exact<Strict<{ query: { q: { id: true } } }>, OpQId>,
   Ts.Test.exact<Loose<'query q { unknownField }'>, OpQUnknownField>,
 
   // Multiple scalar fields
