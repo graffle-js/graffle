@@ -153,8 +153,6 @@ type OpMultiQueryAndMutationLoose = D<
   | { name: 'Set'; result: { updated: unknown }; variables: {} }
 >
 
-type x = Strict<'query A { id } query B { string }'>
-
 type _MultiOp = Ts.Test.Cases<
   // Two queries
   Ts.Test.bid<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,

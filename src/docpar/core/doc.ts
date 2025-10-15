@@ -79,24 +79,23 @@ export type IsUntyped<$Doc> = $Doc extends UntypedDocument ? true : false
 
 /**
  * Helper to detect if a type is a union.
+ * Returns true if $T is a union type, false otherwise.
  */
-type IsUnion<$T> = [($T extends any ? ($arg: $T) => void : never)] extends [($arg: infer $U) => void] ? [$U] extends [$T]
-  ? false
+type IsUnion<$T, $U = $T> = $T extends $U ? [$U] extends [$T] ? false
   : true
   : false
 
 /**
  * Check if a document contains a single operation.
  */
-export type IsSingleOperation<$Doc> = $Doc extends Document<infer $Operations> ? IsUnion<$Operations> extends false
-    ? true
-    : false
+export type IsSingleOperation<$Doc> = $Doc extends Document<infer $Operations>
+  ? IsUnion<$Operations> extends false ? true
+  : false
   : false
 
 /**
  * Check if a document contains multiple operations.
  */
-export type IsMultiOperation<$Doc> = $Doc extends Document<infer $Operations> ? IsUnion<$Operations> extends true
-    ? true
-    : false
+export type IsMultiOperation<$Doc> = $Doc extends Document<infer $Operations> ? IsUnion<$Operations> extends true ? true
+  : false
   : false

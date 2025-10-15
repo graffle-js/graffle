@@ -24,21 +24,19 @@ export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSe
  * // Returns: TypedFullDocument.SingleOperation<{ result: { id: string }, variables: {} }>
  * ```
  */
-export type Parse<$Input extends string, $Schema> =
-  Simplify<
-    getDocumentOperations<
-      parseDocument<$Input>['definitions'],
-      $Schema
-    >
-  > extends infer $OperationsRecord
-    ? $OperationsRecord extends Record<string, any>
-      ? $OperationsRecord[keyof $OperationsRecord] extends infer $Op
-        ? $Op extends Doc.Operation
-          ? Doc.Document<$Op>
-          : string
-        : string
+export type Parse<$Input extends string, $Schema> = Simplify<
+  getDocumentOperations<
+    parseDocument<$Input>['definitions'],
+    $Schema
+  >
+> extends infer $OperationsRecord ? $OperationsRecord extends { __typename: 'ParserError' } ? $OperationsRecord
+  : [$OperationsRecord] extends [Record<string, any>]
+    ? [$OperationsRecord[keyof $OperationsRecord]] extends [infer $Op]
+      ? [$Op] extends [Doc.Operation] ? Doc.Document<$Op>
       : string
     : string
+  : string
+  : string
 
 /**
  * parseDocument - captures the input string to pass to getDocumentOperations.

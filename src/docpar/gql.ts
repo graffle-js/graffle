@@ -62,7 +62,7 @@ export type InferOperationsInDocument<
           operationName
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
-  }[keyof $Document]  // Extract union from operation types
+  }[keyof $Document] // Extract union from operation types
 
 /**
  * @deprecated Use `InferOperationsInDocument` instead. This alias exists for backwards compatibility.
@@ -154,43 +154,41 @@ export interface gql<
   <const $Input extends string>(
     graphqlDocument: $Input,
   ): Simplify<
-      Docpar.getDocumentOperations<
-        Docpar.parseDocument<$Input>['definitions'],
-        Docpar.schemaOfSetup<{
-          schema: $Schema
-        }>
-      >
-    > extends infer $OperationsRecord
-      ? $OperationsRecord extends Record<string, any>
-        ? $OperationsRecord[keyof $OperationsRecord] extends infer $Op
-          ? $Op extends Doc.Operation
-            ? Doc.Document<$Op>
-            : string
-          : string
+    Docpar.getDocumentOperations<
+      Docpar.parseDocument<$Input>['definitions'],
+      Docpar.schemaOfSetup<{
+        schema: $Schema
+      }>
+    >
+  > extends infer $OperationsRecord ? $OperationsRecord extends { __typename: 'ParserError' } ? $OperationsRecord
+    : [$OperationsRecord] extends [Record<string, any>]
+      ? [$OperationsRecord[keyof $OperationsRecord]] extends [infer $Op]
+        ? [$Op] extends [Doc.Operation] ? Doc.Document<$Op>
         : string
       : string
+    : string
+    : string
 
   // Document object overload
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): $Document extends object
-      ? Doc.Document<
-          Simplify<
-            InferOperationsInDocument<
-              $Document,
-              $Schema,
-              $ArgumentsMap,
-              {
-                // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
-                // For now, hardcoded to never since static documents have no runtime extensions
-                typeHookRequestResultDataTypes: never
-                scalars: $Schema['scalarRegistry']
-              }
-            >
-          >
+  ): $Document extends object ? Doc.Document<
+      Simplify<
+        InferOperationsInDocument<
+          $Document,
+          $Schema,
+          $ArgumentsMap,
+          {
+            // TODO: Extensions should be able to extend typeHookRequestResultDataTypes
+            // For now, hardcoded to never since static documents have no runtime extensions
+            typeHookRequestResultDataTypes: never
+            scalars: $Schema['scalarRegistry']
+          }
         >
-      : never
+      >
+    >
+    : never
 }
 
 /**

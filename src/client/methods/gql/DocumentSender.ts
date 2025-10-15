@@ -15,16 +15,19 @@ export type DocumentInput =
 
 /**
  * Convert an operation to its static executor type (for `$send` method).
- * Distributes over unions to create overloads.
+ * Uses tuple wrapping to prevent distribution over unions.
  */
 type OperationToStaticExecutor<
   $Op extends TypedFullDocument.Operation,
   $Context,
+> = [$Op] extends [infer $O extends TypedFullDocument.Operation]
   // @ts-expect-error - todo: loosen constraint on vars
-  ___$VarKind = GetVariablesInputKind<$Op['variables']>,
-> = ___$VarKind extends 'none' ? SingleOpNoVarsStaticExecutor<$Op, $Context>
-  : ___$VarKind extends 'optional' ? SingleOpOptionalVarsStaticExecutor<$Op, $Context>
-  : ___$VarKind extends 'required' ? SingleOpRequiredVarsStaticExecutor<$Op, $Context>
+  ? GetVariablesInputKind<$O['variables']> extends infer ___$VarKind
+    ? ___$VarKind extends 'none' ? SingleOpNoVarsStaticExecutor<$O, $Context>
+    : ___$VarKind extends 'optional' ? SingleOpOptionalVarsStaticExecutor<$O, $Context>
+    : ___$VarKind extends 'required' ? SingleOpRequiredVarsStaticExecutor<$O, $Context>
+    : never
+  : never
   : never
 
 /**
@@ -183,21 +186,20 @@ type SenderStatic<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
 > = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
-  ? TypedFullDocument.IsMultiOperation<$Doc> extends true
-    ? { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
-    : { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
+  ? TypedFullDocument.IsSingleOperation<$Doc> extends true
+    ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
+  : { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
   : never
 
 type SenderNamed<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
-> = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
-  ? {
-      [k in $Operations['name'] & string]: Configuration.Check.Preflight<
-        $Context,
-        OperationToNamedExecutor<Extract<$Operations, { name: k }>, $Context>
-      >
-    }
+> = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation> ? {
+    [k in $Operations['name'] & string]: Configuration.Check.Preflight<
+      $Context,
+      OperationToNamedExecutor<Extract<$Operations, { name: k }>, $Context>
+    >
+  }
   : never
 
 /**
