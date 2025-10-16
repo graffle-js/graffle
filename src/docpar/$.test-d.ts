@@ -241,8 +241,6 @@ type _SpecialTypes = Ts.Test.Cases<
 //                                   Variable Definitions
 // ==================================================================================================
 
-const x = gqlYe({ query: { q: { dateArg: { $: { date: $ } } } } })
-const y = gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } })
 // Required String variable
 type d1YeSchema = D<{ name: 'q'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
 type d1NoSchema = D<{ name: 'q'; result: { stringWithRequiredArg: unknown }; variables: { string: string } }>
@@ -265,7 +263,10 @@ type d3NoSchema = D<{ name: 'q'; result: { dateArg: unknown }; variables: { date
 Ts.Test.exact<d3YeSchema>()(gqlYe('query q($date: Date) { dateArg(date: $date) }'))
 Ts.Test.exact<d3NoSchema>()(gqlNo('query q($date: Date) { dateArg(date: $date) }'))
 Ts.Test.exact<d3YeSchema>()(gqlYe({ query: { q: { dateArg: { $: { date: $ } } } } }))
-Ts.Test.exact<d3NoSchema>()(gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } }))
+Ts.Test.exact<d3NoSchema>()(gqlNo({ query: { q: { dateArg: { $: { date: $ } } } } }))
+// special thing -- string documents cannot do this
+type varForce = D<{ name: 'q'; result: { dateArg: unknown }; variables: { date?: string|null } }>
+Ts.Test.exact<varForce>()(gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } }))
 
 // Multiple optional variables
 type d4YeSchema = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined } }>

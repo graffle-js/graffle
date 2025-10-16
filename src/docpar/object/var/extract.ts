@@ -100,7 +100,8 @@ type ExtractFromOutputFieldSchemaLess<
 
 /**
  * Extract variables from arguments (schema-less mode).
- * Only extracts BuilderTyped variables - plain $ is skipped.
+ * Extracts BuilderTyped variables ($.String(), etc.) with their type hints.
+ * Extracts plain $ variables as unknown.
  */
 // dprint-ignore
 type ExtractFromArgsSchemaLess<
@@ -113,6 +114,13 @@ type ExtractFromArgsSchemaLess<
       {
         name: ___$SSArgsWriteable[k]['_']['name'] extends string ? ___$SSArgsWriteable[k]['_']['name'] : Select.Arguments.EnumKeyPrefixStrip<k>;
         type: VarBuilderToTypeFromGraphQLType<$GQLType, ___$SSArgsWriteable[k]>
+        optional: IsOptionalVarFromGraphQLType<___$SSArgsWriteable[k]>
+        optionalUndefined: true
+      }
+    : ___$SSArgsWriteable[k] extends VarBuilder ?
+      {
+        name: ___$SSArgsWriteable[k]['_']['name'] extends string ? ___$SSArgsWriteable[k]['_']['name'] : Select.Arguments.EnumKeyPrefixStrip<k>;
+        type: unknown
         optional: IsOptionalVarFromGraphQLType<___$SSArgsWriteable[k]>
         optionalUndefined: true
       }

@@ -30,8 +30,8 @@ export type Float = number
 export type Boolean = boolean
 export type ID = string
 
-// Custom scalars (encoded types for inputs)
-export type Date = $$Utilities.Schema.Scalar.GetEncoded<typeof CustomScalars.Date>
+// Custom scalars (decoded types for variables)
+export type Date = $$Utilities.Schema.Scalar.GetDecoded<typeof CustomScalars.Date>
 
 // Enums
 export type BattleWildResult = 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated'
