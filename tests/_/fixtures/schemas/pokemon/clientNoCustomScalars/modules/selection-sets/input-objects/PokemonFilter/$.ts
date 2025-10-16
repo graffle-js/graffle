@@ -18,7 +18,7 @@ export type * as PokemonFilter from './fields.js'
 export interface PokemonFilter<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  birthday?: $$Utilities.Docpar.Object.Var.Maybe<$Named.DateFilter<_$Context> | null | undefined>
-  name?: $$Utilities.Docpar.Object.Var.Maybe<$Named.StringFilter<_$Context> | null | undefined>
-  $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.PokemonType | null | undefined>
+  birthday?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.DateFilter<_$Context> | null | undefined>
+  name?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.StringFilter<_$Context> | null | undefined>
+  $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonType | null | undefined>
 }

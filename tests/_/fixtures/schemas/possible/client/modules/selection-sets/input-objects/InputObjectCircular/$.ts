@@ -19,6 +19,6 @@ export type * as InputObjectCircular from './fields.js'
 export interface InputObjectCircular<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  circular?: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObjectCircular<_$Context> | null | undefined>
+  circular?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectCircular<_$Context> | null | undefined>
   date?: $Scalars.Date<_$Context>
 }

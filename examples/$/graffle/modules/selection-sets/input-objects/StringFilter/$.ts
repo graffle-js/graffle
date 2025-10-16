@@ -27,5 +27,5 @@ export interface StringFilter<
   /**
    * Filter for strings matching any value in this list.
    */
-  in?: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.String<_$Context>> | null | undefined>
+  in?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.String<_$Context>> | null | undefined>
 }

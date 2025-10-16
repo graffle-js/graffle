@@ -3,20 +3,63 @@ export * from './infer.js'
 export { type InferVariables as Infer } from './infer.js'
 export * from './var.js'
 
-import type { Builder } from './var.js'
+import type { Builder, BuilderTyped } from './var.js'
 
 /**
- * Utility type that wraps a type to allow variable markers.
+ * Utility type for schema-ful mode that allows bare $ variable markers.
  *
  * @remarks
- * Used in generated selection set types to allow both literal values and variable builders
- * without complex conditional types.
+ * In schema-ful mode, variable types are inferred from ArgumentsMap,
+ * so bare `$` markers are allowed. The type will be looked up from the schema.
  *
  * @example
  * ```typescript
- * // In generated code:
- * date?: Var.Maybe<Date | null | undefined>
+ * // Schema-ful generated code:
+ * date?: Var.MaybeSchemaful<Date | null | undefined>
  * // Expands to: Date | null | undefined | Builder<Date | null | undefined>
+ *
+ * // Usage:
+ * { $: { date: $ } }  // ✅ Type inferred from ArgumentsMap
  * ```
  */
-export type Maybe<$Type> = $Type | Builder<$Type>
+export type MaybeSchemaful<$Type> = $Type | Builder<$Type>
+
+/**
+ * Utility type for schema-less mode that requires typed $ variable markers.
+ *
+ * @remarks
+ * In schema-less mode, ArgumentsMap is not available, so variable types
+ * must be explicitly provided using typed markers like `$.String()`.
+ *
+ * @example
+ * ```typescript
+ * // Schema-less generated code:
+ * date?: Var.MaybeSchemaless<unknown | null | undefined>
+ * // Expands to: unknown | null | undefined | BuilderTyped<string>
+ *
+ * // Usage:
+ * { $: { date: $.String() } }  // ✅ Type explicitly provided
+ * { $: { date: $ } }            // ❌ Error: bare $ not allowed
+ * ```
+ */
+export type MaybeSchemaless<$Type> = $Type | BuilderTyped<string>
+
+/**
+ * Context-aware utility type that dispatches to schema-ful or schema-less variant.
+ *
+ * @remarks
+ * Used in dynamic scenarios where schema may be added at runtime via chaining API.
+ * Checks if context has ArgumentsMap and dispatches accordingly.
+ *
+ * @example
+ * ```typescript
+ * // Dynamic client with schema addition:
+ * const client = Graffle.create()
+ *   .with({ schema: { definition } })  // Schema added dynamically
+ *
+ * // Uses Maybe<T, Context> which dispatches based on context
+ * client.gql({ query: { ... } })
+ * ```
+ */
+export type Maybe<$Type, $Context = any> = $Context extends { argumentsMap: any } ? MaybeSchemaful<$Type>
+  : MaybeSchemaless<$Type>

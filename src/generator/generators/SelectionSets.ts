@@ -220,11 +220,13 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
 
   // Generate wrapper utilities
   scalarsCode(Code.TSDoc(getScalarNullableDoc()))
-  scalarsCode(`export type Nullable<$Type> = ${$.$$Utilities}.Docpar.Object.Var.Maybe<$Type | null | undefined>`)
+  scalarsCode(
+    `export type Nullable<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type | null | undefined>`,
+  )
   scalarsCode()
 
   scalarsCode(Code.TSDoc(getScalarNonNullDoc()))
-  scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.Docpar.Object.Var.Maybe<$Type>`)
+  scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type>`)
   scalarsCode()
 
   // Generate standard scalar types (nullable + non-null variants)
@@ -962,7 +964,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
     const innerTypeRendered = renderArgumentType(innerType)
     const arrayType = `Array<${innerTypeRendered}>`
     const fullType = isNullable ? `${arrayType} | null | undefined` : arrayType
-    return `${i.$$Utilities}.Docpar.Object.Var.Maybe<${fullType}>`
+    return `${i.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<${fullType}>`
   }
 
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
@@ -980,7 +982,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   // For non-scalar types (enums, input objects), use $Named
   const baseType = H.namedTypesReference(sansNullabilityType)
   const fullType = isNullable ? `${baseType} | null | undefined` : baseType
-  return `${i.$$Utilities}.Docpar.Object.Var.Maybe<${fullType}>`
+  return `${i.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<${fullType}>`
 }
 
 // ===== Helper Namespace =====

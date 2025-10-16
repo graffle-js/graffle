@@ -6,5 +6,5 @@ export type contains<_$Context extends $$Utilities.Docpar.Object.Select.Selectio
   $Scalars.String<_$Context>
 
 type $in<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
-  $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.String<_$Context>> | null | undefined>
+  $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.String<_$Context>> | null | undefined>
 export { type $in as in }

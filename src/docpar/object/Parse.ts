@@ -103,7 +103,7 @@ export type InferOperation<
       ? Core.Operation<
           $OperationName & string,
           InferResult.OperationSchemaLess<$DocOp>,
-          {}  // No variables in schema-less mode
+          Var.InferFromOperationSchemaLess<$DocOp>
         >
       : $Context extends { schema: infer $Schema; sddm: infer $SDDM extends SchemaDrivenDataMap }
         ? Core.Operation<

@@ -56,6 +56,20 @@ interface StaticDocumentContext {
  */
 
 export interface QueryBuilder {
+  $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+    selection: $SelectionSet,
+  ) => TypedDocument.String<
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>
+    >,
+    true
+  >
+
   /**
    * # Info
    *

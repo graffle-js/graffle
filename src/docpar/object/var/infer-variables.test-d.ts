@@ -109,13 +109,13 @@ type _1 = Ts.Test.Cases<
   // Optional custom scalar (Date)
   Ts.Test.exact<
     InferFromQuery<{ dateArg: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date?: string | null | undefined }  // Should be string (encoded type)
+    { date?: Date | null | undefined }
   >,
 
   // Required custom scalar (Date)
   Ts.Test.exact<
     InferFromQuery<{ dateArgNonNull: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date: string }  // Should be string (encoded type)
+    { date: Date }
   >,
 
   // ====================================================================
@@ -124,7 +124,7 @@ type _1 = Ts.Test.Cases<
   // Optional list of required items
   Ts.Test.exact<
     InferFromQuery<{ dateArgList: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date?: readonly string[] | null | undefined }
+    { date?: readonly Date[] | null | undefined }
   >,
 
   // Required list of required items

@@ -2,6 +2,7 @@ import { Docpar } from '#src/docpar/$.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
+import type { Simplify } from 'type-fest'
 
 //
 //
@@ -22,9 +23,9 @@ import { print } from '@0no-co/graphql.web'
  * This interface unifies static and instance-level typings using Graffle's own type system.
  */
 export interface gql<
-  $Schema extends Schema,
+  $Schema extends Schema | undefined,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends Docpar.SchemaDrivenDataMap,
+  $ArgumentsMap,
 > {
   // String GraphQL document overload
   <const $Input extends string>(
@@ -32,7 +33,7 @@ export interface gql<
   ): Docpar.Parse<$Input, Docpar.ParserContext<$Schema>>
 
   // Document object overload
-  <$Document extends $DocumentObjectConstraint>(
+  <const $Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Docpar.Object.ToGraphQLDocument.Options,
   ): $Document extends object ? Docpar.Parse<
@@ -86,9 +87,9 @@ export const defaults: Partial<Docpar.Object.ToGraphQLDocument.Options> = {
 }
 
 export const createGql = <
-  $Schema extends Schema,
+  $Schema extends Schema | undefined,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends Docpar.SchemaDrivenDataMap,
+  $ArgumentsMap,
 >(config: {
   sddm: $ArgumentsMap
 }): gql<$Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
@@ -108,7 +109,7 @@ export const createGql = <
     const result = Docpar.Object.ToGraphQLDocument.toGraphQLDocument(documentNormalized, {
       ...defaults,
       ...normalized.options,
-      sddm: config.sddm,
+      sddm: config.sddm as any,
     })
 
     // Print and return as TypedFullDocument

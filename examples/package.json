@@ -16,9 +16,12 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
+    "@effect/platform": "^0.92.1",
+    "@effect/platform-node": "^0.98.3",
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5",
     "@wollybeard/kit": "^0.71.0",
+    "effect": "^3.18.4",
     "graffle": "file:..",
     "tsx": "^4.19.3",
     "vitest": "^3.1.1"

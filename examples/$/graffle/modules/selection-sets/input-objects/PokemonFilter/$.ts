@@ -23,13 +23,13 @@ export interface PokemonFilter<
   /**
    * Filter by Pokemon birth/catch date.
    */
-  birthday?: $$Utilities.Docpar.Object.Var.Maybe<$Named.DateFilter<_$Context> | null | undefined>
+  birthday?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.DateFilter<_$Context> | null | undefined>
   /**
    * Filter by Pokemon name.
    */
-  name?: $$Utilities.Docpar.Object.Var.Maybe<$Named.StringFilter<_$Context> | null | undefined>
+  name?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.StringFilter<_$Context> | null | undefined>
   /**
    * Filter by Pokemon type.
    */
-  $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.PokemonType | null | undefined>
+  $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonType | null | undefined>
 }

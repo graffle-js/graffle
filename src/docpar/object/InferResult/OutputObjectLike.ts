@@ -158,7 +158,9 @@ export namespace OutputObjectLike {
   export type SchemaLess<$SelectionSet extends SelectionSet> = {
     [K in PickApplicableFieldKeys<$SelectionSet>]:
       $SelectionSet[K] extends object
-        ? SchemaLess<$SelectionSet[K]> | null  // Nested object field (assume nullable)
+        ? PickApplicableFieldKeys<$SelectionSet[K]> extends never
+          ? unknown  // Object with only $/directives = scalar field with arguments
+          : SchemaLess<$SelectionSet[K]> | null  // Nested object field
         : unknown  // Scalar field
   }
 }

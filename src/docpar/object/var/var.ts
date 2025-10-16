@@ -196,6 +196,63 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
 }
 
 /**
+ * Typed variable builder for schema-less mode.
+ *
+ * @typeParam $GraphQLType - The GraphQL type name (e.g., 'String', 'Int')
+ * @typeParam $State - The builder state containing default, required, and name properties
+ *
+ * @remarks
+ * BuilderTyped extends Builder with a GraphQL type annotation, enabling variable
+ * type inference in schema-less mode where ArgumentsMap is not available.
+ * The `__graphqlType` property is a type-level brand used by the inference system.
+ *
+ * @example
+ * ```ts
+ * // Schema-less mode - explicit type required
+ * const doc = Graffle.gql({
+ *   query: { default: { fieldWithArg: { $: { arg: $.String() } } } }
+ * })
+ * // Variables type inferred as: { arg: string }
+ * ```
+ */
+export interface BuilderTyped<$GraphQLType extends string, $State extends BuilderState = BuilderStateEmpty>
+  extends BuilderSentinel
+{
+  /**
+   * GraphQL type brand for compile-time type extraction.
+   * Used by variable inference to map GraphQL types to TypeScript types.
+   * @internal
+   */
+  readonly __graphqlType: $GraphQLType
+
+  /**
+   * Type-level state stored directly on object
+   */
+  readonly _: $State
+
+  /**
+   * Phantom property to enforce covariant type parameter checking.
+   * @internal
+   */
+  readonly __type?: Ts.Variance.Co<unknown>
+
+  // Override methods to preserve BuilderTyped after chaining
+  readonly name: <$name extends string>(
+    name: $name,
+  ) => BuilderTyped<$GraphQLType, Omit<$State, 'name'> & { name: $name }>
+
+  readonly as: <$name extends string>(
+    name: $name,
+  ) => BuilderTyped<$GraphQLType, Omit<$State, 'name'> & { name: $name }>
+
+  readonly default: <const $value>(
+    value: $value,
+  ) => BuilderTyped<$GraphQLType, Omit<$State, 'default'> & { default: $value }>
+
+  readonly required: () => BuilderTyped<$GraphQLType, Omit<$State, 'required'> & { required: true }>
+}
+
+/**
  * Entrypoint for the variable builder system.
  *
  * @typeParam $Type - The type of the variable value
@@ -253,6 +310,66 @@ export interface BuilderEntrypoint<$Type = unknown, $State extends BuilderState 
    * If you want to use builder methods without a custom name, use `$.method()` directly instead of `$().method()`.
    */
   <$name extends string>(name: $name): Builder<$Type, Omit<BuilderStateEmpty, 'name'> & { name: $name }>
+
+  /**
+   * Create a String-typed variable for schema-less mode.
+   *
+   * @example
+   * ```ts
+   * Graffle.gql({
+   *   query: { default: { stringArg: { $: { arg: $.String() } } } }
+   * })
+   * ```
+   */
+  String(): BuilderTyped<'String', BuilderStateEmpty>
+
+  /**
+   * Create an Int-typed variable for schema-less mode.
+   *
+   * @example
+   * ```ts
+   * Graffle.gql({
+   *   query: { default: { intArg: { $: { arg: $.Int() } } } }
+   * })
+   * ```
+   */
+  Int(): BuilderTyped<'Int', BuilderStateEmpty>
+
+  /**
+   * Create a Float-typed variable for schema-less mode.
+   *
+   * @example
+   * ```ts
+   * Graffle.gql({
+   *   query: { default: { floatArg: { $: { arg: $.Float() } } } }
+   * })
+   * ```
+   */
+  Float(): BuilderTyped<'Float', BuilderStateEmpty>
+
+  /**
+   * Create a Boolean-typed variable for schema-less mode.
+   *
+   * @example
+   * ```ts
+   * Graffle.gql({
+   *   query: { default: { boolArg: { $: { arg: $.Boolean() } } } }
+   * })
+   * ```
+   */
+  Boolean(): BuilderTyped<'Boolean', BuilderStateEmpty>
+
+  /**
+   * Create an ID-typed variable for schema-less mode.
+   *
+   * @example
+   * ```ts
+   * Graffle.gql({
+   *   query: { default: { idArg: { $: { arg: $.ID() } } } }
+   * })
+   * ```
+   */
+  ID(): BuilderTyped<'ID', BuilderStateEmpty>
 }
 
 /**
@@ -264,6 +381,7 @@ const createVariableBuilder = <$Type>(): Builder<$Type, BuilderStateEmpty> => {
 
 const createVariableBuilder_ = <$Type, $State extends BuilderState>(
   state: $State,
+  graphqlType?: string,
 ): Builder<$Type, BuilderStateEmpty> => {
   const self = createVariableBuilder_
 
@@ -275,32 +393,64 @@ const createVariableBuilder_ = <$Type, $State extends BuilderState>(
       return self({
         ...state,
         name,
-      }) as any
+      }, graphqlType) as any
     },
 
     as(name) {
       return self({
         ...state,
         name,
-      }) as any
+      }, graphqlType) as any
     },
 
     default(value) {
       return self({
         ...state,
         default: value,
-      }) as any
+      }, graphqlType) as any
     },
 
     required() {
       return self({
         ...state,
         required: true,
-      }) as any
+      }, graphqlType) as any
     },
   }
 
+  // Add __graphqlType property if this is a typed builder
+  if (graphqlType !== undefined) {
+    Object.defineProperty(builder, '__graphqlType', {
+      value: graphqlType,
+      enumerable: false,
+      writable: false,
+      configurable: false,
+    })
+  }
+
   return builder as any
+}
+
+/**
+ * Create a typed variable builder with GraphQL type annotation.
+ *
+ * @param graphqlType - The GraphQL type name (e.g., 'String', 'Int')
+ * @returns A typed builder with the specified GraphQL type
+ *
+ * @remarks
+ * Used by schema-less mode to create explicitly typed variables.
+ * The builder carries the GraphQL type at both compile-time and runtime
+ * for variable inference.
+ *
+ * @internal
+ */
+const createTypedBuilder = <$GraphQLType extends string>(
+  graphqlType: $GraphQLType,
+): BuilderTyped<$GraphQLType, BuilderStateEmpty> => {
+  return createVariableBuilder_<unknown, BuilderStateEmpty>(builderStateEmpty(), graphqlType) as BuilderTyped<
+    $GraphQLType,
+    BuilderStateEmpty
+  >
 }
 
 /**
@@ -337,6 +487,38 @@ const createEntrypoint = <$Type>(): BuilderEntrypoint<$Type, BuilderStateEmpty> 
   // Explicitly copy the Symbol property (Object.keys doesn't enumerate Symbols)
   Object.defineProperty(entrypoint, BuilderSymbol, {
     value: true,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  })
+
+  // Add type methods for schema-less mode
+  Object.defineProperty(entrypoint, 'String', {
+    value: () => createTypedBuilder('String'),
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  })
+  Object.defineProperty(entrypoint, 'Int', {
+    value: () => createTypedBuilder('Int'),
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  })
+  Object.defineProperty(entrypoint, 'Float', {
+    value: () => createTypedBuilder('Float'),
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  })
+  Object.defineProperty(entrypoint, 'Boolean', {
+    value: () => createTypedBuilder('Boolean'),
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  })
+  Object.defineProperty(entrypoint, 'ID', {
+    value: () => createTypedBuilder('ID'),
     enumerable: false,
     writable: false,
     configurable: false,
