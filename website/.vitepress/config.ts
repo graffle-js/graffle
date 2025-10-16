@@ -93,6 +93,7 @@ export default defineConfig({
       'data-domain': 'graffle.js.org',
       src: 'https://plausible.io/js/script.js',
     }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
   ],
   markdown: {
     config(md) {
