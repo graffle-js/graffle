@@ -31,47 +31,11 @@
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-Ready-blue.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="TypeScript"></a>
 </p>
 
-## Installation
+## Getting Started
 
-```sh
-npm install graffle@next graphql
-```
+Visit **[graffle.js.org/guides/getting-started](https://graffle.js.org/guides/getting-started)** for installation instructions, quick start guide, and examples.
 
-## Quick Start
-
-```ts
-import { Graffle } from 'graffle'
-
-const graffle = Graffle
-  .create()
-  .transport({ url: 'https://countries.trevorblades.com/graphql' })
-
-const data = graffle.gql(`
-  query getCountries {
-    countries {
-      name
-      capital
-      emoji
-      currency
-    }
-  }
-
-  query getContinents {
-    continents {
-      name
-      code
-    }
-  }
-
-  query getLanguage {
-    language(code: "en") {
-      name
-      native
-    }
-  }
-`)
-  .getCountries()
-```
+> **Note:** Graffle is currently in pre-release. Follow the documentation for the correct installation command.
 
 ## Learn More
 
