@@ -5,6 +5,8 @@ import { Ts } from '@wollybeard/kit'
 import type { Core } from './core/$.js'
 import { $ } from './object/var/var.js'
 
+type $ = typeof $
+
 type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.ArgumentsMap, never>
 type ContextLoose = Docpar.ParserContext<undefined>
 
@@ -251,44 +253,73 @@ type OpQObjWithArgsWithMultiRequiredVars = D<{ name: 'q'; result: { objWithArgs:
 type OpDefaultFieldWithArgWithVarS = D<{ name: 'default'; result: { fieldWithArg: unknown }; variables: { s: string } }>
 type OpQObjWithArgsWithVarId = D<{ name: 'q'; result: { objWithArgs: { nested: unknown } | null }; variables: { id: string } }>
 
+// Object builder operation types - variable names inferred from argument names
+type OpQStringWithRequiredArgWithVarString = D<{ name: 'q'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
+type OpQFieldWithArgWithVarArg = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { arg: string } }>
+type OpQStringWithArgsWithVarString_Optional = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
+type OpQFieldWithArgWithVarArg_Optional = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { arg?: string | null | undefined } }>
+type OpQDateArgWithVarDate_Optional = D<{ name: 'q'; result: { dateArg: Date | null }; variables: { date?: string | null | undefined } }>
+type OpQFieldWithArgWithVarArgDate = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { arg: unknown } }>
+type OpQObjectWithArgsWithVarIdAndString = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined } }>
+type OpQObjWithArgsWithVarIdAndName = D<{ name: 'q'; result: { objWithArgs: { nested: unknown } | null }; variables: { id: string; name?: string | null | undefined } }>
+type OpQStringWithArgsWithVarBoolean = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { boolean?: boolean | null | undefined } }>
+type OpQFieldWithArgWithVarArgBoolean = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { arg: boolean } }>
+type OpQStringWithArgsWithVarInt_Optional = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { int?: number | null | undefined } }>
+type OpQFieldWithArgWithVarArgInt_Optional = D<{ name: 'q'; result: { fieldWithArg: unknown }; variables: { arg?: number | null | undefined } }>
+type OpQObjectWithArgsWithVarIdStringInt = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined; int?: number | null | undefined } }>
+type OpQObjWithArgsWithVarIdSN = D<{ name: 'q'; result: { objWithArgs: { nested: unknown } | null }; variables: { id: string; s: string; n: number } }>
+type OpDefaultStringWithRequiredArgWithVarString = D<{ name: 'default'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
+type OpDefaultFieldWithArgWithVarArg = D<{ name: 'default'; result: { fieldWithArg: unknown }; variables: { arg: string } }>
+// Note: OpQInterfaceWithArgsWithVarId and OpQObjWithArgsWithVarId already defined above
+
 type _Variables = Ts.Test.Cases<
-  // NOTE: Object syntax with variables requires runtime variable builder behavior
-  // and is tested separately in runtime tests. These type tests focus on string syntax.
+  // Object syntax uses $ marker for variable inference instead of explicit declarations
+  // Variables are inferred from argument positions and SDDM type information
+  // Note: Object builder variable inference requires schema (SDDM) - only Strict mode tests below
 
   // Required String variable passed to field argument
   Ts.Test.exact<Strict<'query q($s: String!) { stringWithRequiredArg(string: $s) }'>, OpQStringWithRequiredArgWithVarS>,
+  Ts.Test.exact<Strict<{ query: { q: { stringWithRequiredArg: { $: { string: $ } } } } }>, OpQStringWithRequiredArgWithVarString>,
   Ts.Test.exact<Loose<'query q($s: String!) { fieldWithArg(arg: $s) }'>, OpQFieldWithArgWithVarS>,
 
   // Optional String variable passed to field argument
   Ts.Test.exact<Strict<'query q($s: String) { stringWithArgs(string: $s) }'>, OpQStringWithArgsWithVarS_Optional>,
+  Ts.Test.exact<Strict<{ query: { q: { stringWithArgs: { $: { string: $ } } } } }>, OpQStringWithArgsWithVarString_Optional>,
   Ts.Test.exact<Loose<'query q($s: String) { fieldWithArg(arg: $s) }'>, OpQFieldWithArgWithVarS_Optional>,
 
   // Custom scalar variable (Date mapped to Date type in strict, unknown in schema-less)
   Ts.Test.exact<Strict<'query q($d: Date!) { dateArg(date: $d) }'>, OpQDateArgWithVarD>,
+  Ts.Test.exact<Strict<{ query: { q: { dateArg: { $: { date: $ } } } } }>, OpQDateArgWithVarDate_Optional>,
   Ts.Test.exact<Loose<'query q($d: Date!) { fieldWithArg(arg: $d) }'>, OpQFieldWithArgWithVarD>,
 
   // Multiple variables (required + optional) passed to nested object with arguments
   Ts.Test.exact<Strict<'query q($id: ID!, $s: String) { objectWithArgs(id: $id, string: $s) { id } }'>, OpQObjectWithArgsWithMultiVars>,
+  Ts.Test.exact<Strict<{ query: { q: { objectWithArgs: { $: { id: $; string: $ }; id: true } } } }>, OpQObjectWithArgsWithVarIdAndString>,
   Ts.Test.exact<Loose<'query q($id: ID!, $name: String) { objWithArgs(id: $id, name: $name) { nested } }'>, OpQObjWithArgsWithMultiVars>,
 
   // Boolean variable passed to field argument
   Ts.Test.exact<Strict<'query q($b: Boolean!) { stringWithArgs(boolean: $b) }'>, OpQStringWithArgsWithVarB>,
+  Ts.Test.exact<Strict<{ query: { q: { stringWithArgs: { $: { boolean: $ } } } } }>, OpQStringWithArgsWithVarBoolean>,
   Ts.Test.exact<Loose<'query q($b: Boolean!) { fieldWithArg(arg: $b) }'>, OpQFieldWithArgWithVarB>,
 
   // Optional Int variable passed to field argument
   Ts.Test.exact<Strict<'query q($n: Int) { stringWithArgs(int: $n) }'>, OpQStringWithArgsWithVarN_Optional>,
+  Ts.Test.exact<Strict<{ query: { q: { stringWithArgs: { $: { int: $ } } } } }>, OpQStringWithArgsWithVarInt_Optional>,
   Ts.Test.exact<Loose<'query q($n: Int) { fieldWithArg(arg: $n) }'>, OpQFieldWithArgWithVarN_Optional>,
 
   // Multiple required variables passed to nested object
   Ts.Test.exact<Strict<'query q($id: ID!, $s: String!, $n: Int!) { objectWithArgs(id: $id, string: $s, int: $n) { id } }'>, OpQObjectWithArgsWithMultiRequiredVars>,
+  Ts.Test.exact<Strict<{ query: { q: { objectWithArgs: { $: { id: $; string: $; int: $ }; id: true } } } }>, OpQObjectWithArgsWithVarIdStringInt>,
   Ts.Test.exact<Loose<'query q($id: ID!, $s: String!, $n: Int!) { objWithArgs(id: $id, s: $s, n: $n) { nested } }'>, OpQObjWithArgsWithMultiRequiredVars>,
 
   // Anonymous query with variable
   Ts.Test.exact<Strict<'query($s: String!) { stringWithRequiredArg(string: $s) }'>, OpDefaultStringWithRequiredArgWithVarS>,
+  Ts.Test.exact<Strict<{ query: { default: { stringWithRequiredArg: { $: { string: $ } } } } }>, OpDefaultStringWithRequiredArgWithVarString>,
   Ts.Test.exact<Loose<'query($s: String!) { fieldWithArg(arg: $s) }'>, OpDefaultFieldWithArgWithVarS>,
 
   // Variable used in field argument with nested selection
   Ts.Test.exact<Strict<'query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'>, OpQInterfaceWithArgsWithVarId>,
+  Ts.Test.exact<Strict<{ query: { q: { interfaceWithArgs: { $: { id: $ }; id: true } } } }>, OpQInterfaceWithArgsWithVarId>,
   Ts.Test.exact<Loose<'query q($id: ID!) { objWithArgs(id: $id) { nested } }'>, OpQObjWithArgsWithVarId>
 >
 

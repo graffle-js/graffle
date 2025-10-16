@@ -30,5 +30,4 @@ export type Operation<
  * Operation type inference for schema-less mode.
  * All fields are typed as `unknown` since no schema information is available.
  */
-export type OperationSchemaLess<$SelectionSet extends object> =
-  OutputObjectLike.SchemaLess<$SelectionSet>
+export type OperationSchemaLess<$SelectionSet extends object> = OutputObjectLike.SchemaLess<$SelectionSet>

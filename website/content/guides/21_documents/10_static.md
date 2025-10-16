@@ -27,6 +27,74 @@ const doc2 = Graffle.gql({
 
 Once built, documents can be sent using the [Instance API](/guides/documents/instance/sending).
 
+## Root-Level Builders
+
+For simpler queries and mutations, Graffle provides dedicated root-level builders that let you skip the operation wrapper:
+
+### Single Field Operations
+
+Build queries and mutations for individual fields directly:
+
+```ts
+import { mutation, query } from 'graffle'
+
+// Query a single field
+const getUserDoc = query.user({ id: true, name: true })
+// Generates: { user { id name } }
+
+// Mutate a single field
+const createUserDoc = mutation.createUser({ id: true })
+// Generates: mutation { createUser { id } }
+```
+
+### Multi-Field Operations with `$batch`
+
+Use `$batch` to select multiple root fields in a single operation:
+
+```ts
+import { mutation, query } from 'graffle'
+
+// Multiple queries
+const batchQueryDoc = query.$batch({
+  user: { id: true, name: true },
+  posts: { id: true, title: true },
+  comments: { id: true, text: true },
+})
+// Generates:
+// {
+//   user { id name }
+//   posts { id title }
+//   comments { id text }
+// }
+
+// Multiple mutations
+const batchMutationDoc = mutation.$batch({
+  createUser: { id: true },
+  updatePost: { success: true },
+  deleteComment: { success: true },
+})
+// Generates:
+// mutation {
+//   createUser { id }
+//   updatePost { success }
+//   deleteComment { success }
+// }
+```
+
+::: tip When to Use Root-Level Builders
+Use `query` and `mutation` for:
+
+- Quick, focused operations on single or multiple fields
+- Simple cases without complex nesting or variables
+- Schema-less workflows where you don't need generation
+
+Use `Graffle.gql()` for:
+
+- Complex documents with variables and arguments
+- Multiple operations with different names
+- Full control over the document structure
+  :::
+
 ## Fields
 
 Fields control which data appears in your GraphQL document using boolean values:

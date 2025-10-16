@@ -35,6 +35,7 @@ export const examplePaths = [
   FsLoc.fromString('./55_document-builder/document-builder_document.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_interface.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_root-field.ts'),
+  FsLoc.fromString('./55_document-builder/document-builder_root-level-builders.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_static.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_union.ts'),
   FsLoc.fromString('./60_extension/extension_introspection__introspection.ts'),

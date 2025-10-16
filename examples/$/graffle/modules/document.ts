@@ -56,6 +56,20 @@ interface StaticDocumentContext {
  */
 
 export interface QueryBuilder {
+  $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+    selection: $SelectionSet,
+  ) => TypedDocument.String<
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>
+    >,
+    true
+  >
+
   /**
    * Retrieve all battles that have occurred.
    *
@@ -456,6 +470,20 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY,
  */
 
 export interface MutationBuilder {
+  $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+    selection: $SelectionSet,
+  ) => TypedDocument.String<
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>
+    >,
+    true
+  >
+
   /**
    * Add a new Pokemon to the database.
    *
