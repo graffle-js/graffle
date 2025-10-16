@@ -24,7 +24,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importUtilities(config))
-    code(`import type * as $$ArgumentsMap from './arguments-map.js'`)
+    code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
     code``
     code``
     config.schema.kindMap.list.Root.forEach(node => {
