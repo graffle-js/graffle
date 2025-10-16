@@ -30,8 +30,8 @@ const trainers = await Graffle.query.trainers({
 **With Variables** - Returns `DocumentRunner<Variables, Result>`:
 
 ```ts
-import { $ } from './graffle/modules/Scalar.js'
 import { Graffle } from './graffle/$.js'
+import { $ } from './graffle/modules/Scalar.js'
 
 // Has variables → returns DocumentRunner
 const runner = Graffle.query.pokemonByName({
@@ -59,6 +59,7 @@ When variables are detected, methods return a `DocumentRunner` with two properti
 ### `document: string`
 
 The generated GraphQL document as a string. Useful for:
+
 - Debugging queries
 - Logging/monitoring
 - Using with other GraphQL clients
@@ -83,6 +84,7 @@ console.log(runner.document)
 ### `run(variables): Promise<Result>`
 
 Execute the operation with the provided variables. Fully type-safe - TypeScript knows:
+
 - Which variables are required vs optional
 - The types of each variable
 - The shape of the result
@@ -101,8 +103,8 @@ const missing = await runner.run({}) // ✗ Type error: 'name' is required
 Build a query once, execute it multiple times:
 
 ```ts
-import { $ } from './graffle/modules/Scalar.js'
 import { Graffle } from './graffle/$.js'
+import { $ } from './graffle/modules/Scalar.js'
 
 const getPokemon = Graffle.query.pokemonByName({
   $: { name: $.String$NonNull },
@@ -404,6 +406,7 @@ Graffle.query.trainers({
 ## When to Use
 
 **Use Deferred Execution when:**
+
 - You need to reuse a query with different variables
 - You want to inspect the generated GraphQL document
 - You're integrating with other GraphQL tools
@@ -411,6 +414,7 @@ Graffle.query.trainers({
 - You're building a query library for your application
 
 **Use Auto-Execution when:**
+
 - You're making a one-off query
 - Variables aren't needed
 - You want the simplest possible syntax
