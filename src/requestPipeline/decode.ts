@@ -110,7 +110,7 @@ const decodeResultValue = (input: {
         parentContext.object[parentContext.index] = decodedValue
       }
     } else if (Docpar.isCustomScalarName(sddmNode)) {
-      const scalar = Schema.Scalar.lookupCustomScalarOrFallbackToString(scalars, sddmNode)
+      const scalar = Schema.Scalar.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
       const decodedValue = Schema.Scalar.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
