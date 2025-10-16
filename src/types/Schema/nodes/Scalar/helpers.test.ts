@@ -12,37 +12,34 @@ import type { Scalar } from './Scalar.js'
 
 describe('LookupCustomScalarOrFallbackToUnknown', () => {
   test('standard scalars are resolved correctly', () => {
-    declare let _: any
-
     type EmptyRegistry = Registry<{}, any, any>
 
     // Standard scalars should resolve to their types
-    Ts.Test.exact<typeof StringScalar, LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()(_ as typeof StringScalar)
-    Ts.Test.exact<typeof Int, LookupCustomScalarOrFallbackToUnknown<'Int', EmptyRegistry>>()(_ as typeof Int)
-    Ts.Test.exact<typeof Float, LookupCustomScalarOrFallbackToUnknown<'Float', EmptyRegistry>>()(_ as typeof Float)
-    Ts.Test.exact<typeof ID, LookupCustomScalarOrFallbackToUnknown<'ID', EmptyRegistry>>()(_ as typeof ID)
+    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()(StringScalar)
+    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'Int', EmptyRegistry>>()(Int)
+    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'Float', EmptyRegistry>>()(Float)
+    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'ID', EmptyRegistry>>()(ID)
   })
 
   test('custom scalars in registry are resolved', () => {
-    declare let _: any
-
     type DateScalar = Scalar<'Date', Date, string>
     type RegistryWithDate = Registry<{ Date: DateScalar }, string, Date>
 
+    const DateScalar: DateScalar = {
+      kind: 'Scalar',
+      name: 'Date',
+      codec: createCodec({ encode: () => '', decode: () => new Date() }),
+    }
+
     // Custom scalar in registry should resolve
-    Ts.Test.exact<DateScalar, LookupCustomScalarOrFallbackToUnknown<'Date', RegistryWithDate>>()(_ as DateScalar)
+    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'Date', RegistryWithDate>>()(DateScalar)
   })
 
   test('unknown custom scalars default to UnknownScalar', () => {
-    declare let _: any
-
     type EmptyRegistry = Registry<{}, any, any>
 
-    // Unknown custom scalar should default to UnknownScalar
-    type Result = LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>
-
-    // Should be UnknownScalar (not String)
-    Ts.Test.exact<typeof UnknownScalar, Result>()(_ as typeof UnknownScalar)
+    // Unknown custom scalar should default to UnknownScalar (not String)
+    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()(UnknownScalar)
   })
 })
 
