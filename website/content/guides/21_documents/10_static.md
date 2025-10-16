@@ -668,6 +668,10 @@ query getPokemon {
 
 ## Variables
 
+::: tip Defer Execution with Variables
+When using variables with generated method calls (not `Graffle.gql()`), Graffle automatically switches to [deferred execution](/extensions/document-builder#deferred-execution), giving you a `DocumentRunner` object to inspect the document and execute it multiple times with different variables.
+:::
+
 ### Basic Usage
 
 :::tabs
@@ -782,104 +786,9 @@ $.Int().default(10) // Optional number with default
 $.Boolean().as('flag') // Boolean with custom name
 ```
 
-### Hoisting Arguments
-
-By default, the builder extracts **all** arguments as GraphQL variables (`hoistArguments: true`). This provides:
-
-- Better query caching (same query structure, different variable values)
-- Automatic custom scalar encoding
-- Alignment with GraphQL best practices
-
-**Example with default behavior:**
-
-```ts
-const doc = Graffle.gql({
-  query: {
-    getTrainer: {
-      trainerByName: {
-        $: { name: 'Ash' },
-        name: true,
-        class: true,
-      },
-    },
-  },
-})
-
-// Generates:
-// query($name: String!) {
-//   trainerByName(name: $name) { name class }
-// }
-// Variables: { name: "Ash" }
-```
-
-**Disabling automatic extraction:**
-
-```ts
-import { staticBuilderDefaults } from 'graffle/extensions/document-builder'
-
-staticBuilderDefaults.hoistArguments = false
-
-const doc = Graffle.gql({
-  query: {
-    getTrainer: {
-      trainerByName: {
-        $: { name: 'Ash' },
-        name: true,
-      },
-    },
-  },
-})
-
-// Generates:
-// query { trainerByName(name: "Ash") { name } }
-```
-
-**Note:** Explicit `$` markers are ALWAYS extracted as variables, regardless of this setting:
-
-```ts
-staticBuilderDefaults.hoistArguments = false
-
-const doc = Graffle.gql({
-  query: {
-    getPokemon: {
-      pokemonByName: {
-        $: {
-          name: $('pokemonName'), // Always extracted
-        },
-        name: true,
-        trainer: {
-          name: true,
-        },
-      },
-    },
-  },
-})
-
-// Generates:
-// query($pokemonName: String!) {
-//   pokemonByName(name: $pokemonName) { name trainer { name } }
-// }
-```
-
-### Conflict Resolution
-
-When both explicit `$` markers and auto-hoisted arguments want the same variable name, automatic renaming occurs:
-
-```ts
-const doc = Graffle.gql({
-  query: {
-    getTrainer: {
-      trainerByName: {
-        $: {
-          name: $('trainerName'), // Gets: $trainerName
-        },
-        name: true,
-        class: true,
-      },
-    },
-  },
-})
-```
+::: tip Variable Hoisting
+Graffle supports both **manual hoisting** (explicit `$` markers) and **automatic hoisting** (extracting all arguments as variables). For a comprehensive guide on how hoisting works, configuration options, and choosing between approaches, see [Variable Hoisting](/guides/documents/hoisting).
+:::
 
 ## Picking a Syntax
 

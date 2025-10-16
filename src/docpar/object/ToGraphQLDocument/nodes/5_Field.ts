@@ -54,7 +54,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
           const isVarMarker = Var.isVariableMarker(argValue)
 
           if (isVarMarker) {
-            // Extract variable from $var marker (explicit user marking)
+            // Manual hoisting - user explicitly marked with $ sentinel
             const varInfo = Var.extractVariableInfo(argValue, argNameSchemaStripped)
 
             const argument = context.variables.capture({
@@ -64,10 +64,11 @@ export const toGraphQLField: GraphQLPostOperationMapper<
               defaultValue: varInfo.defaultValue, // Include default in GraphQL definition if provided
               isEnum,
               sddmArgument,
+              provenance: `manual`,
             })
             arguments_.push(argument)
           } else if (context.variables.enabled) {
-            // Extract all arguments as variables when hoistArguments: true
+            // Automatic hoisting - system extracts all arguments when hoistArguments: true
             // When SDDM is available, use it for precise type inference
             // When SDDM is unavailable, infer types from runtime values
             const argument = context.variables.capture({
@@ -77,6 +78,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
               // defaultValue intentionally omitted - not needed when we always pass the value
               isEnum,
               sddmArgument,
+              provenance: `automatic`,
             })
             arguments_.push(argument)
           } else {
