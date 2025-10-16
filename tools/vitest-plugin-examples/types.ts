@@ -47,6 +47,54 @@ export interface ExamplesPluginConfig {
    * @default true
    */
   maskDynamicValues?: boolean
+
+  /**
+   * Execution configuration for running examples.
+   */
+  executor?: {
+    /**
+     * Command to execute examples.
+     *
+     * @default ['tsx']
+     */
+    command?: string[]
+    /**
+     * Working directory for command execution.
+     *
+     * @default process.cwd()
+     */
+    cwd?: string
+    /**
+     * Environment variables to pass to the command.
+     *
+     * @default process.env
+     */
+    env?: Record<string, string | undefined>
+  }
+
+  /**
+   * Type generation configuration.
+   */
+  typeGeneration?: {
+    /**
+     * Whether to enable type generation.
+     *
+     * @default true
+     */
+    enabled?: boolean
+    /**
+     * Output directory for generated types.
+     *
+     * @default 'node_modules/@generated/test-examples'
+     */
+    outputDir?: string
+    /**
+     * Package name for generated types.
+     *
+     * @default '@generated/test-examples'
+     */
+    packageName?: string
+  }
 }
 
 /**

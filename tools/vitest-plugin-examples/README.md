@@ -1,36 +1,129 @@
 # Vitest Examples Plugin
 
-A Vitest plugin for testing executable documentation examples. This plugin discovers example files, executes them, captures their output, and integrates with Vitest's snapshot testing.
+A Vite plugin for testing executable documentation examples with type-safe configuration. This plugin automatically discovers example files, generates TypeScript types for type-safe encoder configuration, executes examples, captures their output, and integrates with Vitest's snapshot testing.
 
 ## Features
 
+- **Automatic Type Generation**: Generates TypeScript types in `@generated/test-examples` for type-safe encoder configuration
 - **Automatic Discovery**: Finds example files using glob patterns
-- **Output Capture**: Executes examples and captures stdout/stderr
-- **Dynamic Value Masking**: Configurable encoders for masking non-deterministic values
-- **Snapshot Testing**: Integrates seamlessly with Vitest snapshots
+- **Output Capture**: Executes examples and captures stdout/stderr using Effect Platform
+- **Dynamic Value Masking**: Type-safe encoder configuration for masking non-deterministic values
+- **Snapshot Testing**: Integrates seamlessly with Vitest inline snapshots
 - **Lifecycle Hooks**: Support for setup/teardown before/after each example
 - **Sequential Execution**: Runs examples sequentially to avoid race conditions
+- **IDE Autocomplete**: Full TypeScript autocomplete for example file paths
+- **Configurable Execution**: Customize executor command, cwd, and environment
 
 ## Installation
 
-This plugin is currently part of the Graffle project. No separate installation needed.
+```bash
+pnpm add -D @jasonkuhrt/vitest-plugin-examples
+```
+
+Or use it locally within the Graffle monorepo.
 
 ## Usage
 
-### Basic Usage
+### 1. Configure Vitest to Use the Plugin
+
+In your `vitest.config.ts`:
+
+```typescript
+import { defineConfig } from 'vitest/config'
+import { examplesPlugin } from '@jasonkuhrt/vitest-plugin-examples'
+
+export default defineConfig({
+  plugins: [
+    examplesPlugin({
+      pattern: './*/*.ts',
+      outputDir: './__outputs__',
+    }),
+  ],
+  // ... rest of your config
+})
+```
+
+The plugin runs during Vite's `buildStart` lifecycle, generating types before TypeScript compilation.
+
+### 2. Use the Convenience Test Function
+
+In your test file:
+
+```typescript
+import { test } from 'vitest'
+import { createExamplesTest } from '@jasonkuhrt/vitest-plugin-examples'
+import type { ExamplePath } from '@generated/test-examples'
+
+// Type-safe encoder configuration with autocomplete
+const encoders = {
+  './examples/dynamic-timestamp.ts': (value: string) => {
+    return value.replace(/timestamp: \d+/g, 'timestamp: MASKED')
+  },
+} satisfies Partial<Record<ExamplePath, EncoderFunction>>
+
+createExamplesTest(test, {
+  timeout: 300000,
+  config: {
+    pattern: './*/*.ts',
+    outputDir: './__outputs__',
+    ignore: ['./$', './__outputs__', './__tests__'],
+    encoders,
+    beforeEach: async () => {
+      // Reset database before each example
+      await db.reset()
+    },
+  },
+})
+```
+
+That's it! The `createExamplesTest()` function:
+- Automatically runs all discovered examples
+- Creates a single Vitest test case
+- Generates individual snapshots for each example
+- Handles all assertions internally
+
+### Type-Safe Encoders
+
+The plugin generates TypeScript types for all discovered example files in `node_modules/@generated/test-examples/`:
+
+```typescript
+// Auto-generated - provides autocomplete for example paths
+export interface ExampleFiles {
+  './examples/example1.ts': true
+  './examples/example2.ts': true
+  // ... all discovered examples
+}
+
+export type ExamplePath = keyof ExampleFiles
+```
+
+Use these types for type-safe encoder configuration:
+
+```typescript
+import type { ExamplePath, EncoderFunction } from '@generated/test-examples'
+
+const encoders = {
+  './examples/dynamic-values.ts': (output: string) => {
+    return output.replace(/'x-timestamp', '\d+'/gi, `'x-timestamp', 'MASKED'`)
+  },
+  // ✅ TypeScript autocomplete works here!
+  // ✅ Typos are caught at compile time!
+} satisfies Partial<Record<ExamplePath, EncoderFunction>>
+```
+
+### Advanced: Manual Test Setup
+
+If you need more control, you can use the lower-level APIs:
 
 ```typescript
 import { expect, test } from 'vitest'
-import { testExamples } from '../../tools/vitest-plugin-examples/index.js'
-
-// Create the test runner
-const runAllExamples = testExamples({
-  pattern: './*/*.ts',
-  outputDir: './__outputs__',
-})
+import { runExamples } from '@jasonkuhrt/vitest-plugin-examples'
 
 test('examples', async () => {
-  const results = await runAllExamples()
+  const results = await runExamples({
+    pattern: './*/*.ts',
+    outputDir: './__outputs__',
+  })
 
   for (const result of results) {
     expect(result.encoded).toMatchSnapshot(
@@ -38,41 +131,6 @@ test('examples', async () => {
     )
   }
 }, { timeout: 300000 })
-```
-
-### With Custom Encoders
-
-Encoders mask dynamic values in outputs to make tests deterministic:
-
-```typescript
-const encoders = {
-  'examples/dynamic-timestamp.ts': (output: string) => {
-    return output.replace(/timestamp: \d+/g, 'timestamp: MASKED')
-  },
-}
-
-const runAllExamples = testExamples({
-  pattern: './examples/*/*.ts',
-  encoders,
-})
-```
-
-### With Lifecycle Hooks
-
-Use hooks for database resets or other setup:
-
-```typescript
-const runAllExamples = testExamples({
-  pattern: './examples/*/*.ts',
-  beforeEach: async () => {
-    // Reset database before each example
-    await db.reset()
-  },
-  afterEach: async () => {
-    // Cleanup after each example
-    await cleanup()
-  },
-})
 ```
 
 ## Configuration
@@ -120,6 +178,48 @@ interface ExamplesPluginConfig {
    * @default true
    */
   maskDynamicValues?: boolean
+
+  /**
+   * Execution configuration for running examples.
+   */
+  executor?: {
+    /**
+     * Command to execute examples.
+     * @default ['tsx']
+     */
+    command?: string[]
+    /**
+     * Working directory for command execution.
+     * @default process.cwd()
+     */
+    cwd?: string
+    /**
+     * Environment variables to pass to the command.
+     * @default process.env
+     */
+    env?: Record<string, string | undefined>
+  }
+
+  /**
+   * Type generation configuration.
+   */
+  typeGeneration?: {
+    /**
+     * Whether to enable type generation.
+     * @default true
+     */
+    enabled?: boolean
+    /**
+     * Output directory for generated types.
+     * @default 'node_modules/@generated/test-examples'
+     */
+    outputDir?: string
+    /**
+     * Package name for generated types.
+     * @default '@generated/test-examples'
+     */
+    packageName?: string
+  }
 }
 ```
 
@@ -144,11 +244,18 @@ interface ExampleResult {
 
 ## How It Works
 
-1. **Discovery**: Uses `globby` to find example files matching the pattern
-2. **Execution**: Runs each example using Effect Platform's `Command` API with `tsx`
-3. **Capture**: Captures stdout/stderr using Effect Streams
-4. **Encoding**: Applies custom encoders + default masking for determinism
-5. **Testing**: Returns results for use with Vitest's `expect().toMatchSnapshot()`
+1. **Type Generation** (Vite plugin, `buildStart` hook):
+   - Discovers example files using Kit's `Fs.glob()`
+   - Generates TypeScript types to `node_modules/@generated/test-examples/`
+   - Creates proper npm package with `package.json` for TypeScript module resolution
+   - Runs before TypeScript compilation, ensuring types are available during type checking
+
+2. **Test Execution** (Vitest runtime):
+   - Discovers example files matching the pattern
+   - Runs each example using Effect Platform's `Command` API (configurable executor)
+   - Captures stdout/stderr using Effect Streams
+   - Applies custom encoders + default masking for determinism
+   - Creates individual inline snapshots for each example
 
 ### Default Encoding
 
@@ -161,31 +268,56 @@ The plugin applies default encoding to mask common dynamic values:
 
 ## API
 
-### `testExamples(config?)`
+### Plugin API
+
+#### `examplesPlugin(config?)`
+
+Vite plugin that generates TypeScript types for example files during build.
+
+**Usage**: Add to `vitest.config.ts` plugins array
+
+**Configuration**: Same as `ExamplesPluginConfig`
+
+### Test Helper API
+
+#### `createExamplesTest(test, options?)`
+
+Convenience function that creates a complete test case for all examples.
+
+**Parameters**:
+- `test` - Vitest's `test` function
+- `options` - Configuration object:
+  - `config?: ExamplesPluginConfig` - Plugin configuration
+  - `timeout?: number` - Test timeout in milliseconds (default: 300000)
+  - `testName?: string` - Name of the test case (default: 'examples')
+
+**Returns**: void (creates test internally)
+
+#### `testExamples(config?)`
 
 Creates a function that runs all examples with the given configuration.
 
 **Returns**: `() => Promise<ExampleResult[]>`
 
-### `runExamples(config)`
+#### `runExamples(config)`
 
 Runs all examples and returns their results.
 
 **Returns**: `Promise<ExampleResult[]>`
 
-### `runExample(relativePath, config)`
+#### `runExample(relativePath, config)`
 
 Runs a single example by its relative path.
 
 **Returns**: `Promise<ExampleResult>`
 
-### `discoverExamples(config)`
+#### `discoverExamples(config)`
 
 Discovers example files without executing them.
 
 **Returns**: `Promise<ExampleFile[]>`
 
-### `captureExample(file, config)`
+#### `captureExample(file, config)`
 
 Executes a single example file and captures its output.
 
@@ -213,16 +345,25 @@ The new plugin simplifies this to:
 - Typical run time: ~2-5 minutes for ~30 examples
 - Set test timeout to at least 300000ms (5 minutes)
 
+## Dependencies
+
+This plugin requires:
+- **Effect Platform** (`@effect/platform`, `@effect/platform-node`, `effect`) - For command execution and stream handling
+- **@wollybeard/kit** - For file system operations and FsLoc types
+- **Vite & Vitest** (peer dependencies)
+
 ## Limitations
 
-- Currently executes via `pnpm tsx` - requires these tools to be available
-- Sequential execution means slower than parallel (by design)
-- Snapshot comparison happens in-memory, not via file system
-- Requires Effect Platform packages (`@effect/platform`, `@effect/platform-node`, `effect`)
+- Executes examples via configurable executor (default: `tsx`)
+- Sequential execution means slower than parallel (by design, for safety)
+- Snapshot comparison happens in-memory (inline snapshots)
+- Generated types live in `node_modules/@generated/` - not committed to git
+- Requires Effect Platform and Kit dependencies
 
 ## Future Improvements
 
 - Support for parallel execution with opt-in
-- Better TypeScript integration without needing `tsx`
-- Output file generation for documentation
+- Option to commit generated types to source control
 - Comparison utilities for validating against old system
+- Support for custom snapshot serializers
+- Lighter-weight alternative without Effect/Kit dependencies
