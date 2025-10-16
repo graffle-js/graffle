@@ -66,7 +66,6 @@
     "examples:test": "cd examples && pnpm test",
     "examples:gen:website": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm fix:format",
     "examples:gen:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
-    "examples:gen:tests": "tsx scripts/generate-examples-derivatives/generate.ts --tests && dprint fmt examples/__tests__/**/*",
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "fix:format": "dprint fmt",
     "fix:lint": "oxlint --fix",
@@ -109,7 +108,7 @@
     "@0no-co/graphql.web": "^1.0.12",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
-    "@wollybeard/kit": "^0.78.3",
+    "@wollybeard/kit": "^0.79.0",
     "es-toolkit": "^1.35.0",
     "is-plain-obj": "^4.1.0",
     "type-fest": "^4.40.0"

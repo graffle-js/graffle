@@ -15,31 +15,31 @@ const rejects = <$Expected>() => (_value: $Expected) => {}
 describe('Builder type defaults', () => {
   test('bare type accepts any state (widest)', () => {
     type AcceptsAny = Var.Builder
-    Ts.Test.sub<AcceptsAny>()(as<Var.Builder<unknown, Var.BuilderStateEmpty>>())
-    Ts.Test.sub<AcceptsAny>()(as<Var.Builder<number, { default: 5; required: true; name: 'test' }>>())
-    Ts.Test.sub<AcceptsAny>()(as<Var.Builder<string, Var.BuilderState>>())
+    Ts.Test.sub.is<AcceptsAny>()(as<Var.Builder<unknown, Var.BuilderStateEmpty>>())
+    Ts.Test.sub.is<AcceptsAny>()(as<Var.Builder<number, { default: 5; required: true; name: 'test' }>>())
+    Ts.Test.sub.is<AcceptsAny>()(as<Var.Builder<string, Var.BuilderState>>())
   })
   test('$var starts with empty state', () => {
-    Ts.Test.sub<Var.Builder<unknown, Var.BuilderStateEmpty>>()($var)
+    Ts.Test.sub.is<Var.Builder<unknown, Var.BuilderStateEmpty>>()($var)
   })
 })
 
 describe('Builder type inference', () => {
   test('infers type from default value', () => {
     const marker1 = $var.default(42)
-    Ts.Test.sub<Var.Builder<42, { default: 42; required: undefined; name: undefined }>>()(marker1)
+    Ts.Test.sub.is<Var.Builder<42, { default: 42; required: undefined; name: undefined }>>()(marker1)
 
     const marker2 = $var.default('hello')
-    Ts.Test.sub<Var.Builder<'hello', { default: 'hello'; required: undefined; name: undefined }>>()(marker2)
+    Ts.Test.sub.is<Var.Builder<'hello', { default: 'hello'; required: undefined; name: undefined }>>()(marker2)
 
     const marker3 = $var.default(true)
-    Ts.Test.sub<Var.Builder<true, { default: true; required: undefined; name: undefined }>>()(marker3)
+    Ts.Test.sub.is<Var.Builder<true, { default: true; required: undefined; name: undefined }>>()(marker3)
 
     const marker4 = $var.default(null)
-    Ts.Test.sub<Var.Builder<null, { default: null; required: undefined; name: undefined }>>()(marker4)
+    Ts.Test.sub.is<Var.Builder<null, { default: null; required: undefined; name: undefined }>>()(marker4)
 
     const marker5 = $var.default([1, 2, 3])
-    Ts.Test.sub<
+    Ts.Test.sub.is<
       Var.Builder<readonly [1, 2, 3], { default: readonly [1, 2, 3]; required: undefined; name: undefined }>
     >()(
       marker5,
@@ -48,16 +48,16 @@ describe('Builder type inference', () => {
 
   test('preserves narrowed type through chaining', () => {
     const marker1 = $var.default(42).name('limit')
-    Ts.Test.sub<Var.Builder<42, { default: 42; required: undefined; name: 'limit' }>>()(marker1)
+    Ts.Test.sub.is<Var.Builder<42, { default: 42; required: undefined; name: 'limit' }>>()(marker1)
 
     const marker2 = $var.name('userId').default('abc123')
-    Ts.Test.sub<Var.Builder<'abc123', { default: 'abc123'; required: undefined; name: 'userId' }>>()(marker2)
+    Ts.Test.sub.is<Var.Builder<'abc123', { default: 'abc123'; required: undefined; name: 'userId' }>>()(marker2)
 
     const marker4 = $var.default('test').required()
-    Ts.Test.sub<Var.Builder<'test', { default: 'test'; required: true; name: undefined }>>()(marker4)
+    Ts.Test.sub.is<Var.Builder<'test', { default: 'test'; required: true; name: undefined }>>()(marker4)
 
     const marker5 = $var.name('pageSize').default(20).required()
-    Ts.Test.sub<Var.Builder<20, { default: 20; required: true; name: 'pageSize' }>>()(marker5)
+    Ts.Test.sub.is<Var.Builder<20, { default: 20; required: true; name: 'pageSize' }>>()(marker5)
   })
 })
 

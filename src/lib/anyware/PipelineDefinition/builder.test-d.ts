@@ -11,33 +11,33 @@ const b0 = PipelineDefinition.create().input<initialInput>()
 const b1 = PipelineDefinition.create().input<initialInput>().step(stepA)
 
 test(`initial context`, () => {
-  Ts.Test.sub<{ input: initialInput; steps: []; config: Config; overloads: [] }>()(b0.type)
+  Ts.Test.sub.is<{ input: initialInput; steps: []; config: Config; overloads: [] }>()(b0.type)
 })
 
 test(`first step definition`, () => {
-  Ts.Test.sub<
+  Ts.Test.sub.is<
     (name: string, definition: { run: (params: { input: initialInput; previous: undefined }) => any }) => any
   >()(b0.step)
 })
 
 test(`can force an input type while inferring rest`, () => {
   const b1 = b0.step(`a`, { run: (_: { x: 9 }) => {} })
-  Ts.Test.exact<'a'>()(b1.type.steps[0]['name'])
-  Ts.Test.exact<{ x: 9 }>()(b1.type.steps[0]['input'])
+  Ts.Test.exact.is<'a'>()(b1.type.steps[0]['name'])
+  Ts.Test.exact.is<{ x: 9 }>()(b1.type.steps[0]['input'])
 })
 
 test(`step can omit run, output defaults to object`, () => {
   const b1 = b0.step(`a`)
-  Ts.Test.exact<{ readonly x: 1 }>()(b1.type.steps[0]['input'])
-  Ts.Test.exact<{}>()(b1.type.steps[0]['output'])
+  Ts.Test.exact.is<{ readonly x: 1 }>()(b1.type.steps[0]['input'])
+  Ts.Test.exact.is<{}>()(b1.type.steps[0]['output'])
   const b2 = b0.step(`a`).step(`b`)
-  Ts.Test.exact<{}>()(b2.type.steps[1]['input'])
-  Ts.Test.exact<{}>()(b2.type.steps[1]['output'])
+  Ts.Test.exact.is<{}>()(b2.type.steps[1]['input'])
+  Ts.Test.exact.is<{}>()(b2.type.steps[1]['output'])
 })
 
 test(`second step definition`, () => {
   const p1 = b0.step(`a`, { run: () => results.a })
-  Ts.Test.sub<
+  Ts.Test.sub.is<
     (
       name: string,
       parameters: {
@@ -49,7 +49,7 @@ test(`second step definition`, () => {
       },
     ) => any
   >()(p1.step)
-  Ts.Test.sub<
+  Ts.Test.sub.is<
     {
       input: initialInput
       steps: [{ name: 'a'; slots: {} }]
@@ -61,7 +61,7 @@ test(`step input receives awaited return value from previous step `, () => {
   const b1 = b0.step(`a`, { run: () => Promise.resolve(results.a) })
   b1.step(`b`, {
     run: (input) => {
-      Ts.Test.exact<results['a']>()(input)
+      Ts.Test.exact.is<results['a']>()(input)
     },
   })
 })
@@ -74,12 +74,12 @@ test(`step definition with slots`, () => {
         n: slots.n,
       },
       run: (_, slots) => {
-        Ts.Test.exact<Promise<'m'>>()(slots.m())
-        Ts.Test.exact<'n'>()(slots.n())
+        Ts.Test.exact.is<Promise<'m'>>()(slots.m())
+        Ts.Test.exact.is<'n'>()(slots.n())
         return results.a
       },
     })
-  Ts.Test.sub<
+  Ts.Test.sub.is<
     {
       input: initialInput
       config: Config
@@ -107,7 +107,7 @@ describe(`overload`, () => {
       type StepSignature = typeof o.create extends (args: any) => infer R ? R extends { step: infer S } ? S : never
         : never
       type _Test = Ts.Test.Cases<
-        Ts.Test.sub<
+        Ts.Test.sub.is<
           ((name: never, spec: _) => _),
           StepSignature
         >
@@ -122,7 +122,7 @@ describe(`overload`, () => {
         .create({ discriminant: discriminant })
         .step(`a`, { run: (input) => ({ ...input, ola: 1 as const }) })
     )
-    Ts.Test.sub<
+    Ts.Test.sub.is<
       [{
         discriminant: discriminant
         configurator: Configurator.States.Empty
@@ -143,11 +143,11 @@ describe(`overload`, () => {
     const result = b0.step(`a`).overload(o =>
       o.create({ discriminant: discriminant }).stepWithExtendedInput<{ ex: 1 }>()(`a`, {
         run: (input) => {
-          Ts.Test.exact<initialInput & dObject & { ex: 1 }>()(input)
+          Ts.Test.exact.is<initialInput & dObject & { ex: 1 }>()(input)
         },
       })
     )
-    Ts.Test.sub<
+    Ts.Test.sub.is<
       [{
         discriminant: discriminant
         configurationMount: undefined
@@ -169,11 +169,11 @@ describe(`overload`, () => {
     const b1o = b1.overload(o =>
       o.create({ discriminant: discriminant }).step(`a`, {
         run: (_, slots) => {
-          Ts.Test.exact<undefined>()(slots)
+          Ts.Test.exact.is<undefined>()(slots)
         },
       })
     )
-    Ts.Test.exact<{}>()(b1o.type.overloads[0]['steps']['a']['slots'])
+    Ts.Test.exact.is<{}>()(b1o.type.overloads[0]['steps']['a']['slots'])
   })
 
   test(`slots available to run and added to overload context`, () => {
@@ -181,11 +181,11 @@ describe(`overload`, () => {
       o.create({ discriminant: discriminant }).step(`a`, {
         slots: { m: slots.m },
         run: (_, slots) => {
-          Ts.Test.exact<{ m: slots['m'] }>()(slots)
+          Ts.Test.exact.is<{ m: slots['m'] }>()(slots)
         },
       })
     )
-    Ts.Test.sub<
+    Ts.Test.sub.is<
       [{
         steps: {
           a: {
@@ -205,7 +205,7 @@ describe(`overload`, () => {
         .create({ discriminant: discriminant })
         .step(`b`, {
           run: (input) => {
-            Ts.Test.exact<results['a'] & dObject>()(input)
+            Ts.Test.exact.is<results['a'] & dObject>()(input)
           },
         })
     )

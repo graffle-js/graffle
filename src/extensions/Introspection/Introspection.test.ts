@@ -10,5 +10,5 @@ test(`adds an introspection method that introspects the schema`, async ({ schema
   graffle._.typeHookRequestResultDataTypes
   const result = await graffle.introspect()
   expect(result).toMatchSnapshot()
-  Ts.Test.sub<IntrospectionQuery | null>()(result)
+  Ts.Test.sub.is<IntrospectionQuery | null>()(result)
 })

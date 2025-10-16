@@ -45,25 +45,25 @@ const multiRequiredVarsString = Possible.gql(
 const untypedDoc = `query { id }` as string
 type R10 = unknown
 
-Ts.Test.exact<R10>()(await client.gql(untypedDoc).$send())
-Ts.Test.exact<R10>()(await client.gql(untypedDoc).$send('anyName'))
-Ts.Test.exact<R10>()(await client.gql(untypedDoc).$send({ any: 'vars' }))
-Ts.Test.exact<R10>()(await client.gql(untypedDoc).$send('anyName', { any: 'vars' }))
+Ts.Test.exact.is<R10>()(await client.gql(untypedDoc).$send())
+Ts.Test.exact.is<R10>()(await client.gql(untypedDoc).$send('anyName'))
+Ts.Test.exact.is<R10>()(await client.gql(untypedDoc).$send({ any: 'vars' }))
+Ts.Test.exact.is<R10>()(await client.gql(untypedDoc).$send('anyName', { any: 'vars' }))
 
 // ==================================================================================================
 //                            SINGLE OPERATION - NO VARIABLES
 // ==================================================================================================
 type R1 = typeof singleNoVars['operations']['result'] | null
 
-Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send('myQuery'))
-Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send())
-Ts.Test.exact<R1>()(await client.gql(singleNoVars).myQuery())
-Ts.Test.exact<R1>()(await client.gql(singleNoVarsString).$send())
+Ts.Test.exact.is<R1>()(await client.gql(singleNoVars).$send('myQuery'))
+Ts.Test.exact.is<R1>()(await client.gql(singleNoVars).$send())
+Ts.Test.exact.is<R1>()(await client.gql(singleNoVars).myQuery())
+Ts.Test.exact.is<R1>()(await client.gql(singleNoVarsString).$send())
 // Inline string
-Ts.Test.exact<R1>()(await client.gql(`query myQuery { id }`).$send())
+Ts.Test.exact.is<R1>()(await client.gql(`query myQuery { id }`).$send())
 
 // Inline object
-Ts.Test.exact<R1>()(await client.gql({ query: { myQuery: { id: true } } }).$send())
+Ts.Test.exact.is<R1>()(await client.gql({ query: { myQuery: { id: true } } }).$send())
 // @ts-expect-error - invalid operation name
 client.gql(singleNoVars).bad()
 // @ts-expect-error - invalid operation name
@@ -78,16 +78,16 @@ client.gql(singleNoVarsString).$send({})
 // ==================================================================================================
 type R2 = typeof singleRequiredVars['operations']['result'] | null
 
-Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
-Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
-Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).getById({ id: '' }))
-Ts.Test.exact<R2>()(await client.gql(singleRequiredVarsString).$send({ id: '' }))
+Ts.Test.exact.is<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
+Ts.Test.exact.is<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
+Ts.Test.exact.is<R2>()(await client.gql(singleRequiredVars).getById({ id: '' }))
+Ts.Test.exact.is<R2>()(await client.gql(singleRequiredVarsString).$send({ id: '' }))
 // Inline string
-Ts.Test.exact<R2>()(
+Ts.Test.exact.is<R2>()(
   await client.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`).$send({ id: '' }),
 )
 // Inline object
-Ts.Test.exact<R2>()(
+Ts.Test.exact.is<R2>()(
   await client.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }).$send({
     id: '',
   }),
@@ -112,30 +112,30 @@ client.gql(singleRequiredVarsString).$send({ id: 0 })
 // ==================================================================================================
 type R3 = typeof singleOptionalVars['operations']['result'] | null
 
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send('search'))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send('search', {}))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send('search', { string: 'hello' }))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send())
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send({}))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).$send({ string: 'hello' }))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search())
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search({}))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search({ string: 'hello' }))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send())
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send({}))
-Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).$send('search'))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).$send('search', {}))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).$send('search', { string: 'hello' }))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).$send())
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).$send({}))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).$send({ string: 'hello' }))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).search())
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).search({}))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVars).search({ string: 'hello' }))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVarsString).$send())
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVarsString).$send({}))
+Ts.Test.exact.is<R3>()(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
 // Inline string
-Ts.Test.exact<R3>()(await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send())
-Ts.Test.exact<R3>()(
+Ts.Test.exact.is<R3>()(await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send())
+Ts.Test.exact.is<R3>()(
   await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send({ string: 'hello' }),
 )
 // Inline object
-Ts.Test.exact<R3>()(
+Ts.Test.exact.is<R3>()(
   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send(),
 )
 // TODO: Inline object with variables has type inference limitation
 // Workaround: assign to const first, then pass to gql()
-// Ts.Test.bid<R3>()(
+// Ts.Test.equiv.is<R3>()(
 //   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
 //     string: 'hello',
 //   }),
@@ -153,19 +153,19 @@ client.gql(singleOptionalVarsString).$send({ string: 0 })
 type R4 = Extract<typeof multiNoVars['operations'], { name: 'getUser' }>['result'] | null
 type R5 = Extract<typeof multiNoVars['operations'], { name: 'addId' }>['result'] | null
 
-Ts.Test.exact<R4>()(await client.gql(multiNoVars).$send('getUser'))
-Ts.Test.exact<R5>()(await client.gql(multiNoVars).$send('addId'))
-Ts.Test.exact<R4>()(await client.gql(multiNoVars).getUser())
-Ts.Test.exact<R5>()(await client.gql(multiNoVars).addId())
+Ts.Test.exact.is<R4>()(await client.gql(multiNoVars).$send('getUser'))
+Ts.Test.exact.is<R5>()(await client.gql(multiNoVars).$send('addId'))
+Ts.Test.exact.is<R4>()(await client.gql(multiNoVars).getUser())
+Ts.Test.exact.is<R5>()(await client.gql(multiNoVars).addId())
 // Multi-op string documents require operation name
-Ts.Test.exact<R4>()(await client.gql(multiNoVarsString).$send('getUser'))
+Ts.Test.exact.is<R4>()(await client.gql(multiNoVarsString).$send('getUser'))
 // Inline string - multi-op requires operation name
-Ts.Test.exact<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
+Ts.Test.exact.is<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
 // Inline object
-Ts.Test.exact<R4>()(
+Ts.Test.exact.is<R4>()(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('getUser'),
 )
-Ts.Test.exact<R5>()(
+Ts.Test.exact.is<R5>()(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('addId'),
 )
 // @ts-expect-error - invalid operation name
@@ -185,14 +185,14 @@ client.gql(multiNoVarsString).$send('getUser', {})
 type R6a = Extract<typeof multiRequiredVars['operations'], { name: 'getById' }>['result'] | null
 type R6b = Extract<typeof multiRequiredVars['operations'], { name: 'setId' }>['result'] | null
 
-Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).$send('getById', { id: 'user-123' }))
-Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).$send('setId'))
-Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
-Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).setId())
+Ts.Test.exact.is<R6a>()(await client.gql(multiRequiredVars).$send('getById', { id: 'user-123' }))
+Ts.Test.exact.is<R6b>()(await client.gql(multiRequiredVars).$send('setId'))
+Ts.Test.exact.is<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
+Ts.Test.exact.is<R6b>()(await client.gql(multiRequiredVars).setId())
 // Multi-op string documents require operation name
-Ts.Test.exact<R6a>()(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
+Ts.Test.exact.is<R6a>()(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
 // Inline string - multi-op requires operation name
-Ts.Test.exact<R6a>()(
+Ts.Test.exact.is<R6a>()(
   await client
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
     .$send('getById', { id: 'user-123' }),
@@ -204,7 +204,7 @@ const x = await client
   })
   .$send('getById', { id: 'user-123' })
 // Inline object
-Ts.Test.exact<R6a>()(
+Ts.Test.exact.is<R6a>()(
   await client
     .gql({
       query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
@@ -212,7 +212,7 @@ Ts.Test.exact<R6a>()(
     })
     .$send('getById', { id: 'user-123' }),
 )
-Ts.Test.exact<R6b>()(
+Ts.Test.exact.is<R6b>()(
   await client
     .gql({
       query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
@@ -239,15 +239,15 @@ client.gql(multiRequiredVarsString).$send('getById', { id: 0 })
 
 // TypedDocumentString
 declare const typedDocString: Grafaid.Document.Typed.String<{ id: string | null }, { userId: string }>
-Ts.Test.exact<{ id: string | null } | null>()(await client.gql(typedDocString).$send({ userId: '123' }))
+Ts.Test.exact.is<{ id: string | null } | null>()(await client.gql(typedDocString).$send({ userId: '123' }))
 
 // TypedDocumentNode
 declare const typedDocNode: Grafaid.Document.Typed.Node<{ name: string | null }, { id: string }>
-Ts.Test.exact<{ name: string | null } | null>()(await client.gql(typedDocNode).$send({ id: '456' }))
+Ts.Test.exact.is<{ name: string | null } | null>()(await client.gql(typedDocNode).$send({ id: '456' }))
 
 // TypedQueryDocumentNode
 declare const typedQueryDocNode: Grafaid.Document.Typed.Query<{ title: string | null }, {}>
-Ts.Test.exact<{ title: string | null } | null>()(await client.gql(typedQueryDocNode).$send())
+Ts.Test.exact.is<{ title: string | null } | null>()(await client.gql(typedQueryDocNode).$send())
 
 // ==================================================================================================
 //                                   SDDM TYPE SAFETY
@@ -258,7 +258,7 @@ declare const sddmDoc: Grafaid.Document.Typed.String<{ id: string | null }, {}, 
 
 // Client with SDDM support - should work
 const clientWithSDDM = Possible.create()
-Ts.Test.exact<{ id: string | null } | null>()(await clientWithSDDM.gql(sddmDoc).$send())
+Ts.Test.exact.is<{ id: string | null } | null>()(await clientWithSDDM.gql(sddmDoc).$send())
 
 const clientWithoutSDDM = Graffle.create().transport({ url: 'https://example.com/graphql' })
 // @ts-expect-error - plain client lacks SDDM support, document requires it
@@ -276,12 +276,12 @@ const g1 = g0.transport(ATransport)
 const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)
 
 // .gql() is callable, but $send is not available if no transports registered
-Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>()(
+Ts.Test.exact.is<Context.Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>()(
   g0.gql('query { __typename }').$send,
 )
 // dprint-ignore
 // $send not available if current transport not ready
-Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>()(g2.gql('query { __typename }').$send)
+Ts.Test.exact.is<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>()(g2.gql('query { __typename }').$send)
 // dprint-ignore
 // ... Reflects name of currently selected transport
-Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>()(g2.transport(RequiredConfigurationTransportB.name).gql('query { __typename }').$send)
+Ts.Test.exact.is<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>()(g2.transport(RequiredConfigurationTransportB.name).gql('query { __typename }').$send)

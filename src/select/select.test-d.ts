@@ -11,10 +11,10 @@ describe(`select`, () => {
   })
 
   it(`has type safe methods`, () => {
-    Ts.Test.exact<{ int: true }>()(select.Bar({ int: true }))
+    Ts.Test.exact.is<{ int: true }>()(select.Bar({ int: true }))
     // Errors
     // @ts-expect-error Excess property check.
-    Ts.Test.exact<{ int: true }>()(select.Bar({ int: true, int2: true }))
+    Ts.Test.exact.is<{ int: true }>()(select.Bar({ int: true, int2: true }))
   })
 })
 
