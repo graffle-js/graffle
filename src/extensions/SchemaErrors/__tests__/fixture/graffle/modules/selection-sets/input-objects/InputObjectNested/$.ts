@@ -18,5 +18,5 @@ export type * as InputObjectNested from './fields.js'
 export interface InputObjectNested<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  InputObject?: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
+  InputObject?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
 }

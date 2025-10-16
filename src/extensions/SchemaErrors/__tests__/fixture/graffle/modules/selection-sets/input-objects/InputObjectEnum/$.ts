@@ -18,5 +18,5 @@ export type * as InputObjectEnum from './fields.js'
 export interface InputObjectEnum<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  $abcEnum?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ABCEnum | null | undefined>
+  $abcEnum?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ABCEnum | null | undefined>
 }

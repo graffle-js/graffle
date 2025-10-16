@@ -228,7 +228,6 @@ test(`Query`, () => {
   Ts.Test.sub<Q>()({ stringWithListArgRequired: { $: { ints: null } } })
 
   // custom scalar arg
-  // @ts-expect-error wrong type
   Ts.Test.sub<Q>()({ dateArg: { $: { date: 0 } } })
   Ts.Test.sub<Q>()({ dateArg: { $: { date: null } } })
   Ts.Test.sub<Q>()({ dateArg: { $: { date: db.date0Encoded } } })

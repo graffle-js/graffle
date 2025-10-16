@@ -211,7 +211,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
     `  $Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`,
   )
   scalarsCode(`> = ${$.$$Utilities}.Schema.Scalar.GetDecoded<`)
-  scalarsCode(`  ${$.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<`)
+  scalarsCode(`  ${$.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToUnknown<`)
   scalarsCode(`    $ScalarName,`)
   scalarsCode(`    $Context extends { scalars: infer $S } ? $S : ${$.$$Utilities}.Schema.Scalar.Registry.Empty`)
   scalarsCode(`  >`)

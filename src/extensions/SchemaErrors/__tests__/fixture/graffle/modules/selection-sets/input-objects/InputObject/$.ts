@@ -19,7 +19,7 @@ export type * as InputObject from './fields.js'
 export interface InputObject<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
-  $abcEnum?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ABCEnum | null | undefined>
+  $abcEnum?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ABCEnum | null | undefined>
   date?: $Scalars.Date<_$Context>
   dateRequired: $Scalars.Date$NonNull<_$Context>
   id?: $Scalars.ID<_$Context>

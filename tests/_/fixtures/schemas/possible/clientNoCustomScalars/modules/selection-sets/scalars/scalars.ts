@@ -11,7 +11,7 @@ export type $Scalar<
   $ScalarName extends string,
   $Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > = $$Utilities.Schema.Scalar.GetDecoded<
-  $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+  $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToUnknown<
     $ScalarName,
     $Context extends { scalars: infer $S } ? $S : $$Utilities.Schema.Scalar.Registry.Empty
   >
