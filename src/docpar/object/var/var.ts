@@ -686,27 +686,40 @@ export const extractVariableInfo = (builder: Builder, argName: string) => {
 }
 
 /**
- * Check if a selection set contains any variable builders.
+ * Check if a selection set contains any manual hoisting (`$` sentinels).
  *
- * Recursively traverses the selection set to detect Builder instances.
- * This is used to determine whether a query method should auto-execute
- * or return a deferred document runner.
+ * Recursively traverses the selection set to detect Builder instances, which indicate
+ * that the user has explicitly marked arguments for variable hoisting using `$` sentinels.
  *
- * @param selectionSet - The selection set to scan for variable builders
- * @returns True if any variable builders are found
+ * This checks for **manual hoisting** only - it does NOT detect automatic hoisting
+ * (arguments extracted via `hoistArguments: true`). Downstream systems can use this
+ * to implement policies based on whether users explicitly requested variables.
+ *
+ * @param value - The selection set or value to scan for variable builders
+ * @returns True if any manual hoisting (`$` markers) are found
  *
  * @example
  * ```ts
- * const hasVars1 = containsVariableBuilder({ id: true })
+ * // No manual hoisting
+ * const hasManual1 = containsManualHoisting({ id: true })
  * // => false
  *
- * const hasVars2 = containsVariableBuilder({ $: { id: $ }, name: true })
+ * // Manual hoisting present
+ * const hasManual2 = containsManualHoisting({ $: { id: $ }, name: true })
  * // => true
  * ```
  *
+ * @remarks
+ * This function enables extensions to differentiate between:
+ * - Manual hoisting: User explicitly wrote `$` markers
+ * - Automatic hoisting: System extracted via `hoistArguments: true`
+ *
+ * For example, the DocumentBuilder extension uses this to defer execution only
+ * when manual hoisting is detected, not for automatic hoisting.
+ *
  * @internal
  */
-export const containsVariableBuilder = (value: unknown): boolean => {
+export const containsManualHoisting = (value: unknown): boolean => {
   // Direct variable builder
   if (isVariableBuilder(value)) return true
 
@@ -715,17 +728,23 @@ export const containsVariableBuilder = (value: unknown): boolean => {
 
   // Arrays
   if (Array.isArray(value)) {
-    return value.some(item => containsVariableBuilder(item))
+    return value.some(item => containsManualHoisting(item))
   }
 
   // Objects
   if (typeof value === `object`) {
-    return Object.values(value).some(v => containsVariableBuilder(v))
+    return Object.values(value).some(v => containsManualHoisting(v))
   }
 
   // Primitives
   return false
 }
+
+/**
+ * @deprecated Use {@link containsManualHoisting} instead. This function was renamed to better reflect
+ * its purpose - detecting manual hoisting (explicit `$` markers) rather than all variable usage.
+ */
+export const containsVariableBuilder = containsManualHoisting
 
 // Backward compatibility exports
 /**

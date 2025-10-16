@@ -29,8 +29,8 @@ Or use it locally within the Graffle monorepo.
 In your `vitest.config.ts`:
 
 ```typescript
-import { defineConfig } from 'vitest/config'
 import { examplesPlugin } from '@jasonkuhrt/vitest-plugin-examples'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [
@@ -50,9 +50,9 @@ The plugin runs during Vite's `buildStart` lifecycle, generating types before Ty
 In your test file:
 
 ```typescript
-import { test } from 'vitest'
-import { createExamplesTest } from '@jasonkuhrt/vitest-plugin-examples'
 import type { ExamplePath } from '@generated/test-examples'
+import { createExamplesTest } from '@jasonkuhrt/vitest-plugin-examples'
+import { test } from 'vitest'
 
 // Type-safe encoder configuration with autocomplete
 const encoders = {
@@ -77,6 +77,7 @@ createExamplesTest(test, {
 ```
 
 That's it! The `createExamplesTest()` function:
+
 - Automatically runs all discovered examples
 - Creates a single Vitest test case
 - Generates individual snapshots for each example
@@ -100,7 +101,7 @@ export type ExamplePath = keyof ExampleFiles
 Use these types for type-safe encoder configuration:
 
 ```typescript
-import type { ExamplePath, EncoderFunction } from '@generated/test-examples'
+import type { EncoderFunction, ExamplePath } from '@generated/test-examples'
 
 const encoders = {
   './examples/dynamic-values.ts': (output: string) => {
@@ -116,8 +117,8 @@ const encoders = {
 If you need more control, you can use the lower-level APIs:
 
 ```typescript
-import { expect, test } from 'vitest'
 import { runExamples } from '@jasonkuhrt/vitest-plugin-examples'
+import { expect, test } from 'vitest'
 
 test('examples', async () => {
   const results = await runExamples({
@@ -285,6 +286,7 @@ Vite plugin that generates TypeScript types for example files during build.
 Convenience function that creates a complete test case for all examples.
 
 **Parameters**:
+
 - `test` - Vitest's `test` function
 - `options` - Configuration object:
   - `config?: ExamplesPluginConfig` - Plugin configuration
@@ -348,6 +350,7 @@ The new plugin simplifies this to:
 ## Dependencies
 
 This plugin requires:
+
 - **Effect Platform** (`@effect/platform`, `@effect/platform-node`, `effect`) - For command execution and stream handling
 - **@wollybeard/kit** - For file system operations and FsLoc types
 - **Vite & Vitest** (peer dependencies)

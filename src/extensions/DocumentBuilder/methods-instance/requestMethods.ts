@@ -48,8 +48,8 @@ export const createMethodOperationType = (state: Context, operationType: Operati
 
       if (key.startsWith(`$batch`)) {
         return (selectionSetOrIndicator: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
-          // Check if selection set contains variables
-          if (Docpar.Object.Var.containsVariableBuilder(selectionSetOrIndicator)) {
+          // Check for manual hoisting (explicit $ markers) to determine execution strategy
+          if (Docpar.Object.Var.containsManualHoisting(selectionSetOrIndicator)) {
             return buildDocumentRunner(state, operationType, selectionSetOrIndicator)
           }
           return executeOperation(state, operationType, selectionSetOrIndicator)
@@ -58,8 +58,8 @@ export const createMethodOperationType = (state: Context, operationType: Operati
         const fieldName = key
         return (selectionSetOrArgs: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
           const rootTypeSelectionSet = { [fieldName]: selectionSetOrArgs ?? {} }
-          // Check if selection set contains variables
-          if (Docpar.Object.Var.containsVariableBuilder(rootTypeSelectionSet)) {
+          // Check for manual hoisting (explicit $ markers) to determine execution strategy
+          if (Docpar.Object.Var.containsManualHoisting(rootTypeSelectionSet)) {
             return buildDocumentRunnerForRootField(state, operationType, fieldName, selectionSetOrArgs)
           }
           return executeRootField(state, operationType, fieldName, selectionSetOrArgs)
