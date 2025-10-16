@@ -24,6 +24,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importUtilities(config))
+    code(`import type * as $$ArgumentsMap from './arguments-map.js'`)
     code``
     code``
     config.schema.kindMap.list.Root.forEach(node => {
@@ -70,12 +71,21 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
           <$SelectionSet>(selectionSet: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${node.name}<{ scalars: $Context['scalars'] }>>) =>
-            Promise<
+            ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
+              ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$ArgumentsMap.ArgumentsMap>,
               & (null | {})
               & ${$.$$Utilities}.HandleOutput<
                   $Context,
                   ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
-                >
+                >,
+              ${$.$$Utilities}.DocumentRunnerDeferred<
+                ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$ArgumentsMap.ArgumentsMap>,
+                & (null | {})
+                & ${$.$$Utilities}.HandleOutput<
+                    $Context,
+                    ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
+                  >
+              >
             >
         >
   `
@@ -123,13 +133,23 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
           <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>>) =>
-            Promise<
+            ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
+              ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$ArgumentsMap.ArgumentsMap>,
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
                   ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                   '${field.name}'
-                >
+                >,
+              ${$.$$Utilities}.DocumentRunnerDeferred<
+                ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$ArgumentsMap.ArgumentsMap>,
+                & (null | {})
+                & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
+                    $Context,
+                    ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                    '${field.name}'
+                  >
+              >
             >
         >
     `
