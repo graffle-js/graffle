@@ -735,6 +735,53 @@ $.default('Ash')
 $.required()
 ```
 
+### Schema-Less Mode Type Hints
+
+When using the static builder without a generated schema, you can provide explicit type hints for variables using typed builder methods:
+
+```ts
+import { $ } from 'graffle'
+
+const doc = Graffle.gql({
+  query: {
+    getPokemon: {
+      pokemonByName: {
+        $: {
+          name: $.String(),      // → string
+          level: $.Int(),        // → number
+          isShiny: $.Boolean(),  // → boolean
+          id: $.ID(),           // → string
+        },
+        name: true,
+      },
+    },
+  },
+})
+```
+
+**Available type hints:**
+
+- `$.String()` - Maps to TypeScript `string`
+- `$.Int()` - Maps to TypeScript `number`
+- `$.Float()` - Maps to TypeScript `number`
+- `$.Boolean()` - Maps to TypeScript `boolean`
+- `$.ID()` - Maps to TypeScript `string`
+
+**Type inference rules:**
+
+- **With schema** (generated client): Plain `$` infers types from the schema
+- **Without schema** (static mode):
+  - Plain `$` → `unknown` (no type information)
+  - `$.String()`, etc. → trusts the type hint you provide
+
+Type hints can be combined with modifiers:
+
+```ts
+$.String().required()    // Required string variable
+$.Int().default(10)      // Optional number with default
+$.Boolean().as('flag')   // Boolean with custom name
+```
+
 ### Hoisting Arguments
 
 By default, the builder extracts **all** arguments as GraphQL variables (`hoistArguments: true`). This provides:
