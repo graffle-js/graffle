@@ -555,7 +555,7 @@ exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $A
       return self({
         ...state,
         name
-      });
+      }, graphqlType);
     }] { name: [Function: name], _: {
           default: undefined,
           name: undefined,
@@ -582,7 +582,7 @@ exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $A
       return self({
         ...state,
         name
-      });
+      }, graphqlType);
     }] { name: [Function: name], _: {
           default: undefined,
           name: undefined,
@@ -609,7 +609,7 @@ exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $A
       return self({
         ...state,
         name
-      });
+      }, graphqlType);
     }] { name: [Function: name], _: {
           default: undefined,
           name: undefined,
@@ -636,7 +636,7 @@ exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $A
       return self({
         ...state,
         name
-      });
+      }, graphqlType);
     }] { name: [Function: name], _: {
           default: undefined,
           name: undefined,
