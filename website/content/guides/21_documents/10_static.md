@@ -747,10 +747,10 @@ const doc = Graffle.gql({
     getPokemon: {
       pokemonByName: {
         $: {
-          name: $.String(),      // → string
-          level: $.Int(),        // → number
-          isShiny: $.Boolean(),  // → boolean
-          id: $.ID(),           // → string
+          name: $.String(), // → string
+          level: $.Int(), // → number
+          isShiny: $.Boolean(), // → boolean
+          id: $.ID(), // → string
         },
         name: true,
       },
@@ -777,9 +777,9 @@ const doc = Graffle.gql({
 Type hints can be combined with modifiers:
 
 ```ts
-$.String().required()    // Required string variable
-$.Int().default(10)      // Optional number with default
-$.Boolean().as('flag')   // Boolean with custom name
+$.String().required() // Required string variable
+$.Int().default(10) // Optional number with default
+$.Boolean().as('flag') // Boolean with custom name
 ```
 
 ### Hoisting Arguments
