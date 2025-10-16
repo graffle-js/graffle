@@ -685,6 +685,48 @@ export const extractVariableInfo = (builder: Builder, argName: string) => {
   }
 }
 
+/**
+ * Check if a selection set contains any variable builders.
+ *
+ * Recursively traverses the selection set to detect Builder instances.
+ * This is used to determine whether a query method should auto-execute
+ * or return a deferred document runner.
+ *
+ * @param selectionSet - The selection set to scan for variable builders
+ * @returns True if any variable builders are found
+ *
+ * @example
+ * ```ts
+ * const hasVars1 = containsVariableBuilder({ id: true })
+ * // => false
+ *
+ * const hasVars2 = containsVariableBuilder({ $: { id: $ }, name: true })
+ * // => true
+ * ```
+ *
+ * @internal
+ */
+export const containsVariableBuilder = (value: unknown): boolean => {
+  // Direct variable builder
+  if (isVariableBuilder(value)) return true
+
+  // Null/undefined
+  if (value == null) return false
+
+  // Arrays
+  if (Array.isArray(value)) {
+    return value.some(item => containsVariableBuilder(item))
+  }
+
+  // Objects
+  if (typeof value === `object`) {
+    return Object.values(value).some(v => containsVariableBuilder(v))
+  }
+
+  // Primitives
+  return false
+}
+
 // Backward compatibility exports
 /**
  * @deprecated Use Builder instead
