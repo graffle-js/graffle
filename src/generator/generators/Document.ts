@@ -65,6 +65,14 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(Code.TSDoc(interfaceDoc))
       code`
         export interface QueryBuilder {
+          $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+            selection: $SelectionSet
+          ) => TypedDocument.String<
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
+            true
+          >
+
           ${
         Obj.values(queryType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, queryType, 'query')
@@ -108,6 +116,14 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(Code.TSDoc(mutationInterfaceDoc))
       code`
         export interface MutationBuilder {
+          $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+            selection: $SelectionSet
+          ) => TypedDocument.String<
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
+            true
+          >
+
           ${
         Obj.values(mutationType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, mutationType, 'mutation')
@@ -151,6 +167,14 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(Code.TSDoc(subscriptionInterfaceDoc))
       code`
         export interface SubscriptionBuilder {
+          $batch: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+            selection: $SelectionSet
+          ) => TypedDocument.String<
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationSubscription<$SelectionSet, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
+            true
+          >
+
           ${
         Obj.values(subscriptionType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, subscriptionType, 'subscription')

@@ -22,14 +22,14 @@ export type $Scalar<
  *
  * Adds variable marker and allows null/undefined values.
  */
-export type Nullable<$Type> = $$Utilities.Docpar.Object.Var.Maybe<$Type | null | undefined>
+export type Nullable<$Type> = $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Type | null | undefined>
 
 /**
  * Wraps a type for non-null input fields.
  *
  * Adds variable marker but does not allow null (undefined still allowed for optionality).
  */
-export type NonNull<$Type> = $$Utilities.Docpar.Object.Var.Maybe<$Type>
+export type NonNull<$Type> = $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Type>
 
 export type String<$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   Nullable<$Scalar<'String', $Context>>

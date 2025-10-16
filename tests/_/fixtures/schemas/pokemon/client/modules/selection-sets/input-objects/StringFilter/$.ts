@@ -19,5 +19,5 @@ export interface StringFilter<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > {
   contains?: $Scalars.String<_$Context>
-  in?: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.String<_$Context>> | null | undefined>
+  in?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.String<_$Context>> | null | undefined>
 }

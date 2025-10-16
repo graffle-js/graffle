@@ -66,6 +66,23 @@ export type InferVariables<
     : {}
 
 /**
+ * Infer variables from a schema-less operation selection set.
+ * Only extracts variables with explicit type annotations ($.String(), $.Int(), etc.).
+ * Variables without type annotations (plain $) are not extracted.
+ */
+// dprint-ignore
+export type InferFromOperationSchemaLess<
+  $SS extends object,
+  ___$ExtractedPropSigs =
+     ExtractFromOperation<$SS, { f: {} }, { argsMap: { operations: {}, types: {}, directives: {} } }>,
+  ___$ExtractedProps =
+    ___$ExtractedPropSigs extends PropertySignature
+      ? PropertySignature.ToProperty<___$ExtractedPropSigs>
+      : {}
+> =
+Simplify<UnionToIntersection<___$ExtractedProps>>
+
+/**
  * Core inferer that takes an operation map directly.
  * Used as foundation for specialized operation-specific inferers.
  */

@@ -6,7 +6,7 @@ aside: false
 
 This example demonstrates the Static Document Builder.
 *
-Generate typed GraphQL documents statically!
+Generate typed GraphQL documents at compile-time!
 No client needed (•̀ᴗ•́)و
 
 <!-- dprint-ignore-start -->

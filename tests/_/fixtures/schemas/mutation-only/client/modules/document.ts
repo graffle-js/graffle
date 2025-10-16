@@ -45,6 +45,20 @@ interface StaticDocumentContext {
  */
 
 export interface MutationBuilder {
+  $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+    selection: $SelectionSet,
+  ) => TypedDocument.String<
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>
+    >,
+    true
+  >
+
   /**
    * # Info
    *

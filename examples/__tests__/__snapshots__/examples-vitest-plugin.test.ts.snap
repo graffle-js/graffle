@@ -1,0 +1,3124 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`examples using vitest plugin > ./10_transport-http 1`] = `""`;
+
+exports[`examples using vitest plugin > ./10_transport-http 2`] = `""`;
+
+exports[`examples using vitest plugin > ./10_transport-http 3`] = `""`;
+
+exports[`examples using vitest plugin > ./10_transport-http 4`] = `""`;
+
+exports[`examples using vitest plugin > ./10_transport-http 5`] = `""`;
+
+exports[`examples using vitest plugin > ./10_transport-http 6`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 1`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 2`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 3`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 4`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 5`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 6`] = `""`;
+
+exports[`examples using vitest plugin > ./20_output 7`] = `""`;
+
+exports[`examples using vitest plugin > ./30_gql 1`] = `""`;
+
+exports[`examples using vitest plugin > ./30_gql 2`] = `""`;
+
+exports[`examples using vitest plugin > ./30_gql 3`] = `""`;
+
+exports[`examples using vitest plugin > ./30_gql 4`] = `""`;
+
+exports[`examples using vitest plugin > ./35_custom-scalar 1`] = `""`;
+
+exports[`examples using vitest plugin > ./40_other 1`] = `""`;
+
+exports[`examples using vitest plugin > ./50_anyware 1`] = `""`;
+
+exports[`examples using vitest plugin > ./50_anyware 2`] = `""`;
+
+exports[`examples using vitest plugin > ./50_anyware 3`] = `""`;
+
+exports[`examples using vitest plugin > ./50_anyware 4`] = `""`;
+
+exports[`examples using vitest plugin > ./50_anyware 5`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 1`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 2`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 3`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 4`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 5`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 6`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 7`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 8`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 9`] = `""`;
+
+exports[`examples using vitest plugin > ./55_document-builder 10`] = `""`;
+
+exports[`examples using vitest plugin > ./60_extension 1`] = `""`;
+
+exports[`examples using vitest plugin > ./60_extension 2`] = `""`;
+
+exports[`examples using vitest plugin > ./60_extension 3`] = `""`;
+
+exports[`examples using vitest plugin > ./65_preset 1`] = `""`;
+
+exports[`examples using vitest plugin > ./65_preset 2`] = `""`;
+
+exports[`examples using vitest plugin > ./70_type-level 1`] = `""`;
+
+exports[`examples using vitest plugin > 10_transport-http/transport-http_abort 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+This operation was aborted"
+`;
+
+exports[`examples using vitest plugin > 10_transport-http/transport-http_extension_fetch__custom-fetch 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  "pokemon": [
+    {
+      "name": "Pokemon Mocked!"
+    }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 10_transport-http/transport-http_extension_headers__dynamicHeaders 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  methodMode: 'post',
+  headers: [
+    [
+      'accept',
+      'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
+    ],
+    [ 'content-type', 'application/json' ],
+    [ 'x-sent-at-time', 'DYNAMIC_VALUE' ]
+  ],
+  method: 'post',
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
+    }
+  },
+  body: '{"query":"{ pokemons { name } }"}'
+}"
+`;
+
+exports[`examples using vitest plugin > 10_transport-http/transport-http_headers_raw__headers 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+Headers {
+  accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
+  'content-type': 'application/json',
+  'x-from-raw': 'true',
+  authorization: 'Bearer MY_TOKEN'
+}"
+`;
+
+exports[`examples using vitest plugin > 10_transport-http/transport-http_method-get 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  methodMode: 'getReads',
+  headers: Headers {
+    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
+    'content-type': 'application/json',
+    tenant: 'nano'
+  },
+  method: 'post',
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
+    }
+  },
+  body: '{"query":"mutation { addPokemon(attack:0, defense:0, hp:1, name:\\\\"Nano\\\\", type: grass) { name } }"}'
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  methodMode: 'getReads',
+  headers: Headers {
+    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
+    tenant: 'nano'
+  },
+  method: 'get',
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
+      searchParams: URLSearchParams { 'query' => 'query { pokemonByName(name: "Nano") { hp } }' },
+      hash: ''
+    }
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 10_transport-http/transport-http_raw 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  methodMode: 'post',
+  headers: Headers {
+    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
+    'content-type': 'application/json'
+  },
+  mode: 'cors',
+  method: 'post',
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
+    }
+  },
+  body: '{"query":"{ pokemons { name } }"}'
+}"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_default 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+[
+  { name: 'Pikachu' },
+  { name: 'Charizard' },
+  { name: 'Squirtle' },
+  { name: 'Bulbasaur' },
+  { name: 'Caterpie' },
+  { name: 'Weedle' }
+]"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_envelope 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  data: {
+    pokemons: [
+      { name: 'Pikachu' },
+      { name: 'Charizard' },
+      { name: 'Squirtle' },
+      { name: 'Bulbasaur' },
+      { name: 'Caterpie' },
+      { name: 'Weedle' }
+    ]
+  },
+  response: Response {
+    status: 200,
+    statusText: 'OK',
+    headers: DYNAMIC_VALUE,
+    body: ReadableStream { locked: true, state: 'closed', supportsBYOB: true },
+    bodyUsed: true,
+    ok: true,
+    redirected: false,
+    type: 'basic',
+    url: 'http://localhost:3000/graphql'
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_envelope_envelope_error-throw__envelope-error-throw 1`] = `
+"/some/path/to/runPipeline.ts:XX
+           return new ContextualError(message, {
+                  ^
+
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_envelope_envelope_error-throw__envelope-error-throw.ts:XX:XX) {
+  context: {
+    hookName: 'encode',
+    source: 'extension',
+    interceptorName: 'anonymous'
+  },
+  cause: Error: Something went wrong.
+      at <anonymous> (/some/path/to/output_envelope_envelope_error-throw__envelope-error-throw.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
+}
+
+Node.js vXX.XX.XX"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_envelope_envelope-error__envelope-error 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  errors: [
+    ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+        at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+        at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+        at async Module.run (/some/path/to/run.ts:XX:XX)
+        at async sendRequest (/some/path/to/send.ts:XX:XX)
+        at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+        at async <anonymous> (/some/path/to/output_envelope_envelope-error__envelope-error.ts:XX:XX) {
+      context: {
+        hookName: 'encode',
+        source: 'extension',
+        interceptorName: 'anonymous'
+      },
+      cause: Error: Something went wrong.
+          at <anonymous> (/some/path/to/output_envelope_envelope-error__envelope-error.ts:XX:XX)
+          at applyBody (/some/path/to/runner.ts:XX:XX)
+    }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_preset__standard-graphql 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  errors: [
+    {
+      message: 'Cannot query field "query" on type "Query".',
+      locations: [ { line: 1, column: 3 } ],
+      extensions: { code: 'GRAPHQL_VALIDATION_FAILED' }
+    }
+  ],
+  response: Response {
+    status: 400,
+    statusText: 'Bad Request',
+    headers: DYNAMIC_VALUE,
+    body: ReadableStream { locked: true, state: 'closed', supportsBYOB: true },
+    bodyUsed: true,
+    ok: false,
+    redirected: false,
+    type: 'basic',
+    url: 'http://localhost:3000/graphql'
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_return-error 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_return-error.ts:XX:XX) {
+  context: {
+    hookName: 'encode',
+    source: 'extension',
+    interceptorName: 'anonymous'
+  },
+  cause: Error: Something went wrong.
+      at <anonymous> (/some/path/to/output_return-error.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
+}"
+`;
+
+exports[`examples using vitest plugin > 20_output/output_return-error_return-error-execution__return-error-execution 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+ContextualAggregateError: One or more errors in the execution result.
+    at handleOutput (/some/path/to/handle.ts:XX:XX)
+    at sendRequest (/some/path/to/send.ts:XX:XX)
+    at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
+  context: {},
+  cause: undefined,
+  errors: [
+    ContextualError: [
+      {
+        "code": "too_small",
+        "minimum": 1,
+        "type": "string",
+        "inclusive": true,
+        "exact": false,
+        "message": "Pokemon name cannot be empty.",
+        "path": [
+          "name"
+        ]
+      }
+    ]
+        at <anonymous> (/some/path/to/handle.ts:XX:XX)
+        at Array.map (<anonymous>)
+        at handleOutput (/some/path/to/handle.ts:XX:XX)
+        at sendRequest (/some/path/to/send.ts:XX:XX)
+        at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+        at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+        at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
+      context: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] },
+      cause: undefined
+    }
+  ]
+}
+---------------------------------------- SHOW ----------------------------------------
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
+  context: {
+    hookName: 'encode',
+    source: 'extension',
+    interceptorName: 'anonymous'
+  },
+  cause: Error: Something went wrong.
+      at <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
+      at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+}"
+`;
+
+exports[`examples using vitest plugin > 30_gql/gql_gql-document-node 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  pokemonByName: [ { name: 'Pikachu', trainer: { name: 'Ash' } } ]
+}"
+`;
+
+exports[`examples using vitest plugin > 30_gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+[
+  {
+    name: 'Pikachu',
+    hp: 35,
+    attack: 55,
+    defense: 40,
+    trainer: { name: 'Ash' }
+  }
+]"
+`;
+
+exports[`examples using vitest plugin > 30_gql/gql_gql-string 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons: [
+    { name: 'Pikachu' },
+    { name: 'Charizard' },
+    { name: 'Squirtle' },
+    { name: 'Bulbasaur' },
+    { name: 'Caterpie' },
+    { name: 'Weedle' }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 30_gql/gql_gql-string_gql-typed__gql-string-typed 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+[
+  {
+    name: 'Pikachu',
+    hp: 35,
+    attack: 55,
+    defense: 40,
+    trainer: { name: 'Ash' }
+  }
+]"
+`;
+
+exports[`examples using vitest plugin > 35_custom-scalar/custom-scalar 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+true
+---------------------------------------- SHOW ----------------------------------------
+[
+  { name: 'Pikachu', birthday: 1850-01-01T00:00:00.000Z },
+  { name: 'Squirtle', birthday: 1910-01-01T00:00:00.000Z }
+]"
+`;
+
+exports[`examples using vitest plugin > 40_other/transport-memory 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  "account": "account_abc123"
+}"
+`;
+
+exports[`examples using vitest plugin > 50_anyware/anyware_jump-start__jump-start 1`] = `""`;
+
+exports[`examples using vitest plugin > 50_anyware/anyware_short-circuit__short-circuit 1`] = `""`;
+
+exports[`examples using vitest plugin > 50_anyware/anyware_slot_slot-body__slot-body 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  trainers: [
+    { name: 'Ash' },
+    { name: 'Misty' },
+    { name: 'Brock' },
+    { name: 'Gary' }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 50_anyware/anyware_slot_slot-body__slot-search-params 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons: [
+    { name: 'Pikachu' },
+    { name: 'Charizard' },
+    { name: 'Squirtle' },
+    { name: 'Bulbasaur' },
+    { name: 'Caterpie' },
+    { name: 'Weedle' }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 50_anyware/anyware_slot_slot-fetch__slot-fetch 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{ trainers: [ { name: 'Jason' } ] }"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_alias 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  "elderPokemons": [
+    {
+      "name": "Pikachu"
+    },
+    {
+      "name": "Squirtle"
+    }
+  ],
+  "babyPokemons": [
+    {
+      "name": "Charizard"
+    }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_arguments 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+[
+  {
+    "name": "Pikachu",
+    "trainer": {
+      "name": "Ash"
+    }
+  },
+  {
+    "name": "Charizard",
+    "trainer": {
+      "name": "Ash"
+    }
+  }
+]"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_batch 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  "pokemonByName": [
+    {
+      "name": "Pikachu",
+      "id": "1"
+    }
+  ],
+  "trainerByName": {
+    "name": "Ash",
+    "id": "1"
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_directive 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  "trainers": [
+    {
+      "name": "Ash",
+      "pokemon": [
+        {
+          "name": "Pikachu"
+        },
+        {
+          "name": "Charizard"
+        }
+      ]
+    },
+    {
+      "name": "Misty",
+      "pokemon": [
+        {
+          "name": "Squirtle"
+        }
+      ]
+    },
+    {
+      "name": "Brock",
+      "pokemon": []
+    },
+    {
+      "name": "Gary",
+      "pokemon": []
+    }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_document 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  "trainers": [
+    {
+      "name": "Ash"
+    },
+    {
+      "name": "Misty"
+    },
+    {
+      "name": "Brock"
+    },
+    {
+      "name": "Gary"
+    }
+  ],
+  "pokemons": [
+    {
+      "name": "Pikachu",
+      "trainer": {
+        "name": "Ash"
+      }
+    },
+    {
+      "name": "Charizard",
+      "trainer": {
+        "name": "Ash"
+      }
+    }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_interface 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+Sally
+---------------------------------------- SHOW ----------------------------------------
+1080000
+---------------------------------------- SHOW ----------------------------------------
+Dylan
+---------------------------------------- SHOW ----------------------------------------
+3530000
+---------------------------------------- SHOW ----------------------------------------
+Ash
+---------------------------------------- SHOW ----------------------------------------
+youth
+---------------------------------------- SHOW ----------------------------------------
+Misty
+---------------------------------------- SHOW ----------------------------------------
+teamRocketGrunt
+---------------------------------------- SHOW ----------------------------------------
+Brock
+---------------------------------------- SHOW ----------------------------------------
+youth
+---------------------------------------- SHOW ----------------------------------------
+Gary
+---------------------------------------- SHOW ----------------------------------------
+youth
+---------------------------------------- SHOW ----------------------------------------
+Pikachu
+---------------------------------------- SHOW ----------------------------------------
+electric
+---------------------------------------- SHOW ----------------------------------------
+Charizard
+---------------------------------------- SHOW ----------------------------------------
+fire
+---------------------------------------- SHOW ----------------------------------------
+Squirtle
+---------------------------------------- SHOW ----------------------------------------
+water
+---------------------------------------- SHOW ----------------------------------------
+Bulbasaur
+---------------------------------------- SHOW ----------------------------------------
+grass
+---------------------------------------- SHOW ----------------------------------------
+Caterpie
+---------------------------------------- SHOW ----------------------------------------
+bug
+---------------------------------------- SHOW ----------------------------------------
+Weedle
+---------------------------------------- SHOW ----------------------------------------
+bug"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_root-field 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+[
+  {
+    "name": "Pikachu"
+  },
+  {
+    "name": "Charizard"
+  },
+  {
+    "name": "Squirtle"
+  },
+  {
+    "name": "Bulbasaur"
+  },
+  {
+    "name": "Caterpie"
+  },
+  {
+    "name": "Weedle"
+  }
+]"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_root-level-builders 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    hp
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($name: String!) {
+  pokemonByName(name: $name) {
+    name
+    type
+    trainer {
+      name
+      class
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    hp
+  }
+  trainers {
+    name
+    class
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($name: String!, $name_2: String!) {
+  pokemonByName(name: $name) {
+    name
+    type
+    attack
+  }
+  trainerByName(name: $name_2) {
+    name
+    pokemon {
+      name
+    }
+  }
+  pokemons {
+    name
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+mutation ($name: String!, $type: PokemonType!, $hp: Int, $attack: Int, $defense: Int) {
+  addPokemon(
+    name: $name
+    type: $type
+    hp: $hp
+    attack: $attack
+    defense: $defense
+  ) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+mutation ($name: String!, $type: PokemonType!, $hp: Int, $attack: Int, $defense: Int, $name_2: String!, $class: String!) {
+  addPokemon(
+    name: $name
+    type: $type
+    hp: $hp
+    attack: $attack
+    defense: $defense
+  ) {
+    name
+  }
+  addTrainer(name: $name_2, class: $class) {
+    name
+    class
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_static 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    hp
+    trainer {
+      name
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($pokemonName: String!) {
+  pokemonByName(name: $pokemonName) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($filter: PokemonFilter) {
+  pokemons(filter: $filter) {
+    name
+    hp
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($name: String! = "Ash") {
+  trainerByName(name: $name) {
+    name
+    class
+    pokemon {
+      name
+      type
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+mutation ($name: String! = "Pikachu", $attack: Int, $defense: Int, $hp: Int, $type: PokemonType!) {
+  addPokemon(
+    name: $name
+    attack: $attack
+    defense: $defense
+    hp: $hp
+    type: $type
+  ) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query allPokemons {
+  pokemons {
+    name
+    hp
+  }
+}
+
+query specificPokemon($pokemonName: String!) {
+  pokemonByName(name: $pokemonName) {
+    name
+    type
+    hp
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons: [
+    { name: 'Pikachu', hp: 35 },
+    { name: 'Charizard', hp: 78 },
+    { name: 'Squirtle', hp: 44 },
+    { name: 'Bulbasaur', hp: 45 },
+    { name: 'Caterpie', hp: 45 },
+    { name: 'Weedle', hp: 40 }
+  ]
+}
+---------------------------------------- SHOW ----------------------------------------
+{ pokemonByName: [ { name: 'Pikachu', type: 'electric', hp: 35 } ] }
+---------------------------------------- SHOW ----------------------------------------
+query getTrainers {
+  trainers {
+    name
+    pokemon {
+      name
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  trainers: [
+    {
+      name: 'Ash',
+      pokemon: [ { name: 'Pikachu' }, { name: 'Charizard' } ]
+    },
+    { name: 'Misty', pokemon: [ { name: 'Squirtle' } ] },
+    { name: 'Brock', pokemon: [] },
+    { name: 'Gary', pokemon: [] }
+  ]
+}
+---------------------------------------- SHOW ----------------------------------------
+query getPokemon($name: String!) {
+  pokemonByName(name: $name) {
+    name
+    hp
+    attack
+  }
+}
+
+mutation addNewPokemon($name: String!, $type: PokemonType!, $hp: Int, $attack: Int, $defense: Int) {
+  addPokemon(
+    name: $name
+    type: $type
+    hp: $hp
+    attack: $attack
+    defense: $defense
+  ) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{ pokemonByName: [ { name: 'Charizard', hp: 78, attack: 84 } ] }
+---------------------------------------- SHOW ----------------------------------------
+{ addPokemon: { name: 'Mew', type: 'electric' } }
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    birthday
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 55_document-builder/document-builder_union 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+BattleWild on 1/1/2020
+trainer: Ash with Pikachu
+vs wild pokemons: Squirtle, Bulbasaur
+result: pokemonsCaptured
+---------------------------------------- SHOW ----------------------------------------
+BattleTrainer on 1/1/2003
+Ash vs Misty
+winner: Misty
+---------------------------------------- SHOW ----------------------------------------
+BattleRoyale on 1/13/1987
+combatants: Ash, Misty
+winner: Ash"
+`;
+
+exports[`examples using vitest plugin > 60_extension/extension_introspection__introspection 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  __schema: {
+    description: null,
+    queryType: { name: 'Query', kind: 'OBJECT' },
+    mutationType: { name: 'Mutation', kind: 'OBJECT' },
+    subscriptionType: null,
+    types: [
+      {
+        kind: 'UNION',
+        name: 'Battle',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: [
+          { kind: 'OBJECT', name: 'BattleRoyale', ofType: null },
+          { kind: 'OBJECT', name: 'BattleTrainer', ofType: null },
+          { kind: 'OBJECT', name: 'BattleWild', ofType: null }
+        ]
+      },
+      {
+        kind: 'OBJECT',
+        name: 'BattleRoyale',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'combatants',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: {
+                  kind: 'OBJECT',
+                  name: 'CombatantMultiPokemon',
+                  ofType: null
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'date',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'Float', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'winner',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'BattleTrainer',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'combatant1',
+            description: null,
+            args: [],
+            type: {
+              kind: 'OBJECT',
+              name: 'CombatantSinglePokemon',
+              ofType: null
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'combatant2',
+            description: null,
+            args: [],
+            type: {
+              kind: 'OBJECT',
+              name: 'CombatantSinglePokemon',
+              ofType: null
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'date',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'Float', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'winner',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'BattleWild',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'date',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'Float', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'pokemon',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Pokemon', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'result',
+            description: null,
+            args: [],
+            type: { kind: 'ENUM', name: 'BattleWildResult', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainer',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'wildPokemons',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Pokemon', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'ENUM',
+        name: 'BattleWildResult',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: [
+          {
+            name: 'pokemonsCaptured',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'pokemonsDefeated',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainerDefeated',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        possibleTypes: null
+      },
+      {
+        kind: 'INTERFACE',
+        name: 'Being',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: [
+          { kind: 'OBJECT', name: 'Patron', ofType: null },
+          { kind: 'OBJECT', name: 'Pokemon', ofType: null },
+          { kind: 'OBJECT', name: 'Trainer', ofType: null }
+        ]
+      },
+      {
+        kind: 'SCALAR',
+        name: 'Boolean',
+        description: 'The \`Boolean\` scalar type represents \`true\` or \`false\`.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'CombatantMultiPokemon',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'pokemons',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Pokemon', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainer',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'CombatantSinglePokemon',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'pokemon',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Pokemon', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainer',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'SCALAR',
+        name: 'Date',
+        description: 'A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the \`date-time\` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'DateFilter',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: false,
+        fields: null,
+        inputFields: [
+          {
+            name: 'gte',
+            description: null,
+            type: { kind: 'SCALAR', name: 'Date', ofType: null },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'lte',
+            description: null,
+            type: { kind: 'SCALAR', name: 'Date', ofType: null },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'SCALAR',
+        name: 'Float',
+        description: 'The \`Float\` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'SCALAR',
+        name: 'ID',
+        description: 'The \`ID\` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as \`"4"\`) or integer (such as \`4\`) input value will be accepted as an ID.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'SCALAR',
+        name: 'Int',
+        description: 'The \`Int\` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'Mutation',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'addPokemon',
+            description: null,
+            args: [
+              {
+                name: 'attack',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Int', ofType: null },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              },
+              {
+                name: 'defense',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Int', ofType: null },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              },
+              {
+                name: 'hp',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Int', ofType: null },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              },
+              {
+                name: 'name',
+                description: null,
+                type: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+                },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              },
+              {
+                name: 'type',
+                description: null,
+                type: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'ENUM', name: 'PokemonType', ofType: null }
+                },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: { kind: 'OBJECT', name: 'Pokemon', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'resetData',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'Patron',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'money',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'Int', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [ { kind: 'INTERFACE', name: 'Being', ofType: null } ],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'Pokemon',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'attack',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Int', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'birthday',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Date', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'defense',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Int', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'hp',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Int', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'ID', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainer',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'type',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'ENUM', name: 'PokemonType', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [ { kind: 'INTERFACE', name: 'Being', ofType: null } ],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'PokemonFilter',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: false,
+        fields: null,
+        inputFields: [
+          {
+            name: 'birthday',
+            description: null,
+            type: { kind: 'INPUT_OBJECT', name: 'DateFilter', ofType: null },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'name',
+            description: null,
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'StringFilter',
+              ofType: null
+            },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'type',
+            description: null,
+            type: { kind: 'ENUM', name: 'PokemonType', ofType: null },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'ENUM',
+        name: 'PokemonType',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: [
+          {
+            name: 'bug',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'electric',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'fire',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'grass',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'water',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'Query',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'battles',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'UNION', name: 'Battle', ofType: null }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'beings',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'INTERFACE', name: 'Being', ofType: null }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'pokemonByName',
+            description: null,
+            args: [
+              {
+                name: 'name',
+                description: null,
+                type: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+                },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Pokemon', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'pokemons',
+            description: null,
+            args: [
+              {
+                name: 'filter',
+                description: null,
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'PokemonFilter',
+                  ofType: null
+                },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Pokemon', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainerByName',
+            description: null,
+            args: [
+              {
+                name: 'name',
+                description: null,
+                type: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+                },
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'trainers',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Trainer', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'SCALAR',
+        name: 'String',
+        description: 'The \`String\` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'StringFilter',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: false,
+        fields: null,
+        inputFields: [
+          {
+            name: 'contains',
+            description: null,
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'in',
+            description: null,
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+              }
+            },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: 'Trainer',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'class',
+            description: null,
+            args: [],
+            type: { kind: 'ENUM', name: 'TrainerClass', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'fans',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Patron', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'id',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'pokemon',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: 'Pokemon', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [ { kind: 'INTERFACE', name: 'Being', ofType: null } ],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'ENUM',
+        name: 'TrainerClass',
+        description: null,
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: [
+          {
+            name: 'bugCatcher',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'camper',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'picnicker',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'psychic',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'psychicMedium',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'psychicYoungster',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'sailor',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'superNerd',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'tamer',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'teamRocketGrunt',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'triathlete',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'youngster',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'youth',
+            description: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: '__Directive',
+        description: 'A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\\n' +
+          '\\n' +
+          "In some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'description',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'isRepeatable',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'locations',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: {
+                    kind: 'ENUM',
+                    name: '__DirectiveLocation',
+                    ofType: null
+                  }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'args',
+            description: null,
+            args: [
+              {
+                name: 'includeDeprecated',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: '__InputValue',
+                    ofType: null
+                  }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'ENUM',
+        name: '__DirectiveLocation',
+        description: 'A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: [
+          {
+            name: 'QUERY',
+            description: 'Location adjacent to a query operation.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'MUTATION',
+            description: 'Location adjacent to a mutation operation.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'SUBSCRIPTION',
+            description: 'Location adjacent to a subscription operation.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'FIELD',
+            description: 'Location adjacent to a field.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'FRAGMENT_DEFINITION',
+            description: 'Location adjacent to a fragment definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'FRAGMENT_SPREAD',
+            description: 'Location adjacent to a fragment spread.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'INLINE_FRAGMENT',
+            description: 'Location adjacent to an inline fragment.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'VARIABLE_DEFINITION',
+            description: 'Location adjacent to a variable definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'SCHEMA',
+            description: 'Location adjacent to a schema definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'SCALAR',
+            description: 'Location adjacent to a scalar definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'OBJECT',
+            description: 'Location adjacent to an object type definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'FIELD_DEFINITION',
+            description: 'Location adjacent to a field definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'ARGUMENT_DEFINITION',
+            description: 'Location adjacent to an argument definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'INTERFACE',
+            description: 'Location adjacent to an interface definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'UNION',
+            description: 'Location adjacent to a union definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'ENUM',
+            description: 'Location adjacent to an enum definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'ENUM_VALUE',
+            description: 'Location adjacent to an enum value definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'INPUT_OBJECT',
+            description: 'Location adjacent to an input object type definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'INPUT_FIELD_DEFINITION',
+            description: 'Location adjacent to an input object field definition.',
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: '__EnumValue',
+        description: 'One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'description',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'isDeprecated',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'deprecationReason',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: '__Field',
+        description: 'Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'description',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'args',
+            description: null,
+            args: [
+              {
+                name: 'includeDeprecated',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: '__InputValue',
+                    ofType: null
+                  }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'type',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'OBJECT', name: '__Type', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'isDeprecated',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'deprecationReason',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: '__InputValue',
+        description: 'Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'description',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'type',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'OBJECT', name: '__Type', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'defaultValue',
+            description: 'A GraphQL-formatted string representing the default value for this input value.',
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'isDeprecated',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'deprecationReason',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: '__Schema',
+        description: 'A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'description',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'types',
+            description: 'A list of all types supported by this server.',
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'OBJECT', name: '__Type', ofType: null }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'queryType',
+            description: 'The type that query operations will be rooted at.',
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'OBJECT', name: '__Type', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'mutationType',
+            description: 'If this server supports mutation, the type that mutation operations will be rooted at.',
+            args: [],
+            type: { kind: 'OBJECT', name: '__Type', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'subscriptionType',
+            description: 'If this server support subscription, the type that subscription operations will be rooted at.',
+            args: [],
+            type: { kind: 'OBJECT', name: '__Type', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'directives',
+            description: 'A list of all directives supported by this server.',
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'NON_NULL',
+                  name: null,
+                  ofType: { kind: 'OBJECT', name: '__Directive', ofType: null }
+                }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'OBJECT',
+        name: '__Type',
+        description: 'The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the \`__TypeKind\` enum.\\n' +
+          '\\n' +
+          'Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional \`specifiedByURL\`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: [
+          {
+            name: 'kind',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'ENUM', name: '__TypeKind', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'name',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'description',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'specifiedByURL',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'fields',
+            description: null,
+            args: [
+              {
+                name: 'includeDeprecated',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: '__Field', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'interfaces',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: '__Type', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'possibleTypes',
+            description: null,
+            args: [],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: '__Type', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'enumValues',
+            description: null,
+            args: [
+              {
+                name: 'includeDeprecated',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: '__EnumValue', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'inputFields',
+            description: null,
+            args: [
+              {
+                name: 'includeDeprecated',
+                description: null,
+                type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
+              }
+            ],
+            type: {
+              kind: 'LIST',
+              name: null,
+              ofType: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: { kind: 'OBJECT', name: '__InputValue', ofType: null }
+              }
+            },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'ofType',
+            description: null,
+            args: [],
+            type: { kind: 'OBJECT', name: '__Type', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'isOneOf',
+            description: null,
+            args: [],
+            type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        inputFields: null,
+        interfaces: [],
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
+        kind: 'ENUM',
+        name: '__TypeKind',
+        description: 'An enum describing what kind of type a given \`__Type\` is.',
+        specifiedByURL: null,
+        isOneOf: null,
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: [
+          {
+            name: 'SCALAR',
+            description: 'Indicates this type is a scalar.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'OBJECT',
+            description: 'Indicates this type is an object. \`fields\` and \`interfaces\` are valid fields.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'INTERFACE',
+            description: 'Indicates this type is an interface. \`fields\`, \`interfaces\`, and \`possibleTypes\` are valid fields.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'UNION',
+            description: 'Indicates this type is a union. \`possibleTypes\` is a valid field.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'ENUM',
+            description: 'Indicates this type is an enum. \`enumValues\` is a valid field.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'INPUT_OBJECT',
+            description: 'Indicates this type is an input object. \`inputFields\` is a valid field.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'LIST',
+            description: 'Indicates this type is a list. \`ofType\` is a valid field.',
+            isDeprecated: false,
+            deprecationReason: null
+          },
+          {
+            name: 'NON_NULL',
+            description: 'Indicates this type is a non-null. \`ofType\` is a valid field.',
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ],
+        possibleTypes: null
+      }
+    ],
+    directives: [
+      {
+        name: 'deprecated',
+        description: 'Marks an element of a GraphQL schema as no longer supported.',
+        isRepeatable: false,
+        locations: [
+          'ARGUMENT_DEFINITION',
+          'ENUM_VALUE',
+          'FIELD_DEFINITION',
+          'INPUT_FIELD_DEFINITION'
+        ],
+        args: [
+          {
+            name: 'reason',
+            description: 'Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).',
+            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            defaultValue: '"No longer supported"',
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ]
+      },
+      {
+        name: 'include',
+        description: 'Directs the executor to include this field or fragment only when the \`if\` argument is true.',
+        isRepeatable: false,
+        locations: [ 'FIELD', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT' ],
+        args: [
+          {
+            name: 'if',
+            description: 'Included when true.',
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ]
+      },
+      {
+        name: 'oneOf',
+        description: 'Indicates exactly one field must be supplied and this field must not be \`null\`.',
+        isRepeatable: false,
+        locations: [ 'INPUT_OBJECT' ],
+        args: []
+      },
+      {
+        name: 'skip',
+        description: 'Directs the executor to skip this field or fragment when the \`if\` argument is true.',
+        isRepeatable: false,
+        locations: [ 'FIELD', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT' ],
+        args: [
+          {
+            name: 'if',
+            description: 'Skipped when true.',
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ]
+      },
+      {
+        name: 'specifiedBy',
+        description: 'Exposes a URL that specifies the behavior of this scalar.',
+        isRepeatable: false,
+        locations: [ 'SCALAR' ],
+        args: [
+          {
+            name: 'url',
+            description: 'The URL that specifies the behavior of this scalar.',
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
+          }
+        ]
+      }
+    ]
+  }
+}"
+`;
+
+exports[`examples using vitest plugin > 60_extension/extension_opentelemetry__opentelemetry 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+{
+  resource: {
+    attributes: {
+      'service.name': '...',
+      'telemetry.sdk.language': 'nodejs',
+      'telemetry.sdk.name': 'opentelemetry',
+      'telemetry.sdk.version': '...'
+    }
+  },
+  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
+  traceId: '...',
+  parentId: '...',
+  traceState: undefined,
+  name: 'encode',
+  id: '...',
+  kind: 0,
+  timestamp: 0,
+  duration: 0.0,
+  attributes: {},
+  status: { code: 0 },
+  events: [],
+  links: []
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  resource: {
+    attributes: {
+      'service.name': '...',
+      'telemetry.sdk.language': 'nodejs',
+      'telemetry.sdk.name': 'opentelemetry',
+      'telemetry.sdk.version': '...'
+    }
+  },
+  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
+  traceId: '...',
+  parentId: '...',
+  traceState: undefined,
+  name: 'pack',
+  id: '...',
+  kind: 0,
+  timestamp: 0,
+  duration: 0.0,
+  attributes: {},
+  status: { code: 0 },
+  events: [],
+  links: []
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  resource: {
+    attributes: {
+      'service.name': '...',
+      'telemetry.sdk.language': 'nodejs',
+      'telemetry.sdk.name': 'opentelemetry',
+      'telemetry.sdk.version': '...'
+    }
+  },
+  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
+  traceId: '...',
+  parentId: '...',
+  traceState: undefined,
+  name: 'exchange',
+  id: '...',
+  kind: 0,
+  timestamp: 0,
+  duration: 0.0,
+  attributes: {},
+  status: { code: 0 },
+  events: [],
+  links: []
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  resource: {
+    attributes: {
+      'service.name': '...',
+      'telemetry.sdk.language': 'nodejs',
+      'telemetry.sdk.name': 'opentelemetry',
+      'telemetry.sdk.version': '...'
+    }
+  },
+  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
+  traceId: '...',
+  parentId: '...',
+  traceState: undefined,
+  name: 'unpack',
+  id: '...',
+  kind: 0,
+  timestamp: 0,
+  duration: 0.0,
+  attributes: {},
+  status: { code: 0 },
+  events: [],
+  links: []
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  resource: {
+    attributes: {
+      'service.name': '...',
+      'telemetry.sdk.language': 'nodejs',
+      'telemetry.sdk.name': 'opentelemetry',
+      'telemetry.sdk.version': '...'
+    }
+  },
+  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
+  traceId: '...',
+  parentId: '...',
+  traceState: undefined,
+  name: 'decode',
+  id: '...',
+  kind: 0,
+  timestamp: 0,
+  duration: 0.0,
+  attributes: {},
+  status: { code: 0 },
+  events: [],
+  links: []
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  resource: {
+    attributes: {
+      'service.name': '...',
+      'telemetry.sdk.language': 'nodejs',
+      'telemetry.sdk.name': 'opentelemetry',
+      'telemetry.sdk.version': '...'
+    }
+  },
+  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
+  traceId: '...',
+  parentId: undefined,
+  traceState: undefined,
+  name: 'request',
+  id: '...',
+  kind: 0,
+  timestamp: 0,
+  duration: 0.0,
+  attributes: {},
+  status: { code: 0 },
+  events: [],
+  links: []
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons: [
+    { name: 'Pikachu' },
+    { name: 'Charizard' },
+    { name: 'Squirtle' },
+    { name: 'Bulbasaur' },
+    { name: 'Caterpie' },
+    { name: 'Weedle' }
+  ]
+}"
+`;
+
+exports[`examples using vitest plugin > 60_extension/extension_throws__throws 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX) {
+  context: {
+    hookName: 'encode',
+    source: 'extension',
+    interceptorName: 'anonymous'
+  },
+  cause: Error: Something went wrong.
+      at <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
+}
+---------------------------------------- SHOW ----------------------------------------
+UNCAUGHT EXCEPTION:
+
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX) {
+  context: {
+    hookName: 'encode',
+    source: 'extension',
+    interceptorName: 'anonymous'
+  },
+  cause: Error: Something went wrong.
+      at <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
+}"
+`;
+
+exports[`examples using vitest plugin > 65_preset/preset_bare 1`] = `""`;
+
+exports[`examples using vitest plugin > 65_preset/preset_minimal 1`] = `
+"Is the default preset true
+The current transport is http"
+`;
+
+exports[`examples using vitest plugin > 70_type-level/selection-sets 1`] = `
+"---------------------------------------- SHOW ----------------------------------------
+[
+  {
+    "hp": 44,
+    "name": "Squirtle"
+  }
+]"
+`;

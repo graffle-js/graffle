@@ -45,13 +45,13 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
     // Custom scalars - always reference the scalar module types
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
       code``
-      code`// Custom scalars (encoded types for inputs)`
+      code`// Custom scalars (decoded types for variables)`
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         const scalarName = scalar.name
         const safeName = renderName(scalarName)
         if (config.options.isImportsCustomScalars) {
-          // Use the encoded type from the custom scalar implementation
-          code`export type ${safeName} = ${$.$$Utilities}.Schema.Scalar.GetEncoded<typeof ${$.CustomScalars}.${scalarName}>`
+          // Use the decoded type from the custom scalar implementation (for variable inputs)
+          code`export type ${safeName} = ${$.$$Utilities}.Schema.Scalar.GetDecoded<typeof ${$.CustomScalars}.${scalarName}>`
         } else {
           // Use string for ScalarCodecless types (their encoded type is always string)
           code`export type ${safeName} = string`

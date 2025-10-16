@@ -140,9 +140,29 @@ export const createStaticRootType = (operationType: OperationTypeNode, options?:
   return new Proxy({}, {
     get: (_, fieldName: string) => {
       if (isSymbol(fieldName)) throw new Error(`Symbols not supported`)
+
+      // Special $batch method for multi-field selection
+      if (fieldName === '$batch') {
+        return (selection: Docpar.Object.Select.SelectionSet.AnySelectionSet, opts?: Partial<Options>) => {
+          // Selection already contains multiple fields, no wrapping needed
+          const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
+            operationType,
+            selection,
+          )
+
+          const result = toGraphQLDocument(documentNormalized, {
+            ...defaults,
+            ...options,
+            ...opts,
+          })
+
+          return print(result.document) as any
+        }
+      }
+
       return createStaticRootField(operationType, fieldName, options)
     },
-  })
+  }) as any
 }
 
 export const createStaticRootField = (

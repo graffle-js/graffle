@@ -117,7 +117,7 @@ export namespace pokemons {
      * | **Path** | `Query.pokemons(filter)` |
      * | **Nullability** | Optional |
      */
-    filter?: $$Utilities.Docpar.Object.Var.Maybe<$Named.PokemonFilter<_$Context> | null | undefined>
+    filter?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonFilter<_$Context> | null | undefined>
   }
 
   /**

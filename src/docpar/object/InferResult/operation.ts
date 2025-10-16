@@ -25,3 +25,9 @@ export type Operation<
   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   Null.Exclude<$Schema['Root'][$OperationType]>
 >
+
+/**
+ * Operation type inference for schema-less mode.
+ * All fields are typed as `unknown` since no schema information is available.
+ */
+export type OperationSchemaLess<$SelectionSet extends object> = OutputObjectLike.SchemaLess<$SelectionSet>

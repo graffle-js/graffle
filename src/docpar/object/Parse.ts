@@ -99,23 +99,29 @@ export type InferOperation<
   $OperationName,
 > =
   $DocOp extends object
-    ? $Context extends { schema: infer $Schema; sddm: infer $SDDM extends SchemaDrivenDataMap }
+    ? $Context extends { schema: undefined }
       ? Core.Operation<
           $OperationName & string,
-          RequestResult.Simplify<$Context,
-            [InferResult.Operation<
-              $DocOp,
-              $Schema,
-              $OperationType
-            >][0]
-          >,
-          RequestResult.Simplify<$Context,
-            [Var.InferFromOperation<
-              $DocOp,
-              $SDDM,
-              $OperationType
-            >][0]
-          >
+          InferResult.OperationSchemaLess<$DocOp>,
+          Var.InferFromOperationSchemaLess<$DocOp>
         >
-      : never
+      : $Context extends { schema: infer $Schema; sddm: infer $SDDM extends SchemaDrivenDataMap }
+        ? Core.Operation<
+            $OperationName & string,
+            RequestResult.Simplify<$Context,
+              [InferResult.Operation<
+                $DocOp,
+                $Schema,
+                $OperationType
+              >][0]
+            >,
+            RequestResult.Simplify<$Context,
+              [Var.InferFromOperation<
+                $DocOp,
+                $SDDM,
+                $OperationType
+              >][0]
+            >
+          >
+        : never
     : never

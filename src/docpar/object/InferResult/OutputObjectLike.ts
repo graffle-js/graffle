@@ -147,6 +147,24 @@ export namespace Errors {
   >
 }
 
+export namespace OutputObjectLike {
+  /**
+   * Schema-less mode type inference.
+   *
+   * All fields are typed as `unknown` (scalars) or `SchemaLess<...> | null` (nested objects)
+   * since no schema information is available to determine actual types.
+   */
+  // dprint-ignore
+  export type SchemaLess<$SelectionSet extends SelectionSet> = {
+    [K in PickApplicableFieldKeys<$SelectionSet>]:
+      $SelectionSet[K] extends object
+        ? PickApplicableFieldKeys<$SelectionSet[K]> extends never
+          ? unknown  // Object with only $/directives = scalar field with arguments
+          : SchemaLess<$SelectionSet[K]> | null  // Nested object field
+        : unknown  // Scalar field
+  }
+}
+
 // dprint-ignore
 export type IsFieldKey<$Key extends PropertyKey> =
   IsArgumentsOrDirectiveKey<$Key> extends true

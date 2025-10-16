@@ -73,7 +73,7 @@ export namespace addPokemon {
      * | **Path** | `Mutation.addPokemon(type)` |
      * | **Nullability** | Required |
      */
-    $type: $$Utilities.Docpar.Object.Var.Maybe<$Named.PokemonType>
+    $type: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonType>
   }
 
   /**

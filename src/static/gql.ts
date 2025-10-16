@@ -2,6 +2,7 @@ import { Docpar } from '#src/docpar/$.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
+import type { Simplify } from 'type-fest'
 
 //
 //
@@ -22,9 +23,9 @@ import { print } from '@0no-co/graphql.web'
  * This interface unifies static and instance-level typings using Graffle's own type system.
  */
 export interface gql<
-  $Schema extends Schema,
+  $Schema extends Schema | undefined,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends Docpar.SchemaDrivenDataMap,
+  $ArgumentsMap,
 > {
   // String GraphQL document overload
   <const $Input extends string>(
@@ -32,7 +33,7 @@ export interface gql<
   ): Docpar.Parse<$Input, Docpar.ParserContext<$Schema>>
 
   // Document object overload
-  <$Document extends $DocumentObjectConstraint>(
+  <const $Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Docpar.Object.ToGraphQLDocument.Options,
   ): $Document extends object ? Docpar.Parse<
@@ -86,9 +87,9 @@ export const defaults: Partial<Docpar.Object.ToGraphQLDocument.Options> = {
 }
 
 export const createGql = <
-  $Schema extends Schema,
+  $Schema extends Schema | undefined,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends Docpar.SchemaDrivenDataMap,
+  $ArgumentsMap,
 >(config: {
   sddm: $ArgumentsMap
 }): gql<$Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
@@ -108,7 +109,7 @@ export const createGql = <
     const result = Docpar.Object.ToGraphQLDocument.toGraphQLDocument(documentNormalized, {
       ...defaults,
       ...normalized.options,
-      sddm: config.sddm,
+      sddm: config.sddm as any,
     })
 
     // Print and return as TypedFullDocument
@@ -116,8 +117,82 @@ export const createGql = <
   }) as any
 }
 
-// todo
-// export const gql = createGql()
+/**
+ * Schema-less unified document builder function.
+ *
+ * Build GraphQL documents using either GraphQL string syntax or TypeScript objects.
+ * Works without needing a client instance or schema generation, making it perfect for
+ * quick prototyping, schema-less workflows, or when you prefer inline GraphQL strings.
+ *
+ * @remarks
+ * This function accepts two input formats:
+ * - **String**: Standard GraphQL document syntax with type inference
+ * - **Object**: TypeScript objects with type-safe field selection
+ *
+ * For simpler single-field or multi-field operations, consider using the
+ * {@link query} and {@link mutation} builders directly.
+ *
+ * @example GraphQL string documents
+ * ```ts
+ * import { gql } from 'graffle'
+ *
+ * // Simple query
+ * const doc1 = gql(`query { user { id name } }`)
+ *
+ * // With variables
+ * const doc2 = gql(`
+ *   query GetUser($id: ID!) {
+ *     user(id: $id) {
+ *       id
+ *       name
+ *       email
+ *     }
+ *   }
+ * `)
+ *
+ * // Multiple operations
+ * const doc3 = gql(`
+ *   query GetUser { user { id name } }
+ *   mutation CreateUser { createUser { id } }
+ * `)
+ * ```
+ *
+ * @example Document object syntax
+ * ```ts
+ * import { gql } from 'graffle'
+ *
+ * // Single query operation
+ * const doc1 = gql({
+ *   query: {
+ *     user: {
+ *       id: true,
+ *       name: true
+ *     }
+ *   }
+ * })
+ *
+ * // Multiple operations
+ * const doc2 = gql({
+ *   query: {
+ *     getUser: {
+ *       user: { id: true, name: true }
+ *     }
+ *   },
+ *   mutation: {
+ *     createUser: {
+ *       createUser: { id: true }
+ *     }
+ *   }
+ * })
+ * ```
+ *
+ * @see {@link https://graffle.js.org/guides/documents/static | Static Document Guide}
+ * @see {@link query} For simplified query operations
+ * @see {@link mutation} For simplified mutation operations
+ */
+export const gql = createGql({
+  sddm: undefined as any, // Schema-less mode - no SDDM needed
+})
 
 //
 //

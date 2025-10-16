@@ -32,7 +32,7 @@ export namespace InputObjectNested {
      * | **Path** | `Query.InputObjectNested(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObjectNested<_$Context> | null | undefined>
+    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectNested<_$Context> | null | undefined>
   }
 
   /**
@@ -75,7 +75,7 @@ export namespace InputObjectNestedNonNull {
      * | **Path** | `Query.InputObjectNestedNonNull(input)` |
      * | **Nullability** | Required |
      */
-    input: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObjectNestedNonNull<_$Context>>
+    input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectNestedNonNull<_$Context>>
   }
 
   /**
@@ -142,7 +142,7 @@ export namespace argInputObjectCircular {
      * | **Path** | `Query.argInputObjectCircular(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObjectCircular<_$Context> | null | undefined>
+    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectCircular<_$Context> | null | undefined>
   }
 
   /**
@@ -303,7 +303,7 @@ export namespace dateArgInputObject {
      * | **Path** | `Query.dateArgInputObject(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
+    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
   }
 
   /**
@@ -348,7 +348,7 @@ export namespace dateArgList {
      * | **Path** | `Query.dateArgList(date)` |
      * | **Nullability** | Optional |
      */
-    date?: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.Date<_$Context>> | null | undefined>
+    date?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>> | null | undefined>
   }
 
   /**
@@ -433,7 +433,7 @@ export namespace dateArgNonNullList {
      * | **Path** | `Query.dateArgNonNullList(date)` |
      * | **Nullability** | Required |
      */
-    date: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.Date<_$Context>>>
+    date: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>>>
   }
 
   /**
@@ -475,7 +475,7 @@ export namespace dateArgNonNullListNonNull {
      * | **Path** | `Query.dateArgNonNullListNonNull(date)` |
      * | **Nullability** | Required |
      */
-    date: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.Date<_$Context>>>
+    date: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>>>
   }
 
   /**
@@ -792,7 +792,7 @@ export namespace interfaceHierarchyChildA {
      * | **Path** | `Query.interfaceHierarchyChildA(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ChildAInterfaceHierarchyMember | null | undefined>
+    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ChildAInterfaceHierarchyMember | null | undefined>
   }
 
   /**
@@ -834,7 +834,7 @@ export namespace interfaceHierarchyChildB {
      * | **Path** | `Query.interfaceHierarchyChildB(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ChildBInterfaceHierarchyMember | null | undefined>
+    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ChildBInterfaceHierarchyMember | null | undefined>
   }
 
   /**
@@ -876,7 +876,7 @@ export namespace interfaceHierarchyGrandparents {
      * | **Path** | `Query.interfaceHierarchyGrandparents(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.GrandparentInterfaceHierarchyMember | null | undefined>
+    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.GrandparentInterfaceHierarchyMember | null | undefined>
   }
 
   /**
@@ -918,7 +918,7 @@ export namespace interfaceHierarchyParents {
      * | **Path** | `Query.interfaceHierarchyParents(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ParentInterfaceHierarchyMember | null | undefined>
+    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ParentInterfaceHierarchyMember | null | undefined>
   }
 
   /**
@@ -1361,7 +1361,7 @@ export namespace result {
      * | **Path** | `Query.result(case)` |
      * | **Nullability** | Required |
      */
-    $case: $$Utilities.Docpar.Object.Var.Maybe<$Named.Case>
+    $case: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.Case>
   }
 
   /**
@@ -1403,7 +1403,7 @@ export namespace resultNonNull {
      * | **Path** | `Query.resultNonNull(case)` |
      * | **Nullability** | Optional |
      */
-    $case?: $$Utilities.Docpar.Object.Var.Maybe<$Named.Case | null | undefined>
+    $case?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.Case | null | undefined>
   }
 
   /**
@@ -1472,7 +1472,7 @@ export namespace stringWithArgEnum {
      * | **Path** | `Query.stringWithArgEnum(ABCEnum)` |
      * | **Nullability** | Optional |
      */
-    $ABCEnum?: $$Utilities.Docpar.Object.Var.Maybe<$Named.ABCEnum | null | undefined>
+    $ABCEnum?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ABCEnum | null | undefined>
   }
 
   /**
@@ -1517,7 +1517,7 @@ export namespace stringWithArgInputObject {
      * | **Path** | `Query.stringWithArgInputObject(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
+    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
   }
 
   /**
@@ -1560,7 +1560,7 @@ export namespace stringWithArgInputObjectEnum {
      * | **Path** | `Query.stringWithArgInputObjectEnum(input)` |
      * | **Nullability** | Required |
      */
-    input: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObjectEnum<_$Context>>
+    input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectEnum<_$Context>>
   }
 
   /**
@@ -1602,7 +1602,7 @@ export namespace stringWithArgInputObjectRequired {
      * | **Path** | `Query.stringWithArgInputObjectRequired(input)` |
      * | **Nullability** | Required |
      */
-    input: $$Utilities.Docpar.Object.Var.Maybe<$Named.InputObject<_$Context>>
+    input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context>>
   }
 
   /**
@@ -1740,7 +1740,7 @@ export namespace stringWithListArg {
      * | **Path** | `Query.stringWithListArg(ints)` |
      * | **Nullability** | Optional |
      */
-    ints?: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.Int<_$Context>> | null | undefined>
+    ints?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Int<_$Context>> | null | undefined>
   }
 
   /**
@@ -1783,7 +1783,7 @@ export namespace stringWithListArgRequired {
      * | **Path** | `Query.stringWithListArgRequired(ints)` |
      * | **Nullability** | Required |
      */
-    ints: $$Utilities.Docpar.Object.Var.Maybe<Array<$Scalars.Int<_$Context>>>
+    ints: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Int<_$Context>>>
   }
 
   /**
