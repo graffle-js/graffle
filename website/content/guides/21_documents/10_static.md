@@ -669,7 +669,7 @@ query getPokemon {
 ## Variables
 
 ::: tip Defer Execution with Variables
-When using variables with generated method calls (not `Graffle.gql()`), Graffle automatically switches to [deferred execution](/guides/documents/deferred-execution), giving you a `DocumentRunner` object to inspect the document and execute it multiple times with different variables.
+When using variables with generated method calls (not `Graffle.gql()`), Graffle automatically switches to [deferred execution](/extensions/document-builder#deferred-execution), giving you a `DocumentRunner` object to inspect the document and execute it multiple times with different variables.
 :::
 
 ### Basic Usage
