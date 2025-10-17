@@ -296,7 +296,7 @@ await graffle.pokemon.pokemonByName({ name: true })
 
 ## Rule Precedence
 
-:::warning[Important: Rule Order Matters]
+::: warning Important: Rule Order Matters
 Rules are evaluated sequentially, and **the first matching rule wins**. Once a field matches a rule, subsequent rules are not evaluated for that field.
 
 Place more specific patterns before general ones to ensure correct matching.
