@@ -322,23 +322,59 @@ export const libraryPathKeys = {
  */
 export interface DomainGroupingConfig {
   /**
-   * Grouping rules that define how root fields are organized into domain methods.
+   * Groups provide independent organizational views over schema fields.
+   * Each group gets a fresh view of all root fields and can organize them differently.
+   */
+  groups: GroupConfig[]
+}
+
+/**
+ * A group defines one organizational view over schema fields.
+ */
+export interface GroupConfig {
+  /**
+   * Default values inherited by all rules in this group.
+   * Rules can override these defaults by providing their own values.
+   */
+  defaults?: {
+    /**
+     * Default namespace for fields matched by rules in this group.
+     * If omitted and a rule doesn't specify namespace, generation will throw an error at runtime.
+     */
+    namespace?: string | string[] | null
+    /**
+     * Default method name transformation for fields matched by rules in this group.
+     */
+    methodName?: string | ((
+      fieldName: string,
+      operationType: 'query' | 'mutation',
+      match?: RegExpExecArray,
+    ) => string)
+  }
+  /**
+   * Rules that match and organize fields within this group.
+   * Rules are evaluated in order, and the first matching rule wins for each field.
    */
   rules: FieldGroupingRule[]
 }
 
 /**
- * Rule for grouping and renaming a root field into a domain-based method.
+ * Rule for organizing a root field into a namespace-based method.
  */
 export interface FieldGroupingRule {
   /**
    * Pattern to match against field names. Can be a string (exact match) or RegExp.
    *
-   * When using RegExp, capture groups can be referenced in `groupName` and `methodName`.
+   * When using RegExp, capture groups can be referenced in `namespace` and `methodName`.
    */
   pattern: string | RegExp
   /**
-   * The domain/resource name to group this field under (e.g., "pokemon", "trainer").
+   * The namespace path to organize this field under.
+   *
+   * Can be:
+   * - String: `'pokemon'` or `'api.v2.pokemon'` (dot-notation parsed as nested path)
+   * - Array: `['api', 'v2', 'pokemon']` (explicit nested path)
+   * - Null: Place method at root level alongside logical organization methods
    *
    * When `pattern` is a RegExp, you can reference capture groups:
    * - Named groups: `$name` or `${name}`
@@ -346,18 +382,34 @@ export interface FieldGroupingRule {
    *
    * @example
    * ```ts
+   * // String namespace
+   * { pattern: 'pokemonByName', namespace: 'pokemon' }
+   * // → graffle.pokemon.pokemonByName
+   *
+   * // Dot-notation for nesting
+   * { pattern: 'pokemonByName', namespace: 'api.v2.pokemon' }
+   * // → graffle.api.v2.pokemon.pokemonByName
+   *
+   * // Array for nesting
+   * { pattern: 'pokemonByName', namespace: ['api', 'v2', 'pokemon'] }
+   * // → graffle.api.v2.pokemon.pokemonByName
+   *
+   * // Null for root-level
+   * { pattern: 'pokemonByName', namespace: null }
+   * // → graffle.pokemonByName
+   *
    * // With named capture group
-   * { pattern: /^(?<resource>\w+)ByName$/, groupName: '$resource' }
-   * // pokemonByName → pokemon
+   * { pattern: /^(?<resource>\w+)ByName$/, namespace: '$resource' }
+   * // pokemonByName → graffle.pokemon.*
    *
    * // With indexed capture group
-   * { pattern: /^(\w+)ByName$/, groupName: '$1' }
-   * // trainerByName → trainer
+   * { pattern: /^(\w+)ByName$/, namespace: '$1' }
+   * // trainerByName → graffle.trainer.*
    * ```
    */
-  groupName: string
+  namespace?: string | string[] | null
   /**
-   * The method name to use within the domain group.
+   * The method name to use within the namespace.
    *
    * Can be:
    * - Static string: Can include capture group references when `pattern` is RegExp

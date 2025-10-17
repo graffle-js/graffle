@@ -30,16 +30,18 @@ export default Generator.configure({
   methodsOrganization: {
     logical: true, // Keep query/mutation organization
     domains: { // Add domain organization
-      rules: [
-        // Map specific fields to domain methods
-        {
-          pattern: 'pokemonByName',
-          groupName: 'pokemon',
-          methodName: 'getOne',
-        },
-        { pattern: 'pokemons', groupName: 'pokemon', methodName: 'getMany' },
-        { pattern: 'addPokemon', groupName: 'pokemon', methodName: 'create' },
-      ],
+      groups: [{ // Each group provides an organizational view
+        rules: [
+          // Map specific fields to namespace methods
+          {
+            pattern: 'pokemonByName',
+            namespace: 'pokemon',
+            methodName: 'getOne',
+          },
+          { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
+          { pattern: 'addPokemon', namespace: 'pokemon', methodName: 'create' },
+        ],
+      }],
     },
   },
 })
@@ -59,6 +61,106 @@ await graffle.pokemon.getMany({ name: true })
 await graffle.pokemon.create({ name: true })
 ```
 
+## Groups and Defaults
+
+### Groups
+
+Groups provide independent organizational views over your schema. Each group:
+- Gets a fresh view of all root fields
+- Can organize fields differently than other groups
+- Allows the same field to appear in multiple namespaces across different groups
+
+This enables multiple organizational perspectives over the same schema:
+
+```typescript
+export default Generator.configure({
+  methodsOrganization: {
+    domains: {
+      groups: [
+        {
+          // Group 1: CRUD-style organization
+          rules: [
+            { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+            { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
+          ],
+        },
+        {
+          // Group 2: Query-style organization
+          rules: [
+            { pattern: 'pokemonByName', namespace: 'byName', methodName: 'pokemon' },
+            { pattern: 'trainerByName', namespace: 'byName', methodName: 'trainer' },
+          ],
+        },
+      ],
+    },
+  },
+})
+```
+
+Both organizational styles coexist:
+
+```typescript
+// Group 1: CRUD style
+await graffle.pokemon.getOne({ name: true })
+await graffle.pokemon.getMany({ name: true })
+
+// Group 2: Query style
+await graffle.byName.pokemon({ name: true })
+await graffle.byName.trainer({ name: true })
+```
+
+### Group Defaults
+
+Provide default values for namespace and methodName within a group. Rules inherit these defaults but can override them:
+
+```typescript
+{
+  groups: [{
+    defaults: {
+      namespace: 'pokemon', // Default namespace for all rules
+      methodName: (fieldName) => fieldName.replace(/^pokemon/, ''), // Default transform
+    },
+    rules: [
+      { pattern: 'pokemonByName' }, // Uses defaults → pokemon.ByName
+      { pattern: 'pokemonById' },   // Uses defaults → pokemon.ById
+      { pattern: 'pokemons', methodName: 'getAll' }, // Overrides methodName → pokemon.getAll
+    ],
+  }],
+}
+```
+
+**Benefits:**
+- **Reduce repetition** - Set common values once per group
+- **Clear intent** - Group configuration shows the organizational strategy
+- **Easy overrides** - Rules can still customize when needed
+
+**Example: Versioned API namespaces**
+
+```typescript
+{
+  groups: [
+    {
+      defaults: { namespace: 'v1' },
+      rules: [
+        { pattern: 'pokemonByName', methodName: 'getPokemon' },
+        { pattern: 'trainerById', methodName: 'getTrainer' },
+      ],
+    },
+    {
+      defaults: { namespace: 'v2' },
+      rules: [
+        { pattern: 'pokemonByName', methodName: 'getPokemon' },
+        { pattern: 'trainerById', methodName: 'getTrainer' },
+      ],
+    },
+  ],
+}
+
+// Usage:
+await graffle.v1.getPokemon({ name: true })
+await graffle.v2.getPokemon({ name: true })
+```
+
 ## Pattern Matching
 
 ### String Patterns
@@ -67,10 +169,12 @@ Use exact string matching for specific fields. The `methodName` specifies what t
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-    { pattern: 'trainerById', groupName: 'trainer', methodName: 'getOne' },
-  ]
+  groups: [{
+    rules: [
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+      { pattern: 'trainerById', namespace: 'trainer', methodName: 'getOne' },
+    ],
+  }],
 }
 
 // Usage:
@@ -82,9 +186,11 @@ If `methodName` is omitted, the domain method keeps the original field name:
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon' },  // No methodName
-  ]
+  groups: [{
+    rules: [
+      { pattern: 'pokemonByName', namespace: 'pokemon' },  // No methodName
+    ],
+  }],
 }
 
 // Usage:
@@ -97,13 +203,15 @@ Use regular expressions to match multiple fields. You can provide a static `meth
 
 ```typescript
 {
-  rules: [
-    // All pokemon fields → pokemon domain, keep original names
-    { pattern: /^pokemon/, groupName: 'pokemon' },
+  groups: [{
+    rules: [
+      // All pokemon fields → pokemon domain, keep original names
+      { pattern: /^pokemon/, namespace: 'pokemon' },
 
-    // All *ByName fields → byName domain, renamed to "find"
-    { pattern: /ByName$/, groupName: 'byName', methodName: 'find' },
-  ]
+      // All *ByName fields → byName domain, renamed to "find"
+      { pattern: /ByName$/, namespace: 'byName', methodName: 'find' },
+    ],
+  }],
 }
 
 // pokemonByName → pokemon.pokemonByName (no methodName specified)
@@ -123,13 +231,15 @@ Use named groups with `$name` or `${name}` syntax:
 
 ```typescript
 {
-  rules: [
-    {
-      pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '$resource',
-      methodName: 'getOne',
-    },
-  ]
+  groups: [{
+    rules: [
+      {
+        pattern: /^(?<resource>\w+)ByName$/,
+        namespace: '$resource',
+        methodName: 'getOne',
+      },
+    ],
+  }],
 }
 
 // Matches all *ByName patterns
@@ -144,13 +254,15 @@ Use numbered groups with `$1`, `$2`, etc.:
 
 ```typescript
 {
-  rules: [
-    {
-      pattern: /^(\w+)By(Name|Id)$/,
-      groupName: '$1',
-      methodName: 'getBy$2',
-    },
-  ]
+  groups: [{
+    rules: [
+      {
+        pattern: /^(\w+)By(Name|Id)$/,
+        namespace: '$1',
+        methodName: 'getBy$2',
+      },
+    ],
+  }],
 }
 
 // pokemonByName → pokemon.getByName
@@ -164,20 +276,22 @@ For complex logic, use a function to determine method names dynamically. The fun
 
 ```typescript
 {
-  rules: [
-    {
-      pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
-      groupName: '$resource',
-      methodName: (fieldName, operationType, match) => {
-        if (!match?.groups) return fieldName
-        const action = match.groups.action
-        // Map schema naming to domain naming conventions
-        if (action === 'add') return 'create'
-        if (action === 'delete') return 'remove'
-        return action
+  groups: [{
+    rules: [
+      {
+        pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
+        namespace: '$resource',
+        methodName: (fieldName, operationType, match) => {
+          if (!match?.groups) return fieldName
+          const action = match.groups.action
+          // Map schema naming to domain naming conventions
+          if (action === 'add') return 'create'
+          if (action === 'delete') return 'remove'
+          return action
+        },
       },
-    },
-  ]
+    ],
+  }],
 }
 
 // addPokemon    → Pokemon.create  (add → create)
@@ -193,13 +307,15 @@ Apply case transformations directly in your template strings without writing fun
 
 ```typescript
 {
-  rules: [
-    {
-      pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '${kebab:resource}', // Transform to kebab-case
-      methodName: 'getOne',
-    },
-  ]
+  groups: [{
+    rules: [
+      {
+        pattern: /^(?<resource>\w+)ByName$/,
+        namespace: '${kebab:resource}', // Transform to kebab-case
+        methodName: 'getOne',
+      },
+    ],
+  }],
 }
 
 // pokemonSpeciesByName → pokemon-species.getOne
@@ -221,35 +337,37 @@ Apply case transformations directly in your template strings without writing fun
 
 **Syntax:**
 
-- Named groups: `${transform:groupName}`
+- Named groups: `${transform:captureName}` where `captureName` is your regex capture group name
 - Indexed groups: `${transform:1}` or `${transform:2}`
 
 **Examples:**
 
 ```typescript
 {
-  rules: [
-    // Multiple transformations in one rule
-    {
-      pattern: /^(?<prefix>get)(?<resource>\w+)$/,
-      groupName: '${kebab:resource}', // kebab-case for domain
-      methodName: '${lower:prefix}${pascal:resource}', // Combine transformations
-    },
+  groups: [{
+    rules: [
+      // Multiple transformations in one rule
+      {
+        pattern: /^(?<prefix>get)(?<resource>\w+)$/,
+        namespace: '${kebab:resource}', // kebab-case for domain
+        methodName: '${lower:prefix}${pascal:resource}', // Combine transformations
+      },
 
-    // Transform indexed capture groups
-    {
-      pattern: /^(\w+)ByName$/,
-      groupName: '${snake:1}', // Use transformation with indexed group
-      methodName: 'getOne',
-    },
+      // Transform indexed capture groups
+      {
+        pattern: /^(\w+)ByName$/,
+        namespace: '${snake:1}', // Use transformation with indexed group
+        methodName: 'getOne',
+      },
 
-    // Mix transformations with static text
-    {
-      pattern: /^(?<action>add|update)(?<resource>\w+)$/,
-      groupName: '${kebab:resource}',
-      methodName: '${lower:action}${pascal:resource}',
-    },
-  ]
+      // Mix transformations with static text
+      {
+        pattern: /^(?<action>add|update)(?<resource>\w+)$/,
+        namespace: '${kebab:resource}',
+        methodName: '${lower:action}${pascal:resource}',
+      },
+    ],
+  }],
 }
 
 // Examples:
@@ -257,6 +375,75 @@ Apply case transformations directly in your template strings without writing fun
 // pokemonSpeciesByName → pokemon_species.getOne
 // addPokemonTrainer → pokemon-trainer.addPokemonTrainer
 ```
+
+### Nested Namespaces
+
+Organize methods into hierarchical namespace structures using arrays or dot-notation:
+
+#### Array Format
+
+Use arrays to define explicit nested paths:
+
+```typescript
+{
+  groups: [{
+    rules: [
+      {
+        pattern: 'pokemonByName',
+        namespace: ['api', 'v2', 'pokemon'], // Nested path
+        methodName: 'getOne',
+      },
+    ],
+  }],
+}
+
+// Usage: nested namespace structure
+await graffle.api.v2.pokemon.getOne({ name: true })
+```
+
+#### Dot-Notation
+
+Use dot-notation strings that are automatically parsed into nested paths:
+
+```typescript
+{
+  groups: [{
+    rules: [
+      {
+        pattern: 'pokemonByName',
+        namespace: 'api.v2.pokemon', // Parsed as ['api', 'v2', 'pokemon']
+        methodName: 'getOne',
+      },
+    ],
+  }],
+}
+
+// Same result as array format
+await graffle.api.v2.pokemon.getOne({ name: true })
+```
+
+#### Root-Level Methods
+
+Use `null` to place methods at the root level alongside logical organization:
+
+```typescript
+{
+  groups: [{
+    rules: [
+      {
+        pattern: 'pokemonByName',
+        namespace: null, // Place at root level
+        methodName: 'getPokemon',
+      },
+    ],
+  }],
+}
+
+// Usage: method at root level
+await graffle.getPokemon({ name: true })
+```
+
+This is useful for promoting commonly-used methods or creating a flatter API structure.
 
 ## Rule Precedence
 
@@ -274,18 +461,20 @@ You'll see warnings in your terminal during code generation if issues are detect
 
 ```typescript
 {
-  rules: [
-    // ✅ Specific pattern first - matches pokemonByName
-    {
-      pattern: /^pokemonByName$/,
-      groupName: 'pokemon',
-      methodName: 'findByName',
-    },
+  groups: [{
+    rules: [
+      // ✅ Specific pattern first - matches pokemonByName
+      {
+        pattern: /^pokemonByName$/,
+        namespace: 'pokemon',
+        methodName: 'findByName',
+      },
 
-    // ❌ This won't match pokemonByName (already matched by rule above)
-    // Graffle will warn: "Rule at index 0 matches string pattern at index 1"
-    { pattern: /^pokemon/, groupName: 'pokemon', methodName: 'find' },
-  ]
+      // ❌ This won't match pokemonByName (already matched by rule above)
+      // Graffle will warn: "Rule at index 0 matches string pattern at index 1"
+      { pattern: /^pokemon/, namespace: 'pokemon', methodName: 'find' },
+    ],
+  }],
 }
 ```
 
@@ -293,19 +482,21 @@ You'll see warnings in your terminal during code generation if issues are detect
 
 ```typescript
 {
-  rules: [
-    // Most specific: exact match
-    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
+  groups: [{
+    rules: [
+      // Most specific: exact match
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getByName' },
 
-    // More specific: narrow pattern
-    { pattern: /^pokemonById$/, groupName: 'pokemon', methodName: 'getById' },
+      // More specific: narrow pattern
+      { pattern: /^pokemonById$/, namespace: 'pokemon', methodName: 'getById' },
 
-    // Less specific: broader pattern
-    { pattern: /^pokemon/, groupName: 'pokemon', methodName: 'query' },
+      // Less specific: broader pattern
+      { pattern: /^pokemon/, namespace: 'pokemon', methodName: 'query' },
 
-    // Least specific: catch-all patterns (use with caution)
-    { pattern: /.*/, groupName: 'general' },
-  ]
+      // Least specific: catch-all patterns (use with caution)
+      { pattern: /.*/, namespace: 'general' },
+    ],
+  }],
 }
 ```
 
@@ -315,9 +506,11 @@ Fields that don't match any rule are **not included** in domain methods. They re
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon' },
-  ]
+  groups: [{
+    rules: [
+      { pattern: 'pokemonByName', namespace: 'pokemon' },
+    ],
+  }],
 }
 
 // ✅ Available
@@ -337,18 +530,20 @@ Graffle automatically detects conflicts when multiple fields map to the same dom
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-    { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' }, // ❌ Conflict!
-  ]
+  groups: [{
+    rules: [
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+      { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getOne' }, // ❌ Conflict!
+    ],
+  }],
 }
 ```
 
 **Error:**
 
 ```
-Domain grouping conflict in domain "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById.
-Please adjust your grouping rules to ensure unique method names within each domain.
+Namespace organization conflict at namespace "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById.
+Please adjust your grouping rules to ensure unique method names within each namespace.
 ```
 
 **Resolution:**
@@ -357,10 +552,12 @@ Use unique method names within each domain:
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
-    { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getById' },
-  ]
+  groups: [{
+    rules: [
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getByName' },
+      { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getById' },
+    ],
+  }],
 }
 ```
 
@@ -368,10 +565,12 @@ Use unique method names within each domain:
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' }, // ✅ OK
-    { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' }, // ✅ OK
-  ]
+  groups: [{
+    rules: [
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' }, // ✅ OK
+      { pattern: 'trainerByName', namespace: 'trainer', methodName: 'getOne' }, // ✅ OK
+    ],
+  }],
 }
 ```
 
@@ -384,13 +583,15 @@ export default Generator.configure({
   methodsOrganization: {
     logical: false, // Disable query/mutation
     domains: { // Only domain methods
-      rules: [
-        {
-          pattern: 'pokemonByName',
-          groupName: 'pokemon',
-          methodName: 'getOne',
-        },
-      ],
+      groups: [{
+        rules: [
+          {
+            pattern: 'pokemonByName',
+            namespace: 'pokemon',
+            methodName: 'getOne',
+          },
+        ],
+      }],
     },
   },
 })
@@ -414,29 +615,31 @@ A complete example organizing multiple resources:
 export default Generator.configure({
   methodsOrganization: {
     domains: {
-      rules: [
-        // Pokemon domain
-        {
-          pattern: 'pokemonByName',
-          groupName: 'pokemon',
-          methodName: 'getOne',
-        },
-        { pattern: 'pokemons', groupName: 'pokemon', methodName: 'getMany' },
-        { pattern: 'addPokemon', groupName: 'pokemon', methodName: 'create' },
-        {
-          pattern: 'updatePokemon',
-          groupName: 'pokemon',
-          methodName: 'update',
-        },
+      groups: [{
+        rules: [
+          // Pokemon domain
+          {
+            pattern: 'pokemonByName',
+            namespace: 'pokemon',
+            methodName: 'getOne',
+          },
+          { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
+          { pattern: 'addPokemon', namespace: 'pokemon', methodName: 'create' },
+          {
+            pattern: 'updatePokemon',
+            namespace: 'pokemon',
+            methodName: 'update',
+          },
 
-        // Trainer domain
-        { pattern: 'trainerById', groupName: 'trainer', methodName: 'getOne' },
-        { pattern: 'trainers', groupName: 'trainer', methodName: 'getMany' },
-        { pattern: 'addTrainer', groupName: 'trainer', methodName: 'create' },
+          // Trainer domain
+          { pattern: 'trainerById', namespace: 'trainer', methodName: 'getOne' },
+          { pattern: 'trainers', namespace: 'trainer', methodName: 'getMany' },
+          { pattern: 'addTrainer', namespace: 'trainer', methodName: 'create' },
 
-        // Battle domain
-        { pattern: /^battle/, groupName: 'battle' },
-      ],
+          // Battle domain
+          { pattern: /^battle/, namespace: 'battle' },
+        ],
+      }],
     },
   },
 })

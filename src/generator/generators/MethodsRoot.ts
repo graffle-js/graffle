@@ -36,11 +36,11 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       })
     }
 
-    // Generate domain-based organization if enabled
+    // Generate namespace-based organization if enabled
     if (config.methodsOrganization.domains) {
-      const domainGroups = groupFieldsByDomain(config)
-      for (const [domainName, fields] of Object.entries(domainGroups)) {
-        code(renderDomainType({ config, domainName, fields }))
+      const namespaceGroups = groupFieldsByDomain(config)
+      for (const [namespaceKey, fields] of Object.entries(namespaceGroups)) {
+        code(renderDomainType({ config, namespaceKey, fields }))
         code``
       }
     }
@@ -56,11 +56,23 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       })
     }
 
-    // Add domain organization properties
+    // Add namespace organization properties
     if (config.methodsOrganization.domains) {
-      const domainGroups = groupFieldsByDomain(config)
-      for (const domainName of Object.keys(domainGroups)) {
-        code(`  ${domainName}: ${Str.Case.capFirst(domainName)}DomainMethods<$Context>`)
+      const namespaceGroups = groupFieldsByDomain(config)
+      for (const [namespaceKey, fields] of Object.entries(namespaceGroups)) {
+        // Get the property name from the namespace path
+        const firstField = fields[0]
+        if (!firstField) continue
+
+        if (firstField.namespacePath === null) {
+          // Root-level methods - add directly to BuilderMethodsRoot
+          // These will be generated inline below
+        } else {
+          // Namespaced methods - add property
+          const propertyName = firstField.namespacePath[0]!
+          const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+          code(`  ${propertyName}: ${interfaceName}<$Context>`)
+        }
       }
     }
 
@@ -188,13 +200,14 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
 // ========================================
 
 import type { Config } from '../config/config.js'
-import type { FieldGroupingRule } from '../config/configInit.js'
+import type { FieldGroupingRule, GroupConfig } from '../config/configInit.js'
 
 interface DomainField {
   fieldName: string
   methodName: string | undefined
   operationType: 'query' | 'mutation'
   rootTypeName: string
+  namespacePath: string[] | null // null for root-level, array for nested
 }
 
 /**
@@ -279,6 +292,23 @@ const replaceCaptures = (template: string, match: RegExpExecArray): string => {
 }
 
 /**
+ * Normalize a namespace value to an array path or null.
+ * - string: parse dot-notation ('api.v2.pokemon' → ['api', 'v2', 'pokemon'])
+ * - array: use as-is
+ * - null: return null (root-level)
+ */
+const normalizeNamespace = (namespace: string | string[] | null | undefined): string[] | null => {
+  if (namespace === null || namespace === undefined) {
+    return null
+  }
+  if (Array.isArray(namespace)) {
+    return namespace
+  }
+  // Parse dot-notation
+  return namespace.split('.').filter(part => part.length > 0)
+}
+
+/**
  * Check if a field name matches a grouping rule's pattern.
  */
 const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
@@ -289,16 +319,17 @@ const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
 }
 
 /**
- * Apply a single rule to a field name, returning group/method info or null.
+ * Apply a single rule to a field name, returning namespace/method info or null.
+ * Requires defaults to be pre-applied to the rule.
  */
 const applyRule = (
   fieldName: string,
   operationType: 'query' | 'mutation',
   rule: FieldGroupingRule,
-): { groupName: string; methodName?: string } | null => {
+): { namespacePath: string[] | null; methodName?: string } | null => {
   if (!matchesRule(fieldName, rule)) return null
 
-  let groupName = rule.groupName
+  let namespace = rule.namespace
   let methodName = rule.methodName
 
   // If pattern is RegExp, extract captures and replace references
@@ -306,9 +337,9 @@ const applyRule = (
     const match = rule.pattern.exec(fieldName)
     if (!match) return null
 
-    // Process groupName with capture groups
-    if (typeof groupName === 'string') {
-      groupName = replaceCaptures(groupName, match)
+    // Process namespace with capture groups (only if it's a string)
+    if (typeof namespace === 'string') {
+      namespace = replaceCaptures(namespace, match)
     }
 
     // Process methodName with capture groups
@@ -325,20 +356,32 @@ const applyRule = (
     }
   }
 
+  // Namespace must be defined at this point (either from rule or from defaults)
+  if (namespace === undefined) {
+    throw new Error(
+      `Rule matching field "${fieldName}" has no namespace defined. ` +
+      `Ensure all rules have a namespace or provide a default namespace in the group configuration.`
+    )
+  }
+
+  // Normalize namespace to array path or null
+  const namespacePath = normalizeNamespace(namespace)
+
   return {
-    groupName,
+    namespacePath,
     methodName,
   }
 }
 
 /**
  * Apply rules in order, returning first match.
+ * Rules should already have defaults applied.
  */
 const applyRules = (
   fieldName: string,
   operationType: 'query' | 'mutation',
   rules: FieldGroupingRule[],
-): { groupName: string; methodName?: string } | null => {
+): { namespacePath: string[] | null; methodName?: string } | null => {
   for (const rule of rules) {
     const result = applyRule(fieldName, operationType, rule)
     if (result) return result
@@ -393,45 +436,69 @@ const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
 }
 
 /**
- * Group all root fields by domain according to configuration.
+ * Apply group defaults to rules, creating rules with inherited values.
+ */
+const applyGroupDefaults = (group: GroupConfig): FieldGroupingRule[] => {
+  return group.rules.map(rule => ({
+    ...rule,
+    namespace: rule.namespace !== undefined ? rule.namespace : group.defaults?.namespace,
+    methodName: rule.methodName !== undefined ? rule.methodName : group.defaults?.methodName,
+  }))
+}
+
+/**
+ * Group all root fields by namespace according to configuration.
+ * Each group gets a fresh view of all root fields.
  */
 const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
   if (!config.methodsOrganization.domains) return {}
 
   const grouped: Record<string, DomainField[]> = {}
-  const { rules } = config.methodsOrganization.domains
+  const { groups } = config.methodsOrganization.domains
 
-  // Check for rule precedence issues
-  checkRulePrecedence(rules)
+  // Process each group independently
+  for (const group of groups) {
+    // Apply defaults to rules in this group
+    const rulesWithDefaults = applyGroupDefaults(group)
 
-  config.schema.kindMap.list.Root.forEach(rootType => {
-    const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
-    const operationType = rootDetails.operationType
+    // Check for rule precedence issues within this group
+    checkRulePrecedence(rulesWithDefaults)
 
-    // Skip subscription for now (domain grouping only supports query/mutation)
-    if (operationType === 'subscription') return
+    // Each group gets a fresh view of all root fields
+    config.schema.kindMap.list.Root.forEach(rootType => {
+      const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
+      const operationType = rootDetails.operationType
 
-    for (const field of Object.values(rootType.getFields())) {
-      const result = applyRules(field.name, operationType, rules)
-      if (!result) continue
+      // Skip subscription for now (domain grouping only supports query/mutation)
+      if (operationType === 'subscription') return
 
-      const { groupName, methodName } = result
+      for (const field of Object.values(rootType.getFields())) {
+        const result = applyRules(field.name, operationType, rulesWithDefaults)
+        if (!result) continue
 
-      if (!grouped[groupName]) {
-        grouped[groupName] = []
+        const { namespacePath, methodName } = result
+
+        // Create a key for the namespace path
+        // null → '__root__', ['a', 'b'] → 'a.b'
+        const namespaceKey = namespacePath === null ? '__root__' : namespacePath.join('.')
+
+        if (!grouped[namespaceKey]) {
+          grouped[namespaceKey] = []
+        }
+
+        grouped[namespaceKey].push({
+          fieldName: field.name,
+          methodName,
+          operationType,
+          rootTypeName: rootType.name,
+          namespacePath,
+        })
       }
+    })
+  }
 
-      grouped[groupName].push({
-        fieldName: field.name,
-        methodName,
-        operationType,
-        rootTypeName: rootType.name,
-      })
-    }
-  })
-
-  // Detect conflicts: multiple fields mapping to same domain + method name
-  for (const [domainName, fields] of Object.entries(grouped)) {
+  // Detect conflicts: multiple fields mapping to same namespace path + method name
+  for (const [namespaceKey, fields] of Object.entries(grouped)) {
     const methodNameToFields = new Map<string, DomainField[]>()
 
     for (const field of fields) {
@@ -449,9 +516,10 @@ const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
     for (const [methodName, conflictingFields] of methodNameToFields.entries()) {
       if (conflictingFields.length > 1) {
         const fieldNames = conflictingFields.map(f => f.fieldName).join(', ')
+        const namespaceDisplay = namespaceKey === '__root__' ? 'root level' : `namespace "${namespaceKey}"`
         throw new Error(
-          `Domain grouping conflict in domain "${domainName}": Multiple fields map to method "${methodName}": ${fieldNames}. `
-            + `Please adjust your grouping rules to ensure unique method names within each domain.`,
+          `Namespace organization conflict at ${namespaceDisplay}: Multiple fields map to method "${methodName}": ${fieldNames}. `
+            + `Please adjust your grouping rules to ensure unique method names within each namespace.`,
         )
       }
     }
@@ -461,13 +529,22 @@ const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
 }
 
 /**
- * Render a domain type interface with methods for all fields in that domain.
+ * Render a namespace type interface with methods for all fields in that namespace.
  */
 const renderDomainType = createCodeGenerator<{
-  domainName: string
+  namespaceKey: string
   fields: DomainField[]
-}>(({ domainName, fields, config, code }) => {
-  const interfaceName = `${Str.Case.capFirst(domainName)}DomainMethods`
+}>(({ namespaceKey, fields, config, code }) => {
+  // Generate interface name from namespace key
+  // '__root__' → methods added directly to BuilderMethodsRoot (skip interface)
+  // 'pokemon' → 'PokemonMethods'
+  // 'api.v2.pokemon' → 'ApiV2PokemonMethods'
+  if (namespaceKey === '__root__') {
+    // Root-level methods don't need a separate interface
+    return
+  }
+
+  const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
 
   code(`export interface ${interfaceName}<$Context extends ${$.$$Utilities}.Context> {`)
 

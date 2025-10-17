@@ -12,7 +12,7 @@ describe('custom rules', () => {
   test('applies string pattern exact match', () => {
     const rule: FieldGroupingRule = {
       pattern: 'pokemonByName',
-      groupName: 'pokemon',
+      namespace: 'pokemon',
       methodName: 'getOne',
     }
     expect(matchesRule('pokemonByName', rule)).toBe(true)
@@ -22,7 +22,7 @@ describe('custom rules', () => {
   test('applies RegExp pattern match', () => {
     const rule: FieldGroupingRule = {
       pattern: /^pokemonBy/,
-      groupName: 'pokemon',
+      namespace: 'pokemon',
       methodName: 'getOne',
     }
     expect(matchesRule('pokemonByName', rule)).toBe(true)
@@ -33,11 +33,11 @@ describe('custom rules', () => {
   test('uses static method name from rule', () => {
     const rule: FieldGroupingRule = {
       pattern: /^pokemon/,
-      groupName: 'pokemon',
+      namespace: 'pokemon',
       methodName: 'getOne',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getOne',
     })
   })
@@ -45,7 +45,7 @@ describe('custom rules', () => {
   test('uses dynamic method name function from rule', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(add|delete)Pokemon$/,
-      groupName: 'pokemon',
+      namespace: 'pokemon',
       methodName: (fieldName, operationType) => {
         if (fieldName.startsWith('add')) return 'create'
         if (fieldName.startsWith('delete')) return 'delete'
@@ -53,11 +53,11 @@ describe('custom rules', () => {
       },
     }
     expect(applyRule('addPokemon', 'mutation', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'create',
     })
     expect(applyRule('deletePokemon', 'mutation', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'delete',
     })
   })
@@ -65,7 +65,7 @@ describe('custom rules', () => {
   test('returns null when field does not match rule pattern', () => {
     const rule: FieldGroupingRule = {
       pattern: /^pokemon/,
-      groupName: 'pokemon',
+      namespace: 'pokemon',
     }
     expect(applyRule('trainerByName', 'query', rule)).toBe(null)
   })
@@ -73,10 +73,10 @@ describe('custom rules', () => {
   test('omits methodName when not provided in rule', () => {
     const rule: FieldGroupingRule = {
       pattern: 'pokemonByName',
-      groupName: 'pokemon',
+      namespace: 'pokemon',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: undefined,
     })
   })
@@ -87,18 +87,18 @@ describe('rule precedence', () => {
     const rules: FieldGroupingRule[] = [
       {
         pattern: /^pokemon/,
-        groupName: 'poke',
+        namespace: 'poke',
         methodName: 'customName',
       },
       {
         pattern: /^pokemon/,
-        groupName: 'pokemon',
+        namespace: 'pokemon',
         methodName: 'shouldNotMatch',
       },
     ]
     const result = applyRules('pokemonByName', 'query', rules)
     expect(result).toEqual({
-      groupName: 'poke',
+      namespacePath: ['poke'],
       methodName: 'customName',
     })
   })
@@ -107,7 +107,7 @@ describe('rule precedence', () => {
     const rules: FieldGroupingRule[] = [
       {
         pattern: /^trainer/,
-        groupName: 'trainer',
+        namespace: 'trainer',
         methodName: 'customName',
       },
     ]
@@ -119,8 +119,8 @@ describe('rule precedence', () => {
     const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
     const rules: FieldGroupingRule[] = [
-      { pattern: /^pokemon/, groupName: 'pokemon' },
-      { pattern: 'pokemonByName', groupName: 'specific', methodName: 'getOne' },
+      { pattern: /^pokemon/, namespace: 'pokemon' },
+      { pattern: 'pokemonByName', namespace: 'specific', methodName: 'getOne' },
     ]
 
     checkRulePrecedence(rules)
@@ -135,8 +135,8 @@ describe('rule precedence', () => {
     const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
     const rules: FieldGroupingRule[] = [
-      { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-      { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getDuplicate' },
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getDuplicate' },
     ]
 
     checkRulePrecedence(rules)
@@ -155,10 +155,10 @@ describe('domain grouping', () => {
       { name: 'pokemons', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-        { pattern: 'pokemons', groupName: 'pokemon', methodName: 'getMany' },
-      ],
+      groups: [{ rules: [
+        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+        { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
+      ] }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(grouped).toEqual({
@@ -175,10 +175,10 @@ describe('domain grouping', () => {
       { name: 'trainerById', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon' },
-        { pattern: 'trainerById', groupName: 'trainer' },
-      ],
+      groups: [{ rules: [
+        { pattern: 'pokemonByName', namespace: 'pokemon' },
+        { pattern: 'trainerById', namespace: 'trainer' },
+      ] }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(Object.keys(grouped)).toEqual(['pokemon', 'trainer'])
@@ -190,9 +190,9 @@ describe('domain grouping', () => {
       { name: 'unmatchedField', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-      ],
+      groups: [{ rules: [
+        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+      ] }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(grouped).toEqual({
@@ -221,13 +221,13 @@ describe('conflict detection', () => {
       { name: 'pokemonById', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-        { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' },
-      ],
+      groups: [{ rules: [
+        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+        { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getOne' },
+      ] }],
     }
     expect(() => groupFieldsByDomain(fields, config)).toThrow(
-      'Domain grouping conflict in domain "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById',
+      'Namespace organization conflict at namespace "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById',
     )
   })
 
@@ -237,40 +237,40 @@ describe('conflict detection', () => {
       { name: 'trainerByName', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-        { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' },
-      ],
+      groups: [{ rules: [
+        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+        { pattern: 'trainerByName', namespace: 'trainer', methodName: 'getOne' },
+      ] }],
     }
     expect(() => groupFieldsByDomain(fields, config)).not.toThrow()
   })
 })
 
 describe('capture groups', () => {
-  test('uses named capture groups in groupName', () => {
+  test('uses named capture groups in namespace', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '$resource',
+      namespace: '$resource',
       methodName: 'getOne',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getOne',
     })
     expect(applyRule('trainerByName', 'query', rule)).toEqual({
-      groupName: 'trainer',
+      namespacePath: ['trainer'],
       methodName: 'getOne',
     })
   })
 
-  test('uses indexed capture groups in groupName', () => {
+  test('uses indexed capture groups in namespace', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(\w+)ByName$/,
-      groupName: '$1',
+      namespace: '$1',
       methodName: 'getOne',
     }
     expect(applyRule('trainerByName', 'query', rule)).toEqual({
-      groupName: 'trainer',
+      namespacePath: ['trainer'],
       methodName: 'getOne',
     })
   })
@@ -278,15 +278,15 @@ describe('capture groups', () => {
   test('uses capture groups in methodName', () => {
     const rule: FieldGroupingRule = {
       pattern: /^pokemonBy(\w+)$/,
-      groupName: 'pokemon',
+      namespace: 'pokemon',
       methodName: 'getBy$1',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getByName',
     })
     expect(applyRule('pokemonById', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getById',
     })
   })
@@ -294,11 +294,11 @@ describe('capture groups', () => {
   test('uses multiple indexed capture groups', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(\w+)By(\w+)$/,
-      groupName: '$1',
+      namespace: '$1',
       methodName: 'getBy$2',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getByName',
     })
   })
@@ -306,15 +306,15 @@ describe('capture groups', () => {
   test('mixed named and indexed groups', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(?<action>add|update)(\w+)$/,
-      groupName: '$2',
+      namespace: '$2',
       methodName: '$action',
     }
     expect(applyRule('addPokemon', 'mutation', rule)).toEqual({
-      groupName: 'Pokemon',
+      namespacePath: ['Pokemon'],
       methodName: 'add',
     })
     expect(applyRule('updateTrainer', 'mutation', rule)).toEqual({
-      groupName: 'Trainer',
+      namespacePath: ['Trainer'],
       methodName: 'update',
     })
   })
@@ -322,13 +322,13 @@ describe('capture groups', () => {
   test('function methodName receives match object', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(\w+)By(\w+)$/,
-      groupName: '$1',
+      namespace: '$1',
       methodName: (fieldName, operationType, match) => {
         return match ? `getBy${match[2]}` : fieldName
       },
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getByName',
     })
   })
@@ -336,7 +336,7 @@ describe('capture groups', () => {
   test('function methodName with named groups', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
-      groupName: '$resource',
+      namespace: '$resource',
       methodName: (fieldName, operationType, match) => {
         if (!match?.groups) return `unknown`
         const action = match.groups[`action`]
@@ -346,7 +346,7 @@ describe('capture groups', () => {
       },
     }
     expect(applyRule('addPokemon', 'mutation', rule)).toEqual({
-      groupName: 'Pokemon',
+      namespacePath: ['Pokemon'],
       methodName: 'create',
     })
   })
@@ -358,9 +358,9 @@ describe('capture groups', () => {
       { name: 'battleById', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: /^(?<resource>\w+)By(Name|Id)$/, groupName: '$resource', methodName: 'getBy$2' },
-      ],
+      groups: [{ rules: [
+        { pattern: /^(?<resource>\w+)By(Name|Id)$/, namespace: '$resource', methodName: 'getBy$2' },
+      ] }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(grouped).toEqual({
@@ -382,30 +382,30 @@ describe('string template transformations', () => {
     // Test kebab-case transformation
     expect(applyRule('pokemonSpeciesByName', 'query', {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '${kebab:resource}',
+      namespace: '${kebab:resource}',
       methodName: 'getOne',
     })).toEqual({
-      groupName: 'pokemon-species',
+      namespacePath: ['pokemon-species'],
       methodName: 'getOne',
     })
 
     // Test PascalCase transformation
     expect(applyRule('pokemonByName', 'query', {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '${pascal:resource}',
+      namespace: '${pascal:resource}',
       methodName: 'getOne',
     })).toEqual({
-      groupName: 'Pokemon',
+      namespacePath: ['Pokemon'],
       methodName: 'getOne',
     })
 
     // Test snake_case transformation
     expect(applyRule('pokemonSpeciesByName', 'query', {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '${snake:resource}',
+      namespace: '${snake:resource}',
       methodName: 'getOne',
     })).toEqual({
-      groupName: 'pokemon_species',
+      namespacePath: ['pokemon_species'],
       methodName: 'getOne',
     })
   })
@@ -413,11 +413,11 @@ describe('string template transformations', () => {
   test('transformations work with indexed groups', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(\w+)ByName$/,
-      groupName: '${kebab:1}',
+      namespace: '${kebab:1}',
       methodName: 'getOne',
     }
     expect(applyRule('pokemonSpeciesByName', 'query', rule)).toEqual({
-      groupName: 'pokemon-species',
+      namespacePath: ['pokemon-species'],
       methodName: 'getOne',
     })
   })
@@ -425,11 +425,11 @@ describe('string template transformations', () => {
   test('transformations work in methodName', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: 'pokemon',
+      namespace: 'pokemon',
       methodName: 'get${pascal:resource}',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getPokemon',
     })
   })
@@ -437,11 +437,11 @@ describe('string template transformations', () => {
   test('multiple transformations in one template', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(?<prefix>get)(?<resource>\w+)$/,
-      groupName: '${kebab:resource}',
+      namespace: '${kebab:resource}',
       methodName: '${lower:prefix}${pascal:resource}',
     }
     expect(applyRule('getPokemon', 'query', rule)).toEqual({
-      groupName: 'pokemon',
+      namespacePath: ['pokemon'],
       methodName: 'getPokemon',
     })
   })
@@ -449,11 +449,11 @@ describe('string template transformations', () => {
   test('unknown transformation leaves template unchanged', () => {
     const rule: FieldGroupingRule = {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '${unknown:resource}',
+      namespace: '${unknown:resource}',
       methodName: 'getOne',
     }
     expect(applyRule('pokemonByName', 'query', rule)).toEqual({
-      groupName: '${unknown:resource}',
+      namespacePath: ['${unknown:resource}'],
       methodName: 'getOne',
     })
   })
@@ -601,16 +601,30 @@ function replaceCaptures(template: string, match: RegExpExecArray): string {
 }
 
 /**
- * Apply a single rule to a field name, returning group/method info or null.
+ * Normalize a namespace value to an array path or null.
+ */
+function normalizeNamespace(namespace: string | string[] | null | undefined): string[] | null {
+  if (namespace === null || namespace === undefined) {
+    return null
+  }
+  if (Array.isArray(namespace)) {
+    return namespace
+  }
+  // Parse dot-notation
+  return namespace.split('.').filter(part => part.length > 0)
+}
+
+/**
+ * Apply a single rule to a field name, returning namespace/method info or null.
  */
 function applyRule(
   fieldName: string,
   operationType: 'query' | 'mutation',
   rule: FieldGroupingRule,
-): { groupName: string; methodName?: string } | null {
+): { namespacePath: string[] | null; methodName?: string } | null {
   if (!matchesRule(fieldName, rule)) return null
 
-  let groupName = rule.groupName
+  let namespace = rule.namespace
   let methodName = rule.methodName
 
   // If pattern is RegExp, extract captures and replace references
@@ -618,9 +632,9 @@ function applyRule(
     const match = rule.pattern.exec(fieldName)
     if (!match) return null
 
-    // Process groupName with capture groups
-    if (typeof groupName === 'string') {
-      groupName = replaceCaptures(groupName, match)
+    // Process namespace with capture groups (only if it's a string)
+    if (typeof namespace === 'string') {
+      namespace = replaceCaptures(namespace, match)
     }
 
     // Process methodName with capture groups
@@ -637,8 +651,19 @@ function applyRule(
     }
   }
 
+  // Namespace must be defined at this point (either from rule or from defaults)
+  if (namespace === undefined) {
+    throw new Error(
+      `Rule matching field "${fieldName}" has no namespace defined. ` +
+      `Ensure all rules have a namespace or provide a default namespace in the group configuration.`
+    )
+  }
+
+  // Normalize namespace to array path or null
+  const namespacePath = normalizeNamespace(namespace)
+
   return {
-    groupName,
+    namespacePath,
     methodName,
   }
 }
@@ -650,7 +675,7 @@ function applyRules(
   fieldName: string,
   operationType: 'query' | 'mutation',
   rules: FieldGroupingRule[],
-): { groupName: string; methodName?: string } | null {
+): { namespacePath: string[] | null; methodName?: string } | null {
   for (const rule of rules) {
     const result = applyRule(fieldName, operationType, rule)
     if (result) return result
@@ -659,7 +684,18 @@ function applyRules(
 }
 
 /**
- * Group fields by domain according to configuration.
+ * Apply group defaults to rules (simplified for testing).
+ */
+function applyGroupDefaults(group: { defaults?: { namespace?: string | string[] | null; methodName?: string | ((fieldName: string, operationType: 'query' | 'mutation', match?: RegExpExecArray) => string) }; rules: FieldGroupingRule[] }): FieldGroupingRule[] {
+  return group.rules.map(rule => ({
+    ...rule,
+    namespace: rule.namespace !== undefined ? rule.namespace : group.defaults?.namespace,
+    methodName: rule.methodName !== undefined ? rule.methodName : group.defaults?.methodName,
+  }))
+}
+
+/**
+ * Group fields by namespace according to configuration.
  */
 function groupFieldsByDomain(
   fields: Array<{ name: string; operationType: 'query' | 'mutation' }>,
@@ -672,27 +708,37 @@ function groupFieldsByDomain(
     Record<string, { methodName: string | undefined; operationType: 'query' | 'mutation' }>
   > = {}
 
-  for (const field of fields) {
-    const result = applyRules(field.name, field.operationType, config.rules)
-    if (!result) continue
+  // Process each group independently
+  for (const group of config.groups) {
+    // Apply defaults to rules in this group
+    const rulesWithDefaults = applyGroupDefaults(group)
 
-    const { groupName, methodName } = result
+    for (const field of fields) {
+      const result = applyRules(field.name, field.operationType, rulesWithDefaults)
+      if (!result) continue
 
-    if (!grouped[groupName]) {
-      grouped[groupName] = {}
-    }
+      const { namespacePath, methodName } = result
 
-    grouped[groupName][field.name] = {
-      methodName,
-      operationType: field.operationType,
+      // Create a key for the namespace path
+      // null → '__root__', ['a', 'b'] → 'a.b'
+      const namespaceKey = namespacePath === null ? '__root__' : namespacePath.join('.')
+
+      if (!grouped[namespaceKey]) {
+        grouped[namespaceKey] = {}
+      }
+
+      grouped[namespaceKey][field.name] = {
+        methodName,
+        operationType: field.operationType,
+      }
     }
   }
 
-  // Detect conflicts: multiple fields mapping to same domain + method name
-  for (const [domainName, domainFields] of Object.entries(grouped)) {
+  // Detect conflicts: multiple fields mapping to same namespace + method name
+  for (const [namespaceKey, namespaceFields] of Object.entries(grouped)) {
     const methodNameToFields = new Map<string, string[]>()
 
-    for (const [fieldName, fieldInfo] of Object.entries(domainFields)) {
+    for (const [fieldName, fieldInfo] of Object.entries(namespaceFields)) {
       const effectiveMethodName = fieldInfo.methodName ?? fieldName
       const existing = methodNameToFields.get(effectiveMethodName)
 
@@ -707,9 +753,10 @@ function groupFieldsByDomain(
     for (const [methodName, conflictingFields] of methodNameToFields.entries()) {
       if (conflictingFields.length > 1) {
         const fieldNames = conflictingFields.join(', ')
+        const namespaceDisplay = namespaceKey === '__root__' ? 'root level' : `namespace "${namespaceKey}"`
         throw new Error(
-          `Domain grouping conflict in domain "${domainName}": Multiple fields map to method "${methodName}": ${fieldNames}. `
-            + `Please adjust your grouping rules to ensure unique method names within each domain.`,
+          `Namespace organization conflict at ${namespaceDisplay}: Multiple fields map to method "${methodName}": ${fieldNames}. `
+            + `Please adjust your grouping rules to ensure unique method names within each namespace.`,
         )
       }
     }
