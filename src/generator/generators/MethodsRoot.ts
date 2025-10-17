@@ -234,17 +234,28 @@ const replaceCaptures = (template: string, match: RegExpExecArray): string => {
 
     // Apply transformation
     switch (transform) {
-      case 'kebab': return Str.Case.kebab(value)
-      case 'pascal': return Str.Case.pascal(value)
-      case 'camel': return Str.Case.camel(value)
-      case 'snake': return Str.Case.snake(value)
-      case 'constant': return Str.Case.constant(value)
-      case 'title': return Str.Case.title(value)
-      case 'upper': return Str.Case.capAll(value)
-      case 'lower': return value.toLowerCase()
-      case 'capFirst': return Str.Case.capFirst(value)
-      case 'uncapFirst': return Str.Case.uncapFirst(value)
-      default: return fullMatch // Unknown transform, keep original
+      case 'kebab':
+        return Str.Case.kebab(value)
+      case 'pascal':
+        return Str.Case.pascal(value)
+      case 'camel':
+        return Str.Case.camel(value)
+      case 'snake':
+        return Str.Case.snake(value)
+      case 'constant':
+        return Str.Case.snake(value).toUpperCase()
+      case 'title':
+        return Str.Case.title(value)
+      case 'upper':
+        return Str.Case.capAll(value)
+      case 'lower':
+        return value.toLowerCase()
+      case 'capFirst':
+        return Str.Case.capFirst(value)
+      case 'uncapFirst':
+        return Str.Case.uncapFirst(value)
+      default:
+        return fullMatch // Unknown transform, keep original
     }
   })
 
@@ -390,8 +401,8 @@ const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
       if (conflictingFields.length > 1) {
         const fieldNames = conflictingFields.map(f => f.fieldName).join(', ')
         throw new Error(
-          `Domain grouping conflict in domain "${domainName}": Multiple fields map to method "${methodName}": ${fieldNames}. ` +
-          `Please adjust your grouping rules to ensure unique method names within each domain.`
+          `Domain grouping conflict in domain "${domainName}": Multiple fields map to method "${methodName}": ${fieldNames}. `
+            + `Please adjust your grouping rules to ensure unique method names within each domain.`,
         )
       }
     }

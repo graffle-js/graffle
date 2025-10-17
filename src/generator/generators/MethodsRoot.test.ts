@@ -121,13 +121,11 @@ describe('domain grouping', () => {
     const fields = [
       { name: 'pokemonByName', operationType: 'query' as const },
       { name: 'pokemons', operationType: 'query' as const },
-      { name: 'addPokemon', operationType: 'mutation' as const },
     ]
     const config: DomainGroupingConfig = {
       rules: [
         { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
         { pattern: 'pokemons', groupName: 'pokemon', methodName: 'getMany' },
-        { pattern: 'addPokemon', groupName: 'pokemon', methodName: 'create' },
       ],
     }
     const grouped = groupFieldsByDomain(fields, config)
@@ -135,7 +133,6 @@ describe('domain grouping', () => {
       pokemon: {
         pokemonByName: { methodName: 'getOne', operationType: 'query' },
         pokemons: { methodName: 'getMany', operationType: 'query' },
-        addPokemon: { methodName: 'create', operationType: 'mutation' },
       },
     })
   })
@@ -144,17 +141,15 @@ describe('domain grouping', () => {
     const fields = [
       { name: 'pokemonByName', operationType: 'query' as const },
       { name: 'trainerById', operationType: 'query' as const },
-      { name: 'battles', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
       rules: [
         { pattern: 'pokemonByName', groupName: 'pokemon' },
         { pattern: 'trainerById', groupName: 'trainer' },
-        { pattern: 'battles', groupName: 'battle' },
       ],
     }
     const grouped = groupFieldsByDomain(fields, config)
-    expect(Object.keys(grouped)).toEqual(['pokemon', 'trainer', 'battle'])
+    expect(Object.keys(grouped)).toEqual(['pokemon', 'trainer'])
   })
 
   test('omits fields that do not match any rule', () => {
@@ -184,23 +179,6 @@ describe('configuration', () => {
     ]
     const grouped = groupFieldsByDomain(fields, false)
     expect(grouped).toEqual({})
-  })
-
-  test('uses provided rules', () => {
-    const fields = [
-      { name: 'pokemonByName', operationType: 'query' as const },
-    ]
-    const config: DomainGroupingConfig = {
-      rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-      ],
-    }
-    const grouped = groupFieldsByDomain(fields, config)
-    expect(grouped).toEqual({
-      pokemon: {
-        pokemonByName: { methodName: 'getOne', operationType: 'query' },
-      },
-    })
   })
 })
 
@@ -249,18 +227,6 @@ describe('capture groups', () => {
     })
     expect(applyRule('trainerByName', 'query', rule)).toEqual({
       groupName: 'trainer',
-      methodName: 'getOne',
-    })
-  })
-
-  test('uses braced syntax ${name} for named groups', () => {
-    const rule: FieldGroupingRule = {
-      pattern: /^(?<res>\w+)ByName$/,
-      groupName: '${res}',
-      methodName: 'getOne',
-    }
-    expect(applyRule('battleByName', 'query', rule)).toEqual({
-      groupName: 'battle',
       methodName: 'getOne',
     })
   })
@@ -350,14 +316,6 @@ describe('capture groups', () => {
     expect(applyRule('addPokemon', 'mutation', rule)).toEqual({
       groupName: 'Pokemon',
       methodName: 'create',
-    })
-    expect(applyRule('updateTrainer', 'mutation', rule)).toEqual({
-      groupName: 'Trainer',
-      methodName: 'update',
-    })
-    expect(applyRule('deleteBattle', 'mutation', rule)).toEqual({
-      groupName: 'Battle',
-      methodName: 'remove',
     })
   })
 

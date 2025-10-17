@@ -28,16 +28,20 @@ import { Generator } from 'graffle/generator'
 
 export default Generator.configure({
   methodsOrganization: {
-    logical: true,  // Keep query/mutation organization
-    domains: {      // Add domain organization
+    logical: true, // Keep query/mutation organization
+    domains: { // Add domain organization
       rules: [
         // Map specific fields to domain methods
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
+        {
+          pattern: 'pokemonByName',
+          groupName: 'pokemon',
+          methodName: 'getOne',
+        },
         { pattern: 'pokemons', groupName: 'pokemon', methodName: 'getMany' },
         { pattern: 'addPokemon', groupName: 'pokemon', methodName: 'create' },
-      ]
-    }
-  }
+      ],
+    },
+  },
 })
 ```
 
@@ -63,7 +67,8 @@ Use exact string matching for specific fields:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
     { pattern: 'trainerById', groupName: 'trainer', methodName: 'getOne' },
   ]
@@ -76,7 +81,8 @@ Use regular expressions to match multiple fields:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     // Match all pokemon queries
     { pattern: /^pokemon/, groupName: 'pokemon' },
 
@@ -96,12 +102,13 @@ Use named groups with `$name` or `${name}` syntax:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     {
       pattern: /^(?<resource>\w+)ByName$/,
       groupName: '$resource',
-      methodName: 'getOne'
-    }
+      methodName: 'getOne',
+    },
   ]
 }
 
@@ -117,12 +124,13 @@ Use numbered groups with `$1`, `$2`, etc.:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     {
       pattern: /^(\w+)By(Name|Id)$/,
       groupName: '$1',
-      methodName: 'getBy$2'
-    }
+      methodName: 'getBy$2',
+    },
   ]
 }
 
@@ -137,7 +145,8 @@ For complex transformations, access the full RegExp match object:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     {
       pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
       groupName: '$resource',
@@ -147,8 +156,8 @@ For complex transformations, access the full RegExp match object:
         if (action === 'add') return 'create'
         if (action === 'delete') return 'remove'
         return action
-      }
-    }
+      },
+    },
   ]
 }
 
@@ -163,12 +172,13 @@ Apply case transformations directly in your template strings without writing fun
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     {
       pattern: /^(?<resource>\w+)ByName$/,
-      groupName: '${kebab:resource}',    // Transform to kebab-case
-      methodName: 'getOne'
-    }
+      groupName: '${kebab:resource}', // Transform to kebab-case
+      methodName: 'getOne',
+    },
   ]
 }
 
@@ -190,6 +200,7 @@ Apply case transformations directly in your template strings without writing fun
 - **uncapFirst** - Uncapitalize first letter: `Pokemon` → `pokemon`
 
 **Syntax:**
+
 - Named groups: `${transform:groupName}`
 - Indexed groups: `${transform:1}` or `${transform:2}`
 
@@ -197,27 +208,28 @@ Apply case transformations directly in your template strings without writing fun
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     // Multiple transformations in one rule
     {
       pattern: /^(?<prefix>get)(?<resource>\w+)$/,
-      groupName: '${kebab:resource}',           // kebab-case for domain
-      methodName: '${lower:prefix}${pascal:resource}'  // Combine transformations
+      groupName: '${kebab:resource}', // kebab-case for domain
+      methodName: '${lower:prefix}${pascal:resource}', // Combine transformations
     },
 
     // Transform indexed capture groups
     {
       pattern: /^(\w+)ByName$/,
-      groupName: '${snake:1}',  // Use transformation with indexed group
-      methodName: 'getOne'
+      groupName: '${snake:1}', // Use transformation with indexed group
+      methodName: 'getOne',
     },
 
     // Mix transformations with static text
     {
       pattern: /^(?<action>add|update)(?<resource>\w+)$/,
       groupName: '${kebab:resource}',
-      methodName: '${lower:action}${pascal:resource}'
-    }
+      methodName: '${lower:action}${pascal:resource}',
+    },
   ]
 }
 
@@ -235,7 +247,8 @@ Provide a fixed method name for all matching fields:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     { pattern: /^pokemonBy/, groupName: 'pokemon', methodName: 'getOne' },
   ]
 }
@@ -247,17 +260,20 @@ Use a function to determine method names based on the field:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     {
       pattern: /^(add|create|update|delete)Pokemon$/,
       groupName: 'pokemon',
       methodName: (fieldName, operationType) => {
-        if (fieldName.startsWith('add') || fieldName.startsWith('create')) return 'create'
+        if (fieldName.startsWith('add') || fieldName.startsWith('create')) {
+          return 'create'
+        }
         if (fieldName.startsWith('update')) return 'update'
         if (fieldName.startsWith('delete')) return 'delete'
         return fieldName
-      }
-    }
+      },
+    },
   ]
 }
 ```
@@ -268,8 +284,9 @@ If `methodName` is omitted, the domain method uses the original field name:
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon' }
+  rules: ;
+  ;[
+    { pattern: 'pokemonByName', groupName: 'pokemon' },
   ]
 }
 
@@ -279,16 +296,46 @@ await graffle.pokemon.pokemonByName({ name: true })
 
 ## Rule Precedence
 
-Rules are applied in order. The first matching rule wins:
+:::warning[Important: Rule Order Matters]
+Rules are evaluated sequentially, and **the first matching rule wins**. Once a field matches a rule, subsequent rules are not evaluated for that field.
+
+Place more specific patterns before general ones to ensure correct matching.
+:::
 
 ```typescript
 {
-  rules: [
-    // This rule matches first
-    { pattern: /^pokemonByName/, groupName: 'pokemon', methodName: 'findByName' },
+  rules: ;
+  ;[
+    // ✅ Specific pattern first - matches pokemonByName
+    {
+      pattern: /^pokemonByName$/,
+      groupName: 'pokemon',
+      methodName: 'findByName',
+    },
 
-    // This rule won't match pokemonByName (already matched above)
+    // ❌ This won't match pokemonByName (already matched by rule above)
     { pattern: /^pokemon/, groupName: 'pokemon', methodName: 'find' },
+  ]
+}
+```
+
+**Best Practice**: Order your rules from most specific to most general:
+
+```typescript
+{
+  rules: ;
+  ;[
+    // Most specific: exact match
+    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
+
+    // More specific: narrow pattern
+    { pattern: /^pokemonById$/, groupName: 'pokemon', methodName: 'getById' },
+
+    // Less specific: broader pattern
+    { pattern: /^pokemon/, groupName: 'pokemon', methodName: 'query' },
+
+    // Least specific: catch-all patterns (use with caution)
+    { pattern: /.*/, groupName: 'general' },
   ]
 }
 ```
@@ -299,8 +346,9 @@ Fields that don't match any rule are **not included** in domain methods. They re
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon' }
+  rules: ;
+  ;[
+    { pattern: 'pokemonByName', groupName: 'pokemon' },
   ]
 }
 
@@ -321,14 +369,16 @@ Graffle automatically detects conflicts when multiple fields map to the same dom
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
-    { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' },  // ❌ Conflict!
+    { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' }, // ❌ Conflict!
   ]
 }
 ```
 
 **Error:**
+
 ```
 Domain grouping conflict in domain "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById.
 Please adjust your grouping rules to ensure unique method names within each domain.
@@ -340,7 +390,8 @@ Use unique method names within each domain:
 
 ```typescript
 {
-  rules: [
+  rules: ;
+  ;[
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
     { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getById' },
   ]
@@ -351,9 +402,10 @@ Use unique method names within each domain:
 
 ```typescript
 {
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },  // ✅ OK
-    { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' },  // ✅ OK
+  rules: ;
+  ;[
+    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' }, // ✅ OK
+    { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' }, // ✅ OK
   ]
 }
 ```
@@ -365,13 +417,17 @@ If you want **only** domain-based methods, disable logical organization:
 ```typescript
 export default Generator.configure({
   methodsOrganization: {
-    logical: false,  // Disable query/mutation
-    domains: {       // Only domain methods
+    logical: false, // Disable query/mutation
+    domains: { // Only domain methods
       rules: [
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' }
-      ]
-    }
-  }
+        {
+          pattern: 'pokemonByName',
+          groupName: 'pokemon',
+          methodName: 'getOne',
+        },
+      ],
+    },
+  },
 })
 ```
 
@@ -395,10 +451,18 @@ export default Generator.configure({
     domains: {
       rules: [
         // Pokemon domain
-        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
+        {
+          pattern: 'pokemonByName',
+          groupName: 'pokemon',
+          methodName: 'getOne',
+        },
         { pattern: 'pokemons', groupName: 'pokemon', methodName: 'getMany' },
         { pattern: 'addPokemon', groupName: 'pokemon', methodName: 'create' },
-        { pattern: 'updatePokemon', groupName: 'pokemon', methodName: 'update' },
+        {
+          pattern: 'updatePokemon',
+          groupName: 'pokemon',
+          methodName: 'update',
+        },
 
         // Trainer domain
         { pattern: 'trainerById', groupName: 'trainer', methodName: 'getOne' },
@@ -407,9 +471,9 @@ export default Generator.configure({
 
         // Battle domain
         { pattern: /^battle/, groupName: 'battle' },
-      ]
-    }
-  }
+      ],
+    },
+  },
 })
 ```
 
@@ -433,11 +497,13 @@ await graffle.battle.battles({})
 ## Benefits
 
 **Domain organization is best when:**
+
 - Your schema has clear resource/entity grouping
 - You want a more RESTful or resource-oriented API feel
 - You have many CRUD operations on the same entities
 
 **Logical organization is best when:**
+
 - Your GraphQL schema follows operation-type grouping
 - You prefer standard GraphQL conventions
 - Fields don't follow a clear domain pattern

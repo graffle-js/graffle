@@ -381,9 +381,11 @@ export interface FieldGroupingRule {
    *   match?.groups?.action === 'add' ? 'create' : 'update'
    * ```
    */
-  methodName?: string | ((
-    fieldName: string,
-    operationType: 'query' | 'mutation',
-    match?: RegExpExecArray
-  ) => string)
+  methodName?:
+    | string
+    | ((
+      fieldName: string,
+      operationType: 'query' | 'mutation',
+      match?: RegExpExecArray,
+    ) => string)
 }
