@@ -63,7 +63,7 @@ await graffle.pokemon.create({ name: true })
 
 ### String Patterns
 
-Use exact string matching for specific fields:
+Use exact string matching for specific fields. The `methodName` specifies what the method will be called in the domain group.
 
 ```typescript
 {
@@ -72,23 +72,46 @@ Use exact string matching for specific fields:
     { pattern: 'trainerById', groupName: 'trainer', methodName: 'getOne' },
   ]
 }
+
+// Usage:
+await graffle.pokemon.getOne({ name: true })    // was pokemonByName
+await graffle.trainer.getOne({ id: true })      // was trainerById
 ```
 
-### RegExp Patterns
-
-Use regular expressions to match multiple fields:
+If `methodName` is omitted, the domain method keeps the original field name:
 
 ```typescript
 {
   rules: [
-    // Match all pokemon queries
+    { pattern: 'pokemonByName', groupName: 'pokemon' },  // No methodName
+  ]
+}
+
+// Usage:
+await graffle.pokemon.pokemonByName({ name: true })  // Original name preserved
+```
+
+### RegExp Patterns
+
+Use regular expressions to match multiple fields. You can provide a static `methodName` that applies to all matches:
+
+```typescript
+{
+  rules: [
+    // All pokemon fields → pokemon domain, keep original names
     { pattern: /^pokemon/, groupName: 'pokemon' },
 
-    // Match specific patterns
+    // All *ByName fields → byName domain, renamed to "find"
     { pattern: /ByName$/, groupName: 'byName', methodName: 'find' },
   ]
 }
+
+// pokemonByName → pokemon.pokemonByName (no methodName specified)
+// pokemonById   → pokemon.pokemonById   (no methodName specified)
+// trainerByName → byName.find           (methodName: 'find')
 ```
+
+For dynamic method names based on the matched pattern, use capture groups (next section).
 
 ### Capture Groups
 
@@ -135,9 +158,9 @@ Use numbered groups with `$1`, `$2`, etc.:
 // trainerByName → trainer.getByName
 ```
 
-#### Advanced: Function with Match
+#### Advanced: Dynamic Method Names with Functions
 
-For complex transformations, access the full RegExp match object:
+For complex logic, use a function to determine method names dynamically. The function receives the field name, operation type, and the RegExp match object:
 
 ```typescript
 {
@@ -148,6 +171,7 @@ For complex transformations, access the full RegExp match object:
       methodName: (fieldName, operationType, match) => {
         if (!match?.groups) return fieldName
         const action = match.groups.action
+        // Map schema naming to domain naming conventions
         if (action === 'add') return 'create'
         if (action === 'delete') return 'remove'
         return action
@@ -156,10 +180,12 @@ For complex transformations, access the full RegExp match object:
   ]
 }
 
-// addPokemon → Pokemon.create
-// updateTrainer → Trainer.update
-// deleteBattle → Battle.remove
+// addPokemon    → Pokemon.create  (add → create)
+// updateTrainer → Trainer.update  (update → update)
+// deleteBattle  → Battle.remove   (delete → remove)
 ```
+
+This is useful when you need branching logic or access to the operation type to determine the method name.
 
 #### String Template Transformations
 
@@ -232,64 +258,18 @@ Apply case transformations directly in your template strings without writing fun
 // addPokemonTrainer → pokemon-trainer.addPokemonTrainer
 ```
 
-## Method Naming
-
-### Static Method Names
-
-Provide a fixed method name for all matching fields:
-
-```typescript
-{
-  rules: [
-    { pattern: /^pokemonBy/, groupName: 'pokemon', methodName: 'getOne' },
-  ]
-}
-```
-
-### Dynamic Method Names
-
-Use a function to determine method names based on the field:
-
-```typescript
-{
-  rules: [
-    {
-      pattern: /^(add|create|update|delete)Pokemon$/,
-      groupName: 'pokemon',
-      methodName: (fieldName, operationType) => {
-        if (fieldName.startsWith('add') || fieldName.startsWith('create')) {
-          return 'create'
-        }
-        if (fieldName.startsWith('update')) return 'update'
-        if (fieldName.startsWith('delete')) return 'delete'
-        return fieldName
-      },
-    },
-  ]
-}
-```
-
-### Omitting Method Names
-
-If `methodName` is omitted, the domain method uses the original field name:
-
-```typescript
-{
-  rules: [
-    { pattern: 'pokemonByName', groupName: 'pokemon' },
-  ]
-}
-
-// Usage
-await graffle.pokemon.pokemonByName({ name: true })
-```
-
 ## Rule Precedence
 
 ::: warning Important: Rule Order Matters
 Rules are evaluated sequentially, and **the first matching rule wins**. Once a field matches a rule, subsequent rules are not evaluated for that field.
 
 Place more specific patterns before general ones to ensure correct matching.
+
+**Good news**: Graffle automatically detects common precedence issues at generation time and warns you when:
+- A RegExp pattern shadows a later string pattern
+- Duplicate patterns exist
+
+You'll see warnings in your terminal during code generation if issues are detected.
 :::
 
 ```typescript
@@ -303,6 +283,7 @@ Place more specific patterns before general ones to ensure correct matching.
     },
 
     // ❌ This won't match pokemonByName (already matched by rule above)
+    // Graffle will warn: "Rule at index 0 matches string pattern at index 1"
     { pattern: /^pokemon/, groupName: 'pokemon', methodName: 'find' },
   ]
 }
