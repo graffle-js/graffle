@@ -66,6 +66,7 @@ await graffle.pokemon.create({ name: true })
 ### Groups
 
 Groups provide independent organizational views over your schema. Each group:
+
 - Gets a fresh view of all root fields
 - Can organize fields differently than other groups
 - Allows the same field to appear in multiple namespaces across different groups
@@ -80,15 +81,31 @@ export default Generator.configure({
         {
           // Group 1: CRUD-style organization
           rules: [
-            { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-            { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
+            {
+              pattern: 'pokemonByName',
+              namespace: 'pokemon',
+              methodName: 'getOne',
+            },
+            {
+              pattern: 'pokemons',
+              namespace: 'pokemon',
+              methodName: 'getMany',
+            },
           ],
         },
         {
           // Group 2: Query-style organization
           rules: [
-            { pattern: 'pokemonByName', namespace: 'byName', methodName: 'pokemon' },
-            { pattern: 'trainerByName', namespace: 'byName', methodName: 'trainer' },
+            {
+              pattern: 'pokemonByName',
+              namespace: 'byName',
+              methodName: 'pokemon',
+            },
+            {
+              pattern: 'trainerByName',
+              namespace: 'byName',
+              methodName: 'trainer',
+            },
           ],
         },
       ],
@@ -130,6 +147,7 @@ Provide default values for namespace and methodName within a group. Rules inheri
 ```
 
 **Benefits:**
+
 - **Reduce repetition** - Set common values once per group
 - **Clear intent** - Group configuration shows the organizational strategy
 - **Easy overrides** - Rules can still customize when needed
@@ -453,6 +471,7 @@ Rules are evaluated sequentially, and **the first matching rule wins**. Once a f
 Place more specific patterns before general ones to ensure correct matching.
 
 **Good news**: Graffle automatically detects common precedence issues at generation time and warns you when:
+
 - A RegExp pattern shadows a later string pattern
 - Duplicate patterns exist
 
@@ -632,7 +651,11 @@ export default Generator.configure({
           },
 
           // Trainer domain
-          { pattern: 'trainerById', namespace: 'trainer', methodName: 'getOne' },
+          {
+            pattern: 'trainerById',
+            namespace: 'trainer',
+            methodName: 'getOne',
+          },
           { pattern: 'trainers', namespace: 'trainer', methodName: 'getMany' },
           { pattern: 'addTrainer', namespace: 'trainer', methodName: 'create' },
 

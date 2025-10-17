@@ -359,8 +359,8 @@ const applyRule = (
   // Namespace must be defined at this point (either from rule or from defaults)
   if (namespace === undefined) {
     throw new Error(
-      `Rule matching field "${fieldName}" has no namespace defined. ` +
-      `Ensure all rules have a namespace or provide a default namespace in the group configuration.`
+      `Rule matching field "${fieldName}" has no namespace defined. `
+        + `Ensure all rules have a namespace or provide a default namespace in the group configuration.`,
     )
   }
 
@@ -406,10 +406,10 @@ const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
       if (earlierRule.pattern instanceof RegExp && typeof laterRule.pattern === 'string') {
         if (earlierRule.pattern.test(laterRule.pattern)) {
           warnings.push(
-            `Rule precedence warning: Rule at index ${i} (pattern: ${earlierRule.pattern}) ` +
-            `matches the string pattern at index ${j} ('${laterRule.pattern}'). ` +
-            `The later rule will never be reached. Consider reordering your rules to place ` +
-            `more specific patterns before general ones.`
+            `Rule precedence warning: Rule at index ${i} (pattern: ${earlierRule.pattern}) `
+              + `matches the string pattern at index ${j} ('${laterRule.pattern}'). `
+              + `The later rule will never be reached. Consider reordering your rules to place `
+              + `more specific patterns before general ones.`,
           )
         }
       }
@@ -419,9 +419,9 @@ const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
       if (typeof earlierRule.pattern === 'string' && typeof laterRule.pattern === 'string') {
         if (earlierRule.pattern === laterRule.pattern) {
           warnings.push(
-            `Rule precedence warning: Rule at index ${i} and rule at index ${j} both match ` +
-            `the same field name ('${earlierRule.pattern}'). The later rule will never be reached. ` +
-            `Consider removing the duplicate or adjusting your grouping logic.`
+            `Rule precedence warning: Rule at index ${i} and rule at index ${j} both match `
+              + `the same field name ('${earlierRule.pattern}'). The later rule will never be reached. `
+              + `Consider removing the duplicate or adjusting your grouping logic.`,
           )
         }
       }

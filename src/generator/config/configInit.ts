@@ -345,11 +345,13 @@ export interface GroupConfig {
     /**
      * Default method name transformation for fields matched by rules in this group.
      */
-    methodName?: string | ((
-      fieldName: string,
-      operationType: 'query' | 'mutation',
-      match?: RegExpExecArray,
-    ) => string)
+    methodName?:
+      | string
+      | ((
+        fieldName: string,
+        operationType: 'query' | 'mutation',
+        match?: RegExpExecArray,
+      ) => string)
   }
   /**
    * Rules that match and organize fields within this group.

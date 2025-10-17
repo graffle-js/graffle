@@ -155,10 +155,12 @@ describe('domain grouping', () => {
       { name: 'pokemons', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      groups: [{ rules: [
-        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-        { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
-      ] }],
+      groups: [{
+        rules: [
+          { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+          { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
+        ],
+      }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(grouped).toEqual({
@@ -175,10 +177,12 @@ describe('domain grouping', () => {
       { name: 'trainerById', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      groups: [{ rules: [
-        { pattern: 'pokemonByName', namespace: 'pokemon' },
-        { pattern: 'trainerById', namespace: 'trainer' },
-      ] }],
+      groups: [{
+        rules: [
+          { pattern: 'pokemonByName', namespace: 'pokemon' },
+          { pattern: 'trainerById', namespace: 'trainer' },
+        ],
+      }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(Object.keys(grouped)).toEqual(['pokemon', 'trainer'])
@@ -190,9 +194,11 @@ describe('domain grouping', () => {
       { name: 'unmatchedField', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      groups: [{ rules: [
-        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-      ] }],
+      groups: [{
+        rules: [
+          { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+        ],
+      }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(grouped).toEqual({
@@ -221,10 +227,12 @@ describe('conflict detection', () => {
       { name: 'pokemonById', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      groups: [{ rules: [
-        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-        { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getOne' },
-      ] }],
+      groups: [{
+        rules: [
+          { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+          { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getOne' },
+        ],
+      }],
     }
     expect(() => groupFieldsByDomain(fields, config)).toThrow(
       'Namespace organization conflict at namespace "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById',
@@ -237,10 +245,12 @@ describe('conflict detection', () => {
       { name: 'trainerByName', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      groups: [{ rules: [
-        { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-        { pattern: 'trainerByName', namespace: 'trainer', methodName: 'getOne' },
-      ] }],
+      groups: [{
+        rules: [
+          { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
+          { pattern: 'trainerByName', namespace: 'trainer', methodName: 'getOne' },
+        ],
+      }],
     }
     expect(() => groupFieldsByDomain(fields, config)).not.toThrow()
   })
@@ -358,9 +368,11 @@ describe('capture groups', () => {
       { name: 'battleById', operationType: 'query' as const },
     ]
     const config: DomainGroupingConfig = {
-      groups: [{ rules: [
-        { pattern: /^(?<resource>\w+)By(Name|Id)$/, namespace: '$resource', methodName: 'getBy$2' },
-      ] }],
+      groups: [{
+        rules: [
+          { pattern: /^(?<resource>\w+)By(Name|Id)$/, namespace: '$resource', methodName: 'getBy$2' },
+        ],
+      }],
     }
     const grouped = groupFieldsByDomain(fields, config)
     expect(grouped).toEqual({
@@ -480,10 +492,10 @@ function checkRulePrecedence(rules: FieldGroupingRule[]): void {
       if (earlierRule.pattern instanceof RegExp && typeof laterRule.pattern === 'string') {
         if (earlierRule.pattern.test(laterRule.pattern)) {
           warnings.push(
-            `Rule precedence warning: Rule at index ${i} (pattern: ${earlierRule.pattern}) ` +
-            `matches the string pattern at index ${j} ('${laterRule.pattern}'). ` +
-            `The later rule will never be reached. Consider reordering your rules to place ` +
-            `more specific patterns before general ones.`
+            `Rule precedence warning: Rule at index ${i} (pattern: ${earlierRule.pattern}) `
+              + `matches the string pattern at index ${j} ('${laterRule.pattern}'). `
+              + `The later rule will never be reached. Consider reordering your rules to place `
+              + `more specific patterns before general ones.`,
           )
         }
       }
@@ -493,9 +505,9 @@ function checkRulePrecedence(rules: FieldGroupingRule[]): void {
       if (typeof earlierRule.pattern === 'string' && typeof laterRule.pattern === 'string') {
         if (earlierRule.pattern === laterRule.pattern) {
           warnings.push(
-            `Rule precedence warning: Rule at index ${i} and rule at index ${j} both match ` +
-            `the same field name ('${earlierRule.pattern}'). The later rule will never be reached. ` +
-            `Consider removing the duplicate or adjusting your grouping logic.`
+            `Rule precedence warning: Rule at index ${i} and rule at index ${j} both match `
+              + `the same field name ('${earlierRule.pattern}'). The later rule will never be reached. `
+              + `Consider removing the duplicate or adjusting your grouping logic.`,
           )
         }
       }
@@ -654,8 +666,8 @@ function applyRule(
   // Namespace must be defined at this point (either from rule or from defaults)
   if (namespace === undefined) {
     throw new Error(
-      `Rule matching field "${fieldName}" has no namespace defined. ` +
-      `Ensure all rules have a namespace or provide a default namespace in the group configuration.`
+      `Rule matching field "${fieldName}" has no namespace defined. `
+        + `Ensure all rules have a namespace or provide a default namespace in the group configuration.`,
     )
   }
 
@@ -686,7 +698,17 @@ function applyRules(
 /**
  * Apply group defaults to rules (simplified for testing).
  */
-function applyGroupDefaults(group: { defaults?: { namespace?: string | string[] | null; methodName?: string | ((fieldName: string, operationType: 'query' | 'mutation', match?: RegExpExecArray) => string) }; rules: FieldGroupingRule[] }): FieldGroupingRule[] {
+function applyGroupDefaults(
+  group: {
+    defaults?: {
+      namespace?: string | string[] | null
+      methodName?:
+        | string
+        | ((fieldName: string, operationType: 'query' | 'mutation', match?: RegExpExecArray) => string)
+    }
+    rules: FieldGroupingRule[]
+  },
+): FieldGroupingRule[] {
   return group.rules.map(rule => ({
     ...rule,
     namespace: rule.namespace !== undefined ? rule.namespace : group.defaults?.namespace,
