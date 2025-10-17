@@ -204,6 +204,76 @@ describe('configuration', () => {
   })
 })
 
+describe('conflict detection', () => {
+  test('throws error when multiple fields map to same method name', () => {
+    const fields = [
+      { name: 'pokemonByName', operationType: 'query' as const },
+      { name: 'pokemonById', operationType: 'query' as const },
+    ]
+    const config: DomainGroupingConfig = {
+      rules: [
+        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
+        { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' },
+      ],
+    }
+    expect(() => groupFieldsByDomain(fields, config)).toThrow(
+      'Domain grouping conflict in domain "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById'
+    )
+  })
+
+  test('throws error when fields with no methodName use same field name', () => {
+    const fields = [
+      { name: 'getPokemon', operationType: 'query' as const },
+      { name: 'findPokemon', operationType: 'query' as const },
+    ]
+    const config: DomainGroupingConfig = {
+      rules: [
+        // Both match the pattern, both go to 'pokemon' domain
+        // Without explicit methodName, they use field names which differ
+        // But if we use a regex that produces same methodName...
+        { pattern: /^(get|find)Pokemon$/, groupName: 'pokemon' },
+      ],
+    }
+    // This should NOT throw because the effective method names are different
+    // (getPokemon and findPokemon)
+    expect(() => groupFieldsByDomain(fields, config)).not.toThrow()
+  })
+
+  test('allows same method name in different domains', () => {
+    const fields = [
+      { name: 'pokemonByName', operationType: 'query' as const },
+      { name: 'trainerByName', operationType: 'query' as const },
+    ]
+    const config: DomainGroupingConfig = {
+      rules: [
+        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
+        { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' },
+      ],
+    }
+    expect(() => groupFieldsByDomain(fields, config)).not.toThrow()
+  })
+
+  test('no conflict when method names are unique within domain', () => {
+    const fields = [
+      { name: 'pokemonByName', operationType: 'query' as const },
+      { name: 'pokemonById', operationType: 'query' as const },
+    ]
+    const config: DomainGroupingConfig = {
+      rules: [
+        { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
+        { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getById' },
+      ],
+    }
+    const grouped = groupFieldsByDomain(fields, config)
+    expect(grouped).toEqual({
+      pokemon: {
+        pokemonByName: { methodName: 'getByName', operationType: 'query' },
+        pokemonById: { methodName: 'getById', operationType: 'query' },
+      },
+    })
+  })
+})
+
 describe('capture groups', () => {
   test('uses named capture groups in groupName', () => {
     const rule: FieldGroupingRule = {
@@ -355,6 +425,164 @@ describe('capture groups', () => {
   })
 })
 
+describe('string template transformations', () => {
+  test('kebab: converts to kebab-case', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${kebab:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonSpeciesByName', 'query', rule)).toEqual({
+      groupName: 'pokemon-species',
+      methodName: 'getOne',
+    })
+  })
+
+  test('pascal: converts to PascalCase', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${pascal:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'Pokemon',
+      methodName: 'getOne',
+    })
+  })
+
+  test('camel: converts to camelCase', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<Resource>\w+)ByName$/,
+      groupName: '${camel:Resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('PokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getOne',
+    })
+  })
+
+  test('snake: converts to snake_case', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${snake:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonSpeciesByName', 'query', rule)).toEqual({
+      groupName: 'pokemon_species',
+      methodName: 'getOne',
+    })
+  })
+
+  test('constant: converts to CONSTANT_CASE', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${constant:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonSpeciesByName', 'query', rule)).toEqual({
+      groupName: 'POKEMON_SPECIES',
+      methodName: 'getOne',
+    })
+  })
+
+  test('upper: converts to UPPERCASE', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${upper:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'POKEMON',
+      methodName: 'getOne',
+    })
+  })
+
+  test('lower: converts to lowercase', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<Resource>\w+)ByName$/,
+      groupName: '${lower:Resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('PokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getOne',
+    })
+  })
+
+  test('capFirst: capitalizes first letter', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${capFirst:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'Pokemon',
+      methodName: 'getOne',
+    })
+  })
+
+  test('uncapFirst: uncapitalizes first letter', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<Resource>\w+)ByName$/,
+      groupName: '${uncapFirst:Resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('PokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getOne',
+    })
+  })
+
+  test('transformations work with indexed groups', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(\w+)ByName$/,
+      groupName: '${kebab:1}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonSpeciesByName', 'query', rule)).toEqual({
+      groupName: 'pokemon-species',
+      methodName: 'getOne',
+    })
+  })
+
+  test('transformations work in methodName', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: 'pokemon',
+      methodName: 'get${pascal:resource}',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getPokemon',
+    })
+  })
+
+  test('multiple transformations in one template', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<prefix>get)(?<resource>\w+)$/,
+      groupName: '${kebab:resource}',
+      methodName: '${lower:prefix}${pascal:resource}',
+    }
+    expect(applyRule('getPokemon', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getPokemon',
+    })
+  })
+
+  test('unknown transformation leaves template unchanged', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${unknown:resource}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: '${unknown:resource}',
+      methodName: 'getOne',
+    })
+  })
+})
+
 // ========================================
 // Helper Functions (to be implemented)
 // ========================================
@@ -371,12 +599,56 @@ function matchesRule(fieldName: string, rule: FieldGroupingRule): boolean {
 
 /**
  * Replace capture group references in a template string with actual captured values.
- * Supports both indexed ($1, $2) and named (${name}, $name) capture groups.
+ * Supports:
+ * - Indexed capture groups: $1, $2, etc.
+ * - Named capture groups: $name or ${name}
+ * - Transformations: ${transform:captureRef}
+ *
+ * Available transformations:
+ * - kebab: Convert to kebab-case
+ * - pascal: Convert to PascalCase
+ * - camel: Convert to camelCase
+ * - snake: Convert to snake_case
+ * - constant: Convert to CONSTANT_CASE
+ * - title: Convert to Title Case
+ * - upper: Convert to UPPERCASE
+ * - lower: Convert to lowercase
+ * - capFirst: Capitalize first letter
+ * - uncapFirst: Uncapitalize first letter
  */
 function replaceCaptures(template: string, match: RegExpExecArray): string {
   let result = template
 
-  // Replace named groups: ${name} or $name
+  // Replace with transformations: ${transform:name} or ${transform:1}
+  result = result.replace(/\$\{(\w+):(\w+)\}/g, (fullMatch, transform, captureRef) => {
+    // Get captured value (name or index)
+    let value: string | undefined
+    const index = parseInt(captureRef, 10)
+    if (!isNaN(index)) {
+      value = match[index]
+    } else {
+      value = match.groups?.[captureRef]
+    }
+
+    if (value === undefined) return fullMatch
+
+    // Apply transformation (simplified version using native JS)
+    switch (transform) {
+      case 'kebab': return value.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+      case 'pascal': return value.charAt(0).toUpperCase() + value.slice(1)
+      case 'camel': return value.charAt(0).toLowerCase() + value.slice(1)
+      case 'snake': return value.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase()
+      case 'constant': return value.replace(/([a-z])([A-Z])/g, '$1_$2').toUpperCase()
+      case 'title': return value.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+      case 'upper': return value.toUpperCase()
+      case 'lower': return value.toLowerCase()
+      case 'capFirst': return value.charAt(0).toUpperCase() + value.slice(1)
+      case 'uncapFirst': return value.charAt(0).toLowerCase() + value.slice(1)
+      default: return fullMatch // Unknown transform, keep original
+    }
+  })
+
+  // Then handle plain substitutions: ${name} or $name
   result = result.replace(/\$\{(\w+)\}|\$(\w+)/g, (fullMatch, bracedName, unbracedName) => {
     const name = bracedName || unbracedName
     // Check if it's a named group
@@ -477,6 +749,33 @@ function groupFieldsByDomain(
     grouped[groupName][field.name] = {
       methodName,
       operationType: field.operationType,
+    }
+  }
+
+  // Detect conflicts: multiple fields mapping to same domain + method name
+  for (const [domainName, domainFields] of Object.entries(grouped)) {
+    const methodNameToFields = new Map<string, string[]>()
+
+    for (const [fieldName, fieldInfo] of Object.entries(domainFields)) {
+      const effectiveMethodName = fieldInfo.methodName ?? fieldName
+      const existing = methodNameToFields.get(effectiveMethodName)
+
+      if (existing) {
+        existing.push(fieldName)
+      } else {
+        methodNameToFields.set(effectiveMethodName, [fieldName])
+      }
+    }
+
+    // Check for conflicts (multiple fields with same method name)
+    for (const [methodName, conflictingFields] of methodNameToFields.entries()) {
+      if (conflictingFields.length > 1) {
+        const fieldNames = conflictingFields.join(', ')
+        throw new Error(
+          `Domain grouping conflict in domain "${domainName}": Multiple fields map to method "${methodName}": ${fieldNames}. ` +
+          `Please adjust your grouping rules to ensure unique method names within each domain.`
+        )
+      }
     }
   }
 

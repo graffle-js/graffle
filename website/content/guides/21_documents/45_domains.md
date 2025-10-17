@@ -157,6 +157,76 @@ For complex transformations, access the full RegExp match object:
 // deleteBattle → Battle.remove
 ```
 
+#### String Template Transformations
+
+Apply case transformations directly in your template strings without writing functions:
+
+```typescript
+{
+  rules: [
+    {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '${kebab:resource}',    // Transform to kebab-case
+      methodName: 'getOne'
+    }
+  ]
+}
+
+// pokemonSpeciesByName → pokemon-species.getOne
+// trainerProfileByName → trainer-profile.getOne
+```
+
+**Available Transformations:**
+
+- **kebab** - Convert to kebab-case: `pokemonSpecies` → `pokemon-species`
+- **pascal** - Convert to PascalCase: `pokemon` → `Pokemon`
+- **camel** - Convert to camelCase: `Pokemon` → `pokemon`
+- **snake** - Convert to snake_case: `pokemonSpecies` → `pokemon_species`
+- **constant** - Convert to CONSTANT_CASE: `pokemonSpecies` → `POKEMON_SPECIES`
+- **title** - Convert to Title Case: `pokemon-species` → `Pokemon Species`
+- **upper** - Convert to UPPERCASE: `pokemon` → `POKEMON`
+- **lower** - Convert to lowercase: `Pokemon` → `pokemon`
+- **capFirst** - Capitalize first letter: `pokemon` → `Pokemon`
+- **uncapFirst** - Uncapitalize first letter: `Pokemon` → `pokemon`
+
+**Syntax:**
+- Named groups: `${transform:groupName}`
+- Indexed groups: `${transform:1}` or `${transform:2}`
+
+**Examples:**
+
+```typescript
+{
+  rules: [
+    // Multiple transformations in one rule
+    {
+      pattern: /^(?<prefix>get)(?<resource>\w+)$/,
+      groupName: '${kebab:resource}',           // kebab-case for domain
+      methodName: '${lower:prefix}${pascal:resource}'  // Combine transformations
+    },
+
+    // Transform indexed capture groups
+    {
+      pattern: /^(\w+)ByName$/,
+      groupName: '${snake:1}',  // Use transformation with indexed group
+      methodName: 'getOne'
+    },
+
+    // Mix transformations with static text
+    {
+      pattern: /^(?<action>add|update)(?<resource>\w+)$/,
+      groupName: '${kebab:resource}',
+      methodName: '${lower:action}${pascal:resource}'
+    }
+  ]
+}
+
+// Examples:
+// getPokemon → pokemon.getPokemon
+// pokemonSpeciesByName → pokemon_species.getOne
+// addPokemonTrainer → pokemon-trainer.addPokemonTrainer
+```
+
 ## Method Naming
 
 ### Static Method Names
@@ -243,6 +313,49 @@ await graffle.pokemon.pokemonByName({ name: true })
 
 // ❌ Not available (doesn't match any rule)
 await graffle.unmatchedDomain.unmatchedField({ id: true })
+```
+
+## Conflict Detection
+
+Graffle automatically detects conflicts when multiple fields map to the same domain and method name:
+
+```typescript
+{
+  rules: [
+    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
+    { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' },  // ❌ Conflict!
+  ]
+}
+```
+
+**Error:**
+```
+Domain grouping conflict in domain "pokemon": Multiple fields map to method "getOne": pokemonByName, pokemonById.
+Please adjust your grouping rules to ensure unique method names within each domain.
+```
+
+**Resolution:**
+
+Use unique method names within each domain:
+
+```typescript
+{
+  rules: [
+    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
+    { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getById' },
+  ]
+}
+```
+
+**Note:** The same method name can exist in different domains without conflict:
+
+```typescript
+{
+  rules: [
+    { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },  // ✅ OK
+    { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' },  // ✅ OK
+  ]
+}
 ```
 
 ## Disabling Logical Organization

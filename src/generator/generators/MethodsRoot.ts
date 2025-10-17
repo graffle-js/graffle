@@ -199,12 +199,56 @@ interface DomainField {
 
 /**
  * Replace capture group references in a template string with actual captured values.
- * Supports both indexed ($1, $2) and named (${name}, $name) capture groups.
+ * Supports:
+ * - Indexed capture groups: $1, $2, etc.
+ * - Named capture groups: $name or ${name}
+ * - Transformations: ${transform:captureRef}
+ *
+ * Available transformations:
+ * - kebab: Convert to kebab-case
+ * - pascal: Convert to PascalCase
+ * - camel: Convert to camelCase
+ * - snake: Convert to snake_case
+ * - constant: Convert to CONSTANT_CASE
+ * - title: Convert to Title Case
+ * - upper: Convert to UPPERCASE
+ * - lower: Convert to lowercase
+ * - capFirst: Capitalize first letter
+ * - uncapFirst: Uncapitalize first letter
  */
 const replaceCaptures = (template: string, match: RegExpExecArray): string => {
   let result = template
 
-  // Replace named groups: ${name} or $name
+  // Replace with transformations: ${transform:name} or ${transform:1}
+  result = result.replace(/\$\{(\w+):(\w+)\}/g, (fullMatch, transform, captureRef) => {
+    // Get captured value (name or index)
+    let value: string | undefined
+    const index = parseInt(captureRef, 10)
+    if (!isNaN(index)) {
+      value = match[index]
+    } else {
+      value = match.groups?.[captureRef]
+    }
+
+    if (value === undefined) return fullMatch
+
+    // Apply transformation
+    switch (transform) {
+      case 'kebab': return Str.Case.kebab(value)
+      case 'pascal': return Str.Case.pascal(value)
+      case 'camel': return Str.Case.camel(value)
+      case 'snake': return Str.Case.snake(value)
+      case 'constant': return Str.Case.constant(value)
+      case 'title': return Str.Case.title(value)
+      case 'upper': return Str.Case.capAll(value)
+      case 'lower': return value.toLowerCase()
+      case 'capFirst': return Str.Case.capFirst(value)
+      case 'uncapFirst': return Str.Case.uncapFirst(value)
+      default: return fullMatch // Unknown transform, keep original
+    }
+  })
+
+  // Then handle plain substitutions: ${name} or $name
   result = result.replace(/\$\{(\w+)\}|\$(\w+)/g, (fullMatch, bracedName, unbracedName) => {
     const name = bracedName || unbracedName
     // Check if it's a named group
@@ -325,6 +369,33 @@ const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
       })
     }
   })
+
+  // Detect conflicts: multiple fields mapping to same domain + method name
+  for (const [domainName, fields] of Object.entries(grouped)) {
+    const methodNameToFields = new Map<string, DomainField[]>()
+
+    for (const field of fields) {
+      const effectiveMethodName = field.methodName ?? field.fieldName
+      const existing = methodNameToFields.get(effectiveMethodName)
+
+      if (existing) {
+        existing.push(field)
+      } else {
+        methodNameToFields.set(effectiveMethodName, [field])
+      }
+    }
+
+    // Check for conflicts (multiple fields with same method name)
+    for (const [methodName, conflictingFields] of methodNameToFields.entries()) {
+      if (conflictingFields.length > 1) {
+        const fieldNames = conflictingFields.map(f => f.fieldName).join(', ')
+        throw new Error(
+          `Domain grouping conflict in domain "${domainName}": Multiple fields map to method "${methodName}": ${fieldNames}. ` +
+          `Please adjust your grouping rules to ensure unique method names within each domain.`
+        )
+      }
+    }
+  }
 
   return grouped
 }
