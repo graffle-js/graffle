@@ -204,6 +204,157 @@ describe('configuration', () => {
   })
 })
 
+describe('capture groups', () => {
+  test('uses named capture groups in groupName', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '$resource',
+      methodName: 'getOne',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getOne',
+    })
+    expect(applyRule('trainerByName', 'query', rule)).toEqual({
+      groupName: 'trainer',
+      methodName: 'getOne',
+    })
+  })
+
+  test('uses braced syntax ${name} for named groups', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<res>\w+)ByName$/,
+      groupName: '${res}',
+      methodName: 'getOne',
+    }
+    expect(applyRule('battleByName', 'query', rule)).toEqual({
+      groupName: 'battle',
+      methodName: 'getOne',
+    })
+  })
+
+  test('uses indexed capture groups in groupName', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(\w+)ByName$/,
+      groupName: '$1',
+      methodName: 'getOne',
+    }
+    expect(applyRule('trainerByName', 'query', rule)).toEqual({
+      groupName: 'trainer',
+      methodName: 'getOne',
+    })
+  })
+
+  test('uses capture groups in methodName', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^pokemonBy(\w+)$/,
+      groupName: 'pokemon',
+      methodName: 'getBy$1',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getByName',
+    })
+    expect(applyRule('pokemonById', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getById',
+    })
+  })
+
+  test('uses multiple indexed capture groups', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(\w+)By(\w+)$/,
+      groupName: '$1',
+      methodName: 'getBy$2',
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getByName',
+    })
+  })
+
+  test('mixed named and indexed groups', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<action>add|update)(\w+)$/,
+      groupName: '$2',
+      methodName: '$action',
+    }
+    expect(applyRule('addPokemon', 'mutation', rule)).toEqual({
+      groupName: 'Pokemon',
+      methodName: 'add',
+    })
+    expect(applyRule('updateTrainer', 'mutation', rule)).toEqual({
+      groupName: 'Trainer',
+      methodName: 'update',
+    })
+  })
+
+  test('function methodName receives match object', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(\w+)By(\w+)$/,
+      groupName: '$1',
+      methodName: (fieldName, operationType, match) => {
+        return match ? `getBy${match[2]}` : fieldName
+      },
+    }
+    expect(applyRule('pokemonByName', 'query', rule)).toEqual({
+      groupName: 'pokemon',
+      methodName: 'getByName',
+    })
+  })
+
+  test('function methodName with named groups', () => {
+    const rule: FieldGroupingRule = {
+      pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
+      groupName: '$resource',
+      methodName: (fieldName, operationType, match) => {
+        if (!match?.groups) return `unknown`
+        const action = match.groups[`action`]
+        if (action === 'add') return 'create'
+        if (action === 'delete') return 'remove'
+        return action ?? `unknown`
+      },
+    }
+    expect(applyRule('addPokemon', 'mutation', rule)).toEqual({
+      groupName: 'Pokemon',
+      methodName: 'create',
+    })
+    expect(applyRule('updateTrainer', 'mutation', rule)).toEqual({
+      groupName: 'Trainer',
+      methodName: 'update',
+    })
+    expect(applyRule('deleteBattle', 'mutation', rule)).toEqual({
+      groupName: 'Battle',
+      methodName: 'remove',
+    })
+  })
+
+  test('captures work with groupFieldsByDomain', () => {
+    const fields = [
+      { name: 'pokemonByName', operationType: 'query' as const },
+      { name: 'trainerByName', operationType: 'query' as const },
+      { name: 'battleById', operationType: 'query' as const },
+    ]
+    const config: DomainGroupingConfig = {
+      rules: [
+        { pattern: /^(?<resource>\w+)By(Name|Id)$/, groupName: '$resource', methodName: 'getBy$2' },
+      ],
+    }
+    const grouped = groupFieldsByDomain(fields, config)
+    expect(grouped).toEqual({
+      pokemon: {
+        pokemonByName: { methodName: 'getByName', operationType: 'query' },
+      },
+      trainer: {
+        trainerByName: { methodName: 'getByName', operationType: 'query' },
+      },
+      battle: {
+        battleById: { methodName: 'getById', operationType: 'query' },
+      },
+    })
+  })
+})
+
 // ========================================
 // Helper Functions (to be implemented)
 // ========================================
@@ -219,6 +370,32 @@ function matchesRule(fieldName: string, rule: FieldGroupingRule): boolean {
 }
 
 /**
+ * Replace capture group references in a template string with actual captured values.
+ * Supports both indexed ($1, $2) and named (${name}, $name) capture groups.
+ */
+function replaceCaptures(template: string, match: RegExpExecArray): string {
+  let result = template
+
+  // Replace named groups: ${name} or $name
+  result = result.replace(/\$\{(\w+)\}|\$(\w+)/g, (fullMatch, bracedName, unbracedName) => {
+    const name = bracedName || unbracedName
+    // Check if it's a named group
+    if (match.groups?.[name] !== undefined) {
+      return match.groups[name]
+    }
+    // Check if it's an indexed group (e.g., $1)
+    const index = parseInt(name, 10)
+    if (!isNaN(index) && match[index] !== undefined) {
+      return match[index]
+    }
+    // Return original if no match found
+    return fullMatch
+  })
+
+  return result
+}
+
+/**
  * Apply a single rule to a field name, returning group/method info or null.
  */
 function applyRule(
@@ -228,12 +405,35 @@ function applyRule(
 ): { groupName: string; methodName?: string } | null {
   if (!matchesRule(fieldName, rule)) return null
 
-  const methodName = typeof rule.methodName === 'function'
-    ? rule.methodName(fieldName, operationType)
-    : rule.methodName
+  let groupName = rule.groupName
+  let methodName = rule.methodName
+
+  // If pattern is RegExp, extract captures and replace references
+  if (rule.pattern instanceof RegExp) {
+    const match = rule.pattern.exec(fieldName)
+    if (!match) return null
+
+    // Process groupName with capture groups
+    if (typeof groupName === 'string') {
+      groupName = replaceCaptures(groupName, match)
+    }
+
+    // Process methodName with capture groups
+    if (typeof methodName === 'string') {
+      methodName = replaceCaptures(methodName, match)
+    } else if (typeof methodName === 'function') {
+      // Pass match as third parameter for advanced usage
+      methodName = methodName(fieldName, operationType, match)
+    }
+  } else {
+    // String pattern - apply methodName as before
+    if (typeof methodName === 'function') {
+      methodName = methodName(fieldName, operationType)
+    }
+  }
 
   return {
-    groupName: rule.groupName,
+    groupName,
     methodName,
   }
 }

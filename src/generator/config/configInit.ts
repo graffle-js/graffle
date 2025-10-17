@@ -333,25 +333,57 @@ export interface DomainGroupingConfig {
 export interface FieldGroupingRule {
   /**
    * Pattern to match against field names. Can be a string (exact match) or RegExp.
+   *
+   * When using RegExp, capture groups can be referenced in `groupName` and `methodName`.
    */
   pattern: string | RegExp
   /**
    * The domain/resource name to group this field under (e.g., "pokemon", "trainer").
+   *
+   * When `pattern` is a RegExp, you can reference capture groups:
+   * - Named groups: `$name` or `${name}`
+   * - Indexed groups: `$1`, `$2`, etc.
+   *
+   * @example
+   * ```ts
+   * // With named capture group
+   * { pattern: /^(?<resource>\w+)ByName$/, groupName: '$resource' }
+   * // pokemonByName → pokemon
+   *
+   * // With indexed capture group
+   * { pattern: /^(\w+)ByName$/, groupName: '$1' }
+   * // trainerByName → trainer
+   * ```
    */
   groupName: string
   /**
    * The method name to use within the domain group.
-   * Can be a static string or a function that receives the field name and operation type.
+   *
+   * Can be:
+   * - Static string: Can include capture group references when `pattern` is RegExp
+   * - Function: Receives fieldName, operationType, and optionally the RegExp match object
    *
    * @example
    * ```ts
    * // Static name
    * methodName: 'getOne'
    *
-   * // Dynamic name
+   * // Static with capture groups
+   * { pattern: /^pokemonBy(\w+)$/, methodName: 'getBy$1' }
+   * // pokemonByName → getByName
+   *
+   * // Function without captures
    * methodName: (fieldName, operationType) =>
    *   operationType === 'query' ? 'get' : 'create'
+   *
+   * // Function with captures
+   * methodName: (fieldName, operationType, match) =>
+   *   match?.groups?.action === 'add' ? 'create' : 'update'
    * ```
    */
-  methodName?: string | ((fieldName: string, operationType: 'query' | 'mutation') => string)
+  methodName?: string | ((
+    fieldName: string,
+    operationType: 'query' | 'mutation',
+    match?: RegExpExecArray
+  ) => string)
 }

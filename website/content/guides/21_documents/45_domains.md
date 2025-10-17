@@ -86,6 +86,77 @@ Use regular expressions to match multiple fields:
 }
 ```
 
+### Capture Groups
+
+Extract parts of field names using RegExp capture groups to reduce boilerplate:
+
+#### Named Capture Groups
+
+Use named groups with `$name` or `${name}` syntax:
+
+```typescript
+{
+  rules: [
+    {
+      pattern: /^(?<resource>\w+)ByName$/,
+      groupName: '$resource',
+      methodName: 'getOne'
+    }
+  ]
+}
+
+// Matches all *ByName patterns
+// pokemonByName → pokemon.getOne
+// trainerByName → trainer.getOne
+// battleByName → battle.getOne
+```
+
+#### Indexed Capture Groups
+
+Use numbered groups with `$1`, `$2`, etc.:
+
+```typescript
+{
+  rules: [
+    {
+      pattern: /^(\w+)By(Name|Id)$/,
+      groupName: '$1',
+      methodName: 'getBy$2'
+    }
+  ]
+}
+
+// pokemonByName → pokemon.getByName
+// pokemonById → pokemon.getById
+// trainerByName → trainer.getByName
+```
+
+#### Advanced: Function with Match
+
+For complex transformations, access the full RegExp match object:
+
+```typescript
+{
+  rules: [
+    {
+      pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
+      groupName: '$resource',
+      methodName: (fieldName, operationType, match) => {
+        if (!match?.groups) return fieldName
+        const action = match.groups.action
+        if (action === 'add') return 'create'
+        if (action === 'delete') return 'remove'
+        return action
+      }
+    }
+  ]
+}
+
+// addPokemon → Pokemon.create
+// updateTrainer → Trainer.update
+// deleteBattle → Battle.remove
+```
+
 ## Method Naming
 
 ### Static Method Names

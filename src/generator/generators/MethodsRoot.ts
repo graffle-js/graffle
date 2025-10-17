@@ -198,6 +198,32 @@ interface DomainField {
 }
 
 /**
+ * Replace capture group references in a template string with actual captured values.
+ * Supports both indexed ($1, $2) and named (${name}, $name) capture groups.
+ */
+const replaceCaptures = (template: string, match: RegExpExecArray): string => {
+  let result = template
+
+  // Replace named groups: ${name} or $name
+  result = result.replace(/\$\{(\w+)\}|\$(\w+)/g, (fullMatch, bracedName, unbracedName) => {
+    const name = bracedName || unbracedName
+    // Check if it's a named group
+    if (match.groups?.[name] !== undefined) {
+      return match.groups[name]
+    }
+    // Check if it's an indexed group (e.g., $1)
+    const index = parseInt(name, 10)
+    if (!isNaN(index) && match[index] !== undefined) {
+      return match[index]
+    }
+    // Return original if no match found
+    return fullMatch
+  })
+
+  return result
+}
+
+/**
  * Check if a field name matches a grouping rule's pattern.
  */
 const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
@@ -217,12 +243,35 @@ const applyRule = (
 ): { groupName: string; methodName?: string } | null => {
   if (!matchesRule(fieldName, rule)) return null
 
-  const methodName = typeof rule.methodName === 'function'
-    ? rule.methodName(fieldName, operationType)
-    : rule.methodName
+  let groupName = rule.groupName
+  let methodName = rule.methodName
+
+  // If pattern is RegExp, extract captures and replace references
+  if (rule.pattern instanceof RegExp) {
+    const match = rule.pattern.exec(fieldName)
+    if (!match) return null
+
+    // Process groupName with capture groups
+    if (typeof groupName === 'string') {
+      groupName = replaceCaptures(groupName, match)
+    }
+
+    // Process methodName with capture groups
+    if (typeof methodName === 'string') {
+      methodName = replaceCaptures(methodName, match)
+    } else if (typeof methodName === 'function') {
+      // Pass match as third parameter for advanced usage
+      methodName = methodName(fieldName, operationType, match)
+    }
+  } else {
+    // String pattern - apply methodName as before
+    if (typeof methodName === 'function') {
+      methodName = methodName(fieldName, operationType)
+    }
+  }
 
   return {
-    groupName: rule.groupName,
+    groupName,
     methodName,
   }
 }
