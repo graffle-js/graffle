@@ -222,6 +222,25 @@ export interface ConfigInit {
    */
   extensions?: Extension[]
   /**
+   * Configure how root field methods are organized in the generated client.
+   * Multiple organizations can be enabled simultaneously.
+   */
+  methodsOrganization?: {
+    /**
+     * Enable logical organization by operation type (query/mutation).
+     *
+     * @defaultValue `true`
+     */
+    logical?: boolean
+    /**
+     * Enable domain-based organization by resource/entity.
+     * Requires explicit rules defining how fields are grouped into domains.
+     *
+     * @defaultValue `false`
+     */
+    domains?: DomainGroupingConfig | false
+  }
+  /**
    * Esoteric options that are not designed for use by regular users and use-cases.
    */
   advanced?: {
@@ -297,3 +316,42 @@ export const libraryPathKeys = {
   extensionTransportHttp: `extensionTransportHttp`,
   extensionDocumentBuilder: `extensionDocumentBuilder`,
 } satisfies Record<LibraryPathsKeys, LibraryPathsKeys>
+
+/**
+ * Configuration for domain-based method organization.
+ */
+export interface DomainGroupingConfig {
+  /**
+   * Grouping rules that define how root fields are organized into domain methods.
+   */
+  rules: FieldGroupingRule[]
+}
+
+/**
+ * Rule for grouping and renaming a root field into a domain-based method.
+ */
+export interface FieldGroupingRule {
+  /**
+   * Pattern to match against field names. Can be a string (exact match) or RegExp.
+   */
+  pattern: string | RegExp
+  /**
+   * The domain/resource name to group this field under (e.g., "pokemon", "trainer").
+   */
+  groupName: string
+  /**
+   * The method name to use within the domain group.
+   * Can be a static string or a function that receives the field name and operation type.
+   *
+   * @example
+   * ```ts
+   * // Static name
+   * methodName: 'getOne'
+   *
+   * // Dynamic name
+   * methodName: (fieldName, operationType) =>
+   *   operationType === 'query' ? 'get' : 'create'
+   * ```
+   */
+  methodName?: string | ((fieldName: string, operationType: 'query' | 'mutation') => string)
+}

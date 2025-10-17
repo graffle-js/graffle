@@ -27,16 +27,43 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
     code``
     code``
-    config.schema.kindMap.list.Root.forEach(node => {
-      code(renderRootType({ config, node }))
-      code``
-    })
+
+    // Generate logical organization (query/mutation) if enabled
+    if (config.methodsOrganization.logical) {
+      config.schema.kindMap.list.Root.forEach(node => {
+        code(renderRootType({ config, node }))
+        code``
+      })
+    }
+
+    // Generate domain-based organization if enabled
+    if (config.methodsOrganization.domains) {
+      const domainGroups = groupFieldsByDomain(config)
+      for (const [domainName, fields] of Object.entries(domainGroups)) {
+        code(renderDomainType({ config, domainName, fields }))
+        code``
+      }
+    }
+
     code(`export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {`)
-    config.schema.kindMap.root.list.forEach(node => {
-      const propertyDoc = getRootPropertyDoc(node.operationType)
-      code(Code.TSDocIndented(propertyDoc, `  `))
-      code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
-    })
+
+    // Add logical organization properties
+    if (config.methodsOrganization.logical) {
+      config.schema.kindMap.root.list.forEach(node => {
+        const propertyDoc = getRootPropertyDoc(node.operationType)
+        code(Code.TSDocIndented(propertyDoc, `  `))
+        code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
+      })
+    }
+
+    // Add domain organization properties
+    if (config.methodsOrganization.domains) {
+      const domainGroups = groupFieldsByDomain(config)
+      for (const domainName of Object.keys(domainGroups)) {
+        code(`  ${domainName}: ${Str.Case.capFirst(domainName)}DomainMethods<$Context>`)
+      }
+    }
+
     code(`}`)
     code``
     code`
@@ -154,4 +181,160 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
         >
     `
   }
+})
+
+// ========================================
+// Domain Grouping Helpers
+// ========================================
+
+import type { Config } from '../config/config.js'
+import type { FieldGroupingRule } from '../config/configInit.js'
+
+interface DomainField {
+  fieldName: string
+  methodName: string | undefined
+  operationType: 'query' | 'mutation'
+  rootTypeName: string
+}
+
+/**
+ * Check if a field name matches a grouping rule's pattern.
+ */
+const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
+  if (typeof rule.pattern === 'string') {
+    return fieldName === rule.pattern
+  }
+  return rule.pattern.test(fieldName)
+}
+
+/**
+ * Apply a single rule to a field name, returning group/method info or null.
+ */
+const applyRule = (
+  fieldName: string,
+  operationType: 'query' | 'mutation',
+  rule: FieldGroupingRule,
+): { groupName: string; methodName?: string } | null => {
+  if (!matchesRule(fieldName, rule)) return null
+
+  const methodName = typeof rule.methodName === 'function'
+    ? rule.methodName(fieldName, operationType)
+    : rule.methodName
+
+  return {
+    groupName: rule.groupName,
+    methodName,
+  }
+}
+
+/**
+ * Apply rules in order, returning first match.
+ */
+const applyRules = (
+  fieldName: string,
+  operationType: 'query' | 'mutation',
+  rules: FieldGroupingRule[],
+): { groupName: string; methodName?: string } | null => {
+  for (const rule of rules) {
+    const result = applyRule(fieldName, operationType, rule)
+    if (result) return result
+  }
+  return null
+}
+
+/**
+ * Group all root fields by domain according to configuration.
+ */
+const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
+  if (!config.methodsOrganization.domains) return {}
+
+  const grouped: Record<string, DomainField[]> = {}
+  const { rules } = config.methodsOrganization.domains
+
+  config.schema.kindMap.list.Root.forEach(rootType => {
+    const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
+    const operationType = rootDetails.operationType
+
+    // Skip subscription for now (domain grouping only supports query/mutation)
+    if (operationType === 'subscription') return
+
+    for (const field of Object.values(rootType.getFields())) {
+      const result = applyRules(field.name, operationType, rules)
+      if (!result) continue
+
+      const { groupName, methodName } = result
+
+      if (!grouped[groupName]) {
+        grouped[groupName] = []
+      }
+
+      grouped[groupName].push({
+        fieldName: field.name,
+        methodName,
+        operationType,
+        rootTypeName: rootType.name,
+      })
+    }
+  })
+
+  return grouped
+}
+
+/**
+ * Render a domain type interface with methods for all fields in that domain.
+ */
+const renderDomainType = createCodeGenerator<{
+  domainName: string
+  fields: DomainField[]
+}>(({ domainName, fields, config, code }) => {
+  const interfaceName = `${Str.Case.capFirst(domainName)}DomainMethods`
+
+  code(`export interface ${interfaceName}<$Context extends ${$.$$Utilities}.Context> {`)
+
+  for (const field of fields) {
+    const methodName = field.methodName ?? field.fieldName
+    const rootTypeName = field.rootTypeName
+    const { operationType } = field
+
+    const rootType = config.schema.instance.getType(rootTypeName) as Grafaid.Schema.ObjectType
+    const fieldDef = rootType.getFields()[field.fieldName]!
+
+    const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
+    if (docContent) {
+      code(Code.TSDocIndented(docContent, `  `))
+    }
+
+    const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)
+    const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
+      && Grafaid.Schema.Args.isAllArgsNullable(fieldDef.args)
+
+    // dprint-ignore
+    code`
+      ${methodName}:
+        ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
+          $Context,
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${renderName(rootTypeName)}.${field.fieldName}<{ scalars: $Context['scalars'] }>>) =>
+            ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
+              ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$ArgumentsMap.ArgumentsMap>,
+              & (null | {})
+              & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
+                  $Context,
+                  ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                  '${field.fieldName}'
+                >,
+              ${$.$$Utilities}.DocumentRunnerDeferred<
+                ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$ArgumentsMap.ArgumentsMap>,
+                & (null | {})
+                & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
+                    $Context,
+                    ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                    '${field.fieldName}'
+                  >
+              >
+            >
+        >
+    `
+  }
+
+  code(`}`)
 })

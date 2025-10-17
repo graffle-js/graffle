@@ -16,4 +16,8 @@ export const defaults = {
     missingCustomScalarCodec: true as boolean,
     missingGraphqlSP: true as boolean,
   },
+  methodsOrganization: {
+    logical: true as boolean,
+    domains: false as const,
+  },
 } satisfies Partial<ConfigInit>
