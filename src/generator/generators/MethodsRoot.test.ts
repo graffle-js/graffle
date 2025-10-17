@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import type { DomainGroupingConfig, FieldGroupingRule } from '../config/configInit.js'
 
 /**
@@ -113,6 +113,38 @@ describe('rule precedence', () => {
     ]
     const result = applyRules('pokemonByName', 'query', rules)
     expect(result).toBe(null)
+  })
+
+  test('warns when RegExp shadows later string pattern', () => {
+    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    const rules: FieldGroupingRule[] = [
+      { pattern: /^pokemon/, groupName: 'pokemon' },
+      { pattern: 'pokemonByName', groupName: 'specific', methodName: 'getOne' },
+    ]
+
+    checkRulePrecedence(rules)
+
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Rule precedence warning'))
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('pokemonByName'))
+
+    consoleSpy.mockRestore()
+  })
+
+  test('warns when duplicate string patterns exist', () => {
+    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    const rules: FieldGroupingRule[] = [
+      { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
+      { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getDuplicate' },
+    ]
+
+    checkRulePrecedence(rules)
+
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Rule precedence warning'))
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('duplicate'))
+
+    consoleSpy.mockRestore()
   })
 })
 
@@ -430,6 +462,52 @@ describe('string template transformations', () => {
 // ========================================
 // Helper Functions (to be implemented)
 // ========================================
+
+/**
+ * Check rules for potential precedence issues where later rules might be shadowed by earlier ones.
+ */
+function checkRulePrecedence(rules: FieldGroupingRule[]): void {
+  const warnings: string[] = []
+
+  for (let i = 0; i < rules.length; i++) {
+    const earlierRule = rules[i]!
+
+    for (let j = i + 1; j < rules.length; j++) {
+      const laterRule = rules[j]!
+
+      // Case 1: Earlier rule is RegExp, later rule is string
+      // Check if the earlier RegExp would match the later string
+      if (earlierRule.pattern instanceof RegExp && typeof laterRule.pattern === 'string') {
+        if (earlierRule.pattern.test(laterRule.pattern)) {
+          warnings.push(
+            `Rule precedence warning: Rule at index ${i} (pattern: ${earlierRule.pattern}) ` +
+            `matches the string pattern at index ${j} ('${laterRule.pattern}'). ` +
+            `The later rule will never be reached. Consider reordering your rules to place ` +
+            `more specific patterns before general ones.`
+          )
+        }
+      }
+
+      // Case 2: Both are strings and identical
+      // This would be a complete shadowing
+      if (typeof earlierRule.pattern === 'string' && typeof laterRule.pattern === 'string') {
+        if (earlierRule.pattern === laterRule.pattern) {
+          warnings.push(
+            `Rule precedence warning: Rule at index ${i} and rule at index ${j} both match ` +
+            `the same field name ('${earlierRule.pattern}'). The later rule will never be reached. ` +
+            `Consider removing the duplicate or adjusting your grouping logic.`
+          )
+        }
+      }
+    }
+  }
+
+  // Print all warnings
+  if (warnings.length > 0) {
+    console.warn(`\n⚠️  Domain organization rule precedence warnings:\n`)
+    warnings.forEach(warning => console.warn(`   ${warning}\n`))
+  }
+}
 
 /**
  * Check if a field name matches a grouping rule's pattern.

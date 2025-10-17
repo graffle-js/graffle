@@ -347,6 +347,52 @@ const applyRules = (
 }
 
 /**
+ * Check rules for potential precedence issues where later rules might be shadowed by earlier ones.
+ */
+const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
+  const warnings: string[] = []
+
+  for (let i = 0; i < rules.length; i++) {
+    const earlierRule = rules[i]!
+
+    for (let j = i + 1; j < rules.length; j++) {
+      const laterRule = rules[j]!
+
+      // Case 1: Earlier rule is RegExp, later rule is string
+      // Check if the earlier RegExp would match the later string
+      if (earlierRule.pattern instanceof RegExp && typeof laterRule.pattern === 'string') {
+        if (earlierRule.pattern.test(laterRule.pattern)) {
+          warnings.push(
+            `Rule precedence warning: Rule at index ${i} (pattern: ${earlierRule.pattern}) ` +
+            `matches the string pattern at index ${j} ('${laterRule.pattern}'). ` +
+            `The later rule will never be reached. Consider reordering your rules to place ` +
+            `more specific patterns before general ones.`
+          )
+        }
+      }
+
+      // Case 2: Both are strings and identical
+      // This would be a complete shadowing
+      if (typeof earlierRule.pattern === 'string' && typeof laterRule.pattern === 'string') {
+        if (earlierRule.pattern === laterRule.pattern) {
+          warnings.push(
+            `Rule precedence warning: Rule at index ${i} and rule at index ${j} both match ` +
+            `the same field name ('${earlierRule.pattern}'). The later rule will never be reached. ` +
+            `Consider removing the duplicate or adjusting your grouping logic.`
+          )
+        }
+      }
+    }
+  }
+
+  // Print all warnings
+  if (warnings.length > 0) {
+    console.warn(`\n⚠️  Domain organization rule precedence warnings:\n`)
+    warnings.forEach(warning => console.warn(`   ${warning}\n`))
+  }
+}
+
+/**
  * Group all root fields by domain according to configuration.
  */
 const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
@@ -354,6 +400,9 @@ const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
 
   const grouped: Record<string, DomainField[]> = {}
   const { rules } = config.methodsOrganization.domains
+
+  // Check for rule precedence issues
+  checkRulePrecedence(rules)
 
   config.schema.kindMap.list.Root.forEach(rootType => {
     const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)

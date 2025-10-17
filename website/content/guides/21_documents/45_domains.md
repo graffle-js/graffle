@@ -67,8 +67,7 @@ Use exact string matching for specific fields:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
     { pattern: 'trainerById', groupName: 'trainer', methodName: 'getOne' },
   ]
@@ -81,8 +80,7 @@ Use regular expressions to match multiple fields:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     // Match all pokemon queries
     { pattern: /^pokemon/, groupName: 'pokemon' },
 
@@ -102,8 +100,7 @@ Use named groups with `$name` or `${name}` syntax:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     {
       pattern: /^(?<resource>\w+)ByName$/,
       groupName: '$resource',
@@ -124,8 +121,7 @@ Use numbered groups with `$1`, `$2`, etc.:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     {
       pattern: /^(\w+)By(Name|Id)$/,
       groupName: '$1',
@@ -145,8 +141,7 @@ For complex transformations, access the full RegExp match object:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     {
       pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
       groupName: '$resource',
@@ -172,8 +167,7 @@ Apply case transformations directly in your template strings without writing fun
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     {
       pattern: /^(?<resource>\w+)ByName$/,
       groupName: '${kebab:resource}', // Transform to kebab-case
@@ -208,8 +202,7 @@ Apply case transformations directly in your template strings without writing fun
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     // Multiple transformations in one rule
     {
       pattern: /^(?<prefix>get)(?<resource>\w+)$/,
@@ -247,8 +240,7 @@ Provide a fixed method name for all matching fields:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: /^pokemonBy/, groupName: 'pokemon', methodName: 'getOne' },
   ]
 }
@@ -260,8 +252,7 @@ Use a function to determine method names based on the field:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     {
       pattern: /^(add|create|update|delete)Pokemon$/,
       groupName: 'pokemon',
@@ -284,8 +275,7 @@ If `methodName` is omitted, the domain method uses the original field name:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: 'pokemonByName', groupName: 'pokemon' },
   ]
 }
@@ -304,8 +294,7 @@ Place more specific patterns before general ones to ensure correct matching.
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     // ✅ Specific pattern first - matches pokemonByName
     {
       pattern: /^pokemonByName$/,
@@ -323,8 +312,7 @@ Place more specific patterns before general ones to ensure correct matching.
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     // Most specific: exact match
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
 
@@ -346,8 +334,7 @@ Fields that don't match any rule are **not included** in domain methods. They re
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: 'pokemonByName', groupName: 'pokemon' },
   ]
 }
@@ -369,8 +356,7 @@ Graffle automatically detects conflicts when multiple fields map to the same dom
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' },
     { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getOne' }, // ❌ Conflict!
   ]
@@ -390,8 +376,7 @@ Use unique method names within each domain:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getByName' },
     { pattern: 'pokemonById', groupName: 'pokemon', methodName: 'getById' },
   ]
@@ -402,8 +387,7 @@ Use unique method names within each domain:
 
 ```typescript
 {
-  rules: ;
-  ;[
+  rules: [
     { pattern: 'pokemonByName', groupName: 'pokemon', methodName: 'getOne' }, // ✅ OK
     { pattern: 'trainerByName', groupName: 'trainer', methodName: 'getOne' }, // ✅ OK
   ]
