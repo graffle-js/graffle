@@ -352,33 +352,33 @@ Graffle detects when multiple fields map to the same path and method name. Use u
 }
 ```
 
-##### Merge Conflicts
+##### Understanding Namespace Conflicts
 
-When using nested namespaces with dot-notation, sub-namespaces are merged into properties. Conflicts occur if the same method name appears in multiple sub-namespaces:
+Conflicts only occur when multiple fields map to the **same full namespace path** with the **same method name**:
 
 ```typescript
 {
   domains: {
     rules: [
-      // ❌ Merge conflict - both define "get" method
+      // ✅ NO CONFLICT - Different sub-namespaces (pokemon.query vs pokemon.list)
       { pattern: 'getPokemon', path: 'pokemon.query', methodName: 'get' },
       { pattern: 'listPokemon', path: 'pokemon.list', methodName: 'get' },
-      // These will be merged into graffle.pokemon, creating ambiguity
+      // Creates: graffle.pokemon.query.get() and graffle.pokemon.list.get()
 
-      // ✅ Fixed with unique method names
+      // ❌ CONFLICT - Same namespace path (pokemon.query) with same method name
+      { pattern: 'getPokemon', path: 'pokemon.query', methodName: 'get' },
+      { pattern: 'findPokemon', path: 'pokemon.query', methodName: 'get' },
+      // Both try to create: graffle.pokemon.query.get()
+
+      // ✅ Fixed with unique method names within same namespace
       { pattern: 'getPokemon', path: 'pokemon.query', methodName: 'getOne' },
-      { pattern: 'listPokemon', path: 'pokemon.list', methodName: 'getAll' },
+      { pattern: 'findPokemon', path: 'pokemon.query', methodName: 'findOne' },
     ],
-    onMergeConflict: 'fail', // Default: throw error on conflicts
   },
 }
 ```
 
-The `onMergeConflict` policy determines how to handle merge conflicts:
-
-- `'fail'` (default): Throw an error during code generation
-- `'merge'`: Auto-increment conflicting names (e.g., `get` → `get`, `get2`) _[TODO: Not yet implemented]_
-- `'drop'`: Keep only the first occurrence _[TODO: Not yet implemented]_
+**Key principle**: Same method names are allowed in different namespace paths (e.g., `pokemon.query` and `pokemon.list`), but not within the same path.
 
 ### Only Domain Organization
 
