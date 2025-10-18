@@ -352,6 +352,34 @@ Graffle detects when multiple fields map to the same path and method name. Use u
 }
 ```
 
+##### Merge Conflicts
+
+When using nested namespaces with dot-notation, sub-namespaces are merged into properties. Conflicts occur if the same method name appears in multiple sub-namespaces:
+
+```typescript
+{
+  domains: {
+    rules: [
+      // ❌ Merge conflict - both define "get" method
+      { pattern: 'getPokemon', path: 'pokemon.query', methodName: 'get' },
+      { pattern: 'listPokemon', path: 'pokemon.list', methodName: 'get' },
+      // These will be merged into graffle.pokemon, creating ambiguity
+
+      // ✅ Fixed with unique method names
+      { pattern: 'getPokemon', path: 'pokemon.query', methodName: 'getOne' },
+      { pattern: 'listPokemon', path: 'pokemon.list', methodName: 'getAll' },
+    ],
+    onMergeConflict: 'fail', // Default: throw error on conflicts
+  },
+}
+```
+
+The `onMergeConflict` policy determines how to handle merge conflicts:
+
+- `'fail'` (default): Throw an error during code generation
+- `'merge'`: Auto-increment conflicting names (e.g., `get` → `get`, `get2`) _[TODO: Not yet implemented]_
+- `'drop'`: Keep only the first occurrence _[TODO: Not yet implemented]_
+
 ### Only Domain Organization
 
 If you want **only** domain-based methods, disable logical organization:

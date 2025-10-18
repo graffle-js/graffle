@@ -45,24 +45,109 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       }
     }
 
-    // Compute domain organization property groups once (if enabled)
-    let domainPropertyGroups: Map<string, string[]> | undefined
+    // Build nested namespace structure (if domain organization enabled)
+    interface NamespaceTreeNode {
+      fullPath: string
+      propertyName: string
+      children: Map<string, NamespaceTreeNode>
+      fields: DomainField[] | null
+    }
+
+    let namespaceTree: Map<string, NamespaceTreeNode> | undefined
+    let namespaceGroups: Record<string, DomainField[]> | undefined
+
     if (config.methodsOrganization.domains) {
-      const namespaceGroups = groupFieldsByDomain(config)
-      domainPropertyGroups = new Map<string, string[]>()
+      namespaceGroups = groupFieldsByDomain(config)
+      namespaceTree = new Map<string, NamespaceTreeNode>()
+      const onMergeConflict = config.methodsOrganization.domains.onMergeConflict ?? 'fail'
 
-      for (const [namespaceKey, fields] of Object.entries(namespaceGroups)) {
-        const firstField = fields[0]
-        if (!firstField || firstField.namespacePath === null) continue
+      // Build tree structure from namespace paths
+      for (const [namespacePath, fields] of Object.entries(namespaceGroups)) {
+        const segments = namespacePath.split('.')
+        let currentLevel = namespaceTree
+        let currentPath = ''
 
-        // Namespaced methods - group by property name (first path element)
-        const propertyName = firstField.namespacePath[0]!
-        if (!domainPropertyGroups.has(propertyName)) {
-          domainPropertyGroups.set(propertyName, [])
+        for (let i = 0; i < segments.length; i++) {
+          const segment = segments[i]!
+          currentPath = currentPath ? `${currentPath}.${segment}` : segment
+
+          if (!currentLevel.has(segment)) {
+            currentLevel.set(segment, {
+              fullPath: currentPath,
+              propertyName: segment,
+              children: new Map(),
+              fields: null,
+            })
+          }
+
+          const node = currentLevel.get(segment)!
+
+          // Leaf node - store fields
+          if (i === segments.length - 1) {
+            node.fields = fields
+
+            // Check for conflicts within this namespace only
+            const methodsMap = new Map<string, string[]>()
+            for (const field of fields) {
+              const methodName = field.methodName ?? field.fieldName
+              if (!methodsMap.has(methodName)) {
+                methodsMap.set(methodName, [])
+              }
+              methodsMap.get(methodName)!.push(field.fieldName)
+            }
+
+            // Detect conflicts (same method name from different fields in same namespace)
+            for (const [methodName, fieldNames] of methodsMap.entries()) {
+              if (fieldNames.length > 1) {
+                if (onMergeConflict === 'fail') {
+                  throw new Error(
+                    `Domain conflict in namespace "${currentPath}": `
+                      + `Multiple fields map to method "${methodName}": ${fieldNames.join(', ')}. `
+                      + `Use unique method names within each namespace.`,
+                  )
+                } else if (onMergeConflict === 'merge') {
+                  throw new Error(`'merge' policy for onMergeConflict is not yet implemented`)
+                } else if (onMergeConflict === 'drop') {
+                  throw new Error(`'drop' policy for onMergeConflict is not yet implemented`)
+                }
+              }
+            }
+          }
+
+          currentLevel = node.children
         }
-        const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
-        domainPropertyGroups.get(propertyName)!.push(interfaceName)
       }
+
+      // Generate interfaces recursively (bottom-up)
+      const generateNamespaceInterfaces = (
+        nodes: Map<string, NamespaceTreeNode>,
+        depth: number = 0,
+      ): void => {
+        for (const [_key, node] of nodes.entries()) {
+          // Process children first (bottom-up)
+          if (node.children.size > 0) {
+            generateNamespaceInterfaces(node.children, depth + 1)
+          }
+
+          const interfaceName = node.fullPath.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+
+          if (node.fields !== null) {
+            // Leaf node - generate interface with actual methods
+            // This is handled by renderDomainType, so we skip it here
+          } else {
+            // Parent node - generate interface with nested children
+            code(`export interface ${interfaceName}<$Context extends ${$.$$Utilities}.Context> {`)
+            for (const [childKey, childNode] of node.children.entries()) {
+              const childInterfaceName = childNode.fullPath.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+              code(`  ${childKey}: ${childInterfaceName}<$Context>`)
+            }
+            code(`}`)
+            code``
+          }
+        }
+      }
+
+      generateNamespaceInterfaces(namespaceTree)
     }
 
     code(`export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {`)
@@ -76,16 +161,11 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       })
     }
 
-    // Add namespace organization properties
-    if (domainPropertyGroups) {
-      for (const [propertyName, interfaceNames] of domainPropertyGroups.entries()) {
-        if (interfaceNames.length === 1) {
-          code(`  ${propertyName}: ${interfaceNames[0]}<$Context>`)
-        } else {
-          // Use intersection types to combine multiple interfaces
-          const intersectionType = interfaceNames.map(name => `& ${name}<$Context>`).join(' ')
-          code(`  ${propertyName}: ${intersectionType}`)
-        }
+    // Add namespace organization properties (top-level only)
+    if (namespaceTree) {
+      for (const [propertyName, node] of namespaceTree.entries()) {
+        const interfaceName = node.fullPath.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+        code(`  ${propertyName}: ${interfaceName}<$Context>`)
       }
     }
 

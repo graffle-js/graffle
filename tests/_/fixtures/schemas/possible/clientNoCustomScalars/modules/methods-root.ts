@@ -9839,6 +9839,37 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   >
 }
 
+export interface ArgsYeReqMethods<$Context extends $$Utilities.Context> {
+  ye: ArgsYeReqYeMethods<$Context>
+  no: ArgsYeReqNoMethods<$Context>
+}
+
+export interface ArgsYeMethods<$Context extends $$Utilities.Context> {
+  req: ArgsYeReqMethods<$Context>
+}
+
+export interface ArgsMethods<$Context extends $$Utilities.Context> {
+  ye: ArgsYeMethods<$Context>
+  no: ArgsNoMethods<$Context>
+}
+
+export interface TypeMethods<$Context extends $$Utilities.Context> {
+  scalar: TypeScalarMethods<$Context>
+  interface: TypeInterfaceMethods<$Context>
+  list: TypeListMethods<$Context>
+  listNested: TypeListNestedMethods<$Context>
+  union: TypeUnionMethods<$Context>
+  object: TypeObjectMethods<$Context>
+}
+
+export interface FeatMethods<$Context extends $$Utilities.Context> {
+  input: FeatInputMethods<$Context>
+  enum: FeatEnumMethods<$Context>
+  date: FeatDateMethods<$Context>
+  error: FeatErrorMethods<$Context>
+  hierarchy: FeatHierarchyMethods<$Context>
+}
+
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   /**
    * Access to {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root field methods.
@@ -9881,20 +9912,9 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```
    */
   mutation: MutationMethods<$Context>
-  args: ArgsYeReqYeMethods<$Context> & ArgsNoMethods<$Context> & ArgsYeReqNoMethods<$Context>
-  type:
-    & TypeScalarMethods<$Context>
-    & TypeInterfaceMethods<$Context>
-    & TypeListMethods<$Context>
-    & TypeListNestedMethods<$Context>
-    & TypeUnionMethods<$Context>
-    & TypeObjectMethods<$Context>
-  feat:
-    & FeatInputMethods<$Context>
-    & FeatEnumMethods<$Context>
-    & FeatDateMethods<$Context>
-    & FeatErrorMethods<$Context>
-    & FeatHierarchyMethods<$Context>
+  args: ArgsMethods<$Context>
+  type: TypeMethods<$Context>
+  feat: FeatMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {

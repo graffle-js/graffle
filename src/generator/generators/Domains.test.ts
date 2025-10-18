@@ -17,7 +17,6 @@ test('generates domains directory structure', async () => {
       `,
     },
     methodsOrganization: {
-      logical: true,
       domains: {
         rules: [
           {
@@ -139,7 +138,6 @@ test('skips domain generation when domains config is false', async () => {
       sdl: 'type Query { ok: Boolean }',
     },
     methodsOrganization: {
-      logical: true,
       domains: false,
     },
   })
@@ -147,4 +145,62 @@ test('skips domain generation when domains config is false', async () => {
   // Should not have any domains modules
   const domainsModules = modules.filter(m => m.filePath?.startsWith('domains/'))
   expect(domainsModules).toHaveLength(0)
+})
+
+test('throws error on conflicts within same namespace', async () => {
+  await expect(async () => {
+    await generateModules({
+      schema: {
+        type: 'sdl',
+        sdl: `
+          type Query {
+            getPokemon(id: ID!): String
+            findPokemon(name: String!): String
+          }
+        `,
+      },
+      methodsOrganization: {
+        domains: {
+          rules: [
+            { pattern: 'getPokemon', path: 'pokemon', methodName: 'get' },
+            { pattern: 'findPokemon', path: 'pokemon', methodName: 'get' },
+          ],
+        },
+      },
+    })
+  }).rejects.toThrow(/Namespace organization conflict/)
+})
+
+test('allows same method name in different nested namespaces', async () => {
+  const { modules } = await generateModules({
+    schema: {
+      type: 'sdl',
+      sdl: `
+        type Query {
+          getPokemon(id: ID!): String
+          listPokemon: String
+        }
+      `,
+    },
+    methodsOrganization: {
+      domains: {
+        rules: [
+          { pattern: 'getPokemon', path: 'pokemon.query', methodName: 'get' },
+          { pattern: 'listPokemon', path: 'pokemon.list', methodName: 'get' },
+        ],
+      },
+    },
+  })
+
+  // Should generate nested structure without conflicts
+  const domainsRoot = modules.find(m => m.filePath === 'domains/$$.ts')
+  expect(domainsRoot).toBeDefined()
+  expect(domainsRoot!.content).toContain('export * as pokemon')
+
+  // Should have pokemon parent interface with nested children
+  const methodsRoot = modules.find(m => m.name === 'MethodsRoot')
+  expect(methodsRoot).toBeDefined()
+  expect(methodsRoot!.content).toContain('interface PokemonMethods')
+  expect(methodsRoot!.content).toContain('query: PokemonQueryMethods')
+  expect(methodsRoot!.content).toContain('list: PokemonListMethods')
 })
