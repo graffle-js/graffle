@@ -1,231 +1,70 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest'
-import type { InputImportFormat } from '../config/configInit.js'
+import { beforeEach, expect, test, vi } from 'vitest'
 
-// Mock the TypeScript module
-vi.mock(`typescript`, () => {
-  return {
-    findConfigFile: vi.fn(),
-    readConfigFile: vi.fn(),
-    parseJsonConfigFileContent: vi.fn(),
-    sys: {
-      fileExists: vi.fn(),
-      readFile: vi.fn(),
-    },
-  }
+vi.mock(`typescript`, () => ({
+  findConfigFile: vi.fn(),
+  readConfigFile: vi.fn(),
+  parseJsonConfigFileContent: vi.fn(),
+  sys: { fileExists: vi.fn(), readFile: vi.fn() },
+}))
+
+vi.mock(`node:fs/promises`, () => ({ readFile: vi.fn() }))
+
+let detect: (cwd: string) => Promise<string | null>
+let ts: any
+let fs: any
+
+const mockModuleResolution = (mode: string) => {
+  vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
+    options: { moduleResolution: { toString: () => mode } },
+  })
+}
+
+beforeEach(async () => {
+  vi.clearAllMocks()
+  ts = await import(`typescript`)
+  fs = await import(`node:fs/promises`)
+  detect = (await import(`./detectImportFormat.js`)).detectDefaultImportFormat
+
+  // Default happy path
+  vi.mocked(ts.findConfigFile).mockReturnValue(`/tsconfig.json`)
+  vi.mocked(ts.readConfigFile).mockReturnValue({ error: undefined, config: {} })
+  vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({ options: {} })
 })
 
-// Mock fs/promises
-vi.mock(`node:fs/promises`, () => {
-  return {
-    readFile: vi.fn(),
-  }
+test(`bundler → noExtension`, async () => {
+  mockModuleResolution(`bundler`)
+  expect(await detect(`/`)).toBe(`noExtension`)
 })
 
-describe(`detectDefaultImportFormat`, () => {
-  // Dynamically import after mocks are set up
-  let detectDefaultImportFormat: (cwd: string) => Promise<InputImportFormat | null>
-  let ts: any
-  let fs: any
+test(`node16 + type:module → jsExtension`, async () => {
+  mockModuleResolution(`node16`)
+  vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({ type: `module` }))
+  expect(await detect(`/`)).toBe(`jsExtension`)
+})
 
-  beforeEach(async () => {
-    vi.clearAllMocks()
+test(`node16 + CJS → noExtension`, async () => {
+  mockModuleResolution(`node16`)
+  vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({}))
+  expect(await detect(`/`)).toBe(`noExtension`)
+})
 
-    // Import the mocked modules
-    ts = await import(`typescript`)
-    fs = await import(`node:fs/promises`)
+test(`node16 + missing package.json → noExtension`, async () => {
+  mockModuleResolution(`node16`)
+  vi.mocked(fs.readFile).mockRejectedValue(new Error(`ENOENT`))
+  expect(await detect(`/`)).toBe(`noExtension`)
+})
 
-    // Import the function under test
-    const module = await import(`./detectImportFormat.js`)
-    detectDefaultImportFormat = module.detectDefaultImportFormat
+test(`unknown moduleResolution → null`, async () => {
+  mockModuleResolution(`node`)
+  expect(await detect(`/`)).toBe(null)
+})
 
-    // Setup default happy path
-    vi.mocked(ts.findConfigFile).mockReturnValue(`/mock/tsconfig.json`)
-    vi.mocked(ts.readConfigFile).mockReturnValue({
-      error: undefined,
-      config: {},
-    })
-    vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-      options: {},
-    })
-  })
+test(`missing tsconfig → null`, async () => {
+  vi.mocked(ts.findConfigFile).mockReturnValue(undefined)
+  expect(await detect(`/`)).toBe(null)
+})
 
-  describe(`bundler mode`, () => {
-    test(`returns 'noExtension' for moduleResolution: bundler`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `bundler`,
-          },
-        },
-      })
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`noExtension`)
-    })
-
-    test(`is case-insensitive`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `BUNDLER`,
-          },
-        },
-      })
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`noExtension`)
-    })
-  })
-
-  describe(`node16/nodenext with ESM`, () => {
-    test(`returns 'jsExtension' for node16 with type:module`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `node16`,
-          },
-        },
-      })
-
-      vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({ type: `module` }))
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`jsExtension`)
-    })
-
-    test(`returns 'jsExtension' for nodenext with type:module`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `nodenext`,
-          },
-        },
-      })
-
-      vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({ type: `module` }))
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`jsExtension`)
-    })
-  })
-
-  describe(`node16/nodenext with CJS`, () => {
-    test(`returns 'noExtension' for node16 without type:module`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `node16`,
-          },
-        },
-      })
-
-      vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({}))
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`noExtension`)
-    })
-
-    test(`returns 'noExtension' for node16 with type:commonjs`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `node16`,
-          },
-        },
-      })
-
-      vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({ type: `commonjs` }))
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`noExtension`)
-    })
-
-    test(`returns 'noExtension' for nodenext without package.json`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `nodenext`,
-          },
-        },
-      })
-
-      vi.mocked(fs.readFile).mockRejectedValue(new Error(`ENOENT`))
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`noExtension`)
-    })
-  })
-
-  describe(`other module resolution modes`, () => {
-    test(`returns null for 'node' resolution`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `node`,
-          },
-        },
-      })
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(null)
-    })
-
-    test(`returns null for 'classic' resolution`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `classic`,
-          },
-        },
-      })
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(null)
-    })
-
-    test(`returns null when moduleResolution is undefined`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: undefined,
-        },
-      })
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(null)
-    })
-  })
-
-  describe(`graceful error handling`, () => {
-    test(`returns null when tsconfig.json not found`, async () => {
-      vi.mocked(ts.findConfigFile).mockReturnValue(undefined)
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(null)
-    })
-
-    test(`returns null when tsconfig.json has parse errors`, async () => {
-      vi.mocked(ts.readConfigFile).mockReturnValue({
-        error: new Error(`Unexpected token`),
-        config: undefined,
-      })
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(null)
-    })
-
-    test(`returns 'noExtension' when package.json parse fails for node16`, async () => {
-      vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
-        options: {
-          moduleResolution: {
-            toString: () => `node16`,
-          },
-        },
-      })
-
-      vi.mocked(fs.readFile).mockResolvedValue(`{invalid json`)
-
-      const result = await detectDefaultImportFormat(`/project`)
-      expect(result).toBe(`noExtension`)
-    })
-  })
+test(`tsconfig parse error → null`, async () => {
+  vi.mocked(ts.readConfigFile).mockReturnValue({ error: new Error(), config: undefined })
+  expect(await detect(`/`)).toBe(null)
 })

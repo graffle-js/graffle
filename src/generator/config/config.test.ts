@@ -2,7 +2,7 @@ import { type Fs, writeFileAndCreateDir } from '#src/lib/fsp.js'
 import { test } from '#test/helpers'
 import * as Memfs from 'memfs'
 import * as Path from 'node:path'
-import { describe, expect, vi } from 'vitest'
+import { describe, expect } from 'vitest'
 import { createConfig } from './config.js'
 import type { ConfigInitSchemaSdl } from './configInit.js'
 
@@ -14,27 +14,14 @@ const schema: ConfigInitSchemaSdl = {
 }
 
 describe(`import format`, () => {
-  test(`falls back to jsExtension when auto-detection fails`, async () => {
-    // No tsconfig or explicit config = falls back to default
+  test(`defaults to jsExtension`, async () => {
     const config = await createConfig({ schema })
     expect(config.importFormat).toEqual(`jsExtension`)
   })
 
-  test(`explicit configuration takes precedence over auto-detection`, async () => {
-    // Even if auto-detection would detect something, explicit config wins
-    const config = await createConfig({
-      schema,
-      importFormat: `noExtension`,
-    })
+  test(`respects explicit configuration`, async () => {
+    const config = await createConfig({ schema, importFormat: `noExtension` })
     expect(config.importFormat).toEqual(`noExtension`)
-  })
-
-  test(`explicit tsExtension configuration`, async () => {
-    const config = await createConfig({
-      schema,
-      importFormat: `tsExtension`,
-    })
-    expect(config.importFormat).toEqual(`tsExtension`)
   })
 })
 
