@@ -11,8 +11,8 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
 
-    // Import domains if configured
-    const hasDomains = config.methodsOrganization.domains !== false
+    // Import domains only if there are actual rules configured
+    const hasDomains = config.methodsOrganization.domains && config.methodsOrganization.domains.rules?.length > 0
     if (hasDomains) {
       code`import * as $$Domains from './domains/index.js'`
     }

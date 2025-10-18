@@ -1,5 +1,5 @@
 // Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder/methods-instance/requestMethods.js'
+import { executeRootField } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
