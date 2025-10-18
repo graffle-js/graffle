@@ -8,6 +8,7 @@ import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import type { Extension } from '../extension/types.js'
+import { detectDefaultImportFormat } from '../helpers/detectImportFormat.js'
 import {
   type ConfigInit,
   type ConfigInitLibraryPaths,
@@ -115,7 +116,10 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
   }
 
   // Get import format early to use in path processing
-  const importFormat = configInit.importFormat ?? defaults.importFormat
+  // Auto-detect from tsconfig.json/package.json if not explicitly configured
+  const importFormat = configInit.importFormat
+    ?? await detectDefaultImportFormat(cwd)
+    ?? defaults.importFormat
 
   // Helper to get the correct extension based on importFormat
   const getImportExtension = (path: string): string => {
