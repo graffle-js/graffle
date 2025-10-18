@@ -2,15 +2,19 @@
 {
   "elderPokemons": [
     {
-      "name": "Pikachu"
+      "name": "Pikachu",
+      "elderId": "1",
+      "elderHp": 35
     },
     {
-      "name": "Squirtle"
+      "name": "Squirtle",
+      "elderId": "3",
+      "elderHp": 44
     }
   ],
   "babyPokemons": [
     {
-      "name": "Charizard"
+      "babyName": "Charizard"
     }
   ]
 }
