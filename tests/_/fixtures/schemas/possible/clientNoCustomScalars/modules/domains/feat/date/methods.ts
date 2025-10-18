@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -13,11 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.date` |
  * | **Nullability** | Optional |
  */
-export const date = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'date', selectionSetOrArgs)
-  }
-}
+export const date = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'date', context)
 
 /**
  * # Info
@@ -31,11 +26,7 @@ export const date = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArg = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArg', selectionSetOrArgs)
-  }
-}
+export const dateArg = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArg', context)
 
 /**
  * # Info
@@ -49,11 +40,8 @@ export const dateArg = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgInputObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgInputObject', selectionSetOrArgs)
-  }
-}
+export const dateArgInputObject = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgInputObject', context)
 
 /**
  * # Info
@@ -67,11 +55,7 @@ export const dateArgInputObject = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgList', selectionSetOrArgs)
-  }
-}
+export const dateArgList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgList', context)
 
 /**
  * # Info
@@ -85,11 +69,8 @@ export const dateArgList = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgNonNull', selectionSetOrArgs)
-  }
-}
+export const dateArgNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNull', context)
 
 /**
  * # Info
@@ -103,11 +84,8 @@ export const dateArgNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNullList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgNonNullList', selectionSetOrArgs)
-  }
-}
+export const dateArgNonNullList = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNullList', context)
 
 /**
  * # Info
@@ -121,11 +99,8 @@ export const dateArgNonNullList = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNullListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgNonNullListNonNull', selectionSetOrArgs)
-  }
-}
+export const dateArgNonNullListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNullListNonNull', context)
 
 /**
  * # Info
@@ -138,11 +113,8 @@ export const dateArgNonNullListNonNull = (context: any) => {
  * | **Path** | `Query.dateInterface1` |
  * | **Nullability** | Optional |
  */
-export const dateInterface1 = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateInterface1', selectionSetOrArgs)
-  }
-}
+export const dateInterface1 = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateInterface1', context)
 
 /**
  * # Info
@@ -156,11 +128,7 @@ export const dateInterface1 = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateList', selectionSetOrArgs)
-  }
-}
+export const dateList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateList', context)
 
 /**
  * # Info
@@ -174,11 +142,7 @@ export const dateList = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateListList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateListList', selectionSetOrArgs)
-  }
-}
+export const dateListList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListList', context)
 
 /**
  * # Info
@@ -192,11 +156,8 @@ export const dateListList = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const dateListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateListNonNull', selectionSetOrArgs)
-  }
-}
+export const dateListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListNonNull', context)
 
 /**
  * # Info
@@ -209,11 +170,7 @@ export const dateListNonNull = (context: any) => {
  * | **Path** | `Query.dateNonNull` |
  * | **Nullability** | Required |
  */
-export const dateNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateNonNull', selectionSetOrArgs)
-  }
-}
+export const dateNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateNonNull', context)
 
 /**
  * # Info
@@ -226,11 +183,7 @@ export const dateNonNull = (context: any) => {
  * | **Path** | `Query.dateObject1` |
  * | **Nullability** | Optional |
  */
-export const dateObject1 = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateObject1', selectionSetOrArgs)
-  }
-}
+export const dateObject1 = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateObject1', context)
 
 /**
  * # Info
@@ -243,8 +196,4 @@ export const dateObject1 = (context: any) => {
  * | **Path** | `Query.dateUnion` |
  * | **Nullability** | Optional |
  */
-export const dateUnion = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateUnion', selectionSetOrArgs)
-  }
-}
+export const dateUnion = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateUnion', context)

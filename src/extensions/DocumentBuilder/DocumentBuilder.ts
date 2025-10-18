@@ -12,7 +12,7 @@ export type ConfigurationInput = {
   domains?: Record<string, Record<string, (context: any) => any>>
 }
 
-export const DocumentBuilder: any = Extension
+export const DocumentBuilder = Extension
   .create(`DocumentBuilder`)
   .configurator(
     Extension.Configurator()

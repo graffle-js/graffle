@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -15,11 +14,7 @@ import { OperationTypeNode } from 'graphql'
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const findByName = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'pokemonByName', selectionSetOrArgs)
-  }
-}
+export const findByName = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'pokemonByName', context)
 
 /**
  * # Info
@@ -34,11 +29,7 @@ export const findByName = (context: any) => {
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const list = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'pokemons', selectionSetOrArgs)
-  }
-}
+export const list = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'pokemons', context)
 
 /**
  * # Info
@@ -52,8 +43,4 @@ export const list = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const create = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.MUTATION, 'addPokemon', selectionSetOrArgs)
-  }
-}
+export const create = (context: any) => createRootFieldExecutor(OperationTypeNode.MUTATION, 'addPokemon', context)

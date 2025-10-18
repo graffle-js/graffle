@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -13,11 +12,8 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.dateInterface1` |
  * | **Nullability** | Optional |
  */
-export const dateInterface1 = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateInterface1', selectionSetOrArgs)
-  }
-}
+export const dateInterface1 = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateInterface1', context)
 
 /**
  * # Info
@@ -30,11 +26,7 @@ export const dateInterface1 = (context: any) => {
  * | **Path** | `Query.interface` |
  * | **Nullability** | Optional |
  */
-const $interface = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interface', selectionSetOrArgs)
-  }
-}
+const $interface = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'interface', context)
 export { $interface as interface }
 
 /**
@@ -50,11 +42,8 @@ export { $interface as interface }
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyChildA = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceHierarchyChildA', selectionSetOrArgs)
-  }
-}
+export const interfaceHierarchyChildA = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyChildA', context)
 
 /**
  * # Info
@@ -69,11 +58,8 @@ export const interfaceHierarchyChildA = (context: any) => {
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyChildB = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceHierarchyChildB', selectionSetOrArgs)
-  }
-}
+export const interfaceHierarchyChildB = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyChildB', context)
 
 /**
  * # Info
@@ -88,11 +74,8 @@ export const interfaceHierarchyChildB = (context: any) => {
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyGrandparents = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceHierarchyGrandparents', selectionSetOrArgs)
-  }
-}
+export const interfaceHierarchyGrandparents = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyGrandparents', context)
 
 /**
  * # Info
@@ -107,11 +90,8 @@ export const interfaceHierarchyGrandparents = (context: any) => {
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyParents = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceHierarchyParents', selectionSetOrArgs)
-  }
-}
+export const interfaceHierarchyParents = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyParents', context)
 
 /**
  * # Info
@@ -124,11 +104,8 @@ export const interfaceHierarchyParents = (context: any) => {
  * | **Path** | `Query.interfaceNonNull` |
  * | **Nullability** | Required |
  */
-export const interfaceNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceNonNull', selectionSetOrArgs)
-  }
-}
+export const interfaceNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceNonNull', context)
 
 /**
  * # Info
@@ -142,8 +119,5 @@ export const interfaceNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const interfaceWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceWithArgs', selectionSetOrArgs)
-  }
-}
+export const interfaceWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceWithArgs', context)

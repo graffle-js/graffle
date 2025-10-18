@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -15,11 +14,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.abcEnum` |
  * | **Nullability** | Optional |
  */
-export const abcEnum = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'abcEnum', selectionSetOrArgs)
-  }
-}
+export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'abcEnum', context)
 
 /**
  * # Info
@@ -33,11 +28,8 @@ export const abcEnum = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgEnum = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgEnum', selectionSetOrArgs)
-  }
-}
+export const stringWithArgEnum = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgEnum', context)
 
 /**
  * # Info
@@ -51,8 +43,5 @@ export const stringWithArgEnum = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObjectEnum = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgInputObjectEnum', selectionSetOrArgs)
-  }
-}
+export const stringWithArgInputObjectEnum = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObjectEnum', context)

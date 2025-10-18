@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -14,11 +13,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateListList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateListList', selectionSetOrArgs)
-  }
-}
+export const dateListList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListList', context)
 
 /**
  * # Info
@@ -32,11 +27,7 @@ export const dateListList = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listListInt = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listListInt', selectionSetOrArgs)
-  }
-}
+export const listListInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listListInt', context)
 
 /**
  * # Info
@@ -50,8 +41,5 @@ export const listListInt = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listListIntNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listListIntNonNull', selectionSetOrArgs)
-  }
-}
+export const listListIntNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'listListIntNonNull', context)

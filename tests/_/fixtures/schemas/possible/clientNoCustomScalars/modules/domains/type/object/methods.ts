@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -13,11 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.object` |
  * | **Nullability** | Optional |
  */
-const $object = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'object', selectionSetOrArgs)
-  }
-}
+const $object = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'object', context)
 export { $object as object }
 
 /**
@@ -32,11 +27,7 @@ export { $object as object }
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const objectList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectList', selectionSetOrArgs)
-  }
-}
+export const objectList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectList', context)
 
 /**
  * # Info
@@ -50,11 +41,8 @@ export const objectList = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const objectListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectListNonNull', selectionSetOrArgs)
-  }
-}
+export const objectListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectListNonNull', context)
 
 /**
  * # Info
@@ -67,11 +55,7 @@ export const objectListNonNull = (context: any) => {
  * | **Path** | `Query.objectNested` |
  * | **Nullability** | Optional |
  */
-export const objectNested = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectNested', selectionSetOrArgs)
-  }
-}
+export const objectNested = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNested', context)
 
 /**
  * # Info
@@ -84,11 +68,8 @@ export const objectNested = (context: any) => {
  * | **Path** | `Query.objectNestedWithArgs` |
  * | **Nullability** | Optional |
  */
-export const objectNestedWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectNestedWithArgs', selectionSetOrArgs)
-  }
-}
+export const objectNestedWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNestedWithArgs', context)
 
 /**
  * # Info
@@ -101,11 +82,8 @@ export const objectNestedWithArgs = (context: any) => {
  * | **Path** | `Query.objectNonNull` |
  * | **Nullability** | Required |
  */
-export const objectNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectNonNull', selectionSetOrArgs)
-  }
-}
+export const objectNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNonNull', context)
 
 /**
  * # Info
@@ -119,8 +97,5 @@ export const objectNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const objectWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectWithArgs', selectionSetOrArgs)
-  }
-}
+export const objectWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectWithArgs', context)

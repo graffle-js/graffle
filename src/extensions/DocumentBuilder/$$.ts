@@ -6,6 +6,7 @@ export * from './methods-instance/document.js'
 export {
   createMethodDocument,
   createMethodOperationType,
+  createRootFieldExecutor,
   type DocumentRunner as DocumentRunnerDeferred,
   graffleMappedResultToRequest,
 } from './methods-instance/requestMethods.js'

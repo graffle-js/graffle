@@ -22,7 +22,6 @@ for (const schemaName of Obj.keysStrict(TestSchemas)) {
   // With the new API, fields can match multiple rules and appear in multiple namespaces
   const methodsOrganization = schemaName === 'possible'
     ? {
-      logical: true,
       domains: {
         rules: [
           // By argument characteristics - no args
@@ -87,7 +86,6 @@ for (const schemaName of Obj.keysStrict(TestSchemas)) {
     }
     : schemaName === 'pokemon'
     ? {
-      logical: true,
       domains: {
         rules: [
           // Pokemon domain

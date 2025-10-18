@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -13,11 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.dateUnion` |
  * | **Nullability** | Optional |
  */
-export const dateUnion = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateUnion', selectionSetOrArgs)
-  }
-}
+export const dateUnion = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateUnion', context)
 
 /**
  * # Info
@@ -30,11 +25,8 @@ export const dateUnion = (context: any) => {
  * | **Path** | `Query.lowerCaseUnion` |
  * | **Nullability** | Optional |
  */
-export const lowerCaseUnion = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'lowerCaseUnion', selectionSetOrArgs)
-  }
-}
+export const lowerCaseUnion = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'lowerCaseUnion', context)
 
 /**
  * # Info
@@ -48,11 +40,7 @@ export const lowerCaseUnion = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const result = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'result', selectionSetOrArgs)
-  }
-}
+export const result = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'result', context)
 
 /**
  * # Info
@@ -66,11 +54,8 @@ export const result = (context: any) => {
  * | **Nullability** | Required |
  * | **Arguments** | 1 |
  */
-export const resultNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'resultNonNull', selectionSetOrArgs)
-  }
-}
+export const resultNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'resultNonNull', context)
 
 /**
  * # Info
@@ -83,11 +68,7 @@ export const resultNonNull = (context: any) => {
  * | **Path** | `Query.unionFooBar` |
  * | **Nullability** | Optional |
  */
-export const unionFooBar = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionFooBar', selectionSetOrArgs)
-  }
-}
+export const unionFooBar = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBar', context)
 
 /**
  * # Info
@@ -100,11 +81,8 @@ export const unionFooBar = (context: any) => {
  * | **Path** | `Query.unionFooBarNonNull` |
  * | **Nullability** | Required |
  */
-export const unionFooBarNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionFooBarNonNull', selectionSetOrArgs)
-  }
-}
+export const unionFooBarNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarNonNull', context)
 
 /**
  * # Info
@@ -118,11 +96,8 @@ export const unionFooBarNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const unionFooBarWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionFooBarWithArgs', selectionSetOrArgs)
-  }
-}
+export const unionFooBarWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarWithArgs', context)
 
 /**
  * # Info
@@ -135,11 +110,7 @@ export const unionFooBarWithArgs = (context: any) => {
  * | **Path** | `Query.unionObject` |
  * | **Nullability** | Optional |
  */
-export const unionObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionObject', selectionSetOrArgs)
-  }
-}
+export const unionObject = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObject', context)
 
 /**
  * # Info
@@ -152,8 +123,5 @@ export const unionObject = (context: any) => {
  * | **Path** | `Query.unionObjectNonNull` |
  * | **Nullability** | Required |
  */
-export const unionObjectNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionObjectNonNull', selectionSetOrArgs)
-  }
-}
+export const unionObjectNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObjectNonNull', context)

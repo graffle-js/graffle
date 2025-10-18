@@ -1,5 +1,5 @@
 import * as $$Data from './data.js'
-import * as $$Domains from './domains/index.js'
+import * as $$Domains from './domains/$$.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 

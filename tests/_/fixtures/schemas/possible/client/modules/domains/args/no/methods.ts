@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -15,11 +14,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.abcEnum` |
  * | **Nullability** | Optional |
  */
-export const abcEnum = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'abcEnum', selectionSetOrArgs)
-  }
-}
+export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'abcEnum', context)
 
 /**
  * # Info
@@ -32,11 +27,7 @@ export const abcEnum = (context: any) => {
  * | **Path** | `Query.bigintField` |
  * | **Nullability** | Optional |
  */
-export const bigintField = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'bigintField', selectionSetOrArgs)
-  }
-}
+export const bigintField = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'bigintField', context)
 
 /**
  * # Info
@@ -49,11 +40,8 @@ export const bigintField = (context: any) => {
  * | **Path** | `Query.bigintFieldNonNull` |
  * | **Nullability** | Required |
  */
-export const bigintFieldNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'bigintFieldNonNull', selectionSetOrArgs)
-  }
-}
+export const bigintFieldNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'bigintFieldNonNull', context)
 
 /**
  * # Info
@@ -66,11 +54,7 @@ export const bigintFieldNonNull = (context: any) => {
  * | **Path** | `Query.date` |
  * | **Nullability** | Optional |
  */
-export const date = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'date', selectionSetOrArgs)
-  }
-}
+export const date = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'date', context)
 
 /**
  * # Info
@@ -83,11 +67,8 @@ export const date = (context: any) => {
  * | **Path** | `Query.dateInterface1` |
  * | **Nullability** | Optional |
  */
-export const dateInterface1 = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateInterface1', selectionSetOrArgs)
-  }
-}
+export const dateInterface1 = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateInterface1', context)
 
 /**
  * # Info
@@ -101,11 +82,7 @@ export const dateInterface1 = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateList', selectionSetOrArgs)
-  }
-}
+export const dateList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateList', context)
 
 /**
  * # Info
@@ -119,11 +96,7 @@ export const dateList = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateListList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateListList', selectionSetOrArgs)
-  }
-}
+export const dateListList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListList', context)
 
 /**
  * # Info
@@ -137,11 +110,8 @@ export const dateListList = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const dateListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateListNonNull', selectionSetOrArgs)
-  }
-}
+export const dateListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListNonNull', context)
 
 /**
  * # Info
@@ -154,11 +124,7 @@ export const dateListNonNull = (context: any) => {
  * | **Path** | `Query.dateNonNull` |
  * | **Nullability** | Required |
  */
-export const dateNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateNonNull', selectionSetOrArgs)
-  }
-}
+export const dateNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateNonNull', context)
 
 /**
  * # Info
@@ -171,11 +137,7 @@ export const dateNonNull = (context: any) => {
  * | **Path** | `Query.dateObject1` |
  * | **Nullability** | Optional |
  */
-export const dateObject1 = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateObject1', selectionSetOrArgs)
-  }
-}
+export const dateObject1 = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateObject1', context)
 
 /**
  * # Info
@@ -188,11 +150,7 @@ export const dateObject1 = (context: any) => {
  * | **Path** | `Query.dateUnion` |
  * | **Nullability** | Optional |
  */
-export const dateUnion = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateUnion', selectionSetOrArgs)
-  }
-}
+export const dateUnion = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateUnion', context)
 
 /**
  * # Info
@@ -205,11 +163,7 @@ export const dateUnion = (context: any) => {
  * | **Path** | `Query.id` |
  * | **Nullability** | Optional |
  */
-export const id = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'id', selectionSetOrArgs)
-  }
-}
+export const id = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'id', context)
 
 /**
  * # Info
@@ -222,11 +176,7 @@ export const id = (context: any) => {
  * | **Path** | `Query.idNonNull` |
  * | **Nullability** | Required |
  */
-export const idNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'idNonNull', selectionSetOrArgs)
-  }
-}
+export const idNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'idNonNull', context)
 
 /**
  * # Info
@@ -239,11 +189,7 @@ export const idNonNull = (context: any) => {
  * | **Path** | `Query.interface` |
  * | **Nullability** | Optional |
  */
-const $interface = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interface', selectionSetOrArgs)
-  }
-}
+const $interface = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'interface', context)
 export { $interface as interface }
 
 /**
@@ -257,11 +203,8 @@ export { $interface as interface }
  * | **Path** | `Query.interfaceNonNull` |
  * | **Nullability** | Required |
  */
-export const interfaceNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceNonNull', selectionSetOrArgs)
-  }
-}
+export const interfaceNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceNonNull', context)
 
 /**
  * # Info
@@ -275,11 +218,7 @@ export const interfaceNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listInt = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listInt', selectionSetOrArgs)
-  }
-}
+export const listInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listInt', context)
 
 /**
  * # Info
@@ -293,11 +232,8 @@ export const listInt = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listIntNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listIntNonNull', selectionSetOrArgs)
-  }
-}
+export const listIntNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'listIntNonNull', context)
 
 /**
  * # Info
@@ -311,11 +247,7 @@ export const listIntNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listListInt = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listListInt', selectionSetOrArgs)
-  }
-}
+export const listListInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listListInt', context)
 
 /**
  * # Info
@@ -329,11 +261,8 @@ export const listListInt = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listListIntNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listListIntNonNull', selectionSetOrArgs)
-  }
-}
+export const listListIntNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'listListIntNonNull', context)
 
 /**
  * # Info
@@ -346,11 +275,8 @@ export const listListIntNonNull = (context: any) => {
  * | **Path** | `Query.lowerCaseUnion` |
  * | **Nullability** | Optional |
  */
-export const lowerCaseUnion = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'lowerCaseUnion', selectionSetOrArgs)
-  }
-}
+export const lowerCaseUnion = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'lowerCaseUnion', context)
 
 /**
  * # Info
@@ -363,11 +289,7 @@ export const lowerCaseUnion = (context: any) => {
  * | **Path** | `Query.object` |
  * | **Nullability** | Optional |
  */
-const $object = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'object', selectionSetOrArgs)
-  }
-}
+const $object = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'object', context)
 export { $object as object }
 
 /**
@@ -382,11 +304,7 @@ export { $object as object }
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const objectList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectList', selectionSetOrArgs)
-  }
-}
+export const objectList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectList', context)
 
 /**
  * # Info
@@ -400,11 +318,8 @@ export const objectList = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const objectListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectListNonNull', selectionSetOrArgs)
-  }
-}
+export const objectListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectListNonNull', context)
 
 /**
  * # Info
@@ -417,11 +332,7 @@ export const objectListNonNull = (context: any) => {
  * | **Path** | `Query.objectNested` |
  * | **Nullability** | Optional |
  */
-export const objectNested = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectNested', selectionSetOrArgs)
-  }
-}
+export const objectNested = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNested', context)
 
 /**
  * # Info
@@ -434,11 +345,8 @@ export const objectNested = (context: any) => {
  * | **Path** | `Query.objectNestedWithArgs` |
  * | **Nullability** | Optional |
  */
-export const objectNestedWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectNestedWithArgs', selectionSetOrArgs)
-  }
-}
+export const objectNestedWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNestedWithArgs', context)
 
 /**
  * # Info
@@ -451,11 +359,8 @@ export const objectNestedWithArgs = (context: any) => {
  * | **Path** | `Query.objectNonNull` |
  * | **Nullability** | Required |
  */
-export const objectNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectNonNull', selectionSetOrArgs)
-  }
-}
+export const objectNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNonNull', context)
 
 /**
  * # Info
@@ -468,11 +373,7 @@ export const objectNonNull = (context: any) => {
  * | **Path** | `Query.string` |
  * | **Nullability** | Optional |
  */
-const $string = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'string', selectionSetOrArgs)
-  }
-}
+const $string = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'string', context)
 export { $string as string }
 
 /**
@@ -486,11 +387,7 @@ export { $string as string }
  * | **Path** | `Query.unionFooBar` |
  * | **Nullability** | Optional |
  */
-export const unionFooBar = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionFooBar', selectionSetOrArgs)
-  }
-}
+export const unionFooBar = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBar', context)
 
 /**
  * # Info
@@ -503,11 +400,8 @@ export const unionFooBar = (context: any) => {
  * | **Path** | `Query.unionFooBarNonNull` |
  * | **Nullability** | Required |
  */
-export const unionFooBarNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionFooBarNonNull', selectionSetOrArgs)
-  }
-}
+export const unionFooBarNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarNonNull', context)
 
 /**
  * # Info
@@ -520,11 +414,7 @@ export const unionFooBarNonNull = (context: any) => {
  * | **Path** | `Query.unionObject` |
  * | **Nullability** | Optional |
  */
-export const unionObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionObject', selectionSetOrArgs)
-  }
-}
+export const unionObject = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObject', context)
 
 /**
  * # Info
@@ -537,8 +427,5 @@ export const unionObject = (context: any) => {
  * | **Path** | `Query.unionObjectNonNull` |
  * | **Nullability** | Required |
  */
-export const unionObjectNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionObjectNonNull', selectionSetOrArgs)
-  }
-}
+export const unionObjectNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObjectNonNull', context)

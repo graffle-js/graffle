@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -14,8 +13,4 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const list = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'beings', selectionSetOrArgs)
-  }
-}
+export const list = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'beings', context)

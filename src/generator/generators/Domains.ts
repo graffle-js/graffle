@@ -57,19 +57,19 @@ export const ModuleGeneratorDomains = {
         filePath: `domains/${dirPath}/methods.ts`,
       })
 
-      // Generate index.ts for this namespace with export aliases
+      // Generate $$.ts for this namespace with export aliases
       modules.push({
-        name: `domains/${dirPath}/index`,
+        name: `domains/${dirPath}/$$`,
         content: generateNamespaceIndexFile(fields, namespaceGroups[namespaceKey]!),
-        filePath: `domains/${dirPath}/index.ts`,
+        filePath: `domains/${dirPath}/$$.ts`,
       })
     }
 
-    // Generate root domains/index.ts with namespace exports
+    // Generate root domains/$$.ts with namespace exports
     modules.push({
-      name: `domains/index`,
+      name: `domains/$$`,
       content: generateRootIndexFile(namespaceStructure, namespaceGroups),
-      filePath: `domains/index.ts`,
+      filePath: `domains/$$.ts`,
     })
 
     return modules
@@ -87,9 +87,18 @@ const generateMethodsFile = (
   const lines: string[] = []
 
   // Import runtime execution helper
-  lines.push(`// Runtime methods for domain organization`)
-  lines.push(`import { executeRootField } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
-  lines.push(`import { OperationTypeNode } from 'graphql'`)
+  lines.push(
+    Code.importNamed({
+      names: ['createRootFieldExecutor'],
+      from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
+    }),
+  )
+  lines.push(
+    Code.importNamed({
+      names: ['OperationTypeNode'],
+      from: 'graphql',
+    }),
+  )
   lines.push(``)
 
   // Generate a method for each unique field
@@ -114,12 +123,8 @@ const generateMethodsFile = (
       lines.push(Code.TSDoc(docContent))
     }
 
-    // Generate method implementation - curry function that takes context then selection set
-    const functionDecl = `const ${renderName(methodName)} = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.${operationTypeNode}, '${field.fieldName}', selectionSetOrArgs)
-  }
-}`
+    // Generate method implementation using helper
+    const functionDecl = `const ${renderName(methodName)} = (context: any) => createRootFieldExecutor(OperationTypeNode.${operationTypeNode}, '${field.fieldName}', context)`
     lines.push(Code.exportValueWithKeywordHandling(methodName, functionDecl))
     lines.push(``)
   }
@@ -128,7 +133,7 @@ const generateMethodsFile = (
 }
 
 /**
- * Generate the index.ts file for a namespace.
+ * Generate the $$.ts file for a namespace.
  * Re-exports methods with aliases using ESM export syntax.
  */
 const generateNamespaceIndexFile = (
@@ -137,7 +142,6 @@ const generateNamespaceIndexFile = (
 ): string => {
   const lines: string[] = []
 
-  lines.push(`// Namespace exports with aliases`)
   lines.push(`export * from './methods.js'`)
   lines.push(``)
 
@@ -170,7 +174,7 @@ const generateNamespaceIndexFile = (
 }
 
 /**
- * Generate the root domains/index.ts file.
+ * Generate the root domains/$$.ts file.
  * Exports all namespaces with aliases.
  */
 const generateRootIndexFile = (
@@ -207,7 +211,7 @@ const generateRootIndexFile = (
     const exportName = pathWithoutPrefix.map((segment, index) => index === 0 ? segment : Str.Case.capFirst(segment))
       .join('')
 
-    lines.push(`export * as ${exportName} from './${fullPath}/index.js'`)
+    lines.push(`export * as ${exportName} from './${fullPath}/$$.js'`)
   }
 
   return lines.join('\n')

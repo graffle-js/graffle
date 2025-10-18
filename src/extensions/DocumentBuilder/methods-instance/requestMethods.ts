@@ -154,6 +154,20 @@ export const executeRootField = async (
     : result[rootFieldName]
 }
 
+/**
+ * Helper to create a curried root field executor for domain-organized methods.
+ * Used by the domain generator to reduce boilerplate.
+ */
+export const createRootFieldExecutor = (
+  operationType: OperationTypeNode,
+  rootFieldName: string,
+  context: Context,
+) => {
+  return (rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
+    return executeRootField(context, operationType, rootFieldName, rootFieldSelectionSet)
+  }
+}
+
 const executeOperation = async (
   context: Context,
   operationType: OperationTypeNode,

@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -14,11 +13,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateList', selectionSetOrArgs)
-  }
-}
+export const dateList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateList', context)
 
 /**
  * # Info
@@ -32,11 +27,8 @@ export const dateList = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const dateListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateListNonNull', selectionSetOrArgs)
-  }
-}
+export const dateListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListNonNull', context)
 
 /**
  * # Info
@@ -50,11 +42,7 @@ export const dateListNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listInt = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listInt', selectionSetOrArgs)
-  }
-}
+export const listInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listInt', context)
 
 /**
  * # Info
@@ -68,11 +56,8 @@ export const listInt = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listIntNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'listIntNonNull', selectionSetOrArgs)
-  }
-}
+export const listIntNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'listIntNonNull', context)
 
 /**
  * # Info
@@ -86,11 +71,7 @@ export const listIntNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const objectList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectList', selectionSetOrArgs)
-  }
-}
+export const objectList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectList', context)
 
 /**
  * # Info
@@ -104,8 +85,5 @@ export const objectList = (context: any) => {
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const objectListNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectListNonNull', selectionSetOrArgs)
-  }
-}
+export const objectListNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectListNonNull', context)

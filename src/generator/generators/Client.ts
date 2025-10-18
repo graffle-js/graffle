@@ -14,7 +14,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
     // Import domains only if there are actual rules configured
     const hasDomains = config.methodsOrganization.domains && config.methodsOrganization.domains.rules?.length > 0
     if (hasDomains) {
-      code`import * as $$Domains from './domains/index.js'`
+      code`import * as $$Domains from './domains/$$.js'`
     }
 
     code`

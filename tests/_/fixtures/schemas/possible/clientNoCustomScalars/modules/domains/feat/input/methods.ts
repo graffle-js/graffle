@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -14,11 +13,8 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const InputObjectNested = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'InputObjectNested', selectionSetOrArgs)
-  }
-}
+export const InputObjectNested = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'InputObjectNested', context)
 
 /**
  * # Info
@@ -32,11 +28,8 @@ export const InputObjectNested = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const InputObjectNestedNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'InputObjectNestedNonNull', selectionSetOrArgs)
-  }
-}
+export const InputObjectNestedNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'InputObjectNestedNonNull', context)
 
 /**
  * # Info
@@ -50,11 +43,8 @@ export const InputObjectNestedNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const argInputObjectCircular = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'argInputObjectCircular', selectionSetOrArgs)
-  }
-}
+export const argInputObjectCircular = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'argInputObjectCircular', context)
 
 /**
  * # Info
@@ -68,11 +58,8 @@ export const argInputObjectCircular = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgInputObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgInputObject', selectionSetOrArgs)
-  }
-}
+export const dateArgInputObject = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgInputObject', context)
 
 /**
  * # Info
@@ -86,11 +73,8 @@ export const dateArgInputObject = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgInputObject', selectionSetOrArgs)
-  }
-}
+export const stringWithArgInputObject = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObject', context)
 
 /**
  * # Info
@@ -104,11 +88,8 @@ export const stringWithArgInputObject = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObjectEnum = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgInputObjectEnum', selectionSetOrArgs)
-  }
-}
+export const stringWithArgInputObjectEnum = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObjectEnum', context)
 
 /**
  * # Info
@@ -122,8 +103,5 @@ export const stringWithArgInputObjectEnum = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObjectRequired = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgInputObjectRequired', selectionSetOrArgs)
-  }
-}
+export const stringWithArgInputObjectRequired = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObjectRequired', context)

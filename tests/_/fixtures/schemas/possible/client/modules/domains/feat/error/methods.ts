@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -14,11 +13,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const error = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'error', selectionSetOrArgs)
-  }
-}
+export const error = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'error', context)
 
 /**
  * # Info
@@ -32,11 +27,7 @@ export const error = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const result = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'result', selectionSetOrArgs)
-  }
-}
+export const result = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'result', context)
 
 /**
  * # Info
@@ -50,8 +41,5 @@ export const result = (context: any) => {
  * | **Nullability** | Required |
  * | **Arguments** | 1 |
  */
-export const resultNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'resultNonNull', selectionSetOrArgs)
-  }
-}
+export const resultNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'resultNonNull', context)

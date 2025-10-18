@@ -1,5 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from '#graffle/extensions/document-builder'
+import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
 /**
@@ -14,11 +13,8 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const argInputObjectCircular = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'argInputObjectCircular', selectionSetOrArgs)
-  }
-}
+export const argInputObjectCircular = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'argInputObjectCircular', context)
 
 /**
  * # Info
@@ -32,11 +28,7 @@ export const argInputObjectCircular = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArg = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArg', selectionSetOrArgs)
-  }
-}
+export const dateArg = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArg', context)
 
 /**
  * # Info
@@ -50,11 +42,8 @@ export const dateArg = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgInputObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgInputObject', selectionSetOrArgs)
-  }
-}
+export const dateArgInputObject = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgInputObject', context)
 
 /**
  * # Info
@@ -68,11 +57,7 @@ export const dateArgInputObject = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgList = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'dateArgList', selectionSetOrArgs)
-  }
-}
+export const dateArgList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgList', context)
 
 /**
  * # Info
@@ -86,11 +71,7 @@ export const dateArgList = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const error = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'error', selectionSetOrArgs)
-  }
-}
+export const error = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'error', context)
 
 /**
  * # Info
@@ -104,11 +85,8 @@ export const error = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const interfaceWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'interfaceWithArgs', selectionSetOrArgs)
-  }
-}
+export const interfaceWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceWithArgs', context)
 
 /**
  * # Info
@@ -122,11 +100,8 @@ export const interfaceWithArgs = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const objectWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'objectWithArgs', selectionSetOrArgs)
-  }
-}
+export const objectWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectWithArgs', context)
 
 /**
  * # Info
@@ -140,11 +115,8 @@ export const objectWithArgs = (context: any) => {
  * | **Nullability** | Required |
  * | **Arguments** | 1 |
  */
-export const resultNonNull = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'resultNonNull', selectionSetOrArgs)
-  }
-}
+export const resultNonNull = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'resultNonNull', context)
 
 /**
  * # Info
@@ -158,11 +130,8 @@ export const resultNonNull = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgEnum = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgEnum', selectionSetOrArgs)
-  }
-}
+export const stringWithArgEnum = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgEnum', context)
 
 /**
  * # Info
@@ -176,11 +145,8 @@ export const stringWithArgEnum = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObject = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgInputObject', selectionSetOrArgs)
-  }
-}
+export const stringWithArgInputObject = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObject', context)
 
 /**
  * The given arguments are reflected back as a JSON string.
@@ -196,11 +162,8 @@ export const stringWithArgInputObject = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const stringWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithArgs', selectionSetOrArgs)
-  }
-}
+export const stringWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgs', context)
 
 /**
  * # Info
@@ -214,11 +177,8 @@ export const stringWithArgs = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithListArg = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'stringWithListArg', selectionSetOrArgs)
-  }
-}
+export const stringWithListArg = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithListArg', context)
 
 /**
  * # Info
@@ -232,8 +192,5 @@ export const stringWithListArg = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const unionFooBarWithArgs = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'unionFooBarWithArgs', selectionSetOrArgs)
-  }
-}
+export const unionFooBarWithArgs = (context: any) =>
+  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarWithArgs', context)

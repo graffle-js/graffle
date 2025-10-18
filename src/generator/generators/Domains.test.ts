@@ -36,7 +36,7 @@ test('generates domains directory structure', async () => {
   })
 
   // Should have generated domains modules
-  const domainsRoot = modules.find(m => m.filePath === 'domains/index.ts')
+  const domainsRoot = modules.find(m => m.filePath === 'domains/$$.ts')
   expect(domainsRoot).toBeDefined()
   expect(domainsRoot!.content).toContain('export * as pokemon')
   expect(domainsRoot!.content).toContain('export * as trainer')
@@ -82,7 +82,7 @@ test('generates method aliases using Cartesian product', async () => {
   })
 
   // Should generate both namespace aliases
-  const domainsRoot = modules.find(m => m.filePath === 'domains/index.ts')
+  const domainsRoot = modules.find(m => m.filePath === 'domains/$$.ts')
   expect(domainsRoot!.content).toContain('export * as pokemon')
   expect(domainsRoot!.content).toContain('export * as poke')
 
