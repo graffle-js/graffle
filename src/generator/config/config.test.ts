@@ -2,8 +2,7 @@ import { type Fs, writeFileAndCreateDir } from '#src/lib/fsp.js'
 import { test } from '#test/helpers'
 import * as Memfs from 'memfs'
 import * as Path from 'node:path'
-import { expect } from 'vitest'
-import { describe } from 'vitest'
+import { describe, expect, vi } from 'vitest'
 import { createConfig } from './config.js'
 import type { ConfigInitSchemaSdl } from './configInit.js'
 
@@ -15,20 +14,27 @@ const schema: ConfigInitSchemaSdl = {
 }
 
 describe(`import format`, () => {
-  test(`defaults to jsExtension`, async () => {
+  test(`falls back to jsExtension when auto-detection fails`, async () => {
+    // No tsconfig or explicit config = falls back to default
     const config = await createConfig({ schema })
     expect(config.importFormat).toEqual(`jsExtension`)
   })
-  test(`noExtension`, async () => {
-    const customPathFile = `./tests/_/fixtures/custom.graphql`
-    await fs.mkdir(Path.dirname(customPathFile), { recursive: true })
-    await fs.writeFile(customPathFile, `type Query { ok: Boolean }`)
+
+  test(`explicit configuration takes precedence over auto-detection`, async () => {
+    // Even if auto-detection would detect something, explicit config wins
     const config = await createConfig({
-      fs,
-      schema: { type: `sdlFile`, dirOrFilePath: customPathFile },
+      schema,
       importFormat: `noExtension`,
     })
     expect(config.importFormat).toEqual(`noExtension`)
+  })
+
+  test(`explicit tsExtension configuration`, async () => {
+    const config = await createConfig({
+      schema,
+      importFormat: `tsExtension`,
+    })
+    expect(config.importFormat).toEqual(`tsExtension`)
   })
 })
 
