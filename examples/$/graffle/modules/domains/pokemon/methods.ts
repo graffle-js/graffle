@@ -1,6 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from 'graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$mutation, $$query } from 'graffle/extensions/document-builder'
 
 /**
  * Find Pokemon by their name.
@@ -32,11 +30,7 @@ import { OperationTypeNode } from 'graphql'
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const findByName = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'pokemonByName', selectionSetOrArgs)
-  }
-}
+export const findByName = $$query('pokemonByName')
 
 /**
  * Retrieve all Pokemon, optionally filtered.
@@ -68,11 +62,7 @@ export const findByName = (context: any) => {
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const list = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'pokemons', selectionSetOrArgs)
-  }
-}
+export const list = $$query('pokemons')
 
 /**
  * Add a new Pokemon to the database.
@@ -103,8 +93,4 @@ export const list = (context: any) => {
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const create = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.MUTATION, 'addPokemon', selectionSetOrArgs)
-  }
-}
+export const create = $$mutation('addPokemon')

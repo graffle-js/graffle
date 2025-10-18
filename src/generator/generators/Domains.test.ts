@@ -45,7 +45,7 @@ test('generates domains directory structure', async () => {
   const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
   expect(pokemonMethods).toBeDefined()
   // Should import pre-curried helper from core
-  expect(pokemonMethods!.content).toContain("import { $$query } from")
+  expect(pokemonMethods!.content).toContain('import { $$query } from')
   // Should use simplified syntax with imported helper
   expect(pokemonMethods!.content).toContain("export const getOne = $$query('pokemonByName')")
 
@@ -56,7 +56,7 @@ test('generates domains directory structure', async () => {
   // Should have generated trainer namespace
   const trainerMethods = modules.find(m => m.filePath === 'domains/trainer/methods.ts')
   expect(trainerMethods).toBeDefined()
-  expect(trainerMethods!.content).toContain("import { $$query } from")
+  expect(trainerMethods!.content).toContain('import { $$query } from')
   expect(trainerMethods!.content).toContain("export const getOne = $$query('trainerById')")
 })
 

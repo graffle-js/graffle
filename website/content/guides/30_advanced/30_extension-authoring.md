@@ -51,6 +51,7 @@ client.use(MyExtension)
 ```
 
 **Examples:**
+
 - `TransportHttp` - No base configuration required
 - `TransportMemory` - No configuration needed
 - `Throws` - Simple behavior toggle
@@ -75,6 +76,7 @@ client.use(MyExtension()) // Still must call even with no args
 ```
 
 **Examples:**
+
 - `DocumentBuilder()` - Accepts domains configuration
 - `SchemaErrors()` - Accepts error handling options
 - `Introspection()` - May accept introspection options
@@ -83,11 +85,13 @@ client.use(MyExtension()) // Still must call even with no args
 ### Choosing the Right Pattern
 
 **Use Non-Parameterized when:**
+
 - Extension has zero configuration options
 - Behavior is purely additive without customization
 - You want the simplest possible API
 
 **Use Parameterized when:**
+
 - Extension accepts any configuration (even if optional)
 - You may add configuration options in the future
 - Behavior can be customized

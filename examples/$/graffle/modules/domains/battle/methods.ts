@@ -1,6 +1,4 @@
-// Runtime methods for domain organization
-import { executeRootField } from 'graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from 'graffle/extensions/document-builder'
 
 /**
  * Retrieve all battles that have occurred.
@@ -22,8 +20,4 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const list = (context: any) => {
-  return (selectionSetOrArgs?: any) => {
-    return executeRootField(context, OperationTypeNode.QUERY, 'battles', selectionSetOrArgs)
-  }
-}
+export const list = $$query('battles')
