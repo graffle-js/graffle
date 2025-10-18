@@ -10,7 +10,7 @@ By not hardcoding this feature into core, we keep Graffle lean and bundle sizes 
 import { Graffle } from 'graffle'
 import { DocumentBuilder } from 'graffle/extensions/document-builder'
 
-const graffle = Graffle.create().use(DocumentBuilder)
+const graffle = Graffle.create().use(DocumentBuilder())
 ```
 
 In addition to using this extension programmatically you must also run the [generator](../../../website/content/guides/25_generation/10_generation.md). Refer to its docs for details about it. Here's a basic example of usage:
@@ -78,7 +78,7 @@ Graffle detects variables at **both runtime and compile-time**:
 ```ts
 import { Graffle } from './graffle/$.js'
 
-const graffle = Graffle.create().use(DocumentBuilder)
+const graffle = Graffle.create().use(DocumentBuilder())
 
 // No variables → executes immediately
 const trainers = await graffle.query.trainers({
@@ -94,7 +94,7 @@ const trainers = await graffle.query.trainers({
 import { Graffle } from './graffle/$.js'
 import { $ } from './graffle/modules/Scalar.js'
 
-const graffle = Graffle.create().use(DocumentBuilder)
+const graffle = Graffle.create().use(DocumentBuilder())
 
 // Has variables → returns DocumentRunner
 const runner = graffle.query.pokemonByName({

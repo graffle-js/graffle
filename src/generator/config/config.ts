@@ -29,6 +29,10 @@ export interface Config {
     customScalars: boolean
     operationVariables: boolean
   }
+  methodsOrganization: {
+    logical: boolean
+    domains: false | ConfigInitDomainGroupingConfig
+  }
   options: {
     /**
      * Does the generated client import custom scalars statically from the user's project?
@@ -66,6 +70,8 @@ export interface Config {
     schemaInterfaceExtendsEnabled?: boolean
   }
 }
+
+type ConfigInitDomainGroupingConfig = import('./configInit.js').DomainGroupingConfig
 
 interface ConfigSchema {
   via: ConfigInit['schema']['type']
@@ -232,6 +238,11 @@ To suppress this warning disable formatting in one of the following ways:
 
   const schemaInterfaceExtendsEnabled = configInit.advanced?.schemaInterfaceExtendsEnabled ?? false
 
+  // --- methods organization ---
+
+  const methodsOrganizationLogical = configInit.methodsOrganization?.logical ?? defaults.methodsOrganization.logical
+  const methodsOrganizationDomains = configInit.methodsOrganization?.domains ?? defaults.methodsOrganization.domains
+
   // --- Config ---
 
   return {
@@ -246,6 +257,10 @@ To suppress this warning disable formatting in one of the following ways:
     runtimeFeatures: {
       customScalars: true, // todo do not assume true
       operationVariables: true, // todo do not assume true
+    },
+    methodsOrganization: {
+      logical: methodsOrganizationLogical,
+      domains: methodsOrganizationDomains,
     },
     schema,
     options: {

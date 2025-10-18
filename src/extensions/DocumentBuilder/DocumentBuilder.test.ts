@@ -9,7 +9,7 @@ describe(`without a registered client, document builder is not statically availa
   const graffle = Graffle
     .create({ schema: { name: `unknown` } })
     .use(Throws)
-    .use(DocumentBuilder)
+    .use(DocumentBuilder())
 
   test(`unavailable methods`, () => {
     // @ts-expect-error

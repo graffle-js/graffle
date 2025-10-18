@@ -7,6 +7,7 @@ import { ModuleGeneratorArgumentsMap } from '../generators/ArgumentsMap.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
 import { ModuleGeneratorDocument } from '../generators/Document.js'
+import { ModuleGeneratorDomains } from '../generators/Domains.js'
 import { ModuleGeneratorGlobal } from '../generators/global.js'
 import { ModuleGeneratorGql } from '../generators/Gql.js'
 import { ModuleGeneratorMethodsDocument } from '../generators/MethodsDocument.js'
@@ -43,6 +44,7 @@ const moduleGenerators = [
   ModuleGeneratorMethodsSelect,
   ModuleGeneratorMethodsRoot,
   ModuleGeneratorMethodsDocument,
+  ModuleGeneratorDomains,
 ]
 
 /**

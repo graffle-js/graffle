@@ -4,8 +4,7 @@ import { type Context } from '#src/context/context.js'
 import { Docpar } from '#src/docpar/$.js'
 import { getOperationDefinition } from '#src/lib/grafaid/document.js'
 import { isSymbol } from '#src/lib/prelude.js'
-import { print } from 'graphql'
-import type { OperationTypeNode } from 'graphql'
+import { OperationTypeNode, print } from 'graphql'
 
 /**
  * Document runner for deferred execution when variables are present.
@@ -136,7 +135,7 @@ const buildDocumentRunner = (
   }
 }
 
-const executeRootField = async (
+export const executeRootField = async (
   context: Context,
   operationType: OperationTypeNode,
   rootFieldName: string,
@@ -153,6 +152,28 @@ const executeRootField = async (
     // @ts-expect-error
     : result[rootFieldName]
 }
+
+/**
+ * Helper to create a curried root field executor for domain-organized methods.
+ * Used by the domain generator to reduce boilerplate.
+ */
+export const createRootFieldExecutor = (operationType: OperationTypeNode) => {
+  return (rootFieldName: string) => {
+    return (context: Context) => {
+      return (rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
+        return executeRootField(context, operationType, rootFieldName, rootFieldSelectionSet)
+      }
+    }
+  }
+}
+
+/**
+ * Pre-curried helpers for domain-organized methods.
+ * Exported for use by generated domain modules.
+ */
+export const $$query = createRootFieldExecutor(OperationTypeNode.QUERY)
+export const $$mutation = createRootFieldExecutor(OperationTypeNode.MUTATION)
+export const $$subscription = createRootFieldExecutor(OperationTypeNode.SUBSCRIPTION)
 
 const executeOperation = async (
   context: Context,

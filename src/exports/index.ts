@@ -8,9 +8,20 @@ export type * from '#src/lib/prelude.js'
 export type * from '#src/requestPipeline/RequestPipeline.js'
 export type * from '#src/types/Schema/nodes/Scalar/helpers.js'
 export { type Normalized } from '../context/fragments/configuration/output/$$.js'
+export type * from '../docpar/object/Select/context.js'
+export type {
+  AnyExceptAlias as SelectionSetAnyExceptAlias,
+  AnySelectionSet,
+  FieldValue as SelectionSetFieldValue,
+  RootType as SelectionSetRootType,
+  TypenameSelection,
+} from '../docpar/object/Select/selectionSet.js'
 export { $ } from '../docpar/object/var/var.js'
+export type {
+  ConfigurationInput as DocumentBuilderConfigurationInput,
+  Properties as DocumentBuilderProperties,
+} from '../extensions/DocumentBuilder/DocumentBuilder.js'
 export { DocumentBuilder } from '../extensions/DocumentBuilder/DocumentBuilder.js'
-export type * from '../extensions/DocumentBuilder/DocumentBuilder.js'
 export { TransportHttp } from '../extensions/TransportHttp/TransportHttp.js'
 export type * from '../extensions/TransportHttp/TransportHttp.js'
 // export { Data } from '#src/context/fragments/transports/dataType/data.js'

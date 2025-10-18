@@ -99,7 +99,7 @@ test(`client works with generation`, async ({ project, pokemonService }) => {
 		import { Graffle } from 'graffle'
 		import { DocumentBuilder } from 'graffle/extensions/document-builder'
 
-		const graffle = Graffle.create().use(DocumentBuilder).transport({ url: '${pokemonService.url.href}' })
+		const graffle = Graffle.create().use(DocumentBuilder()).transport({ url: '${pokemonService.url.href}' })
 		const data = await graffle.query.pokemonByName({
 			$: { name: 'Pikachu' },
 			name: true,
