@@ -1034,7 +1034,9 @@ namespace H {
 
     const aliasTypes: string[] = []
     if (aliasable) {
-      aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`)
+      aliasTypes.push(
+        `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`,
+      )
       if (isCanBeIndicator) {
         aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`)
         aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`)

@@ -1,5 +1,5 @@
-import type { AnyExceptAlias } from './selectionSet.js'
 import type { Indicator } from './Indicator/$.js'
+import type { AnyExceptAlias } from './selectionSet.js'
 
 export type SelectAlias<$SelectionSet = AnyExceptAlias> =
   | SelectAliasOne<$SelectionSet>
@@ -57,7 +57,9 @@ export const isSelectAliasOne = (selectAlias: SelectAlias<any> | SelectAliasShor
   return typeof selectAlias[0] === `string`
 }
 
-export const normalizeSelectAlias = (selectAlias: SelectAlias<any> | SelectAliasShort | SelectAliasString): SelectAliasMultiple => {
+export const normalizeSelectAlias = (
+  selectAlias: SelectAlias<any> | SelectAliasShort | SelectAliasString,
+): SelectAliasMultiple => {
   // String: "x" → [["x", true]]
   if (typeof selectAlias === 'string') {
     return [[selectAlias, true as Indicator.Indicator]]
