@@ -1,0 +1,61 @@
+---------------------------------------- SHOW ----------------------------------------
+{
+  "pikachu": [
+    {
+      "name": "Pikachu",
+      "hp": 35,
+      "attack": 55
+    }
+  ],
+  "allPokemon": [
+    {
+      "name": "Pikachu",
+      "type": "electric"
+    },
+    {
+      "name": "Charizard",
+      "type": "fire"
+    },
+    {
+      "name": "Squirtle",
+      "type": "water"
+    },
+    {
+      "name": "Bulbasaur",
+      "type": "grass"
+    },
+    {
+      "name": "Caterpie",
+      "type": "bug"
+    },
+    {
+      "name": "Weedle",
+      "type": "bug"
+    }
+  ],
+  "ash": {
+    "name": "Ash",
+    "pokemon": [
+      {
+        "name": "Pikachu"
+      },
+      {
+        "name": "Charizard"
+      }
+    ]
+  },
+  "allTrainers": [
+    {
+      "name": "Ash"
+    },
+    {
+      "name": "Misty"
+    },
+    {
+      "name": "Brock"
+    },
+    {
+      "name": "Gary"
+    }
+  ]
+}
