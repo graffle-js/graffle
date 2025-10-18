@@ -239,6 +239,9 @@ Aliases let you rename fields in your response or request the same field multipl
 
 Works for all fields. Required when the field has arguments or non-scalar selection.
 
+:::tabs
+== object
+
 ```ts
 const doc = Graffle.gql({
   query: {
@@ -256,9 +259,42 @@ const doc = Graffle.gql({
 })
 ```
 
+== string
+
+```ts
+const doc = Graffle.gql(`
+  query {
+    fire: pokemons(filter: { type: FIRE }) {
+      name
+    }
+    water: pokemons(filter: { type: WATER }) {
+      name
+    }
+  }
+`)
+```
+
+== native
+
+```graphql
+query {
+  fire: pokemons(filter: { type: FIRE }) {
+    name
+  }
+  water: pokemons(filter: { type: WATER }) {
+    name
+  }
+}
+```
+
+:::
+
 ### Short Array
 
 Only for scalars/enums without required arguments. Equivalent to `['alias', true]`.
+
+:::tabs
+== object
 
 ```ts
 const doc = Graffle.gql({
@@ -271,9 +307,38 @@ const doc = Graffle.gql({
 })
 ```
 
+== string
+
+```ts
+const doc = Graffle.gql(`
+  query {
+    pokemon {
+      pokemonName: name
+      hitPoints: hp
+    }
+  }
+`)
+```
+
+== native
+
+```graphql
+query {
+  pokemon {
+    pokemonName: name
+    hitPoints: hp
+  }
+}
+```
+
+:::
+
 ### String Only
 
 Only for scalars/enums without required arguments. Equivalent to `['alias', true]`. Most concise.
+
+:::tabs
+== object
 
 ```ts
 const doc = Graffle.gql({
@@ -285,6 +350,32 @@ const doc = Graffle.gql({
   },
 })
 ```
+
+== string
+
+```ts
+const doc = Graffle.gql(`
+  query {
+    pokemon {
+      pokemonId: id
+      pokemonName: name
+    }
+  }
+`)
+```
+
+== native
+
+```graphql
+query {
+  pokemon {
+    pokemonId: id
+    pokemonName: name
+  }
+}
+```
+
+:::
 
 ## Directives
 
