@@ -31,7 +31,10 @@ export interface InterfaceGrandparent<
    * | **Path** | `InterfaceGrandparent.a` |
    * | **Nullability** | Required |
    */
-  a?: $Fields.a.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+  a?:
+    | $Fields.a.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
    *
@@ -255,4 +258,5 @@ export interface InterfaceGrandparent<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

@@ -34,6 +34,7 @@ export interface DateInterface1<
   date1?:
     | $Fields.date1.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * Inline fragment selection for {@link $Schema.DateObject1} implementor.
    *
@@ -83,4 +84,5 @@ export interface DateInterface1<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

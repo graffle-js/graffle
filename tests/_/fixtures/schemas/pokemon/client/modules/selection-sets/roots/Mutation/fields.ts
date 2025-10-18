@@ -83,13 +83,12 @@ export namespace addPokemon {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type resetData<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   | resetData.$SelectionSet<_$Context>
 
 export namespace resetData {
@@ -107,6 +106,7 @@ export namespace resetData {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
     | $SelectionSet<_$Context>
   >
 }

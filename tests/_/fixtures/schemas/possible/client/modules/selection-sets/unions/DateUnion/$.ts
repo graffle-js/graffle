@@ -30,6 +30,7 @@ export interface DateUnion<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * Inline fragment selection for {@link $Schema.DateObject1} member.
    *

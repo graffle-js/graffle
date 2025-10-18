@@ -34,6 +34,7 @@ export interface Error<_$Context extends $$Utilities.Docpar.Object.Select.Select
   message?:
     | $Fields.message.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.message<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * Inline fragment selection for {@link $Schema.ErrorOne} implementor.
    *
@@ -112,4 +113,5 @@ export interface Error<_$Context extends $$Utilities.Docpar.Object.Select.Select
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

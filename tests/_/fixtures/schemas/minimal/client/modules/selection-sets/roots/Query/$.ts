@@ -25,6 +25,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   id1?:
     | $Fields.id1.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 
   /**
    * Inline fragments for field groups.
@@ -45,4 +46,5 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

@@ -26,6 +26,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   InputObjectNested?:
     | $Fields.InputObjectNested.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.InputObjectNested<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -57,6 +58,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   abcEnum?:
     | $Fields.abcEnum.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.abcEnum<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -72,6 +74,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   argInputObjectCircular?:
     | $Fields.argInputObjectCircular.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.argInputObjectCircular<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -86,6 +89,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   bigintField?:
     | $Fields.bigintField.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.bigintField<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -100,6 +104,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   bigintFieldNonNull?:
     | $Fields.bigintFieldNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.bigintFieldNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -114,6 +119,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   date?:
     | $Fields.date.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -129,6 +135,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateArg?:
     | $Fields.dateArg.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArg<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -144,6 +151,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateArgInputObject?:
     | $Fields.dateArgInputObject.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgInputObject<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -159,6 +167,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateArgList?:
     | $Fields.dateArgList.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateArgList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -233,6 +242,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateList?:
     | $Fields.dateList.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -248,6 +258,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateListList?:
     | $Fields.dateListList.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateListList<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -263,6 +274,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateListNonNull?:
     | $Fields.dateListNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateListNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -277,6 +289,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   dateNonNull?:
     | $Fields.dateNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.dateNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -320,6 +333,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   error?:
     | $Fields.error.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.error<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -331,7 +345,10 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
    * | **Path** | `Query.id` |
    * | **Nullability** | Optional |
    */
-  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?:
+    | $Fields.id.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -346,6 +363,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   idNonNull?:
     | $Fields.idNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.idNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -468,6 +486,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   listInt?:
     | $Fields.listInt.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listInt<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -483,6 +502,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   listIntNonNull?:
     | $Fields.listIntNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listIntNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -498,6 +518,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   listListInt?:
     | $Fields.listListInt.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listListInt<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -513,6 +534,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   listListIntNonNull?:
     | $Fields.listListIntNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.listListIntNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -672,6 +694,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   string?:
     | $Fields.string.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -687,6 +710,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   stringWithArgEnum?:
     | $Fields.stringWithArgEnum.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgEnum<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -702,6 +726,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   stringWithArgInputObject?:
     | $Fields.stringWithArgInputObject.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObject<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -749,6 +774,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   stringWithArgs?:
     | $Fields.stringWithArgs.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithArgs<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -764,6 +790,7 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   stringWithListArg?:
     | $Fields.stringWithListArg.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.stringWithListArg<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -885,4 +912,5 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

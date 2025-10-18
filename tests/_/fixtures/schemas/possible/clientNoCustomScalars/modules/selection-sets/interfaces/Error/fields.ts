@@ -3,6 +3,7 @@ import type { $DefaultSelectionContext } from '../../_context.js'
 
 export type message<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   | message.$SelectionSet<_$Context>
 
 export namespace message {
@@ -20,6 +21,7 @@ export namespace message {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
     | $SelectionSet<_$Context>
   >
 }

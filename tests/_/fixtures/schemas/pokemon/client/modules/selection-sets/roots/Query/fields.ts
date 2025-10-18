@@ -19,9 +19,7 @@ export namespace battles {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type beings<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -40,9 +38,7 @@ export namespace beings {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type pokemonByName<
@@ -82,9 +78,7 @@ export namespace pokemonByName {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type pokemons<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -123,9 +117,7 @@ export namespace pokemons {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type trainerByName<
@@ -165,9 +157,7 @@ export namespace trainerByName {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type trainers<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -186,7 +176,5 @@ export namespace trainers {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }

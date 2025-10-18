@@ -31,7 +31,10 @@ export interface Being<_$Context extends $$Utilities.Docpar.Object.Select.Select
    * | **Path** | `Being.id` |
    * | **Nullability** | Optional |
    */
-  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?:
+    | $Fields.id.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -46,6 +49,7 @@ export interface Being<_$Context extends $$Utilities.Docpar.Object.Select.Select
   name?:
     | $Fields.name.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * Inline fragment selection for {@link $Schema.Patron} implementor.
    *
@@ -153,4 +157,5 @@ export interface Being<_$Context extends $$Utilities.Docpar.Object.Select.Select
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

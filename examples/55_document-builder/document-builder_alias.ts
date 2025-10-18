@@ -1,5 +1,16 @@
 /**
  * This example shows how to write GraphQL aliases in the TypeScript interface.
+ *
+ * There are two syntaxes for aliases:
+ *
+ * 1. Full syntax: ["aliasName", selectionSet]
+ *    - Works for all fields
+ *    - Required when field has required arguments or non-scalar selection
+ *
+ * 2. Short syntax: ["aliasName"]
+ *    - Only for scalar fields without required arguments
+ *    - Equivalent to ["aliasName", true]
+ *    - More concise for simple scalar selections
  */
 
 import { Graffle } from '../$/graffle/$.js'
@@ -15,15 +26,17 @@ const yearsAgo1 = new Date(Date.now() - year)
 // dprint-ignore
 const pokemons = await pokemon.query.$batch({
   pokemons: [
+    // Full syntax - required when field has arguments or complex selection
     [`elderPokemons`, {
-//   ^^^^^^^^^^^^^^^
       $: { filter: { birthday: { lte: yearsAgo100 } } },
       name: true,
+      id: [`elderId`],     // Short syntax for scalar field
+//        ^^^^^^^^^^^^
     }],
     [`babyPokemons`, {
-//   ^^^^^^^^^^^^^^
       $: { filter: { birthday: { gte: yearsAgo1 } } },
-      name: true,
+      name: [`babyName`],  // Short syntax for scalar field
+//         ^^^^^^^^^^^^^
     }],
   ],
 })

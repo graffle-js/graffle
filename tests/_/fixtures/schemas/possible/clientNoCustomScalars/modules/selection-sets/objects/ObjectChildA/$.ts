@@ -30,7 +30,10 @@ export interface ObjectChildA<
    * | **Path** | `ObjectChildA.a` |
    * | **Nullability** | Required |
    */
-  a?: $Fields.a.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+  a?:
+    | $Fields.a.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -42,7 +45,10 @@ export interface ObjectChildA<
    * | **Path** | `ObjectChildA.b` |
    * | **Nullability** | Required |
    */
-  b?: $Fields.b.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
+  b?:
+    | $Fields.b.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -54,7 +60,10 @@ export interface ObjectChildA<
    * | **Path** | `ObjectChildA.c1` |
    * | **Nullability** | Required |
    */
-  c1?: $Fields.c1.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.c1<_$Context>>
+  c1?:
+    | $Fields.c1.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.c1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -66,7 +75,10 @@ export interface ObjectChildA<
    * | **Path** | `ObjectChildA.me` |
    * | **Nullability** | Required |
    */
-  me?: $Fields.me.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
+  me?:
+    | $Fields.me.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 
   /**
    * Inline fragments for field groups.
@@ -87,4 +99,5 @@ export interface ObjectChildA<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }

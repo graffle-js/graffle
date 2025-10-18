@@ -30,7 +30,10 @@ export interface ObjectGrandparent<
    * | **Path** | `ObjectGrandparent.a` |
    * | **Nullability** | Required |
    */
-  a?: $Fields.a.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+  a?:
+    | $Fields.a.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
   /**
    * # Info
    *
@@ -42,7 +45,10 @@ export interface ObjectGrandparent<
    * | **Path** | `ObjectGrandparent.me` |
    * | **Nullability** | Required |
    */
-  me?: $Fields.me.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
+  me?:
+    | $Fields.me.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 
   /**
    * Inline fragments for field groups.
@@ -63,4 +69,5 @@ export interface ObjectGrandparent<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
 }
