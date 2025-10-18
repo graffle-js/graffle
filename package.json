@@ -1,6 +1,6 @@
 {
   "name": "graphql-request",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "packageManager": "pnpm@9.4.0",
   "type": "module",
   "main": "./build/entrypoints/main.js",
@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jasonkuhrt/graphql-request.git"
+    "url": "https://github.com/graffle-js/graffle.git"
   },
   "keywords": [
     "graphql",
@@ -32,9 +32,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jasonkuhrt/graphql-request/issues"
+    "url": "https://github.com/graffle-js/graffle/issues"
   },
-  "homepage": "https://github.com/jasonkuhrt/graphql-request",
+  "homepage": "https://github.com/graffle-js/graffle/tree/graphql-request",
   "scripts": {
     "gen:test:schema": "tsx tests/_/schemaGenerate.ts",
     "demo": "tsx src/cli/generateSchema.ts && dprint fmt src/demo.ts",
