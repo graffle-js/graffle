@@ -33,6 +33,7 @@ export const examplePaths = [
   FsLoc.fromString('./55_document-builder/document-builder_batch.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_directive.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_document.ts'),
+  FsLoc.fromString('./55_document-builder/document-builder_domains.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_interface.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_root-field.ts'),
   FsLoc.fromString('./55_document-builder/document-builder_root-level-builders.ts'),

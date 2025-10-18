@@ -20,15 +20,19 @@ const yearsAgo1 = new Date(Date.now() - year)
 
 const pokemons = await pokemon.query.$batch({
   pokemons: [
+    // Full syntax - required when field has arguments or complex selection
     [`elderPokemons`, {
-//   ^^^^^^^^^^^^^^^
       $: { filter: { birthday: { lte: yearsAgo100 } } },
       name: true,
+      id: `elderId`,       // String syntax (most concise)
+//        ^^^^^^^^^^
+      hp: [`elderHp`],     // Short array syntax
+//        ^^^^^^^^^^^^
     }],
     [`babyPokemons`, {
-//   ^^^^^^^^^^^^^^
       $: { filter: { birthday: { gte: yearsAgo1 } } },
-      name: true,
+      name: `babyName`,    // String syntax (most concise)
+//         ^^^^^^^^^^^^
     }],
   ],
 })
@@ -42,15 +46,19 @@ console.log(pokemons)
 {
   "elderPokemons": [
     {
-      "name": "Pikachu"
+      "name": "Pikachu",
+      "elderId": "1",
+      "elderHp": 35
     },
     {
-      "name": "Squirtle"
+      "name": "Squirtle",
+      "elderId": "3",
+      "elderHp": 44
     }
   ],
   "babyPokemons": [
     {
-      "name": "Charizard"
+      "babyName": "Charizard"
     }
   ]
 }
