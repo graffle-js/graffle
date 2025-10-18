@@ -100,7 +100,11 @@ const generateMethodsFile = (
     seenFields.add(field.fieldName)
 
     const methodName = field.methodName ?? field.fieldName
-    const operationTypeNode = field.operationType === 'query' ? 'QUERY' : field.operationType === 'mutation' ? 'MUTATION' : 'SUBSCRIPTION'
+    const operationTypeNode = field.operationType === 'query'
+      ? 'QUERY'
+      : field.operationType === 'mutation'
+      ? 'MUTATION'
+      : 'SUBSCRIPTION'
 
     // Get field definition and JSDoc
     const rootType = config.schema.instance.getType(field.rootTypeName) as Grafaid.Schema.ObjectType

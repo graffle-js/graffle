@@ -96,7 +96,10 @@ export const addAndApplyMany = <
     }
 
     // todo: test that if computed present, then they are added to the context.
-    if (extension.requestInterceptor || (extension.requestInterceptorsComputed && extension.requestInterceptorsComputed.length > 0)) {
+    if (
+      extension.requestInterceptor
+      || (extension.requestInterceptorsComputed && extension.requestInterceptorsComputed.length > 0)
+    ) {
       Object.assign(
         newContext,
         RequestInterceptors.add(newContext, {

@@ -12,7 +12,7 @@ await graffle.query.pokemonByName({ name: 'Pikachu' })
 await graffle.mutation.addPokemon({ input: { name: 'Pikachu' } })
 
 // With domains: Resource-oriented organization
-await graffle.pokemon.getOne({ name: 'Pikachu' })
+await graffle.pokemon.findByName({ name: 'Pikachu' })
 await graffle.pokemon.create({ input: { name: 'Pikachu' } })
 ```
 
@@ -44,18 +44,12 @@ export default Generator.configure({
   methodsOrganization: {
     logical: true, // Keep query/mutation organization
     domains: { // Add domain organization
-      groups: [{ // Each group provides an organizational view
-        rules: [
-          // Map specific fields to namespace methods
-          {
-            pattern: 'pokemonByName',
-            namespace: 'pokemon',
-            methodName: 'getOne',
-          },
-          { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
-          { pattern: 'addPokemon', namespace: 'pokemon', methodName: 'create' },
-        ],
-      }],
+      rules: [
+        // Map specific fields to namespaces with custom method names
+        { pattern: 'pokemonByName', path: 'pokemon', methodName: 'findByName' },
+        { pattern: 'pokemons', path: 'pokemon', methodName: 'list' },
+        { pattern: 'addPokemon', path: 'pokemon', methodName: 'create' },
+      ],
     },
   },
 })
@@ -70,125 +64,9 @@ await graffle.query.pokemons()
 await graffle.mutation.addPokemon({ input: { name: 'Pikachu' } })
 
 // Domain (resource-oriented)
-await graffle.pokemon.getOne({ name: 'Pikachu' })
-await graffle.pokemon.getMany()
+await graffle.pokemon.findByName({ name: 'Pikachu' })
+await graffle.pokemon.list()
 await graffle.pokemon.create({ input: { name: 'Pikachu' } })
-```
-
-### Groups
-
-Groups provide independent organizational views over your schema. Each group:
-
-- Gets a fresh view of all root fields
-- Can organize fields differently than other groups
-- Allows the same field to appear in multiple namespaces across different groups
-
-This enables multiple organizational perspectives over the same schema:
-
-```typescript
-export default Generator.configure({
-  methodsOrganization: {
-    domains: {
-      groups: [
-        {
-          // Group 1: CRUD-style organization
-          rules: [
-            {
-              pattern: 'pokemonByName',
-              namespace: 'pokemon',
-              methodName: 'getOne',
-            },
-            {
-              pattern: 'pokemons',
-              namespace: 'pokemon',
-              methodName: 'getMany',
-            },
-          ],
-        },
-        {
-          // Group 2: Query-style organization
-          rules: [
-            {
-              pattern: 'pokemonByName',
-              namespace: 'byName',
-              methodName: 'pokemon',
-            },
-            {
-              pattern: 'trainerByName',
-              namespace: 'byName',
-              methodName: 'trainer',
-            },
-          ],
-        },
-      ],
-    },
-  },
-})
-```
-
-Both organizational styles coexist:
-
-```typescript
-// Group 1: CRUD style
-await graffle.pokemon.getOne({ name: 'Pikachu' })
-await graffle.pokemon.getMany()
-
-// Group 2: Query style
-await graffle.byName.pokemon({ name: 'Pikachu' })
-await graffle.byName.trainer({ name: 'Ash' })
-```
-
-### Group Defaults
-
-Provide default values for namespace and methodName within a group. Rules inherit these defaults but can override them:
-
-```typescript
-{
-  groups: [{
-    defaults: {
-      namespace: 'pokemon', // Default namespace for all rules
-      methodName: (fieldName) => fieldName.replace(/^pokemon/, ''), // Default transform
-    },
-    rules: [
-      { pattern: 'pokemonByName' }, // Uses defaults → pokemon.ByName
-      { pattern: 'pokemonById' },   // Uses defaults → pokemon.ById
-      { pattern: 'pokemons', methodName: 'getAll' }, // Overrides methodName → pokemon.getAll
-    ],
-  }],
-}
-```
-
-**Benefits:**
-
-- **Reduce repetition** - Set common values once per group
-- **Clear intent** - Group configuration shows the organizational strategy
-- **Easy overrides** - Rules can still customize when needed
-
-**Example: Versioned API namespaces**
-
-```typescript
-{
-  groups: [
-    {
-      defaults: { namespace: 'v1' },
-      rules: [
-        { pattern: 'pokemonByName', methodName: 'getPokemon' },
-        { pattern: 'trainerById', methodName: 'getTrainer' },
-      ],
-    },
-    {
-      defaults: { namespace: 'v2' },
-      rules: [
-        { pattern: 'pokemonByName', methodName: 'getPokemon' },
-        { pattern: 'trainerById', methodName: 'getTrainer' },
-      ],
-    },
-  ],
-}
-
-// Usage:
-await graffle.v1.getPokemon({ name: 'Pikachu' })
-await graffle.v2.getPokemon({ name: 'Pikachu' })
 ```
 
 ### Pattern Matching
@@ -199,17 +77,17 @@ Use exact string matching for specific fields. Specify `methodName` to rename th
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
-      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-      { pattern: 'pokemons', namespace: 'pokemon' },  // Keeps original name
+      { pattern: 'pokemonByName', path: 'pokemon', methodName: 'findByName' },
+      { pattern: 'pokemons', path: 'pokemon' },  // Keeps original name "pokemons"
     ],
-  }],
+  },
 }
 
 // Usage:
-await graffle.pokemon.getOne({ name: 'Pikachu' })    // was pokemonByName
-await graffle.pokemon.pokemons()                     // kept original name
+await graffle.pokemon.findByName({ name: 'Pikachu' })    // was pokemonByName
+await graffle.pokemon.pokemons()                          // kept original name
 ```
 
 #### RegExp Patterns
@@ -218,15 +96,15 @@ Use regular expressions to match multiple fields. You can provide a static `meth
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       // All pokemon fields → pokemon domain, keep original names
-      { pattern: /^pokemon/, namespace: 'pokemon' },
+      { pattern: /^pokemon/, path: 'pokemon' },
 
       // All *ByName fields → byName domain, renamed to "find"
-      { pattern: /ByName$/, namespace: 'byName', methodName: 'find' },
+      { pattern: /ByName$/, path: 'byName', methodName: 'find' },
     ],
-  }],
+  },
 }
 
 // pokemonByName → pokemon.pokemonByName (no methodName specified)
@@ -246,21 +124,21 @@ Use named groups with `$name` or `${name}` syntax:
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: /^(?<resource>\w+)ByName$/,
-        namespace: '$resource',
-        methodName: 'getOne',
+        path: '$resource',
+        methodName: 'findByName',
       },
     ],
-  }],
+  },
 }
 
 // Matches all *ByName patterns
-// pokemonByName → pokemon.getOne
-// trainerByName → trainer.getOne
-// battleByName → battle.getOne
+// pokemonByName → pokemon.findByName
+// trainerByName → trainer.findByName
+// battleByName → battle.findByName
 ```
 
 ##### Indexed Capture Groups
@@ -269,15 +147,15 @@ Use numbered groups with `$1`, `$2`, etc.:
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: /^(\w+)By(Name|Id)$/,
-        namespace: '$1',
+        path: '$1',
         methodName: 'getBy$2',
       },
     ],
-  }],
+  },
 }
 
 // pokemonByName → pokemon.getByName
@@ -291,11 +169,11 @@ For complex logic, use a function to determine method names dynamically. The fun
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
-        namespace: '$resource',
+        path: '$resource',
         methodName: (fieldName, operationType, match) => {
           if (!match?.groups) return fieldName
           const action = match.groups.action
@@ -306,7 +184,7 @@ For complex logic, use a function to determine method names dynamically. The fun
         },
       },
     ],
-  }],
+  },
 }
 
 // addPokemon    → Pokemon.create  (add → create)
@@ -322,15 +200,15 @@ Apply case transformations in template strings using `${transform:captureName}` 
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: /^(?<resource>\w+)ByName$/,
-        namespace: '${kebab:resource}',  // pokemonSpecies → pokemon-species
-        methodName: 'getOne',
+        path: '${kebab:resource}',  // pokemonSpecies → pokemon-species
+        methodName: 'findByName',
       },
     ],
-  }],
+  },
 }
 ```
 
@@ -342,19 +220,19 @@ Organize methods into hierarchical namespace structures using dot-notation:
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: 'pokemonByName',
-        namespace: 'api.v2.pokemon', // Dot-notation for nesting
-        methodName: 'getOne',
+        path: 'api.v2.pokemon', // Dot-notation for nesting
+        methodName: 'findByName',
       },
     ],
-  }],
+  },
 }
 
 // Usage: nested namespace structure
-await graffle.api.v2.pokemon.getOne({ name: 'Pikachu' })
+await graffle.api.v2.pokemon.findByName({ name: 'Pikachu' })
 ```
 
 ##### Root-Level Methods
@@ -363,15 +241,15 @@ Use `null` to place methods at the root level alongside logical organization:
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: 'pokemonByName',
-        namespace: null, // Place at root level
+        path: null, // Place at root level
         methodName: 'getPokemon',
       },
     ],
-  }],
+  },
 }
 
 // Usage: method at root level
@@ -382,26 +260,26 @@ This is useful for promoting commonly-used methods or creating a flatter API str
 
 ### Aliases
 
-Use arrays for `namespace` and `methodName` to create multiple names for the same methods. When both are arrays, you get a Cartesian product of all combinations:
+Use arrays for `path` and `methodName` to create multiple names for the same methods. When both are arrays, you get a Cartesian product of all combinations:
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       {
         pattern: 'pokemonByName',
-        namespace: ['pokemon', 'poke'],     // Multiple namespaces
-        methodName: ['getOne', 'get'],      // Multiple method names
+        path: ['pokemon', 'poke'],     // Multiple paths
+        methodName: ['findByName', 'getOne'],      // Multiple method names
       },
     ],
-  }],
+  },
 }
 
-// Creates all 4 combinations (2 namespaces × 2 methods):
+// Creates all 4 combinations (2 paths × 2 methods):
+await graffle.pokemon.findByName({ name: 'Pikachu' })
 await graffle.pokemon.getOne({ name: 'Pikachu' })
-await graffle.pokemon.get({ name: 'Pikachu' })
+await graffle.poke.findByName({ name: 'Pikachu' })
 await graffle.poke.getOne({ name: 'Pikachu' })
-await graffle.poke.get({ name: 'Pikachu' })
 ```
 
 ### Precedence
@@ -412,16 +290,16 @@ Rules are evaluated sequentially, and **the first matching rule wins**. Order ru
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
       // Most specific first
-      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getByName' },
-      { pattern: /^pokemonById$/, namespace: 'pokemon', methodName: 'getById' },
+      { pattern: 'pokemonByName', path: 'pokemon', methodName: 'getByName' },
+      { pattern: /^pokemonById$/, path: 'pokemon', methodName: 'getById' },
 
       // Less specific
-      { pattern: /^pokemon/, namespace: 'pokemon', methodName: 'query' },
+      { pattern: /^pokemon/, path: 'pokemon', methodName: 'query' },
     ],
-  }],
+  },
 }
 ```
 
@@ -433,11 +311,11 @@ Fields that don't match any rule are **not included** in domain methods. They re
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
-      { pattern: 'pokemonByName', namespace: 'pokemon' },
+      { pattern: 'pokemonByName', path: 'pokemon' },
     ],
-  }],
+  },
 }
 
 // ✅ Available
@@ -453,24 +331,24 @@ await graffle.unmatchedDomain.unmatchedField({ id: '123' })
 
 #### Conflict Detection
 
-Graffle detects when multiple fields map to the same namespace and method name. Use unique method names within each namespace:
+Graffle detects when multiple fields map to the same path and method name. Use unique method names within each path:
 
 ```typescript
 {
-  groups: [{
+  domains: {
     rules: [
-      // ❌ Conflict - both map to pokemon.getOne
-      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getOne' },
-      { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getOne' },
+      // ❌ Conflict - both map to pokemon.findByName
+      { pattern: 'pokemonByName', path: 'pokemon', methodName: 'findByName' },
+      { pattern: 'pokemonById', path: 'pokemon', methodName: 'findByName' },
 
       // ✅ Fixed with unique method names
-      { pattern: 'pokemonByName', namespace: 'pokemon', methodName: 'getByName' },
-      { pattern: 'pokemonById', namespace: 'pokemon', methodName: 'getById' },
+      { pattern: 'pokemonByName', path: 'pokemon', methodName: 'findByName' },
+      { pattern: 'pokemonById', path: 'pokemon', methodName: 'findById' },
 
-      // ✅ Same method name in different namespaces is OK
-      { pattern: 'trainerByName', namespace: 'trainer', methodName: 'getOne' },
+      // ✅ Same method name in different paths is OK
+      { pattern: 'trainerByName', path: 'trainer', methodName: 'findByName' },
     ],
-  }],
+  },
 }
 ```
 
@@ -483,15 +361,13 @@ export default Generator.configure({
   methodsOrganization: {
     logical: false, // Disable query/mutation
     domains: { // Only domain methods
-      groups: [{
-        rules: [
-          {
-            pattern: 'pokemonByName',
-            namespace: 'pokemon',
-            methodName: 'getOne',
-          },
-        ],
-      }],
+      rules: [
+        {
+          pattern: 'pokemonByName',
+          path: 'pokemon',
+          methodName: 'findByName',
+        },
+      ],
     },
   },
 })
@@ -501,11 +377,72 @@ Now only domain methods are available:
 
 ```typescript
 // ✅ Available
-await graffle.pokemon.getOne({ name: 'Pikachu' })
+await graffle.pokemon.findByName({ name: 'Pikachu' })
 
 // ❌ Not available
 await graffle.query.pokemonByName({ name: 'Pikachu' })
 ```
+
+## Bundle Size Considerations
+
+::: warning Current Limitation
+All domain code is currently imported upfront in the generated client, which prevents tree-shaking of unused domains. This is tracked in [issue #1410](https://github.com/graffle-js/graffle/issues/1410).
+:::
+
+When you configure domains, **all domain code is included in your bundle**, even if you only use a subset of the domains. This is a known limitation of the current implementation.
+
+### Mitigation Strategy
+
+**Be selective about which domains you configure.** Only create domains for the parts of your API you actually need:
+
+```typescript
+export default Generator.configure({
+  methodsOrganization: {
+    domains: {
+      rules: [
+        // Only define domains for the 5% of your API you actually use
+        { pattern: 'pokemonByName', path: 'pokemon', methodName: 'findByName' },
+        { pattern: 'pokemons', path: 'pokemon', methodName: 'list' },
+        // Don't add rules for trainer, battle, etc. if you don't use them
+      ],
+    },
+  },
+})
+```
+
+If you only need 5% of your API surface area, only configure domains for those fields. This keeps the generated code small from the start, since fields without matching rules won't have domain methods generated at all.
+
+**Example: Focused API surface**
+
+```typescript
+// Large API with hundreds of fields, but you only need a few
+export default Generator.configure({
+  methodsOrganization: {
+    logical: true, // Keep this for full access
+    domains: { // Add domains only for frequently-used operations
+      rules: [
+        // Core user operations - used everywhere
+        { pattern: 'currentUser', path: 'user', methodName: 'getCurrent' },
+        { pattern: 'updateUser', path: 'user', methodName: 'update' },
+
+        // Common product queries - used often
+        { pattern: 'products', path: 'product', methodName: 'list' },
+        { pattern: 'productById', path: 'product', methodName: 'get' },
+      ],
+      // Omit hundreds of other fields - they remain accessible via query/mutation
+    },
+  },
+})
+
+// Small bundle: Only user + product domain code is generated
+// Other operations still available via graffle.query.* and graffle.mutation.*
+```
+
+This approach gives you:
+
+- **Small bundle size** - only generates code for configured domains
+- **Best of both worlds** - domains for common operations, logical organization for everything else
+- **Flexibility** - can add more domains later as needed
 
 ## Example
 
@@ -515,35 +452,21 @@ A complete example organizing multiple resources:
 export default Generator.configure({
   methodsOrganization: {
     domains: {
-      groups: [{
-        rules: [
-          // Pokemon domain
-          {
-            pattern: 'pokemonByName',
-            namespace: 'pokemon',
-            methodName: 'getOne',
-          },
-          { pattern: 'pokemons', namespace: 'pokemon', methodName: 'getMany' },
-          { pattern: 'addPokemon', namespace: 'pokemon', methodName: 'create' },
-          {
-            pattern: 'updatePokemon',
-            namespace: 'pokemon',
-            methodName: 'update',
-          },
+      rules: [
+        // Pokemon domain
+        { pattern: 'pokemonByName', path: 'pokemon', methodName: 'findByName' },
+        { pattern: 'pokemons', path: 'pokemon', methodName: 'list' },
+        { pattern: 'addPokemon', path: 'pokemon', methodName: 'create' },
+        { pattern: 'updatePokemon', path: 'pokemon', methodName: 'update' },
 
-          // Trainer domain
-          {
-            pattern: 'trainerById',
-            namespace: 'trainer',
-            methodName: 'getOne',
-          },
-          { pattern: 'trainers', namespace: 'trainer', methodName: 'getMany' },
-          { pattern: 'addTrainer', namespace: 'trainer', methodName: 'create' },
+        // Trainer domain
+        { pattern: 'trainerById', path: 'trainer', methodName: 'findById' },
+        { pattern: 'trainers', path: 'trainer', methodName: 'list' },
+        { pattern: 'addTrainer', path: 'trainer', methodName: 'create' },
 
-          // Battle domain
-          { pattern: /^battle/, namespace: 'battle' },
-        ],
-      }],
+        // Battle domain
+        { pattern: /^battle/, path: 'battle' },
+      ],
     },
   },
 })
@@ -553,13 +476,13 @@ Usage:
 
 ```typescript
 // Pokemon operations
-await graffle.pokemon.getOne({ name: 'Pikachu' })
-await graffle.pokemon.getMany()
+await graffle.pokemon.findByName({ name: 'Pikachu' })
+await graffle.pokemon.list()
 await graffle.pokemon.create({ input: { name: 'Pikachu' } })
 
 // Trainer operations
-await graffle.trainer.getOne({ id: '123' })
-await graffle.trainer.getMany()
+await graffle.trainer.findById({ id: '123' })
+await graffle.trainer.list()
 
 // Battle operations (using original field names)
 await graffle.battle.battleById({ id: '456' })
@@ -568,7 +491,7 @@ await graffle.battle.battles()
 
 ## Architecture
 
-Domain organization generates runtime code in the `domains/` directory alongside your type definitions. This code is fully tree-shakable using modern bundlers.
+Domain organization generates runtime code in the `domains/` directory alongside your type definitions.
 
 ### Layout
 
@@ -578,33 +501,13 @@ Generated structure:
 graffle/modules/
   domains/
     pokemon/
-      constants.js       # Field name constants
       methods.js         # Method implementations
-      index.js          # Namespace exports
+      index.js          # Exports (with aliases if configured)
     trainer/
-      constants.js
       methods.js
       index.js
     index.js            # Root exports
 ```
-
-### Tree-Shaking
-
-Only code you use gets bundled:
-
-```typescript
-import { pokemon } from './graffle/modules/domains'
-
-// Only bundles:
-// - domains/pokemon/constants.js (GET_ONE constant)
-// - domains/pokemon/methods.js (getOne function)
-// - domains/pokemon/index.js (export)
-// - domains/index.js (export * as pokemon)
-
-await pokemon.getOne({ name: 'Pikachu' })
-```
-
-Unused namespaces (`trainer`, etc.) and unused methods (`getMany`, etc.) are completely removed from your bundle.
 
 ### Aliases
 
@@ -612,15 +515,15 @@ Aliases are implemented using ESM export aliases, which have **zero runtime cost
 
 ```javascript
 // Generated code (simplified):
-const getOne = (args) =>
+const findByName = (context) => (args) =>
   executeRootField(context, 'Query', 'pokemonByName', args)
 
 // Multiple export names for the same function
-export { getOne, getOne as find, getOne as get }
+export { findByName, findByName as get, findByName as getOne }
 
-// Namespace aliases point to the same module
-export * as pokemon from './pokemon.js'
-export * as poke from './pokemon.js'
+// Path aliases point to the same module
+export * as pokemon from './pokemon/index.js'
+export * as poke from './pokemon/index.js'
 ```
 
 Modern bundlers recognize these as the same reference and deduplicate them automatically. Whether you use one alias or ten, the bundle size remains the same - only the function implementation is included once.
