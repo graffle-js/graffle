@@ -233,71 +233,58 @@ mutation addPokemon($name: String!, $type: PokemonType!) {
 
 ## Aliases
 
-Aliases allow you to request the same field multiple times with different arguments or rename fields in your response.
+Aliases let you rename fields in your response or request the same field multiple times with different arguments.
 
-**Three alias syntaxes are available:**
+### Full Syntax
 
-1. **Full syntax**: `['alias', selectionSet]` - Works for all fields
-2. **Short array**: `['alias']` - Only for scalars/enums without required arguments (equivalent to `['alias', true]`)
-3. **String-only**: `'alias'` - Only for scalars/enums without required arguments (equivalent to `['alias', true]`)
-
-<!--@include: @/_snippets/examples/document-builder/alias.detail.md-->
-
-### Multiple Fields with Arguments
-
-When aliasing fields with arguments or complex selections, use the full syntax:
-
-:::tabs
-== object
+Works for all fields. Required when the field has arguments or non-scalar selection.
 
 ```ts
 const doc = Graffle.gql({
   query: {
-    getPokemons: {
-      pokemons: [
-        ['elderPokemons', {
-          $: { filter: { birthday: { lte: '1924-01-01' } } },
-          name: true,
-        }],
-        ['babyPokemons', {
-          $: { filter: { birthday: { gte: '2023-01-01' } } },
-          name: true,
-        }],
-      ],
+    pokemons: [
+      ['fire', {
+        $: { filter: { type: 'FIRE' } },
+        name: true,
+      }],
+      ['water', {
+        $: { filter: { type: 'WATER' } },
+        name: true,
+      }],
+    ],
+  },
+})
+```
+
+### Short Array
+
+Only for scalars/enums without required arguments. Equivalent to `['alias', true]`.
+
+```ts
+const doc = Graffle.gql({
+  query: {
+    pokemon: {
+      name: ['pokemonName'],
+      hp: ['hitPoints'],
     },
   },
 })
 ```
 
-== string
+### String Only
+
+Only for scalars/enums without required arguments. Equivalent to `['alias', true]`. Most concise.
 
 ```ts
-const doc = Graffle.gql(`
-  query getPokemons {
-    elderPokemons: pokemons(filter: { birthday: { lte: "1924-01-01" } }) {
-      name
-    }
-    babyPokemons: pokemons(filter: { birthday: { gte: "2023-01-01" } }) {
-      name
-    }
-  }
-`)
+const doc = Graffle.gql({
+  query: {
+    pokemon: {
+      id: 'pokemonId',
+      name: 'pokemonName',
+    },
+  },
+})
 ```
-
-== native
-
-```graphql
-query getPokemons {
-  elderPokemons: pokemons(filter: { birthday: { lte: "1924-01-01" } }) {
-    name
-  }
-  babyPokemons: pokemons(filter: { birthday: { gte: "2023-01-01" } }) {
-    name
-  }
-}
-```
-
-:::
 
 ## Directives
 
