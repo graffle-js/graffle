@@ -10,6 +10,13 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
+
+    // Import domains if configured
+    const hasDomains = config.methodsOrganization.domains !== false
+    if (hasDomains) {
+      code`import * as $$Domains from './domains/index.js'`
+    }
+
     code`
       import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'
@@ -17,7 +24,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
 
       const context = ${$.$$Utilities}.pipe(
         ${$.$$Utilities}.contextEmpty,
-        ctx => ${$.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+        ctx => ${$.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, ${hasDomains ? 'DocumentBuilder({ domains: $$Domains })' : 'DocumentBuilder'}]),
         ctx => ${$.$$Utilities}.Transports.configureCurrentOrThrow(ctx, { url: $$Data.defaultSchemaUrl }),
         ctx => ${$.$$Utilities}.Configuration.add(ctx, {
            schema: {

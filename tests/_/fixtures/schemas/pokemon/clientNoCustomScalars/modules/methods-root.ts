@@ -490,6 +490,326 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
 }
 
+export interface $BattleMethods<$Context extends $$Utilities.Context> {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Battle}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.battles` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   */
+
+  list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>>,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          { battles: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'battles'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+            { battles: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'battles'
+        >
+      >
+    >
+  >
+}
+
+export interface $BeingMethods<$Context extends $$Utilities.Context> {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Being}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.beings` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   */
+
+  list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          { beings: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'beings'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+            { beings: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'beings'
+        >
+      >
+    >
+  >
+}
+
+export interface $PokemonMethods<$Context extends $$Utilities.Context> {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.pokemonByName` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   */
+
+  findByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
+      >,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          { pokemonByName: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'pokemonByName'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+            { pokemonByName: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'pokemonByName'
+        >
+      >
+    >
+  >
+
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.pokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   */
+
+  list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>>,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          { pokemons: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'pokemons'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+            { pokemons: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'pokemons'
+        >
+      >
+    >
+  >
+
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.addPokemon` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
+   */
+
+  create: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
+      >,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationMutation<
+          { addPokemon: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'addPokemon'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationMutation<
+            { addPokemon: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'addPokemon'
+        >
+      >
+    >
+  >
+}
+
+export interface $TrainerMethods<$Context extends $$Utilities.Context> {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.trainerByName` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
+
+  findByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
+      >,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          { trainerByName: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'trainerByName'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+            { trainerByName: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'trainerByName'
+        >
+      >
+    >
+  >
+
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Trainer}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.trainers` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   */
+
+  list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>>,
+    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          { trainers: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'trainers'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+            { trainers: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'trainers'
+        >
+      >
+    >
+  >
+}
+
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   /**
    * Access to {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root field methods.
@@ -532,6 +852,7 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```
    */
   mutation: MutationMethods<$Context>
+  $: $BattleMethods<$Context> & $BeingMethods<$Context> & $PokemonMethods<$Context> & $TrainerMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {

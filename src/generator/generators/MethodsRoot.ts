@@ -59,8 +59,11 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     // Add namespace organization properties
     if (config.methodsOrganization.domains) {
       const namespaceGroups = groupFieldsByDomain(config)
+
+      // Group namespaces by their property name (first path element)
+      const propertyGroups = new Map<string, string[]>()
+
       for (const [namespaceKey, fields] of Object.entries(namespaceGroups)) {
-        // Get the property name from the namespace path
         const firstField = fields[0]
         if (!firstField) continue
 
@@ -68,10 +71,24 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
           // Root-level methods - add directly to BuilderMethodsRoot
           // These will be generated inline below
         } else {
-          // Namespaced methods - add property
+          // Namespaced methods - group by property name
           const propertyName = firstField.namespacePath[0]!
+          if (!propertyGroups.has(propertyName)) {
+            propertyGroups.set(propertyName, [])
+          }
           const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
-          code(`  ${propertyName}: ${interfaceName}<$Context>`)
+          propertyGroups.get(propertyName)!.push(interfaceName)
+        }
+      }
+
+      // Generate a single property for each group with intersected types
+      for (const [propertyName, interfaceNames] of propertyGroups.entries()) {
+        if (interfaceNames.length === 1) {
+          code(`  ${propertyName}: ${interfaceNames[0]}<$Context>`)
+        } else {
+          // Multiple interfaces - create intersection type
+          const intersected = interfaceNames.map(name => `${name}<$Context>`).join(' & ')
+          code(`  ${propertyName}: ${intersected}`)
         }
       }
     }
@@ -200,9 +217,9 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
 // ========================================
 
 import type { Config } from '../config/config.js'
-import type { FieldGroupingRule, GroupConfig } from '../config/configInit.js'
+import type { FieldGroupingRule } from '../config/configInit.js'
 
-interface DomainField {
+export interface DomainField {
   fieldName: string
   methodName: string | undefined
   operationType: 'query' | 'mutation'
@@ -292,20 +309,81 @@ const replaceCaptures = (template: string, match: RegExpExecArray): string => {
 }
 
 /**
- * Normalize a namespace value to an array path or null.
- * - string: parse dot-notation ('api.v2.pokemon' → ['api', 'v2', 'pokemon'])
- * - array: use as-is
- * - null: return null (root-level)
+ * Parse a single path string with dot-notation into a path array.
+ * Handles the new path semantics:
+ * - 'args.no' or '.args.no' → ['$', 'args', 'no']
+ * - '.' → ['$'] (root level)
+ * - Input always gets '$' prefix added
  */
-const normalizeNamespace = (namespace: string | string[] | null | undefined): string[] | null => {
-  if (namespace === null || namespace === undefined) {
-    return null
+const parsePath = (path: string): string[] => {
+  // Remove leading dot if present
+  const normalized = path.startsWith('.') ? path.slice(1) : path
+
+  // Handle root case
+  if (normalized === '') {
+    return ['$']
   }
-  if (Array.isArray(namespace)) {
-    return namespace
+
+  // Add $ prefix and parse dot-notation
+  return ['$', ...normalized.split('.').filter(part => part.length > 0)]
+}
+
+/**
+ * Normalize a path value to an array of namespace paths.
+ * Handles aliases (array of paths) and single paths.
+ * - string: parse dot-notation and return as single-item array
+ * - array: parse each element and return as array (aliases)
+ * - null: return [null] (discard)
+ * - undefined: error (path must be defined)
+ */
+const normalizePaths = (path: string | string[] | null | undefined): (string[] | null)[] => {
+  if (path === null) {
+    return [null]
   }
-  // Parse dot-notation
-  return namespace.split('.').filter(part => part.length > 0)
+  if (path === undefined) {
+    throw new Error('Path must be defined')
+  }
+  if (Array.isArray(path)) {
+    // Array of path aliases - parse each one
+    return path.map(p => parsePath(p))
+  }
+  // Single path with dot-notation
+  return [parsePath(path)]
+}
+
+/**
+ * Normalize a methodName value to an array of method names.
+ * - string: return as single-item array
+ * - array: return as-is (aliases)
+ * - function: call function and return result as single-item array
+ * - undefined: return undefined
+ */
+const normalizeMethodNames = (
+  methodName:
+    | string
+    | string[]
+    | ((fieldName: string, operationType: 'query' | 'mutation', match?: RegExpExecArray) => string)
+    | undefined,
+  fieldName: string,
+  operationType: 'query' | 'mutation',
+  match?: RegExpExecArray,
+): string[] | undefined => {
+  if (methodName === undefined) return undefined
+  if (typeof methodName === 'function') {
+    return [methodName(fieldName, operationType, match)]
+  }
+  if (Array.isArray(methodName)) {
+    // Handle array of aliases - apply capture replacement to each
+    if (match) {
+      return methodName.map(name => replaceCaptures(name, match))
+    }
+    return methodName
+  }
+  // Single method name - handle capture replacement if needed
+  if (match && typeof methodName === 'string') {
+    return [replaceCaptures(methodName, match)]
+  }
+  return [methodName]
 }
 
 /**
@@ -319,74 +397,109 @@ const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
 }
 
 /**
- * Apply a single rule to a field name, returning namespace/method info or null.
- * Requires defaults to be pre-applied to the rule.
+ * Apply a single rule to a field name, returning path/method info (with potential aliases) or null.
+ * Returns arrays for both namespacePaths and methodNames to support aliases.
+ * If path is null, returns null namespacePaths (discard field).
  */
 const applyRule = (
   fieldName: string,
   operationType: 'query' | 'mutation',
   rule: FieldGroupingRule,
-): { namespacePath: string[] | null; methodName?: string } | null => {
+): { namespacePaths: (string[] | null)[]; methodNames?: string[]; consume: boolean } | null => {
   if (!matchesRule(fieldName, rule)) return null
 
-  let namespace = rule.namespace
+  let path = rule.path
   let methodName = rule.methodName
+  const consume = rule.consume ?? false
 
-  // If pattern is RegExp, extract captures and replace references
-  if (rule.pattern instanceof RegExp) {
-    const match = rule.pattern.exec(fieldName)
-    if (!match) return null
+  // Get RegExp match if pattern is RegExp
+  const match = rule.pattern instanceof RegExp ? rule.pattern.exec(fieldName) : undefined
+  if (rule.pattern instanceof RegExp && !match) return null
 
-    // Process namespace with capture groups (only if it's a string)
-    if (typeof namespace === 'string') {
-      namespace = replaceCaptures(namespace, match)
-    }
-
-    // Process methodName with capture groups
-    if (typeof methodName === 'string') {
-      methodName = replaceCaptures(methodName, match)
-    } else if (typeof methodName === 'function') {
-      // Pass match as third parameter for advanced usage
-      methodName = methodName(fieldName, operationType, match)
-    }
-  } else {
-    // String pattern - apply methodName as before
-    if (typeof methodName === 'function') {
-      methodName = methodName(fieldName, operationType)
-    }
+  // Process path with capture groups
+  if (typeof path === 'string' && match) {
+    path = replaceCaptures(path, match)
+  } else if (Array.isArray(path) && match) {
+    // Handle array of aliases - apply capture replacement to each
+    path = path.map(p => replaceCaptures(p, match))
   }
 
-  // Namespace must be defined at this point (either from rule or from defaults)
-  if (namespace === undefined) {
-    throw new Error(
-      `Rule matching field "${fieldName}" has no namespace defined. `
-        + `Ensure all rules have a namespace or provide a default namespace in the group configuration.`,
-    )
+  // Path defaults to '.' (root level) if not specified
+  if (path === undefined) {
+    path = '.'
   }
 
-  // Normalize namespace to array path or null
-  const namespacePath = normalizeNamespace(namespace)
+  // Normalize to arrays
+  const namespacePaths = normalizePaths(path)
+  const methodNames = normalizeMethodNames(methodName, fieldName, operationType, match ?? undefined)
 
   return {
-    namespacePath,
-    methodName,
+    namespacePaths,
+    methodNames,
+    consume,
   }
 }
 
 /**
- * Apply rules in order, returning first match.
- * Rules should already have defaults applied.
+ * Apply all matching rules to a field (unless consumed).
+ * By default, fields can match multiple rules.
+ * If a rule has consume=true, stop processing after that rule.
  */
 const applyRules = (
   fieldName: string,
   operationType: 'query' | 'mutation',
   rules: FieldGroupingRule[],
-): { namespacePath: string[] | null; methodName?: string } | null => {
+): Array<{ namespacePaths: (string[] | null)[]; methodNames?: string[] }> => {
+  const matches: Array<{ namespacePaths: (string[] | null)[]; methodNames?: string[] }> = []
+
   for (const rule of rules) {
     const result = applyRule(fieldName, operationType, rule)
-    if (result) return result
+    if (result) {
+      const { namespacePaths, methodNames, consume } = result
+      matches.push({ namespacePaths, methodNames })
+
+      // If consume=true, stop processing
+      if (consume) break
+    }
   }
-  return null
+
+  return matches
+}
+
+/**
+ * Expand alias arrays into individual DomainField entries (cartesian product).
+ * If namespace is ['pokemon', 'poke'] and methodName is ['getOne', 'get'],
+ * creates 4 entries: pokemon.getOne, pokemon.get, poke.getOne, poke.get
+ */
+const expandAliases = (
+  field: {
+    fieldName: string
+    namespacePaths: (string[] | null)[]
+    methodNames?: string[]
+    operationType: 'query' | 'mutation'
+    rootTypeName: string
+  },
+): DomainField[] => {
+  const { fieldName, namespacePaths, methodNames, operationType, rootTypeName } = field
+
+  // If no methodNames provided, use field name as single method name
+  const effectiveMethodNames = methodNames ?? [undefined]
+
+  // Create cartesian product of namespacePaths × methodNames
+  const expanded: DomainField[] = []
+  for (const namespacePath of namespacePaths) {
+    for (const methodName of effectiveMethodNames) {
+      expanded.push({
+        fieldName,
+        namespacePath,
+        methodName,
+        operationType,
+        rootTypeName,
+      })
+    }
+  }
+
+  return expanded
 }
 
 /**
@@ -436,65 +549,112 @@ const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
 }
 
 /**
- * Apply group defaults to rules, creating rules with inherited values.
- */
-const applyGroupDefaults = (group: GroupConfig): FieldGroupingRule[] => {
-  return group.rules.map(rule => ({
-    ...rule,
-    namespace: rule.namespace !== undefined ? rule.namespace : group.defaults?.namespace,
-    methodName: rule.methodName !== undefined ? rule.methodName : group.defaults?.methodName,
-  }))
-}
-
-/**
  * Group all root fields by namespace according to configuration.
- * Each group gets a fresh view of all root fields.
+ * Processes all rules against all fields (unless consumed).
  */
-const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
+export const groupFieldsByDomain = (config: Config): Record<string, DomainField[]> => {
   if (!config.methodsOrganization.domains) return {}
 
   const grouped: Record<string, DomainField[]> = {}
-  const { groups } = config.methodsOrganization.domains
+  const { rules } = config.methodsOrganization.domains
 
-  // Process each group independently
-  for (const group of groups) {
-    // Apply defaults to rules in this group
-    const rulesWithDefaults = applyGroupDefaults(group)
+  // Track which rules have matched at least one field (for warnings)
+  const ruleMatchCounts = new Map<FieldGroupingRule, number>()
+  rules.forEach(rule => ruleMatchCounts.set(rule, 0))
 
-    // Check for rule precedence issues within this group
-    checkRulePrecedence(rulesWithDefaults)
+  // Process all root fields
+  config.schema.kindMap.list.Root.forEach(rootType => {
+    const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
+    const operationType = rootDetails.operationType
 
-    // Each group gets a fresh view of all root fields
-    config.schema.kindMap.list.Root.forEach(rootType => {
-      const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
-      const operationType = rootDetails.operationType
+    // Skip subscription for now (domain grouping only supports query/mutation)
+    if (operationType === 'subscription') return
 
-      // Skip subscription for now (domain grouping only supports query/mutation)
-      if (operationType === 'subscription') return
+    for (const field of Object.values(rootType.getFields())) {
+      const matches = applyRules(field.name, operationType, rules)
 
-      for (const field of Object.values(rootType.getFields())) {
-        const result = applyRules(field.name, operationType, rulesWithDefaults)
-        if (!result) continue
+      // Track rule matches for warnings
+      for (const rule of rules) {
+        if (matchesRule(field.name, rule)) {
+          ruleMatchCounts.set(rule, (ruleMatchCounts.get(rule) ?? 0) + 1)
+        }
+      }
 
-        const { namespacePath, methodName } = result
+      // Process each match
+      for (const match of matches) {
+        const { namespacePaths, methodNames } = match
 
-        // Create a key for the namespace path
-        // null → '__root__', ['a', 'b'] → 'a.b'
-        const namespaceKey = namespacePath === null ? '__root__' : namespacePath.join('.')
-
-        if (!grouped[namespaceKey]) {
-          grouped[namespaceKey] = []
+        // Skip if path is null (discard field)
+        if (namespacePaths.length === 1 && namespacePaths[0] === null) {
+          continue
         }
 
-        grouped[namespaceKey].push({
+        // Expand aliases into individual entries (cartesian product)
+        const expandedFields = expandAliases({
           fieldName: field.name,
-          methodName,
+          namespacePaths,
+          methodNames,
           operationType,
           rootTypeName: rootType.name,
-          namespacePath,
         })
+
+        // Add each expanded field to the appropriate namespace group
+        for (const domainField of expandedFields) {
+          const { namespacePath } = domainField
+
+          // Create a key for the namespace path
+          // ['$', 'args', 'no'] → '$.args.no'
+          const namespaceKey = namespacePath === null ? '__root__' : namespacePath.join('.')
+
+          if (!grouped[namespaceKey]) {
+            grouped[namespaceKey] = []
+          }
+
+          grouped[namespaceKey].push(domainField)
+        }
       }
+    }
+  })
+
+  // Warn about rules that matched no fields (excluding consume=true with path=null)
+  const unmatchedRules = Array.from(ruleMatchCounts.entries())
+    .filter(([rule, count]) => {
+      // Don't warn about consume+null rules (they're intentionally silent)
+      if (rule.consume && rule.path === null) return false
+      return count === 0
     })
+    .map(([rule]) => rule)
+
+  if (unmatchedRules.length > 0) {
+    console.warn(`\n⚠️  Domain organization unused rules:\n`)
+    unmatchedRules.forEach(rule => {
+      const patternDisplay = typeof rule.pattern === 'string'
+        ? `'${rule.pattern}'`
+        : rule.pattern.toString()
+      console.warn(
+        `   Rule with pattern ${patternDisplay} matched no fields in the schema. `
+          + `This rule will have no effect. Check for typos or remove unused rules.`,
+      )
+    })
+    console.warn(``)
+  }
+
+  // Deduplicate fields that match multiple rules producing the same (fieldName, methodName, namespace)
+  for (const [namespaceKey, fields] of Object.entries(grouped)) {
+    const seen = new Set<string>()
+    const deduplicated: DomainField[] = []
+
+    for (const field of fields) {
+      const methodName = field.methodName ?? field.fieldName
+      const key = `${field.fieldName}:${methodName}`
+
+      if (!seen.has(key)) {
+        seen.add(key)
+        deduplicated.push(field)
+      }
+    }
+
+    grouped[namespaceKey] = deduplicated
   }
 
   // Detect conflicts: multiple fields mapping to same namespace path + method name

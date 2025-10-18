@@ -1,4 +1,5 @@
 import * as $$Data from './data.js'
+import * as $$Domains from './domains/index.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 
@@ -8,7 +9,7 @@ import * as $$Utilities from '#graffle/utilities-for-generated'
 
 const context = $$Utilities.pipe(
   $$Utilities.contextEmpty,
-  ctx => $$Utilities.Extensions.addAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+  ctx => $$Utilities.Extensions.addAndApplyMany(ctx, [TransportHttp, [DocumentBuilder, { domains: $$Domains }]]),
   ctx => $$Utilities.Transports.configureCurrentOrThrow(ctx, { url: $$Data.defaultSchemaUrl }),
   ctx =>
     $$Utilities.Configuration.add(ctx, {

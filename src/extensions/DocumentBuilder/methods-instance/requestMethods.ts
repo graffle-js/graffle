@@ -136,7 +136,7 @@ const buildDocumentRunner = (
   }
 }
 
-const executeRootField = async (
+export const executeRootField = async (
   context: Context,
   operationType: OperationTypeNode,
   rootFieldName: string,

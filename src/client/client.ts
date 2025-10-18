@@ -516,16 +516,18 @@ export const createWithContext = <$Context extends Context>(
 
   Object.assign(client, context.properties.static)
 
-  context.properties.computed.forEach(propertiesComputer => {
-    Object.assign(
-      client,
-      propertiesComputer({
-        configuration: context.configuration,
-        context,
-        client: client as any,
-      }),
-    )
-  })
+  if (context.properties.computed) {
+    context.properties.computed.forEach(propertiesComputer => {
+      Object.assign(
+        client,
+        propertiesComputer({
+          configuration: context.configuration,
+          context,
+          client: client as any,
+        }),
+      )
+    })
+  }
 
   // todo: access computed properties from context
   context.extensions.forEach(extension => {
@@ -533,19 +535,21 @@ export const createWithContext = <$Context extends Context>(
     // const configurationIndexEntry = configurationIndex[_.name]
     // if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
-    const propertiesComputed = extension.propertiesComputed.reduce((acc, propertiesComputer) => {
-      return {
-        ...acc,
-        ...propertiesComputer({
-          // configuration: configurationIndexEntry?.current,
-          configuration: context.configuration,
-          client: client as any,
-          context,
-        }),
-      }
-    }, {})
+    if (extension.propertiesComputed && extension.propertiesComputed.length > 0) {
+      const propertiesComputed = extension.propertiesComputed.reduce((acc, propertiesComputer) => {
+        return {
+          ...acc,
+          ...propertiesComputer({
+            // configuration: configurationIndexEntry?.current,
+            configuration: context.configuration,
+            client: client as any,
+            context,
+          }),
+        }
+      }, {})
 
-    Object.assign(client, propertiesComputed)
+      Object.assign(client, propertiesComputed)
+    }
   })
 
   return client
