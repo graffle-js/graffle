@@ -1,12 +1,12 @@
 import { Generator } from 'graffle/generator'
 
-export default Generator.configure({
+const config = Generator.configure({
   schema: {
     type: 'sdl',
     sdl: '../tests/_/fixtures/schemas/pokemon/schema.graphql',
   },
   outputDirPath: './$/graffle',
-  defaultSchemaUrl: 'http://localhost:3000/graphql',
+  defaultSchemaUrl: new URL('http://localhost:3000/graphql'),
   methodsOrganization: {
     logical: true, // Keep query/mutation organization
     domains: {
@@ -29,3 +29,5 @@ export default Generator.configure({
     },
   },
 })
+
+export default config
