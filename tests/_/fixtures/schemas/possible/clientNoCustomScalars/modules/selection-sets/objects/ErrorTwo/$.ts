@@ -34,6 +34,7 @@ export interface ErrorTwo<
     | $Fields.infoInt.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.infoInt<_$Context>>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -49,6 +50,7 @@ export interface ErrorTwo<
     | $Fields.message.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.message<_$Context>>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 
   /**
    * Inline fragments for field groups.
@@ -70,4 +72,5 @@ export interface ErrorTwo<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

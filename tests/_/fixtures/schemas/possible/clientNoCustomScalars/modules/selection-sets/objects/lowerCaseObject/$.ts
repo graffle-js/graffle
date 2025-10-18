@@ -33,6 +33,7 @@ export interface lowerCaseObject<
     | $Fields.id.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 
   /**
    * Inline fragments for field groups.
@@ -54,4 +55,5 @@ export interface lowerCaseObject<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

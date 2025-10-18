@@ -1,16 +1,20 @@
 /**
  * This example shows how to write GraphQL aliases in the TypeScript interface.
  *
- * There are two syntaxes for aliases:
+ * There are three syntaxes for aliases:
  *
  * 1. Full syntax: ["aliasName", selectionSet]
  *    - Works for all fields
  *    - Required when field has required arguments or non-scalar selection
  *
- * 2. Short syntax: ["aliasName"]
+ * 2. Short array: ["aliasName"]
  *    - Only for scalar fields without required arguments
  *    - Equivalent to ["aliasName", true]
- *    - More concise for simple scalar selections
+ *
+ * 3. String only: "aliasName"
+ *    - Only for scalar fields without required arguments
+ *    - Equivalent to ["aliasName", true]
+ *    - Most concise option
  */
 
 import { Graffle } from '../$/graffle/$.js'
@@ -30,13 +34,15 @@ const pokemons = await pokemon.query.$batch({
     [`elderPokemons`, {
       $: { filter: { birthday: { lte: yearsAgo100 } } },
       name: true,
-      id: [`elderId`],     // Short syntax for scalar field
+      id: `elderId`,       // String syntax (most concise)
+//        ^^^^^^^^^^
+      hp: [`elderHp`],     // Short array syntax
 //        ^^^^^^^^^^^^
     }],
     [`babyPokemons`, {
       $: { filter: { birthday: { gte: yearsAgo1 } } },
-      name: [`babyName`],  // Short syntax for scalar field
-//         ^^^^^^^^^^^^^
+      name: `babyName`,    // String syntax (most concise)
+//         ^^^^^^^^^^^^
     }],
   ],
 })

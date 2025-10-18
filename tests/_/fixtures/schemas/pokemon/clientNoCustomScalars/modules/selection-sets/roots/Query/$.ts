@@ -124,4 +124,5 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

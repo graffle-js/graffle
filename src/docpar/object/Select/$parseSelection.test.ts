@@ -2,6 +2,15 @@ import { describe, expect, it } from 'vitest'
 import { parseSelection } from './$parseSelection.js'
 
 describe('parseSelection - alias syntax', () => {
+  it('parses string alias: "x"', () => {
+    const result = parseSelection('id', 'x')
+    expect(result).toEqual({
+      type: 'Alias',
+      name: 'id',
+      aliases: [['x', true]],
+    })
+  })
+
   it('parses full array alias: ["x", true]', () => {
     const result = parseSelection('id', ['x', true])
     expect(result).toEqual({

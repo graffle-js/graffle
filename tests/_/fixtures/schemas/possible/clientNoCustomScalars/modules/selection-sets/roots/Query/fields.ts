@@ -8,6 +8,7 @@ export type InputObjectNested<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | InputObjectNested.$SelectionSet<_$Context>
 
 export namespace InputObjectNested {
@@ -46,6 +47,7 @@ export namespace InputObjectNested {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -93,6 +95,7 @@ export namespace InputObjectNestedNonNull {
 export type abcEnum<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | abcEnum.$SelectionSet<_$Context>
 
 export namespace abcEnum {
@@ -111,6 +114,7 @@ export namespace abcEnum {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -120,6 +124,7 @@ export type argInputObjectCircular<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | argInputObjectCircular.$SelectionSet<_$Context>
 
 export namespace argInputObjectCircular {
@@ -158,6 +163,7 @@ export namespace argInputObjectCircular {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -167,6 +173,7 @@ export type bigintField<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | bigintField.$SelectionSet<_$Context>
 
 export namespace bigintField {
@@ -185,6 +192,7 @@ export namespace bigintField {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -194,6 +202,7 @@ export type bigintFieldNonNull<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | bigintFieldNonNull.$SelectionSet<_$Context>
 
 export namespace bigintFieldNonNull {
@@ -212,6 +221,7 @@ export namespace bigintFieldNonNull {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -219,6 +229,7 @@ export namespace bigintFieldNonNull {
 export type date<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | date.$SelectionSet<_$Context>
 
 export namespace date {
@@ -237,6 +248,7 @@ export namespace date {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -244,6 +256,7 @@ export namespace date {
 export type dateArg<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateArg.$SelectionSet<_$Context>
 
 export namespace dateArg {
@@ -282,6 +295,7 @@ export namespace dateArg {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -291,6 +305,7 @@ export type dateArgInputObject<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateArgInputObject.$SelectionSet<_$Context>
 
 export namespace dateArgInputObject {
@@ -329,6 +344,7 @@ export namespace dateArgInputObject {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -338,6 +354,7 @@ export type dateArgList<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateArgList.$SelectionSet<_$Context>
 
 export namespace dateArgList {
@@ -376,6 +393,7 @@ export namespace dateArgList {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -523,6 +541,7 @@ export namespace dateInterface1 {
 export type dateList<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateList.$SelectionSet<_$Context>
 
 export namespace dateList {
@@ -541,6 +560,7 @@ export namespace dateList {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -550,6 +570,7 @@ export type dateListList<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateListList.$SelectionSet<_$Context>
 
 export namespace dateListList {
@@ -568,6 +589,7 @@ export namespace dateListList {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -577,6 +599,7 @@ export type dateListNonNull<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateListNonNull.$SelectionSet<_$Context>
 
 export namespace dateListNonNull {
@@ -595,6 +618,7 @@ export namespace dateListNonNull {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -604,6 +628,7 @@ export type dateNonNull<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateNonNull.$SelectionSet<_$Context>
 
 export namespace dateNonNull {
@@ -622,6 +647,7 @@ export namespace dateNonNull {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -668,6 +694,7 @@ export namespace dateUnion {
 export type error<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | error.$SelectionSet<_$Context>
 
 export namespace error {
@@ -706,6 +733,7 @@ export namespace error {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -713,6 +741,7 @@ export namespace error {
 export type id<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | id.$SelectionSet<_$Context>
 
 export namespace id {
@@ -731,6 +760,7 @@ export namespace id {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -738,6 +768,7 @@ export namespace id {
 export type idNonNull<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | idNonNull.$SelectionSet<_$Context>
 
 export namespace idNonNull {
@@ -756,6 +787,7 @@ export namespace idNonNull {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1004,6 +1036,7 @@ export namespace interfaceWithArgs {
 export type listInt<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listInt.$SelectionSet<_$Context>
 
 export namespace listInt {
@@ -1022,6 +1055,7 @@ export namespace listInt {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1031,6 +1065,7 @@ export type listIntNonNull<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listIntNonNull.$SelectionSet<_$Context>
 
 export namespace listIntNonNull {
@@ -1049,6 +1084,7 @@ export namespace listIntNonNull {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1058,6 +1094,7 @@ export type listListInt<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listListInt.$SelectionSet<_$Context>
 
 export namespace listListInt {
@@ -1076,6 +1113,7 @@ export namespace listListInt {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1085,6 +1123,7 @@ export type listListIntNonNull<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listListIntNonNull.$SelectionSet<_$Context>
 
 export namespace listListIntNonNull {
@@ -1103,6 +1142,7 @@ export namespace listListIntNonNull {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1413,6 +1453,7 @@ export namespace resultNonNull {
 type $string<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | $string.$SelectionSet<_$Context>
 
 namespace $string {
@@ -1431,6 +1472,7 @@ namespace $string {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1442,6 +1484,7 @@ export type stringWithArgEnum<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithArgEnum.$SelectionSet<_$Context>
 
 export namespace stringWithArgEnum {
@@ -1480,6 +1523,7 @@ export namespace stringWithArgEnum {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1489,6 +1533,7 @@ export type stringWithArgInputObject<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithArgInputObject.$SelectionSet<_$Context>
 
 export namespace stringWithArgInputObject {
@@ -1527,6 +1572,7 @@ export namespace stringWithArgInputObject {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1616,6 +1662,7 @@ export type stringWithArgs<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithArgs.$SelectionSet<_$Context>
 
 export namespace stringWithArgs {
@@ -1703,6 +1750,7 @@ export namespace stringWithArgs {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1712,6 +1760,7 @@ export type stringWithListArg<
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
   | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithListArg.$SelectionSet<_$Context>
 
 export namespace stringWithListArg {
@@ -1750,6 +1799,7 @@ export namespace stringWithListArg {
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }

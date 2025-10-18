@@ -38,6 +38,11 @@ describe('isSelectAliasOne', () => {
 })
 
 describe('normalizeSelectAlias', () => {
+  it('normalizes string "x" to [["x", true]]', () => {
+    const result = normalizeSelectAlias('x')
+    expect(result).toEqual([['x', true]])
+  })
+
   it('normalizes short array ["x"] to [["x", true]]', () => {
     const result = normalizeSelectAlias(['x'])
     expect(result).toEqual([['x', true]])

@@ -651,10 +651,13 @@ const renderOutputFieldForFields = (
   const shortAlias = isCanBeIndicator
     ? `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`
     : null
+  const stringAlias = isCanBeIndicator
+    ? `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`
+    : null
 
   // Main field type - references the namespace's $SelectionSet
   const mainTypeDecl = `${safeName}<${$ContextTypeParameter}> = ${
-    Code.tsUnionItems([indicator, shortAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
+    Code.tsUnionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
   }`
   if (isReservedKeyword(field.name)) {
     code(`type ${mainTypeDecl}`)
@@ -707,7 +710,7 @@ const renderOutputFieldForFields = (
   code(`  ${Code.TSDoc(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
-      Code.tsUnionItems([indicator, shortAlias, `$SelectionSet<${i._$Context}>`])
+      Code.tsUnionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
     }>`,
   )
 
@@ -1034,6 +1037,7 @@ namespace H {
       aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`)
       if (isCanBeIndicator) {
         aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`)
+        aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`)
       }
     }
     const aliasType = aliasTypes.length > 0 ? aliasTypes.map(t => `| ${t}`).join(' ') : ``
