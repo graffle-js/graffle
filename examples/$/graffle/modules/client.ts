@@ -1,11 +1,10 @@
+import { DocumentBuilder } from 'graffle/extensions/document-builder'
+import { TransportHttp } from 'graffle/extensions/transport-http'
+import * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $$Data from './data.js'
 import * as $$Domains from './domains/$$.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
-
-import { DocumentBuilder } from 'graffle/extensions/document-builder'
-import { TransportHttp } from 'graffle/extensions/transport-http'
-import * as $$Utilities from 'graffle/utilities-for-generated'
 
 const context = $$Utilities.pipe(
   $$Utilities.contextEmpty,

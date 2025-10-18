@@ -2937,7 +2937,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
+export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -3647,7 +3647,7 @@ export interface $ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TypeScalarMethods<$Context extends $$Utilities.Context> {
+export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -4793,7 +4793,7 @@ export interface $TypeScalarMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $FeatInputMethods<$Context extends $$Utilities.Context> {
+export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -5150,7 +5150,7 @@ export interface $FeatInputMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $ArgsNoMethods<$Context extends $$Utilities.Context> {
+export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   /**
    * Query enum field documentation.
    *
@@ -6549,7 +6549,7 @@ export interface $ArgsNoMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $FeatEnumMethods<$Context extends $$Utilities.Context> {
+export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
   /**
    * Query enum field documentation.
    *
@@ -6693,7 +6693,7 @@ export interface $FeatEnumMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
+export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -7307,7 +7307,7 @@ export interface $ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $FeatDateMethods<$Context extends $$Utilities.Context> {
+export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -7948,7 +7948,7 @@ export interface $FeatDateMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TypeInterfaceMethods<$Context extends $$Utilities.Context> {
+export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -8340,7 +8340,7 @@ export interface $TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TypeListMethods<$Context extends $$Utilities.Context> {
+export interface TypeListMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -8612,7 +8612,7 @@ export interface $TypeListMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TypeListNestedMethods<$Context extends $$Utilities.Context> {
+export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -8755,7 +8755,7 @@ export interface $TypeListNestedMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TypeUnionMethods<$Context extends $$Utilities.Context> {
+export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -9168,7 +9168,7 @@ export interface $TypeUnionMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $FeatErrorMethods<$Context extends $$Utilities.Context> {
+export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -9302,7 +9302,7 @@ export interface $FeatErrorMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $FeatHierarchyMethods<$Context extends $$Utilities.Context> {
+export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -9516,7 +9516,7 @@ export interface $FeatHierarchyMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TypeObjectMethods<$Context extends $$Utilities.Context> {
+export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -9881,21 +9881,20 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```
    */
   mutation: MutationMethods<$Context>
-  $:
-    & $ArgsYeReqYeMethods<$Context>
-    & $TypeScalarMethods<$Context>
-    & $FeatInputMethods<$Context>
-    & $ArgsNoMethods<$Context>
-    & $FeatEnumMethods<$Context>
-    & $ArgsYeReqNoMethods<$Context>
-    & $FeatDateMethods<$Context>
-    & $TypeInterfaceMethods<$Context>
-    & $TypeListMethods<$Context>
-    & $TypeListNestedMethods<$Context>
-    & $TypeUnionMethods<$Context>
-    & $FeatErrorMethods<$Context>
-    & $FeatHierarchyMethods<$Context>
-    & $TypeObjectMethods<$Context>
+  args: ArgsYeReqYeMethods<$Context> & ArgsNoMethods<$Context> & ArgsYeReqNoMethods<$Context>
+  type:
+    & TypeScalarMethods<$Context>
+    & TypeInterfaceMethods<$Context>
+    & TypeListMethods<$Context>
+    & TypeListNestedMethods<$Context>
+    & TypeUnionMethods<$Context>
+    & TypeObjectMethods<$Context>
+  feat:
+    & FeatInputMethods<$Context>
+    & FeatEnumMethods<$Context>
+    & FeatDateMethods<$Context>
+    & FeatErrorMethods<$Context>
+    & FeatHierarchyMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {

@@ -326,6 +326,21 @@ export interface DomainGroupingConfig {
    * Rules are evaluated in order. By default, fields can match multiple rules.
    */
   rules: FieldGroupingRule[]
+  /**
+   * How to handle method name conflicts when merging sub-namespaces.
+   *
+   * When multiple sub-namespaces (e.g., `pokemon.query` and `pokemon.list`)
+   * are merged into a single property (e.g., `pokemon`), conflicts may occur
+   * if they both define methods with the same name.
+   *
+   * Policies:
+   * - `'fail'`: Throw an error on conflict (default)
+   * - `'merge'`: Auto-increment conflicting names (e.g., `get` → `get`, `get2`) [TODO: Not yet implemented]
+   * - `'drop'`: Keep only the first occurrence, drop duplicates [TODO: Not yet implemented]
+   *
+   * @defaultValue `'fail'`
+   */
+  onMergeConflict?: 'fail' | 'merge' | 'drop'
 }
 
 /**

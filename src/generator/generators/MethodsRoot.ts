@@ -45,6 +45,26 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       }
     }
 
+    // Compute domain organization property groups once (if enabled)
+    let domainPropertyGroups: Map<string, string[]> | undefined
+    if (config.methodsOrganization.domains) {
+      const namespaceGroups = groupFieldsByDomain(config)
+      domainPropertyGroups = new Map<string, string[]>()
+
+      for (const [namespaceKey, fields] of Object.entries(namespaceGroups)) {
+        const firstField = fields[0]
+        if (!firstField || firstField.namespacePath === null) continue
+
+        // Namespaced methods - group by property name (first path element)
+        const propertyName = firstField.namespacePath[0]!
+        if (!domainPropertyGroups.has(propertyName)) {
+          domainPropertyGroups.set(propertyName, [])
+        }
+        const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+        domainPropertyGroups.get(propertyName)!.push(interfaceName)
+      }
+    }
+
     code(`export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {`)
 
     // Add logical organization properties
@@ -57,38 +77,14 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     }
 
     // Add namespace organization properties
-    if (config.methodsOrganization.domains) {
-      const namespaceGroups = groupFieldsByDomain(config)
-
-      // Group namespaces by their property name (first path element)
-      const propertyGroups = new Map<string, string[]>()
-
-      for (const [namespaceKey, fields] of Object.entries(namespaceGroups)) {
-        const firstField = fields[0]
-        if (!firstField) continue
-
-        if (firstField.namespacePath === null) {
-          // Root-level methods - add directly to BuilderMethodsRoot
-          // These will be generated inline below
-        } else {
-          // Namespaced methods - group by property name
-          const propertyName = firstField.namespacePath[0]!
-          if (!propertyGroups.has(propertyName)) {
-            propertyGroups.set(propertyName, [])
-          }
-          const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
-          propertyGroups.get(propertyName)!.push(interfaceName)
-        }
-      }
-
-      // Generate a single property for each group with intersected types
-      for (const [propertyName, interfaceNames] of propertyGroups.entries()) {
+    if (domainPropertyGroups) {
+      for (const [propertyName, interfaceNames] of domainPropertyGroups.entries()) {
         if (interfaceNames.length === 1) {
           code(`  ${propertyName}: ${interfaceNames[0]}<$Context>`)
         } else {
-          // Multiple interfaces - create intersection type
-          const intersected = interfaceNames.map(name => `${name}<$Context>`).join(' & ')
-          code(`  ${propertyName}: ${intersected}`)
+          // Use intersection types to combine multiple interfaces
+          const intersectionType = interfaceNames.map(name => `& ${name}<$Context>`).join(' ')
+          code(`  ${propertyName}: ${intersectionType}`)
         }
       }
     }
@@ -310,10 +306,9 @@ const replaceCaptures = (template: string, match: RegExpExecArray): string => {
 
 /**
  * Parse a single path string with dot-notation into a path array.
- * Handles the new path semantics:
- * - 'args.no' or '.args.no' → ['$', 'args', 'no']
- * - '.' → ['$'] (root level)
- * - Input always gets '$' prefix added
+ * - 'pokemon' → ['pokemon']
+ * - 'args.no' → ['args', 'no']
+ * - '' → [] (root level)
  */
 const parsePath = (path: string): string[] => {
   // Remove leading dot if present
@@ -321,11 +316,11 @@ const parsePath = (path: string): string[] => {
 
   // Handle root case
   if (normalized === '') {
-    return ['$']
+    return []
   }
 
-  // Add $ prefix and parse dot-notation
-  return ['$', ...normalized.split('.').filter(part => part.length > 0)]
+  // Parse dot-notation without adding prefix
+  return normalized.split('.').filter(part => part.length > 0)
 }
 
 /**

@@ -547,7 +547,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $BattleMethods<$Context extends $$Utilities.Context> {
+export interface BattleMethods<$Context extends $$Utilities.Context> {
   /**
    * Retrieve all battles that have occurred.
    *
@@ -600,7 +600,7 @@ export interface $BattleMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $BeingMethods<$Context extends $$Utilities.Context> {
+export interface BeingMethods<$Context extends $$Utilities.Context> {
   /**
    * Retrieve all beings (Pokemon, Trainers, and Patrons).
    *
@@ -656,7 +656,7 @@ export interface $BeingMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $PokemonMethods<$Context extends $$Utilities.Context> {
+export interface PokemonMethods<$Context extends $$Utilities.Context> {
   /**
    * Find Pokemon by their name.
    *
@@ -846,7 +846,7 @@ export interface $PokemonMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TrainerMethods<$Context extends $$Utilities.Context> {
+export interface TrainerMethods<$Context extends $$Utilities.Context> {
   /**
    * Find a trainer by their name.
    *
@@ -1007,7 +1007,10 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```
    */
   mutation: MutationMethods<$Context>
-  $: $BattleMethods<$Context> & $BeingMethods<$Context> & $PokemonMethods<$Context> & $TrainerMethods<$Context>
+  battle: BattleMethods<$Context>
+  being: BeingMethods<$Context>
+  pokemon: PokemonMethods<$Context>
+  trainer: TrainerMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {

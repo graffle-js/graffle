@@ -490,7 +490,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $BattleMethods<$Context extends $$Utilities.Context> {
+export interface BattleMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -535,7 +535,7 @@ export interface $BattleMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $BeingMethods<$Context extends $$Utilities.Context> {
+export interface BeingMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -580,7 +580,7 @@ export interface $BeingMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $PokemonMethods<$Context extends $$Utilities.Context> {
+export interface PokemonMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -719,7 +719,7 @@ export interface $PokemonMethods<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface $TrainerMethods<$Context extends $$Utilities.Context> {
+export interface TrainerMethods<$Context extends $$Utilities.Context> {
   /**
    * # Info
    *
@@ -852,7 +852,10 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * ```
    */
   mutation: MutationMethods<$Context>
-  $: $BattleMethods<$Context> & $BeingMethods<$Context> & $PokemonMethods<$Context> & $TrainerMethods<$Context>
+  battle: BattleMethods<$Context>
+  being: BeingMethods<$Context>
+  pokemon: PokemonMethods<$Context>
+  trainer: TrainerMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {
