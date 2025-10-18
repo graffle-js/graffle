@@ -3,6 +3,8 @@ import type { $DefaultSelectionContext } from '../../_context.js'
 
 export type date1<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | date1.$SelectionSet<_$Context>
 
 export namespace date1 {
@@ -20,6 +22,8 @@ export namespace date1 {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }

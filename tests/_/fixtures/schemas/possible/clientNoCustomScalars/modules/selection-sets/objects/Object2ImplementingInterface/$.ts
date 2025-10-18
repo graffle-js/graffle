@@ -33,6 +33,8 @@ export interface Object2ImplementingInterface<
   boolean?:
     | $Fields.boolean.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.boolean<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -44,7 +46,11 @@ export interface Object2ImplementingInterface<
    * | **Path** | `Object2ImplementingInterface.id` |
    * | **Nullability** | Optional |
    */
-  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?:
+    | $Fields.id.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 
   /**
    * Inline fragments for field groups.
@@ -65,4 +71,6 @@ export interface Object2ImplementingInterface<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

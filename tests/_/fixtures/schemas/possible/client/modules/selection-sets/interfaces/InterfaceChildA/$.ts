@@ -31,7 +31,11 @@ export interface InterfaceChildA<
    * | **Path** | `InterfaceChildA.a` |
    * | **Nullability** | Required |
    */
-  a?: $Fields.a.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+  a?:
+    | $Fields.a.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -43,7 +47,11 @@ export interface InterfaceChildA<
    * | **Path** | `InterfaceChildA.b` |
    * | **Nullability** | Required |
    */
-  b?: $Fields.b.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
+  b?:
+    | $Fields.b.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -55,7 +63,11 @@ export interface InterfaceChildA<
    * | **Path** | `InterfaceChildA.c1` |
    * | **Nullability** | Required |
    */
-  c1?: $Fields.c1.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.c1<_$Context>>
+  c1?:
+    | $Fields.c1.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.c1<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
    *
@@ -105,4 +117,6 @@ export interface InterfaceChildA<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

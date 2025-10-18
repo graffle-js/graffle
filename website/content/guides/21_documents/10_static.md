@@ -233,7 +233,11 @@ mutation addPokemon($name: String!, $type: PokemonType!) {
 
 ## Aliases
 
-Aliases allow you to request the same field multiple times with different arguments.
+Aliases let you rename fields in your response or request the same field multiple times with different arguments.
+
+### Full Syntax
+
+Works for all fields. Required when the field has arguments or non-scalar selection.
 
 :::tabs
 == object
@@ -241,18 +245,16 @@ Aliases allow you to request the same field multiple times with different argume
 ```ts
 const doc = Graffle.gql({
   query: {
-    getPokemons: {
-      pokemons: [
-        ['elderPokemons', {
-          $: { filter: { birthday: { lte: '1924-01-01' } } },
-          name: true,
-        }],
-        ['babyPokemons', {
-          $: { filter: { birthday: { gte: '2023-01-01' } } },
-          name: true,
-        }],
-      ],
-    },
+    pokemons: [
+      ['fire', {
+        $: { filter: { type: 'FIRE' } },
+        name: true,
+      }],
+      ['water', {
+        $: { filter: { type: 'WATER' } },
+        name: true,
+      }],
+    ],
   },
 })
 ```
@@ -261,11 +263,11 @@ const doc = Graffle.gql({
 
 ```ts
 const doc = Graffle.gql(`
-  query getPokemons {
-    elderPokemons: pokemons(filter: { birthday: { lte: "1924-01-01" } }) {
+  query {
+    fire: pokemons(filter: { type: FIRE }) {
       name
     }
-    babyPokemons: pokemons(filter: { birthday: { gte: "2023-01-01" } }) {
+    water: pokemons(filter: { type: WATER }) {
       name
     }
   }
@@ -275,12 +277,100 @@ const doc = Graffle.gql(`
 == native
 
 ```graphql
-query getPokemons {
-  elderPokemons: pokemons(filter: { birthday: { lte: "1924-01-01" } }) {
+query {
+  fire: pokemons(filter: { type: FIRE }) {
     name
   }
-  babyPokemons: pokemons(filter: { birthday: { gte: "2023-01-01" } }) {
+  water: pokemons(filter: { type: WATER }) {
     name
+  }
+}
+```
+
+:::
+
+### Short Array
+
+Only for scalars/enums without required arguments. Equivalent to `['alias', true]`.
+
+:::tabs
+== object
+
+```ts
+const doc = Graffle.gql({
+  query: {
+    pokemon: {
+      name: ['pokemonName'],
+      hp: ['hitPoints'],
+    },
+  },
+})
+```
+
+== string
+
+```ts
+const doc = Graffle.gql(`
+  query {
+    pokemon {
+      pokemonName: name
+      hitPoints: hp
+    }
+  }
+`)
+```
+
+== native
+
+```graphql
+query {
+  pokemon {
+    pokemonName: name
+    hitPoints: hp
+  }
+}
+```
+
+:::
+
+### String Only
+
+Only for scalars/enums without required arguments. Equivalent to `['alias', true]`. Most concise.
+
+:::tabs
+== object
+
+```ts
+const doc = Graffle.gql({
+  query: {
+    pokemon: {
+      id: 'pokemonId',
+      name: 'pokemonName',
+    },
+  },
+})
+```
+
+== string
+
+```ts
+const doc = Graffle.gql(`
+  query {
+    pokemon {
+      pokemonId: id
+      pokemonName: name
+    }
+  }
+`)
+```
+
+== native
+
+```graphql
+query {
+  pokemon {
+    pokemonId: id
+    pokemonName: name
   }
 }
 ```
@@ -365,10 +455,6 @@ const doc = Graffle.gql({
   },
 })
 ```
-
-**Note on @defer and @stream:**
-
-The experimental `@defer` and `@stream` directives are not yet supported in Graffle. These directives enable incremental delivery of GraphQL responses. Support is planned as a future extension. [Track progress in #1134](https://github.com/graffle-js/graffle/issues/1134).
 
 ## Enums
 

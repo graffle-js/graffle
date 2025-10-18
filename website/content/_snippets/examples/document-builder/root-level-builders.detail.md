@@ -158,7 +158,7 @@ console.log(doc4)
 Build a mutation for a single root field:
 
 mutation {
-  addPokemon(name: "Mew", type: "psychic", hp: 100, attack: 100, defense: 100) {
+  addPokemon(name: "Mew", type: "water", hp: 100, attack: 100, defense: 100) {
     name
     type
   }
@@ -169,7 +169,7 @@ mutation {
 const doc5 = mutation.addPokemon({
   $: {
     name: 'Mew',
-    $type: 'psychic',
+    $type: 'water',
     hp: 100,
     attack: 100,
     defense: 100,
@@ -188,7 +188,7 @@ console.log(doc5)
 Execute multiple mutations in a single operation:
 
 mutation {
-  addPokemon(name: "Mewtwo", type: "psychic", hp: 106, attack: 110, defense: 90) {
+  addPokemon(name: "Mewtwo", type: "electric", hp: 106, attack: 110, defense: 90) {
     name
   }
   addTrainer(name: "Blue", class: "leader") {
@@ -203,7 +203,7 @@ const doc6 = mutation.$batch({
   addPokemon: {
     $: {
       name: 'Mewtwo',
-      $type: 'psychic',
+      $type: 'electric',
       hp: 106,
       attack: 110,
       defense: 90,

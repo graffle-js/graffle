@@ -95,6 +95,38 @@ test('static root type builder > type output inference', () => {
     { int?: number | null | undefined },
     true
   >>()(q20)
+
+  // Alias short array syntax (scalars/enums without required args only)
+  const q21 = Possible.query.$batch({ id: ['myId'] })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>()(q21)
+
+  const q22 = Possible.query.$batch({ string: ['myString'] })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>()(q22)
+
+  const q23 = Possible.query.$batch({ abcEnum: ['myEnum'] })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>()(q23)
+
+  // Alias string syntax (scalars/enums without required args only)
+  const q24 = Possible.query.$batch({ id: 'myId' })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>()(q24)
+
+  const q25 = Possible.query.$batch({ string: 'myString' })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>()(q25)
+
+  const q26 = Possible.query.$batch({ abcEnum: 'myEnum' })
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>()(q26)
+
+  // @ts-expect-error - short array alias not allowed on non-scalar
+  const q27 = Possible.query.$batch({ object: ['myObject'] })
+
+  // @ts-expect-error - string alias not allowed on non-scalar
+  const q28 = Possible.query.$batch({ object: 'myObject' })
+
+  // @ts-expect-error - short array alias not allowed on scalar with required args
+  const q29 = Possible.query.$batch({ stringWithRequiredArg: ['myString'] })
+
+  // @ts-expect-error - string alias not allowed on scalar with required args
+  const q30 = Possible.query.$batch({ stringWithRequiredArg: 'myString' })
 })
 
 // ==================================================================================================

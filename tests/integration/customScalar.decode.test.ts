@@ -65,8 +65,12 @@ const testGeneralCases = test.for<TestCase>([
 
 // dprint-ignore
 const testAliasCases = test.for<TestCase>([
-  [`alias`,                                                  { date: [`x`, true] },                { x: db.date0Encoded },                                       { x: db.date0 }],
+  [`alias full array`,                                       { date: [`x`, true] },                { x: db.date0Encoded },                                       { x: db.date0 }],
+  [`alias short array`,                                      { date: [`x`] },                      { x: db.date0Encoded },                                       { x: db.date0 }],
+  [`alias string`,                                           { date: `x` },                        { x: db.date0Encoded },                                       { x: db.date0 }],
   [`interface inline fragment alias`,                        { dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } },                                  { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
+  [`interface inline fragment alias short array`,            { dateInterface1: { ___on_DateObject1: { date1: [`x`] } } },                                        { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
+  [`interface inline fragment alias string`,                 { dateInterface1: { ___on_DateObject1: { date1: `x` } } },                                          { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
   [`interface inline fragment nested alias`,                 { dateInterface1: { ___on_DateObject1: { ___: { date1: [`x`, true] } } } },                         { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
   [`inline fragment interface alias`,                        { ___: { dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } } },                         { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
   [`inline fragment x2 interface alias & nullable value`,    { ___: [{ dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } }, {date: [`y`,true]}] },   { dateInterface1: { x: db.date0Encoded }, y: db.date0Encoded },     { dateInterface1: { x: db.date0 }, y: db.date0 }],

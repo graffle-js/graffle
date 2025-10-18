@@ -33,6 +33,8 @@ export interface Trainer<_$Context extends $$Utilities.Docpar.Object.Select.Sele
   class?:
     | $Fields.class.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.class<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -59,7 +61,11 @@ export interface Trainer<_$Context extends $$Utilities.Docpar.Object.Select.Sele
    * | **Path** | `Trainer.id` |
    * | **Nullability** | Optional |
    */
-  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?:
+    | $Fields.id.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -74,6 +80,8 @@ export interface Trainer<_$Context extends $$Utilities.Docpar.Object.Select.Sele
   name?:
     | $Fields.name.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -109,4 +117,6 @@ export interface Trainer<_$Context extends $$Utilities.Docpar.Object.Select.Sele
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

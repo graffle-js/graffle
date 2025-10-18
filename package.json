@@ -68,6 +68,7 @@
     "examples:gen:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
     "examples:gen:tests": "tsx scripts/generate-examples-derivatives/generate.ts --tests && dprint fmt examples/__tests__/**/*",
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
+    "docs:dev": "cd website && pnpm dev",
     "fix:format": "dprint fmt",
     "fix:lint": "oxlint --fix",
     "check:examples:types": "cd examples && pnpm install && pnpm gen:graffle && pnpm check:types",
