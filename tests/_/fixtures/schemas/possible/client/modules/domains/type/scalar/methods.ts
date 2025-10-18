@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -13,8 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const InputObjectNested = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'InputObjectNested', context)
+export const InputObjectNested = $$query('InputObjectNested')
 
 /**
  * # Info
@@ -28,8 +26,7 @@ export const InputObjectNested = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const InputObjectNestedNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'InputObjectNestedNonNull', context)
+export const InputObjectNestedNonNull = $$query('InputObjectNestedNonNull')
 
 /**
  * Query enum field documentation.
@@ -44,7 +41,7 @@ export const InputObjectNestedNonNull = (context: any) =>
  * | **Path** | `Query.abcEnum` |
  * | **Nullability** | Optional |
  */
-export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'abcEnum', context)
+export const abcEnum = $$query('abcEnum')
 
 /**
  * # Info
@@ -58,8 +55,7 @@ export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const argInputObjectCircular = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'argInputObjectCircular', context)
+export const argInputObjectCircular = $$query('argInputObjectCircular')
 
 /**
  * # Info
@@ -72,7 +68,7 @@ export const argInputObjectCircular = (context: any) =>
  * | **Path** | `Query.bigintField` |
  * | **Nullability** | Optional |
  */
-export const bigintField = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'bigintField', context)
+export const bigintField = $$query('bigintField')
 
 /**
  * # Info
@@ -85,8 +81,7 @@ export const bigintField = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.bigintFieldNonNull` |
  * | **Nullability** | Required |
  */
-export const bigintFieldNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'bigintFieldNonNull', context)
+export const bigintFieldNonNull = $$query('bigintFieldNonNull')
 
 /**
  * # Info
@@ -100,7 +95,7 @@ export const bigintFieldNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArg = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArg', context)
+export const dateArg = $$query('dateArg')
 
 /**
  * # Info
@@ -114,8 +109,7 @@ export const dateArg = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgInputObject = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgInputObject', context)
+export const dateArgInputObject = $$query('dateArgInputObject')
 
 /**
  * # Info
@@ -129,7 +123,7 @@ export const dateArgInputObject = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgList', context)
+export const dateArgList = $$query('dateArgList')
 
 /**
  * # Info
@@ -143,8 +137,7 @@ export const dateArgList = (context: any) => createRootFieldExecutor(OperationTy
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNull', context)
+export const dateArgNonNull = $$query('dateArgNonNull')
 
 /**
  * # Info
@@ -158,8 +151,7 @@ export const dateArgNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNullList = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNullList', context)
+export const dateArgNonNullList = $$query('dateArgNonNullList')
 
 /**
  * # Info
@@ -173,8 +165,7 @@ export const dateArgNonNullList = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNullListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNullListNonNull', context)
+export const dateArgNonNullListNonNull = $$query('dateArgNonNullListNonNull')
 
 /**
  * # Info
@@ -188,7 +179,7 @@ export const dateArgNonNullListNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const error = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'error', context)
+export const error = $$query('error')
 
 /**
  * # Info
@@ -201,7 +192,7 @@ export const error = (context: any) => createRootFieldExecutor(OperationTypeNode
  * | **Path** | `Query.id` |
  * | **Nullability** | Optional |
  */
-export const id = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'id', context)
+export const id = $$query('id')
 
 /**
  * # Info
@@ -214,7 +205,7 @@ export const id = (context: any) => createRootFieldExecutor(OperationTypeNode.QU
  * | **Path** | `Query.idNonNull` |
  * | **Nullability** | Required |
  */
-export const idNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'idNonNull', context)
+export const idNonNull = $$query('idNonNull')
 
 /**
  * # Info
@@ -227,7 +218,7 @@ export const idNonNull = (context: any) => createRootFieldExecutor(OperationType
  * | **Path** | `Query.string` |
  * | **Nullability** | Optional |
  */
-const $string = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'string', context)
+const $string = $$query('string')
 export { $string as string }
 
 /**
@@ -242,8 +233,7 @@ export { $string as string }
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgEnum = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgEnum', context)
+export const stringWithArgEnum = $$query('stringWithArgEnum')
 
 /**
  * # Info
@@ -257,8 +247,7 @@ export const stringWithArgEnum = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObject = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObject', context)
+export const stringWithArgInputObject = $$query('stringWithArgInputObject')
 
 /**
  * # Info
@@ -272,8 +261,7 @@ export const stringWithArgInputObject = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObjectEnum = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObjectEnum', context)
+export const stringWithArgInputObjectEnum = $$query('stringWithArgInputObjectEnum')
 
 /**
  * # Info
@@ -287,8 +275,7 @@ export const stringWithArgInputObjectEnum = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObjectRequired = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObjectRequired', context)
+export const stringWithArgInputObjectRequired = $$query('stringWithArgInputObjectRequired')
 
 /**
  * The given arguments are reflected back as a JSON string.
@@ -304,8 +291,7 @@ export const stringWithArgInputObjectRequired = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const stringWithArgs = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgs', context)
+export const stringWithArgs = $$query('stringWithArgs')
 
 /**
  * # Info
@@ -319,8 +305,7 @@ export const stringWithArgs = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithListArg = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithListArg', context)
+export const stringWithListArg = $$query('stringWithListArg')
 
 /**
  * # Info
@@ -334,8 +319,7 @@ export const stringWithListArg = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithListArgRequired = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithListArgRequired', context)
+export const stringWithListArgRequired = $$query('stringWithListArgRequired')
 
 /**
  * # Info
@@ -349,5 +333,4 @@ export const stringWithListArgRequired = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithRequiredArg = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithRequiredArg', context)
+export const stringWithRequiredArg = $$query('stringWithRequiredArg')

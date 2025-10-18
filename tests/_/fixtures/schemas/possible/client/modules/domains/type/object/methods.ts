@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -12,7 +11,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.object` |
  * | **Nullability** | Optional |
  */
-const $object = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'object', context)
+const $object = $$query('object')
 export { $object as object }
 
 /**
@@ -27,7 +26,7 @@ export { $object as object }
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const objectList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectList', context)
+export const objectList = $$query('objectList')
 
 /**
  * # Info
@@ -41,8 +40,7 @@ export const objectList = (context: any) => createRootFieldExecutor(OperationTyp
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const objectListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectListNonNull', context)
+export const objectListNonNull = $$query('objectListNonNull')
 
 /**
  * # Info
@@ -55,7 +53,7 @@ export const objectListNonNull = (context: any) =>
  * | **Path** | `Query.objectNested` |
  * | **Nullability** | Optional |
  */
-export const objectNested = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNested', context)
+export const objectNested = $$query('objectNested')
 
 /**
  * # Info
@@ -68,8 +66,7 @@ export const objectNested = (context: any) => createRootFieldExecutor(OperationT
  * | **Path** | `Query.objectNestedWithArgs` |
  * | **Nullability** | Optional |
  */
-export const objectNestedWithArgs = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNestedWithArgs', context)
+export const objectNestedWithArgs = $$query('objectNestedWithArgs')
 
 /**
  * # Info
@@ -82,8 +79,7 @@ export const objectNestedWithArgs = (context: any) =>
  * | **Path** | `Query.objectNonNull` |
  * | **Nullability** | Required |
  */
-export const objectNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNonNull', context)
+export const objectNonNull = $$query('objectNonNull')
 
 /**
  * # Info
@@ -97,5 +93,4 @@ export const objectNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const objectWithArgs = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectWithArgs', context)
+export const objectWithArgs = $$query('objectWithArgs')

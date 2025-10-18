@@ -86,17 +86,21 @@ const generateMethodsFile = (
 ): string => {
   const lines: string[] = []
 
-  // Import runtime execution helper
+  // Determine which operation types are used
+  const operationTypes = new Set<string>()
+  const helperNames = new Map<string, string>()
+  for (const field of fields) {
+    operationTypes.add(field.operationType)
+    const helperName = `$$${field.operationType}`
+    helperNames.set(field.operationType, helperName)
+  }
+
+  // Import pre-curried helpers from core library
+  const helpersToImport = Array.from(operationTypes).map(opType => `$$${opType}`)
   lines.push(
     Code.importNamed({
-      names: ['createRootFieldExecutor'],
+      names: helpersToImport,
       from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
-    }),
-  )
-  lines.push(
-    Code.importNamed({
-      names: ['OperationTypeNode'],
-      from: 'graphql',
     }),
   )
   lines.push(``)
@@ -109,11 +113,7 @@ const generateMethodsFile = (
     seenFields.add(field.fieldName)
 
     const methodName = field.methodName ?? field.fieldName
-    const operationTypeNode = field.operationType === 'query'
-      ? 'QUERY'
-      : field.operationType === 'mutation'
-      ? 'MUTATION'
-      : 'SUBSCRIPTION'
+    const helperName = helperNames.get(field.operationType)!
 
     // Get field definition and JSDoc
     const rootType = config.schema.instance.getType(field.rootTypeName) as Grafaid.Schema.ObjectType
@@ -124,7 +124,7 @@ const generateMethodsFile = (
     }
 
     // Generate method implementation using helper
-    const functionDecl = `const ${renderName(methodName)} = (context: any) => createRootFieldExecutor(OperationTypeNode.${operationTypeNode}, '${field.fieldName}', context)`
+    const functionDecl = `const ${renderName(methodName)} = ${helperName}('${field.fieldName}')`
     lines.push(Code.exportValueWithKeywordHandling(methodName, functionDecl))
     lines.push(``)
   }

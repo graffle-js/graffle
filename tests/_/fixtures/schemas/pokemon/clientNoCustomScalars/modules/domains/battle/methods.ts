@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -13,4 +12,4 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const list = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'battles', context)
+export const list = $$query('battles')

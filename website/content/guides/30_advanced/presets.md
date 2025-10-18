@@ -141,7 +141,7 @@ Moving between presets is straightforward:
 - import { GraffleMinimal } from 'graffle/presets/minimal'
 + import { GraffleBasic } from 'graffle/presets/basic'
 
-- const graffle = GraffleMinimal.create().use(TransportMemory).use(DocumentBuilder)
+- const graffle = GraffleMinimal.create().use(TransportMemory).use(DocumentBuilder())
 + const graffle = GraffleBasic.create()
 ```
 

@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$mutation, $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -14,7 +13,7 @@ import { OperationTypeNode } from 'graphql'
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const findByName = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'pokemonByName', context)
+export const findByName = $$query('pokemonByName')
 
 /**
  * # Info
@@ -29,7 +28,7 @@ export const findByName = (context: any) => createRootFieldExecutor(OperationTyp
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const list = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'pokemons', context)
+export const list = $$query('pokemons')
 
 /**
  * # Info
@@ -43,4 +42,4 @@ export const list = (context: any) => createRootFieldExecutor(OperationTypeNode.
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
  */
-export const create = (context: any) => createRootFieldExecutor(OperationTypeNode.MUTATION, 'addPokemon', context)
+export const create = $$mutation('addPokemon')

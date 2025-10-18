@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -13,7 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateListList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListList', context)
+export const dateListList = $$query('dateListList')
 
 /**
  * # Info
@@ -27,7 +26,7 @@ export const dateListList = (context: any) => createRootFieldExecutor(OperationT
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listListInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listListInt', context)
+export const listListInt = $$query('listListInt')
 
 /**
  * # Info
@@ -41,5 +40,4 @@ export const listListInt = (context: any) => createRootFieldExecutor(OperationTy
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listListIntNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'listListIntNonNull', context)
+export const listListIntNonNull = $$query('listListIntNonNull')

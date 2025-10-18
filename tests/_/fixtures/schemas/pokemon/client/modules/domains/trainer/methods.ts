@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -13,7 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const findByName = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'trainerByName', context)
+export const findByName = $$query('trainerByName')
 
 /**
  * # Info
@@ -27,4 +26,4 @@ export const findByName = (context: any) => createRootFieldExecutor(OperationTyp
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const list = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'trainers', context)
+export const list = $$query('trainers')

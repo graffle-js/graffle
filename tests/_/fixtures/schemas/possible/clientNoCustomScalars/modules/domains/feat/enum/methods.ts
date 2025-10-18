@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * Query enum field documentation.
@@ -14,7 +13,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.abcEnum` |
  * | **Nullability** | Optional |
  */
-export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'abcEnum', context)
+export const abcEnum = $$query('abcEnum')
 
 /**
  * # Info
@@ -28,8 +27,7 @@ export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgEnum = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgEnum', context)
+export const stringWithArgEnum = $$query('stringWithArgEnum')
 
 /**
  * # Info
@@ -43,5 +41,4 @@ export const stringWithArgEnum = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const stringWithArgInputObjectEnum = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'stringWithArgInputObjectEnum', context)
+export const stringWithArgInputObjectEnum = $$query('stringWithArgInputObjectEnum')

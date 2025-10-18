@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -12,8 +11,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.dateInterface1` |
  * | **Nullability** | Optional |
  */
-export const dateInterface1 = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateInterface1', context)
+export const dateInterface1 = $$query('dateInterface1')
 
 /**
  * # Info
@@ -26,7 +24,7 @@ export const dateInterface1 = (context: any) =>
  * | **Path** | `Query.interface` |
  * | **Nullability** | Optional |
  */
-const $interface = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'interface', context)
+const $interface = $$query('interface')
 export { $interface as interface }
 
 /**
@@ -42,8 +40,7 @@ export { $interface as interface }
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyChildA = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyChildA', context)
+export const interfaceHierarchyChildA = $$query('interfaceHierarchyChildA')
 
 /**
  * # Info
@@ -58,8 +55,7 @@ export const interfaceHierarchyChildA = (context: any) =>
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyChildB = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyChildB', context)
+export const interfaceHierarchyChildB = $$query('interfaceHierarchyChildB')
 
 /**
  * # Info
@@ -74,8 +70,7 @@ export const interfaceHierarchyChildB = (context: any) =>
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyGrandparents = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyGrandparents', context)
+export const interfaceHierarchyGrandparents = $$query('interfaceHierarchyGrandparents')
 
 /**
  * # Info
@@ -90,8 +85,7 @@ export const interfaceHierarchyGrandparents = (context: any) =>
  * | **List** | Yes |
  * | **Arguments** | 1 |
  */
-export const interfaceHierarchyParents = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceHierarchyParents', context)
+export const interfaceHierarchyParents = $$query('interfaceHierarchyParents')
 
 /**
  * # Info
@@ -104,8 +98,7 @@ export const interfaceHierarchyParents = (context: any) =>
  * | **Path** | `Query.interfaceNonNull` |
  * | **Nullability** | Required |
  */
-export const interfaceNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceNonNull', context)
+export const interfaceNonNull = $$query('interfaceNonNull')
 
 /**
  * # Info
@@ -119,5 +112,4 @@ export const interfaceNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const interfaceWithArgs = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceWithArgs', context)
+export const interfaceWithArgs = $$query('interfaceWithArgs')

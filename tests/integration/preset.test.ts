@@ -9,7 +9,7 @@ test(`can create a preset`, () => {
   const context = GraffleKit.Context.Extensions.addAndApplyMany(GraffleKit.Context.contextEmpty, [
     TransportHttp,
     TransportMemory,
-    DocumentBuilder,
+    DocumentBuilder(),
   ])
   const Graffle = GraffleKit.Client.createConstructorWithContext(context)
   const client = Graffle()

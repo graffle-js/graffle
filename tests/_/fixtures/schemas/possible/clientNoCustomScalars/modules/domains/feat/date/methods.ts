@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -12,7 +11,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.date` |
  * | **Nullability** | Optional |
  */
-export const date = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'date', context)
+export const date = $$query('date')
 
 /**
  * # Info
@@ -26,7 +25,7 @@ export const date = (context: any) => createRootFieldExecutor(OperationTypeNode.
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArg = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArg', context)
+export const dateArg = $$query('dateArg')
 
 /**
  * # Info
@@ -40,8 +39,7 @@ export const dateArg = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgInputObject = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgInputObject', context)
+export const dateArgInputObject = $$query('dateArgInputObject')
 
 /**
  * # Info
@@ -55,7 +53,7 @@ export const dateArgInputObject = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgList', context)
+export const dateArgList = $$query('dateArgList')
 
 /**
  * # Info
@@ -69,8 +67,7 @@ export const dateArgList = (context: any) => createRootFieldExecutor(OperationTy
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNull', context)
+export const dateArgNonNull = $$query('dateArgNonNull')
 
 /**
  * # Info
@@ -84,8 +81,7 @@ export const dateArgNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNullList = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNullList', context)
+export const dateArgNonNullList = $$query('dateArgNonNullList')
 
 /**
  * # Info
@@ -99,8 +95,7 @@ export const dateArgNonNullList = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const dateArgNonNullListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateArgNonNullListNonNull', context)
+export const dateArgNonNullListNonNull = $$query('dateArgNonNullListNonNull')
 
 /**
  * # Info
@@ -113,8 +108,7 @@ export const dateArgNonNullListNonNull = (context: any) =>
  * | **Path** | `Query.dateInterface1` |
  * | **Nullability** | Optional |
  */
-export const dateInterface1 = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateInterface1', context)
+export const dateInterface1 = $$query('dateInterface1')
 
 /**
  * # Info
@@ -128,7 +122,7 @@ export const dateInterface1 = (context: any) =>
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateList', context)
+export const dateList = $$query('dateList')
 
 /**
  * # Info
@@ -142,7 +136,7 @@ export const dateList = (context: any) => createRootFieldExecutor(OperationTypeN
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateListList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListList', context)
+export const dateListList = $$query('dateListList')
 
 /**
  * # Info
@@ -156,8 +150,7 @@ export const dateListList = (context: any) => createRootFieldExecutor(OperationT
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const dateListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListNonNull', context)
+export const dateListNonNull = $$query('dateListNonNull')
 
 /**
  * # Info
@@ -170,7 +163,7 @@ export const dateListNonNull = (context: any) =>
  * | **Path** | `Query.dateNonNull` |
  * | **Nullability** | Required |
  */
-export const dateNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateNonNull', context)
+export const dateNonNull = $$query('dateNonNull')
 
 /**
  * # Info
@@ -183,7 +176,7 @@ export const dateNonNull = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.dateObject1` |
  * | **Nullability** | Optional |
  */
-export const dateObject1 = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateObject1', context)
+export const dateObject1 = $$query('dateObject1')
 
 /**
  * # Info
@@ -196,4 +189,4 @@ export const dateObject1 = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.dateUnion` |
  * | **Nullability** | Optional |
  */
-export const dateUnion = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateUnion', context)
+export const dateUnion = $$query('dateUnion')

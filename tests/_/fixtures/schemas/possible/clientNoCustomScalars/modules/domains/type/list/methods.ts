@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -13,7 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateList', context)
+export const dateList = $$query('dateList')
 
 /**
  * # Info
@@ -27,8 +26,7 @@ export const dateList = (context: any) => createRootFieldExecutor(OperationTypeN
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const dateListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListNonNull', context)
+export const dateListNonNull = $$query('dateListNonNull')
 
 /**
  * # Info
@@ -42,7 +40,7 @@ export const dateListNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listInt', context)
+export const listInt = $$query('listInt')
 
 /**
  * # Info
@@ -56,8 +54,7 @@ export const listInt = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listIntNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'listIntNonNull', context)
+export const listIntNonNull = $$query('listIntNonNull')
 
 /**
  * # Info
@@ -71,7 +68,7 @@ export const listIntNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const objectList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectList', context)
+export const objectList = $$query('objectList')
 
 /**
  * # Info
@@ -85,5 +82,4 @@ export const objectList = (context: any) => createRootFieldExecutor(OperationTyp
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const objectListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectListNonNull', context)
+export const objectListNonNull = $$query('objectListNonNull')

@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * Query enum field documentation.
@@ -14,7 +13,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.abcEnum` |
  * | **Nullability** | Optional |
  */
-export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'abcEnum', context)
+export const abcEnum = $$query('abcEnum')
 
 /**
  * # Info
@@ -27,7 +26,7 @@ export const abcEnum = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Path** | `Query.bigintField` |
  * | **Nullability** | Optional |
  */
-export const bigintField = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'bigintField', context)
+export const bigintField = $$query('bigintField')
 
 /**
  * # Info
@@ -40,8 +39,7 @@ export const bigintField = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.bigintFieldNonNull` |
  * | **Nullability** | Required |
  */
-export const bigintFieldNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'bigintFieldNonNull', context)
+export const bigintFieldNonNull = $$query('bigintFieldNonNull')
 
 /**
  * # Info
@@ -54,7 +52,7 @@ export const bigintFieldNonNull = (context: any) =>
  * | **Path** | `Query.date` |
  * | **Nullability** | Optional |
  */
-export const date = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'date', context)
+export const date = $$query('date')
 
 /**
  * # Info
@@ -67,8 +65,7 @@ export const date = (context: any) => createRootFieldExecutor(OperationTypeNode.
  * | **Path** | `Query.dateInterface1` |
  * | **Nullability** | Optional |
  */
-export const dateInterface1 = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateInterface1', context)
+export const dateInterface1 = $$query('dateInterface1')
 
 /**
  * # Info
@@ -82,7 +79,7 @@ export const dateInterface1 = (context: any) =>
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateList', context)
+export const dateList = $$query('dateList')
 
 /**
  * # Info
@@ -96,7 +93,7 @@ export const dateList = (context: any) => createRootFieldExecutor(OperationTypeN
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const dateListList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListList', context)
+export const dateListList = $$query('dateListList')
 
 /**
  * # Info
@@ -110,8 +107,7 @@ export const dateListList = (context: any) => createRootFieldExecutor(OperationT
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const dateListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'dateListNonNull', context)
+export const dateListNonNull = $$query('dateListNonNull')
 
 /**
  * # Info
@@ -124,7 +120,7 @@ export const dateListNonNull = (context: any) =>
  * | **Path** | `Query.dateNonNull` |
  * | **Nullability** | Required |
  */
-export const dateNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateNonNull', context)
+export const dateNonNull = $$query('dateNonNull')
 
 /**
  * # Info
@@ -137,7 +133,7 @@ export const dateNonNull = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.dateObject1` |
  * | **Nullability** | Optional |
  */
-export const dateObject1 = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateObject1', context)
+export const dateObject1 = $$query('dateObject1')
 
 /**
  * # Info
@@ -150,7 +146,7 @@ export const dateObject1 = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.dateUnion` |
  * | **Nullability** | Optional |
  */
-export const dateUnion = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateUnion', context)
+export const dateUnion = $$query('dateUnion')
 
 /**
  * # Info
@@ -163,7 +159,7 @@ export const dateUnion = (context: any) => createRootFieldExecutor(OperationType
  * | **Path** | `Query.id` |
  * | **Nullability** | Optional |
  */
-export const id = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'id', context)
+export const id = $$query('id')
 
 /**
  * # Info
@@ -176,7 +172,7 @@ export const id = (context: any) => createRootFieldExecutor(OperationTypeNode.QU
  * | **Path** | `Query.idNonNull` |
  * | **Nullability** | Required |
  */
-export const idNonNull = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'idNonNull', context)
+export const idNonNull = $$query('idNonNull')
 
 /**
  * # Info
@@ -189,7 +185,7 @@ export const idNonNull = (context: any) => createRootFieldExecutor(OperationType
  * | **Path** | `Query.interface` |
  * | **Nullability** | Optional |
  */
-const $interface = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'interface', context)
+const $interface = $$query('interface')
 export { $interface as interface }
 
 /**
@@ -203,8 +199,7 @@ export { $interface as interface }
  * | **Path** | `Query.interfaceNonNull` |
  * | **Nullability** | Required |
  */
-export const interfaceNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'interfaceNonNull', context)
+export const interfaceNonNull = $$query('interfaceNonNull')
 
 /**
  * # Info
@@ -218,7 +213,7 @@ export const interfaceNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listInt', context)
+export const listInt = $$query('listInt')
 
 /**
  * # Info
@@ -232,8 +227,7 @@ export const listInt = (context: any) => createRootFieldExecutor(OperationTypeNo
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listIntNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'listIntNonNull', context)
+export const listIntNonNull = $$query('listIntNonNull')
 
 /**
  * # Info
@@ -247,7 +241,7 @@ export const listIntNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const listListInt = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'listListInt', context)
+export const listListInt = $$query('listListInt')
 
 /**
  * # Info
@@ -261,8 +255,7 @@ export const listListInt = (context: any) => createRootFieldExecutor(OperationTy
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const listListIntNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'listListIntNonNull', context)
+export const listListIntNonNull = $$query('listListIntNonNull')
 
 /**
  * # Info
@@ -275,8 +268,7 @@ export const listListIntNonNull = (context: any) =>
  * | **Path** | `Query.lowerCaseUnion` |
  * | **Nullability** | Optional |
  */
-export const lowerCaseUnion = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'lowerCaseUnion', context)
+export const lowerCaseUnion = $$query('lowerCaseUnion')
 
 /**
  * # Info
@@ -289,7 +281,7 @@ export const lowerCaseUnion = (context: any) =>
  * | **Path** | `Query.object` |
  * | **Nullability** | Optional |
  */
-const $object = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'object', context)
+const $object = $$query('object')
 export { $object as object }
 
 /**
@@ -304,7 +296,7 @@ export { $object as object }
  * | **Nullability** | Optional |
  * | **List** | Yes |
  */
-export const objectList = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectList', context)
+export const objectList = $$query('objectList')
 
 /**
  * # Info
@@ -318,8 +310,7 @@ export const objectList = (context: any) => createRootFieldExecutor(OperationTyp
  * | **Nullability** | Required |
  * | **List** | Yes |
  */
-export const objectListNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectListNonNull', context)
+export const objectListNonNull = $$query('objectListNonNull')
 
 /**
  * # Info
@@ -332,7 +323,7 @@ export const objectListNonNull = (context: any) =>
  * | **Path** | `Query.objectNested` |
  * | **Nullability** | Optional |
  */
-export const objectNested = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNested', context)
+export const objectNested = $$query('objectNested')
 
 /**
  * # Info
@@ -345,8 +336,7 @@ export const objectNested = (context: any) => createRootFieldExecutor(OperationT
  * | **Path** | `Query.objectNestedWithArgs` |
  * | **Nullability** | Optional |
  */
-export const objectNestedWithArgs = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNestedWithArgs', context)
+export const objectNestedWithArgs = $$query('objectNestedWithArgs')
 
 /**
  * # Info
@@ -359,8 +349,7 @@ export const objectNestedWithArgs = (context: any) =>
  * | **Path** | `Query.objectNonNull` |
  * | **Nullability** | Required |
  */
-export const objectNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'objectNonNull', context)
+export const objectNonNull = $$query('objectNonNull')
 
 /**
  * # Info
@@ -373,7 +362,7 @@ export const objectNonNull = (context: any) =>
  * | **Path** | `Query.string` |
  * | **Nullability** | Optional |
  */
-const $string = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'string', context)
+const $string = $$query('string')
 export { $string as string }
 
 /**
@@ -387,7 +376,7 @@ export { $string as string }
  * | **Path** | `Query.unionFooBar` |
  * | **Nullability** | Optional |
  */
-export const unionFooBar = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBar', context)
+export const unionFooBar = $$query('unionFooBar')
 
 /**
  * # Info
@@ -400,8 +389,7 @@ export const unionFooBar = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.unionFooBarNonNull` |
  * | **Nullability** | Required |
  */
-export const unionFooBarNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarNonNull', context)
+export const unionFooBarNonNull = $$query('unionFooBarNonNull')
 
 /**
  * # Info
@@ -414,7 +402,7 @@ export const unionFooBarNonNull = (context: any) =>
  * | **Path** | `Query.unionObject` |
  * | **Nullability** | Optional |
  */
-export const unionObject = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObject', context)
+export const unionObject = $$query('unionObject')
 
 /**
  * # Info
@@ -427,5 +415,4 @@ export const unionObject = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.unionObjectNonNull` |
  * | **Nullability** | Required |
  */
-export const unionObjectNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObjectNonNull', context)
+export const unionObjectNonNull = $$query('unionObjectNonNull')

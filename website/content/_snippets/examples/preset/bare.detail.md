@@ -27,7 +27,7 @@ const graffle1 = GraffleBare.create()
 
 const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = graffle1.gql('{ __typename }').$send
 
-const graffle2 = graffle1.use(DocumentBuilder).use(Introspection())
+const graffle2 = graffle1.use(DocumentBuilder()).use(Introspection())
 
 const _e2: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.gql('{ __typename }').$send
 const _e3: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.query.$batch

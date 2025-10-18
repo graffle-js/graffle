@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -12,7 +11,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Path** | `Query.dateUnion` |
  * | **Nullability** | Optional |
  */
-export const dateUnion = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'dateUnion', context)
+export const dateUnion = $$query('dateUnion')
 
 /**
  * # Info
@@ -25,8 +24,7 @@ export const dateUnion = (context: any) => createRootFieldExecutor(OperationType
  * | **Path** | `Query.lowerCaseUnion` |
  * | **Nullability** | Optional |
  */
-export const lowerCaseUnion = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'lowerCaseUnion', context)
+export const lowerCaseUnion = $$query('lowerCaseUnion')
 
 /**
  * # Info
@@ -40,7 +38,7 @@ export const lowerCaseUnion = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const result = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'result', context)
+export const result = $$query('result')
 
 /**
  * # Info
@@ -54,8 +52,7 @@ export const result = (context: any) => createRootFieldExecutor(OperationTypeNod
  * | **Nullability** | Required |
  * | **Arguments** | 1 |
  */
-export const resultNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'resultNonNull', context)
+export const resultNonNull = $$query('resultNonNull')
 
 /**
  * # Info
@@ -68,7 +65,7 @@ export const resultNonNull = (context: any) =>
  * | **Path** | `Query.unionFooBar` |
  * | **Nullability** | Optional |
  */
-export const unionFooBar = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBar', context)
+export const unionFooBar = $$query('unionFooBar')
 
 /**
  * # Info
@@ -81,8 +78,7 @@ export const unionFooBar = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.unionFooBarNonNull` |
  * | **Nullability** | Required |
  */
-export const unionFooBarNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarNonNull', context)
+export const unionFooBarNonNull = $$query('unionFooBarNonNull')
 
 /**
  * # Info
@@ -96,8 +92,7 @@ export const unionFooBarNonNull = (context: any) =>
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const unionFooBarWithArgs = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionFooBarWithArgs', context)
+export const unionFooBarWithArgs = $$query('unionFooBarWithArgs')
 
 /**
  * # Info
@@ -110,7 +105,7 @@ export const unionFooBarWithArgs = (context: any) =>
  * | **Path** | `Query.unionObject` |
  * | **Nullability** | Optional |
  */
-export const unionObject = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObject', context)
+export const unionObject = $$query('unionObject')
 
 /**
  * # Info
@@ -123,5 +118,4 @@ export const unionObject = (context: any) => createRootFieldExecutor(OperationTy
  * | **Path** | `Query.unionObjectNonNull` |
  * | **Nullability** | Required |
  */
-export const unionObjectNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'unionObjectNonNull', context)
+export const unionObjectNonNull = $$query('unionObjectNonNull')

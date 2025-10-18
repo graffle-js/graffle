@@ -25,7 +25,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
       const context = ${$.$$Utilities}.pipe(
         ${$.$$Utilities}.contextEmpty,
         ctx => ${$.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, ${
-      hasDomains ? 'DocumentBuilder({ domains: $$Domains })' : 'DocumentBuilder'
+      hasDomains ? 'DocumentBuilder({ domains: $$Domains })' : 'DocumentBuilder()'
     }]),
         ctx => ${$.$$Utilities}.Transports.configureCurrentOrThrow(ctx, { url: $$Data.defaultSchemaUrl }),
         ctx => ${$.$$Utilities}.Configuration.add(ctx, {

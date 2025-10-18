@@ -1,5 +1,4 @@
-import { createRootFieldExecutor } from '#graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+import { $$query } from '#graffle/extensions/document-builder'
 
 /**
  * # Info
@@ -13,7 +12,7 @@ import { OperationTypeNode } from 'graphql'
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const error = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'error', context)
+export const error = $$query('error')
 
 /**
  * # Info
@@ -27,7 +26,7 @@ export const error = (context: any) => createRootFieldExecutor(OperationTypeNode
  * | **Nullability** | Optional |
  * | **Arguments** | 1 |
  */
-export const result = (context: any) => createRootFieldExecutor(OperationTypeNode.QUERY, 'result', context)
+export const result = $$query('result')
 
 /**
  * # Info
@@ -41,5 +40,4 @@ export const result = (context: any) => createRootFieldExecutor(OperationTypeNod
  * | **Nullability** | Required |
  * | **Arguments** | 1 |
  */
-export const resultNonNull = (context: any) =>
-  createRootFieldExecutor(OperationTypeNode.QUERY, 'resultNonNull', context)
+export const resultNonNull = $$query('resultNonNull')
