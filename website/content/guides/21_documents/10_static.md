@@ -233,7 +233,19 @@ mutation addPokemon($name: String!, $type: PokemonType!) {
 
 ## Aliases
 
-Aliases allow you to request the same field multiple times with different arguments.
+Aliases allow you to request the same field multiple times with different arguments or rename fields in your response.
+
+**Three alias syntaxes are available:**
+
+1. **Full syntax**: `['alias', selectionSet]` - Works for all fields
+2. **Short array**: `['alias']` - Only for scalars/enums without required arguments (equivalent to `['alias', true]`)
+3. **String-only**: `'alias'` - Only for scalars/enums without required arguments (equivalent to `['alias', true]`)
+
+<!--@include: @/_snippets/examples/document-builder/alias.detail.md-->
+
+### Multiple Fields with Arguments
+
+When aliasing fields with arguments or complex selections, use the full syntax:
 
 :::tabs
 == object
