@@ -14,9 +14,10 @@ export type Alias<
     ValuesOrEmptyObject<
       {
         [
-          $Select in keyof $SelectionSet as $SelectionSet[$Select] extends Select.SelectAlias.SelectAlias<any>
-            ? $Select
-            : never
+          $Select in keyof $SelectionSet as
+            $SelectionSet[$Select] extends Select.SelectAlias.SelectAlias<any> | Select.SelectAlias.SelectAliasShort | Select.SelectAlias.SelectAliasString
+              ? $Select
+              : never
         ]:
           InferSelectAlias<
             // @ts-expect-error We know this satisfies the alias type constraint b/c of the key filtering above.
@@ -31,13 +32,15 @@ export type Alias<
 
 // dprint-ignore
 type InferSelectAlias<
-  $SelectAlias extends Select.SelectAlias.SelectAlias,
+  $SelectAlias extends Select.SelectAlias.SelectAlias | Select.SelectAlias.SelectAliasShort | Select.SelectAlias.SelectAliasString,
   $FieldName extends string,
   $Schema extends Schema,
   $Node extends Schema.OutputObjectLike,
 > =
   $SelectAlias extends Select.SelectAlias.SelectAliasOne<any>      ?  InferSelectAliasOne<$SelectAlias, $FieldName, $Schema, $Node> :
   $SelectAlias extends Select.SelectAlias.SelectAliasMultiple<any> ?  InferSelectAliasMultiple<$SelectAlias, $FieldName, $Schema, $Node> :
+  $SelectAlias extends Select.SelectAlias.SelectAliasShort         ?  InferSelectAliasShort<$SelectAlias, $FieldName, $Schema, $Node> :
+  $SelectAlias extends Select.SelectAlias.SelectAliasString        ?  InferSelectAliasString<$SelectAlias, $FieldName, $Schema, $Node> :
                                                                       never
 
 type InferSelectAliasMultiple<
@@ -58,4 +61,22 @@ type InferSelectAliasOne<
   $Node extends Schema.OutputObjectLike,
 > = {
   [_ in $SelectAliasOne[0]]: OutputField<$SelectAliasOne[1], $Node['fields'][$FieldName], $Schema>
+}
+
+type InferSelectAliasShort<
+  $SelectAliasShort extends Select.SelectAlias.SelectAliasShort,
+  $FieldName extends string,
+  $Schema extends Schema,
+  $Node extends Schema.OutputObjectLike,
+> = {
+  [_ in $SelectAliasShort[0]]: OutputField<true, $Node['fields'][$FieldName], $Schema>
+}
+
+type InferSelectAliasString<
+  $SelectAliasString extends Select.SelectAlias.SelectAliasString,
+  $FieldName extends string,
+  $Schema extends Schema,
+  $Node extends Schema.OutputObjectLike,
+> = {
+  [_ in $SelectAliasString]: OutputField<true, $Node['fields'][$FieldName], $Schema>
 }
