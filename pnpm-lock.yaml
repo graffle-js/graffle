@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: ^0.79.0
-        version: 0.79.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+        specifier: ^0.80.0
+        version: 0.80.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit:
         specifier: ^1.35.0
         version: 1.35.0
@@ -158,7 +158,7 @@ importers:
         version: 5.9.3
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.9.3)(vite@5.4.18(@types/node@22.14.1))
+        version: 5.1.4(typescript@5.9.3)(vite@6.3.2(@types/node@22.14.1)(tsx@4.19.3))
       vitepress:
         specifier: ^1.6.3
         version: 1.6.3(@algolia/client-search@5.23.4)(@types/node@22.14.1)(postcss@8.5.3)(search-insights@2.17.3)(typescript@5.9.3)
@@ -1530,8 +1530,8 @@ packages:
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
-  '@types/node@24.8.0':
-    resolution: {integrity: sha512-5x08bUtU8hfboMTrJ7mEO4CpepS9yBwAqcL52y86SWNmbPX8LVbNs3EP4cNrIZgdjk2NAlP2ahNihozpoZIxSg==}
+  '@types/node@24.8.1':
+    resolution: {integrity: sha512-alv65KGRadQVfVcG69MuB4IzdYVpRwMG/mq8KWOaoOdyY617P5ivaDiMCGOFDWD2sAn5Q0mR3mRtUOgm99hL9Q==}
 
   '@types/object-inspect@1.13.0':
     resolution: {integrity: sha512-lwGTVESDDV+XsQ1pH4UifpJ1f7OtXzQ6QBOX2Afq2bM/T3oOt8hF6exJMjjIjtEWeAN2YAo25J7HxWh97CCz9w==}
@@ -1738,8 +1738,8 @@ packages:
     resolution: {integrity: sha512-ydxzH1iox9AzLe+uaX9jjyVFkQO+h15j+JClropw0P4Vz+ES4+xTZVu5leUsWW8AYTVZBFkiC0iHl/PwFZ+Q1Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.79.0':
-    resolution: {integrity: sha512-7w9ODqkdiCNj/xxYnhVxUD1lvuAae3mTezaFJGF1V6x3BfZGp4/3g44YZ1ZDmPn8BA6dunEKf5/pfiVl5ddDeg==}
+  '@wollybeard/kit@0.80.0':
+    resolution: {integrity: sha512-J/O1c5yaDr8pQfEvBUnNeSqe3bWRDjtnKHAGk8ho9pTlFQuUSaCbOI9i4dVRVdigT35DLTckBG5goQr2urFuNQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -4996,7 +4996,7 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.8.0':
+  '@types/node@24.8.1':
     dependencies:
       undici-types: 7.14.0
 
@@ -5237,10 +5237,10 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.1
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.79.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.80.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
-      '@types/node': 24.8.0
+      '@types/node': 24.8.1
       '@types/object-inspect': 1.13.0
       '@vltpkg/semver': 0.0.0-30
       ansis: 4.2.0
@@ -7027,13 +7027,13 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@5.4.18(@types/node@22.14.1)):
+  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@6.3.2(@types/node@22.14.1)(tsx@4.19.3)):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.9.3)
     optionalDependencies:
-      vite: 5.4.18(@types/node@22.14.1)
+      vite: 6.3.2(@types/node@22.14.1)(tsx@4.19.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
