@@ -63,3 +63,32 @@ export type MaybeSchemaless<$Type> = $Type | BuilderTyped<string>
  */
 export type Maybe<$Type, $Context = any> = $Context extends { argumentsMap: any } ? MaybeSchemaful<$Type>
   : MaybeSchemaless<$Type>
+
+/**
+ * Conditional return type for deferred execution based on variable presence.
+ *
+ * @remarks
+ * When a selection set contains variables (using $ markers), the method returns
+ * a DocumentRunner instead of auto-executing. This allows users to provide variables
+ * at runtime via the .run(variables) method.
+ *
+ * @typeParam $Variables - The inferred variables from the selection set
+ * @typeParam $Result - The result type that would be returned
+ * @typeParam $DocumentRunner - The DocumentRunner type to return when variables are present
+ *
+ * @example
+ * ```typescript
+ * // No variables - returns Promise
+ * graffle.query.user({ id: true }) // => Promise<{ id: string }>
+ *
+ * // Has variables - returns DocumentRunner
+ * graffle.query.user({ $: { id: $ }, id: true }) // => DocumentRunner<{ id: string }, { id: string }>
+ * runner.document // => "query($id: ID!) { user(id: $id) { id } }"
+ * runner.run({ id: '123' }) // => Promise<{ id: string }>
+ * ```
+ */
+// dprint-ignore
+export type MethodReturn<$Variables, $Result, $DocumentRunner> =
+  [keyof $Variables] extends [never]
+    ? Promise<$Result>
+    : $DocumentRunner

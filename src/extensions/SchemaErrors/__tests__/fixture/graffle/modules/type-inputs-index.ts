@@ -26,7 +26,7 @@ export type Float = number
 export type Boolean = boolean
 export type ID = string
 
-// Custom scalars (encoded types for inputs)
+// Custom scalars (decoded types for variables)
 export type Date = string
 export type $bigint = string
 

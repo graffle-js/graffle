@@ -89,8 +89,10 @@ type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
           // field is e.g. foo: false
           : $SelectionSet[$Key] extends Select.Indicator.Negative
             ? never
-            // We handle aliases elsewhere
+            // We handle aliases elsewhere (arrays and strings)
             : $SelectionSet[$Key] extends any[]
+              ? never
+            : $SelectionSet[$Key] extends string
               ? never
               // We handle inline fragments elsewhere
               : $Key extends Select.InlineFragment.Key

@@ -1,0 +1,58 @@
+{
+  "name": "@jasonkuhrt/vitest-plugin-examples",
+  "version": "0.1.0",
+  "description": "Vitest plugin for testing executable documentation examples with type-safe configuration",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./index.d.ts"
+    }
+  },
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "*.ts",
+    "README.md"
+  ],
+  "keywords": [
+    "vitest",
+    "plugin",
+    "testing",
+    "examples",
+    "documentation",
+    "snapshot",
+    "type-safe"
+  ],
+  "author": {
+    "name": "Jason Kuhrt",
+    "email": "jasonkuhrt@me.com",
+    "url": "https://kuhrt.me"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonkuhrt/vitest-plugin-examples.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jasonkuhrt/vitest-plugin-examples/issues"
+  },
+  "homepage": "https://github.com/jasonkuhrt/vitest-plugin-examples#readme",
+  "dependencies": {
+    "@effect/platform": "^0.92.0",
+    "@effect/platform-node": "^0.98.0",
+    "@wollybeard/kit": "^0.79.0",
+    "effect": "^3.18.0",
+    "strip-ansi": "^7.1.0"
+  },
+  "peerDependencies": {
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  }
+}

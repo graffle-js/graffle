@@ -7,6 +7,18 @@ import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Options } from './nodes/1_Document.js'
 
 /**
+ * Provenance of a hoisted variable, indicating how it was extracted.
+ *
+ * - `manual` - User explicitly marked with `$` sentinel (e.g., `{ $: { name: $('pokemonName') } }`)
+ * - `automatic` - System extracted via `hoistArguments: true` setting
+ *
+ * This metadata allows downstream systems (like extensions) to implement policies based on
+ * variable origin. For example, the DocumentBuilder extension defers execution only when
+ * manual hoisting is detected.
+ */
+export type VariableProvenance = 'manual' | 'automatic'
+
+/**
  * Input data for capturing a variable during GraphQL document construction.
  *
  * Variables are captured to extract inline argument values into GraphQL operation variables.
@@ -73,6 +85,13 @@ export interface CaptureVariableInput {
    * When present, enables precise GraphQL type generation (including nullability, list types, etc.).
    */
   sddmArgument?: SchemaDrivenDataMap.ArgumentOrInputField
+  /**
+   * Provenance of this variable, indicating how it was hoisted.
+   *
+   * - `manual` - User explicitly marked with `$` sentinel
+   * - `automatic` - System extracted via `hoistArguments: true`
+   */
+  provenance: VariableProvenance
 }
 
 export interface OperationContext {
@@ -95,6 +114,7 @@ export interface CapturedVariable {
   defaultValue?: unknown
   isEnum: boolean
   sddmArgument: SchemaDrivenDataMap.ArgumentOrInputField | undefined
+  provenance: VariableProvenance
 }
 
 export interface Captures {
@@ -130,6 +150,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
           defaultValue: processedDefaultValue,
           isEnum: input.isEnum,
           sddmArgument: input.sddmArgument,
+          provenance: input.provenance,
         })
 
         return Nodes.Argument({

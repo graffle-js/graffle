@@ -96,26 +96,21 @@ export const addAndApplyMany = <
     }
 
     // todo: test that if computed present, then they are added to the context.
-    if (extension.requestInterceptor || extension.requestInterceptorsComputed.length > 0) {
+    if (
+      extension.requestInterceptor
+      || (extension.requestInterceptorsComputed && extension.requestInterceptorsComputed.length > 0)
+    ) {
       Object.assign(
         newContext,
         RequestInterceptors.add(newContext, {
           static: extension.requestInterceptor ? [extension.requestInterceptor] : [],
-          computed: extension.requestInterceptorsComputed,
+          computed: extension.requestInterceptorsComputed ?? [],
         }),
       )
     }
 
-    if (extension.propertiesStatic || extension.propertiesComputed) {
-      const propertiesFragment = Properties.add(newContext, {
-        static: extension.propertiesStatic,
-        computed: extension.propertiesComputed,
-      })
-      if (propertiesFragment) {
-        Object.assign(newContext, propertiesFragment)
-      }
-    }
-
+    // IMPORTANT: Configuration must be added BEFORE properties
+    // because properties may need to read from configuration
     if (extension.configurator) {
       const fragment = Configuration.addType(
         newContext,
@@ -126,6 +121,16 @@ export const addAndApplyMany = <
         extension.configuratorInitialInput ?? {},
       )
       Object.assign(newContext, fragment)
+    }
+
+    if (extension.propertiesStatic || (extension.propertiesComputed && extension.propertiesComputed.length > 0)) {
+      const propertiesFragment = Properties.add(newContext, {
+        static: extension.propertiesStatic ?? {},
+        computed: extension.propertiesComputed ?? [],
+      })
+      if (propertiesFragment) {
+        Object.assign(newContext, propertiesFragment)
+      }
     }
   }
 

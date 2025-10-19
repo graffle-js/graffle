@@ -211,7 +211,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
     `  $Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`,
   )
   scalarsCode(`> = ${$.$$Utilities}.Schema.Scalar.GetDecoded<`)
-  scalarsCode(`  ${$.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<`)
+  scalarsCode(`  ${$.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToUnknown<`)
   scalarsCode(`    $ScalarName,`)
   scalarsCode(`    $Context extends { scalars: infer $S } ? $S : ${$.$$Utilities}.Schema.Scalar.Registry.Empty`)
   scalarsCode(`  >`)
@@ -559,12 +559,16 @@ const generateFieldedTypeModule = (
 
   const fieldKeys = fields.map(field => {
     const namedType = Grafaid.Schema.getNamedType(field.type)
+    const argsAnalysis = analyzeArgsNullability(field.args)
+    const isCanBeIndicator = (Grafaid.Schema.isScalarType(namedType) || Grafaid.Schema.isEnumType(namedType))
+      && argsAnalysis.isAllNullable
     const doc = Code.TSDoc(getOutputFieldSelectionSetDoc(field, type.name, namedType))
     const key = H.outputFieldKey(
       field.name,
       `$Fields.${field.name}`, // Use $Fields import to avoid circular reference
       true,
-      analyzeArgsNullability(field.args).isAllNullable,
+      argsAnalysis.isAllNullable,
+      isCanBeIndicator,
     )
     return `${doc}\n${key}`
   }).join(`\n`)
@@ -643,11 +647,17 @@ const renderOutputFieldForFields = (
     && argsAnalysis.isAllNullable
   const indicator = isCanBeIndicator
     ? `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
-    : ``
+    : null
+  const shortAlias = isCanBeIndicator
+    ? `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`
+    : null
+  const stringAlias = isCanBeIndicator
+    ? `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`
+    : null
 
   // Main field type - references the namespace's $SelectionSet
   const mainTypeDecl = `${safeName}<${$ContextTypeParameter}> = ${
-    Code.tsUnionItems([indicator, `${safeName}.$SelectionSet<${i._$Context}>`])
+    Code.tsUnionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
   }`
   if (isReservedKeyword(field.name)) {
     code(`type ${mainTypeDecl}`)
@@ -700,7 +710,7 @@ const renderOutputFieldForFields = (
   code(`  ${Code.TSDoc(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
-      Code.tsUnionItems([indicator, `$SelectionSet<${i._$Context}>`])
+      Code.tsUnionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
     }>`,
   )
 
@@ -1014,22 +1024,33 @@ namespace H {
     type: string,
     aliasable: boolean = true,
     isHasExpanded: boolean = true,
+    isCanBeIndicator: boolean = false,
   ) => {
     const isReference = type !== `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
     // For namespace-qualified types like Query.pokemons, append .$Expanded and <_$Context> directly
     const typeReferenced = isReference
       ? (isHasExpanded ? `${type}.$Expanded<${i._$Context}>` : reference(type))
       : type
-    const aliasType = aliasable
-      ? `| ${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`
-      : ``
+
+    const aliasTypes: string[] = []
+    if (aliasable) {
+      aliasTypes.push(
+        `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`,
+      )
+      if (isCanBeIndicator) {
+        aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`)
+        aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`)
+      }
+    }
+    const aliasType = aliasTypes.length > 0 ? aliasTypes.map(t => `| ${t}`).join(' ') : ``
+
     return `${name}?: ${typeReferenced}${aliasType}`
   }
 
   export const __typenameField = (kind: 'union' | 'interface' | 'object') => {
     const doc = __typenameDoc(kind)
     return `${doc}\n${
-      outputFieldKey(`__typename`, `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`, true, false)
+      outputFieldKey(`__typename`, `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`, true, false, true)
     }`
   }
 

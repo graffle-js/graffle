@@ -40,9 +40,8 @@ export const testExamples = (config: ExamplesPluginConfig = {}) => {
 }
 
 /**
- * Create a Vitest test that runs all examples and snapshots their outputs.
- * This convenience function reduces boilerplate by automatically creating
- * the test and handling snapshot assertions.
+ * Convenience function that creates a complete test case for all examples.
+ * Reduces test boilerplate significantly.
  *
  * @example
  * ```ts
@@ -51,18 +50,15 @@ export const testExamples = (config: ExamplesPluginConfig = {}) => {
  * import type { ExamplePath } from '@generated/test-examples'
  *
  * const encoders = {
- *   'some-example.ts': (output) => output.replace(/timestamp: \d+/, 'timestamp: MASKED')
+ *   './examples/dynamic.ts': (value: string) => value.replace(/\d+/g, 'MASKED')
  * } satisfies Partial<Record<ExamplePath, EncoderFunction>>
  *
  * createExamplesTest(test, {
  *   timeout: 300000,
  *   config: {
  *     pattern: './*\/*.ts',
- *     outputDir: './__outputs__',
  *     encoders,
- *     beforeEach: async () => {
- *       // Reset database
- *     }
+ *     beforeEach: async () => { await resetDb() }
  *   }
  * })
  * ```

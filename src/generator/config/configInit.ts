@@ -222,6 +222,25 @@ export interface ConfigInit {
    */
   extensions?: Extension[]
   /**
+   * Configure how root field methods are organized in the generated client.
+   * Multiple organizations can be enabled simultaneously.
+   */
+  methodsOrganization?: {
+    /**
+     * Enable logical organization by operation type (query/mutation).
+     *
+     * @defaultValue `true`
+     */
+    logical?: boolean
+    /**
+     * Enable domain-based organization by resource/entity.
+     * Requires explicit rules defining how fields are grouped into domains.
+     *
+     * @defaultValue `false`
+     */
+    domains?: DomainGroupingConfig | false
+  }
+  /**
    * Esoteric options that are not designed for use by regular users and use-cases.
    */
   advanced?: {
@@ -297,3 +316,150 @@ export const libraryPathKeys = {
   extensionTransportHttp: `extensionTransportHttp`,
   extensionDocumentBuilder: `extensionDocumentBuilder`,
 } satisfies Record<LibraryPathsKeys, LibraryPathsKeys>
+
+/**
+ * Configuration for domain-based method organization.
+ */
+export interface DomainGroupingConfig {
+  /**
+   * Rules for organizing fields into domain namespaces.
+   * Rules are evaluated in order. By default, fields can match multiple rules.
+   */
+  rules: FieldGroupingRule[]
+  /**
+   * How to handle method name conflicts when merging sub-namespaces.
+   *
+   * When multiple sub-namespaces (e.g., `pokemon.query` and `pokemon.list`)
+   * are merged into a single property (e.g., `pokemon`), conflicts may occur
+   * if they both define methods with the same name.
+   *
+   * Policies:
+   * - `'fail'`: Throw an error on conflict (default)
+   * - `'merge'`: Auto-increment conflicting names (e.g., `get` → `get`, `get2`) [TODO: Not yet implemented]
+   * - `'drop'`: Keep only the first occurrence, drop duplicates [TODO: Not yet implemented]
+   *
+   * @defaultValue `'fail'`
+   */
+  onMergeConflict?: 'fail' | 'merge' | 'drop'
+}
+
+/**
+ * Rule for organizing a root field into a namespace-based method.
+ */
+export interface FieldGroupingRule {
+  /**
+   * Pattern to match against field names. Can be a string (exact match) or RegExp.
+   *
+   * When using RegExp, capture groups can be referenced in `path` and `methodName`.
+   */
+  pattern: string | RegExp
+  /**
+   * The namespace path to organize this field under.
+   *
+   * Can be:
+   * - String: `'args.no'` creates namespace `$.args.no.*` (dot prefix is implied)
+   * - String with explicit prefix: `'.args.no'` same as above
+   * - String: `'api.v2.pokemon'` for nested paths → `$.api.v2.pokemon.*`
+   * - String: `'.'` for root level → `$.*`
+   * - Array: `['pokemon', 'poke']` creates aliases - multiple namespaces with the same methods
+   * - Null: Discard field (don't generate method, suppress warnings)
+   *
+   * When `pattern` is a RegExp, you can reference capture groups using `$name` or `$1` syntax.
+   *
+   * @example
+   * ```ts
+   * // Single namespace
+   * { pattern: 'pokemonByName', path: 'pokemon' }
+   * // → graffle.$.pokemon.pokemonByName
+   *
+   * // Nested namespace (dot-notation)
+   * { pattern: 'pokemonByName', path: 'api.v2.pokemon' }
+   * // → graffle.$.api.v2.pokemon.pokemonByName
+   *
+   * // Namespace aliases (array)
+   * { pattern: 'pokemonByName', path: ['pokemon', 'poke'] }
+   * // → graffle.$.pokemon.pokemonByName AND graffle.$.poke.pokemonByName
+   *
+   * // Root-level
+   * { pattern: 'pokemonByName', path: '.' }
+   * // → graffle.$.pokemonByName
+   *
+   * // Discard field
+   * { pattern: /legacy/, path: null }
+   * // → Not generated, no warnings
+   *
+   * // With named capture group
+   * { pattern: /^(?<resource>\w+)ByName$/, path: '$resource' }
+   * // pokemonByName → graffle.$.pokemon.*
+   *
+   * // With indexed capture group
+   * { pattern: /^(\w+)ByName$/, path: '$1' }
+   * // trainerByName → graffle.$.trainer.*
+   * ```
+   */
+  path?: string | string[] | null
+  /**
+   * The method name(s) to use within the namespace.
+   *
+   * Can be:
+   * - String: Single method name (can include capture group references when `pattern` is RegExp)
+   * - Array: Multiple method names (creates aliases)
+   * - Function: Receives fieldName, operationType, and optionally the RegExp match object
+   *
+   * @example
+   * ```ts
+   * // Single name
+   * methodName: 'getOne'
+   *
+   * // Multiple names (aliases)
+   * methodName: ['getOne', 'get', 'find']
+   *
+   * // With capture groups
+   * { pattern: /^pokemonBy(\w+)$/, methodName: 'getBy$1' }
+   * // pokemonByName → getByName
+   *
+   * // Function without captures
+   * methodName: (fieldName, operationType) =>
+   *   operationType === 'query' ? 'get' : 'create'
+   *
+   * // Function with captures
+   * methodName: (fieldName, operationType, match) =>
+   *   match?.groups?.action === 'add' ? 'create' : 'update'
+   * ```
+   */
+  methodName?:
+    | string
+    | string[]
+    | ((
+      fieldName: string,
+      operationType: 'query' | 'mutation',
+      match?: RegExpExecArray,
+    ) => string)
+  /**
+   * Whether this rule should consume the field, preventing it from matching subsequent rules.
+   *
+   * - `false` (default): Field continues to subsequent rules and can match multiple
+   * - `true`: Stop processing this field after match
+   * - `true` + `path: null`: Discard field and hide from "unmatched field" warnings
+   *
+   * @defaultValue `false`
+   *
+   * @example
+   * ```ts
+   * // Multi-categorization (default)
+   * { pattern: /^date/, path: 'feat.date' }
+   * { pattern: /^date/, path: 'type.scalar' }
+   * // dateField appears in both feat.date AND type.scalar
+   *
+   * // First-match-wins with consume
+   * { pattern: 'specificField', path: 'special', consume: true }
+   * { pattern: /Field/, path: 'generic' }
+   * // specificField only in 'special', otherField in 'generic'
+   *
+   * // Discard and suppress warnings
+   * { pattern: /^internal/, path: null, consume: true }
+   * // internalField is hidden, no warnings
+   * ```
+   */
+  consume?: boolean
+}

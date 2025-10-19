@@ -2,8 +2,7 @@ import { type Fs, writeFileAndCreateDir } from '#src/lib/fsp.js'
 import { test } from '#test/helpers'
 import * as Memfs from 'memfs'
 import * as Path from 'node:path'
-import { expect } from 'vitest'
-import { describe } from 'vitest'
+import { describe, expect } from 'vitest'
 import { createConfig } from './config.js'
 import type { ConfigInitSchemaSdl } from './configInit.js'
 
@@ -19,15 +18,9 @@ describe(`import format`, () => {
     const config = await createConfig({ schema })
     expect(config.importFormat).toEqual(`jsExtension`)
   })
-  test(`noExtension`, async () => {
-    const customPathFile = `./tests/_/fixtures/custom.graphql`
-    await fs.mkdir(Path.dirname(customPathFile), { recursive: true })
-    await fs.writeFile(customPathFile, `type Query { ok: Boolean }`)
-    const config = await createConfig({
-      fs,
-      schema: { type: `sdlFile`, dirOrFilePath: customPathFile },
-      importFormat: `noExtension`,
-    })
+
+  test(`respects explicit configuration`, async () => {
+    const config = await createConfig({ schema, importFormat: `noExtension` })
     expect(config.importFormat).toEqual(`noExtension`)
   })
 })

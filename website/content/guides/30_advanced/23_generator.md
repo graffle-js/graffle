@@ -171,3 +171,47 @@ await Generator.generate({
   schema: '...',
 })
 ```
+
+## Import Format Auto-Detection
+
+The generator automatically detects the appropriate import format for generated code based on your TypeScript configuration. This ensures generated imports work correctly with your build setup without manual configuration.
+
+**Detection Logic:**
+
+1. **Bundler mode** (`moduleResolution: "bundler"`) → No extensions (bundlers resolve automatically)
+2. **Node ESM** (`moduleResolution: "node16"/"nodenext"` + `type: "module"` in package.json) → `.js` extensions
+3. **Node CJS** (`moduleResolution: "node16"/"nodenext"` without `type: "module"`) → No extensions
+4. **Other/Unknown** → Defaults to `.js` extensions
+
+**Example:**
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler"
+  }
+}
+```
+
+Generated imports will use no extensions:
+
+```ts
+// Generated code automatically uses the correct format
+import { Graffle } from './modules/Client'
+```
+
+**Manual Override:**
+
+You can explicitly set the import format if needed:
+
+```ts
+// graffle.config.ts
+import { Generator } from 'graffle/generator'
+
+export default Generator.configure({
+  importFormat: 'jsExtension', // 'jsExtension' | 'tsExtension' | 'noExtension'
+})
+```
+
+**Note**: The auto-detection gracefully handles missing dependencies or config files, falling back to `.js` extensions (compatible with Node ESM). No setup is required for the default behavior to work.

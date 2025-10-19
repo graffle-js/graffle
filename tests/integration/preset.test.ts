@@ -9,12 +9,12 @@ test(`can create a preset`, () => {
   const context = GraffleKit.Context.Extensions.addAndApplyMany(GraffleKit.Context.contextEmpty, [
     TransportHttp,
     TransportMemory,
-    DocumentBuilder,
+    DocumentBuilder(),
   ])
-  const G = GraffleKit.Client.createConstructorWithContext(context)
-  const g = G()
-  g.transport(`http`)
+  const Graffle = GraffleKit.Client.createConstructorWithContext(context)
+  const client = Graffle()
+  client.transport(`http`)
   // @ts-expect-error
-  expect(() => g.transport(`foobar`)).toThrow()
-  g.transport(`memory`)
+  expect(() => client.transport(`foobar`)).toThrow()
+  client.transport(`memory`)
 })

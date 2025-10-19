@@ -24,11 +24,13 @@ export const toGraphQLDirective: GraphQLPostOperationMapper<
     let argument: Nodes.ArgumentNode
 
     if (context.variables.enabled && sddmArgument) {
+      // Automatic hoisting for directive arguments
       argument = context.variables.capture({
         name: argumentName,
         value: argumentValue,
         isEnum: false,
         sddmArgument,
+        provenance: `automatic`,
       })
     } else {
       const name = Nodes.Name({ value: argumentName })

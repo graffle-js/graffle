@@ -22,7 +22,11 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
    * | **Path** | `Query.id` |
    * | **Nullability** | Optional |
    */
-  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?:
+    | $Fields.id.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -37,6 +41,8 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
   idNonNull?:
     | $Fields.idNonNull.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.idNonNull<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 
   /**
    * Inline fragments for field groups.
@@ -57,4 +63,6 @@ export interface Query<_$Context extends $$Utilities.Docpar.Object.Select.Select
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

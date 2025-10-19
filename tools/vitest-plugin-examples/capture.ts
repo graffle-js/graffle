@@ -12,13 +12,20 @@ export const captureExample = async (
   file: ExampleFile,
   config: ExamplesPluginConfig,
 ): Promise<ExampleResult> => {
+  // Get executor configuration
+  const executorConfig = config.executor ?? {}
+  const commandArgs = executorConfig.command ?? ['tsx']
+  const cwd = executorConfig.cwd ?? process.cwd()
+  const env = executorConfig.env ?? process.env
+
   // Create the command
-  const command = Command.make('pnpm', 'tsx', file.relativePath).pipe(
+  const command = Command.make(commandArgs[0]!, ...commandArgs.slice(1), file.relativePath).pipe(
     Command.env({
-      ...process.env,
+      ...env,
       // Ensure the subprocess gets the server URL if set by vitest
-      POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'] ?? '',
+      POKEMON_SCHEMA_URL: env['POKEMON_SCHEMA_URL'] ?? process.env['POKEMON_SCHEMA_URL'] ?? '',
     }),
+    Command.workingDirectory(cwd),
   )
 
   // Execute and capture output

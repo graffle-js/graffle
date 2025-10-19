@@ -8,7 +8,7 @@ import { DocumentBuilder } from '../extensions/document-builder/runtime.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 
-const contextEmptyBasic = addAndApplyMany(contextEmpty, [TransportHttp, TransportMemory, DocumentBuilder])
+const contextEmptyBasic = addAndApplyMany(contextEmpty, [TransportHttp, TransportMemory, DocumentBuilder()])
 
 export type ContextEmpty = typeof contextEmptyBasic
 

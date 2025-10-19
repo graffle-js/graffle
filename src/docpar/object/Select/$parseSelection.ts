@@ -149,7 +149,16 @@ export const parseSelection = (key: string, value: any): ParsedSelection => {
     }
   }
 
-  // Parse alias after inline fragment because both can have array values but the keys are distinctive
+  // Parse string alias BEFORE object check (strings are always aliases for scalar fields)
+  if (typeof value === 'string') {
+    return {
+      type: `Alias`,
+      name: key,
+      aliases: SelectAlias.normalizeSelectAlias(value),
+    }
+  }
+
+  // Parse array alias after inline fragment because both can have array values but the keys are distinctive
   if (SelectAlias.isSelectAlias(value)) {
     return {
       type: `Alias`,

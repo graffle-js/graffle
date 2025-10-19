@@ -1,7 +1,29 @@
 import { type AnyAndUnknownToNever, type EmptyObject, emptyObject } from '#src/lib/prelude.js'
 import { Boolean, Float, ID, Int, String } from '../../StandardTypes/scalar.js'
-import type { Mapper } from './codec.js'
+import { createCodec, type Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'
+
+/**
+ * Scalar representing an unknown custom scalar type without a codec definition.
+ *
+ * When a GraphQL schema contains a custom scalar (e.g., `Date`, `DateTime`, `JSON`)
+ * but no codec is provided in the scalar registry, this scalar is used as a fallback.
+ *
+ * The decoded type is `unknown`, forcing users to either:
+ * 1. Define a proper codec for the custom scalar, or
+ * 2. Explicitly handle the unknown type at runtime
+ *
+ * This aligns with gql-tada's behavior and provides better type safety than
+ * the previous fallback to `string`.
+ */
+export const UnknownScalar: Scalar<string, unknown, any> = {
+  kind: 'Scalar',
+  name: '__unknown__',
+  codec: createCodec({
+    encode: (value: unknown) => value as any,
+    decode: (value: any) => value as unknown,
+  }),
+}
 
 // dprint-ignore
 export type GetEncoded<$Scalar extends Scalar> =
@@ -61,16 +83,16 @@ export namespace Registry {
 export type ScalarMap = Record<string, Scalar>
 
 // dprint-ignore
-export type LookupCustomScalarOrFallbackToString<$Name extends string, $Scalars extends Registry> =
+export type LookupCustomScalarOrFallbackToUnknown<$Name extends string, $Scalars extends Registry> =
   $Name extends keyof $Scalars['map']  ? $Scalars['map'][$Name]
   : $Name extends 'String'              ? typeof String
   : $Name extends 'Int'                 ? typeof Int
   : $Name extends 'Float'               ? typeof Float
   : $Name extends 'Boolean'             ? typeof Boolean
   : $Name extends 'ID'                  ? typeof ID
-  :                                       typeof String
+  :                                       typeof UnknownScalar
 
-export const lookupCustomScalarOrFallbackToString = (scalars: ScalarMap, name: string): Scalar => {
+export const lookupCustomScalarOrFallbackToUnknown = (scalars: ScalarMap, name: string): Scalar => {
   const scalar = scalars[name]
   if (scalar) return scalar
 
@@ -87,7 +109,7 @@ export const lookupCustomScalarOrFallbackToString = (scalars: ScalarMap, name: s
     case 'ID':
       return ID
     default:
-      return String
+      return UnknownScalar
   }
 }
 

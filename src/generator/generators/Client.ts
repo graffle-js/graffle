@@ -1,3 +1,4 @@
+import { Code } from '#src/lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'
@@ -10,14 +11,28 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
-    code`
-      import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-      import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'
-      import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
 
+    // Import domains only if there are actual rules configured
+    const hasDomains = config.methodsOrganization.domains && config.methodsOrganization.domains.rules?.length > 0
+    if (hasDomains) {
+      code(Code.importAll({ as: '$$Domains', from: './domains/$$.js' }))
+    }
+
+    code(Code.importAll({ as: $.$$Utilities, from: config.paths.imports.grafflePackage.utilitiesForGenerated }))
+    code(Code.importNamed({ names: 'TransportHttp', from: config.paths.imports.grafflePackage.extensionTransportHttp }))
+    code(
+      Code.importNamed({
+        names: 'DocumentBuilder',
+        from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
+      }),
+    )
+
+    code`
       const context = ${$.$$Utilities}.pipe(
         ${$.$$Utilities}.contextEmpty,
-        ctx => ${$.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+        ctx => ${$.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, ${
+      hasDomains ? 'DocumentBuilder({ domains: $$Domains })' : 'DocumentBuilder()'
+    }]),
         ctx => ${$.$$Utilities}.Transports.configureCurrentOrThrow(ctx, { url: $$Data.defaultSchemaUrl }),
         ctx => ${$.$$Utilities}.Configuration.add(ctx, {
            schema: {

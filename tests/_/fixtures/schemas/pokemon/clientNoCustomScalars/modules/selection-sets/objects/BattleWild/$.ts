@@ -32,6 +32,8 @@ export interface BattleWild<
   date?:
     | $Fields.date.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -43,7 +45,11 @@ export interface BattleWild<
    * | **Path** | `BattleWild.id` |
    * | **Nullability** | Optional |
    */
-  id?: $Fields.id.$Expanded<_$Context> | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+  id?:
+    | $Fields.id.$Expanded<_$Context>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -72,6 +78,8 @@ export interface BattleWild<
   result?:
     | $Fields.result.$Expanded<_$Context>
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<$Fields.result<_$Context>>
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   /**
    * # Info
    *
@@ -121,4 +129,6 @@ export interface BattleWild<
     | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAlias<
       $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
     >
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
 }

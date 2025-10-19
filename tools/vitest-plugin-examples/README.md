@@ -1,21 +1,26 @@
 # Vitest Examples Plugin
 
-A Vite plugin for testing executable documentation examples. This plugin automatically discovers example files, generates TypeScript types for type-safe configuration, executes examples, captures their output, and integrates with Vitest's snapshot testing.
+A Vite plugin for testing executable documentation examples with type-safe configuration. This plugin automatically discovers example files, generates TypeScript types for type-safe encoder configuration, executes examples, captures their output, and integrates with Vitest's snapshot testing.
 
 ## Features
 
 - **Automatic Type Generation**: Generates TypeScript types in `@generated/test-examples` for type-safe encoder configuration
 - **Automatic Discovery**: Finds example files using glob patterns
-- **Output Capture**: Executes examples and captures stdout/stderr
+- **Output Capture**: Executes examples and captures stdout/stderr using Effect Platform
 - **Dynamic Value Masking**: Type-safe encoder configuration for masking non-deterministic values
-- **Snapshot Testing**: Integrates seamlessly with Vitest snapshots
+- **Snapshot Testing**: Integrates seamlessly with Vitest inline snapshots
 - **Lifecycle Hooks**: Support for setup/teardown before/after each example
 - **Sequential Execution**: Runs examples sequentially to avoid race conditions
 - **IDE Autocomplete**: Full TypeScript autocomplete for example file paths
+- **Configurable Execution**: Customize executor command, cwd, and environment
 
 ## Installation
 
-This plugin is currently part of the Graffle project. No separate installation needed.
+```bash
+pnpm add -D @jasonkuhrt/vitest-plugin-examples
+```
+
+Or use it locally within the Graffle monorepo.
 
 ## Usage
 
@@ -24,8 +29,8 @@ This plugin is currently part of the Graffle project. No separate installation n
 In your `vitest.config.ts`:
 
 ```typescript
+import { examplesPlugin } from '@jasonkuhrt/vitest-plugin-examples'
 import { defineConfig } from 'vitest/config'
-import { examplesPlugin } from '../tools/vitest-plugin-examples/index.js'
 
 export default defineConfig({
   plugins: [
@@ -45,9 +50,9 @@ The plugin runs during Vite's `buildStart` lifecycle, generating types before Ty
 In your test file:
 
 ```typescript
-import { test } from 'vitest'
-import { createExamplesTest } from '../../tools/vitest-plugin-examples/index.js'
 import type { ExamplePath } from '@generated/test-examples'
+import { createExamplesTest } from '@jasonkuhrt/vitest-plugin-examples'
+import { test } from 'vitest'
 
 // Type-safe encoder configuration with autocomplete
 const encoders = {
@@ -72,6 +77,7 @@ createExamplesTest(test, {
 ```
 
 That's it! The `createExamplesTest()` function:
+
 - Automatically runs all discovered examples
 - Creates a single Vitest test case
 - Generates individual snapshots for each example
@@ -95,7 +101,7 @@ export type ExamplePath = keyof ExampleFiles
 Use these types for type-safe encoder configuration:
 
 ```typescript
-import type { ExamplePath, EncoderFunction } from '@generated/test-examples'
+import type { EncoderFunction, ExamplePath } from '@generated/test-examples'
 
 const encoders = {
   './examples/dynamic-values.ts': (output: string) => {
@@ -111,9 +117,8 @@ const encoders = {
 If you need more control, you can use the lower-level APIs:
 
 ```typescript
+import { runExamples } from '@jasonkuhrt/vitest-plugin-examples'
 import { expect, test } from 'vitest'
-import { runExamples } from '../../tools/vitest-plugin-examples/index.js'
-import type { ExamplePath } from '@generated/test-examples'
 
 test('examples', async () => {
   const results = await runExamples({
@@ -174,6 +179,48 @@ interface ExamplesPluginConfig {
    * @default true
    */
   maskDynamicValues?: boolean
+
+  /**
+   * Execution configuration for running examples.
+   */
+  executor?: {
+    /**
+     * Command to execute examples.
+     * @default ['tsx']
+     */
+    command?: string[]
+    /**
+     * Working directory for command execution.
+     * @default process.cwd()
+     */
+    cwd?: string
+    /**
+     * Environment variables to pass to the command.
+     * @default process.env
+     */
+    env?: Record<string, string | undefined>
+  }
+
+  /**
+   * Type generation configuration.
+   */
+  typeGeneration?: {
+    /**
+     * Whether to enable type generation.
+     * @default true
+     */
+    enabled?: boolean
+    /**
+     * Output directory for generated types.
+     * @default 'node_modules/@generated/test-examples'
+     */
+    outputDir?: string
+    /**
+     * Package name for generated types.
+     * @default '@generated/test-examples'
+     */
+    packageName?: string
+  }
 }
 ```
 
@@ -199,17 +246,17 @@ interface ExampleResult {
 ## How It Works
 
 1. **Type Generation** (Vite plugin, `buildStart` hook):
-   - Discovers example files using `globby`
+   - Discovers example files using Kit's `Fs.glob()`
    - Generates TypeScript types to `node_modules/@generated/test-examples/`
    - Creates proper npm package with `package.json` for TypeScript module resolution
    - Runs before TypeScript compilation, ensuring types are available during type checking
 
 2. **Test Execution** (Vitest runtime):
    - Discovers example files matching the pattern
-   - Runs each example using Effect Platform's `Command` API with `tsx`
+   - Runs each example using Effect Platform's `Command` API (configurable executor)
    - Captures stdout/stderr using Effect Streams
    - Applies custom encoders + default masking for determinism
-   - Creates individual snapshots for each example
+   - Creates individual inline snapshots for each example
 
 ### Default Encoding
 
@@ -239,6 +286,7 @@ Vite plugin that generates TypeScript types for example files during build.
 Convenience function that creates a complete test case for all examples.
 
 **Parameters**:
+
 - `test` - Vitest's `test` function
 - `options` - Configuration object:
   - `config?: ExamplesPluginConfig` - Plugin configuration
@@ -246,6 +294,12 @@ Convenience function that creates a complete test case for all examples.
   - `testName?: string` - Name of the test case (default: 'examples')
 
 **Returns**: void (creates test internally)
+
+#### `testExamples(config?)`
+
+Creates a function that runs all examples with the given configuration.
+
+**Returns**: `() => Promise<ExampleResult[]>`
 
 #### `runExamples(config)`
 
@@ -273,29 +327,19 @@ Executes a single example file and captures its output.
 
 ## Migration from Old System
 
-The old system had two separate concerns:
+The old system used:
 
-1. **Test Generation** (now replaced by this plugin):
-   - `scripts/generate-examples-derivatives/generate-paths.ts` - Generated test paths
-   - Manual `runExampleForTest()` functions
-   - Separate snapshot path construction
-   - Manual encoder loading
-   - **Status**: Fully replaced by Vite plugin + `createExamplesTest()`
+- `scripts/generate-examples-derivatives/generate-outputs.ts` - Manual output generation
+- Custom `runExample()` and `runExampleForTest()` functions
+- Separate snapshot path construction
+- Manual encoder loading
 
-2. **Website Documentation** (still in use):
-   - `scripts/generate-examples-derivatives/generate-outputs.ts` - Creates `.output.txt` files
-   - `scripts/generate-examples-derivatives/generate-docs.ts` - Generates website docs
-   - **Status**: Still needed, runs separately via `pnpm examples:gen:website`
+The new plugin simplifies this to:
 
-### Migration Benefits
-
-The new plugin provides:
-
-- **Type Safety**: Full TypeScript autocomplete for example paths
-- **Reduced Boilerplate**: Test file reduced from ~60 lines to ~28 lines
-- **Automatic Type Generation**: No manual maintenance of type files
-- **Single Test Case**: All examples in one test, individual snapshots per example
-- **Better DX**: IDE autocomplete for encoder configuration
+- Single `testExamples()` call
+- Automatic snapshot integration
+- Inline encoder configuration
+- No manual output file generation needed
 
 ## Performance
 
@@ -303,18 +347,26 @@ The new plugin provides:
 - Typical run time: ~2-5 minutes for ~30 examples
 - Set test timeout to at least 300000ms (5 minutes)
 
+## Dependencies
+
+This plugin requires:
+
+- **Effect Platform** (`@effect/platform`, `@effect/platform-node`, `effect`) - For command execution and stream handling
+- **@wollybeard/kit** - For file system operations and FsLoc types
+- **Vite & Vitest** (peer dependencies)
+
 ## Limitations
 
-- Currently executes via `pnpm tsx` - requires these tools to be available
-- Sequential execution means slower than parallel (by design)
+- Executes examples via configurable executor (default: `tsx`)
+- Sequential execution means slower than parallel (by design, for safety)
 - Snapshot comparison happens in-memory (inline snapshots)
-- Requires Effect Platform packages (`@effect/platform`, `@effect/platform-node`, `effect`)
 - Generated types live in `node_modules/@generated/` - not committed to git
+- Requires Effect Platform and Kit dependencies
 
 ## Future Improvements
 
 - Support for parallel execution with opt-in
-- Better TypeScript integration without needing `tsx`
 - Option to commit generated types to source control
 - Comparison utilities for validating against old system
 - Support for custom snapshot serializers
+- Lighter-weight alternative without Effect/Kit dependencies

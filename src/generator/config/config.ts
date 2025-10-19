@@ -8,6 +8,7 @@ import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import type { Extension } from '../extension/types.js'
+import { detectDefaultImportFormat } from '../helpers/detectImportFormat.js'
 import {
   type ConfigInit,
   type ConfigInitLibraryPaths,
@@ -28,6 +29,10 @@ export interface Config {
   runtimeFeatures: {
     customScalars: boolean
     operationVariables: boolean
+  }
+  methodsOrganization: {
+    logical: boolean
+    domains: false | ConfigInitDomainGroupingConfig
   }
   options: {
     /**
@@ -66,6 +71,8 @@ export interface Config {
     schemaInterfaceExtendsEnabled?: boolean
   }
 }
+
+type ConfigInitDomainGroupingConfig = import('./configInit.js').DomainGroupingConfig
 
 interface ConfigSchema {
   via: ConfigInit['schema']['type']
@@ -109,7 +116,10 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
   }
 
   // Get import format early to use in path processing
-  const importFormat = configInit.importFormat ?? defaults.importFormat
+  // Auto-detect from tsconfig.json/package.json if not explicitly configured
+  const importFormat = configInit.importFormat
+    ?? await detectDefaultImportFormat(cwd)
+    ?? defaults.importFormat
 
   // Helper to get the correct extension based on importFormat
   const getImportExtension = (path: string): string => {
@@ -232,6 +242,11 @@ To suppress this warning disable formatting in one of the following ways:
 
   const schemaInterfaceExtendsEnabled = configInit.advanced?.schemaInterfaceExtendsEnabled ?? false
 
+  // --- methods organization ---
+
+  const methodsOrganizationLogical = configInit.methodsOrganization?.logical ?? defaults.methodsOrganization.logical
+  const methodsOrganizationDomains = configInit.methodsOrganization?.domains ?? defaults.methodsOrganization.domains
+
   // --- Config ---
 
   return {
@@ -246,6 +261,10 @@ To suppress this warning disable formatting in one of the following ways:
     runtimeFeatures: {
       customScalars: true, // todo do not assume true
       operationVariables: true, // todo do not assume true
+    },
+    methodsOrganization: {
+      logical: methodsOrganizationLogical,
+      domains: methodsOrganizationDomains,
     },
     schema,
     options: {

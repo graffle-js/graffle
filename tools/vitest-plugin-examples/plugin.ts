@@ -1,6 +1,7 @@
 import * as FS from 'node:fs/promises'
 import * as Path from 'node:path'
-import type { Plugin } from 'vite'
+// TODO: Fix vite dependency issue
+// import type { Plugin } from 'vite'
 import { discoverExamples } from './discovery.js'
 import type { ExamplesPluginConfig } from './types.js'
 
@@ -8,8 +9,11 @@ import type { ExamplesPluginConfig } from './types.js'
  * Vite plugin that discovers example files and generates TypeScript types.
  * The generated types provide type-safe references to example file paths.
  */
-export const examplesPlugin = (config: ExamplesPluginConfig = {}): Plugin => {
-  const outputDir = 'node_modules/@generated/test-examples'
+export const examplesPlugin = (config: ExamplesPluginConfig = {}): any => {
+  const typeGenConfig = config.typeGeneration ?? {}
+  const enabled = typeGenConfig.enabled ?? true
+  const outputDir = typeGenConfig.outputDir ?? 'node_modules/@generated/test-examples'
+  const packageName = typeGenConfig.packageName ?? '@generated/test-examples'
   const outputFile = `${outputDir}/types.d.ts`
   const packageJsonFile = `${outputDir}/package.json`
 
@@ -17,6 +21,8 @@ export const examplesPlugin = (config: ExamplesPluginConfig = {}): Plugin => {
     name: 'vitest-plugin-examples',
 
     async buildStart() {
+      if (!enabled) return
+
       // Discover examples
       const examples = await discoverExamples(config)
 
@@ -45,7 +51,7 @@ export type ExamplePath = keyof ExampleFiles
 
       // Create package.json to make it a proper npm package
       const packageJson = {
-        name: '@generated/test-examples',
+        name: packageName,
         version: '0.0.0',
         private: true,
         types: './types.d.ts',
