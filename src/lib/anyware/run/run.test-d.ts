@@ -11,19 +11,19 @@ test(`returns input if no steps`, async () => {
   const d = def.type
   const p = Pipeline.create(d)
   const r = await PipelineDefinition.run(p)
-  Ts.Test.exact.is<Result<initialInput>>()(r)
+  Ts.Assert.exact.of.as<Result<initialInput>>()(r)
 })
 
 test(`returns last step output if steps`, async () => {
   const d = def.step({ name: `a`, run: () => 2 as const }).type
   const p = Pipeline.create(d)
   const r = await PipelineDefinition.run(p)
-  Ts.Test.exact.is<Result<2>>()(r)
+  Ts.Assert.exact.of.as<Result<2>>()(r)
 })
 
 test(`can return a promise`, async () => {
   const d = def.step({ name: `a`, run: () => Promise.resolve(2 as const) }).type
   const p = Pipeline.create(d)
   const r = await PipelineDefinition.run(p)
-  Ts.Test.exact.is<Result<2>>()(r)
+  Ts.Assert.exact.of.as<Result<2>>()(r)
 })

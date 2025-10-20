@@ -4,41 +4,43 @@ import { Ts } from '@wollybeard/kit'
 
 const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)
 
-Ts.Test.exact.is<{ id2: null | string } | null>()(await g.query.object({ id: ['id2', true] }))
+Ts.Assert.exact.of.as<{ id2: null | string } | null>()(await g.query.object({ id: ['id2', true] }))
 // scalar
-Ts.Test.exact.is<string | null>()(await g.query.id())
+Ts.Assert.exact.of.as<string | null>()(await g.query.id())
 // scalar none-nullable
-Ts.Test.exact.is<string>()(await g.query.idNonNull())
+Ts.Assert.exact.of.as<string>()(await g.query.idNonNull())
 // scalar with optional arguments
-Ts.Test.sub.parameters<[input?: Possible.$Fields.Query['stringWithArgs']]>()(g.query.stringWithArgs)
+Ts.Assert.parameters.sub.of.as<[input?: Possible.$Fields.Query['stringWithArgs']]>()(g.query.stringWithArgs)
 // scalar with required arguments
-Ts.Test.sub.parameters<[input: Possible.$Fields.Query['stringWithRequiredArg']]>()(g.query.stringWithRequiredArg)
+Ts.Assert.parameters.sub.of.as<[input: Possible.$Fields.Query['stringWithRequiredArg']]>()(
+  g.query.stringWithRequiredArg,
+)
 // scalar custom
-Ts.Test.sub.is<Date | null>()(await g.query.date())
+Ts.Assert.sub.of.as<Date | null>()(await g.query.date())
 // scalar with explicit indicators
 // positive indicator
-Ts.Test.exact.is<string>()(await g.query.idNonNull(true))
+Ts.Assert.exact.of.as<string>()(await g.query.idNonNull(true))
 // negative indicator
 // todo
-// Ts.Test.exact.is<null>()(await graffle.query.idNonNull(false))
+// Ts.Assert.exact.of.as<null>()(await graffle.query.idNonNull(false))
 // negative indicator via directive
 // todo
-// Ts.Test.exact.is<null>()(await graffle.query.idNonNull({ $skip: false }))
+// Ts.Assert.exact.of.as<null>()(await graffle.query.idNonNull({ $skip: false }))
 
 // object
-Ts.Test.exact.is<{ date1: Date | null } | null>()(await g.query.dateObject1({ date1: true }))
-Ts.Test.exact.is<{} | { id: string | null } | null>()(await g.query.unionFooBar({ ___on_Foo: { id: true } }))
-Ts.Test.exact.is<null | { id: string | null }>()(await g.query.interface({ id: true }))
-Ts.Test.exact.is<{} | { int: number | null } | null>()(
+Ts.Assert.exact.of.as<{ date1: Date | null } | null>()(await g.query.dateObject1({ date1: true }))
+Ts.Assert.exact.of.as<{} | { id: string | null } | null>()(await g.query.unionFooBar({ ___on_Foo: { id: true } }))
+Ts.Assert.exact.of.as<null | { id: string | null }>()(await g.query.interface({ id: true }))
+Ts.Assert.exact.of.as<{} | { int: number | null } | null>()(
   await g.query.interface({ ___on_Object1ImplementingInterface: { int: true } }),
 )
 // object with scalars wildcard
-Ts.Test.exact.is<{ __typename: `DateObject1`; date1: Date | null } | null>()(
+Ts.Assert.exact.of.as<{ __typename: `DateObject1`; date1: Date | null } | null>()(
   await g.query.dateObject1({ $scalars: true }),
 )
 
 // $batch with aliases
-Ts.Test.exact.is<
+Ts.Assert.exact.of.as<
   {
     obj1: { id: string | null } | null
     obj2: { id: string | null } | null

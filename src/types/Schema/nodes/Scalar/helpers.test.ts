@@ -15,10 +15,10 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
     type EmptyRegistry = Registry<{}, any, any>
 
     // Standard scalars should resolve to their types
-    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()(StringScalar)
-    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'Int', EmptyRegistry>>()(Int)
-    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'Float', EmptyRegistry>>()(Float)
-    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'ID', EmptyRegistry>>()(ID)
+    Ts.Assert.exact.of.as<LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()(StringScalar)
+    Ts.Assert.exact.of.as<LookupCustomScalarOrFallbackToUnknown<'Int', EmptyRegistry>>()(Int)
+    Ts.Assert.exact.of.as<LookupCustomScalarOrFallbackToUnknown<'Float', EmptyRegistry>>()(Float)
+    Ts.Assert.exact.of.as<LookupCustomScalarOrFallbackToUnknown<'ID', EmptyRegistry>>()(ID)
   })
 
   test('custom scalars in registry are resolved', () => {
@@ -32,14 +32,14 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
     }
 
     // Custom scalar in registry should resolve
-    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'Date', RegistryWithDate>>()(DateScalar)
+    Ts.Assert.exact.of.as<LookupCustomScalarOrFallbackToUnknown<'Date', RegistryWithDate>>()(DateScalar)
   })
 
   test('unknown custom scalars default to UnknownScalar', () => {
     type EmptyRegistry = Registry<{}, any, any>
 
     // Unknown custom scalar should default to UnknownScalar (not String)
-    Ts.Test.exact<LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()(UnknownScalar)
+    Ts.Assert.exact.of.as<LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()(UnknownScalar)
   })
 })
 

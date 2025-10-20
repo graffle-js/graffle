@@ -88,7 +88,7 @@ describe(`creator`, () => {
         "transports": [],
       }
     `)
-    Ts.Test.sub.is<expectedCreator>()(A)
+    Ts.Assert.sub.of.as<expectedCreator>()(A)
     // rejects, why?
     // expectTypeOf<expectedCreator>().toMatchTypeOf<typeof a1>()
   })
