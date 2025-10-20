@@ -334,7 +334,7 @@ type DocError = {
 }
 
 type _ErrorCases = Ts.Assert.Cases<
-  Ts.Assert.exact.of.as<Strict<'{ bad }'>, DocError>
+  Ts.Assert.exact<Strict<'{ bad }'>, DocError>
   // TODO: Object parser produces different error format than string parser
   // Ts.Assert.exact.of.as<Strict<{ query: { default: { bad: true } } }>, DocError>
 >

@@ -172,7 +172,7 @@ test(`Query`, () => {
   // On Root (Query)
   Ts.Assert.sub.of.as<Q>()({ ___: { id: true } })
   Ts.Assert.sub.of.as<Q>()({ ___: { $skip: true, id: true } })
-  Ts.Assert.subNoExcess<Q>()({
+  Ts.Assert.sub.noExcess.as<Q>()({
     // @ts-expect-error no directives on root type
     $skip: true,
     id: true

@@ -79,7 +79,7 @@ test(`step definition with slots`, () => {
         return results.a
       },
     })
-  Ts.Assert.sub.of<
+  Ts.Assert.sub.of.as<
     {
       input: initialInput
       config: Config

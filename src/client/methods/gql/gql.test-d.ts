@@ -43,12 +43,11 @@ const multiRequiredVarsString = Possible.gql(
 //                                   UNTYPED DOCUMENT
 // ==================================================================================================
 const untypedDoc = `query { id }` as string
-type R10 = unknown
 
-Ts.Assert.awaited.exact.of.as<R10>()(client.gql(untypedDoc).$send())
-Ts.Assert.awaited.exact.of.as<R10>()(client.gql(untypedDoc).$send('anyName'))
-Ts.Assert.awaited.exact.of.as<R10>()(client.gql(untypedDoc).$send({ any: 'vars' }))
-Ts.Assert.awaited.exact.of.as<R10>()(client.gql(untypedDoc).$send('anyName', { any: 'vars' }))
+Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send())
+Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send('anyName'))
+Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send({ any: 'vars' }))
+Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send('anyName', { any: 'vars' }))
 
 // ==================================================================================================
 //                            SINGLE OPERATION - NO VARIABLES
