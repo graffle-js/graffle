@@ -10,182 +10,179 @@ type QWithDate = Possible.SelectionSets.Query
 declare const Q: Q
 declare const QWithDate: QWithDate
 
-// dprint-ignore
+const t = Ts.Assert.sub.of(Q)
+
 test(`Query`, () => {
-  Ts.Assert.sub.of(Q)({ __typename: true })
-  Ts.Assert.sub.of(Q)({ __typename: true })
+  t({ __typename: true })
+  t({ __typename: true })
 
   // @ts-expect-error directive on root type Query
-  Ts.Assert.sub.of(Q)({ $defer: true })
+  t({ $defer: true })
 
   // Scalar
-  Ts.Assert.sub.of(Q)({ id: true })
-  Ts.Assert.sub.of(Q)({ id: true })
-  Ts.Assert.sub.of(Q)({ id: false })
-  // Ts.Assert.sub.of(Q)({ id: 1 })
-  // Ts.Assert.sub.of(Q)({ id: 0 })
-  Ts.Assert.sub.of(Q)({ id: undefined })
+  t({ id: true })
+  t({ id: true })
+  t({ id: false })
+  // t({ id: 1 })
+  // t({ id: 0 })
+  t({ id: undefined })
   // non-null
-  Ts.Assert.sub.of(Q)({ idNonNull: true })
+  t({ idNonNull: true })
 
   // Custom Scalar
-  Ts.Assert.sub.of(Q)({ date: true })
-  Ts.Assert.sub.of(Q)({ date: false })
-  // Ts.Assert.sub.of(Q)({ date: 0 })
-  // Ts.Assert.sub.of(Q)({ date: 1 })
-  Ts.Assert.sub.of(Q)({ date: undefined })
+  t({ date: true })
+  t({ date: false })
+  // t({ date: 0 })
+  // t({ date: 1 })
+  t({ date: undefined })
 
   // Enum
-  Ts.Assert.sub.of(Q)({ abcEnum: true })
+  t({ abcEnum: true })
 
   // Object
-  Ts.Assert.sub.of(Q)({ object: { id: true } })
+  t({ object: { id: true } })
   // typename
-  Ts.Assert.sub.of(Q)({ __typename: true })
+  t({ __typename: true })
   // Non-Null
-  Ts.Assert.sub.of(Q)({ objectNonNull: { id: true } })
+  t({ objectNonNull: { id: true } })
   // @ts-expect-error excess property check
-  Ts.Assert.sub.of(Q)({ id2: true })
+  t({ id2: true })
   // @ts-expect-error no a2
-  Ts.Assert.sub.of(Q)({ object: { a2: true } })
+  t({ object: { a2: true } })
 
   // Object Nested
-  Ts.Assert.sub.of(Q)({ objectList: {  } })
+  t({ objectList: {} })
 
   // Union
-  Ts.Assert.sub.of(Q)({ unionFooBar: { __typename: true } })
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Foo: { __typename: true } } })
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Foo: { id: true } } })
+  t({ unionFooBar: { __typename: true } })
+  t({ unionFooBar: { ___on_Foo: { __typename: true } } })
+  t({ unionFooBar: { ___on_Foo: { id: true } } })
   // @ts-expect-error no b
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Foo: { id2: true } } })
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Bar: { __typename: true } } })
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Bar: { int: true } } })
+  t({ unionFooBar: { ___on_Foo: { id2: true } } })
+  t({ unionFooBar: { ___on_Bar: { __typename: true } } })
+  t({ unionFooBar: { ___on_Bar: { int: true } } })
   // @ts-expect-error no a
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Bar: { int2: true } } })
+  t({ unionFooBar: { ___on_Bar: { int2: true } } })
 
   // Union fragments Case
-  Ts.Assert.sub.of(Q)({ lowerCaseUnion: { ___on_lowerCaseObject: { id: true }, ___on_lowerCaseObject2: { int: true } } })
+  t({ lowerCaseUnion: { ___on_lowerCaseObject: { id: true }, ___on_lowerCaseObject2: { int: true } } })
 
   // Interface
-  Ts.Assert.sub.of(Q)({ interface: { id: true } })
-  // Ts.Assert.sub.of(Q)({ interface: { id: { $defer: true } } })
-  Ts.Assert.sub.of(Q)({ interface: { id: { $include: true } } })
-  Ts.Assert.sub.of(Q)({ interface: { id: { $skip: true } } })
-  // Ts.Assert.sub.of(Q)({ interface: { id: { $stream: true } } })
-  Ts.Assert.sub.of(Q)({ interface: { __typename: true } })
-  // Ts.Assert.sub.of(Q)({ interface: { __typename: { $defer: true } } })
-  Ts.Assert.sub.of(Q)({ interface: { $scalars: true } })
-  Ts.Assert.sub.of(Q)({ interfaceWithArgs: { $: { id: `abc` }, id: true } })
+  t({ interface: { id: true } })
+  // t({ interface: { id: { $defer: true } } })
+  t({ interface: { id: { $include: true } } })
+  t({ interface: { id: { $skip: true } } })
+  // t({ interface: { id: { $stream: true } } })
+  t({ interface: { __typename: true } })
+  // t({ interface: { __typename: { $defer: true } } })
+  t({ interface: { $scalars: true } })
+  t({ interfaceWithArgs: { $: { id: `abc` }, id: true } })
   // todo:
   // // @ts-expect-error needs fragment
-  // Ts.Assert.sub.of(Q)({ interface: { id: true, int: true } })
+  // t({ interface: { id: true, int: true } })
   // todo:
   // // @ts-expect-error needs fragment
-  // Ts.Assert.sub.of(Q)({ interface: { id: true, boolean: true } })
-  // Ts.Assert.sub.of(Q)({ interface: { id: true, ___on_Object1ImplementingInterface: { int: true } } })
-  // Ts.Assert.sub.of(Q)({ interface: { id: true, ___on_Object2ImplementingInterface: { boolean: true } } })
+  // t({ interface: { id: true, boolean: true } })
+  // t({ interface: { id: true, ___on_Object1ImplementingInterface: { int: true } } })
+  // t({ interface: { id: true, ___on_Object2ImplementingInterface: { boolean: true } } })
   // todo:
   // // @ts-expect-error incorrect implementor name
   // Ts.Assert.subNoExcess<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
   // directives work on fragments
-  Ts.Assert.sub.of(Q)({ interface: { id: true, ___on_Object1ImplementingInterface: { $include: true } } }) // todo should REQUIRE field selection
-
-
-
-
+  t({ interface: { id: true, ___on_Object1ImplementingInterface: { $include: true } } }) // todo should REQUIRE field selection
 
   // Alias
   // todo test that aliases are no supported on ___on_X polymorphic fields
 
   // alias: enum
-  Ts.Assert.sub.of(Q)({ abcEnum: [`enum`, true] })
-  Ts.Assert.sub.of(Q)({ __typename: [`kind`, true] })
-  Ts.Assert.sub.of(Q)({ __typename: [`f`, true] })
+  t({ abcEnum: [`enum`, true] })
+  t({ __typename: [`kind`, true] })
+  t({ __typename: [`f`, true] })
   // alias: object
-  Ts.Assert.sub.of(Q)({ object: [`o`, { id: true }] })
+  t({ object: [`o`, { id: true }] })
   // alias multiple 1
-  Ts.Assert.sub.of(Q)({ object: [[`o`, { id: true }]] })
+  t({ object: [[`o`, { id: true }]] })
   // alias multiple 2
-  Ts.Assert.sub.of(Q)({ object: [[`o1`, { id: true }], [`o2`, { id: true }]] })
+  t({ object: [[`o1`, { id: true }], [`o2`, { id: true }]] })
   // alias complex
-  Ts.Assert.sub.of(Q)({ objectNested: [[`o1`, { object: {___: {id: true}} }], [`o2`, { id: {$skip:true} }]] })
+  t({ objectNested: [[`o1`, { object: { ___: { id: true } } }], [`o2`, { id: { $skip: true } }]] })
   // alias Nested
-  Ts.Assert.sub.of(Q)({ object: [`object2`, { id: [`id2`, true] }] })
+  t({ object: [`object2`, { id: [`id2`, true] }] })
   // @ts-expect-error alias invalid one too many nested arrays
-  Ts.Assert.sub.of(Q)({ object: [[[`o`, { id: true }]]] })
+  t({ object: [[[`o`, { id: true }]]] })
   // @ts-expect-error alias invalid on union fragment
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Foo: [`x`, { id: true }] } })
+  t({ unionFooBar: { ___on_Foo: [`x`, { id: true }] } })
   // @ts-expect-error alias invalid on interface fragment
-  Ts.Assert.sub.of(Q)({ interface: { ___on_Object1ImplementingInterface: [`x`, { id: true }] } })
+  t({ interface: { ___on_Object1ImplementingInterface: [`x`, { id: true }] } })
 
   // todo: We could achieve this by using a more expensive template literal type like `${Letter}${string}`
   // Make that an opt-in feature since it will potentially decrease the IDE performance for everyone even those not benefiting much from this.
   // //@ts-expect-error invalid alias key format
-  // Ts.Assert.sub.of(Q)({ object: [``, { id: true }] })
+  // t({ object: [``, { id: true }] })
 
   // We would have to pass the input through to Q so that it could parse the identifier. This would be complex and probably not worth it.
   // Maybe this will get easier one day.
   // // @ts-expect-error invalid alias key format
-  // Ts.Assert.sub.of(Q)({ object: [`$$`, { id: true }] })
+  // t({ object: [`$$`, { id: true }] })
 
   // directives
   // @skip
   // on scalar
-  Ts.Assert.sub.of(Q)({ string: { $skip: true } })
-  Ts.Assert.sub.of(Q)({ string: { $skip: false } })
-  Ts.Assert.sub.of(Q)({ string: { $skip: { if: true } } })
-  Ts.Assert.sub.of(Q)({ string: { $skip: { if: false } } })
-  Ts.Assert.sub.of(Q)({ string: { $skip: {} } })
-  Ts.Assert.sub.of(Q)({ string: { $skip: {} } })
-  Ts.Assert.sub.of(Q)({ object: { string: { $skip: true } } })
+  t({ string: { $skip: true } })
+  t({ string: { $skip: false } })
+  t({ string: { $skip: { if: true } } })
+  t({ string: { $skip: { if: false } } })
+  t({ string: { $skip: {} } })
+  t({ string: { $skip: {} } })
+  t({ object: { string: { $skip: true } } })
   // Ts.Assert.sub<S>({ string: skip() })
   // on object
-  Ts.Assert.sub.of(Q)({ object: { $skip: true, string: true } })
+  t({ object: { $skip: true, string: true } })
   // Ts.Assert.sub<S>({ scalars: skip().select({ a: true }) })
   // on fragment
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } })
+  t({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } })
   // @include
-  Ts.Assert.sub.of(Q)({ string: { $include: true } })
-  Ts.Assert.sub.of(Q)({ string: { $include: false } })
-  Ts.Assert.sub.of(Q)({ string: { $include: { if: true } } })
-  Ts.Assert.sub.of(Q)({ string: { $include: { if: false } } })
-  Ts.Assert.sub.of(Q)({ string: { $include: {} } })
-  Ts.Assert.sub.of(Q)({ string: { $include: {} } })
+  t({ string: { $include: true } })
+  t({ string: { $include: false } })
+  t({ string: { $include: { if: true } } })
+  t({ string: { $include: { if: false } } })
+  t({ string: { $include: {} } })
+  t({ string: { $include: {} } })
   // Ts.Assert.sub<S>({ string: include() })
 
   // @defer
-  // Ts.Assert.sub.of(Q)({ string: { $defer: true } })
-  // Ts.Assert.sub.of(Q)({ string: { $defer: { if: true, label: `foo` } } })
-  // Ts.Assert.sub.of(Q)({ string: { $defer: { if: true } } })
-  // Ts.Assert.sub.of(Q)({ string: { $defer: {} } })
+  // t({ string: { $defer: true } })
+  // t({ string: { $defer: { if: true, label: `foo` } } })
+  // t({ string: { $defer: { if: true } } })
+  // t({ string: { $defer: {} } })
 
   // (todo limit to lists?)
   // @stream
-  // Ts.Assert.sub.of(Q)({ string: { $stream: true } })
-  // Ts.Assert.sub.of(Q)({ string: { $stream: { if: true, label: `foo`, initialCount: 0 } } })
-  // Ts.Assert.sub.of(Q)({ string: { $stream: { if: true, label: `foo` } } })
-  // Ts.Assert.sub.of(Q)({ string: { $stream: { if: true } } })
-  // Ts.Assert.sub.of(Q)({ string: { $stream: {} } })
+  // t({ string: { $stream: true } })
+  // t({ string: { $stream: { if: true, label: `foo`, initialCount: 0 } } })
+  // t({ string: { $stream: { if: true, label: `foo` } } })
+  // t({ string: { $stream: { if: true } } })
+  // t({ string: { $stream: {} } })
 
   // Field Group
   // On Object
-  Ts.Assert.sub.of(Q)({ object: { ___: { int: true, id: true } } })
-  Ts.Assert.sub.of(Q)({ object: { ___: { $skip: true, int: true, id: true } } })
-  Ts.Assert.sub.of(Q)({ object: { ___: [{ $skip: true, int: true, id: true }] } })
+  t({ object: { ___: { int: true, id: true } } })
+  t({ object: { ___: { $skip: true, int: true, id: true } } })
+  t({ object: { ___: [{ $skip: true, int: true, id: true }] } })
   // On Root (Query)
-  Ts.Assert.sub.of(Q)({ ___: { id: true } })
-  Ts.Assert.sub.of(Q)({ ___: { $skip: true, id: true } })
+  t({ ___: { id: true } })
+  t({ ___: { $skip: true, id: true } })
   Ts.Assert.sub.noExcess.as<Q>()({
     // @ts-expect-error no directives on root type
     $skip: true,
-    id: true
+    id: true,
   })
 
   // Arguments
   // all-optional on object
-  Ts.Assert.sub.of(Q)({ objectWithArgs: { $: {}, id: true } })
-  Ts.Assert.sub.of(Q)({ objectWithArgs: { id: true } })
-  Ts.Assert.sub.of(Q)({
+  t({ objectWithArgs: { $: {}, id: true } })
+  t({ objectWithArgs: { id: true } })
+  t({
     objectWithArgs: {
       $: {
         boolean: true,
@@ -197,75 +194,81 @@ test(`Query`, () => {
       id: true,
     },
   })
-  Ts.Assert.sub.of(Q)({ id: true })
+  t({ id: true })
   // builder interface
   // Ts.Assert.sub<S>({ foo: args({ ... }) })
   // all-optional on scalar
-  Ts.Assert.sub.of(Q)({ stringWithArgs: true })
-  Ts.Assert.sub.of(Q)({ stringWithArgs: {} })
-  Ts.Assert.sub.of(Q)({ stringWithArgs: { $: { boolean: true, float: 1, id: `id`, int: 3, string: `abc` } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgs: { $: { boolean: null, float: null, id: null, int: null, string: null } } })
+  t({ stringWithArgs: true })
+  t({ stringWithArgs: {} })
+  t({ stringWithArgs: { $: { boolean: true, float: 1, id: `id`, int: 3, string: `abc` } } })
+  t({ stringWithArgs: { $: { boolean: null, float: null, id: null, int: null, string: null } } })
 
   // enum arg
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { $ABCEnum: `A` } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { $ABCEnum: `B` } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { $ABCEnum: `C` } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { $ABCEnum: null } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: {} } })
+  t({ stringWithArgEnum: { $: { $ABCEnum: `A` } } })
+  t({ stringWithArgEnum: { $: { $ABCEnum: `B` } } })
+  t({ stringWithArgEnum: { $: { $ABCEnum: `C` } } })
+  t({ stringWithArgEnum: { $: { $ABCEnum: null } } })
+  t({ stringWithArgEnum: { $: {} } })
   // @ts-expect-error invalid enum value
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { ABCEnum: `D` } } })
+  t({ stringWithArgEnum: { $: { ABCEnum: `D` } } })
   // @ts-expect-error invalid enum value
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { ABCEnum: `` } } })
+  t({ stringWithArgEnum: { $: { ABCEnum: `` } } })
   // @ts-expect-error invalid enum value
-  Ts.Assert.sub.of(Q)({ stringWithArgEnum: { $: { ABCEnum: 1 } } })
+  t({ stringWithArgEnum: { $: { ABCEnum: 1 } } })
 
   // list arg
-  Ts.Assert.sub.of(Q)({ stringWithListArg: { $: { ints: [1, 2, 3] } } })
-  Ts.Assert.sub.of(Q)({ stringWithListArg: { $: { ints: [] } } })
-  Ts.Assert.sub.of(Q)({ stringWithListArg: { $: { ints: [null] } } })
-  Ts.Assert.sub.of(Q)({ stringWithListArg: { $: { ints: null } } })
-  Ts.Assert.sub.of(Q)({ stringWithListArg: { $: {} } })
+  t({ stringWithListArg: { $: { ints: [1, 2, 3] } } })
+  t({ stringWithListArg: { $: { ints: [] } } })
+  t({ stringWithListArg: { $: { ints: [null] } } })
+  t({ stringWithListArg: { $: { ints: null } } })
+  t({ stringWithListArg: { $: {} } })
   // @ts-expect-error missing "ints" arg
-  Ts.Assert.sub.of(Q)({ stringWithListArgRequired: { $: {} } })
+  t({ stringWithListArgRequired: { $: {} } })
   // @ts-expect-error missing non-null "ints" arg
-  Ts.Assert.sub.of(Q)({ stringWithListArgRequired: { $: { ints: null } } })
+  t({ stringWithListArgRequired: { $: { ints: null } } })
 
   // custom scalar arg
-  Ts.Assert.sub.of(Q)({ dateArg: { $: { date: 0 } } })
-  Ts.Assert.sub.of(Q)({ dateArg: { $: { date: null } } })
-  Ts.Assert.sub.of(Q)({ dateArg: { $: { date: db.date0Encoded } } })
+  t({ dateArg: { $: { date: 0 } } })
+  t({ dateArg: { $: { date: null } } })
+  t({ dateArg: { $: { date: db.date0Encoded } } })
   Ts.Assert.sub.of.as<QWithDate>()({ dateArg: { $: { date: db.date0 } } })
 
   // input object arg
-  Ts.Assert.sub.of(Q)({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0Encoded } } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0Encoded } } } })
-  Ts.Assert.sub.of(Q)({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0Encoded } } } })
-  Ts.Assert.sub.of.as<QWithDate>()({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0 } } } })
-  Ts.Assert.sub.of.as<QWithDate>()({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0 } } } })
-  Ts.Assert.sub.of.as<QWithDate>()({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0 } } } })
+  t({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0Encoded } } } })
+  t({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0Encoded } } } })
+  t({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0Encoded } } } })
+  Ts.Assert.sub.of.as<QWithDate>()({
+    stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0 } } },
+  })
+  Ts.Assert.sub.of.as<QWithDate>()({
+    stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0 } } },
+  })
+  Ts.Assert.sub.of.as<QWithDate>()({
+    stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0 } } },
+  })
   // @ts-expect-error missing "idRequired" field
-  Ts.Assert.sub.of(Q)({ stringWithArgInputObjectRequired: { $: { input: {} } } })
+  t({ stringWithArgInputObjectRequired: { $: { input: {} } } })
   // type x = Exclude<Q['stringWithArgInputObjectRequired'],undefined>['$']['input']
 
   // all-optional + scalar + directive
-  Ts.Assert.sub.of(Q)({ stringWithArgs: { $: { boolean: true }, $skip: true } })
+  t({ stringWithArgs: { $: { boolean: true }, $skip: true } })
   // builder interface
   // Ts.Assert.sub<S>({ foo: args({ boolean: true }).skip().select({ x: 1 }) })
   // 1+ required + scalar
-  Ts.Assert.sub.of(Q)({ stringWithRequiredArg: { $: { string: `` } } })
+  t({ stringWithRequiredArg: { $: { string: `` } } })
   // @ts-expect-error missing "string" arg
-  Ts.Assert.sub.of(Q)({ stringWithRequiredArg: { $: {} } })
+  t({ stringWithRequiredArg: { $: {} } })
   // @ts-expect-error missing args ("$")
-  Ts.Assert.sub.of(Q)({ stringWithRequiredArg: {} })
+  t({ stringWithRequiredArg: {} })
 
   // Scalars Wildcard ("client directive")
   // object
-  Ts.Assert.sub.of(Q)({ object: { $scalars: true } })
+  t({ object: { $scalars: true } })
   // @ts-expect-error no directives on scalars field
-  Ts.Assert.sub.of(Q)({ scalars: { $scalars: { $skip: true } } })
+  t({ scalars: { $scalars: { $skip: true } } })
   // union fragment
-  Ts.Assert.sub.of(Q)({ unionFooBar: { ___on_Bar: { $scalars: true } } })
-  Ts.Assert.sub.of(Q)({ unionFooBarWithArgs: { $: { id: `abc` }, ___on_Bar: { $scalars: true } } })
+  t({ unionFooBar: { ___on_Bar: { $scalars: true } } })
+  t({ unionFooBarWithArgs: { $: { id: `abc` }, ___on_Bar: { $scalars: true } } })
 
   // Ts.Assert.sub<S>({ scalars: select() })
 
@@ -278,15 +281,15 @@ test(`Query`, () => {
 
   // Interface Hierarchy
 
-  Ts.Assert.sub.of(Q)({ interfaceHierarchyGrandparents: { a: true } })
+  t({ interfaceHierarchyGrandparents: { a: true } })
   // Can verbosely nest inline fragments matching the interface hierarchy
-  Ts.Assert.sub.of(Q)({ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { ___on_InterfaceChildA: { a: true }  } } })
+  t({ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { ___on_InterfaceChildA: { a: true } } } })
   // Can skip intermediary implementor interfaces
-  Ts.Assert.sub.of(Q)({ interfaceHierarchyGrandparents: { ___on_ObjectChildA: { a: true} } })
+  t({ interfaceHierarchyGrandparents: { ___on_ObjectChildA: { a: true } } })
   // Cannot directly select fields from implementor interface
   // @ts-expect-error
-  Ts.Assert.sub.of(Q)({ interfaceHierarchyGrandparents: { b: true }})
+  t({ interfaceHierarchyGrandparents: { b: true } })
   // Nested: ^
   // @ts-expect-error
-  Ts.Assert.sub.of(Q)({ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { c1: true } }})
+  t({ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { c1: true } } })
 })
