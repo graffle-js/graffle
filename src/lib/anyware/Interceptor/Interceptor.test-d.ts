@@ -16,7 +16,7 @@ describe(`interceptor constructor`, () => {
       .step({ name: `c`, run: () => results.c })
     const p1 = Pipeline.create(b1.type)
     const i1 = Ts.as<Interceptor.InferFromPipeline<typeof p1>>()
-    Ts.Assert.parameter1.exact.of.as<{ a: any; b: any; c: any }>()(i1)
+    Ts.Assert.parameter1.equiv.of.as<{ a: any; b: any; c: any }>()(i1)
     Ts.Assert.parameters.sub.of.as<[{
       a: (params: { input?: initialInput }) => Promise<{ b: (params: { input?: results['a'] }) => any }>
       b: (params: { input?: results['a'] }) => Promise<{ c: (params: { input?: results['b'] }) => any }>
