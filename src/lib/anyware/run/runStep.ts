@@ -79,7 +79,7 @@ export const runStep = async (
    */
 
   if (extension) {
-    const debugExtension = debug.child(`extension ${extension.name}`)
+    const debugExtension = debug.child(`extension_${extension.name}`)
     const hookInvokedDeferred = Prom.createDeferred()
 
     debugExtension.trace(`start`)

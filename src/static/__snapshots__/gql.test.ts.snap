@@ -82,7 +82,11 @@ exports[`static document builder > fn({ query: { getUserWithArg: { stringWithReq
         ...state,
         name
       }, graphqlType);
-    }] { name: [Function: name], _: [Object], as: [Function: as], default: [Function: default], required: [Function: required] }
+    }] { name: [Function: name], _: {
+              default: undefined,
+              name: undefined,
+              required: undefined
+            }, as: [Function: as], default: [Function: default], required: [Function: required] }
         }
       }
     }
