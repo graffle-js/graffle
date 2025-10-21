@@ -7,6 +7,8 @@ export type InputObjectNested<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | InputObjectNested.$SelectionSet<_$Context>
 
 export namespace InputObjectNested {
@@ -16,7 +18,7 @@ export namespace InputObjectNested {
     /**
      * Arguments for `InputObjectNested` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -32,7 +34,9 @@ export namespace InputObjectNested {
      * | **Path** | `Query.InputObjectNested(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectNested<_$Context> | null | undefined>
+    readonly input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<
+      $Named.InputObjectNested<_$Context> | null | undefined
+    >
   }
 
   /**
@@ -44,6 +48,8 @@ export namespace InputObjectNested {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -59,7 +65,7 @@ export namespace InputObjectNestedNonNull {
     /**
      * Arguments for `InputObjectNestedNonNull` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -75,7 +81,7 @@ export namespace InputObjectNestedNonNull {
      * | **Path** | `Query.InputObjectNestedNonNull(input)` |
      * | **Nullability** | Required |
      */
-    input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectNestedNonNull<_$Context>>
+    readonly input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectNestedNonNull<_$Context>>
   }
 
   /**
@@ -85,13 +91,13 @@ export namespace InputObjectNestedNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type abcEnum<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | abcEnum.$SelectionSet<_$Context>
 
 export namespace abcEnum {
@@ -109,6 +115,8 @@ export namespace abcEnum {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -117,6 +125,8 @@ export type argInputObjectCircular<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | argInputObjectCircular.$SelectionSet<_$Context>
 
 export namespace argInputObjectCircular {
@@ -126,7 +136,7 @@ export namespace argInputObjectCircular {
     /**
      * Arguments for `argInputObjectCircular` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -142,7 +152,9 @@ export namespace argInputObjectCircular {
      * | **Path** | `Query.argInputObjectCircular(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectCircular<_$Context> | null | undefined>
+    readonly input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<
+      $Named.InputObjectCircular<_$Context> | null | undefined
+    >
   }
 
   /**
@@ -154,6 +166,8 @@ export namespace argInputObjectCircular {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -162,6 +176,8 @@ export type bigintField<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | bigintField.$SelectionSet<_$Context>
 
 export namespace bigintField {
@@ -179,6 +195,8 @@ export namespace bigintField {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -187,6 +205,8 @@ export type bigintFieldNonNull<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | bigintFieldNonNull.$SelectionSet<_$Context>
 
 export namespace bigintFieldNonNull {
@@ -204,12 +224,16 @@ export namespace bigintFieldNonNull {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
 
 export type date<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | date.$SelectionSet<_$Context>
 
 export namespace date {
@@ -227,12 +251,16 @@ export namespace date {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
 
 export type dateArg<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateArg.$SelectionSet<_$Context>
 
 export namespace dateArg {
@@ -242,7 +270,7 @@ export namespace dateArg {
     /**
      * Arguments for `dateArg` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -258,7 +286,7 @@ export namespace dateArg {
      * | **Path** | `Query.dateArg(date)` |
      * | **Nullability** | Optional |
      */
-    date?: $Scalars.Date<_$Context>
+    readonly date?: $Scalars.Date<_$Context>
   }
 
   /**
@@ -270,6 +298,8 @@ export namespace dateArg {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -278,6 +308,8 @@ export type dateArgInputObject<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateArgInputObject.$SelectionSet<_$Context>
 
 export namespace dateArgInputObject {
@@ -287,7 +319,7 @@ export namespace dateArgInputObject {
     /**
      * Arguments for `dateArgInputObject` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -303,7 +335,7 @@ export namespace dateArgInputObject {
      * | **Path** | `Query.dateArgInputObject(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
+    readonly input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
   }
 
   /**
@@ -315,6 +347,8 @@ export namespace dateArgInputObject {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -323,6 +357,8 @@ export type dateArgList<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateArgList.$SelectionSet<_$Context>
 
 export namespace dateArgList {
@@ -332,7 +368,7 @@ export namespace dateArgList {
     /**
      * Arguments for `dateArgList` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -348,7 +384,7 @@ export namespace dateArgList {
      * | **Path** | `Query.dateArgList(date)` |
      * | **Nullability** | Optional |
      */
-    date?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>> | null | undefined>
+    readonly date?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>> | null | undefined>
   }
 
   /**
@@ -360,6 +396,8 @@ export namespace dateArgList {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -375,7 +413,7 @@ export namespace dateArgNonNull {
     /**
      * Arguments for `dateArgNonNull` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -391,7 +429,7 @@ export namespace dateArgNonNull {
      * | **Path** | `Query.dateArgNonNull(date)` |
      * | **Nullability** | Required |
      */
-    date: $Scalars.Date$NonNull<_$Context>
+    readonly date: $Scalars.Date$NonNull<_$Context>
   }
 
   /**
@@ -401,9 +439,7 @@ export namespace dateArgNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type dateArgNonNullList<
@@ -417,7 +453,7 @@ export namespace dateArgNonNullList {
     /**
      * Arguments for `dateArgNonNullList` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -433,7 +469,7 @@ export namespace dateArgNonNullList {
      * | **Path** | `Query.dateArgNonNullList(date)` |
      * | **Nullability** | Required |
      */
-    date: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>>>
+    readonly date: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>>>
   }
 
   /**
@@ -443,9 +479,7 @@ export namespace dateArgNonNullList {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type dateArgNonNullListNonNull<
@@ -459,7 +493,7 @@ export namespace dateArgNonNullListNonNull {
     /**
      * Arguments for `dateArgNonNullListNonNull` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -475,7 +509,7 @@ export namespace dateArgNonNullListNonNull {
      * | **Path** | `Query.dateArgNonNullListNonNull(date)` |
      * | **Nullability** | Required |
      */
-    date: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>>>
+    readonly date: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Date<_$Context>>>
   }
 
   /**
@@ -485,9 +519,7 @@ export namespace dateArgNonNullListNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type dateInterface1<
@@ -507,13 +539,13 @@ export namespace dateInterface1 {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type dateList<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateList.$SelectionSet<_$Context>
 
 export namespace dateList {
@@ -531,6 +563,8 @@ export namespace dateList {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -539,6 +573,8 @@ export type dateListList<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateListList.$SelectionSet<_$Context>
 
 export namespace dateListList {
@@ -556,6 +592,8 @@ export namespace dateListList {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -564,6 +602,8 @@ export type dateListNonNull<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateListNonNull.$SelectionSet<_$Context>
 
 export namespace dateListNonNull {
@@ -581,6 +621,8 @@ export namespace dateListNonNull {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -589,6 +631,8 @@ export type dateNonNull<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | dateNonNull.$SelectionSet<_$Context>
 
 export namespace dateNonNull {
@@ -606,6 +650,8 @@ export namespace dateNonNull {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -627,9 +673,7 @@ export namespace dateObject1 {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type dateUnion<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -648,13 +692,13 @@ export namespace dateUnion {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type error<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | error.$SelectionSet<_$Context>
 
 export namespace error {
@@ -664,7 +708,7 @@ export namespace error {
     /**
      * Arguments for `error` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -680,7 +724,7 @@ export namespace error {
      * | **Path** | `Query.error(case)` |
      * | **Nullability** | Optional |
      */
-    case?: $Scalars.String<_$Context>
+    readonly case?: $Scalars.String<_$Context>
   }
 
   /**
@@ -692,12 +736,16 @@ export namespace error {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
 
 export type id<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | id.$SelectionSet<_$Context>
 
 export namespace id {
@@ -715,12 +763,16 @@ export namespace id {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
 
 export type idNonNull<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | idNonNull.$SelectionSet<_$Context>
 
 export namespace idNonNull {
@@ -738,6 +790,8 @@ export namespace idNonNull {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -758,9 +812,7 @@ namespace $interface {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type { $interface as interface }
@@ -776,7 +828,7 @@ export namespace interfaceHierarchyChildA {
     /**
      * Arguments for `interfaceHierarchyChildA` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -792,7 +844,9 @@ export namespace interfaceHierarchyChildA {
      * | **Path** | `Query.interfaceHierarchyChildA(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ChildAInterfaceHierarchyMember | null | undefined>
+    readonly $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<
+      $Named.ChildAInterfaceHierarchyMember | null | undefined
+    >
   }
 
   /**
@@ -802,9 +856,7 @@ export namespace interfaceHierarchyChildA {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type interfaceHierarchyChildB<
@@ -818,7 +870,7 @@ export namespace interfaceHierarchyChildB {
     /**
      * Arguments for `interfaceHierarchyChildB` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -834,7 +886,9 @@ export namespace interfaceHierarchyChildB {
      * | **Path** | `Query.interfaceHierarchyChildB(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ChildBInterfaceHierarchyMember | null | undefined>
+    readonly $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<
+      $Named.ChildBInterfaceHierarchyMember | null | undefined
+    >
   }
 
   /**
@@ -844,9 +898,7 @@ export namespace interfaceHierarchyChildB {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type interfaceHierarchyGrandparents<
@@ -860,7 +912,7 @@ export namespace interfaceHierarchyGrandparents {
     /**
      * Arguments for `interfaceHierarchyGrandparents` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -876,7 +928,9 @@ export namespace interfaceHierarchyGrandparents {
      * | **Path** | `Query.interfaceHierarchyGrandparents(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.GrandparentInterfaceHierarchyMember | null | undefined>
+    readonly $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<
+      $Named.GrandparentInterfaceHierarchyMember | null | undefined
+    >
   }
 
   /**
@@ -886,9 +940,7 @@ export namespace interfaceHierarchyGrandparents {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type interfaceHierarchyParents<
@@ -902,7 +954,7 @@ export namespace interfaceHierarchyParents {
     /**
      * Arguments for `interfaceHierarchyParents` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -918,7 +970,9 @@ export namespace interfaceHierarchyParents {
      * | **Path** | `Query.interfaceHierarchyParents(type)` |
      * | **Nullability** | Optional |
      */
-    $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ParentInterfaceHierarchyMember | null | undefined>
+    readonly $type?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<
+      $Named.ParentInterfaceHierarchyMember | null | undefined
+    >
   }
 
   /**
@@ -928,9 +982,7 @@ export namespace interfaceHierarchyParents {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type interfaceNonNull<
@@ -950,9 +1002,7 @@ export namespace interfaceNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type interfaceWithArgs<
@@ -966,7 +1016,7 @@ export namespace interfaceWithArgs {
     /**
      * Arguments for `interfaceWithArgs` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -982,7 +1032,7 @@ export namespace interfaceWithArgs {
      * | **Path** | `Query.interfaceWithArgs(id)` |
      * | **Nullability** | Required |
      */
-    id: $Scalars.ID$NonNull<_$Context>
+    readonly id: $Scalars.ID$NonNull<_$Context>
   }
 
   /**
@@ -992,13 +1042,13 @@ export namespace interfaceWithArgs {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type listInt<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listInt.$SelectionSet<_$Context>
 
 export namespace listInt {
@@ -1016,6 +1066,8 @@ export namespace listInt {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1024,6 +1076,8 @@ export type listIntNonNull<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listIntNonNull.$SelectionSet<_$Context>
 
 export namespace listIntNonNull {
@@ -1041,6 +1095,8 @@ export namespace listIntNonNull {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1049,6 +1105,8 @@ export type listListInt<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listListInt.$SelectionSet<_$Context>
 
 export namespace listListInt {
@@ -1066,6 +1124,8 @@ export namespace listListInt {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1074,6 +1134,8 @@ export type listListIntNonNull<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | listListIntNonNull.$SelectionSet<_$Context>
 
 export namespace listListIntNonNull {
@@ -1091,6 +1153,8 @@ export namespace listListIntNonNull {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1112,9 +1176,7 @@ export namespace lowerCaseUnion {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 type $object<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -1133,9 +1195,7 @@ namespace $object {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type { $object as object }
@@ -1156,9 +1216,7 @@ export namespace objectList {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type objectListNonNull<
@@ -1178,9 +1236,7 @@ export namespace objectListNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type objectNested<
@@ -1200,9 +1256,7 @@ export namespace objectNested {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type objectNestedWithArgs<
@@ -1222,9 +1276,7 @@ export namespace objectNestedWithArgs {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type objectNonNull<
@@ -1244,9 +1296,7 @@ export namespace objectNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type objectWithArgs<
@@ -1260,7 +1310,7 @@ export namespace objectWithArgs {
     /**
      * Arguments for `objectWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1276,7 +1326,7 @@ export namespace objectWithArgs {
      * | **Path** | `Query.objectWithArgs(boolean)` |
      * | **Nullability** | Optional |
      */
-    boolean?: $Scalars.Boolean<_$Context>
+    readonly boolean?: $Scalars.Boolean<_$Context>
     /**
      * # Info
      *
@@ -1287,7 +1337,7 @@ export namespace objectWithArgs {
      * | **Path** | `Query.objectWithArgs(float)` |
      * | **Nullability** | Optional |
      */
-    float?: $Scalars.Float<_$Context>
+    readonly float?: $Scalars.Float<_$Context>
     /**
      * # Info
      *
@@ -1298,7 +1348,7 @@ export namespace objectWithArgs {
      * | **Path** | `Query.objectWithArgs(id)` |
      * | **Nullability** | Optional |
      */
-    id?: $Scalars.ID<_$Context>
+    readonly id?: $Scalars.ID<_$Context>
     /**
      * # Info
      *
@@ -1309,7 +1359,7 @@ export namespace objectWithArgs {
      * | **Path** | `Query.objectWithArgs(int)` |
      * | **Nullability** | Optional |
      */
-    int?: $Scalars.Int<_$Context>
+    readonly int?: $Scalars.Int<_$Context>
     /**
      * # Info
      *
@@ -1320,7 +1370,7 @@ export namespace objectWithArgs {
      * | **Path** | `Query.objectWithArgs(string)` |
      * | **Nullability** | Optional |
      */
-    string?: $Scalars.String<_$Context>
+    readonly string?: $Scalars.String<_$Context>
   }
 
   /**
@@ -1330,9 +1380,7 @@ export namespace objectWithArgs {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type result<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -1345,7 +1393,7 @@ export namespace result {
     /**
      * Arguments for `result` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1361,7 +1409,7 @@ export namespace result {
      * | **Path** | `Query.result(case)` |
      * | **Nullability** | Required |
      */
-    $case: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.Case>
+    readonly $case: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.Case>
   }
 
   /**
@@ -1371,9 +1419,7 @@ export namespace result {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type resultNonNull<
@@ -1387,7 +1433,7 @@ export namespace resultNonNull {
     /**
      * Arguments for `resultNonNull` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1403,7 +1449,7 @@ export namespace resultNonNull {
      * | **Path** | `Query.resultNonNull(case)` |
      * | **Nullability** | Optional |
      */
-    $case?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.Case | null | undefined>
+    readonly $case?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.Case | null | undefined>
   }
 
   /**
@@ -1413,13 +1459,13 @@ export namespace resultNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 type $string<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | $string.$SelectionSet<_$Context>
 
 namespace $string {
@@ -1437,6 +1483,8 @@ namespace $string {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1447,6 +1495,8 @@ export type stringWithArgEnum<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithArgEnum.$SelectionSet<_$Context>
 
 export namespace stringWithArgEnum {
@@ -1456,7 +1506,7 @@ export namespace stringWithArgEnum {
     /**
      * Arguments for `stringWithArgEnum` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1472,7 +1522,7 @@ export namespace stringWithArgEnum {
      * | **Path** | `Query.stringWithArgEnum(ABCEnum)` |
      * | **Nullability** | Optional |
      */
-    $ABCEnum?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ABCEnum | null | undefined>
+    readonly $ABCEnum?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.ABCEnum | null | undefined>
   }
 
   /**
@@ -1484,6 +1534,8 @@ export namespace stringWithArgEnum {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1492,6 +1544,8 @@ export type stringWithArgInputObject<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithArgInputObject.$SelectionSet<_$Context>
 
 export namespace stringWithArgInputObject {
@@ -1501,7 +1555,7 @@ export namespace stringWithArgInputObject {
     /**
      * Arguments for `stringWithArgInputObject` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1517,7 +1571,7 @@ export namespace stringWithArgInputObject {
      * | **Path** | `Query.stringWithArgInputObject(input)` |
      * | **Nullability** | Optional |
      */
-    input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
+    readonly input?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context> | null | undefined>
   }
 
   /**
@@ -1529,6 +1583,8 @@ export namespace stringWithArgInputObject {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1544,7 +1600,7 @@ export namespace stringWithArgInputObjectEnum {
     /**
      * Arguments for `stringWithArgInputObjectEnum` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1560,7 +1616,7 @@ export namespace stringWithArgInputObjectEnum {
      * | **Path** | `Query.stringWithArgInputObjectEnum(input)` |
      * | **Nullability** | Required |
      */
-    input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectEnum<_$Context>>
+    readonly input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObjectEnum<_$Context>>
   }
 
   /**
@@ -1570,9 +1626,7 @@ export namespace stringWithArgInputObjectEnum {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type stringWithArgInputObjectRequired<
@@ -1586,7 +1640,7 @@ export namespace stringWithArgInputObjectRequired {
     /**
      * Arguments for `stringWithArgInputObjectRequired` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1602,7 +1656,7 @@ export namespace stringWithArgInputObjectRequired {
      * | **Path** | `Query.stringWithArgInputObjectRequired(input)` |
      * | **Nullability** | Required |
      */
-    input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context>>
+    readonly input: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.InputObject<_$Context>>
   }
 
   /**
@@ -1612,15 +1666,15 @@ export namespace stringWithArgInputObjectRequired {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type stringWithArgs<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithArgs.$SelectionSet<_$Context>
 
 export namespace stringWithArgs {
@@ -1630,7 +1684,7 @@ export namespace stringWithArgs {
     /**
      * Arguments for `stringWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1646,7 +1700,7 @@ export namespace stringWithArgs {
      * | **Path** | `Query.stringWithArgs(boolean)` |
      * | **Nullability** | Optional |
      */
-    boolean?: $Scalars.Boolean<_$Context>
+    readonly boolean?: $Scalars.Boolean<_$Context>
     /**
      * # Info
      *
@@ -1657,7 +1711,7 @@ export namespace stringWithArgs {
      * | **Path** | `Query.stringWithArgs(float)` |
      * | **Nullability** | Optional |
      */
-    float?: $Scalars.Float<_$Context>
+    readonly float?: $Scalars.Float<_$Context>
     /**
      * # Info
      *
@@ -1668,7 +1722,7 @@ export namespace stringWithArgs {
      * | **Path** | `Query.stringWithArgs(id)` |
      * | **Nullability** | Optional |
      */
-    id?: $Scalars.ID<_$Context>
+    readonly id?: $Scalars.ID<_$Context>
     /**
      * @deprecated Example of argument deprecation reason here.
      *
@@ -1682,7 +1736,7 @@ export namespace stringWithArgs {
      * | **Nullability** | Optional |
      * | **⚠ Deprecated** | Example of argument deprecation reason here. |
      */
-    int?: $Scalars.Int<_$Context>
+    readonly int?: $Scalars.Int<_$Context>
     /**
      * Example of some argument documentation here.
      *
@@ -1695,7 +1749,7 @@ export namespace stringWithArgs {
      * | **Path** | `Query.stringWithArgs(string)` |
      * | **Nullability** | Optional |
      */
-    string?: $Scalars.String<_$Context>
+    readonly string?: $Scalars.String<_$Context>
   }
 
   /**
@@ -1707,6 +1761,8 @@ export namespace stringWithArgs {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1715,6 +1771,8 @@ export type stringWithListArg<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | stringWithListArg.$SelectionSet<_$Context>
 
 export namespace stringWithListArg {
@@ -1724,7 +1782,7 @@ export namespace stringWithListArg {
     /**
      * Arguments for `stringWithListArg` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1740,7 +1798,7 @@ export namespace stringWithListArg {
      * | **Path** | `Query.stringWithListArg(ints)` |
      * | **Nullability** | Optional |
      */
-    ints?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Int<_$Context>> | null | undefined>
+    readonly ints?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Int<_$Context>> | null | undefined>
   }
 
   /**
@@ -1752,6 +1810,8 @@ export namespace stringWithListArg {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -1767,7 +1827,7 @@ export namespace stringWithListArgRequired {
     /**
      * Arguments for `stringWithListArgRequired` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1783,7 +1843,7 @@ export namespace stringWithListArgRequired {
      * | **Path** | `Query.stringWithListArgRequired(ints)` |
      * | **Nullability** | Required |
      */
-    ints: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Int<_$Context>>>
+    readonly ints: $$Utilities.Docpar.Object.Var.MaybeSchemaful<Array<$Scalars.Int<_$Context>>>
   }
 
   /**
@@ -1793,9 +1853,7 @@ export namespace stringWithListArgRequired {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type stringWithRequiredArg<
@@ -1809,7 +1867,7 @@ export namespace stringWithRequiredArg {
     /**
      * Arguments for `stringWithRequiredArg` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1825,7 +1883,7 @@ export namespace stringWithRequiredArg {
      * | **Path** | `Query.stringWithRequiredArg(string)` |
      * | **Nullability** | Required |
      */
-    string: $Scalars.String$NonNull<_$Context>
+    readonly string: $Scalars.String$NonNull<_$Context>
   }
 
   /**
@@ -1835,9 +1893,7 @@ export namespace stringWithRequiredArg {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type unionFooBar<
@@ -1857,9 +1913,7 @@ export namespace unionFooBar {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type unionFooBarNonNull<
@@ -1879,9 +1933,7 @@ export namespace unionFooBarNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type unionFooBarWithArgs<
@@ -1895,7 +1947,7 @@ export namespace unionFooBarWithArgs {
     /**
      * Arguments for `unionFooBarWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -1911,7 +1963,7 @@ export namespace unionFooBarWithArgs {
      * | **Path** | `Query.unionFooBarWithArgs(id)` |
      * | **Nullability** | Optional |
      */
-    id?: $Scalars.ID<_$Context>
+    readonly id?: $Scalars.ID<_$Context>
   }
 
   /**
@@ -1921,9 +1973,7 @@ export namespace unionFooBarWithArgs {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type unionObject<
@@ -1943,9 +1993,7 @@ export namespace unionObject {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type unionObjectNonNull<
@@ -1965,7 +2013,5 @@ export namespace unionObjectNonNull {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }

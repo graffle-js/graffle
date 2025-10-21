@@ -1,8 +1,8 @@
+import type { ExamplePath } from '@generated/test-examples'
 import { Graffle } from 'graffle'
 import { test } from 'vitest'
 import type { EncoderFunction } from '../../tools/vitest-plugin-examples/index.js'
 import { createExamplesTest } from '../../tools/vitest-plugin-examples/index.js'
-import type { ExamplePath } from '@generated/test-examples'
 
 // Type-safe encoder configuration with autocomplete
 const encoders = {

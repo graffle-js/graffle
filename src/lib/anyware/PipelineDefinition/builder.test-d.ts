@@ -11,33 +11,33 @@ const b0 = PipelineDefinition.create().input<initialInput>()
 const b1 = PipelineDefinition.create().input<initialInput>().step(stepA)
 
 test(`initial context`, () => {
-  Ts.Assert.sub.of.as<{ input: initialInput; steps: []; config: Config; overloads: [] }>()(b0.type)
+  Ts.Assert.sub.ofAs<{ input: initialInput; steps: []; config: Config; overloads: [] }>()(b0.type)
 })
 
 test(`first step definition`, () => {
-  Ts.Assert.sub.of.as<
+  Ts.Assert.sub.ofAs<
     (name: string, definition: { run: (params: { input: initialInput; previous: undefined }) => any }) => any
   >()(b0.step)
 })
 
 test(`can force an input type while inferring rest`, () => {
   const b1 = b0.step(`a`, { run: (_: { x: 9 }) => {} })
-  Ts.Assert.exact.of.as<'a'>()(b1.type.steps[0]['name'])
-  Ts.Assert.exact.of.as<{ x: 9 }>()(b1.type.steps[0]['input'])
+  Ts.Assert.exact.ofAs<'a'>()(b1.type.steps[0]['name'])
+  Ts.Assert.exact.ofAs<{ x: 9 }>()(b1.type.steps[0]['input'])
 })
 
 test(`step can omit run, output defaults to object`, () => {
   const b1 = b0.step(`a`)
-  Ts.Assert.exact.of.as<{ readonly x: 1 }>()(b1.type.steps[0]['input'])
-  Ts.Assert.exact.of.as<{}>()(b1.type.steps[0]['output'])
+  Ts.Assert.exact.ofAs<{ readonly x: 1 }>()(b1.type.steps[0]['input'])
+  Ts.Assert.exact.ofAs<{}>()(b1.type.steps[0]['output'])
   const b2 = b0.step(`a`).step(`b`)
-  Ts.Assert.exact.of.as<{}>()(b2.type.steps[1]['input'])
-  Ts.Assert.exact.of.as<{}>()(b2.type.steps[1]['output'])
+  Ts.Assert.exact.ofAs<{}>()(b2.type.steps[1]['input'])
+  Ts.Assert.exact.ofAs<{}>()(b2.type.steps[1]['output'])
 })
 
 test(`second step definition`, () => {
   const p1 = b0.step(`a`, { run: () => results.a })
-  Ts.Assert.sub.of.as<
+  Ts.Assert.sub.ofAs<
     (
       name: string,
       parameters: {
@@ -49,7 +49,7 @@ test(`second step definition`, () => {
       },
     ) => any
   >()(p1.step)
-  Ts.Assert.sub.of.as<
+  Ts.Assert.sub.ofAs<
     {
       input: initialInput
       steps: [{ name: 'a'; slots: {} }]
@@ -61,7 +61,7 @@ test(`step input receives awaited return value from previous step `, () => {
   const b1 = b0.step(`a`, { run: () => Promise.resolve(results.a) })
   b1.step(`b`, {
     run: (input) => {
-      Ts.Assert.exact.of.as<results['a']>()(input)
+      Ts.Assert.exact.ofAs<results['a']>()(input)
     },
   })
 })
@@ -74,12 +74,12 @@ test(`step definition with slots`, () => {
         n: slots.n,
       },
       run: (_, slots) => {
-        Ts.Assert.exact.of.as<Promise<'m'>>()(slots.m())
-        Ts.Assert.exact.of.as<'n'>()(slots.n())
+        Ts.Assert.exact.ofAs<Promise<'m'>>()(slots.m())
+        Ts.Assert.exact.ofAs<'n'>()(slots.n())
         return results.a
       },
     })
-  Ts.Assert.sub.of.as<
+  Ts.Assert.sub.ofAs<
     {
       input: initialInput
       config: Config
@@ -122,7 +122,7 @@ describe(`overload`, () => {
         .create({ discriminant: discriminant })
         .step(`a`, { run: (input) => ({ ...input, ola: 1 as const }) })
     )
-    Ts.Assert.sub.of.as<
+    Ts.Assert.sub.ofAs<
       [{
         discriminant: discriminant
         configurator: Configurator.States.Empty
@@ -143,11 +143,11 @@ describe(`overload`, () => {
     const result = b0.step(`a`).overload(o =>
       o.create({ discriminant: discriminant }).stepWithExtendedInput<{ ex: 1 }>()(`a`, {
         run: (input) => {
-          Ts.Assert.exact.of.as<initialInput & dObject & { ex: 1 }>()(input)
+          Ts.Assert.exact.ofAs<initialInput & dObject & { ex: 1 }>()(input)
         },
       })
     )
-    Ts.Assert.sub.of.as<
+    Ts.Assert.sub.ofAs<
       [{
         discriminant: discriminant
         configurationMount: undefined
@@ -169,11 +169,11 @@ describe(`overload`, () => {
     const b1o = b1.overload(o =>
       o.create({ discriminant: discriminant }).step(`a`, {
         run: (_, slots) => {
-          Ts.Assert.exact.of.as<undefined>()(slots)
+          Ts.Assert.exact.ofAs<undefined>()(slots)
         },
       })
     )
-    Ts.Assert.exact.of.as<{}>()(b1o.type.overloads[0]['steps']['a']['slots'])
+    Ts.Assert.exact.ofAs<{}>()(b1o.type.overloads[0]['steps']['a']['slots'])
   })
 
   test(`slots available to run and added to overload context`, () => {
@@ -181,11 +181,11 @@ describe(`overload`, () => {
       o.create({ discriminant: discriminant }).step(`a`, {
         slots: { m: slots.m },
         run: (_, slots) => {
-          Ts.Assert.exact.of.as<{ m: slots['m'] }>()(slots)
+          Ts.Assert.exact.ofAs<{ m: slots['m'] }>()(slots)
         },
       })
     )
-    Ts.Assert.sub.of.as<
+    Ts.Assert.sub.ofAs<
       [{
         steps: {
           a: {
@@ -205,7 +205,7 @@ describe(`overload`, () => {
         .create({ discriminant: discriminant })
         .step(`b`, {
           run: (input) => {
-            Ts.Assert.exact.of.as<results['a'] & dObject>()(input)
+            Ts.Assert.exact.ofAs<results['a'] & dObject>()(input)
           },
         })
     )

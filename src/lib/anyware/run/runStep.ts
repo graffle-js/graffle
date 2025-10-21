@@ -54,7 +54,7 @@ export const runStep = async (
     asyncErrorDeferred: StepResultErrorAsync
   },
 ) => {
-  const debugHook = debug.child(`step ${name}`)
+  const debugHook = debug.child(`step_${name}`)
 
   debugHook.trace(`advance to next interceptor`)
 

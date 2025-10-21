@@ -5,6 +5,8 @@ import type * as $Scalars from '../../scalars/$.js'
 
 export type id<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | id.$SelectionSet<_$Context>
 
 export namespace id {
@@ -14,7 +16,7 @@ export namespace id {
     /**
      * Arguments for `id` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -30,7 +32,7 @@ export namespace id {
      * | **Path** | `ObjectNestedWithArgs.id(filter)` |
      * | **Nullability** | Optional |
      */
-    filter?: $Scalars.ID<_$Context>
+    readonly filter?: $Scalars.ID<_$Context>
   }
 
   /**
@@ -42,6 +44,8 @@ export namespace id {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
@@ -56,7 +60,7 @@ namespace $object {
     /**
      * Arguments for `object` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -72,7 +76,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(boolean)` |
      * | **Nullability** | Optional |
      */
-    boolean?: $Scalars.Boolean<_$Context>
+    readonly boolean?: $Scalars.Boolean<_$Context>
     /**
      * # Info
      *
@@ -83,7 +87,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(float)` |
      * | **Nullability** | Optional |
      */
-    float?: $Scalars.Float<_$Context>
+    readonly float?: $Scalars.Float<_$Context>
     /**
      * # Info
      *
@@ -94,7 +98,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(int)` |
      * | **Nullability** | Optional |
      */
-    int?: $Scalars.Int<_$Context>
+    readonly int?: $Scalars.Int<_$Context>
     /**
      * # Info
      *
@@ -105,7 +109,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(string)` |
      * | **Nullability** | Optional |
      */
-    string?: $Scalars.String<_$Context>
+    readonly string?: $Scalars.String<_$Context>
   }
 
   /**
@@ -115,9 +119,7 @@ namespace $object {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type { $object as object }

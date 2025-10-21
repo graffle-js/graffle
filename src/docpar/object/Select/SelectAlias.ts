@@ -6,13 +6,12 @@ export type SelectAlias<$SelectionSet = AnyExceptAlias> =
   | SelectAliasMultiple<$SelectionSet>
 
 // dprint-ignore
-export type SelectAliasOne<$SelectionSet = AnyExceptAlias> =
-  [
-    alias: string,
-    selectionSet: $SelectionSet
-  ]
+export type SelectAliasOne<$SelectionSet = AnyExceptAlias> = readonly [
+  alias: string,
+  selectionSet: $SelectionSet
+]
 
-export type SelectAliasMultiple<$SelectionSet = AnyExceptAlias> = [
+export type SelectAliasMultiple<$SelectionSet = AnyExceptAlias> = readonly [
   ...SelectAliasOne<$SelectionSet>[],
 ]
 
@@ -25,7 +24,7 @@ export type SelectAliasMultiple<$SelectionSet = AnyExceptAlias> = [
  * { id: ["myId"] }  // Same as: { id: ["myId", true] }
  * ```
  */
-export type SelectAliasShort = [alias: string]
+export type SelectAliasShort = readonly [alias: string]
 
 /**
  * String-only alias syntax for scalars without required args.

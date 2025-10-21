@@ -3,6 +3,8 @@ import type { $DefaultSelectionContext } from '../../_context.js'
 
 export type a<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | a.$SelectionSet<_$Context>
 
 export namespace a {
@@ -20,12 +22,16 @@ export namespace a {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }
 
 export type b<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
   | b.$SelectionSet<_$Context>
 
 export namespace b {
@@ -43,6 +49,8 @@ export namespace b {
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
+    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }

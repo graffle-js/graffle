@@ -11,10 +11,10 @@ describe(`select`, () => {
   })
 
   it(`has type safe methods`, () => {
-    Ts.Assert.exact.of.as<{ int: true }>()(select.Bar({ int: true }))
+    Ts.Assert.exact.ofAs<{ int: true }>()(select.Bar({ int: true }))
     // Errors
     // @ts-expect-error Excess property check.
-    Ts.Assert.exact.of.as<{ int: true }>()(select.Bar({ int: true, int2: true }))
+    Ts.Assert.exact.ofAs<{ int: true }>()(select.Bar({ int: true, int2: true }))
   })
 })
 

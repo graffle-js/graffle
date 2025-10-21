@@ -864,8 +864,8 @@ packages:
   '@vueuse/shared@11.3.0':
     resolution: {integrity: sha512-P8gSSWQeucH5821ek2mn/ciCk+MS/zoRKqdQIM3bHq6p7GXDAJLmnRRKmF5F65sAVJIfzQlwR3aDzwCn10s8hA==}
 
-  '@wollybeard/kit@0.78.3':
-    resolution: {integrity: sha512-3mn5uyEIYKO5tBzoI8gC/wQxTehAhnx/PKMuIRYi2iMlfBRgVq/DvelanjH82aqkizppgrF7uTNo2Xojy1hKFQ==}
+  '@wollybeard/kit@0.81.1':
+    resolution: {integrity: sha512-I4JrC+XGlfhSfIp79KPf8zQEV8rEBNnpKeyiCA30lcm98vLcQIsu0Uy5MdZSecWSxt5un+j69plD33vzeKzR3Q==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1407,6 +1407,10 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  pluralize-esm@9.0.5:
+    resolution: {integrity: sha512-Kb2dcpMsIutFw2hYrN0EhsAXOUJTd6FVMIxvNAkZCMQLVt9NGZqQczvGpYDxNWCZeCWLHUPxQIBudWzt1h7VVA==}
+    engines: {node: '>=14.0.0'}
 
   postcss@8.4.49:
     resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==}
@@ -2420,7 +2424,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@wollybeard/kit@0.78.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.81.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@types/node': 24.7.1
@@ -2434,6 +2438,7 @@ snapshots:
       jsonc-parser: 3.3.1
       object-inspect: 1.13.4
       pathe: 2.0.3
+      pluralize-esm: 9.0.5
       tinyglobby: 0.2.15
       type-fest: 5.0.1
 
@@ -2704,7 +2709,7 @@ snapshots:
       '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.78.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+      '@wollybeard/kit': 0.81.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.36.0
       graphql: 16.10.0
       is-plain-obj: 4.1.0
@@ -3122,6 +3127,8 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  pluralize-esm@9.0.5: {}
 
   postcss@8.4.49:
     dependencies:

@@ -90,7 +90,7 @@ type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
           : $SelectionSet[$Key] extends Select.Indicator.Negative
             ? never
             // We handle aliases elsewhere (arrays and strings)
-            : $SelectionSet[$Key] extends any[]
+            : $SelectionSet[$Key] extends readonly any[]
               ? never
             : $SelectionSet[$Key] extends string
               ? never
