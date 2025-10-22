@@ -19,9 +19,7 @@ export namespace battles {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type beings<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -40,9 +38,7 @@ export namespace beings {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type pokemonByName<
@@ -56,7 +52,7 @@ export namespace pokemonByName {
     /**
      * Arguments for `pokemonByName` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -74,7 +70,7 @@ export namespace pokemonByName {
      * | **Path** | `Query.pokemonByName(name)` |
      * | **Nullability** | Required |
      */
-    name: $Scalars.String$NonNull<_$Context>
+    readonly name: $Scalars.String$NonNull<_$Context>
   }
 
   /**
@@ -84,9 +80,7 @@ export namespace pokemonByName {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type pokemons<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -99,7 +93,7 @@ export namespace pokemons {
     /**
      * Arguments for `pokemons` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -117,7 +111,7 @@ export namespace pokemons {
      * | **Path** | `Query.pokemons(filter)` |
      * | **Nullability** | Optional |
      */
-    filter?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonFilter<_$Context> | null | undefined>
+    readonly filter?: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonFilter<_$Context> | null | undefined>
   }
 
   /**
@@ -127,9 +121,7 @@ export namespace pokemons {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type trainerByName<
@@ -143,7 +135,7 @@ export namespace trainerByName {
     /**
      * Arguments for `trainerByName` field. All arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -161,7 +153,7 @@ export namespace trainerByName {
      * | **Path** | `Query.trainerByName(name)` |
      * | **Nullability** | Required |
      */
-    name: $Scalars.String$NonNull<_$Context>
+    readonly name: $Scalars.String$NonNull<_$Context>
   }
 
   /**
@@ -171,9 +163,7 @@ export namespace trainerByName {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
 
 export type trainers<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
@@ -192,7 +182,5 @@ export namespace trainers {
    */
   export type $Expanded<
     _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > = $$Utilities.Simplify<
-    $SelectionSet<_$Context>
-  >
+  > = $$Utilities.Simplify<$SelectionSet<_$Context>>
 }
