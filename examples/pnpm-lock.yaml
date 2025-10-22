@@ -681,8 +681,8 @@ packages:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
-  '@wollybeard/kit@0.78.3':
-    resolution: {integrity: sha512-3mn5uyEIYKO5tBzoI8gC/wQxTehAhnx/PKMuIRYi2iMlfBRgVq/DvelanjH82aqkizppgrF7uTNo2Xojy1hKFQ==}
+  '@wollybeard/kit@0.83.0':
+    resolution: {integrity: sha512-0FK3iEVJKbcGH4rBpqdPDJ4qGC5Ek2yTJ3ykHWGJo8aXsqgA1zb8ejvdZe1U60ZLz6GoI7uEW8p7EhXrRgT/rw==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -922,6 +922,10 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  pluralize-esm@9.0.5:
+    resolution: {integrity: sha512-Kb2dcpMsIutFw2hYrN0EhsAXOUJTd6FVMIxvNAkZCMQLVt9NGZqQczvGpYDxNWCZeCWLHUPxQIBudWzt1h7VVA==}
+    engines: {node: '>=14.0.0'}
 
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
@@ -1624,7 +1628,7 @@ snapshots:
       tinyglobby: 0.2.15
       type-fest: 5.1.0
 
-  '@wollybeard/kit@0.78.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.83.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@types/node': 24.7.2
@@ -1638,6 +1642,7 @@ snapshots:
       jsonc-parser: 3.3.1
       object-inspect: 1.13.4
       pathe: 2.0.3
+      pluralize-esm: 9.0.5
       tinyglobby: 0.2.15
       type-fest: 5.1.0
 
@@ -1771,7 +1776,7 @@ snapshots:
       '@0no-co/graphql.web': 1.2.0(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.78.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+      '@wollybeard/kit': 0.83.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.40.0
       graphql: 16.11.0
       is-plain-obj: 4.1.0
@@ -1857,6 +1862,8 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  pluralize-esm@9.0.5: {}
 
   postcss@8.5.6:
     dependencies:
