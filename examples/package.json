@@ -21,7 +21,7 @@
     "@effect/platform-node": "^0.98.3",
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5",
-    "@wollybeard/kit": "^0.71.0",
+    "@wollybeard/kit": "^0.84.0",
     "effect": "^3.18.4",
     "graffle": "file:..",
     "tsx": "^4.19.3",
