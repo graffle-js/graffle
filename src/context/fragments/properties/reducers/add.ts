@@ -27,8 +27,8 @@ export const add = <$Context extends ContextFragment>(
 
   const computed = isHasComputed
     ? [
-      ...context.properties.computed,
-      ...propertiesInput.computed!,
+      ...context.properties.computed as any,
+      ...propertiesInput.computed! as any,
     ]
     : context.properties.computed
 

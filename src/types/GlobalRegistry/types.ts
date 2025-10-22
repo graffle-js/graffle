@@ -63,7 +63,7 @@ export type IsEmpty = IsNever<keyof Clients> extends true ? true : false
 export type ClientUnion = IsEmpty extends true ? ZeroClient : Obj.values<Clients>[number]
 
 export type ClientNames = keyof GraffleGlobal.Clients extends never
-  ? Ts.StaticError<'No schemas have been registered. Did you run graffle generate?', { location: 'SchemaNames' }>
+  ? Ts.Err.StaticError<'No schemas have been registered. Did you run graffle generate?', { location: 'SchemaNames' }>
   : keyof GraffleGlobal.Clients
 
 // dprint-ignore

@@ -55,7 +55,7 @@ type ParseOperations<
   $Input extends string,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-> = $Input extends '' ? Ts.Simplify<$Result>
+> = $Input extends '' ? Ts.Simplify.Shallow<$Result>
   : ParseSingleOperation<$Input, $Schema> extends infer $OpResult
     ? $OpResult extends { operation: infer $Op; rest: infer $Rest }
       ? ParseOperations<SkipIgnored<$Rest & string>, $Schema, $Result & $Op>
@@ -237,7 +237,7 @@ type ParseVariablesRec<
   $Result extends Record<string, any>,
 > =
   // Check for closing paren
-  $Input extends `)${infer $Rest}` ? { variables: Ts.Simplify<$Result>; rest: $Rest }
+  $Input extends `)${infer $Rest}` ? { variables: Ts.Simplify.Shallow<$Result>; rest: $Rest }
     // Parse next variable
     : $Input extends `$${infer $VarNameRest}`
       ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
@@ -327,7 +327,7 @@ type ParseFieldsInSelectionSet<
   $Depth extends number,
 > =
   // Check for closing brace
-  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Ts.Simplify<$Result>; rest: $Rest } // End - simplify result
+  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Ts.Simplify.Shallow<$Result>; rest: $Rest } // End - simplify result
     : ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, $Result, Num.MinusOne<$Depth>>
     // Parse next field
     : TakeName<$Input> extends { name: infer $FieldName; rest: infer $Rest } ? ParseFieldByName<

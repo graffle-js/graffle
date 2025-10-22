@@ -143,7 +143,7 @@ export namespace Errors {
   export type UnknownKey<
     $Key extends PropertyKey,
     $Object extends Schema.OutputObjectLike,
-  > = Ts.StaticError<
+  > = Ts.Err.StaticError<
     `field "${Obj.PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
     { location: 'Object' }
   >
