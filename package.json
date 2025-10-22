@@ -4,7 +4,7 @@
   "version": "0.0.0-dripip",
   "packageManager": "pnpm@10.18.0",
   "type": "module",
-  "bin": "cli.sh",
+  "bin": "build/cli/index.js",
   "exports": {
     "./client": "./build/exports/client.js",
     "./extension": "./build/exports/extension.js",
@@ -31,8 +31,7 @@
   },
   "files": [
     "build",
-    "src",
-    "execute.sh"
+    "src"
   ],
   "repository": {
     "type": "git",
