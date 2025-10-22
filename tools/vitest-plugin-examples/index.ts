@@ -85,6 +85,6 @@ export const createExamplesTest = (
         expect(result.encoded).toMatchSnapshot(snapshotName)
       }
     },
-    { timeout },
+    timeout,
   )
 }
