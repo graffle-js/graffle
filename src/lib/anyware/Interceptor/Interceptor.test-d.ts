@@ -16,12 +16,12 @@ describe(`interceptor constructor`, () => {
       .step({ name: `c`, run: () => results.c })
     const p1 = Pipeline.create(b1.type)
     const i1 = Ts.as<Interceptor.InferFromPipeline<typeof p1>>()
-    Ts.Assert.parameter1.equiv.ofAs<{ a: any; b: any; c: any }>()(i1)
+    Ts.Assert.parameter1.equiv.ofAs<{ a: any; b: any; c: any }>().on(i1)
     Ts.Assert.parameters.sub.ofAs<[{
       a: (params: { input?: initialInput }) => Promise<{ b: (params: { input?: results['a'] }) => any }>
       b: (params: { input?: results['a'] }) => Promise<{ c: (params: { input?: results['b'] }) => any }>
       c: (params: { input?: results['b'] }) => Promise<results['c']>
-    }]>()(i1)
+    }]>().on(i1)
     // const x: Parameters<i1>['0']['a'] = _
     // x({input:{x:1}}).then(r => r.b({input:{}}))
   })
@@ -39,7 +39,7 @@ describe(`interceptor constructor`, () => {
   test(`trigger arguments are optional`, () => {
     const p = b0.step({ name: `a`, run: () => results.a }).done()
     const triggerA = Ts.as<PipelineGetTrigger<typeof p, 'a'>>()
-    Ts.Assert.parameters.sub.ofAs<[params?: { input?: initialInput }]>()(triggerA)
+    Ts.Assert.parameters.sub.ofAs<[params?: { input?: initialInput }]>().on(triggerA)
   })
 
   // --- slots ---

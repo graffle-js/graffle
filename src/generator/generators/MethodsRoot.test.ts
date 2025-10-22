@@ -327,7 +327,7 @@ describe('capture groups', () => {
 
   test('mixed named and indexed groups', () => {
     const rule: FieldGroupingRule = {
-      pattern: /^(?<action>add|update)(\w+)$/,
+      pattern: /^(?<action>add|update).on(\w+)$/,
       path: '$2',
       methodName: '$action',
     }
@@ -357,7 +357,7 @@ describe('capture groups', () => {
 
   test('function methodName with named groups', () => {
     const rule: FieldGroupingRule = {
-      pattern: /^(?<action>add|update|delete)(?<resource>\w+)$/,
+      pattern: /^(?<action>add|update|delete).on(?<resource>\w+)$/,
       path: '$resource',
       methodName: (fieldName, operationType, match) => {
         if (!match?.groups) return `unknown`
@@ -458,7 +458,7 @@ describe('string template transformations', () => {
 
   test('multiple transformations in one template', () => {
     const rule: FieldGroupingRule = {
-      pattern: /^(?<prefix>get)(?<resource>\w+)$/,
+      pattern: /^(?<prefix>get).on(?<resource>\w+)$/,
       path: '${kebab:resource}',
       methodName: '${lower:prefix}${pascal:resource}',
     }
@@ -579,15 +579,15 @@ function replaceCaptures(template: string, match: RegExpExecArray): string {
     // Apply transformation (simplified version using native JS)
     switch (transform) {
       case 'kebab':
-        return value.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+        return value.replace(/([a-z]).on([A-Z])/g, '$1-$2').toLowerCase()
       case 'pascal':
         return value.charAt(0).toUpperCase() + value.slice(1)
       case 'camel':
         return value.charAt(0).toLowerCase() + value.slice(1)
       case 'snake':
-        return value.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase()
+        return value.replace(/([a-z]).on([A-Z])/g, '$1_$2').toLowerCase()
       case 'constant':
-        return value.replace(/([a-z])([A-Z])/g, '$1_$2').toUpperCase()
+        return value.replace(/([a-z]).on([A-Z])/g, '$1_$2').toUpperCase()
       case 'title':
         return value.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
       case 'upper':

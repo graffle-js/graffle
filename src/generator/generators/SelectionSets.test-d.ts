@@ -10,7 +10,7 @@ type QWithDate = Possible.SelectionSets.Query
 declare const Q: Q
 declare const QWithDate: QWithDate
 
-const t = Ts.Assert.sub.of(Q)
+const t = Ts.Assert.sub.of(Q).on
 
 test(`Query`, () => {
   t({ __typename: true })
@@ -87,7 +87,7 @@ test(`Query`, () => {
   // t({ interface: { id: true, ___on_Object2ImplementingInterface: { boolean: true } } })
   // todo:
   // // @ts-expect-error incorrect implementor name
-  // Ts.Assert.subNoExcess<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
+  // Ts.Assert.subNoExcess<Q>().on({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
   // directives work on fragments
   t({ interface: { id: true, ___on_Object1ImplementingInterface: { $include: true } } }) // todo should REQUIRE field selection
 
@@ -172,7 +172,7 @@ test(`Query`, () => {
   // On Root (Query)
   t({ ___: { id: true } })
   t({ ___: { $skip: true, id: true } })
-  Ts.Assert.sub.noExcessAs<Q>()({
+  Ts.Assert.sub.noExcessAs<Q>().on({
     // @ts-expect-error no directives on root type
     $skip: true,
     id: true,
@@ -231,19 +231,19 @@ test(`Query`, () => {
   t({ dateArg: { $: { date: 0 } } })
   t({ dateArg: { $: { date: null } } })
   t({ dateArg: { $: { date: db.date0Encoded } } })
-  Ts.Assert.sub.ofAs<QWithDate>()({ dateArg: { $: { date: db.date0 } } })
+  Ts.Assert.sub.ofAs<QWithDate>().on({ dateArg: { $: { date: db.date0 } } })
 
   // input object arg
   t({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0Encoded } } } })
   t({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0Encoded } } } })
   t({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0Encoded } } } })
-  Ts.Assert.sub.ofAs<QWithDate>()({
+  Ts.Assert.sub.ofAs<QWithDate>().on({
     stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0 } } },
   })
-  Ts.Assert.sub.ofAs<QWithDate>()({
+  Ts.Assert.sub.ofAs<QWithDate>().on({
     stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0 } } },
   })
-  Ts.Assert.sub.ofAs<QWithDate>()({
+  Ts.Assert.sub.ofAs<QWithDate>().on({
     stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0 } } },
   })
   // @ts-expect-error missing "idRequired" field

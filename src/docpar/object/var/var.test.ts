@@ -15,49 +15,49 @@ const rejects = <$Expected>() => (_value: $Expected) => {}
 describe('Builder type defaults', () => {
   test('bare type accepts any state (widest)', () => {
     type AcceptsAny = Var.Builder
-    Ts.Assert.sub.ofAs<AcceptsAny>()(as<Var.Builder<unknown, Var.BuilderStateEmpty>>())
-    Ts.Assert.sub.ofAs<AcceptsAny>()(as<Var.Builder<number, { default: 5; required: true; name: 'test' }>>())
-    Ts.Assert.sub.ofAs<AcceptsAny>()(as<Var.Builder<string, Var.BuilderState>>())
+    Ts.Assert.sub.ofAs<AcceptsAny>().on(as<Var.Builder<unknown, Var.BuilderStateEmpty>>())
+    Ts.Assert.sub.ofAs<AcceptsAny>().on(as<Var.Builder<number, { default: 5; required: true; name: 'test' }>>())
+    Ts.Assert.sub.ofAs<AcceptsAny>().on(as<Var.Builder<string, Var.BuilderState>>())
   })
   test('$var starts with empty state', () => {
-    Ts.Assert.sub.ofAs<Var.Builder<unknown, Var.BuilderStateEmpty>>()($var)
+    Ts.Assert.sub.ofAs<Var.Builder<unknown, Var.BuilderStateEmpty>>().on($var)
   })
 })
 
 describe('Builder type inference', () => {
   test('infers type from default value', () => {
     const marker1 = $var.default(42)
-    Ts.Assert.sub.ofAs<Var.Builder<42, { default: 42; required: undefined; name: undefined }>>()(marker1)
+    Ts.Assert.sub.ofAs<Var.Builder<42, { default: 42; required: undefined; name: undefined }>>().on(marker1)
 
     const marker2 = $var.default('hello')
-    Ts.Assert.sub.ofAs<Var.Builder<'hello', { default: 'hello'; required: undefined; name: undefined }>>()(marker2)
+    Ts.Assert.sub.ofAs<Var.Builder<'hello', { default: 'hello'; required: undefined; name: undefined }>>().on(marker2)
 
     const marker3 = $var.default(true)
-    Ts.Assert.sub.ofAs<Var.Builder<true, { default: true; required: undefined; name: undefined }>>()(marker3)
+    Ts.Assert.sub.ofAs<Var.Builder<true, { default: true; required: undefined; name: undefined }>>().on(marker3)
 
     const marker4 = $var.default(null)
-    Ts.Assert.sub.ofAs<Var.Builder<null, { default: null; required: undefined; name: undefined }>>()(marker4)
+    Ts.Assert.sub.ofAs<Var.Builder<null, { default: null; required: undefined; name: undefined }>>().on(marker4)
 
     const marker5 = $var.default([1, 2, 3])
     Ts.Assert.sub.ofAs<
       Var.Builder<readonly [1, 2, 3], { default: readonly [1, 2, 3]; required: undefined; name: undefined }>
-    >()(
+    >().on(
       marker5,
     )
   })
 
   test('preserves narrowed type through chaining', () => {
     const marker1 = $var.default(42).name('limit')
-    Ts.Assert.sub.ofAs<Var.Builder<42, { default: 42; required: undefined; name: 'limit' }>>()(marker1)
+    Ts.Assert.sub.ofAs<Var.Builder<42, { default: 42; required: undefined; name: 'limit' }>>().on(marker1)
 
     const marker2 = $var.name('userId').default('abc123')
-    Ts.Assert.sub.ofAs<Var.Builder<'abc123', { default: 'abc123'; required: undefined; name: 'userId' }>>()(marker2)
+    Ts.Assert.sub.ofAs<Var.Builder<'abc123', { default: 'abc123'; required: undefined; name: 'userId' }>>().on(marker2)
 
     const marker4 = $var.default('test').required()
-    Ts.Assert.sub.ofAs<Var.Builder<'test', { default: 'test'; required: true; name: undefined }>>()(marker4)
+    Ts.Assert.sub.ofAs<Var.Builder<'test', { default: 'test'; required: true; name: undefined }>>().on(marker4)
 
     const marker5 = $var.name('pageSize').default(20).required()
-    Ts.Assert.sub.ofAs<Var.Builder<20, { default: 20; required: true; name: 'pageSize' }>>()(marker5)
+    Ts.Assert.sub.ofAs<Var.Builder<20, { default: 20; required: true; name: 'pageSize' }>>().on(marker5)
   })
 })
 
@@ -74,13 +74,13 @@ describe('Type narrowing validation', () => {
   test('narrowed builder rejects incompatible type assignments', () => {
     // Incompatible literal types should be rejected
     // @ts-expect-error - Builder<1> should not be assignable to Builder<string>
-    rejects<Var.Builder<string>>()($var.default(1))
+    rejects<Var.Builder<string>>().on($var.default(1))
 
     // @ts-expect-error - Builder<'test'> should not be assignable to Builder<number>
-    rejects<Var.Builder<number>>()($var.default('test'))
+    rejects<Var.Builder<number>>().on($var.default('test'))
 
     // @ts-expect-error - Builder<true> should not be assignable to Builder<string>
-    rejects<Var.Builder<string>>()($var.default(true))
+    rejects<Var.Builder<string>>().on($var.default(true))
 
     // Compatible literal types should work (covariance)
     accepts<Var.Builder<number>>()($var.default(42))
@@ -90,10 +90,10 @@ describe('Type narrowing validation', () => {
 
   test('narrowed type is preserved through chaining', () => {
     // @ts-expect-error - type narrowing should persist through .name()
-    rejects<Var.Builder<string>>()($var.default(1).name('myVar'))
+    rejects<Var.Builder<string>>().on($var.default(1).name('myVar'))
 
     // @ts-expect-error - type narrowing should persist through .required()
-    rejects<Var.Builder<string>>()($var.default(42).required())
+    rejects<Var.Builder<string>>().on($var.default(42).required())
 
     // Chaining preserves compatible types (covariance)
     accepts<Var.Builder<number>>()($var.default(100).name('limit'))

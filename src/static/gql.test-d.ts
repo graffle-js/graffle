@@ -18,59 +18,59 @@ const A = Ts.Assert.exact
 test('static root type builder > type output inference', () => {
   // Nested object args
   const q0 = Q.objectNestedWithArgs({ object: { $: { int: $ }, id:true}})
-  A.ofAs<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | null | undefined }, true>>()(q0)
+  A.ofAs<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | null | undefined }, true>>().on(q0)
 
   // Scalar fields
   const q1 = Q.string(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ string: string | null }, {}, true>>()(q1)
+  A.ofAs<Grafaid.Document.Typed.String<{ string: string | null }, {}, true>>().on(q1)
 
   const q2 = Q.idNonNull(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ idNonNull: string }, {}, true>>()(q2)
+  A.ofAs<Grafaid.Document.Typed.String<{ idNonNull: string }, {}, true>>().on(q2)
 
   // Custom scalar - without custom scalar codecs defined
   const q3 = Q.date(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ date: Date | null }, {}, true>>()(q3)
+  A.ofAs<Grafaid.Document.Typed.String<{ date: Date | null }, {}, true>>().on(q3)
 
   // Lists
   const q5 = Q.listInt(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, {}, true>>()(q5)
+  A.ofAs<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, {}, true>>().on(q5)
 
   const q6 = Q.listIntNonNull(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, {}, true>>()(q6)
+  A.ofAs<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, {}, true>>().on(q6)
 
   const q7 = Q.listListInt(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}, true>>()(q7)
+  A.ofAs<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}, true>>().on(q7)
 
   // Object with fields
   const q8 = Q.object({ id: true })
-  A.ofAs<Grafaid.Document.Typed.String<{ object: { id:string|null } | null }, {}, true>>()(q8)
+  A.ofAs<Grafaid.Document.Typed.String<{ object: { id:string|null } | null }, {}, true>>().on(q8)
 
   // Field with $
   const q9 = Q.stringWithArgs({ $: { boolean: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | null | undefined }, true>>()(q9)
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | null | undefined }, true>>().on(q9)
 
   // Required argument with $
   const q10 = Q.stringWithRequiredArg({ $: { string: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }, true>>()(q10) // NOT undefined!
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }, true>>().on(q10) // NOT undefined!
 
   // Required argument with $ with default
   const q11 = Q.stringWithRequiredArg({ $: { string: $.default('abc') } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string?: string | undefined }, true>>()(q11)
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string?: string | undefined }, true>>().on(q11)
 
   // $ with custom name
   const q12 = Q.stringWithArgs({ $: { boolean: $.name('isActive') } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | null | undefined }, true>>()(q12)
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | null | undefined }, true>>().on(q12)
 
   // $.required() on optional argument
   const q12b = Q.stringWithArgs({ $: { string: $.required() } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }, true>>()(q12b) // NOT undefined!
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }, true>>().on(q12b) // NOT undefined!
 
   // List argument with $
   const q13 = Q.stringWithListArg({ $: { ints: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | null | undefined }, true>>()(q13)
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | null | undefined }, true>>().on(q13)
 
   const q14 = Q.stringWithListArgRequired({ $: { ints: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }, true>>()(q14)
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }, true>>().on(q14)
 
   // Multiple $ types
   const q15 = Q.stringWithArgs({ $: { boolean: $, string: $ } })
@@ -78,11 +78,11 @@ test('static root type builder > type output inference', () => {
     { stringWithArgs: string | null },
     { boolean?: boolean | null | undefined, string?: string | null | undefined },
     true
-  >>()(q15)
+  >>().on(q15)
 
   // Mixed $ and literals
   const q16 = Q.stringWithArgs({ $: { boolean: true, string: $, int: 42 } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | null | undefined }, true>>()(q16)
+  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | null | undefined }, true>>().on(q16)
 
   // Alias with $ on nested object field
   const q20 = Q.objectNestedWithArgs({
@@ -97,27 +97,27 @@ test('static root type builder > type output inference', () => {
     { objectNestedWithArgs: { object2: { id: string | null } | null } | null },
     { int?: number | null | undefined },
     true
-  >>()(q20)
+  >>().on(q20)
 
   // Alias short array syntax (scalars/enums without required args only)
   const q21 = Q.$batch({ id: ['myId'] })
-  A.ofAs<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>()(q21)
+  A.ofAs<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>().on(q21)
 
   const q22 = Q.$batch({ string: ['myString'] })
-  A.ofAs<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>()(q22)
+  A.ofAs<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>().on(q22)
 
   const q23 = Q.$batch({ abcEnum: ['myEnum'] })
-  A.ofAs<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>()(q23)
+  A.ofAs<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>().on(q23)
 
   // Alias string syntax (scalars/enums without required args only)
   const q24 = Q.$batch({ id: 'myId' })
-  A.ofAs<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>()(q24)
+  A.ofAs<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>().on(q24)
 
   const q25 = Q.$batch({ string: 'myString' })
-  A.ofAs<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>()(q25)
+  A.ofAs<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>().on(q25)
 
   const q26 = Q.$batch({ abcEnum: 'myEnum' })
-  A.ofAs<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>()(q26)
+  A.ofAs<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>().on(q26)
 
   // @ts-expect-error - short array alias not allowed on non-scalar
   const q27 = Q.$batch({ object: ['myObject'] })
@@ -138,8 +138,8 @@ test('static root type builder > type output inference', () => {
 
 type SingleOpNoVars = D<{ name: 'myQuery'; result: { date: Date | null }; variables: {} }>
 
-A.ofAs<SingleOpNoVars>()(Possible.gql(`query myQuery { date }`))
-Ts.Assert.equiv.ofAs<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } } }))
+A.ofAs<SingleOpNoVars>().on(Possible.gql(`query myQuery { date }`))
+Ts.Assert.equiv.ofAs<SingleOpNoVars>().on(Possible.gql({ query: { myQuery: { date: true } } }))
 
 // ==================================================================================================
 //                                 Single operation, required variables
@@ -147,9 +147,9 @@ Ts.Assert.equiv.ofAs<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: 
 
 type SingleOpRequiredVars = D<{ name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 
-Ts.Assert.equiv.ofAs<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
+Ts.Assert.equiv.ofAs<SingleOpRequiredVars>().on(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
 // dprint-ignore
-Ts.Assert.equiv.ofAs<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
+Ts.Assert.equiv.ofAs<SingleOpRequiredVars>().on(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
 
 // ==================================================================================================
 //                                 Single operation, optional variables
@@ -157,10 +157,10 @@ Ts.Assert.equiv.ofAs<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { 
 
 type SingleOpOptionalVars = D<{ name: 'search'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 
-A.ofAs<SingleOpOptionalVars>()(
+A.ofAs<SingleOpOptionalVars>().on(
   Possible.gql(`query search($string: String) { stringWithArgs(string: $string) }`),
 )
-Ts.Assert.equiv.ofAs<SingleOpOptionalVars>()(
+Ts.Assert.equiv.ofAs<SingleOpOptionalVars>().on(
   Possible.gql({ query: { search: { stringWithArgs: { $: { string: $ }, __typename: true } } } }),
 )
 
@@ -174,14 +174,14 @@ type DefaultOpWithScalar = D<{ name: 'default'; result: { date: Date | null }; v
 
 type DefaultOpOptionalVars = D<{ name: 'default'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 
-A.ofAs<DefaultOpNoVars>()(Possible.gql(`{ id }`))
-Ts.Assert.equiv.ofAs<DefaultOpNoVars>()(Possible.gql({ query: { default: { id: true } } }))
+A.ofAs<DefaultOpNoVars>().on(Possible.gql(`{ id }`))
+Ts.Assert.equiv.ofAs<DefaultOpNoVars>().on(Possible.gql({ query: { default: { id: true } } }))
 
-A.ofAs<DefaultOpWithScalar>()(Possible.gql(`{ date }`))
-Ts.Assert.equiv.ofAs<DefaultOpWithScalar>()(Possible.gql({ query: { default: { date: true } } }))
+A.ofAs<DefaultOpWithScalar>().on(Possible.gql(`{ date }`))
+Ts.Assert.equiv.ofAs<DefaultOpWithScalar>().on(Possible.gql({ query: { default: { date: true } } }))
 
-A.ofAs<DefaultOpOptionalVars>()(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
-Ts.Assert.equiv.ofAs<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
+A.ofAs<DefaultOpOptionalVars>().on(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
+Ts.Assert.equiv.ofAs<DefaultOpOptionalVars>().on(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
 
 // ==================================================================================================
 //                                   Multiple operations, no variables
@@ -192,11 +192,11 @@ type MultiOpNoVars = D<
   | { name: 'addId'; result: { id: string | null }; variables: {} }
 >
 
-A.ofAs<MultiOpNoVars>()(Possible.gql(`
+A.ofAs<MultiOpNoVars>().on(Possible.gql(`
   query getUser { id }
   mutation addId { id }
 `))
-Ts.Assert.equiv.ofAs<MultiOpNoVars>()(Possible.gql({
+Ts.Assert.equiv.ofAs<MultiOpNoVars>().on(Possible.gql({
   query: { getUser: { id: true } },
   mutation: { addId: { id: true } },
 }))
@@ -210,13 +210,13 @@ type MultiOpWithVars = D<
   | { name: 'setId'; result: { idNonNull: string }; variables: {} }
 >
 
-Ts.Assert.equiv.ofAs<MultiOpWithVars>()(
+Ts.Assert.equiv.ofAs<MultiOpWithVars>().on(
   Possible.gql(`
     query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }
     mutation setId { idNonNull }
   `),
 )
-Ts.Assert.equiv.ofAs<MultiOpWithVars>()(
+Ts.Assert.equiv.ofAs<MultiOpWithVars>().on(
   Possible.gql({
     query: {
       getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } },

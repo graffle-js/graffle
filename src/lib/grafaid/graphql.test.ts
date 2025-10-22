@@ -18,7 +18,7 @@ type CaseParameters = [
 describe(`getOperationType`, () => {
   // dprint-ignore
   test.each<CaseParameters>([
-    
+
     [ `null if no defined operations and operation name given `, 														{ query: docNoDefinedOps, operationName: operationNameOne }, 						null ],
     [ `null if multiple defined operations and no operation name given`, 										{ query: docMultipleQueryOperations  }, 																null ],
     [ `null if multiple defined operations and no operation name given (empty string)`, 		{ query: docMultipleQueryOperations, operationName: ``  }, 							null ],

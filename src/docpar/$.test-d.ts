@@ -244,81 +244,81 @@ type _SpecialTypes = Ts.Assert.Cases<
 // Required String variable
 type d1YeSchema = D<{ name: 'q'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
 type d1NoSchema = D<{ name: 'q'; result: { stringWithRequiredArg: unknown }; variables: { string: string } }>
-Ts.Assert.exact.ofAs<d1YeSchema>()(gqlYe('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d1NoSchema>()(gqlNo('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d1YeSchema>()(gqlYe({ query: { q: { stringWithRequiredArg: { $: { string: $ } } } } }))
-Ts.Assert.exact.ofAs<d1NoSchema>()(gqlNo({ query: { q: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
+Ts.Assert.exact.ofAs<d1YeSchema>().on(gqlYe('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
+Ts.Assert.exact.ofAs<d1NoSchema>().on(gqlNo('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
+Ts.Assert.exact.ofAs<d1YeSchema>().on(gqlYe({ query: { q: { stringWithRequiredArg: { $: { string: $ } } } } }))
+Ts.Assert.exact.ofAs<d1NoSchema>().on(gqlNo({ query: { q: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
 
 // Optional String variable
 type d2YeSchema = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 type d2NoSchema = D<{ name: 'q'; result: { stringWithArgs: unknown }; variables: { string?: string | null | undefined } }>
-Ts.Assert.exact.ofAs<d2YeSchema>()(gqlYe('query q($string: String) { stringWithArgs(string: $string) }'))
-Ts.Assert.exact.ofAs<d2NoSchema>()(gqlNo('query q($string: String) { stringWithArgs(string: $string) }'))
-Ts.Assert.exact.ofAs<d2YeSchema>()(gqlYe({ query: { q: { stringWithArgs: { $: { string: $ } } } } }))
-Ts.Assert.exact.ofAs<d2NoSchema>()(gqlNo({ query: { q: { stringWithArgs: { $: { string: $.String() } } } } }))
+Ts.Assert.exact.ofAs<d2YeSchema>().on(gqlYe('query q($string: String) { stringWithArgs(string: $string) }'))
+Ts.Assert.exact.ofAs<d2NoSchema>().on(gqlNo('query q($string: String) { stringWithArgs(string: $string) }'))
+Ts.Assert.exact.ofAs<d2YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { string: $ } } } } }))
+Ts.Assert.exact.ofAs<d2NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { string: $.String() } } } } }))
 
 // Custom scalar variable (Date)
 type d3YeSchema = D<{ name: 'q'; result: { dateArg: Date | null }; variables: { date?: Date | null | undefined } }>
 type d3NoSchema = D<{ name: 'q'; result: { dateArg: unknown }; variables: { date?: unknown } }>
-Ts.Assert.exact.ofAs<d3YeSchema>()(gqlYe('query q($date: Date) { dateArg(date: $date) }'))
-Ts.Assert.exact.ofAs<d3NoSchema>()(gqlNo('query q($date: Date) { dateArg(date: $date) }'))
-Ts.Assert.exact.ofAs<d3YeSchema>()(gqlYe({ query: { q: { dateArg: { $: { date: $ } } } } }))
-Ts.Assert.exact.ofAs<d3NoSchema>()(gqlNo({ query: { q: { dateArg: { $: { date: $ } } } } }))
+Ts.Assert.exact.ofAs<d3YeSchema>().on(gqlYe('query q($date: Date) { dateArg(date: $date) }'))
+Ts.Assert.exact.ofAs<d3NoSchema>().on(gqlNo('query q($date: Date) { dateArg(date: $date) }'))
+Ts.Assert.exact.ofAs<d3YeSchema>().on(gqlYe({ query: { q: { dateArg: { $: { date: $ } } } } }))
+Ts.Assert.exact.ofAs<d3NoSchema>().on(gqlNo({ query: { q: { dateArg: { $: { date: $ } } } } }))
 // special thing -- string documents cannot do this
 type varForce = D<{ name: 'q'; result: { dateArg: unknown }; variables: { date?: string|null } }>
-Ts.Assert.exact.ofAs<varForce>()(gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } }))
+Ts.Assert.exact.ofAs<varForce>().on(gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } }))
 
 // Multiple optional variables
 type d4YeSchema = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined } }>
 type d4NoSchema = D<{ name: 'q'; result: { objectWithArgs: { id: unknown } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined } }>
-Ts.Assert.exact.ofAs<d4YeSchema>()(gqlYe('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
-Ts.Assert.exact.ofAs<d4NoSchema>()(gqlNo('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
-Ts.Assert.exact.ofAs<d4YeSchema>()(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $ }, id: true } } } }))
-Ts.Assert.exact.ofAs<d4NoSchema>()(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String() }, id: true } } } }))
+Ts.Assert.exact.ofAs<d4YeSchema>().on(gqlYe('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
+Ts.Assert.exact.ofAs<d4NoSchema>().on(gqlNo('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
+Ts.Assert.exact.ofAs<d4YeSchema>().on(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $ }, id: true } } } }))
+Ts.Assert.exact.ofAs<d4NoSchema>().on(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String() }, id: true } } } }))
 
 // Boolean variable
 type d5YeSchema = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { boolean?: boolean | null | undefined } }>
 type d5NoSchema = D<{ name: 'q'; result: { stringWithArgs: unknown }; variables: { boolean?: boolean | null | undefined } }>
-Ts.Assert.exact.ofAs<d5YeSchema>()(gqlYe('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
-Ts.Assert.exact.ofAs<d5NoSchema>()(gqlNo('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
-Ts.Assert.exact.ofAs<d5YeSchema>()(gqlYe({ query: { q: { stringWithArgs: { $: { boolean: $ } } } } }))
-Ts.Assert.exact.ofAs<d5NoSchema>()(gqlNo({ query: { q: { stringWithArgs: { $: { boolean: $.Boolean() } } } } }))
+Ts.Assert.exact.ofAs<d5YeSchema>().on(gqlYe('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
+Ts.Assert.exact.ofAs<d5NoSchema>().on(gqlNo('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
+Ts.Assert.exact.ofAs<d5YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { boolean: $ } } } } }))
+Ts.Assert.exact.ofAs<d5NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { boolean: $.Boolean() } } } } }))
 
 // Int variable
 type d6YeSchema = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { int?: number | null | undefined } }>
 type d6NoSchema = D<{ name: 'q'; result: { stringWithArgs: unknown }; variables: { int?: number | null | undefined } }>
-Ts.Assert.exact.ofAs<d6YeSchema>()(gqlYe('query q($int: Int) { stringWithArgs(int: $int) }'))
-Ts.Assert.exact.ofAs<d6NoSchema>()(gqlNo('query q($int: Int) { stringWithArgs(int: $int) }'))
-Ts.Assert.exact.ofAs<d6YeSchema>()(gqlYe({ query: { q: { stringWithArgs: { $: { int: $ } } } } }))
-Ts.Assert.exact.ofAs<d6NoSchema>()(gqlNo({ query: { q: { stringWithArgs: { $: { int: $.Int() } } } } }))
+Ts.Assert.exact.ofAs<d6YeSchema>().on(gqlYe('query q($int: Int) { stringWithArgs(int: $int) }'))
+Ts.Assert.exact.ofAs<d6NoSchema>().on(gqlNo('query q($int: Int) { stringWithArgs(int: $int) }'))
+Ts.Assert.exact.ofAs<d6YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { int: $ } } } } }))
+Ts.Assert.exact.ofAs<d6NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { int: $.Int() } } } } }))
 
 // Multiple optional variables (3 vars)
 type d7YeSchema = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined; int?: number | null | undefined } }>
 type d7NoSchema = D<{ name: 'q'; result: { objectWithArgs: { id: unknown } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined; int?: number | null | undefined } }>
-Ts.Assert.exact.ofAs<d7YeSchema>()(gqlYe('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
-Ts.Assert.exact.ofAs<d7NoSchema>()(gqlNo('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
-Ts.Assert.exact.ofAs<d7YeSchema>()(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $, int: $ }, id: true } } } }))
-Ts.Assert.exact.ofAs<d7NoSchema>()(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String(), int: $.Int() }, id: true } } } }))
+Ts.Assert.exact.ofAs<d7YeSchema>().on(gqlYe('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
+Ts.Assert.exact.ofAs<d7NoSchema>().on(gqlNo('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
+Ts.Assert.exact.ofAs<d7YeSchema>().on(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $, int: $ }, id: true } } } }))
+Ts.Assert.exact.ofAs<d7NoSchema>().on(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String(), int: $.Int() }, id: true } } } }))
 
 // Anonymous query with variable
 type d8YeSchema = D<{ name: 'default'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
 type d8NoSchema = D<{ name: 'default'; result: { stringWithRequiredArg: unknown }; variables: { string: string } }>
-Ts.Assert.exact.ofAs<d8YeSchema>()(gqlYe('query($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d8NoSchema>()(gqlNo('query($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d8YeSchema>()(gqlYe({ query: { default: { stringWithRequiredArg: { $: { string: $ } } } } }))
-Ts.Assert.exact.ofAs<d8NoSchema>()(gqlNo({ query: { default: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
+Ts.Assert.exact.ofAs<d8YeSchema>().on(gqlYe('query($string: String!) { stringWithRequiredArg(string: $string) }'))
+Ts.Assert.exact.ofAs<d8NoSchema>().on(gqlNo('query($string: String!) { stringWithRequiredArg(string: $string) }'))
+Ts.Assert.exact.ofAs<d8YeSchema>().on(gqlYe({ query: { default: { stringWithRequiredArg: { $: { string: $ } } } } }))
+Ts.Assert.exact.ofAs<d8NoSchema>().on(gqlNo({ query: { default: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
 
 // Variable with nested selection (interfaceWithArgs id is required in schema)
 type d9YeSchema = D<{ name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 type d9NoSchema = D<{ name: 'q'; result: { interfaceWithArgs: { id: unknown } | null }; variables: { id: string } }>
-Ts.Assert.exact.ofAs<d9YeSchema>()(gqlYe('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
-Ts.Assert.exact.ofAs<d9NoSchema>()(gqlNo('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
-Ts.Assert.exact.ofAs<d9YeSchema>()(gqlYe({ query: { q: { interfaceWithArgs: { $: { id: $ }, id: true } } } }))
-Ts.Assert.exact.ofAs<d9NoSchema>()(gqlNo({ query: { q: { interfaceWithArgs: { $: { id: $.ID().required() }, id: true } } } }))
+Ts.Assert.exact.ofAs<d9YeSchema>().on(gqlYe('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
+Ts.Assert.exact.ofAs<d9NoSchema>().on(gqlNo('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
+Ts.Assert.exact.ofAs<d9YeSchema>().on(gqlYe({ query: { q: { interfaceWithArgs: { $: { id: $ }, id: true } } } }))
+Ts.Assert.exact.ofAs<d9NoSchema>().on(gqlNo({ query: { q: { interfaceWithArgs: { $: { id: $.ID().required() }, id: true } } } }))
 
 // Enum argument with $ prefix
 type d10YeSchema = D<{ name: 'q'; result: { stringWithArgEnum: string | null }; variables: { ABCEnum?: 'A' | 'B' | 'C' | null | undefined } }>
-Ts.Assert.exact.ofAs<d10YeSchema>()(gqlYe({ query: { q: { stringWithArgEnum: { $: { $ABCEnum: $ } } } } }))
+Ts.Assert.exact.ofAs<d10YeSchema>().on(gqlYe({ query: { q: { stringWithArgEnum: { $: { $ABCEnum: $ } } } } }))
 
 // ==================================================================================================
 //                                           Error cases
