@@ -1,0 +1,75 @@
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    hp
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($name: String!) {
+  pokemonByName(name: $name) {
+    name
+    type
+    trainer {
+      name
+      class
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    hp
+  }
+  trainers {
+    name
+    class
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($name: String!, $name_2: String!) {
+  pokemonByName(name: $name) {
+    name
+    type
+    attack
+  }
+  trainerByName(name: $name_2) {
+    name
+    pokemon {
+      name
+    }
+  }
+  pokemons {
+    name
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+mutation ($name: String!, $type: PokemonType!, $hp: Int, $attack: Int, $defense: Int) {
+  addPokemon(
+    name: $name
+    type: $type
+    hp: $hp
+    attack: $attack
+    defense: $defense
+  ) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+mutation ($name: String!, $type: PokemonType!, $hp: Int, $attack: Int, $defense: Int, $name_2: String!, $class: String!) {
+  addPokemon(
+    name: $name
+    type: $type
+    hp: $hp
+    attack: $attack
+    defense: $defense
+  ) {
+    name
+  }
+  addTrainer(name: $name_2, class: $class) {
+    name
+    class
+  }
+}

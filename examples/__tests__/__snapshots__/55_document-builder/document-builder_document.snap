@@ -1,0 +1,31 @@
+---------------------------------------- SHOW ----------------------------------------
+{
+  "trainers": [
+    {
+      "name": "Ash"
+    },
+    {
+      "name": "Misty"
+    },
+    {
+      "name": "Brock"
+    },
+    {
+      "name": "Gary"
+    }
+  ],
+  "pokemons": [
+    {
+      "name": "Pikachu",
+      "trainer": {
+        "name": "Ash"
+      }
+    },
+    {
+      "name": "Charizard",
+      "trainer": {
+        "name": "Ash"
+      }
+    }
+  ]
+}

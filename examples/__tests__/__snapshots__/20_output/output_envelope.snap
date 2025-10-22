@@ -1,0 +1,30 @@
+---------------------------------------- SHOW ----------------------------------------
+{
+  data: {
+    pokemons: [
+      { name: 'Pikachu' },
+      { name: 'Charizard' },
+      { name: 'Squirtle' },
+      { name: 'Bulbasaur' },
+      { name: 'Caterpie' },
+      { name: 'Weedle' }
+    ]
+  },
+  response: Response {
+    status: 200,
+    statusText: 'OK',
+    headers: Headers {
+      'content-type': 'application/graphql-response+json; charset=utf-8',
+      'content-length': '142',
+      date: 'DYNAMIC_DATE',
+      connection: 'keep-alive',
+      'keep-alive': 'timeout=5'
+    },
+    body: ReadableStream { locked: true, state: 'closed', supportsBYOB: true },
+    bodyUsed: true,
+    ok: true,
+    redirected: false,
+    type: 'basic',
+    url: 'http://localhost:3000/graphql'
+  }
+}

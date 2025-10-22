@@ -48,6 +48,8 @@ export const defaultEncoder: EncoderFunction = (value: string) => {
     )
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
     .replace(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
+    // Mask HTTP date headers - common across HTTP examples
+    .replace(/date: '[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]{2} \d{4} \d{2}:\d{2}:\d{2} GMT'/gi, `date: 'DYNAMIC_DATE'`)
 }
 
 /**

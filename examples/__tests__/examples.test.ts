@@ -9,6 +9,16 @@ const encoders = {
   './10_transport-http/transport-http_extension_headers__dynamicHeaders.ts': (value: string) => {
     return value.replace(/'x-sent-at-time', '\d+'/gi, `'x-sent-at-time', 'DYNAMIC_VALUE'`)
   },
+  './60_extension/extension_opentelemetry__opentelemetry.ts': (value: string) => {
+    return value
+      .replaceAll(/(id: )'.+'/g, `$1'...'`)
+      .replaceAll(/(traceId: )'.+'/g, `$1'...'`)
+      .replaceAll(/(parentId: )'.+'/g, `$1'...'`)
+      .replaceAll(/(timestamp: ).+,/g, `$10,`)
+      .replaceAll(/(duration: ).+,/g, `$10.0,`)
+      .replaceAll(/(service\.name': )'.+'/g, `$1'...'`)
+      .replaceAll(/('telemetry\.sdk\.version': )'.+'/g, `$1'...'`)
+  },
 } satisfies Partial<Record<ExamplePath, EncoderFunction>>
 
 createExamplesTest(test, {

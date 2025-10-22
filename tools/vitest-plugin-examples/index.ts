@@ -81,8 +81,8 @@ export const createExamplesTest = (
       expect(results.length).toBeGreaterThan(0)
 
       for (const result of results) {
-        const snapshotName = `${result.file.group}/${result.file.name}`
-        expect(result.encoded).toMatchSnapshot(snapshotName)
+        const snapshotPath = `./__snapshots__/${result.file.group}/${result.file.name}.snap`
+        await expect(result.encoded).toMatchFileSnapshot(snapshotPath)
       }
     },
     timeout,
