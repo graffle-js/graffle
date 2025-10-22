@@ -40,6 +40,9 @@ jobs:
       - name: Install Examples Dependencies
         working-directory: examples
         run: pnpm install
+      - name: Generate test types
+        working-directory: examples
+        run: pnpm gen:types
       - run: pnpm check:types
         working-directory: examples
   # While we do not deploy website for PRs we still want to know that it can be built.

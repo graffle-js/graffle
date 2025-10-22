@@ -6,7 +6,8 @@
     "test": "vitest --config vitest.config.ts",
     "check:types": "tsc --noEmit",
     "gen": "pnpm gen:graffle",
-    "gen:graffle": "rm -rf ./$/graffle && pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql --output ./$/graffle"
+    "gen:graffle": "rm -rf ./$/graffle && pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql --output ./$/graffle",
+    "gen:types": "vitest --run --bail=1 --testNamePattern '^---NO-TESTS-MATCH-THIS---$' || true"
   },
   "dependencies": {
     "@opentelemetry/sdk-trace-base": "^1.30.0",
