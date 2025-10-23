@@ -2,7 +2,7 @@
  * Single-pass GraphQL string parser exports
  */
 
-import type { Simplify } from 'type-fest'
+import type { Ts } from '@wollybeard/kit'
 import type { Doc } from '../$$.js'
 import type { ParseDocument } from './parser.js'
 
@@ -24,7 +24,7 @@ export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSe
  * // Returns: Operation<'default', { id: string }, {}> (raw operation, no Document wrapper)
  * ```
  */
-export type Parse<$Input extends string, $Schema> = Simplify<
+export type Parse<$Input extends string, $Schema> = Ts.Simplify.Shallow<
   getDocumentOperations<
     parseDocument<$Input>['definitions'],
     $Schema

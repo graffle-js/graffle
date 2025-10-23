@@ -109,7 +109,7 @@
     "@0no-co/graphql.web": "^1.0.12",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
-    "@wollybeard/kit": "^0.84.0",
+    "@wollybeard/kit": "^0.84.1",
     "es-toolkit": "^1.35.0",
     "is-plain-obj": "^4.1.0",
     "type-fest": "^4.40.0"
@@ -138,6 +138,7 @@
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.15.0",
     "@arethetypeswrong/cli": "^0.17.4",
+    "@ark/attest": "^0.51.0",
     "@dprint/formatter": "^0.4.1",
     "@dprint/typescript": "^0.95.11",
     "@effect/platform": "^0.92.1",
