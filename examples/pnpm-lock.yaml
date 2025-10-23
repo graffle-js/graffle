@@ -686,14 +686,14 @@ packages:
     resolution: {integrity: sha512-gUqYAZwVQjmjbM+xnyZNHnpMyXIvDN5nIzifWY9RKJ9XEmPVJg8Nql5zMXXPbr1MekMZzBvqvCgMeoDV53dX2g==}
     engines: {node: '>=22'}
 
-  '@wollybeard/kit@0.83.0':
-    resolution: {integrity: sha512-0FK3iEVJKbcGH4rBpqdPDJ4qGC5Ek2yTJ3ykHWGJo8aXsqgA1zb8ejvdZe1U60ZLz6GoI7uEW8p7EhXrRgT/rw==}
+  '@wollybeard/kit@0.84.0':
+    resolution: {integrity: sha512-QTshqYV2zTrf8UN2i2OPIwL/ywPol/Oaau/dQqcZ7QkQUWA3U/qi5D4aV8gep6QpLxa+ZyEM1UnZJQUAZrQ0Fw==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
-  '@wollybeard/kit@0.84.0':
-    resolution: {integrity: sha512-QTshqYV2zTrf8UN2i2OPIwL/ywPol/Oaau/dQqcZ7QkQUWA3U/qi5D4aV8gep6QpLxa+ZyEM1UnZJQUAZrQ0Fw==}
+  '@wollybeard/kit@0.85.1':
+    resolution: {integrity: sha512-RyiSHINuYvGvTlR8wYfh/wicRFXi6AG1836koUHCs2Eqz3F2J3vRDe6PWq0IVh/CrqkN/7QAquxXR2xqKRWOWw==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1648,7 +1648,7 @@ snapshots:
       '@vltpkg/semver': 0.0.0-30
       '@vltpkg/spec': 0.0.0-30
 
-  '@wollybeard/kit@0.83.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.84.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@types/node': 24.9.1
@@ -1664,9 +1664,10 @@ snapshots:
       pathe: 2.0.3
       pluralize-esm: 9.0.5
       tinyglobby: 0.2.15
+      ts-morph: 27.0.2
       type-fest: 5.1.0
 
-  '@wollybeard/kit@0.84.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.85.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@types/node': 24.9.1
@@ -1817,7 +1818,7 @@ snapshots:
       '@0no-co/graphql.web': 1.2.0(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.83.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+      '@wollybeard/kit': 0.85.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.40.0
       graphql: 16.11.0
       is-plain-obj: 4.1.0
