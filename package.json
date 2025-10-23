@@ -85,6 +85,7 @@
     "test:integration": "vitest --dir tests/integration",
     "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",
     "test": "vitest",
+    "bench": "tsx scripts/bench.ts",
     "test:web": "vitest --environment jsdom",
     "test:types": "vitest --typecheck --dir src  --testNamePattern .*.test-d.ts",
     "test:coverage": "pnpm test -- --coverage",
