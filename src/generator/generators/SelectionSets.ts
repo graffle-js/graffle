@@ -700,7 +700,7 @@ const renderOutputFieldForFields = (
       const optional = Grafaid.Schema.isNullableType(arg.type) ? '?' : ''
       const value = renderArgumentType(arg.type)
       code(`    ${doc}`)
-      code(`    ${key}${optional}: ${value}`)
+      code(`    readonly ${key}${optional}: ${value}`)
     }
     code(`  }`)
     code()
@@ -745,6 +745,7 @@ const renderFieldPropertyArguments = (
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
     return Code.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
+      readonly: true,
       tsDoc,
     })
   }

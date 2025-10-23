@@ -1,5 +1,4 @@
-import type { Fn } from '@wollybeard/kit'
-import type { Simplify } from 'type-fest'
+import type { Fn, Ts } from '@wollybeard/kit'
 import type { Objekt } from '../prelude.js'
 import type { Step } from './Step.js'
 
@@ -32,7 +31,7 @@ export namespace StepTrigger {
     extends StepTrigger.Properties<$Step['input']>
   {
      (
-      parameters?: Simplify<
+      parameters?: Ts.Simplify.Top<
         & {
             input?: $Step['input']
           }

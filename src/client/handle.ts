@@ -12,9 +12,8 @@ import {
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
 import { type ExcludeNullAndUndefined } from '#src/lib/prelude.js'
-import type { Null, Obj, Undefined } from '@wollybeard/kit'
+import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
-import type { Simplify } from 'type-fest'
 import type { RequestPipeline } from '../requestPipeline/$.js'
 import type { RequestResult } from '../types/RequestResult/$.js'
 
@@ -171,7 +170,7 @@ export type Envelope<
   $Data = unknown,
   $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>,
 > =
-  Simplify<
+  Ts.Simplify.Top<
     & {
       data?: $Data | null
         extensions?: ObjMap

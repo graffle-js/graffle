@@ -55,7 +55,7 @@ type ParseOperations<
   $Input extends string,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-> = $Input extends '' ? Ts.Simplify<$Result>
+> = $Input extends '' ? Ts.Simplify.Top<$Result>
   : ParseSingleOperation<$Input, $Schema> extends infer $OpResult
     ? $OpResult extends { operation: infer $Op; rest: infer $Rest }
       ? ParseOperations<SkipIgnored<$Rest & string>, $Schema, $Result & $Op>
@@ -237,7 +237,7 @@ type ParseVariablesRec<
   $Result extends Record<string, any>,
 > =
   // Check for closing paren
-  $Input extends `)${infer $Rest}` ? { variables: Ts.Simplify<$Result>; rest: $Rest }
+  $Input extends `)${infer $Rest}` ? { variables: Ts.Simplify.Top<$Result>; rest: $Rest }
     // Parse next variable
     : $Input extends `$${infer $VarNameRest}`
       ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
@@ -324,10 +324,10 @@ type ParseFieldsInSelectionSet<
   $ParentType extends OutputObject | Interface,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-  $Depth extends number,
+  $Depth extends Num.Literal,
 > =
   // Check for closing brace
-  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Ts.Simplify<$Result>; rest: $Rest } // End - simplify result
+  $Input extends `}${infer $Rest}` ? $Depth extends 1 ? { result: Ts.Simplify.Top<$Result>; rest: $Rest } // End - simplify result
     : ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, $Result, Num.MinusOne<$Depth>>
     // Parse next field
     : TakeName<$Input> extends { name: infer $FieldName; rest: infer $Rest } ? ParseFieldByName<
@@ -353,7 +353,7 @@ type ParseFieldByName<
   $ParentType extends OutputObject | Interface,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-  $Depth extends number,
+  $Depth extends Num.Literal,
 > = $FieldName extends keyof $ParentType['fields'] ? ParseFieldAfterName<
     $FieldName,
     $Input,
@@ -385,7 +385,7 @@ type ParseFieldAfterName<
   $ParentType extends OutputObject | Interface,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-  $Depth extends number,
+  $Depth extends Num.Literal,
 > =
   // Check for arguments
   $Input extends `(${infer _}`
@@ -422,7 +422,7 @@ type ParseFieldAfterArguments<
   $ParentType extends OutputObject | Interface,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-  $Depth extends number,
+  $Depth extends Num.Literal,
 > =
   // Check for nested selection
   $Input extends `{${infer _}`
@@ -447,7 +447,7 @@ type ParseFieldWithNestedSelection<
   $ParentType extends OutputObject | Interface,
   $Schema extends Schema | undefined,
   $Result extends Record<string, any>,
-  $Depth extends number,
+  $Depth extends Num.Literal,
 > = $Field['namedType'] extends OutputObject | Interface
   ? ParseSelectionSet<$Input, $Field['namedType'], $Schema> extends { result: infer $NestedResult; rest: infer $Rest }
     ? ParseFieldsInSelectionSet<
@@ -519,7 +519,7 @@ type TakeNameRest<$Acc extends string, $Input extends string> = $Input extends `
 /**
  * Skip until closing parenthesis, tracking depth
  */
-type SkipUntilCloseParen<$Input extends string, $Depth extends number> = $Input extends `(${infer $Rest}`
+type SkipUntilCloseParen<$Input extends string, $Depth extends Num.Literal> = $Input extends `(${infer $Rest}`
   ? $Depth extends 0 ? SkipUntilCloseParen<$Rest, 1>
   : SkipUntilCloseParen<$Rest, Num.PlusOne<$Depth>>
   : $Input extends `)${infer $Rest}` ? $Depth extends 1 ? { rest: $Rest }

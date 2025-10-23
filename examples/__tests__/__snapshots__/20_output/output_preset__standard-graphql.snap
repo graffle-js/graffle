@@ -10,7 +10,13 @@
   response: Response {
     status: 400,
     statusText: 'Bad Request',
-    headers: DYNAMIC_VALUE,
+    headers: Headers {
+      'content-type': 'application/graphql-response+json; charset=utf-8',
+      'content-length': '160',
+      date: 'DYNAMIC_DATE',
+      connection: 'keep-alive',
+      'keep-alive': 'timeout=5'
+    },
     body: ReadableStream { locked: true, state: 'closed', supportsBYOB: true },
     bodyUsed: true,
     ok: false,

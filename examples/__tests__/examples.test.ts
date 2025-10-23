@@ -1,28 +1,38 @@
-import { FsLoc } from '@wollybeard/kit'
-import { S } from '@wollybeard/kit/sch'
+import type { ExamplePath } from '@generated/test-examples'
 import { Graffle } from 'graffle'
-import { beforeEach, describe, expect, test } from 'vitest'
-import { runExampleForTest } from '../../scripts/generate-examples-derivatives/helpers.js'
-import { examplePaths } from './paths.generated.js'
+import { test } from 'vitest'
+import type { EncoderFunction } from '../../tools/vitest-plugin-examples/index.js'
+import { createExamplesTest } from '../../tools/vitest-plugin-examples/index.js'
 
-const toString = S.encodeSync(FsLoc.FsLoc)
+// Type-safe encoder configuration with autocomplete
+const encoders = {
+  './10_transport-http/transport-http_extension_headers__dynamicHeaders.ts': (value: string) => {
+    return value.replace(/'x-sent-at-time', '\d+'/gi, `'x-sent-at-time', 'DYNAMIC_VALUE'`)
+  },
+  './60_extension/extension_opentelemetry__opentelemetry.ts': (value: string) => {
+    return value
+      .replaceAll(/(id: )'.+'/g, `$1'...'`)
+      .replaceAll(/(traceId: )'.+'/g, `$1'...'`)
+      .replaceAll(/(parentId: )'.+'/g, `$1'...'`)
+      .replaceAll(/(timestamp: ).+,/g, `$10,`)
+      .replaceAll(/(duration: ).+,/g, `$10.0,`)
+      .replaceAll(/(service\.name': )'.+'/g, `$1'...'`)
+      .replaceAll(/('telemetry\.sdk\.version': )'.+'/g, `$1'...'`)
+  },
+} satisfies Partial<Record<ExamplePath, EncoderFunction>>
 
-describe('examples', () => {
-  // Reset database before each example to ensure consistent state
-  beforeEach(async () => {
-    const pokemonServerUrl = process.env['POKEMON_SCHEMA_URL'] || 'http://localhost:3000/graphql'
-    const graffle = Graffle.create({ schema: { name: 'none' } }).transport({ url: pokemonServerUrl })
-    await graffle.gql('mutation { resetData }').$send()
-  })
-
-  test.for(examplePaths)('%s', async (loc) => {
-    const exampleResult = await runExampleForTest(toString(loc))
-
-    // Build snapshot path using FsLoc
-    const dir = FsLoc.toDir(loc)
-    const filename = FsLoc.stem(loc)
-    const snapshotPath = toString(FsLoc.fromString(`./__snapshots__/${dir}/${filename}.snap`))
-
-    await expect(exampleResult).toMatchFileSnapshot(snapshotPath)
-  })
+createExamplesTest(test, {
+  timeout: 300000,
+  config: {
+    pattern: './*/*.ts',
+    outputDir: './__outputs__',
+    ignore: ['./$', './__outputs__', './__tests__'],
+    encoders,
+    beforeEach: async () => {
+      // Reset database before each example to ensure consistent state
+      const pokemonServerUrl = process.env['POKEMON_SCHEMA_URL'] || 'http://localhost:3000/graphql'
+      const graffle = Graffle.create({ schema: { name: 'none' } }).transport({ url: pokemonServerUrl })
+      await graffle.gql('mutation { resetData }').$send()
+    },
+  },
 })

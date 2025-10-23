@@ -16,7 +16,7 @@ export namespace id {
     /**
      * Arguments for `id` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -32,7 +32,7 @@ export namespace id {
      * | **Path** | `ObjectNestedWithArgs.id(filter)` |
      * | **Nullability** | Optional |
      */
-    filter?: $Scalars.ID<_$Context>
+    readonly filter?: $Scalars.ID<_$Context>
   }
 
   /**
@@ -60,7 +60,7 @@ namespace $object {
     /**
      * Arguments for `object` field. No arguments are required so you may omit this.
      */
-    $?: $Arguments<_$Context>
+    readonly $?: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -76,7 +76,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(boolean)` |
      * | **Nullability** | Optional |
      */
-    boolean?: $Scalars.Boolean<_$Context>
+    readonly boolean?: $Scalars.Boolean<_$Context>
     /**
      * # Info
      *
@@ -87,7 +87,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(float)` |
      * | **Nullability** | Optional |
      */
-    float?: $Scalars.Float<_$Context>
+    readonly float?: $Scalars.Float<_$Context>
     /**
      * # Info
      *
@@ -98,7 +98,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(int)` |
      * | **Nullability** | Optional |
      */
-    int?: $Scalars.Int<_$Context>
+    readonly int?: $Scalars.Int<_$Context>
     /**
      * # Info
      *
@@ -109,7 +109,7 @@ namespace $object {
      * | **Path** | `ObjectNestedWithArgs.object(string)` |
      * | **Nullability** | Optional |
      */
-    string?: $Scalars.String<_$Context>
+    readonly string?: $Scalars.String<_$Context>
   }
 
   /**

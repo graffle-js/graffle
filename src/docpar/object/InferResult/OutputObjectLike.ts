@@ -90,7 +90,7 @@ type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
           : $SelectionSet[$Key] extends Select.Indicator.Negative
             ? never
             // We handle aliases elsewhere (arrays and strings)
-            : $SelectionSet[$Key] extends any[]
+            : $SelectionSet[$Key] extends readonly any[]
               ? never
             : $SelectionSet[$Key] extends string
               ? never
@@ -143,7 +143,7 @@ export namespace Errors {
   export type UnknownKey<
     $Key extends PropertyKey,
     $Object extends Schema.OutputObjectLike,
-  > = Ts.StaticError<
+  > = Ts.Err.StaticError<
     `field "${Obj.PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
     { location: 'Object' }
   >
@@ -183,7 +183,7 @@ export type IsFieldKey<$Key extends PropertyKey> =
 //
 //
 // dprint-ignore
-type _ = Ts.Test.Cases<
-  Ts.Test.exact<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
-  Ts.Test.exact<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
+type _ = Ts.Assert.Cases<
+  Ts.Assert.exact<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
+  Ts.Assert.exact<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
 >

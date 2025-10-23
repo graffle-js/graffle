@@ -72,7 +72,7 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
    * @internal
    * @see {@link Ts.Variance.Co} for details on covariance
    */
-  readonly __type?: Ts.Variance.Co<$Type>
+  readonly __type?: Ts.VariancePhantom.Co<$Type>
 
   /**
    * Specify a custom name for the GraphQL variable.
@@ -234,7 +234,7 @@ export interface BuilderTyped<$GraphQLType extends string, $State extends Builde
    * Phantom property to enforce covariant type parameter checking.
    * @internal
    */
-  readonly __type?: Ts.Variance.Co<unknown>
+  readonly __type?: Ts.VariancePhantom.Co<unknown>
 
   // Override methods to preserve BuilderTyped after chaining
   readonly name: <$name extends string>(

@@ -6,7 +6,8 @@
     "test": "vitest --config vitest.config.ts",
     "check:types": "tsc --noEmit",
     "gen": "pnpm gen:graffle",
-    "gen:graffle": "rm -rf ./$/graffle && pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql --output ./$/graffle"
+    "gen:graffle": "rm -rf ./$/graffle && pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql --output ./$/graffle",
+    "gen:types": "vitest --run --bail=1 --testNamePattern '^---NO-TESTS-MATCH-THIS---$' || true"
   },
   "dependencies": {
     "@opentelemetry/sdk-trace-base": "^1.30.0",
@@ -20,7 +21,7 @@
     "@effect/platform-node": "^0.98.3",
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5",
-    "@wollybeard/kit": "^0.71.0",
+    "@wollybeard/kit": "^0.84.0",
     "effect": "^3.18.4",
     "graffle": "file:..",
     "tsx": "^4.19.3",

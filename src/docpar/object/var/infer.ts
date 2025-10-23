@@ -8,7 +8,8 @@
 
 import type { Grafaid } from '#src/lib/grafaid/$.js'
 import type { PropertySignature } from '#src/lib/prelude.js'
-import type { Simplify, UnionToIntersection } from 'type-fest'
+import type { Ts } from '@wollybeard/kit'
+import type { UnionToIntersection } from 'type-fest'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Select } from '../Select/$.js'
 import type { ExtractFromOperation } from './extract.js'
@@ -80,7 +81,7 @@ export type InferFromOperationSchemaLess<
       ? PropertySignature.ToProperty<___$ExtractedPropSigs>
       : {}
 > =
-Simplify<UnionToIntersection<___$ExtractedProps>>
+Ts.Simplify.Top<UnionToIntersection<___$ExtractedProps>>
 
 /**
  * Core inferer that takes an operation map directly.
@@ -99,4 +100,4 @@ export type InferFromOperationMap<
       : {}
 > =
 // ___$ExtractedPropSigs
-Simplify<UnionToIntersection<___$ExtractedProps>>
+Ts.Simplify.Top<UnionToIntersection<___$ExtractedProps>>

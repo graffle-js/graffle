@@ -1,5 +1,4 @@
-import type { Prom } from '@wollybeard/kit'
-import type { Simplify } from 'type-fest'
+import type { Prom, Ts } from '@wollybeard/kit'
 import type { Pipeline } from '../$$.js'
 import type { ResultSuccess } from '../Result.js'
 import type { Step } from '../Step.js'
@@ -16,7 +15,7 @@ export namespace Interceptor {
     $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (stepTriggers: Simplify<InferStepTriggerParameters<$Pipeline>>):
+    (stepTriggers: Ts.Simplify.Top<InferStepTriggerParameters<$Pipeline>>):
       Promise<
         | $Pipeline['output']
         | StepTriggerEnvelope

@@ -15,28 +15,28 @@ type CEmpty = ContextEmpty
 
 type _1 = Simplify<CEmpty, { x: Date | null }>
 // @ts-expect-error
-Ts.Test.exact<_1, { x: Date | null }>()
+Ts.Assert.exact<_1, { x: Date | null }>()
 // type _2 = Simplify<CExt                     , {x:Text|null}>
-// Ts.Test.exact<_2									            , {x:Text|null}>()
+// Ts.Assert.exact<_2									            , {x:Text|null}>()
 
 type CScalar = Add<ContextEmpty, DateScalar>
 type _3 = Simplify<CScalar, { x: Date | null }>
 
 // dprint-ignore
-type _ = Ts.Test.Cases<
-  Ts.Test.exact<_3									            , {x:Date|null}>,
-  Ts.Test.exact<SimplifyWithEmptyContext<{x:1|null}>									            , {x:1|null}>,
-  Ts.Test.exact<SimplifyWithEmptyContext<null | {x:1}>									          , null | {x:1}>,
-  Ts.Test.exact<SimplifyWithEmptyContext<null | {x?:1}>									          , null | {x?:1}>,
-  Ts.Test.exact<SimplifyWithEmptyContext<null | {x?:1|null}>									    , null | {x?:1|null}>,
+type _ = Ts.Assert.Cases<
+  Ts.Assert.exact<_3									            , {x:Date|null}>,
+  Ts.Assert.exact<SimplifyWithEmptyContext<{x:1|null}>									            , {x:1|null}>,
+  Ts.Assert.exact<SimplifyWithEmptyContext<null | {x:1}>									          , null | {x:1}>,
+  Ts.Assert.exact<SimplifyWithEmptyContext<null | {x?:1}>									          , null | {x?:1}>,
+  Ts.Assert.exact<SimplifyWithEmptyContext<null | {x?:1|null}>									    , null | {x?:1|null}>,
 
-  Ts.Test.exact<_SimplifyExcept<Date, null | Date>								, null | Date>,
-  Ts.Test.exact<_SimplifyExcept<Date, {}>									        , {}>,
-  Ts.Test.exact<_SimplifyExcept<Date, { a: Date }>				        , { a: Date }>,
-  Ts.Test.exact<_SimplifyExcept<Date, { a: 1 }>						        , { a: 1 }>,
-  Ts.Test.exact<_SimplifyExcept<Date, { a: { b: Date } }>         , { a: { b: Date } }>,
-  Ts.Test.exact<_SimplifyExcept<Date, { a: { b: Date } }> 				, { a: { b: Date } }>,
-  Ts.Test.exact<_SimplifyExcept<Date, { a: null | { b: Date } }> 	, { a: null | { b: Date } }>
+  Ts.Assert.exact<_SimplifyExcept<Date, null | Date>								, null | Date>,
+  Ts.Assert.exact<_SimplifyExcept<Date, {}>									        , {}>,
+  Ts.Assert.exact<_SimplifyExcept<Date, { a: Date }>				        , { a: Date }>,
+  Ts.Assert.exact<_SimplifyExcept<Date, { a: 1 }>						        , { a: 1 }>,
+  Ts.Assert.exact<_SimplifyExcept<Date, { a: { b: Date } }>         , { a: { b: Date } }>,
+  Ts.Assert.exact<_SimplifyExcept<Date, { a: { b: Date } }> 				, { a: { b: Date } }>,
+  Ts.Assert.exact<_SimplifyExcept<Date, { a: null | { b: Date } }> 	, { a: null | { b: Date } }>
 >
 // type _4 = Simplify<CExtAndScalar            , {x:Date|Text|null}>
-// Ts.Test.exact<_4									            , {x:Date|Text|null}>()
+// Ts.Assert.exact<_4									            , {x:Date|Text|null}>()

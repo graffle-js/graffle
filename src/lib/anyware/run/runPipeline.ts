@@ -1,4 +1,4 @@
-import { Debug, Lang, Prom } from '@wollybeard/kit'
+import { Lang, Log, Prom } from '@wollybeard/kit'
 import type { Errors } from '../../errors/$.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
@@ -9,7 +9,8 @@ import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 import { runStep } from './runStep.js'
 
-const debug = Debug.create('anyware:pipeline')
+// 'anyware:pipeline'
+const debug = Log.create({})
 
 export const defaultFunctionName = `anonymous`
 
@@ -33,13 +34,13 @@ export const runPipeline = async (
   const [stepToProcess, ...stepsRestToProcess] = stepsToProcess
 
   if (!stepToProcess) {
-    debug(`pipeline: ending`)
+    debug.trace(`pipeline: ending`)
     const result = await runPipelineEnd({ interceptorsStack, result: originalInputOrResult })
-    debug(`pipeline: returning`)
+    debug.trace(`pipeline: returning`)
     return createResultEnvelope(result)
   }
 
-  debug(`hook ${stepToProcess.name}: start`)
+  debug.trace(`hook ${stepToProcess.name}: start`)
 
   const done = Prom.createDeferred<StepResult>({ strict: false })
 
@@ -80,12 +81,12 @@ export const runPipeline = async (
       })
     }
     case `shortCircuited`: {
-      debug(`signal: shortCircuited`)
+      debug.trace(`signal: shortCircuited`)
       const { result } = signal
       return createResultEnvelope(result)
     }
     case `error`: {
-      debug(`signal: error`)
+      debug.trace(`signal: error`)
       signal
 
       if (pipeline.config.passthroughErrorWith?.(signal)) {
@@ -137,7 +138,7 @@ const runPipelineEnd = async ({
   const [interceptor, ...interceptorsRest] = interceptorsStack
   if (!interceptor) return result
 
-  debug(`interceptor ${interceptor.name}: end`)
+  debug.trace(`interceptor ${interceptor.name}: end`)
   interceptor.currentChunk.resolve(result as any)
   const nextResult = await interceptor.body.promise
   return await runPipelineEnd({

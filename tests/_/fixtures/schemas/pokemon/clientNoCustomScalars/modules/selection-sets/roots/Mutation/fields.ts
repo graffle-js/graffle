@@ -13,7 +13,7 @@ export namespace addPokemon {
     /**
      * Arguments for `addPokemon` field. Some (2/5) arguments are required so you must include this.
      */
-    $: $Arguments<_$Context>
+    readonly $: $Arguments<_$Context>
   }
 
   export interface $Arguments<
@@ -29,7 +29,7 @@ export namespace addPokemon {
      * | **Path** | `Mutation.addPokemon(attack)` |
      * | **Nullability** | Optional |
      */
-    attack?: $Scalars.Int<_$Context>
+    readonly attack?: $Scalars.Int<_$Context>
     /**
      * # Info
      *
@@ -40,7 +40,7 @@ export namespace addPokemon {
      * | **Path** | `Mutation.addPokemon(defense)` |
      * | **Nullability** | Optional |
      */
-    defense?: $Scalars.Int<_$Context>
+    readonly defense?: $Scalars.Int<_$Context>
     /**
      * # Info
      *
@@ -51,7 +51,7 @@ export namespace addPokemon {
      * | **Path** | `Mutation.addPokemon(hp)` |
      * | **Nullability** | Optional |
      */
-    hp?: $Scalars.Int<_$Context>
+    readonly hp?: $Scalars.Int<_$Context>
     /**
      * # Info
      *
@@ -62,7 +62,7 @@ export namespace addPokemon {
      * | **Path** | `Mutation.addPokemon(name)` |
      * | **Nullability** | Required |
      */
-    name: $Scalars.String$NonNull<_$Context>
+    readonly name: $Scalars.String$NonNull<_$Context>
     /**
      * # Info
      *
@@ -73,7 +73,7 @@ export namespace addPokemon {
      * | **Path** | `Mutation.addPokemon(type)` |
      * | **Nullability** | Required |
      */
-    $type: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonType>
+    readonly $type: $$Utilities.Docpar.Object.Var.MaybeSchemaful<$Named.PokemonType>
   }
 
   /**

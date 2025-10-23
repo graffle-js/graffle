@@ -17,7 +17,7 @@ test(`requires input`, () => {
 test(`gql with one query`, async () => {
   const sender = g.gql({ query: { foo: { id: true } } })
   const result = await sender.$send()
-  Ts.Test.bid<null | { id: string | null }>()(result)
+  Ts.Assert.sub.ofAs<null | { id: string | null }>().on(result)
 })
 
 test(`gql with two queries`, async () => {
@@ -27,9 +27,9 @@ test(`gql with two queries`, async () => {
       bar: { date: true },
     },
   })
-  Ts.Test.parameters<['foo' | 'bar']>()(sender.$send)
+  Ts.Assert.parameters.sub.ofAs<['foo' | 'bar']>().on(sender.$send)
   const result = await sender.$send(`foo`)
-  Ts.Test.bid<null | { id: string | null }>()(result)
+  Ts.Assert.sub.ofAs<null | { id: string | null }>().on(result)
 })
 
 test(`gql with two queries of different root types`, async () => {
@@ -41,9 +41,9 @@ test(`gql with two queries of different root types`, async () => {
       bar: { idNonNull: true },
     },
   })
-  Ts.Test.parameters<['foo' | 'bar']>()(sender.$send)
+  Ts.Assert.parameters.sub.ofAs<['foo' | 'bar']>().on(sender.$send)
   const result = await sender.$send(`foo`)
-  Ts.Test.bid<null | { id: string | null }>()(result)
+  Ts.Assert.sub.ofAs<null | { id: string | null }>().on(result)
 })
 
 test.skip(`root operation not available if it is not in schema`, () => {

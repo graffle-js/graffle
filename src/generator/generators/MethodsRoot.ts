@@ -464,7 +464,7 @@ const normalizeMethodNames = (
 /**
  * Check if a field name matches a grouping rule's pattern.
  */
-const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
+export const matchesRule = (fieldName: string, rule: FieldGroupingRule): boolean => {
   if (typeof rule.pattern === 'string') {
     return fieldName === rule.pattern
   }
@@ -580,7 +580,7 @@ const expandAliases = (
 /**
  * Check rules for potential precedence issues where later rules might be shadowed by earlier ones.
  */
-const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
+export const checkRulePrecedence = (rules: FieldGroupingRule[]): void => {
   const warnings: string[] = []
 
   for (let i = 0; i < rules.length; i++) {

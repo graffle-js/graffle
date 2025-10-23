@@ -1,5 +1,4 @@
-import { Fs } from '@wollybeard/kit'
-import { Effect } from 'effect'
+import { globby } from 'globby'
 import type { ExampleFile, ExamplesPluginConfig } from './types.js'
 
 const defaultIgnorePatterns = [
@@ -16,16 +15,8 @@ export const discoverExamples = async (config: ExamplesPluginConfig): Promise<Ex
   const pattern = config.pattern ?? './examples/*/*.ts'
   const ignore = [...defaultIgnorePatterns, ...(config.ignore ?? [])]
 
-  // Use Kit's glob (returns Effect<FsLoc.RelFile[], Error>)
-  // Import FsLoc locally to use encodeSync
-  const { FsLoc } = await import('@wollybeard/kit')
-
-  const filePaths = await Effect.runPromise(
-    Fs.glob(pattern, { ignore }).pipe(
-      // Convert FsLoc.RelFile to string using encodeSync
-      Effect.map((files: any) => files.map((file: any) => FsLoc.encodeSync(file))),
-    ),
-  )
+  // Use globby to find files
+  const filePaths = await globby(pattern, { ignore })
 
   const examples: ExampleFile[] = filePaths.map((relativePath: string) => {
     // Normalize path to start with ./

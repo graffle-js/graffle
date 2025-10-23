@@ -3,101 +3,95 @@ import { Test } from '@wollybeard/kit/test'
 import { describe, expect, test } from 'vitest'
 import { Var } from './$.js'
 
-const as = <$value>(value?: unknown): $value => value as any
 const $var = Var.$
-
-// Helper to test assignability (for positive tests)
-const accepts = <$Expected>() => <$Actual extends $Expected>(_value: $Actual) => {}
-
-// Helper to test non-assignability (for negative tests with @ts-expect-error)
-const rejects = <$Expected>() => (_value: $Expected) => {}
+const tsub = Ts.Assert.sub.ofAs
 
 describe('Builder type defaults', () => {
   test('bare type accepts any state (widest)', () => {
     type AcceptsAny = Var.Builder
-    Ts.Test.sub<AcceptsAny>()(as<Var.Builder<unknown, Var.BuilderStateEmpty>>())
-    Ts.Test.sub<AcceptsAny>()(as<Var.Builder<number, { default: 5; required: true; name: 'test' }>>())
-    Ts.Test.sub<AcceptsAny>()(as<Var.Builder<string, Var.BuilderState>>())
+    tsub<AcceptsAny>().onAs<Var.Builder<unknown, Var.BuilderStateEmpty>>()
+    tsub<AcceptsAny>().onAs<Var.Builder<number, { default: 5; required: true; name: 'test' }>>()
+    tsub<AcceptsAny>().onAs<Var.Builder<string, Var.BuilderState>>()
   })
   test('$var starts with empty state', () => {
-    Ts.Test.sub<Var.Builder<unknown, Var.BuilderStateEmpty>>()($var)
+    tsub<Var.Builder<unknown, Var.BuilderStateEmpty>>().on($var)
   })
 })
 
 describe('Builder type inference', () => {
   test('infers type from default value', () => {
     const marker1 = $var.default(42)
-    Ts.Test.sub<Var.Builder<42, { default: 42; required: undefined; name: undefined }>>()(marker1)
+    tsub<Var.Builder<42, { default: 42; required: undefined; name: undefined }>>().on(marker1)
 
     const marker2 = $var.default('hello')
-    Ts.Test.sub<Var.Builder<'hello', { default: 'hello'; required: undefined; name: undefined }>>()(marker2)
+    tsub<Var.Builder<'hello', { default: 'hello'; required: undefined; name: undefined }>>().on(marker2)
 
     const marker3 = $var.default(true)
-    Ts.Test.sub<Var.Builder<true, { default: true; required: undefined; name: undefined }>>()(marker3)
+    tsub<Var.Builder<true, { default: true; required: undefined; name: undefined }>>().on(marker3)
 
     const marker4 = $var.default(null)
-    Ts.Test.sub<Var.Builder<null, { default: null; required: undefined; name: undefined }>>()(marker4)
+    tsub<Var.Builder<null, { default: null; required: undefined; name: undefined }>>().on(marker4)
 
     const marker5 = $var.default([1, 2, 3])
-    Ts.Test.sub<
+    tsub<
       Var.Builder<readonly [1, 2, 3], { default: readonly [1, 2, 3]; required: undefined; name: undefined }>
-    >()(
+    >().on(
       marker5,
     )
   })
 
   test('preserves narrowed type through chaining', () => {
     const marker1 = $var.default(42).name('limit')
-    Ts.Test.sub<Var.Builder<42, { default: 42; required: undefined; name: 'limit' }>>()(marker1)
+    tsub<Var.Builder<42, { default: 42; required: undefined; name: 'limit' }>>().on(marker1)
 
     const marker2 = $var.name('userId').default('abc123')
-    Ts.Test.sub<Var.Builder<'abc123', { default: 'abc123'; required: undefined; name: 'userId' }>>()(marker2)
+    tsub<Var.Builder<'abc123', { default: 'abc123'; required: undefined; name: 'userId' }>>().on(marker2)
 
     const marker4 = $var.default('test').required()
-    Ts.Test.sub<Var.Builder<'test', { default: 'test'; required: true; name: undefined }>>()(marker4)
+    tsub<Var.Builder<'test', { default: 'test'; required: true; name: undefined }>>().on(marker4)
 
     const marker5 = $var.name('pageSize').default(20).required()
-    Ts.Test.sub<Var.Builder<20, { default: 20; required: true; name: 'pageSize' }>>()(marker5)
+    tsub<Var.Builder<20, { default: 20; required: true; name: 'pageSize' }>>().on(marker5)
   })
 })
 
 test('type parameter constrains the default value type', () => {
   // @ts-expect-error
-  as<Var.Builder<number>>($var).default('invalid')
+  Ts.as<Var.Builder<number>>($var).default('invalid')
   // @ts-expect-error
-  as<Var.Builder<{ complex: ['y', 'e', 's'] }>>($var).default('invalid')
+  Ts.as<Var.Builder<{ complex: ['y', 'e', 's'] }>>($var).default('invalid')
   // OK
-  as<Var.Builder<{ complex: ['y', 'e', 's'] }>>($var).default({ complex: ['y', 'e', 's'] })
+  Ts.as<Var.Builder<{ complex: ['y', 'e', 's'] }>>($var).default({ complex: ['y', 'e', 's'] })
 })
 
 describe('Type narrowing validation', () => {
   test('narrowed builder rejects incompatible type assignments', () => {
     // Incompatible literal types should be rejected
     // @ts-expect-error - Builder<1> should not be assignable to Builder<string>
-    rejects<Var.Builder<string>>()($var.default(1))
+    tsub<Var.Builder<string>>().on($var.default(1))
 
     // @ts-expect-error - Builder<'test'> should not be assignable to Builder<number>
-    rejects<Var.Builder<number>>()($var.default('test'))
+    tsub<Var.Builder<number>>().on($var.default('test'))
 
     // @ts-expect-error - Builder<true> should not be assignable to Builder<string>
-    rejects<Var.Builder<string>>()($var.default(true))
+    tsub<Var.Builder<string>>().on($var.default(true))
 
     // Compatible literal types should work (covariance)
-    accepts<Var.Builder<number>>()($var.default(42))
-    accepts<Var.Builder<string>>()($var.default('hello'))
-    accepts<Var.Builder<boolean>>()($var.default(true))
+    tsub<Var.Builder<number>>().on($var.default(42))
+    tsub<Var.Builder<string>>().on($var.default('hello'))
+    tsub<Var.Builder<boolean>>().on($var.default(true))
   })
 
   test('narrowed type is preserved through chaining', () => {
     // @ts-expect-error - type narrowing should persist through .name()
-    rejects<Var.Builder<string>>()($var.default(1).name('myVar'))
+    tsub<Var.Builder<string>>().on($var.default(1).name('myVar'))
 
     // @ts-expect-error - type narrowing should persist through .required()
-    rejects<Var.Builder<string>>()($var.default(42).required())
+    tsub<Var.Builder<string>>().on($var.default(42).required())
 
     // Chaining preserves compatible types (covariance)
-    accepts<Var.Builder<number>>()($var.default(100).name('limit'))
-    accepts<Var.Builder<string>>()($var.name('id').default('abc'))
+    tsub<Var.Builder<number>>().on($var.default(100).name('limit'))
+    tsub<Var.Builder<string>>().on($var.name('id').default('abc'))
   })
 })
 

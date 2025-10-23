@@ -1,4 +1,4 @@
-import { Debug, Err, Lang, Prom } from '@wollybeard/kit'
+import { Err, Lang, Log, Prom } from '@wollybeard/kit'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -8,7 +8,8 @@ import { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 
-const debug = Debug.create('anyware:step')
+// 'anyware:step'
+const debug = Log.create({})
 
 type HookDoneResolver = (input: StepResult) => void
 
@@ -53,9 +54,9 @@ export const runStep = async (
     asyncErrorDeferred: StepResultErrorAsync
   },
 ) => {
-  const debugHook = debug.sub(`step ${name}`)
+  const debugHook = debug.child(`step_${name}`)
 
-  debugHook(`advance to next interceptor`)
+  debugHook.trace(`advance to next interceptor`)
 
   const [extension, ...extensionsStackRest] = interceptorsStack
   const isLastExtension = extensionsStackRest.length === 0
@@ -78,13 +79,13 @@ export const runStep = async (
    */
 
   if (extension) {
-    const debugExtension = debug.sub(`extension ${extension.name}`)
+    const debugExtension = debug.child(`extension_${extension.name}`)
     const hookInvokedDeferred = Prom.createDeferred()
 
-    debugExtension(`start`)
+    debugExtension.trace(`start`)
     let hookFailed = false
     const trigger = StepTrigger.create(inputOriginalOrFromExtension, (extensionParameters) => {
-      debugExtension(`extension calls this hook`, extensionParameters)
+      debugExtension.trace(`extension calls this hook`, extensionParameters)
 
       const inputResolved = extensionParameters?.input ?? inputOriginalOrFromExtension
       const customSlotsResolved = {
@@ -125,7 +126,7 @@ export const runStep = async (
           })
           return Prom.createDeferred().promise // [1]
         } else {
-          debugExtension(`execute branch: retry`)
+          debugExtension.trace(`execute branch: retry`)
           const extensionRetry = createExecutableChunk(extension)
           void runStep({
             pipeline,
@@ -168,7 +169,7 @@ export const runStep = async (
 
         return extensionWithNextChunk.currentChunk.promise.then(_ => {
           if (_ instanceof Error) {
-            debugExtension(`received hook error`)
+            debugExtension.trace(`received hook error`)
             hookFailed = true
           }
           return _
@@ -178,7 +179,7 @@ export const runStep = async (
 
     // The extension is resumed. It is responsible for calling the next hook.
 
-    debugExtension(`advance with envelope`)
+    debugExtension.trace(`advance with envelope`)
     const envelope: StepTriggerEnvelope = {
       [name]: trigger,
     }
@@ -188,7 +189,7 @@ export const runStep = async (
     // If the extension returns the hook envelope, it wants the rest of the pipeline
     // to pass through it.
     // If the extension returns a non-hook-envelope value, it wants to short-circuit the pipeline.
-    debugHook(`start race between extension returning or invoking next hook`)
+    debugHook.trace(`start race between extension returning or invoking next hook`)
     const { branch, result } = await Promise.race([
       hookInvokedDeferred.promise.then(result => {
         return { branch: `hookInvoked`, result } as const
@@ -201,12 +202,12 @@ export const runStep = async (
 
     switch (branch) {
       case `hookInvoked`: {
-        debugExtension(`invoked next hook (or retrying extension got error pushed through)`)
+        debugExtension.trace(`invoked next hook (or retrying extension got error pushed through)`)
         // do nothing, hook is making the processing continue.
         return
       }
       case `extensionReturned`: {
-        debugExtension(`extension returned`)
+        debugExtension.trace(`extension returned`)
         if (result === envelope) {
           void runStep({
             pipeline,
@@ -225,7 +226,7 @@ export const runStep = async (
         return
       }
       case `extensionThrew`: {
-        debugExtension(`extension threw`)
+        debugExtension.trace(`extension threw`)
         done({
           type: `error`,
           hookName: name,
@@ -236,7 +237,7 @@ export const runStep = async (
         return
       }
       case `hookInvokedButThrew`:
-        debugExtension(`hook error`)
+        debugExtension.trace(`hook error`)
         // todo rename source to "hook"
         done({
           type: `error`,
@@ -249,7 +250,7 @@ export const runStep = async (
         throw Lang.neverCase(branch)
     }
   } /* reached core for this hook */ else {
-    debugHook(`no more interceptors to advance, run implementation`)
+    debugHook.trace(`no more interceptors to advance, run implementation`)
 
     const implementation = pipeline.stepsIndex.get(name)
     if (!implementation) {
@@ -268,7 +269,7 @@ export const runStep = async (
         previousStepsCompleted,
       )
     } catch (error) {
-      debugHook(`implementation error`)
+      debugHook.trace(`implementation error`)
       const lastExtension = nextInterceptorsStack[nextInterceptorsStack.length - 1]
       if (lastExtension && lastExtension.retrying) {
         lastExtension.currentChunk.resolve(Err.ensure(error))
@@ -280,7 +281,7 @@ export const runStep = async (
 
     // Return to root with the next result and hook stack
 
-    debugHook(`completed`)
+    debugHook.trace(`completed`)
 
     done({
       type: `completed`,

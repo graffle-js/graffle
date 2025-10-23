@@ -140,12 +140,13 @@ export namespace Code {
   export const field = (
     name: string,
     value: string | TermObject,
-    options?: { tsDoc?: string | null; optional?: boolean },
+    options?: { tsDoc?: string | null; optional?: boolean; readonly?: boolean },
   ) => {
     const tsDoc = options?.tsDoc ? TSDoc(options.tsDoc) + `\n` : ``
+    const readonly = options?.readonly ? `readonly ` : ``
     const optional = options?.optional ? `?` : ``
     const type_ = typeof value === `string` ? value : termObject(value)
-    return `${tsDoc}${name}${optional}: ${type_}`
+    return `${tsDoc}${readonly}${name}${optional}: ${type_}`
   }
   export const nullable = (type: string) => `${type} | null`
   export const union = (name: string, types: string[]) => `type ${name} =\n| ${Code.tsUnionItems(types)}`
