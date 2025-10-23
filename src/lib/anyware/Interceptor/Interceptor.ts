@@ -15,7 +15,7 @@ export namespace Interceptor {
     $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (stepTriggers: Ts.Simplify.Shallow<InferStepTriggerParameters<$Pipeline>>):
+    (stepTriggers: Ts.Simplify.Top<InferStepTriggerParameters<$Pipeline>>):
       Promise<
         | $Pipeline['output']
         | StepTriggerEnvelope

@@ -31,7 +31,7 @@ export namespace StepTrigger {
     extends StepTrigger.Properties<$Step['input']>
   {
      (
-      parameters?: Ts.Simplify.Shallow<
+      parameters?: Ts.Simplify.Top<
         & {
             input?: $Step['input']
           }

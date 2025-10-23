@@ -170,7 +170,7 @@ export type Envelope<
   $Data = unknown,
   $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>,
 > =
-  Ts.Simplify.Shallow<
+  Ts.Simplify.Top<
     & {
       data?: $Data | null
         extensions?: ObjMap

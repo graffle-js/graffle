@@ -41,7 +41,7 @@ export type MergeDefaultsShallow<
 
 // dprint-ignore
 export type MergeDefaults<$Defaults extends object, $Input extends undefined | object, $CustomScalars = never> =
-  Ts.Simplify.Shallow<
+  Ts.Simplify.Top<
     $Input extends undefined
       ? $Defaults
       : & Omit<$Input, keyof $Defaults>
@@ -63,7 +63,7 @@ $InputValue extends $CustomScalars
     : never // Mismatch between defaults and input
   : $InputValue extends object
     ? $DefaultValue extends object
-      ? Ts.Simplify.Shallow<MergeDefaults<$DefaultValue, $InputValue, $CustomScalars>>
+      ? Ts.Simplify.Top<MergeDefaults<$DefaultValue, $InputValue, $CustomScalars>>
       : never // Defaults disagrees with Input
     : $InputValue
 
@@ -94,7 +94,7 @@ export type SetAtPath<
 type MergeDefaultsFn<$CustomScalars> = <$Defaults extends object, $Input extends undefined | PartialDeep<$Defaults>>(
   defaults: $Defaults,
   input?: $Input,
-) => Ts.Simplify.Shallow<MergeDefaults<$Defaults, $Input, $CustomScalars>>
+) => Ts.Simplify.Top<MergeDefaults<$Defaults, $Input, $CustomScalars>>
 
 type MergeDefaultsInnerFn = (
   defaults: object,
@@ -290,7 +290,7 @@ export type SetKeyUnsafe<
 
 // dprint-ignore
 export type SetKeyAtPath<$Obj extends object, $Path extends Path, $Value> =
-    Ts.Simplify.Shallow<
+    Ts.Simplify.Top<
       $Path extends []
         ? $Value extends object
           ? $Obj & $Value
@@ -299,7 +299,7 @@ export type SetKeyAtPath<$Obj extends object, $Path extends Path, $Value> =
     >
 // dprint-ignore
 type SetKeyAtPath_<$ObjOrValue, $Path extends Path, $Value> =
-    Ts.Simplify.Shallow<
+    Ts.Simplify.Top<
       $Path extends [infer $P1 extends string, ...infer $PN extends string[]] ?
         $P1 extends keyof $ObjOrValue
             ? Omit<$ObjOrValue, $P1> & { [_ in $P1]: SetKeyAtPath_<$ObjOrValue[$P1], $PN, $Value> }

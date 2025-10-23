@@ -81,7 +81,7 @@ export type InferFromOperationSchemaLess<
       ? PropertySignature.ToProperty<___$ExtractedPropSigs>
       : {}
 > =
-Ts.Simplify.Shallow<UnionToIntersection<___$ExtractedProps>>
+Ts.Simplify.Top<UnionToIntersection<___$ExtractedProps>>
 
 /**
  * Core inferer that takes an operation map directly.
@@ -100,4 +100,4 @@ export type InferFromOperationMap<
       : {}
 > =
 // ___$ExtractedPropSigs
-Ts.Simplify.Shallow<UnionToIntersection<___$ExtractedProps>>
+Ts.Simplify.Top<UnionToIntersection<___$ExtractedProps>>

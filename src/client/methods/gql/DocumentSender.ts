@@ -36,7 +36,7 @@ type OperationToStaticExecutor<
  * Supports calling without operation name or with operation name.
  */
 export interface SingleOpNoVarsStaticExecutor<$Op extends TypedFullDocument.Operation, $Context> {
-  (operationName?: $Op['name']): Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Op['result']>>>
+  (operationName?: $Op['name']): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Op['result']>>>
 }
 
 /**
@@ -46,7 +46,7 @@ export interface SingleOpNoVarsStaticExecutor<$Op extends TypedFullDocument.Oper
 export interface SingleOpOptionalVarsStaticExecutor<
   $Op extends TypedFullDocument.Operation,
   $Context,
-  ___$Return = Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Op['result']>>>,
+  ___$Return = Promise<Ts.Simplify.Top<HandleOutput<$Context, $Op['result']>>>,
 > {
   (): ___$Return
   (variables?: $Op['variables']): ___$Return
@@ -59,7 +59,7 @@ export interface SingleOpOptionalVarsStaticExecutor<
 export interface SingleOpRequiredVarsStaticExecutor<
   $Op extends TypedFullDocument.Operation,
   $Context,
-  ___$Return = Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Op['result']>>>,
+  ___$Return = Promise<Ts.Simplify.Top<HandleOutput<$Context, $Op['result']>>>,
 > {
   (variables: $Op['variables']): ___$Return
   (operationName: $Op['name'], variables: $Op['variables']): ___$Return
@@ -92,7 +92,7 @@ export interface MultiOpStaticExecutor<$Operations extends TypedFullDocument.Ope
       : GetVariablesInputKind<Extract<$Operations, { name: $OpName }>['variables']> extends 'optional'
         ? [variables?: Extract<$Operations, { name: $OpName }>['variables']]
       : [variables: Extract<$Operations, { name: $OpName }>['variables']]
-  ): Promise<Ts.Simplify.Nullable<HandleOutput<$Context, Extract<$Operations, { name: $OpName }>['result']>>>
+  ): Promise<Ts.Simplify.Top<HandleOutput<$Context, Extract<$Operations, { name: $OpName }>['result']>>>
 }
 
 // ================================================================================================
@@ -118,7 +118,7 @@ type OperationToNamedExecutor<
  * Operation name is encoded in the method itself.
  */
 export interface NoVarsNamedExecutor<$Context, $Result extends Grafaid.SomeObjectData> {
-  (): Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Result>>>
+  (): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
 }
 
 /**
@@ -130,7 +130,7 @@ export interface OptionalVarsNamedExecutor<
   $Result extends Grafaid.SomeObjectData,
   $Variables,
 > {
-  (variables?: $Variables): Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Result>>>
+  (variables?: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
 }
 
 /**
@@ -142,7 +142,7 @@ export interface RequiredVarsNamedExecutor<
   $Result extends Grafaid.SomeObjectData,
   $Variables,
 > {
-  (variables: $Variables): Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Result>>>
+  (variables: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
 }
 
 // ================================================================================================
@@ -224,10 +224,10 @@ type TypedDocumentLikeSender<
   $Variables extends Grafaid.Variables,
   $Context,
   ___$VarKind = GetVariablesInputKind<$Variables>,
-  ___$SendMethod = ___$VarKind extends 'none' ? (() => Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Result>>>)
+  ___$SendMethod = ___$VarKind extends 'none' ? (() => Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>)
     : ___$VarKind extends 'optional'
-      ? ((variables?: $Variables) => Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Result>>>)
-    : ((variables: $Variables) => Promise<Ts.Simplify.Nullable<HandleOutput<$Context, $Result>>>),
+      ? ((variables?: $Variables) => Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>)
+    : ((variables: $Variables) => Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>),
 > = {
   $send: Configuration.Check.Preflight<$Context, ___$SendMethod>
 }

@@ -20,7 +20,7 @@ export const isIndicator = (v: any): v is Indicator => {
 
 export type NoArgsIndicator = Indicator | Directive.$Fields
 
-export type NoArgsIndicator$Expanded = UnionExpanded<Indicator | Ts.Simplify.Shallow<Directive.$Fields>>
+export type NoArgsIndicator$Expanded = UnionExpanded<Indicator | Ts.Simplify.Top<Directive.$Fields>>
 
 export const isPositiveLikeFieldValue = (v: any): v is Positive => {
   return !isNegativeIndicator(v)

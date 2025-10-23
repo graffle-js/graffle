@@ -28,7 +28,7 @@ export const createStepsIndex = <$Steps extends Step[]>(steps: $Steps): StepsInd
 export namespace Pipeline {
   export const create = <$PipelineDef extends PipelineDefinition>(
     definition: $PipelineDef,
-  ): Ts.Simplify.Shallow<InferFromDefinition<$PipelineDef>> => {
+  ): Ts.Simplify.Top<InferFromDefinition<$PipelineDef>> => {
     let steps = definition.steps as unknown as Step[]
     if (definition.overloads.length > 0) {
       steps = steps.map((step): Step => {
@@ -108,7 +108,7 @@ export namespace Pipeline {
       readonly input:
         VAR_IsHasNoOverloads extends true
           ? VAR_StepDefs[i]['input']
-          : Ts.Simplify.Shallow<
+          : Ts.Simplify.Top<
               & VAR_StepDefs[i]['input']
               & InferStepInputFromOverload<
                   i,
@@ -118,7 +118,7 @@ export namespace Pipeline {
             >
       readonly output: VAR_IsHasNoOverloads extends true
         ? VAR_StepDefs[i]['output']
-        : Ts.Simplify.Shallow<
+        : Ts.Simplify.Top<
           & VAR_StepDefs[i]['output']
           & InferStepOutputFromOverloads<
               VAR_StepDefs[i]['name'],

@@ -5,6 +5,12 @@ import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'
 
+export * from '@wollybeard/kit'
+import * as Ts from '@wollybeard/kit'
+// export * from '@wollybeard/kit/ts'
+export { Simplify } from '@wollybeard/kit/ts'
+import { Simplify } from '@wollybeard/kit/ts'
+
 export const create = <$Client extends Client_justContext = ClientEmpty>(
   interceptor: Anyware.Interceptor.InferFromPipeline<
     Anyware.Pipeline.InferFromDefinition<$Client['_']['requestPipelineDefinition']>

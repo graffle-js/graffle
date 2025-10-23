@@ -24,7 +24,7 @@ export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSe
  * // Returns: Operation<'default', { id: string }, {}> (raw operation, no Document wrapper)
  * ```
  */
-export type Parse<$Input extends string, $Schema> = Ts.Simplify.Shallow<
+export type Parse<$Input extends string, $Schema> = Ts.Simplify.Top<
   getDocumentOperations<
     parseDocument<$Input>['definitions'],
     $Schema
