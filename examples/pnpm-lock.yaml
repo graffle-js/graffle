@@ -57,6 +57,14 @@ importers:
 
 packages:
 
+  '@0no-co/graphql.web@1.0.12':
+    resolution: {integrity: sha512-BTDjjsV/zSPy5fqItwm+KWUfh9CSe9tTtR6rCB72ddtkAxdcHbi4Ir4r/L1Et4lyxmL+i7Rb3m9sjLLi9tYrzA==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+    peerDependenciesMeta:
+      graphql:
+        optional: true
+
   '@0no-co/graphql.web@1.2.0':
     resolution: {integrity: sha512-/1iHy9TTr63gE1YcR5idjx8UREz1s0kFhydf3bBLCXyqjhkIc6igAzTOx3zPifCwFR87tsh/4Pa9cNts6d2otw==}
     peerDependencies:
@@ -683,6 +691,12 @@ packages:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
+  '@wollybeard/kit@0.85.3':
+    resolution: {integrity: sha512-hB7gpJTJfSdI6ys2jU/ifHWeYOWoKz/yqkuvJScVSmfqr7zGZ3AlRHxmo8Q+9RYPcUh6dlIayFWcq+jUp5cZbw==}
+    peerDependencies:
+      '@effect/platform': '>=0.90.0 <1.0.0'
+      effect: ^3.17.0
+
   alge@0.8.1:
     resolution: {integrity: sha512-kiV9nTt+XIauAXsowVygDxMZLplZxDWt0W8plE/nB32/V2ziM/P/TxDbSVK7FYIUt2Xo16h3/htDh199LNPCKQ==}
 
@@ -743,6 +757,9 @@ packages:
 
   es-toolkit@1.40.0:
     resolution: {integrity: sha512-8o6w0KFmU0CiIl0/Q/BCEOabF2IJaELM1T2PWj6e8KqzHv1gdx+7JtFnDwOx1kJH/isJ5NwlDG1nCr1HrRF94Q==}
+
+  es-toolkit@1.41.0:
+    resolution: {integrity: sha512-bDd3oRmbVgqZCJS6WmeQieOrzpl3URcWBUVDXxOELlUW2FuW+0glPOz1n0KnRie+PdyvUZcXz2sOn00c6pPRIA==}
 
   esbuild@0.25.11:
     resolution: {integrity: sha512-KohQwyzrKTQmhXDW1PjCv3Tyspn9n5GcY2RTDqeORIdIJY8yKIF7sTSopFmn/wpMPW4rdPXI0UE5LJLuq3bx0Q==}
@@ -828,10 +845,6 @@ packages:
   is-number@7.0.0:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
-
-  is-plain-obj@4.1.0:
-    resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
-    engines: {node: '>=12'}
 
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
@@ -1109,6 +1122,10 @@ packages:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
 snapshots:
+
+  '@0no-co/graphql.web@1.0.12(graphql@16.11.0)':
+    optionalDependencies:
+      graphql: 16.11.0
 
   '@0no-co/graphql.web@1.2.0(graphql@16.11.0)':
     optionalDependencies:
@@ -1603,6 +1620,26 @@ snapshots:
       ts-morph: 27.0.2
       type-fest: 5.1.0
 
+  '@wollybeard/kit@0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+    dependencies:
+      '@effect/platform': 0.92.1(effect@3.18.4)
+      '@microsoft/tsdoc': 0.15.1
+      '@types/node': 24.9.1
+      '@types/object-inspect': 1.13.0
+      '@vltpkg/semver': 0.0.0-30
+      ansis: 4.2.0
+      consola: 3.4.2
+      effect: 3.18.4
+      es-toolkit: 1.41.0
+      fast-check: 4.3.0
+      jsonc-parser: 3.3.1
+      object-inspect: 1.13.4
+      pathe: 2.0.3
+      pluralize-esm: 9.0.5
+      tinyglobby: 0.2.15
+      ts-morph: 27.0.2
+      type-fest: 5.1.0
+
   alge@0.8.1:
     dependencies:
       lodash.ismatch: 4.4.0
@@ -1645,6 +1682,8 @@ snapshots:
   es-module-lexer@1.7.0: {}
 
   es-toolkit@1.40.0: {}
+
+  es-toolkit@1.41.0: {}
 
   esbuild@0.25.11:
     optionalDependencies:
@@ -1720,13 +1759,12 @@ snapshots:
 
   graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(@opentelemetry/api@1.9.0)(effect@3.18.4)(graphql@16.11.0):
     dependencies:
-      '@0no-co/graphql.web': 1.2.0(graphql@16.11.0)
+      '@0no-co/graphql.web': 1.0.12(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.85.2(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
-      es-toolkit: 1.40.0
+      '@wollybeard/kit': 0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+      es-toolkit: 1.41.0
       graphql: 16.11.0
-      is-plain-obj: 4.1.0
       type-fest: 4.41.0
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
@@ -1743,8 +1781,6 @@ snapshots:
       is-extglob: 2.1.1
 
   is-number@7.0.0: {}
-
-  is-plain-obj@4.1.0: {}
 
   jsonc-parser@3.3.1: {}
 

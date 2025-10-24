@@ -10,7 +10,12 @@
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
   traceId: '...',
-  parentId: '...',
+  parentSpanContext: {
+    traceId: '...',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'encode',
   id: '...',
@@ -34,7 +39,12 @@
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
   traceId: '...',
-  parentId: '...',
+  parentSpanContext: {
+    traceId: '...',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'pack',
   id: '...',
@@ -58,7 +68,12 @@
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
   traceId: '...',
-  parentId: '...',
+  parentSpanContext: {
+    traceId: '...',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'exchange',
   id: '...',
@@ -82,7 +97,12 @@
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
   traceId: '...',
-  parentId: '...',
+  parentSpanContext: {
+    traceId: '...',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'unpack',
   id: '...',
@@ -106,7 +126,12 @@
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
   traceId: '...',
-  parentId: '...',
+  parentSpanContext: {
+    traceId: '...',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'decode',
   id: '...',
@@ -130,7 +155,7 @@
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
   traceId: '...',
-  parentId: undefined,
+  parentSpanContext: undefined,
   traceState: undefined,
   name: 'request',
   id: '...',
