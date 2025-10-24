@@ -18,11 +18,11 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: ^0.85.2
-        version: 0.85.2(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+        specifier: ^0.85.3
+        version: 0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit:
-        specifier: ^1.40.0
-        version: 1.40.0
+        specifier: ^1.41.0
+        version: 1.41.0
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -97,8 +97,8 @@ importers:
         specifier: ^5.0.3
         version: 5.0.3
       '@types/node':
-        specifier: ^22.14.1
-        version: 22.14.1
+        specifier: ^24.9.1
+        version: 24.9.1
       async-cleanup:
         specifier: ^1.0.0
         version: 1.0.0
@@ -121,8 +121,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       globby:
-        specifier: ^14.1.0
-        version: 14.1.0
+        specifier: ^15.0.0
+        version: 15.0.0
       gql.tada:
         specifier: ^1.8.13
         version: 1.8.13(graphql@16.10.0)(typescript@5.9.3)
@@ -176,16 +176,16 @@ importers:
         version: 5.9.3
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.9.3)(vite@5.4.21(@types/node@22.14.1))
+        version: 5.1.4(typescript@5.9.3)(vite@5.4.21(@types/node@24.9.1))
       vitepress:
         specifier: ^1.6.4
-        version: 1.6.4(@algolia/client-search@5.41.0)(@types/node@22.14.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3)
+        version: 1.6.4(@algolia/client-search@5.41.0)(@types/node@24.9.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3)
       vitepress-plugin-mermaid:
         specifier: ^2.0.17
-        version: 2.0.17(mermaid@11.12.0)(vitepress@1.6.4(@algolia/client-search@5.41.0)(@types/node@22.14.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3))
+        version: 2.0.17(mermaid@11.12.0)(vitepress@1.6.4(@algolia/client-search@5.41.0)(@types/node@24.9.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3))
       vitest:
         specifier: ^3.1.1
-        version: 3.1.1(@types/debug@4.1.12)(@types/node@22.14.1)(jsdom@26.1.0)
+        version: 3.1.1(@types/debug@4.1.12)(@types/node@24.9.1)(jsdom@26.1.0)
       zod:
         specifier: ^3.24.3
         version: 3.24.3
@@ -1450,10 +1450,6 @@ packages:
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
     engines: {node: '>=10'}
 
-  '@sindresorhus/merge-streams@2.3.0':
-    resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
-    engines: {node: '>=18'}
-
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
@@ -1610,9 +1606,6 @@ packages:
 
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
-
-  '@types/node@22.14.1':
-    resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
   '@types/node@24.9.1':
     resolution: {integrity: sha512-QoiaXANRkSXK6p0Duvt56W208du4P9Uye9hWLWgGMDTEoKPhuenzNcC4vGUmrNkiOKTlIrBoyNQYNpSwfEZXSg==}
@@ -1837,8 +1830,8 @@ packages:
     resolution: {integrity: sha512-Otmxo+0mp8az3B48pLI1I4msNOXPIoP7TLm6h5wOEQmynqHt8oP9nR6NJUeJk6iI5OtFpQtkbJFwfGkmplvc3Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.85.2':
-    resolution: {integrity: sha512-wxq/G8HOJNwBp7iqPpmV5Yk0QEM+JWR9WGh3zCTQ3xwjhf5uiiKueP7NoU7vWJSUHhtdTKpXdFNx94cbvf2umw==}
+  '@wollybeard/kit@0.85.3':
+    resolution: {integrity: sha512-hB7gpJTJfSdI6ys2jU/ifHWeYOWoKz/yqkuvJScVSmfqr7zGZ3AlRHxmo8Q+9RYPcUh6dlIayFWcq+jUp5cZbw==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -2390,8 +2383,8 @@ packages:
     resolution: {integrity: sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==}
     engines: {node: '>= 0.4'}
 
-  es-toolkit@1.40.0:
-    resolution: {integrity: sha512-8o6w0KFmU0CiIl0/Q/BCEOabF2IJaELM1T2PWj6e8KqzHv1gdx+7JtFnDwOx1kJH/isJ5NwlDG1nCr1HrRF94Q==}
+  es-toolkit@1.41.0:
+    resolution: {integrity: sha512-bDd3oRmbVgqZCJS6WmeQieOrzpl3URcWBUVDXxOELlUW2FuW+0glPOz1n0KnRie+PdyvUZcXz2sOn00c6pPRIA==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -2570,9 +2563,9 @@ packages:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
 
-  globby@14.1.0:
-    resolution: {integrity: sha512-0Ia46fDOaT7k4og1PDW4YbodWWr3scS2vAr2lTbsplOt2WkKp0vQbkI9wKis/T5LV/dqPjO3bpS/z6GTJB82LA==}
-    engines: {node: '>=18'}
+  globby@15.0.0:
+    resolution: {integrity: sha512-oB4vkQGqlMl682wL1IlWd02tXCbquGWM4voPEI85QmNKCaw8zGTm1f1rubFgkg3Eli2PtKlFgrnmUqasbQWlkw==}
+    engines: {node: '>=20'}
 
   globrex@0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
@@ -3585,9 +3578,6 @@ packages:
 
   ufo@1.6.1:
     resolution: {integrity: sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==}
-
-  undici-types@6.21.0:
-    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
@@ -5058,8 +5048,6 @@ snapshots:
 
   '@sindresorhus/is@4.6.0': {}
 
-  '@sindresorhus/merge-streams@2.3.0': {}
-
   '@sindresorhus/merge-streams@4.0.0': {}
 
   '@standard-schema/spec@1.0.0': {}
@@ -5246,10 +5234,6 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@22.14.1':
-    dependencies:
-      undici-types: 6.21.0
-
   '@types/node@24.9.1':
     dependencies:
       undici-types: 7.16.0
@@ -5308,9 +5292,9 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-vue@5.2.4(vite@5.4.21(@types/node@22.14.1))(vue@3.5.22(typescript@5.9.3))':
+  '@vitejs/plugin-vue@5.2.4(vite@5.4.21(@types/node@24.9.1))(vue@3.5.22(typescript@5.9.3))':
     dependencies:
-      vite: 5.4.21(@types/node@22.14.1)
+      vite: 5.4.21(@types/node@24.9.1)
       vue: 3.5.22(typescript@5.9.3)
 
   '@vitest/expect@3.1.1':
@@ -5320,13 +5304,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.1.1(vite@5.4.21(@types/node@22.14.1))':
+  '@vitest/mocker@3.1.1(vite@5.4.21(@types/node@24.9.1))':
     dependencies:
       '@vitest/spy': 3.1.1
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 5.4.21(@types/node@22.14.1)
+      vite: 5.4.21(@types/node@24.9.1)
 
   '@vitest/pretty-format@3.1.1':
     dependencies:
@@ -5517,7 +5501,7 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.2
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.85.2(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@microsoft/tsdoc': 0.15.1
@@ -5527,7 +5511,7 @@ snapshots:
       ansis: 4.2.0
       consola: 3.4.2
       effect: 3.18.4
-      es-toolkit: 1.40.0
+      es-toolkit: 1.41.0
       fast-check: 4.3.0
       jsonc-parser: 3.3.1
       object-inspect: 1.13.4
@@ -6114,7 +6098,7 @@ snapshots:
     dependencies:
       es-errors: 1.3.0
 
-  es-toolkit@1.40.0: {}
+  es-toolkit@1.41.0: {}
 
   esbuild@0.21.5:
     optionalDependencies:
@@ -6349,9 +6333,9 @@ snapshots:
       merge2: 1.4.1
       slash: 3.0.0
 
-  globby@14.1.0:
+  globby@15.0.0:
     dependencies:
-      '@sindresorhus/merge-streams': 2.3.0
+      '@sindresorhus/merge-streams': 4.0.0
       fast-glob: 3.3.3
       ignore: 7.0.5
       path-type: 6.0.0
@@ -7379,8 +7363,6 @@ snapshots:
 
   ufo@1.6.1: {}
 
-  undici-types@6.21.0: {}
-
   undici-types@7.16.0: {}
 
   undici@7.16.0: {}
@@ -7446,13 +7428,13 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-node@3.1.1(@types/node@22.14.1):
+  vite-node@3.1.1(@types/node@24.9.1):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 5.4.21(@types/node@22.14.1)
+      vite: 5.4.21(@types/node@24.9.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -7464,34 +7446,34 @@ snapshots:
       - supports-color
       - terser
 
-  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@5.4.21(@types/node@22.14.1)):
+  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@5.4.21(@types/node@24.9.1)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.9.3)
     optionalDependencies:
-      vite: 5.4.21(@types/node@22.14.1)
+      vite: 5.4.21(@types/node@24.9.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@5.4.21(@types/node@22.14.1):
+  vite@5.4.21(@types/node@24.9.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.6
       rollup: 4.52.5
     optionalDependencies:
-      '@types/node': 22.14.1
+      '@types/node': 24.9.1
       fsevents: 2.3.3
 
-  vitepress-plugin-mermaid@2.0.17(mermaid@11.12.0)(vitepress@1.6.4(@algolia/client-search@5.41.0)(@types/node@22.14.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3)):
+  vitepress-plugin-mermaid@2.0.17(mermaid@11.12.0)(vitepress@1.6.4(@algolia/client-search@5.41.0)(@types/node@24.9.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3)):
     dependencies:
       mermaid: 11.12.0
-      vitepress: 1.6.4(@algolia/client-search@5.41.0)(@types/node@22.14.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3)
+      vitepress: 1.6.4(@algolia/client-search@5.41.0)(@types/node@24.9.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
 
-  vitepress@1.6.4(@algolia/client-search@5.41.0)(@types/node@22.14.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.41.0)(@types/node@24.9.1)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.41.0)(search-insights@2.17.3)
@@ -7500,7 +7482,7 @@ snapshots:
       '@shikijs/transformers': 2.5.0
       '@shikijs/types': 2.5.0
       '@types/markdown-it': 14.1.2
-      '@vitejs/plugin-vue': 5.2.4(vite@5.4.21(@types/node@22.14.1))(vue@3.5.22(typescript@5.9.3))
+      '@vitejs/plugin-vue': 5.2.4(vite@5.4.21(@types/node@24.9.1))(vue@3.5.22(typescript@5.9.3))
       '@vue/devtools-api': 7.7.7
       '@vue/shared': 3.5.22
       '@vueuse/core': 12.8.2(typescript@5.9.3)
@@ -7509,7 +7491,7 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 7.2.0
       shiki: 2.5.0
-      vite: 5.4.21(@types/node@22.14.1)
+      vite: 5.4.21(@types/node@24.9.1)
       vue: 3.5.22(typescript@5.9.3)
     optionalDependencies:
       postcss: 8.5.6
@@ -7540,10 +7522,10 @@ snapshots:
       - typescript
       - universal-cookie
 
-  vitest@3.1.1(@types/debug@4.1.12)(@types/node@22.14.1)(jsdom@26.1.0):
+  vitest@3.1.1(@types/debug@4.1.12)(@types/node@24.9.1)(jsdom@26.1.0):
     dependencies:
       '@vitest/expect': 3.1.1
-      '@vitest/mocker': 3.1.1(vite@5.4.21(@types/node@22.14.1))
+      '@vitest/mocker': 3.1.1(vite@5.4.21(@types/node@24.9.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.1.1
       '@vitest/snapshot': 3.1.1
@@ -7559,12 +7541,12 @@ snapshots:
       tinyexec: 0.3.2
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 5.4.21(@types/node@22.14.1)
-      vite-node: 3.1.1(@types/node@22.14.1)
+      vite: 5.4.21(@types/node@24.9.1)
+      vite-node: 3.1.1(@types/node@24.9.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/debug': 4.1.12
-      '@types/node': 22.14.1
+      '@types/node': 24.9.1
       jsdom: 26.1.0
     transitivePeerDependencies:
       - less

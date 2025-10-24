@@ -24,20 +24,20 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6
       es-toolkit:
-        specifier: ^1.41.0
-        version: 1.41.0
+        specifier: ^1.40.0
+        version: 1.40.0
       floating-vue:
         specifier: ^5.2.2
         version: 5.2.2(vue@3.5.22(typescript@5.9.3))
       globby:
-        specifier: ^15.0.0
-        version: 15.0.0
+        specifier: ^14.1.0
+        version: 14.1.0
       graffle:
         specifier: file:..
-        version: file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.11.0)
+        version: file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.10.0)
       graphql:
-        specifier: ^16.11.0
-        version: 16.11.0
+        specifier: ^16.10.0
+        version: 16.10.0
       tsx:
         specifier: ^4.20.6
         version: 4.20.6
@@ -730,8 +730,8 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
-  '@sindresorhus/merge-streams@4.0.0':
-    resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
+  '@sindresorhus/merge-streams@2.3.0':
+    resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
 
   '@standard-schema/spec@1.0.0':
@@ -1067,6 +1067,9 @@ packages:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
 
+  es-toolkit@1.40.0:
+    resolution: {integrity: sha512-8o6w0KFmU0CiIl0/Q/BCEOabF2IJaELM1T2PWj6e8KqzHv1gdx+7JtFnDwOx1kJH/isJ5NwlDG1nCr1HrRF94Q==}
+
   es-toolkit@1.41.0:
     resolution: {integrity: sha512-bDd3oRmbVgqZCJS6WmeQieOrzpl3URcWBUVDXxOELlUW2FuW+0glPOz1n0KnRie+PdyvUZcXz2sOn00c6pPRIA==}
 
@@ -1159,9 +1162,9 @@ packages:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     hasBin: true
 
-  globby@15.0.0:
-    resolution: {integrity: sha512-oB4vkQGqlMl682wL1IlWd02tXCbquGWM4voPEI85QmNKCaw8zGTm1f1rubFgkg3Eli2PtKlFgrnmUqasbQWlkw==}
-    engines: {node: '>=20'}
+  globby@14.1.0:
+    resolution: {integrity: sha512-0Ia46fDOaT7k4og1PDW4YbodWWr3scS2vAr2lTbsplOt2WkKp0vQbkI9wKis/T5LV/dqPjO3bpS/z6GTJB82LA==}
+    engines: {node: '>=18'}
 
   graffle@file:..:
     resolution: {directory: .., type: directory}
@@ -1182,8 +1185,8 @@ packages:
       prettier:
         optional: true
 
-  graphql@16.11.0:
-    resolution: {integrity: sha512-mS1lbMsxgQj6hge1XZ6p7GPhbrtFwUFYi3wRzXAC/FmYnyXMTvvI3td3rjmQ2u8ewXueaSvRPWaEcgVVOT9Jnw==}
+  graphql@16.10.0:
+    resolution: {integrity: sha512-AjqGKbDGUFRKIRCP9tCKiIGHyriz2oHEbPIbEtcSLSs4YjReZOIPQQWek4+6hjw62H9QShXHyaGivGiYVLeYFQ==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
   gray-matter@4.0.3:
@@ -1802,9 +1805,9 @@ packages:
 
 snapshots:
 
-  '@0no-co/graphql.web@1.0.12(graphql@16.11.0)':
+  '@0no-co/graphql.web@1.0.12(graphql@16.10.0)':
     optionalDependencies:
-      graphql: 16.11.0
+      graphql: 16.10.0
 
   '@algolia/abtesting@1.7.0':
     dependencies:
@@ -2119,9 +2122,9 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@graphql-typed-document-node/core@3.2.0(graphql@16.11.0)':
+  '@graphql-typed-document-node/core@3.2.0(graphql@16.10.0)':
     dependencies:
-      graphql: 16.11.0
+      graphql: 16.10.0
 
   '@iconify-json/simple-icons@1.2.55':
     dependencies:
@@ -2365,7 +2368,7 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@sindresorhus/merge-streams@4.0.0': {}
+  '@sindresorhus/merge-streams@2.3.0': {}
 
   '@standard-schema/spec@1.0.0': {}
 
@@ -2717,6 +2720,8 @@ snapshots:
 
   entities@4.5.0: {}
 
+  es-toolkit@1.40.0: {}
+
   es-toolkit@1.41.0: {}
 
   esbuild@0.21.5:
@@ -2849,30 +2854,30 @@ snapshots:
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
 
-  globby@15.0.0:
+  globby@14.1.0:
     dependencies:
-      '@sindresorhus/merge-streams': 4.0.0
+      '@sindresorhus/merge-streams': 2.3.0
       fast-glob: 3.3.3
       ignore: 7.0.5
       path-type: 6.0.0
       slash: 5.1.0
       unicorn-magic: 0.3.0
 
-  graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.11.0):
+  graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)(graphql@16.10.0):
     dependencies:
-      '@0no-co/graphql.web': 1.0.12(graphql@16.11.0)
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
+      '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
       '@wollybeard/kit': 0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.41.0
-      graphql: 16.11.0
+      graphql: 16.10.0
       is-plain-obj: 4.1.0
       type-fest: 4.41.0
     transitivePeerDependencies:
       - '@effect/platform'
       - effect
 
-  graphql@16.11.0: {}
+  graphql@16.10.0: {}
 
   gray-matter@4.0.3:
     dependencies:
