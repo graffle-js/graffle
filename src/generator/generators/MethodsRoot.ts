@@ -129,7 +129,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
             generateNamespaceInterfaces(node.children, depth + 1)
           }
 
-          const interfaceName = node.fullPath.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+          const interfaceName = Str.Case.pascal(node.fullPath) + 'Methods'
 
           if (node.fields !== null) {
             // Leaf node - generate interface with actual methods
@@ -138,7 +138,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
             // Parent node - generate interface with nested children
             code(`export interface ${interfaceName}<$Context extends ${$.$$Utilities}.Context> {`)
             for (const [childKey, childNode] of node.children.entries()) {
-              const childInterfaceName = childNode.fullPath.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+              const childInterfaceName = Str.Case.pascal(childNode.fullPath) + 'Methods'
               code(`  ${childKey}: ${childInterfaceName}<$Context>`)
             }
             code(`}`)
@@ -164,7 +164,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     // Add namespace organization properties (top-level only)
     if (namespaceTree) {
       for (const [propertyName, node] of namespaceTree.entries()) {
-        const interfaceName = node.fullPath.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+        const interfaceName = Str.Case.pascal(node.fullPath) + 'Methods'
         code(`  ${propertyName}: ${interfaceName}<$Context>`)
       }
     }
@@ -779,7 +779,7 @@ const renderDomainType = createCodeGenerator<{
     return
   }
 
-  const interfaceName = namespaceKey.split('.').map(Str.Case.capFirst).join('') + 'Methods'
+  const interfaceName = Str.Case.pascal(namespaceKey) + 'Methods'
 
   code(`export interface ${interfaceName}<$Context extends ${$.$$Utilities}.Context> {`)
 

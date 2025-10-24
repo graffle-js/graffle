@@ -1,4 +1,8 @@
-import isPlainObject from 'is-plain-obj'
+const isPlainObject = (value: unknown): boolean =>
+  value !== null
+  && typeof value === `object`
+  && !Array.isArray(value)
+  && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null)
 
 const extractFiles = (value: any, isExtractable: (value: unknown) => boolean, path: string): {
   clone: object
