@@ -1,6 +1,6 @@
 import { Command, CommandExecutor } from '@effect/platform'
 import { NodeCommandExecutor, NodeContext, NodeFileSystem } from '@effect/platform-node'
-import { Effect, Layer } from 'effect'
+import { Effect } from 'effect'
 import stripAnsi from 'strip-ansi'
 import { applyEncoder } from './encoder.js'
 import type { ExampleFile, ExampleResult, ExamplesPluginConfig } from './types.js'
