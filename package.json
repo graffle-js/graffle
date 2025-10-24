@@ -156,8 +156,6 @@
     "@tsconfig/node-lts": "^22.0.2",
     "@tsconfig/node20": "^20.1.6",
     "@tsconfig/strictest": "^2.0.6",
-    "@types/body-parser": "^1.19.6",
-    "@types/express": "^5.0.3",
     "@types/node": "^24.9.1",
     "async-cleanup": "^1.0.0",
     "dprint": "^0.50.2",
