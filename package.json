@@ -111,7 +111,6 @@
     "@molt/command": "^0.9.0",
     "@wollybeard/kit": "^0.85.3",
     "es-toolkit": "^1.41.0",
-    "is-plain-obj": "^4.1.0",
     "type-fest": "^4.40.0"
   },
   "peerDependencies": {

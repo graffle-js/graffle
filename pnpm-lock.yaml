@@ -23,9 +23,6 @@ importers:
       es-toolkit:
         specifier: ^1.41.0
         version: 1.41.0
-      is-plain-obj:
-        specifier: ^4.1.0
-        version: 4.1.0
       type-fest:
         specifier: ^4.40.0
         version: 4.40.0
