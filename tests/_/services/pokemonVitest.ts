@@ -1,4 +1,4 @@
-import type { GlobalSetupContext } from 'vitest/node'
+import type { TestProject } from 'vitest/node'
 import { schema } from '../fixtures/schemas/pokemon/schema.js'
 import { serveSchema } from '../lib/serveSchema.js'
 
@@ -10,13 +10,13 @@ declare module 'vitest' {
   }
 }
 
-export default async ({ provide }: GlobalSetupContext) => {
+export default async (project: TestProject) => {
   const service = await serveSchema({ schema, log: true })
 
   // Set environment variable for subprocesses spawned by tests
   process.env['POKEMON_SCHEMA_URL'] = service.url.href
 
-  provide(`service`, {
+  project.provide(`service`, {
     url: service.url.href,
   })
 
