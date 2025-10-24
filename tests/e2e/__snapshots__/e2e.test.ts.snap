@@ -16,6 +16,59 @@ exports[`client uses dprint formatter if installed 1`] = `
 ]
 `;
 
+exports[`client uses dprint formatter if installed 2`] = `
+[
+  undefined,
+  \`WARNING: No TypeScript formatter found. Generated code will remain ugly. To have code automatically formatted do one of the following things:
+
+- pnpm add --save-dev @dprint/formatter @dprint/typescript
+- pnpm add --save-dev prettier
+
+To suppress this warning disable formatting in one of the following ways:
+
+- CLI: graffle --no-format
+- Configuration file: Generator.configuration({ format: false })
+- API: Generator.generate({ format: false })
+WARNING: Custom scalars detected in the schema, but you have not created a custom scalars module to import implementations from. Create one at: <TMP_PATH>/scalars.ts
+
+GraphQLSP Setup Recommendation
+
+GraphQLSP provides IDE autocomplete and validation for GraphQL strings.
+
+To enable it:
+
+1. Install the plugin:
+   npm add --save-dev @0no-co/graphqlsp
+
+2. Add to your tsconfig.json:
+
+   {
+     "compilerOptions": {
+       "plugins": [
+         {
+           "name": "@0no-co/graphqlsp",
+           "schemas": [{ "name": "default", "schema": "./graffle/schema.graphql" }]
+         }
+       ]
+     }
+   }
+
+3. Enable SDL output in graffle.config.ts to satisfy the schema requirement:
+
+   export default {
+     schema: '...',
+     outputSDL: true
+   }
+
+Documentation:
+- https://github.com/0no-co/GraphQLSP
+
+To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
+\`,
+  "",
+]
+`;
+
 exports[`client uses prettier formatter if installed 1`] = `
 [
   undefined,
