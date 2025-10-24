@@ -28,6 +28,9 @@ const config = Generator.configure({
       ],
     },
   },
+  lint: {
+    missingGraphqlSP: false,
+  },
 })
 
 export default config
