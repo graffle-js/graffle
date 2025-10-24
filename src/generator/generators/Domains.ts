@@ -207,9 +207,8 @@ const generateRootIndexFile = (
     exported.add(fullPath)
 
     // Create export name from path segments using Str.Case utilities
-    // e.g., ['args', 'no'] → 'argsNo'
-    const exportName = pathWithoutPrefix.map((segment, index) => index === 0 ? segment : Str.Case.capFirst(segment))
-      .join('')
+    // e.g., ['args', 'no'] → 'argsNo', ['pokemon-species'] → 'pokemonSpecies'
+    const exportName = Str.Case.camel(fullPath)
 
     lines.push(`export * as ${exportName} from './${fullPath}/$$.js'`)
   }

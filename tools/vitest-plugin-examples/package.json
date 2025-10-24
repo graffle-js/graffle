@@ -41,18 +41,18 @@
   },
   "homepage": "https://github.com/jasonkuhrt/vitest-plugin-examples#readme",
   "dependencies": {
-    "@effect/platform": "^0.92.0",
-    "@effect/platform-node": "^0.98.0",
-    "@wollybeard/kit": "^0.79.0",
-    "effect": "^3.18.0",
-    "strip-ansi": "^7.1.0"
+    "@effect/platform": "^0.92.1",
+    "@effect/platform-node": "^0.98.4",
+    "@wollybeard/kit": "^0.85.2",
+    "effect": "^3.18.4",
+    "strip-ansi": "^7.1.2"
   },
   "peerDependencies": {
     "vite": "^6.0.0",
     "vitest": "^3.0.0"
   },
   "devDependencies": {
-    "vite": "^6.0.0",
-    "vitest": "^3.0.0"
+    "vite": "^7.1.12",
+    "vitest": "^4.0.2"
   }
 }

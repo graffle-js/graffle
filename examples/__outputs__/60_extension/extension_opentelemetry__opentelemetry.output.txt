@@ -2,21 +2,26 @@
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.20.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.21.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '1.30.1'
+      'telemetry.sdk.version': '2.2.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '7daf5e9c4f7c872e1430804de9737f64',
-  parentId: '9673509ea5b5408c',
+  traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+  parentSpanContext: {
+    traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'encode',
-  id: '0656d7f6c5270654',
+  id: '05d20b2b6e69a0de',
   kind: 0,
-  timestamp: 1760814138396000,
-  duration: 721.584,
+  timestamp: 1761314295370000,
+  duration: 765.916,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -26,21 +31,26 @@
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.20.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.21.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '1.30.1'
+      'telemetry.sdk.version': '2.2.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '7daf5e9c4f7c872e1430804de9737f64',
-  parentId: '9673509ea5b5408c',
+  traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+  parentSpanContext: {
+    traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'pack',
-  id: '4ca5551f15fda738',
+  id: 'a607b39bafc39ecf',
   kind: 0,
-  timestamp: 1760814138397000,
-  duration: 647.042,
+  timestamp: 1761314295372000,
+  duration: 662.292,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -50,21 +60,26 @@
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.20.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.21.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '1.30.1'
+      'telemetry.sdk.version': '2.2.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '7daf5e9c4f7c872e1430804de9737f64',
-  parentId: '9673509ea5b5408c',
+  traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+  parentSpanContext: {
+    traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'exchange',
-  id: '6f979c6dd0c35955',
+  id: '8d67f909863ddd49',
   kind: 0,
-  timestamp: 1760814138398000,
-  duration: 14195.083,
+  timestamp: 1761314295373000,
+  duration: 15341.458,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -74,21 +89,26 @@
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.20.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.21.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '1.30.1'
+      'telemetry.sdk.version': '2.2.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '7daf5e9c4f7c872e1430804de9737f64',
-  parentId: '9673509ea5b5408c',
+  traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+  parentSpanContext: {
+    traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'unpack',
-  id: '49e845ed15af5719',
+  id: '11b692354952e1bd',
   kind: 0,
-  timestamp: 1760814138413000,
-  duration: 748.5,
+  timestamp: 1761314295388000,
+  duration: 787.792,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -98,21 +118,26 @@
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.20.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.21.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '1.30.1'
+      'telemetry.sdk.version': '2.2.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '7daf5e9c4f7c872e1430804de9737f64',
-  parentId: '9673509ea5b5408c',
+  traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+  parentSpanContext: {
+    traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+    spanId: '...',
+    traceFlags: 1,
+    traceState: undefined
+  },
   traceState: undefined,
   name: 'decode',
-  id: '2288bafdda2e7fda',
+  id: 'c9c9af22e46816c9',
   kind: 0,
-  timestamp: 1760814138414000,
-  duration: 339.042,
+  timestamp: 1761314295389000,
+  duration: 308.541,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -122,21 +147,21 @@
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.20.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.21.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '1.30.1'
+      'telemetry.sdk.version': '2.2.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '7daf5e9c4f7c872e1430804de9737f64',
-  parentId: undefined,
+  traceId: '69c39ebc6fd18f9c9496bd2504df0fff',
+  parentSpanContext: undefined,
   traceState: undefined,
   name: 'request',
-  id: '9673509ea5b5408c',
+  id: 'ffa296e6c83bf643',
   kind: 0,
-  timestamp: 1760814138396000,
-  duration: 18339.166,
+  timestamp: 1761314295370000,
+  duration: 19764.5,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -150,7 +175,6 @@
     { name: 'Squirtle' },
     { name: 'Bulbasaur' },
     { name: 'Caterpie' },
-    { name: 'Weedle' },
-    { name: 'Mew' }
+    { name: 'Weedle' }
   ]
 }

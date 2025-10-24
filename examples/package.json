@@ -10,22 +10,22 @@
     "gen:types": "vitest --run --bail=1 --testNamePattern '^---NO-TESTS-MATCH-THIS---$' || true"
   },
   "dependencies": {
-    "@opentelemetry/sdk-trace-base": "^1.30.0",
-    "@opentelemetry/sdk-trace-node": "^1.30.0",
+    "@opentelemetry/sdk-trace-base": "^2.2.0",
+    "@opentelemetry/sdk-trace-node": "^2.2.0",
     "gql.tada": "^1.8.13",
-    "graphql": "^16.10.0",
-    "typescript": "^5.7.2"
+    "graphql": "^16.11.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@effect/platform": "^0.92.1",
-    "@effect/platform-node": "^0.98.3",
-    "@tsconfig/node20": "^20.1.4",
-    "@tsconfig/strictest": "^2.0.5",
-    "@wollybeard/kit": "^0.84.0",
+    "@effect/platform-node": "^0.98.4",
+    "@tsconfig/node20": "^20.1.6",
+    "@tsconfig/strictest": "^2.0.6",
+    "@wollybeard/kit": "^0.85.2",
     "effect": "^3.18.4",
     "graffle": "file:..",
-    "tsx": "^4.19.3",
-    "vitest": "^3.1.1"
+    "tsx": "^4.20.6",
+    "vitest": "^4.0.2"
   },
   "pnpm": {
     "overrides": {
