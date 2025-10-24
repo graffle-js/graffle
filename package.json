@@ -106,11 +106,13 @@
     "ts:analyze": "npx @typescript/analyze-trace .typescript-trace"
   },
   "dependencies": {
+    "@0no-co/graphql.web": "1.0.12",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
     "@wollybeard/kit": "^0.85.2",
     "es-toolkit": "^1.40.0",
-    "is-plain-obj": "^4.1.0"
+    "is-plain-obj": "^4.1.0",
+    "type-fest": "^4.40.0"
   },
   "peerDependencies": {
     "@dprint/formatter": "^0.4.0",
@@ -134,7 +136,6 @@
     }
   },
   "devDependencies": {
-    "@0no-co/graphql.web": "^1.0.12",
     "@0no-co/graphqlsp": "^1.15.0",
     "@arethetypeswrong/cli": "^0.18.2",
     "@ark/attest": "^0.51.0",
@@ -182,7 +183,6 @@
     "tinyglobby": "^0.2.15",
     "ts-morph": "^27.0.2",
     "tsx": "^4.20.6",
-    "type-fest": "^4.40.0",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitepress": "^1.6.4",
