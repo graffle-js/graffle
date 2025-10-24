@@ -39,24 +39,6 @@ export type Client<
     & Properties.RunPropertiesComputers<$Context>,
 > = __
 
-// Helper types for ClientBase methods
-type GetScalarMethod<$Context extends Context> =
-  undefined extends $Context['configuration']['schema']['current']['map']
-    ? ScalarMethod.TypeErrorMissingSchemaMap
-    : ScalarMethod<$Context>
-
-type AddProperties<
-  $Context extends Context,
-  $Properties extends Properties.Properties,
-> = {
-  [_ in keyof $Context]: _ extends 'properties' ? Properties.Add<
-      $Context,
-      $Properties extends Properties.PropertiesComputer$Func ? {} : $Properties,
-      $Properties extends Properties.PropertiesComputer$Func ? [$Properties] : []
-    >
-    : $Context[_]
-}
-
 export interface ClientBase<$Context extends Context> {
   /**
    * Internal client context state.
@@ -132,7 +114,9 @@ export interface ClientBase<$Context extends Context> {
    * const graffle = Graffle.create().scalar(DateScalar)
    * ```
    */
-  scalar: GetScalarMethod<$Context>
+  scalar: undefined extends $Context['configuration']['schema']['current']['map']
+    ? ScalarMethod.TypeErrorMissingSchemaMap
+    : ScalarMethod<$Context>
   /**
    * Configure or change the transport layer used for GraphQL requests.
    *
@@ -236,7 +220,16 @@ export interface ClientBase<$Context extends Context> {
   // todo have the client type be passed through too? Using `this` from parent?
   properties: <$Properties extends Properties.Properties>(
     properties: $Properties | Properties.PropertiesComputer<$Context, $Properties>,
-  ) => Client<AddProperties<$Context, $Properties>>
+  ) => Client<
+    {
+      [_ in keyof $Context]: _ extends 'properties' ? Properties.Add<
+          $Context,
+          $Properties extends Properties.PropertiesComputer$Func ? {} : $Properties,
+          $Properties extends Properties.PropertiesComputer$Func ? [$Properties] : []
+        >
+        : $Context[_]
+    }
+  >
 
   /**
    * Add an extension to the client to enhance its functionality.

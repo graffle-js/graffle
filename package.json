@@ -106,13 +106,11 @@
     "ts:analyze": "npx @typescript/analyze-trace .typescript-trace"
   },
   "dependencies": {
-    "@0no-co/graphql.web": "^1.2.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
     "@wollybeard/kit": "^0.85.2",
     "es-toolkit": "^1.40.0",
-    "is-plain-obj": "^4.1.0",
-    "type-fest": "^5.1.0"
+    "is-plain-obj": "^4.1.0"
   },
   "peerDependencies": {
     "@dprint/formatter": "^0.4.0",
@@ -136,6 +134,7 @@
     }
   },
   "devDependencies": {
+    "@0no-co/graphql.web": "^1.0.12",
     "@0no-co/graphqlsp": "^1.15.0",
     "@arethetypeswrong/cli": "^0.18.2",
     "@ark/attest": "^0.51.0",
@@ -148,8 +147,8 @@
     "@effect/workflow": "^0.11.5",
     "@microsoft/tsdoc": "^0.15.1",
     "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/sdk-trace-base": "^2.2.0",
-    "@opentelemetry/sdk-trace-node": "^2.2.0",
+    "@opentelemetry/sdk-trace-base": "^1.30.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "@pothos/core": "^4.10.0",
     "@pothos/plugin-simple-objects": "^4.1.3",
     "@pothos/plugin-zod": "^4.2.0",
@@ -158,7 +157,7 @@
     "@tsconfig/strictest": "^2.0.6",
     "@types/body-parser": "^1.19.6",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.9.1",
+    "@types/node": "^22.14.1",
     "async-cleanup": "^1.0.0",
     "dprint": "^0.50.2",
     "dripip": "^0.10.0",
@@ -166,14 +165,14 @@
     "execa": "^9.6.0",
     "fs-jetpack": "^5.1.0",
     "get-port": "^7.1.0",
-    "globby": "^15.0.0",
+    "globby": "^14.1.0",
     "gql.tada": "^1.8.13",
-    "graphql": "^16.11.0",
+    "graphql": "^16.10.0",
     "graphql-scalars": "^1.25.0",
     "graphql-tag": "^2.12.6",
     "graphql-upload-minimal": "^1.6.1",
     "graphql-yoga": "^5.16.0",
-    "jsdom": "^27.0.1",
+    "jsdom": "^26.1.0",
     "memfs": "^4.49.0",
     "mermaid": "^11.12.0",
     "oxlint": "^1.24.0",
@@ -183,11 +182,12 @@
     "tinyglobby": "^0.2.15",
     "ts-morph": "^27.0.2",
     "tsx": "^4.20.6",
+    "type-fest": "^4.40.0",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",
-    "vitest": "^4.0.2",
+    "vitest": "^3.1.1",
     "zod": "^3.24.3"
   },
   "imports": {

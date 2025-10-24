@@ -7,6 +7,7 @@ Configuration.Add costs **573 incremental instantiations** (after amortizing Cli
 ## Cost Breakdown
 
 ### Total Cost: 573 instantiations
+
 - **Configurator resolution**: 525 inst (92%)
   - Output configurator: 385 inst
   - Check configurator: 73 inst
@@ -14,6 +15,7 @@ Configuration.Add costs **573 incremental instantiations** (after amortizing Cli
 - **Core logic**: 236 inst (41% of total, but only 8% after amortization)
 
 ### Configurator Access Costs (without amortization)
+
 - Access `Output.Configurator`: 385 inst
 - Access `Check.Configurator`: 73 inst
 - Access `Schema.Configurator`: 130 inst
@@ -23,6 +25,7 @@ Configuration.Add costs **573 incremental instantiations** (after amortizing Cli
   - Access `normalizedIncremental`: +13 inst
 
 ### Configuration.Add Operations
+
 - Mapped types themselves: ~0 inst (essentially free)
 - Conditionals: ~72 inst per key (even when false!)
 - `ApplyConfiguratorInputResolver$Func`: 951 inst (includes configurator access)
@@ -51,6 +54,7 @@ Configuration.Add costs **573 incremental instantiations** (after amortizing Cli
 ## Optimization Attempts
 
 ### ❌ Failed Optimizations
+
 All attempts to restructure Configuration.Add made performance WORSE:
 
 1. **Intersection approach** (763 inst): `& $Context['configuration'] & {...}`
@@ -60,14 +64,17 @@ All attempts to restructure Configuration.Add made performance WORSE:
    - Adds overhead without reducing configurator access
 
 ### Root Problem
+
 TypeScript's type system doesn't allow true short-circuiting. Mapped types evaluate all branches, even when conditionals would skip them.
 
 ## Viable Optimization Paths
 
 ### Option 1: Simplify Configurator Interface
+
 **Target**: Reduce Output.Configurator from 385 → <100 inst
 
 Approaches:
+
 - Remove computed property `normalizedIncremental` from interface
   - Compute on-demand via helper type instead
   - Current: `configurator.normalizedIncremental`
@@ -84,9 +91,11 @@ Approaches:
 **Impact**: Would reduce configurator overhead from 525 → ~150 inst (73% reduction)
 
 ### Option 2: Cache Configurators in Context
+
 **Target**: Amortize configurator cost across multiple operations
 
 Approaches:
+
 - Pre-compute configurator types in ContextEmpty
   - Store resolved types as const type aliases
   - Reference these instead of recomputing
@@ -98,9 +107,11 @@ Approaches:
 **Impact**: ~203 inst savings for first operation only
 
 ### Option 3: Restructure Configuration Storage
+
 **Target**: Avoid nested configurator access pattern
 
 Approaches:
+
 - Flatten configuration structure
   - Current: `$Context['configuration']['output']['configurator']`
   - Proposed: `$Context['configurators']['output']` (separate from current values)
@@ -116,11 +127,13 @@ Approaches:
 ## Recommendations
 
 ### Priority 1: Simplify Configurator Interface (Option 1)
+
 - Highest impact (73% reduction in configurator overhead)
 - Doesn't break public API
 - Changes are localized to configurator implementation
 
 ### Priority 2: Remove computed properties from Configurator
+
 - Move `normalizedIncremental` from interface property to helper type
 - Replace: `$Configurator['normalizedIncremental']`
 - With: `Configurator.GetNormalizedIncremental<$Configurator>`
@@ -163,11 +176,13 @@ type Client3 = Client<Configuration.Add<ContextEmpty, {...}>> // Full price agai
 ```
 
 This means:
+
 - Base Client type: Well-cached across usage
 - Configuration changes: Each unique configuration incurs full cost
 - Chaining: Each `.with()` in a chain may benefit from partial caching
 
 The optimization is most valuable for:
+
 - Type-level tests (run repeatedly)
 - IDE responsiveness (hover, autocomplete)
 - Build times (tsc compilation)

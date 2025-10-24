@@ -9,11 +9,13 @@ The Configurator interface is responsible for **525 out of 573 instantiations** 
 ### Section 1: Raw Configurator Access Costs
 
 Without any baseline amortization:
+
 - **Output.Configurator**: 0 inst (cached by ContextEmpty import)
 - **Check.Configurator**: 54 inst
 - **Schema.Configurator**: 86 inst
 
 After amortizing ContextEmpty:
+
 - **Output.Configurator**: 0 inst (already cached)
 - **Check.Configurator**: 54 inst (no change - not cached by import)
 - **Schema.Configurator**: 86 inst (no change - not cached by import)
@@ -23,6 +25,7 @@ After amortizing ContextEmpty:
 ### Section 2: Property Access Costs (After Amortizing Output.Configurator)
 
 After Output.Configurator is resolved:
+
 - **input**: 1 inst
 - **normalized**: 1 inst
 - **default**: 1 inst
@@ -32,6 +35,7 @@ After Output.Configurator is resolved:
 ### Section 3: Incrementify Type Cost
 
 The `normalizedIncremental` property uses `Configurator.Incrementify`:
+
 - **Output config**: 13 inst
 - **Check config**: **89 inst** (7x more expensive!)
 - **Schema config**: **135 inst** (10x more expensive!)
@@ -55,6 +59,7 @@ Symbol access itself is cheap - the problem is elsewhere.
 ### Section 6: Output Configurator Structure
 
 Individual types are all cheap:
+
 - **Output.Input**: 0 inst
 - **Output.Normalized**: 0 inst
 - **Output.InputResolver$Func**: 0 inst
@@ -64,11 +69,13 @@ The cost comes from combining them in the Configurator interface.
 ### Section 7: Potential Optimizations
 
 **Test 1: Remove `normalizedIncremental` from interface**
+
 - **WITHOUT normalizedIncremental**: 12 inst
 - **Original**: 42 inst
 - **Savings**: **30 inst (71% reduction!)**
 
 **Test 2: Simplify InputResolver to `any`**
+
 - **SIMPLIFIED (with `any`)**: 3 inst
 - **Original**: 42 inst
 - **Savings**: **39 inst (93% reduction!)**
@@ -78,6 +85,7 @@ The cost comes from combining them in the Configurator interface.
 ### Section 8: Multiple Configurator Access Pattern
 
 Simulating Configuration.Add's behavior:
+
 - **All three configurators**: 148 inst (not 525 - TypeScript caching helps!)
 - **All three normalizedIncremental**: 175 inst (27 inst more - computing Incrementify 3x)
 
@@ -106,10 +114,12 @@ Having Incrementify as a computed interface property costs **30 instantiations**
 ### 3. Incrementify Scales Poorly (13-135 inst)
 
 The Incrementify type uses mapped types to partition properties:
+
 - Properties in $Default → required
 - Properties NOT in $Default → optional
 
 Cost scales with configuration structure size:
+
 - Simple (Output): 13 inst
 - Medium (Check): 89 inst
 - Complex (Schema): 135 inst
@@ -119,17 +129,22 @@ Cost scales with configuration structure size:
 ### Priority 1: Remove normalizedIncremental from Interface (30 inst savings)
 
 **Current:**
+
 ```typescript
 export interface Configurator<$Input, $Normalized, $Default, $InputResolver> {
   readonly input: $Input
   readonly normalized: $Normalized
   readonly default: $Default
   readonly inputResolver: $InputResolver
-  readonly normalizedIncremental: Configurator.Incrementify<$Normalized, $Default>
+  readonly normalizedIncremental: Configurator.Incrementify<
+    $Normalized,
+    $Default
+  >
 }
 ```
 
 **Proposed:**
+
 ```typescript
 export interface Configurator<$Input, $Normalized, $Default, $InputResolver> {
   readonly input: $Input
@@ -147,6 +162,7 @@ type Current = Configurator.GetNormalizedIncremental<$Configurator>
 ```
 
 **Impact:**
+
 - Configurator creation: 42 → 12 inst (71% reduction)
 - Configuration.Add: 573 → ~543 inst (5% reduction)
 - Simple change, doesn't break public API if done carefully
@@ -156,17 +172,20 @@ type Current = Configurator.GetNormalizedIncremental<$Configurator>
 This is the #1 cost driver but requires more careful refactoring.
 
 **Option A: Use simpler constraint**
+
 ```typescript
 $InputResolver extends Configurator.InputResolverGeneric =
   Configurator.InputResolverGeneric<Configurator.InputResolver.Standard_ShallowMerge$Func<$Input, $Normalized, $Default>>
 ```
 
 Simplify to:
+
 ```typescript
 $InputResolver extends object = StandardInputResolver<$Input, $Normalized, $Default>
 ```
 
 **Option B: Split Configurator Interface**
+
 ```typescript
 // Base interface - lightweight
 export interface ConfiguratorBase<$Input, $Normalized, $Default> {
@@ -178,12 +197,14 @@ export interface ConfiguratorBase<$Input, $Normalized, $Default> {
 
 // Full interface - use only where needed
 export interface Configurator<$Input, $Normalized, $Default, $InputResolver>
-  extends ConfiguratorBase<$Input, $Normalized, $Default> {
+  extends ConfiguratorBase<$Input, $Normalized, $Default>
+{
   readonly inputResolver: $InputResolver
 }
 ```
 
 **Impact:**
+
 - Configurator creation: 42 → 3 inst (93% reduction!)
 - Configuration.Add: 573 → ~180 inst (69% reduction!)
 - Requires careful API refactoring
@@ -193,6 +214,7 @@ export interface Configurator<$Input, $Normalized, $Default, $InputResolver>
 Schema's Incrementify costs 135 inst because of many properties. Consider:
 
 **Option A: Cached helper type**
+
 ```typescript
 // Instead of computing inline, pre-compute for known configs
 type SchemaConfigIncremental = Configurator.Incrementify<
@@ -220,6 +242,7 @@ Applying **Priority 1 + Priority 2**:
 ## Implementation Strategy
 
 ### Phase 1: Low-Risk Optimization (Week 1)
+
 1. Remove `normalizedIncremental` from Configurator interface
 2. Add helper type `Configurator.GetNormalizedIncremental<T>`
 3. Update all usage sites
@@ -229,6 +252,7 @@ Applying **Priority 1 + Priority 2**:
 **Expected savings: 30 inst (5%)**
 
 ### Phase 2: High-Impact Optimization (Week 2-3)
+
 1. Simplify InputResolver generic parameter
 2. Consider splitting Configurator interface
 3. Refactor Configuration.Add to use simpler constraints
@@ -239,6 +263,7 @@ Applying **Priority 1 + Priority 2**:
 **Expected savings: 39+ inst (additional 60%+)**
 
 ### Phase 3: Polish (Week 4)
+
 1. Optimize Incrementify for Schema config if still needed
 2. Consider caching strategies for expensive configs
 3. Document new patterns
@@ -254,17 +279,20 @@ Applying **Priority 1 + Priority 2**:
 ## Risk Assessment
 
 ### Low Risk (Priority 1)
+
 - Removing `normalizedIncremental` from interface is backwards compatible if done via helper type
 - Easy to verify correctness
 - Small, localized changes
 
 ### Medium Risk (Priority 2)
+
 - Simplifying InputResolver requires careful refactoring
 - May impact type safety guarantees
 - Needs extensive testing
 - Could affect public API if not careful
 
 ### Mitigation
+
 - Implement behind feature flag
 - Run full test suite including type tests
 - Verify no runtime behavior changes

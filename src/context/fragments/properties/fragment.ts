@@ -26,10 +26,7 @@ export type RunPropertiesComputers<
   $Context extends Context,
   $Items extends readonly [...PropertiesComputer$Func[]] = $Context['properties']['$computedTypeFunctions'],
   $Acc extends Properties = {},
-> =
-  // Fast path: short-circuit for empty array
-  $Items extends readonly [] ? {}
-  : $Items extends
+> = $Items extends
       readonly [
         infer $Head extends PropertiesComputer$Func,
         ...infer $Tail extends readonly PropertiesComputer$Func[],
