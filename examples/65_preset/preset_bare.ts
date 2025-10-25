@@ -22,12 +22,8 @@ const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = 
 const graffle2 = graffle1.use(DocumentBuilder()).use(Introspection())
 
 const _e2: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.gql('{ __typename }').$send
-// @ts-expect-error - Type error reporting broken, needs investigation (pre-existing issue on main)
 const _e3: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.query.$batch
-// @ts-expect-error - Type error reporting broken, needs investigation (pre-existing issue on main)
 const _e4: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.query.pokemons
-// @ts-expect-error - Type error reporting broken, needs investigation (pre-existing issue on main)
 const _e5: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.mutation.$batch
-// @ts-expect-error - Type error reporting broken, needs investigation (pre-existing issue on main)
 const _e6: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.mutation.addPokemon
 const _e7: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.introspect
