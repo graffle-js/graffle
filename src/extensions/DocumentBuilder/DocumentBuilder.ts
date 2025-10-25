@@ -63,5 +63,5 @@ type Properties_<
   GlobalRegistry.Has<__Name> extends false ? {}
     : (
       // @ts-ignore Passes after generation
-      Kind.Apply<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], [$Parameters['context']]>
+      Kind.Apply<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
     )
