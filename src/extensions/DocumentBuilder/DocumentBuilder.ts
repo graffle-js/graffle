@@ -47,7 +47,7 @@ export const DocumentBuilder = Extension
   })
   .return()
 
-export interface Properties extends Kind.Kind {
+export interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error
   return: Properties_<this['parameters']>
 }
