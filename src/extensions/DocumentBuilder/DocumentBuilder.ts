@@ -1,6 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { GlobalRegistry } from '#graffle/utilities-for-generated'
-import { Kind } from '@wollybeard/kit/ts'
+import type { GlobalRegistry, Kind } from '#graffle/utilities-for-generated'
 import { OperationTypeNode } from 'graphql'
 import { createMethodOperationType } from './methods-instance/requestMethods.js'
 
@@ -48,7 +47,7 @@ export const DocumentBuilder = Extension
   })
   .return()
 
-export interface Properties extends Extension.PropertiesTypeFunction {
+export interface Properties extends Kind.Kind {
   // @ts-expect-error
   return: Properties_<this['parameters']>
 }

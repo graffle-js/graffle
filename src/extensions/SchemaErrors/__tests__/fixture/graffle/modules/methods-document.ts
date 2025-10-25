@@ -48,7 +48,7 @@ export interface Document<$Context extends $$Utilities.Context> {
  *
  * Internal type used for type-level computation in the document builder.
  */
-export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction {
+export interface BuilderMethodsDocumentFn extends $$Utilities.Kind.Kind {
   // @ts-expect-error parameter is Untyped.
   return: Document<this['parameters']>
 }

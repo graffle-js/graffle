@@ -49,6 +49,6 @@ export interface Document<$Context> {
  *
  * Internal type used for type-level computation in the document builder.
  */
-export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction {
+export interface BuilderMethodsDocumentFn extends $$Utilities.Kind.Kind {
   return: Document<this['parameters']>
 }

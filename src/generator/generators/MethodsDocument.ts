@@ -76,7 +76,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
        *
        * Internal type used for type-level computation in the document builder.
        */
-      export interface BuilderMethodsDocumentFn extends ${$.$$Utilities}.TypeFunction {
+      export interface BuilderMethodsDocumentFn extends ${$.$$Utilities}.Kind.Kind {
         ${hktTsExpectError}
         return: Document<this['parameters']>
       }

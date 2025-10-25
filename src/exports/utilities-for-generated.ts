@@ -1,6 +1,4 @@
-import { Kind } from '@wollybeard/kit/ts'
-export { Kind }
-export type TypeFunction = Kind.Kind
+export { Kind } from '@wollybeard/kit/ts'
 export { createConstructorWithContext } from '#src/client/client.js'
 export {
   type ConfigGetOutputError,
