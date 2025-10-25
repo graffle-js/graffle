@@ -683,8 +683,8 @@ packages:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
-  '@wollybeard/kit@0.85.3':
-    resolution: {integrity: sha512-hB7gpJTJfSdI6ys2jU/ifHWeYOWoKz/yqkuvJScVSmfqr7zGZ3AlRHxmo8Q+9RYPcUh6dlIayFWcq+jUp5cZbw==}
+  '@wollybeard/kit@0.89.0':
+    resolution: {integrity: sha512-UQzy5ce5+OsVPHjetxMtT+yJLdaxitDTR4xrpnXzkU8giBoMzSoV6blq5dakF6JvlS4GQHdQojwzi03VrOjHew==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1608,7 +1608,7 @@ snapshots:
       ts-morph: 27.0.2
       type-fest: 5.1.0
 
-  '@wollybeard/kit@0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.89.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@microsoft/tsdoc': 0.15.1
@@ -1750,7 +1750,7 @@ snapshots:
       '@0no-co/graphql.web': 1.2.0(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+      '@wollybeard/kit': 0.89.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.41.0
       graphql: 16.11.0
       type-fest: 5.1.0
