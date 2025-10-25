@@ -6,8 +6,8 @@ import {
   propertiesComputerPreflight$Func,
   propertiesStatic1,
 } from '#src/context/fragments/properties/_tests/_fixtures.js'
-import { Ts } from '@wollybeard/kit'
 import { test } from '#test/helpers'
+import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { type Configuration } from '../../context/fragments/configuration/$.js'
 import { type Client_justContext } from '../client.js'

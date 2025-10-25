@@ -1,6 +1,6 @@
 import { ATransport, BTransport } from '#test/fixtures/transports'
-import { Ts } from '@wollybeard/kit'
 import { test } from '#test/helpers'
+import { Ts } from '@wollybeard/kit'
 import { addMany } from './addMany.js'
 
 test(`can add one transport`, ({ c0 }) => {

@@ -1,9 +1,9 @@
 import type { Grafaid } from '#lib/grafaid'
 import { DateScalar } from '#test/fixtures/scalars'
-import { Ts } from '@wollybeard/kit'
 import { test as testBase } from '#test/helpers'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
+import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 
