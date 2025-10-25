@@ -57,14 +57,6 @@ importers:
 
 packages:
 
-  '@0no-co/graphql.web@1.0.12':
-    resolution: {integrity: sha512-BTDjjsV/zSPy5fqItwm+KWUfh9CSe9tTtR6rCB72ddtkAxdcHbi4Ir4r/L1Et4lyxmL+i7Rb3m9sjLLi9tYrzA==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-    peerDependenciesMeta:
-      graphql:
-        optional: true
-
   '@0no-co/graphql.web@1.2.0':
     resolution: {integrity: sha512-/1iHy9TTr63gE1YcR5idjx8UREz1s0kFhydf3bBLCXyqjhkIc6igAzTOx3zPifCwFR87tsh/4Pa9cNts6d2otw==}
     peerDependencies:
@@ -1123,10 +1115,6 @@ packages:
 
 snapshots:
 
-  '@0no-co/graphql.web@1.0.12(graphql@16.11.0)':
-    optionalDependencies:
-      graphql: 16.11.0
-
   '@0no-co/graphql.web@1.2.0(graphql@16.11.0)':
     optionalDependencies:
       graphql: 16.11.0
@@ -1759,13 +1747,13 @@ snapshots:
 
   graffle@file:..(@effect/platform@0.92.1(effect@3.18.4))(@opentelemetry/api@1.9.0)(effect@3.18.4)(graphql@16.11.0):
     dependencies:
-      '@0no-co/graphql.web': 1.0.12(graphql@16.11.0)
+      '@0no-co/graphql.web': 1.2.0(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       '@molt/command': 0.9.0
       '@wollybeard/kit': 0.85.3(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit: 1.41.0
       graphql: 16.11.0
-      type-fest: 4.41.0
+      type-fest: 5.1.0
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
     transitivePeerDependencies:
