@@ -5,7 +5,7 @@ import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
 import { Ts } from '@wollybeard/kit'
 import { parse } from 'graphql'
-import { describe, expect, expectTypeOf } from 'vitest'
+import { describe, expect } from 'vitest'
 import { TransportMemory } from '../../../extensions/TransportMemory/TransportMemory.js'
 
 // todo test with custom scalars
@@ -23,7 +23,7 @@ describe(`given typed document node`, () => {
       parse(`query GetId { id }`),
     )
     const result = await g.gql(doc).$send()
-    expectTypeOf(result).toEqualTypeOf<ResultData | null>()
+    Ts.Assert.exact.ofAs<ResultData | null>().on(result)
     expect(result).toEqual({ id: db.id1 })
   })
 

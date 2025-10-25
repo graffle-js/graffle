@@ -2,8 +2,9 @@ import { type GlobalRegistry } from '#graffle/utilities-for-generated'
 import { contextEmpty } from '#src/context/ContextEmpty.js'
 import type { Docpar } from '#src/docpar/$.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
+import { Ts } from '@wollybeard/kit'
 import { g0, test } from '#test/helpers'
-import { expect, expectTypeOf } from 'vitest'
+import { expect } from 'vitest'
 import type { Schema } from '../../types/Schema/$.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
@@ -33,32 +34,32 @@ test(`context scalars begin empty`, ({ g0 }) => {
 })
 
 test(`method not available when no schema map `, ({ g0 }) => {
-  expectTypeOf(g0.scalar).toEqualTypeOf<ScalarMethod.TypeErrorMissingSchemaMap>()
+  Ts.Assert.exact.ofAs<ScalarMethod.TypeErrorMissingSchemaMap>().on(g0.scalar)
 })
 
 test(`method is available when there is a schema map `, () => {
-  expectTypeOf(g1.scalar).toMatchTypeOf<ScalarMethod<typeof g1._>>()
+  Ts.Assert.equiv.ofAs<ScalarMethod<typeof g1._>>().on(g1.scalar)
 })
 
 test(`can pass an inline scalar definition`, () => {
   const codec = AScalar.codec
   const g3 = g1.scalar(`A`, codec)
   expect(g3._.scalars.map).toEqual({ A: AScalar })
-  expectTypeOf(g3._.scalars).toMatchTypeOf<{
+  Ts.Assert.equiv.ofAs<{
     map: { A: AScalar }
     typesDecoded: bigint
     typesEncoded: string
-  }>()
+  }>().on(g3._.scalars)
 })
 
 test(`can pass a scalar definition`, () => {
   const g3 = g1.scalar(AScalar)
   expect(g3._.scalars.map).toEqual({ A: AScalar })
-  expectTypeOf(g3._.scalars).toMatchTypeOf<{
+  Ts.Assert.equiv.ofAs<{
     map: { A: AScalar }
     typesDecoded: bigint
     typesEncoded: string
-  }>()
+  }>().on(g3._.scalars)
 })
 
 test(`scalar name must match a scalar from the schema`, () => {

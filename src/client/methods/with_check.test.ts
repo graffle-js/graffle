@@ -1,4 +1,5 @@
-import { expect, expectTypeOf, test } from 'vitest'
+import { Ts } from '@wollybeard/kit'
+import { expect, test } from 'vitest'
 import { create } from '../client.js'
 
 const g1 = create()
@@ -6,20 +7,20 @@ const g1 = create()
 test(`given empty input, just returns current client`, () => {
   const g2 = g1.with({})
   expect(g2).toBe(g1)
-  expectTypeOf(g2._.configuration).toMatchTypeOf(g1._.configuration)
+  Ts.Assert.equiv.ofAs<typeof g1._.configuration>().on(g2._.configuration)
 })
 
 test(`given undefined for a configuration, same as not given.`, () => {
   const g2 = g1.with({ check: undefined })
   expect(g2).toBe(g1)
-  expectTypeOf(g2._.configuration).toMatchTypeOf(g1._.configuration)
+  Ts.Assert.equiv.ofAs<typeof g1._.configuration>().on(g2._.configuration)
 })
 
 test(`given one configuration input, updates just that configuration`, () => {
   const g2 = g1.with({ check: { preflight: false } })
   expect(g2).not.toBe(g1)
   expect(g2._.configuration.check.current.preflight).toBe(false)
-  expectTypeOf(g2._.configuration[`check`][`current`][`preflight`]).toEqualTypeOf<false>()
+  Ts.Assert.exact.ofAs<false>().on(g2._.configuration[`check`][`current`][`preflight`])
   // Untouched configurations are passed through
   expect(g2._.configuration.output).toBe(g1._.configuration.output)
   expect(g2._.configuration.schema).toBe(g1._.configuration.schema)

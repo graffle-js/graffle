@@ -6,24 +6,25 @@ import {
   propertiesComputerPreflight$Func,
   propertiesStatic1,
 } from '#src/context/fragments/properties/_tests/_fixtures.js'
+import { Ts } from '@wollybeard/kit'
 import { test } from '#test/helpers'
-import { describe, expect, expectTypeOf } from 'vitest'
+import { describe, expect } from 'vitest'
 import { type Configuration } from '../../context/fragments/configuration/$.js'
 import { type Client_justContext } from '../client.js'
 
 test(`initial context is empty`, ({ g0 }) => {
   expect(g0._.properties).toEqual(contextEmpty.properties)
-  expectTypeOf(g0._.properties).toEqualTypeOf<ContextEmpty['properties']>()
+  Ts.Assert.exact.ofAs<ContextEmpty['properties']>().on(g0._.properties)
 })
 
 test(`can add static properties`, ({ g0 }) => {
   const g1 = g0.properties(propertiesStatic1)
   // Context extended
   expect(g1._.properties.static).toEqual(propertiesStatic1)
-  expectTypeOf(g1._.properties.static).toMatchTypeOf<typeof propertiesStatic1>()
+  Ts.Assert.equiv.ofAs<typeof propertiesStatic1>().on(g1._.properties.static)
   // Client extended
   expect(g1).toMatchObject(propertiesStatic1)
-  expectTypeOf(g1.foo).toMatchTypeOf<typeof propertiesStatic1['foo']>()
+  Ts.Assert.equiv.ofAs<typeof propertiesStatic1['foo']>().on(g1.foo)
 })
 
 describe(`computed properties`, () => {
@@ -32,7 +33,7 @@ describe(`computed properties`, () => {
     // Context extended
     expect(g1._.properties.static).toEqual({})
     expect(g1._.properties.computed).toEqual([propertiesComputerParameters])
-    expectTypeOf(g1._.properties.static).toMatchTypeOf<
+    Ts.Assert.equiv.ofAs<
       {
         parameters: {
           configuration: Configuration.ContextFragment['configuration']
@@ -40,8 +41,8 @@ describe(`computed properties`, () => {
           client: Client_justContext
         }
       }
-    >()
-    expectTypeOf(g1._.properties.$computedTypeFunctions).toEqualTypeOf<readonly []>()
+    >().on(g1._.properties.static)
+    Ts.Assert.exact.ofAs<readonly []>().on(g1._.properties.$computedTypeFunctions)
     // Client extended
     expect(g1.parameters.client).toBe(g1)
     expect(g1.parameters.context).toBe(g1._)
@@ -57,11 +58,11 @@ describe(`computed properties`, () => {
   })
   test(`can be added (type level)`, ({ g0 }) => {
     const g1 = g0.properties(propertiesComputerPreflight$Func)
-    expectTypeOf(g1._.properties.$computedTypeFunctions).toEqualTypeOf<readonly [propertiesComputerPreflight$Func]>()
-    expectTypeOf(g1.foo).toEqualTypeOf<`bar`>()
+    Ts.Assert.exact.ofAs<readonly [propertiesComputerPreflight$Func]>().on(g1._.properties.$computedTypeFunctions)
+    Ts.Assert.exact.ofAs<`bar`>().on(g1.foo)
     const g2 = g1.with({ check: { preflight: false } })
-    expectTypeOf(g2.foo).toEqualTypeOf<`baz`>()
+    Ts.Assert.exact.ofAs<`baz`>().on(g2.foo)
     const g3 = g2.with({ check: { preflight: true } })
-    expectTypeOf(g3.foo).toEqualTypeOf<`bar`>()
+    Ts.Assert.exact.ofAs<`bar`>().on(g3.foo)
   })
 })
