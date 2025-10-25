@@ -1,6 +1,10 @@
 import { Kind } from '@wollybeard/kit/ts'
 export { Kind }
-export type TypeFunction = Kind.Kind
+// Create a non-readonly version for backwards compatibility
+export interface TypeFunction {
+  parameters: unknown
+  return: unknown
+}
 export { createConstructorWithContext } from '#src/client/client.js'
 export {
   type ConfigGetOutputError,
