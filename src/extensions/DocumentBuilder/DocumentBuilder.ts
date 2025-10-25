@@ -1,6 +1,6 @@
 import { Extension } from '#graffle/extension'
 import type { GlobalRegistry } from '#graffle/utilities-for-generated'
-import type { TypeFunction } from '#lib/type-function'
+import { Kind } from '@wollybeard/kit/ts'
 import { OperationTypeNode } from 'graphql'
 import { createMethodOperationType } from './methods-instance/requestMethods.js'
 
@@ -64,5 +64,5 @@ type Properties_<
   GlobalRegistry.Has<__Name> extends false ? {}
     : (
       // @ts-ignore Passes after generation
-      TypeFunction.Call<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
+      Kind.Apply<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], [$Parameters['context']]>
     )

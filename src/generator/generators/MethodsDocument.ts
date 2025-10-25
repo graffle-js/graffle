@@ -78,7 +78,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
        */
       export interface BuilderMethodsDocumentFn extends ${$.$$Utilities}.TypeFunction {
         ${hktTsExpectError}
-        return: Document<this['params']>
+        return: Document<this['parameters']>
       }
     `
   },

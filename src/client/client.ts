@@ -1,5 +1,4 @@
 import type { Anyware } from '#lib/anyware'
-import type { TypeFunction } from '#lib/type-function'
 import type { Context } from '#src/context/context.js'
 import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
@@ -10,6 +9,7 @@ import type { Exact } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
 import { Str } from '@wollybeard/kit'
+import { Kind } from '@wollybeard/kit/ts'
 import { Configuration } from '../context/fragments/configuration/$.js'
 import { Extensions } from '../context/fragments/extensions/$.js'
 import type { Extension } from '../context/fragments/extensions/dataType/$.js'
@@ -353,7 +353,7 @@ export type ExtensionChainableRegistry = {
   [name: string]: ExtensionChainable
 }
 
-export interface ExtensionChainable extends TypeFunction {}
+export interface ExtensionChainable extends Kind.Kind {}
 
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
 
