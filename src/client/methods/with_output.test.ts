@@ -1,6 +1,6 @@
 import { type ExecutionResult } from 'graphql'
 import { describe } from 'node:test'
-import { expect, expectTypeOf } from 'vitest'
+import { expect } from 'vitest'
 // import { schema } from '#test/fixtures/schemas/kitchen-sink/schema'
 import type { Anyware } from '#lib/anyware'
 import { type GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'

@@ -1,6 +1,6 @@
 import { Configurator } from '#src/lib/configurator/configurator.js'
-import type { Ts } from '@wollybeard/kit'
-import { expect, expectTypeOf, test } from 'vitest'
+import { Ts } from '@wollybeard/kit'
+import { expect, test } from 'vitest'
 import { contextEmpty } from '../../../$$.js'
 import { addType } from './addType.js'
 
@@ -18,8 +18,8 @@ test(`registers a configurator into the configuration`, () => {
   })
   // Assertions: Type Level
   const nsCurrent: Ts.Simplify.Top<typeof ns.current> = ns.current
-  expectTypeOf(nsCurrent).toEqualTypeOf<typeof configurator.default>()
-  expectTypeOf(ns.configurator).toEqualTypeOf<typeof configurator>()
+  Ts.Assert.exact.ofAs<typeof configurator.default>().on(nsCurrent)
+  Ts.Assert.exact.ofAs<typeof configurator>().on(ns.configurator)
 })
 
 test(`if initial input given, then configurator is applied against it with defaults`, () => {
@@ -34,6 +34,6 @@ test(`if initial input given, then configurator is applied against it with defau
   })
   // Assertions: Type Level
   const nsCurrent: Ts.Simplify.Top<typeof ns.current> = ns.current
-  expectTypeOf(nsCurrent).toEqualTypeOf<{ readonly a: 2; readonly b: 3 }>()
-  expectTypeOf(ns.configurator).toEqualTypeOf<typeof configurator>()
+  Ts.Assert.exact.ofAs<{ readonly a: 2; readonly b: 3 }>().on(nsCurrent)
+  Ts.Assert.exact.ofAs<typeof configurator>().on(ns.configurator)
 })

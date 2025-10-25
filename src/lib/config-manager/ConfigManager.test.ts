@@ -1,11 +1,12 @@
-import { describe, expect, expectTypeOf, test } from 'vitest'
+import { Ts } from '@wollybeard/kit'
+import { describe, expect, test } from 'vitest'
 import { ConfigManager } from './$.js'
 
 test(`defaults are merged into input value`, () => {
   const defaults = { a: 1 }
   const input = {}
   const result = ConfigManager.mergeDefaults(defaults, input)
-  expectTypeOf(result).toEqualTypeOf<{ a: number }>()
+  Ts.Assert.exact.ofAs<{ a: number }>().on(result)
   expect(result).toEqual({ a: 1 })
 })
 
@@ -13,7 +14,7 @@ test(`keys with undefined are ignored`, () => {
   const defaults = { a: 1 }
   const input = { a: undefined }
   const result = ConfigManager.mergeDefaults(defaults, input)
-  expectTypeOf(result).toEqualTypeOf<{ a: number }>()
+  Ts.Assert.exact.ofAs<{ a: number }>().on(result)
   expect(result).toEqual({ a: 1 })
 })
 
@@ -42,7 +43,7 @@ test(`nested objects are merged`, () => {
   const defaults = { a: { b: 2 } }
   const input = {}
   const result = ConfigManager.mergeDefaults(defaults, input)
-  expectTypeOf(result).toEqualTypeOf<{ a: { b: number } }>()
+  Ts.Assert.exact.ofAs<{ a: { b: number } }>().on(result)
   expect(result).toEqual({ a: { b: 2 } })
 })
 
@@ -50,7 +51,7 @@ test(`nested object input value takes precedence`, () => {
   const defaults = { a: { b: 2 } }
   const input = { a: { b: 3 } }
   const result = ConfigManager.mergeDefaults(defaults, input)
-  expectTypeOf(result).toEqualTypeOf<{ a: { b: number } }>()
+  Ts.Assert.exact.ofAs<{ a: { b: number } }>().on(result)
   expect(result).toEqual({ a: { b: 3 } })
 })
 
@@ -73,7 +74,7 @@ test(`works with interface-typed values`, () => {
   const defaults: Defaults = { a: 1 }
   const input: Input = {}
   const result = ConfigManager.mergeDefaults(defaults, input)
-  expectTypeOf(result).toEqualTypeOf<{ a: number }>()
+  Ts.Assert.exact.ofAs<{ a: number }>().on(result)
   expect(result).toEqual({ a: 1 })
 })
 
@@ -91,14 +92,14 @@ test(`works with interface-typed nested-object values`, () => {
   const defaults: Defaults = { a: { b: 2 } }
   const input: Input = {}
   const result = ConfigManager.mergeDefaults(defaults, input)
-  expectTypeOf(result).toEqualTypeOf<{ a: { b: number } }>()
+  Ts.Assert.exact.ofAs<{ a: { b: number } }>().on(result)
   expect(result).toEqual({ a: { b: 2 } })
 })
 
 test(`input can be undefined, returns defaults`, () => {
   const defaults = { a: 1 }
   const result = ConfigManager.mergeDefaults(defaults, undefined)
-  expectTypeOf(result).toEqualTypeOf(defaults)
+  Ts.Assert.exact.ofAs<typeof defaults>().on(result)
   expect(result).toBe(defaults)
 })
 
@@ -107,14 +108,14 @@ describe(`default custom scalars`, () => {
     const defaults = { a: new Date(0), b: () => 0 }
     const input = {}
     const result = ConfigManager.mergeDefaults(defaults, input)
-    expectTypeOf(result).toEqualTypeOf<{ a: Date; b: () => number }>()
+    Ts.Assert.exact.ofAs<{ a: Date; b: () => number }>().on(result)
     expect(result).toEqual({ a: defaults.a, b: defaults.b })
   })
   test(`input takes precedence`, () => {
     const defaults = { a: new Date(0), b: () => 0 }
     const input = { a: new Date(1), b: () => 2 }
     const result = ConfigManager.mergeDefaults(defaults, input)
-    expectTypeOf(result).toEqualTypeOf<{ a: Date; b: () => number }>()
+    Ts.Assert.exact.ofAs<{ a: Date; b: () => number }>().on(result)
     expect(result).toEqual({ a: input.a, b: input.b })
   })
 })
