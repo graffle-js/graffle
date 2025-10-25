@@ -50,5 +50,5 @@ export interface Document<$Context extends $$Utilities.Context> {
  */
 export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction {
   // @ts-expect-error parameter is Untyped.
-  return: Document<this['params']>
+  return: Document<this['parameters']>
 }
