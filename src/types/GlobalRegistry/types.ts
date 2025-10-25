@@ -1,4 +1,4 @@
-import type { Schema, TypeFunction } from '#graffle/utilities-for-generated'
+import type { Kind, Schema } from '#graffle/utilities-for-generated'
 import type { ConfigManager } from '#lib/config-manager'
 import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
@@ -7,8 +7,8 @@ interface ZeroClient extends Client {
   name: DefaultClientName
   schema: Schema
   interfaces: {
-    Root: TypeFunction
-    Document: TypeFunction
+    Root: Kind.Kind
+    Document: Kind.Kind
     MethodsSelect: {}
   }
   selectionSets: {
@@ -37,8 +37,8 @@ export interface Client<$Extensions extends Extensions = Extensions> {
   name: string
   schema: Schema<$Extensions['Schema']>
   interfaces: {
-    Root: TypeFunction
-    Document: TypeFunction
+    Root: Kind.Kind
+    Document: Kind.Kind
     MethodsSelect: {}
   }
   selectionSets: {

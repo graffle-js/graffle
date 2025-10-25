@@ -1,4 +1,3 @@
-export { TypeFunction } from '#lib/type-function'
 export { createConstructorWithContext } from '#src/client/client.js'
 export {
   type ConfigGetOutputError,
@@ -19,6 +18,7 @@ export { ContextFragments } from '#src/types/ContextFragment.js'
 export { type GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 export * from '#src/types/Schema/StandardTypes/scalar.js'
 export { pipe } from '@wollybeard/kit/fn'
+export { Kind } from '@wollybeard/kit/ts'
 export type { Simplify } from 'type-fest'
 export { Configuration } from '../context/fragments/configuration/$.js'
 export { Extensions } from '../context/fragments/extensions/$.js'

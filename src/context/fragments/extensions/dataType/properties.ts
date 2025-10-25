@@ -1,8 +1,6 @@
+import type { Kind } from '@wollybeard/kit/ts'
 import type { DependentExtensionParameters } from './DependentExtensionParameters.js'
 
-export interface PropertiesTypeFunction {
-  parameters: unknown
-  return: unknown
-}
+export type PropertiesTypeFunction = Kind.Kind
 
 export type PropertiesTypeFunctionParameters = DependentExtensionParameters

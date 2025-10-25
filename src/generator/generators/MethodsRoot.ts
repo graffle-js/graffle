@@ -172,9 +172,9 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(`}`)
     code``
     code`
-      export interface BuilderMethodsRootFn extends ${$.$$Utilities}.TypeFunction {
+      export interface BuilderMethodsRootFn extends ${$.$$Utilities}.Kind.Kind {
         // @ts-expect-error parameter is Untyped.
-        return: BuilderMethodsRoot<this['params']>
+        return: BuilderMethodsRoot<this['parameters']>
       }
     `
   },

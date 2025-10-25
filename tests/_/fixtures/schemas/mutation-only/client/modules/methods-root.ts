@@ -180,7 +180,7 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   mutation: MutationMethods<$Context>
 }
 
-export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {
+export interface BuilderMethodsRootFn extends $$Utilities.Kind.Kind {
   // @ts-expect-error parameter is Untyped.
-  return: BuilderMethodsRoot<this['params']>
+  return: BuilderMethodsRoot<this['parameters']>
 }
