@@ -1,7 +1,8 @@
 import type { Select } from '#src/docpar/object/Select/$.js'
 import type { AssertExtendsObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { Obj, Ts } from '@wollybeard/kit'
+import type { Obj } from '@wollybeard/kit'
+import { Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Alias } from './Alias.js'
 import type {
@@ -12,6 +13,8 @@ import type {
 } from './directive.js'
 import type { OutputField } from './OutputField.js'
 import type { ScalarsWildcard } from './ScalarsWildcard.js'
+
+const A = Ts.Assert
 
 type SelectionSet = object
 
@@ -182,8 +185,5 @@ export type IsFieldKey<$Key extends PropertyKey> =
 //
 //
 //
-// dprint-ignore
-type _ = Ts.Assert.Cases<
-  Ts.Assert.exact<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
-  Ts.Assert.exact<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
->
+A.exact.ofAs<'a'>().onAs<PickApplicableFieldKeys<{ a: true }>>()
+A.exact.ofAs<'b'>().onAs<PickApplicableFieldKeys<{ a: ['b', true]; b: true }>>()

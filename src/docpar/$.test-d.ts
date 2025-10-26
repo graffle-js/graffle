@@ -6,6 +6,8 @@ import type { Core } from './core/$.js'
 import { $ } from './object/var/var.js'
 import { createGql } from '#src/static/gql.js'
 
+const A = Ts.Assert
+
 type $ = typeof $
 
 type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.ArgumentsMap, never>
@@ -44,49 +46,58 @@ type OpDefaultIdAndUnknownField = D<{ name: 'default'; result: { id: unknown; un
 type OpDefaultDateLoose = D<{ name: 'default'; result: { date: unknown }; variables: {} }>
 type OpQUnknownField = D<{ name: 'q'; result: { unknownField: unknown }; variables: {} }>
 
-type _ = Ts.Assert.Cases<
-  // Simplest possible query - anonymous query with single scalar field
-  Ts.Assert.exact<Strict<'{ id }'>, OpDefaultId>,
-  Ts.Assert.exact<Strict<{ query: { default: { id: true } } }>, OpDefaultId>,
+// Simplest possible query - anonymous query with single scalar field
+A.exact.ofAs<OpDefaultId>().onAs<Strict<'{ id }'>>()
+A.exact.ofAs<OpDefaultId>().onAs<Strict<{ query: { default: { id: true } } }>>()
 
-  // Schema-less mode - both string and object syntax
-  Ts.Assert.exact<Loose<'{ id }'>, OpDefaultIdLoose>,
-  Ts.Assert.exact<Loose<{ query: { default: { id: true } } }>, OpDefaultIdLoose>,
-  Ts.Assert.exact<Loose<'{ unknownField }'>, OpDefaultUnknownField>,
-  Ts.Assert.exact<Loose<{ query: { default: { unknownField: true } } }>, OpDefaultUnknownField>,
+// Schema-less mode - both string and object syntax
+A.exact.ofAs<OpDefaultIdLoose>().onAs<Loose<'{ id }'>>()
+A.exact.ofAs<OpDefaultIdLoose>().onAs<Loose<{ query: { default: { id: true } } }>>()
+A.exact.ofAs<OpDefaultUnknownField>().onAs<Loose<'{ unknownField }'>>()
+A.exact.ofAs<OpDefaultUnknownField>().onAs<Loose<{ query: { default: { unknownField: true } } }>>()
 
-  // Named query with single scalar field
-  Ts.Assert.exact<Strict<'query q { id }'>, OpQId>,
-  Ts.Assert.exact<Strict<{ query: { q: { id: true } } }>, OpQId>,
-  Ts.Assert.exact<Loose<'query q { id }'>, D<{ name: 'q'; result: { id: unknown }; variables: {} }>>,
-  Ts.Assert.exact<Loose<{ query: { q: { id: true } } }>, D<{ name: 'q'; result: { id: unknown }; variables: {} }>>,
-  Ts.Assert.exact<Loose<'query q { unknownField }'>, OpQUnknownField>,
-  Ts.Assert.exact<Loose<{ query: { q: { unknownField: true } } }>, OpQUnknownField>,
+// Named query with single scalar field
+A.exact.ofAs<OpQId>().onAs<Strict<'query q { id }'>>()
+A.exact.ofAs<OpQId>().onAs<Strict<{ query: { q: { id: true } } }>>()
+A.exact.ofAs<D<{ name: 'q'; result: { id: unknown }; variables: {} }>>()
+       .onAs<Loose<'query q { id }'>>()
+A.exact.ofAs<D<{ name: 'q'; result: { id: unknown }; variables: {} }>>()
+       .onAs<Loose<{ query: { q: { id: true } } }>>()
+A.exact.ofAs<OpQUnknownField>().onAs<Loose<'query q { unknownField }'>>()
+A.exact.ofAs<OpQUnknownField>()
+       .onAs<Loose<{ query: { q: { unknownField: true } } }>>()
 
-  // Multiple scalar fields
-  Ts.Assert.exact<Strict<'{ id idNonNull }'>, OpDefaultIdAndIdNonNull>,
-  Ts.Assert.exact<Strict<{ query: { default: { id: true; idNonNull: true } } }>, OpDefaultIdAndIdNonNull>,
-  Ts.Assert.exact<Loose<'{ id unknownField }'>, OpDefaultIdAndUnknownField>,
-  Ts.Assert.exact<Loose<{ query: { default: { id: true; unknownField: true } } }>, OpDefaultIdAndUnknownField>,
+// Multiple scalar fields
+A.exact.ofAs<OpDefaultIdAndIdNonNull>().onAs<Strict<'{ id idNonNull }'>>()
+A.exact.ofAs<OpDefaultIdAndIdNonNull>()
+       .onAs<Strict<{ query: { default: { id: true; idNonNull: true } } }>>()
+A.exact.ofAs<OpDefaultIdAndUnknownField>().onAs<Loose<'{ id unknownField }'>>()
+A.exact.ofAs<OpDefaultIdAndUnknownField>()
+       .onAs<Loose<{ query: { default: { id: true; unknownField: true } } }>>()
 
-  // Query with custom scalar (Date)
-  Ts.Assert.exact<Strict<'{ date }'>, OpDefaultDate>,
-  Ts.Assert.exact<Strict<{ query: { default: { date: true } } }>, OpDefaultDate>,
-  Ts.Assert.exact<Loose<'{ date }'>, OpDefaultDateLoose>,
-  Ts.Assert.exact<Loose<{ query: { default: { date: true } } }>, OpDefaultDateLoose>,
+// Query with custom scalar (Date)
+A.exact.ofAs<OpDefaultDate>().onAs<Strict<'{ date }'>>()
+A.exact.ofAs<OpDefaultDate>().onAs<Strict<{ query: { default: { date: true } } }>>()
+A.exact.ofAs<OpDefaultDateLoose>().onAs<Loose<'{ date }'>>()
+A.exact.ofAs<OpDefaultDateLoose>().onAs<Loose<{ query: { default: { date: true } } }>>()
 
-  // Query with spaces/formatting - tests parser handles whitespace
-  Ts.Assert.exact<Strict<'query q { date }'>, OpQDate>,
-  Ts.Assert.exact<Strict<{ query: { q: { date: true } } }>, OpQDate>,
-  Ts.Assert.exact<Loose<'query q { date }'>, D<{ name: 'q'; result: { date: unknown }; variables: {} }>>,
-  Ts.Assert.exact<Loose<{ query: { q: { date: true } } }>, D<{ name: 'q'; result: { date: unknown }; variables: {} }>>,
+// Query with spaces/formatting - tests parser handles whitespace
+A.exact.ofAs<OpQDate>().onAs<Strict<'query q { date }'>>()
+A.exact.ofAs<OpQDate>().onAs<Strict<{ query: { q: { date: true } } }>>()
+A.exact.ofAs<D<{ name: 'q'; result: { date: unknown }; variables: {} }>>()
+       .onAs<Loose<'query q { date }'>>()
+A.exact.ofAs<D<{ name: 'q'; result: { date: unknown }; variables: {} }>>()
+       .onAs<Loose<{ query: { q: { date: true } } }>>()
 
-  // Non-null field
-  Ts.Assert.exact<Strict<'{ idNonNull }'>, OpDefaultIdNonNull>,
-  Ts.Assert.exact<Strict<{ query: { default: { idNonNull: true } } }>, OpDefaultIdNonNull>,
-  Ts.Assert.exact<Loose<'{ idNonNull }'>, D<{ name: 'default'; result: { idNonNull: unknown }; variables: {} }>>,
-  Ts.Assert.exact<Loose<{ query: { default: { idNonNull: true } } }>, D<{ name: 'default'; result: { idNonNull: unknown }; variables: {} }>>
->
+// Non-null field
+A.exact.ofAs<OpDefaultIdNonNull>().onAs<Strict<'{ idNonNull }'>>()
+A.exact.ofAs<OpDefaultIdNonNull>()
+       .onAs<Strict<{ query: { default: { idNonNull: true } } }>>()
+A.exact.ofAs<D<{ name: 'default'; result: { idNonNull: unknown }; variables: {} }>>()
+       .onAs<Loose<'{ idNonNull }'>>()
+A.exact.ofAs<D<{ name: 'default'; result: { idNonNull: unknown }; variables: {} }>>()
+       .onAs<Loose<{ query: { default: { idNonNull: true } } }>>()
+
 
 // ==================================================================================================
 //                                   Nested Object Selection
@@ -103,31 +114,45 @@ type OpDefaultUnknownObjWithUnknownField = D<{ name: 'default'; result: { unknow
 type OpDefaultUnknownObjWithTwoFields = D<{ name: 'default'; result: { obj: { field1: unknown; field2: unknown } | null }; variables: {} }>
 type OpDefaultThreeLevelUnknown = D<{ name: 'default'; result: { level1: { level2: { level3: unknown } | null } | null }; variables: {} }>
 
-type _Nested = Ts.Assert.Cases<
-  // Single nested object with one field
-  Ts.Assert.exact<Strict<'{ object { id } }'>, OpDefaultObjectWithId>,
-  Ts.Assert.exact<Strict<{ query: { default: { object: { id: true } } } }>, OpDefaultObjectWithId>,
-  Ts.Assert.exact<Loose<'{ unknownObj { unknownField } }'>, OpDefaultUnknownObjWithUnknownField>,
-  Ts.Assert.exact<Loose<{ query: { default: { unknownObj: { unknownField: true } } } }>, OpDefaultUnknownObjWithUnknownField>,
+// Single nested object with one field
+A.exact.ofAs<OpDefaultObjectWithId>().onAs<Strict<'{ object { id } }'>>()
+A.exact.ofAs<OpDefaultObjectWithId>()
+       .onAs<Strict<{ query: { default: { object: { id: true } } } }>>()
+A.exact.ofAs<OpDefaultUnknownObjWithUnknownField>()
+       .onAs<Loose<'{ unknownObj { unknownField } }'>>()
+A.exact.ofAs<OpDefaultUnknownObjWithUnknownField>()
+       .onAs<Loose<{ query: { default: { unknownObj: { unknownField: true } } } }>>()
 
-  // Nested object with multiple fields
-  Ts.Assert.exact<Strict<'{ object { id string } }'>, OpDefaultObjectWithIdAndString>,
-  Ts.Assert.exact<Strict<{ query: { default: { object: { id: true; string: true } } } }>, OpDefaultObjectWithIdAndString>,
-  Ts.Assert.exact<Loose<'{ obj { field1 field2 } }'>, OpDefaultUnknownObjWithTwoFields>,
-  Ts.Assert.exact<Loose<{ query: { default: { obj: { field1: true; field2: true } } } }>, OpDefaultUnknownObjWithTwoFields>,
+// Nested object with multiple fields
+A.exact.ofAs<OpDefaultObjectWithIdAndString>()
+       .onAs<Strict<'{ object { id string } }'>>()
+A.exact.ofAs<OpDefaultObjectWithIdAndString>()
+       .onAs<Strict<{ query: { default: { object: { id: true; string: true } } } }>>()
+A.exact.ofAs<OpDefaultUnknownObjWithTwoFields>()
+       .onAs<Loose<'{ obj { field1 field2 } }'>>()
+A.exact.ofAs<OpDefaultUnknownObjWithTwoFields>()
+       .onAs<Loose<{ query: { default: { obj: { field1: true; field2: true } } } }>>()
 
-  // Multiple nested objects at same level
-  Ts.Assert.exact<Strict<'{ object { id } objectNested { id } }'>, OpDefaultTwoObjectsWithId>,
-  Ts.Assert.exact<Strict<{ query: { default: { object: { id: true }; objectNested: { id: true } } } }>, OpDefaultTwoObjectsWithId>,
-  Ts.Assert.exact<Loose<'{ obj1 { field } obj2 { field } }'>, D<{ name: 'default'; result: { obj1: { field: unknown } | null; obj2: { field: unknown } | null }; variables: {} }>>,
-  Ts.Assert.exact<Loose<{ query: { default: { obj1: { field: true }; obj2: { field: true } } } }>, D<{ name: 'default'; result: { obj1: { field: unknown } | null; obj2: { field: unknown } | null }; variables: {} }>>,
+// Multiple nested objects at same level
+A.exact.ofAs<OpDefaultTwoObjectsWithId>()
+       .onAs<Strict<'{ object { id } objectNested { id } }'>>()
+A.exact.ofAs<OpDefaultTwoObjectsWithId>()
+       .onAs<Strict<{ query: { default: { object: { id: true }; objectNested: { id: true } } } }>>()
+A.exact.ofAs<D<{ name: 'default'; result: { obj1: { field: unknown } | null; obj2: { field: unknown } | null }; variables: {} }>>()
+       .onAs<Loose<'{ obj1 { field } obj2 { field } }'>>()
+A.exact.ofAs<D<{ name: 'default'; result: { obj1: { field: unknown } | null; obj2: { field: unknown } | null }; variables: {} }>>()
+       .onAs<Loose<{ query: { default: { obj1: { field: true }; obj2: { field: true } } } }>>()
 
-  // Deep nesting (3 levels)
-  Ts.Assert.exact<Strict<'{ objectNested { object { id } } }'>, OpDefaultDeepNested>,
-  Ts.Assert.exact<Strict<{ query: { default: { objectNested: { object: { id: true } } } } }>, OpDefaultDeepNested>,
-  Ts.Assert.exact<Loose<'{ level1 { level2 { level3 } } }'>, OpDefaultThreeLevelUnknown>,
-  Ts.Assert.exact<Loose<{ query: { default: { level1: { level2: { level3: true } } } } }>, OpDefaultThreeLevelUnknown>
->
+// Deep nesting (3 levels)
+A.exact.ofAs<OpDefaultDeepNested>()
+       .onAs<Strict<'{ objectNested { object { id } } }'>>()
+A.exact.ofAs<OpDefaultDeepNested>()
+       .onAs<Strict<{ query: { default: { objectNested: { object: { id: true } } } } }>>()
+A.exact.ofAs<OpDefaultThreeLevelUnknown>()
+       .onAs<Loose<'{ level1 { level2 { level3 } } }'>>()
+A.exact.ofAs<OpDefaultThreeLevelUnknown>()
+       .onAs<Loose<{ query: { default: { level1: { level2: { level3: true } } } } }>>()
+
 
 // ==================================================================================================
 //                                   Field Arguments
@@ -142,20 +167,25 @@ type OpDefaultObjectWithArgs = D<{ name: 'default'; result: { objectWithArgs: { 
 type OpDefaultUnknownFieldWithArgs = D<{ name: 'default'; result: { unknownField: unknown }; variables: {} }>
 type OpDefaultUnknownObjWithArgs = D<{ name: 'default'; result: { unknownObj: { field: unknown } | null }; variables: {} }>
 
-type _Arguments = Ts.Assert.Cases<
-  // Field with single argument
-  Ts.Assert.exact<Strict<'{ stringWithArgs(string: "hello") }'>, OpDefaultStringWithArgs>,
-  Ts.Assert.exact<Loose<'{ unknownField(arg: "value") }'>, OpDefaultUnknownFieldWithArgs>,
-  // Note: Object syntax with $ for arguments will be tested in future (requires argument parsing in object builder)
+// Field with single argument
+A.exact.ofAs<OpDefaultStringWithArgs>()
+       .onAs<Strict<'{ stringWithArgs(string: "hello") }'>>()
+A.exact.ofAs<OpDefaultUnknownFieldWithArgs>()
+       .onAs<Loose<'{ unknownField(arg: "value") }'>>()
+// Note: Object syntax with $ for arguments will be tested in future (requires argument parsing in object builder)
 
-  // Field with required argument
-  Ts.Assert.exact<Strict<'{ stringWithRequiredArg(string: "required") }'>, OpDefaultStringWithRequiredArg>,
-  Ts.Assert.exact<Loose<'{ unknownField(required: "value") }'>, OpDefaultUnknownFieldWithArgs>,
+// Field with required argument
+A.exact.ofAs<OpDefaultStringWithRequiredArg>()
+       .onAs<Strict<'{ stringWithRequiredArg(string: "required") }'>>()
+A.exact.ofAs<OpDefaultUnknownFieldWithArgs>()
+       .onAs<Loose<'{ unknownField(required: "value") }'>>()
 
-  // Nested object with arguments
-  Ts.Assert.exact<Strict<'{ objectWithArgs(id: "123") { id } }'>, OpDefaultObjectWithArgs>,
-  Ts.Assert.exact<Loose<'{ unknownObj(id: "123") { field } }'>, OpDefaultUnknownObjWithArgs>
->
+// Nested object with arguments
+A.exact.ofAs<OpDefaultObjectWithArgs>()
+       .onAs<Strict<'{ objectWithArgs(id: "123") { id } }'>>()
+A.exact.ofAs<OpDefaultUnknownObjWithArgs>()
+       .onAs<Loose<'{ unknownObj(id: "123") { field } }'>>()
+
 
 // ==================================================================================================
 //                                   Multiple Operations
@@ -181,19 +211,26 @@ type OpMultiQueryAndMutationLoose = D<
   | { name: 'Set'; result: { updated: unknown }; variables: {} }
 >
 
-type _MultiOp = Ts.Assert.Cases<
-  // Two queries
-  Ts.Assert.exact<Strict<'query A { id } query B { string }'>, OpMultiTwoQueries>,
-  Ts.Assert.exact<Strict<{ query: { A: { id: true }; B: { string: true } } }>, OpMultiTwoQueries>,
-  Ts.Assert.exact<Loose<'query A { field1 } query B { field2 }'>, OpMultiTwoQueriesLoose>,
-  Ts.Assert.exact<Loose<{ query: { A: { field1: true }; B: { field2: true } } }>, OpMultiTwoQueriesLoose>,
+// Two queries
+A.exact.ofAs<OpMultiTwoQueries>()
+       .onAs<Strict<'query A { id } query B { string }'>>()
+A.exact.ofAs<OpMultiTwoQueries>()
+       .onAs<Strict<{ query: { A: { id: true }; B: { string: true } } }>>()
+A.exact.ofAs<OpMultiTwoQueriesLoose>()
+       .onAs<Loose<'query A { field1 } query B { field2 }'>>()
+A.exact.ofAs<OpMultiTwoQueriesLoose>()
+       .onAs<Loose<{ query: { A: { field1: true }; B: { field2: true } } }>>()
 
-  // Query and mutation
-  Ts.Assert.exact<Strict<'query GetId { id } mutation SetId { idNonNull }'>, OpMultiQueryAndMutation>,
-  Ts.Assert.exact<Strict<{ query: { GetId: { id: true } }; mutation: { SetId: { idNonNull: true } } }>, OpMultiQueryAndMutation>,
-  Ts.Assert.exact<Loose<'query Get { data } mutation Set { updated }'>, OpMultiQueryAndMutationLoose>,
-  Ts.Assert.exact<Loose<{ query: { Get: { data: true } }; mutation: { Set: { updated: true } } }>, OpMultiQueryAndMutationLoose>
->
+// Query and mutation
+A.exact.ofAs<OpMultiQueryAndMutation>()
+       .onAs<Strict<'query GetId { id } mutation SetId { idNonNull }'>>()
+A.exact.ofAs<OpMultiQueryAndMutation>()
+       .onAs<Strict<{ query: { GetId: { id: true } }; mutation: { SetId: { idNonNull: true } } }>>()
+A.exact.ofAs<OpMultiQueryAndMutationLoose>()
+       .onAs<Loose<'query Get { data } mutation Set { updated }'>>()
+A.exact.ofAs<OpMultiQueryAndMutationLoose>()
+       .onAs<Loose<{ query: { Get: { data: true } }; mutation: { Set: { updated: true } } }>>()
+
 
 // ==================================================================================================
 //                                   Mutations
@@ -206,19 +243,18 @@ type OpSetIdIdNonNull = D<{ name: 'SetId'; result: { idNonNull: string }; variab
 type OpDefaultUpdate = D<{ name: 'default'; result: { update: unknown }; variables: {} }>
 type OpCreateCreated = D<{ name: 'Create'; result: { created: unknown }; variables: {} }>
 
-type _Mutations = Ts.Assert.Cases<
-  // Simple mutation (reuses OpDefaultId)
-  Ts.Assert.exact<Strict<'mutation { id }'>, OpDefaultId>,
-  Ts.Assert.exact<Strict<{ mutation: { default: { id: true } } }>, OpDefaultId>,
-  Ts.Assert.exact<Loose<'mutation { update }'>, OpDefaultUpdate>,
-  Ts.Assert.exact<Loose<{ mutation: { default: { update: true } } }>, OpDefaultUpdate>,
+// Simple mutation (reuses OpDefaultId)
+A.exact.ofAs<OpDefaultId>().onAs<Strict<'mutation { id }'>>()
+A.exact.ofAs<OpDefaultId>().onAs<Strict<{ mutation: { default: { id: true } } }>>()
+A.exact.ofAs<OpDefaultUpdate>().onAs<Loose<'mutation { update }'>>()
+A.exact.ofAs<OpDefaultUpdate>().onAs<Loose<{ mutation: { default: { update: true } } }>>()
 
-  // Named mutation
-  Ts.Assert.exact<Strict<'mutation SetId { idNonNull }'>, OpSetIdIdNonNull>,
-  Ts.Assert.exact<Strict<{ mutation: { SetId: { idNonNull: true } } }>, OpSetIdIdNonNull>,
-  Ts.Assert.exact<Loose<'mutation Create { created }'>, OpCreateCreated>,
-  Ts.Assert.exact<Loose<{ mutation: { Create: { created: true } } }>, OpCreateCreated>
->
+// Named mutation
+A.exact.ofAs<OpSetIdIdNonNull>().onAs<Strict<'mutation SetId { idNonNull }'>>()
+A.exact.ofAs<OpSetIdIdNonNull>().onAs<Strict<{ mutation: { SetId: { idNonNull: true } } }>>()
+A.exact.ofAs<OpCreateCreated>().onAs<Loose<'mutation Create { created }'>>()
+A.exact.ofAs<OpCreateCreated>().onAs<Loose<{ mutation: { Create: { created: true } } }>>()
+
 
 // ==================================================================================================
 //                                   Special Types (Enums, Unions, etc.)
@@ -230,13 +266,12 @@ type OpDefaultAbcEnum = D<{ name: 'default'; result: { abcEnum: 'A' | 'B' | 'C' 
 // Loose mode operation types
 type OpDefaultStatus = D<{ name: 'default'; result: { status: unknown }; variables: {} }>
 
-type _SpecialTypes = Ts.Assert.Cases<
-  // Enum field
-  Ts.Assert.exact<Strict<'{ abcEnum }'>, OpDefaultAbcEnum>,
-  Ts.Assert.exact<Strict<{ query: { default: { abcEnum: true } } }>, OpDefaultAbcEnum>,
-  Ts.Assert.exact<Loose<'{ status }'>, OpDefaultStatus>,
-  Ts.Assert.exact<Loose<{ query: { default: { status: true } } }>, OpDefaultStatus>
->
+// Enum field
+A.exact.ofAs<OpDefaultAbcEnum>().onAs<Strict<'{ abcEnum }'>>()
+A.exact.ofAs<OpDefaultAbcEnum>().onAs<Strict<{ query: { default: { abcEnum: true } } }>>()
+A.exact.ofAs<OpDefaultStatus>().onAs<Loose<'{ status }'>>()
+A.exact.ofAs<OpDefaultStatus>().onAs<Loose<{ query: { default: { status: true } } }>>()
+
 // ==================================================================================================
 //                                   Variable Definitions
 // ==================================================================================================
@@ -244,81 +279,81 @@ type _SpecialTypes = Ts.Assert.Cases<
 // Required String variable
 type d1YeSchema = D<{ name: 'q'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
 type d1NoSchema = D<{ name: 'q'; result: { stringWithRequiredArg: unknown }; variables: { string: string } }>
-Ts.Assert.exact.ofAs<d1YeSchema>().on(gqlYe('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d1NoSchema>().on(gqlNo('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d1YeSchema>().on(gqlYe({ query: { q: { stringWithRequiredArg: { $: { string: $ } } } } }))
-Ts.Assert.exact.ofAs<d1NoSchema>().on(gqlNo({ query: { q: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
+A.exact.ofAs<d1YeSchema>().on(gqlYe('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
+A.exact.ofAs<d1NoSchema>().on(gqlNo('query q($string: String!) { stringWithRequiredArg(string: $string) }'))
+A.exact.ofAs<d1YeSchema>().on(gqlYe({ query: { q: { stringWithRequiredArg: { $: { string: $ } } } } }))
+A.exact.ofAs<d1NoSchema>().on(gqlNo({ query: { q: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
 
 // Optional String variable
 type d2YeSchema = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 type d2NoSchema = D<{ name: 'q'; result: { stringWithArgs: unknown }; variables: { string?: string | null | undefined } }>
-Ts.Assert.exact.ofAs<d2YeSchema>().on(gqlYe('query q($string: String) { stringWithArgs(string: $string) }'))
-Ts.Assert.exact.ofAs<d2NoSchema>().on(gqlNo('query q($string: String) { stringWithArgs(string: $string) }'))
-Ts.Assert.exact.ofAs<d2YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { string: $ } } } } }))
-Ts.Assert.exact.ofAs<d2NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { string: $.String() } } } } }))
+A.exact.ofAs<d2YeSchema>().on(gqlYe('query q($string: String) { stringWithArgs(string: $string) }'))
+A.exact.ofAs<d2NoSchema>().on(gqlNo('query q($string: String) { stringWithArgs(string: $string) }'))
+A.exact.ofAs<d2YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { string: $ } } } } }))
+A.exact.ofAs<d2NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { string: $.String() } } } } }))
 
 // Custom scalar variable (Date)
 type d3YeSchema = D<{ name: 'q'; result: { dateArg: Date | null }; variables: { date?: Date | null | undefined } }>
 type d3NoSchema = D<{ name: 'q'; result: { dateArg: unknown }; variables: { date?: unknown } }>
-Ts.Assert.exact.ofAs<d3YeSchema>().on(gqlYe('query q($date: Date) { dateArg(date: $date) }'))
-Ts.Assert.exact.ofAs<d3NoSchema>().on(gqlNo('query q($date: Date) { dateArg(date: $date) }'))
-Ts.Assert.exact.ofAs<d3YeSchema>().on(gqlYe({ query: { q: { dateArg: { $: { date: $ } } } } }))
-Ts.Assert.exact.ofAs<d3NoSchema>().on(gqlNo({ query: { q: { dateArg: { $: { date: $ } } } } }))
+A.exact.ofAs<d3YeSchema>().on(gqlYe('query q($date: Date) { dateArg(date: $date) }'))
+A.exact.ofAs<d3NoSchema>().on(gqlNo('query q($date: Date) { dateArg(date: $date) }'))
+A.exact.ofAs<d3YeSchema>().on(gqlYe({ query: { q: { dateArg: { $: { date: $ } } } } }))
+A.exact.ofAs<d3NoSchema>().on(gqlNo({ query: { q: { dateArg: { $: { date: $ } } } } }))
 // special thing -- string documents cannot do this
 type varForce = D<{ name: 'q'; result: { dateArg: unknown }; variables: { date?: string|null } }>
-Ts.Assert.exact.ofAs<varForce>().on(gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } }))
+A.exact.ofAs<varForce>().on(gqlNo({ query: { q: { dateArg: { $: { date: $.String() } } } } }))
 
 // Multiple optional variables
 type d4YeSchema = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined } }>
 type d4NoSchema = D<{ name: 'q'; result: { objectWithArgs: { id: unknown } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined } }>
-Ts.Assert.exact.ofAs<d4YeSchema>().on(gqlYe('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
-Ts.Assert.exact.ofAs<d4NoSchema>().on(gqlNo('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
-Ts.Assert.exact.ofAs<d4YeSchema>().on(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $ }, id: true } } } }))
-Ts.Assert.exact.ofAs<d4NoSchema>().on(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String() }, id: true } } } }))
+A.exact.ofAs<d4YeSchema>().on(gqlYe('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
+A.exact.ofAs<d4NoSchema>().on(gqlNo('query q($id: ID, $string: String) { objectWithArgs(id: $id, string: $string) { id } }'))
+A.exact.ofAs<d4YeSchema>().on(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $ }, id: true } } } }))
+A.exact.ofAs<d4NoSchema>().on(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String() }, id: true } } } }))
 
 // Boolean variable
 type d5YeSchema = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { boolean?: boolean | null | undefined } }>
 type d5NoSchema = D<{ name: 'q'; result: { stringWithArgs: unknown }; variables: { boolean?: boolean | null | undefined } }>
-Ts.Assert.exact.ofAs<d5YeSchema>().on(gqlYe('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
-Ts.Assert.exact.ofAs<d5NoSchema>().on(gqlNo('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
-Ts.Assert.exact.ofAs<d5YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { boolean: $ } } } } }))
-Ts.Assert.exact.ofAs<d5NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { boolean: $.Boolean() } } } } }))
+A.exact.ofAs<d5YeSchema>().on(gqlYe('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
+A.exact.ofAs<d5NoSchema>().on(gqlNo('query q($boolean: Boolean) { stringWithArgs(boolean: $boolean) }'))
+A.exact.ofAs<d5YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { boolean: $ } } } } }))
+A.exact.ofAs<d5NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { boolean: $.Boolean() } } } } }))
 
 // Int variable
 type d6YeSchema = D<{ name: 'q'; result: { stringWithArgs: string | null }; variables: { int?: number | null | undefined } }>
 type d6NoSchema = D<{ name: 'q'; result: { stringWithArgs: unknown }; variables: { int?: number | null | undefined } }>
-Ts.Assert.exact.ofAs<d6YeSchema>().on(gqlYe('query q($int: Int) { stringWithArgs(int: $int) }'))
-Ts.Assert.exact.ofAs<d6NoSchema>().on(gqlNo('query q($int: Int) { stringWithArgs(int: $int) }'))
-Ts.Assert.exact.ofAs<d6YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { int: $ } } } } }))
-Ts.Assert.exact.ofAs<d6NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { int: $.Int() } } } } }))
+A.exact.ofAs<d6YeSchema>().on(gqlYe('query q($int: Int) { stringWithArgs(int: $int) }'))
+A.exact.ofAs<d6NoSchema>().on(gqlNo('query q($int: Int) { stringWithArgs(int: $int) }'))
+A.exact.ofAs<d6YeSchema>().on(gqlYe({ query: { q: { stringWithArgs: { $: { int: $ } } } } }))
+A.exact.ofAs<d6NoSchema>().on(gqlNo({ query: { q: { stringWithArgs: { $: { int: $.Int() } } } } }))
 
 // Multiple optional variables (3 vars)
 type d7YeSchema = D<{ name: 'q'; result: { objectWithArgs: { id: string | null } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined; int?: number | null | undefined } }>
 type d7NoSchema = D<{ name: 'q'; result: { objectWithArgs: { id: unknown } | null }; variables: { id?: string | null | undefined; string?: string | null | undefined; int?: number | null | undefined } }>
-Ts.Assert.exact.ofAs<d7YeSchema>().on(gqlYe('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
-Ts.Assert.exact.ofAs<d7NoSchema>().on(gqlNo('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
-Ts.Assert.exact.ofAs<d7YeSchema>().on(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $, int: $ }, id: true } } } }))
-Ts.Assert.exact.ofAs<d7NoSchema>().on(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String(), int: $.Int() }, id: true } } } }))
+A.exact.ofAs<d7YeSchema>().on(gqlYe('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
+A.exact.ofAs<d7NoSchema>().on(gqlNo('query q($id: ID, $string: String, $int: Int) { objectWithArgs(id: $id, string: $string, int: $int) { id } }'))
+A.exact.ofAs<d7YeSchema>().on(gqlYe({ query: { q: { objectWithArgs: { $: { id: $, string: $, int: $ }, id: true } } } }))
+A.exact.ofAs<d7NoSchema>().on(gqlNo({ query: { q: { objectWithArgs: { $: { id: $.ID(), string: $.String(), int: $.Int() }, id: true } } } }))
 
 // Anonymous query with variable
 type d8YeSchema = D<{ name: 'default'; result: { stringWithRequiredArg: string | null }; variables: { string: string } }>
 type d8NoSchema = D<{ name: 'default'; result: { stringWithRequiredArg: unknown }; variables: { string: string } }>
-Ts.Assert.exact.ofAs<d8YeSchema>().on(gqlYe('query($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d8NoSchema>().on(gqlNo('query($string: String!) { stringWithRequiredArg(string: $string) }'))
-Ts.Assert.exact.ofAs<d8YeSchema>().on(gqlYe({ query: { default: { stringWithRequiredArg: { $: { string: $ } } } } }))
-Ts.Assert.exact.ofAs<d8NoSchema>().on(gqlNo({ query: { default: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
+A.exact.ofAs<d8YeSchema>().on(gqlYe('query($string: String!) { stringWithRequiredArg(string: $string) }'))
+A.exact.ofAs<d8NoSchema>().on(gqlNo('query($string: String!) { stringWithRequiredArg(string: $string) }'))
+A.exact.ofAs<d8YeSchema>().on(gqlYe({ query: { default: { stringWithRequiredArg: { $: { string: $ } } } } }))
+A.exact.ofAs<d8NoSchema>().on(gqlNo({ query: { default: { stringWithRequiredArg: { $: { string: $.String().required() } } } } }))
 
 // Variable with nested selection (interfaceWithArgs id is required in schema)
 type d9YeSchema = D<{ name: 'q'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 type d9NoSchema = D<{ name: 'q'; result: { interfaceWithArgs: { id: unknown } | null }; variables: { id: string } }>
-Ts.Assert.exact.ofAs<d9YeSchema>().on(gqlYe('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
-Ts.Assert.exact.ofAs<d9NoSchema>().on(gqlNo('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
-Ts.Assert.exact.ofAs<d9YeSchema>().on(gqlYe({ query: { q: { interfaceWithArgs: { $: { id: $ }, id: true } } } }))
-Ts.Assert.exact.ofAs<d9NoSchema>().on(gqlNo({ query: { q: { interfaceWithArgs: { $: { id: $.ID().required() }, id: true } } } }))
+A.exact.ofAs<d9YeSchema>().on(gqlYe('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
+A.exact.ofAs<d9NoSchema>().on(gqlNo('query q($id: ID!) { interfaceWithArgs(id: $id) { id } }'))
+A.exact.ofAs<d9YeSchema>().on(gqlYe({ query: { q: { interfaceWithArgs: { $: { id: $ }, id: true } } } }))
+A.exact.ofAs<d9NoSchema>().on(gqlNo({ query: { q: { interfaceWithArgs: { $: { id: $.ID().required() }, id: true } } } }))
 
 // Enum argument with $ prefix
 type d10YeSchema = D<{ name: 'q'; result: { stringWithArgEnum: string | null }; variables: { ABCEnum?: 'A' | 'B' | 'C' | null | undefined } }>
-Ts.Assert.exact.ofAs<d10YeSchema>().on(gqlYe({ query: { q: { stringWithArgEnum: { $: { $ABCEnum: $ } } } } }))
+A.exact.ofAs<d10YeSchema>().on(gqlYe({ query: { q: { stringWithArgEnum: { $: { $ABCEnum: $ } } } } }))
 
 // ==================================================================================================
 //                                           Error cases
@@ -333,11 +368,10 @@ type DocError = {
   availableFields: 'string' | 'object' | '__typename' | 'InputObjectNested' | 'abcEnum' | 'date' | 'id' | 'InputObjectNestedNonNull' | 'argInputObjectCircular' | 'bigintField' | 'bigintFieldNonNull' | 'dateArg' | 'dateArgInputObject' | 'dateArgList' | 'dateArgNonNull' | 'dateArgNonNullList' | 'dateArgNonNullListNonNull' | 'dateInterface1' | 'dateList' | 'dateListList' | 'dateListNonNull' | 'dateNonNull' | 'dateObject1' | 'dateUnion' | 'error' | 'idNonNull' | 'interface' | 'interfaceHierarchyChildA' | 'interfaceHierarchyChildB' | 'interfaceHierarchyGrandparents' | 'interfaceHierarchyParents' | 'interfaceNonNull' | 'interfaceWithArgs' | 'listInt' | 'listIntNonNull' | 'listListInt' | 'listListIntNonNull' | 'lowerCaseUnion' | 'objectList' | 'objectListNonNull' | 'objectNested' | 'objectNestedWithArgs' | 'objectNonNull' | 'objectWithArgs' | 'result' | 'resultNonNull' | 'stringWithArgEnum' | 'stringWithArgInputObject' | 'stringWithArgInputObjectEnum' | 'stringWithArgInputObjectRequired' | 'stringWithArgs' | 'stringWithListArg' | 'stringWithListArgRequired' | 'stringWithRequiredArg' | 'unionFooBar' | 'unionFooBarNonNull' | 'unionFooBarWithArgs' | 'unionObject' | 'unionObjectNonNull'
 }
 
-type _ErrorCases = Ts.Assert.Cases<
-  Ts.Assert.exact<Strict<'{ bad }'>, DocError>
-  // TODO: Object parser produces different error format than string parser
-  // Ts.Assert.exact.ofAs<Strict<{ query: { default: { bad: true } } }>, DocError>
->
+A.exact.ofAs<DocError>().onAs<Strict<'{ bad }'>>()
+// TODO: Object parser produces different error format than string parser
+// A.exact.ofAs<DocError>().onAs<Strict<{ query: { default: { bad: true } } }>>()
+
 
 // TODO: Object parser produces different error format - needs unification with string parser error format
 // Possible.gql({ query: { default: { bad: true } } })

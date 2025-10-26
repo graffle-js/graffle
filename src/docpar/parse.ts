@@ -1,4 +1,4 @@
-import type { Core, ParserContext } from './core/$.js'
+import type { Core } from './core/$.js'
 import type { Object } from './object/$.js'
 import type { String } from './string/$.js'
 

@@ -1,7 +1,10 @@
+// dprint-ignore-file
 import type { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import type { InferFromQuery } from './infer.js'
 import { $ } from './var.js'
+
+const A = Ts.Assert
 
 type $ = typeof $
 
@@ -17,188 +20,143 @@ type $WithDefault42 = typeof $WithDefault42
 const $Required = $.required()
 type $Required = typeof $Required
 
-// dprint-ignore
-type _1 = Ts.Assert.Cases<
-  // Custom variable name
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { float: $WithCustomName } } }, Possible.$.ArgumentsMap>,
-    { custom?: number | null | undefined }
-  >,
-  // ====================================================================
-  //                      Nested Field Arguments
-  // ====================================================================
-  Ts.Assert.sub<
-    InferFromQuery<{ objectNestedWithArgs: { object: { $: { int: $ } } } }, Possible.$.ArgumentsMap>,
-    { int?: number | null | undefined }
-  >,
-  // ====================================================================
-  //                      ALIASES
-  // ====================================================================
-  // Alias with $ on direct field arguments
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: ['x', { $: { id: $ } }] }, Possible.$.ArgumentsMap>,
-    { id?: string | null | undefined }
-  >,
-  // Multiple aliases with $ on direct field arguments
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: [['x', { $: { id: $ } }]] }, Possible.$.ArgumentsMap>,
-    { id?: string | null | undefined }
-  >,
-  // Alias with $ on nested field arguments
-  Ts.Assert.sub<
-    InferFromQuery<{ objectNestedWithArgs: { id: ['id2', { $: { filter: $ } }] } }, Possible.$.ArgumentsMap>,
-    { filter?: string | null | undefined }
-  >,
-  // ====================================================================
-  //                      OPTIONAL ARGUMENTS
-  // ====================================================================
-  // Field with optional string argument
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { id: $ } } }, Possible.$.ArgumentsMap>,
-    { id?: string | null | undefined }
-  >,
+// ====================================================================
+//                      NESTED FIELD ARGUMENTS
+// ====================================================================
 
-  // Field with optional boolean argument
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { boolean: $ } } }, Possible.$.ArgumentsMap>,
-    { boolean?: boolean | null | undefined }
-  >,
+// Custom variable name
+A.sub.ofAs<{ custom?: number | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { float: $WithCustomName } } }, Possible.$.ArgumentsMap>>()
 
-  // Field with optional int argument
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { int: $ } } }, Possible.$.ArgumentsMap>,
-    { int?: number | null | undefined }
-  >,
+A.sub.ofAs<{ int?: number | null | undefined }>()
+     .onAs<InferFromQuery<{ objectNestedWithArgs: { object: { $: { int: $ } } } }, Possible.$.ArgumentsMap>>()
 
-  // Field with optional float argument
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { float: $ } } }, Possible.$.ArgumentsMap>,
-    { float?: number | null | undefined }
-  >,
+// ====================================================================
+//                      ALIASES
+// ====================================================================
 
-  // ====================================================================
-  //                      REQUIRED ARGUMENTS
-  // ====================================================================
-  // Field with required string argument
-  Ts.Assert.sub<
-    InferFromQuery<{ stringWithRequiredArg: { $: { string: $ } } }, Possible.$.ArgumentsMap>,
-    { string: string }
-  >,
+// Alias with $ on direct field arguments
+A.sub.ofAs<{ id?: string | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: ['x', { $: { id: $ } }] }, Possible.$.ArgumentsMap>>()
 
-  // ====================================================================
-  //               MULTIPLE VARIABLES IN SAME FIELD
-  // ====================================================================
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { id: $, boolean: $, int: $ } } }, Possible.$.ArgumentsMap>,
-    { id?: string | null | undefined; boolean?: boolean | null | undefined; int?: number | null | undefined }
-  >,
+// Multiple aliases with $ on direct field arguments
+A.sub.ofAs<{ id?: string | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: [['x', { $: { id: $ } }]] }, Possible.$.ArgumentsMap>>()
 
-  // ====================================================================
-  //                MULTIPLE FIELDS WITH VARIABLES
-  // ====================================================================
-  Ts.Assert.sub<
-    InferFromQuery<{
-      objectWithArgs: { $: { id: $ } }, stringWithRequiredArg: { $: { string: $ } }
-    }, Possible.$.ArgumentsMap>,
-    { id?: string | null | undefined, string: string }
-  >,
+// Alias with $ on nested field arguments
+A.sub.ofAs<{ filter?: string | null | undefined }>()
+     .onAs<InferFromQuery<{ objectNestedWithArgs: { id: ['id2', { $: { filter: $ } }] } }, Possible.$.ArgumentsMap>>()
 
-  // ====================================================================
-  //                        CUSTOM SCALARS
-  // ====================================================================
-  // Optional custom scalar (Date)
-  Ts.Assert.sub<
-    InferFromQuery<{ dateArg: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date?: Date | null | undefined }
-  >,
+// ====================================================================
+//                      OPTIONAL ARGUMENTS
+// ====================================================================
 
-  // Required custom scalar (Date)
-  Ts.Assert.sub<
-    InferFromQuery<{ dateArgNonNull: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date: Date }
-  >,
+// Field with optional string argument
+A.sub.ofAs<{ id?: string | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // ====================================================================
-  //                        LIST ARGUMENTS
-  // ====================================================================
-  // Optional list of required items
-  Ts.Assert.sub<
-    InferFromQuery<{ dateArgList: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date?: readonly Date[] | null | undefined }
-  >,
+// Field with optional boolean argument
+A.sub.ofAs<{ boolean?: boolean | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { boolean: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // Required list of required items
-  Ts.Assert.sub<
-    InferFromQuery<{ stringWithListArgRequired: { $: { ints: $ } } }, Possible.$.ArgumentsMap>,
-    { ints: readonly number[] }
-  >,
+// Field with optional int argument
+A.sub.ofAs<{ int?: number | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { int: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // Optional list of optional items (stringWithListArg has [0, [0]])
-  Ts.Assert.sub<
-    InferFromQuery<{ stringWithListArg: { $: { ints: $ } } }, Possible.$.ArgumentsMap>,
-    { ints?: readonly number[] | null | undefined }
-  >
->
+// Field with optional float argument
+A.sub.ofAs<{ float?: number | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { float: $ } } }, Possible.$.ArgumentsMap>>()
 
-// dprint-ignore
-type _2 = Ts.Assert.Cases<
-  // ====================================================================
-  //                        INPUT OBJECTS
-  // ====================================================================
-  // Optional input object
-  Ts.Assert.sub<
-    InferFromQuery<{ dateArgInputObject: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input?: Possible.$.TypeInputsIndex['InputObject'] | null | undefined }
-  >,
+// ====================================================================
+//                      REQUIRED ARGUMENTS
+// ====================================================================
 
-  // Required input object
-  Ts.Assert.sub<
-    InferFromQuery<{ stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input: Possible.$.TypeInputsIndex['InputObject'] }
-  >,
+// Field with required string argument
+A.sub.ofAs<{ string: string }>()
+     .onAs<InferFromQuery<{ stringWithRequiredArg: { $: { string: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // Multiple input objects with same variable name (required wins)
-  Ts.Assert.sub<
-    InferFromQuery<{ dateArgInputObject: { $: { input: $ } }, stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input: Possible.$.TypeInputsIndex['InputObject'] }
-  >,
+// ====================================================================
+//               MULTIPLE VARIABLES IN SAME FIELD
+// ====================================================================
 
-  // Nested input object
-  Ts.Assert.sub<
-    InferFromQuery<{ InputObjectNested: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input?: Possible.$.TypeInputsIndex['InputObjectNested'] | null | undefined }
-  >,
+A.sub.ofAs<{ id?: string | null | undefined; boolean?: boolean | null | undefined; int?: number | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $, boolean: $, int: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // Circular input object (self-referential)
-  Ts.Assert.sub<
-    InferFromQuery<{ argInputObjectCircular: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input?: Possible.$.TypeInputsIndex['InputObjectCircular'] | null | undefined }
-  >,
+// ====================================================================
+//                MULTIPLE FIELDS WITH VARIABLES
+// ====================================================================
 
-  // ====================================================================
-  //                    VARIABLE MODIFIERS
-  // ====================================================================
-  // Required modifier - forces optional argument to be required
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { id: $Required } } }, Possible.$.ArgumentsMap>,
-    { id: string }
-  >,
+A.sub.ofAs<{ id?: string | null | undefined, string: string }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $ } }, stringWithRequiredArg: { $: { string: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // Default value modifier - makes any argument optional
-  Ts.Assert.sub<
-    InferFromQuery<{ stringWithRequiredArg: { $: { string: $WithDefaultHello } } }, Possible.$.ArgumentsMap>,
-    { string?: string }
-  >,
+// ====================================================================
+//                        CUSTOM SCALARS
+// ====================================================================
 
-  // Combining required with other arguments
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { id: $Required; boolean: $ } } }, Possible.$.ArgumentsMap>,
-    { id: string; boolean?: boolean | null | undefined }
-  >,
+// Optional custom scalar (Date)
+A.sub.ofAs<{ date?: Date | null | undefined }>()
+     .onAs<InferFromQuery<{ dateArg: { $: { date: $ } } }, Possible.$.ArgumentsMap>>()
 
-  // Default with different types (nullable Int with default still allows null)
-  Ts.Assert.sub<
-    InferFromQuery<{ objectWithArgs: { $: { int: $WithDefault42 } } }, Possible.$.ArgumentsMap>,
-    { int?: number | null }
-  >
->
+// Required custom scalar (Date)
+A.sub.ofAs<{ date: Date }>()
+     .onAs<InferFromQuery<{ dateArgNonNull: { $: { date: $ } } }, Possible.$.ArgumentsMap>>()
+
+// ====================================================================
+//                        LIST ARGUMENTS
+// ====================================================================
+
+// Optional list of required items
+A.sub.ofAs<{ date?: readonly Date[] | null | undefined }>()
+     .onAs<InferFromQuery<{ dateArgList: { $: { date: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Required list of required items
+A.sub.ofAs<{ ints: readonly number[] }>()
+     .onAs<InferFromQuery<{ stringWithListArgRequired: { $: { ints: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Optional list of optional items (stringWithListArg has [0, [0]])
+A.sub.ofAs<{ ints?: readonly number[] | null | undefined }>()
+     .onAs<InferFromQuery<{ stringWithListArg: { $: { ints: $ } } }, Possible.$.ArgumentsMap>>()
+
+// ====================================================================
+//                        INPUT OBJECTS
+// ====================================================================
+
+// Optional input object
+A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObject'] | null | undefined }>()
+     .onAs<InferFromQuery<{ dateArgInputObject: { $: { input: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Required input object
+A.sub.ofAs<{ input: Possible.$.TypeInputsIndex['InputObject'] }>()
+     .onAs<InferFromQuery<{ stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Multiple input objects with same variable name (required wins)
+A.sub.ofAs<{ input: Possible.$.TypeInputsIndex['InputObject'] }>()
+     .onAs<InferFromQuery<{ dateArgInputObject: { $: { input: $ } }, stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Nested input object
+A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObjectNested'] | null | undefined }>()
+     .onAs<InferFromQuery<{ InputObjectNested: { $: { input: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Circular input object (self-referential)
+A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObjectCircular'] | null | undefined }>()
+     .onAs<InferFromQuery<{ argInputObjectCircular: { $: { input: $ } } }, Possible.$.ArgumentsMap>>()
+
+// ====================================================================
+//                    VARIABLE MODIFIERS
+// ====================================================================
+
+// Required modifier - forces optional argument to be required
+A.sub.ofAs<{ id: string }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $Required } } }, Possible.$.ArgumentsMap>>()
+
+// Default value modifier - makes any argument optional
+A.sub.ofAs<{ string?: string }>()
+     .onAs<InferFromQuery<{ stringWithRequiredArg: { $: { string: $WithDefaultHello } } }, Possible.$.ArgumentsMap>>()
+
+// Combining required with other arguments
+A.sub.ofAs<{ id: string; boolean?: boolean | null | undefined }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $Required; boolean: $ } } }, Possible.$.ArgumentsMap>>()
+
+// Default with different types (nullable Int with default still allows null)
+A.sub.ofAs<{ int?: number | null }>()
+     .onAs<InferFromQuery<{ objectWithArgs: { $: { int: $WithDefault42 } } }, Possible.$.ArgumentsMap>>()
