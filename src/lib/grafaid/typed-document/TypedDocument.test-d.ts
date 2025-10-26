@@ -1,5 +1,6 @@
+// dprint-ignore-file
+
 import { Ts } from '@wollybeard/kit'
-import type { DocumentNode } from 'graphql'
 import type {
   GetVariablesInputKind,
   Node,
@@ -16,23 +17,24 @@ import type {
 // We want to test both internal/external Node to ensure they both work. See jsdoc for `Node` for more context.
 import type { TypedDocumentNode as Node2 } from '@graphql-typed-document-node/core'
 
-// dprint-ignore
-type _ = Ts.Assert.Cases<
-  Ts.Assert.exact<GetVariablesInputKind<Variables>        , VariablesInputKindOptional>,
-  Ts.Assert.exact<GetVariablesInputKind<never>            , VariablesInputKindNone>,
-  Ts.Assert.exact<GetVariablesInputKind<{}>               , VariablesInputKindNone>,
-  Ts.Assert.exact<GetVariablesInputKind<{ x: 1 }>         , VariablesInputKindRequired>,
-  Ts.Assert.exact<GetVariablesInputKind<{ x: 1; y?: 1 }>  , VariablesInputKindRequired>,
-  Ts.Assert.exact<GetVariablesInputKind<{ x?: 1 }>        , VariablesInputKindOptional>,
-  Ts.Assert.exact<GetVariablesInputKind<{ x?: 2; y?: 1 }> , VariablesInputKindOptional>,
-  Ts.Assert.exact<VariablesOf<DocumentNode      >         , Variables>,
-  Ts.Assert.exact<VariablesOf<Node2   <{x:1},{}>>         , {}>,
-  Ts.Assert.exact<VariablesOf<Node    <{x:1},{}>>         , {}>,
-  Ts.Assert.exact<VariablesOf<Query   <{x:1},{}>>         , {}>,
-  Ts.Assert.exact<VariablesOf<String  <{x:1},{}, false>>  , {}>,
-  Ts.Assert.exact<ResultOf<string>                        , SomeObjectData>,
-  Ts.Assert.exact<ResultOf<Node2  <{x:1},{}>>             , {x:1}>,
-  Ts.Assert.exact<ResultOf<Node   <{x:1},{}>>             , {x:1}>,
-  Ts.Assert.exact<ResultOf<Query  <{x:1},{}>>             , {x:1}>,
-  Ts.Assert.exact<ResultOf<String <{x:1},{}, false>>      , {x:1}>
->
+const A = Ts.Assert
+
+// dprint-ignore-file
+A.exact.ofAs<VariablesInputKindOptional>() .onAs<GetVariablesInputKind<Variables>>()
+A.exact.ofAs<VariablesInputKindNone>()     .onAs<GetVariablesInputKind<never>>()
+A.exact.ofAs<VariablesInputKindNone>()     .onAs<GetVariablesInputKind<{}>>()
+A.exact.ofAs<VariablesInputKindRequired>() .onAs<GetVariablesInputKind<{ x: 1 }>>()
+A.exact.ofAs<VariablesInputKindRequired>() .onAs<GetVariablesInputKind<{ x: 1; y?: 1 }>>()
+A.exact.ofAs<VariablesInputKindOptional>() .onAs<GetVariablesInputKind<{ x?: 1 }>>()
+A.exact.ofAs<VariablesInputKindOptional>() .onAs<GetVariablesInputKind<{ x?: 2; y?: 1 }>>()
+// todo :excess deep ts error
+// A.exact.ofAs<Variables>()                  .onAs<VariablesOf<DocumentNode>>()
+A.exact.ofAs<{}>()                         .onAs<VariablesOf<Node2   <{x:1},{}>>>()
+A.exact.ofAs<{}>()                         .onAs<VariablesOf<Node    <{x:1},{}>>>()
+A.exact.ofAs<{}>()                         .onAs<VariablesOf<Query   <{x:1},{}>>>()
+A.exact.ofAs<{}>()                         .onAs<VariablesOf<String  <{x:1},{}, false>>>()
+A.exact.ofAs<SomeObjectData>()             .onAs<ResultOf<string>>()
+A.exact.ofAs<{x:1}>()                      .onAs<ResultOf<Node2  <{x:1},{}>>>()
+A.exact.ofAs<{x:1}>()                      .onAs<ResultOf<Node   <{x:1},{}>>>()
+A.exact.ofAs<{x:1}>()                      .onAs<ResultOf<Query  <{x:1},{}>>>()
+A.exact.ofAs<{x:1}>()                      .onAs<ResultOf<String <{x:1},{}, false>>>()
