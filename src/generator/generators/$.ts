@@ -1,5 +1,5 @@
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator$$ } from './$$.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'

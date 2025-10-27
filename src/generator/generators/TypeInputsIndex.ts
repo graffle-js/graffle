@@ -1,7 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'

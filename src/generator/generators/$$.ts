@@ -1,5 +1,5 @@
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator_internals } from './_internals.js'
 import { ModuleGeneratorClient } from './Client.js'
@@ -36,8 +36,12 @@ export const ModuleGenerator$$ = createModuleGenerator(
     }
 
     code(Str.Code.TS.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))
-    code(Str.Code.TS.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }))
-    code(Str.Code.TS.reexportNamed({ names: 'create', from: `./modules/${getImportName(config, ModuleGeneratorClient)}` }))
+    code(
+      Str.Code.TS.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }),
+    )
+    code(
+      Str.Code.TS.reexportNamed({ names: 'create', from: `./modules/${getImportName(config, ModuleGeneratorClient)}` }),
+    )
     code(Str.Code.TS.reexportNamed({ names: 'gql', from: `./modules/${getImportName(config, ModuleGeneratorGql)}` }))
 
     if (documentExports.length > 0) {

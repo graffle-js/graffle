@@ -3,8 +3,8 @@
  */
 
 import { Grafaid } from '#lib/grafaid'
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
 /**
@@ -136,7 +136,9 @@ export const getRootMethodsInterfaceDoc = Str.Code.TSDoc.template.factory<[
 /**
  * Generate JSDoc for $batch method
  */
-export const getBatchMethodDoc = Str.Code.TSDoc.template.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
+export const getBatchMethodDoc = Str.Code.TSDoc.template.factory<
+  [operationType: 'query' | 'mutation' | 'subscription']
+>(
   (doc, operationType) => {
     const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
 
@@ -154,7 +156,10 @@ export const getTypenameMethodDoc = Str.Code.TSDoc.template.factory<[
   typeName: string,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, typeName, operationType) => {
-  const typenameLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/learn/schema/#the-__typename-field', '__typename')
+  const typenameLink = Str.Code.TSDoc.template.tag.link(
+    'https://graphql.org/learn/schema/#the-__typename-field',
+    '__typename',
+  )
 
   doc`Request the ${typenameLink} meta-field.`
   doc``
@@ -168,7 +173,9 @@ export const getTypenameMethodDoc = Str.Code.TSDoc.template.factory<[
 /**
  * Generate JSDoc for BuilderMethodsRoot properties (query, mutation, subscription).
  */
-export const getRootPropertyDoc = Str.Code.TSDoc.template.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
+export const getRootPropertyDoc = Str.Code.TSDoc.template.factory<
+  [operationType: 'query' | 'mutation' | 'subscription']
+>(
   (doc, operationType) => {
     const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
 
@@ -215,7 +222,9 @@ export const getRootPropertyDoc = Str.Code.TSDoc.template.factory<[operationType
  * Generate JSDoc for static document builder (both interface and const).
  * Used for query, mutation, and subscription builders.
  */
-export const getStaticDocumentBuilderDoc = Str.Code.TSDoc.template.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
+export const getStaticDocumentBuilderDoc = Str.Code.TSDoc.template.factory<
+  [operationType: 'query' | 'mutation' | 'subscription']
+>(
   (doc, operationType) => {
     doc`Static ${operationType} builder for compile-time GraphQL document generation.`
     doc``
@@ -580,7 +589,9 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 /**
  * Generate enhanced JSDoc for selection set object types.
  */
-export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.ObjectType, isRoot: boolean]>(
+export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
+  [type: Grafaid.Schema.ObjectType, isRoot: boolean]
+>(
   (doc, type, isRoot) => {
     const kindDocUrl = getKindDocUrl('OutputObject')
     const fields = Object.values(type.getFields())
@@ -614,7 +625,10 @@ export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
   const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
-  const interfaceLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/graphql-js/type/#graphqlinterfacetype', 'Interface')
+  const interfaceLink = Str.Code.TSDoc.template.tag.link(
+    'https://graphql.org/graphql-js/type/#graphqlinterfacetype',
+    'Interface',
+  )
 
   doc`Selection set for ${interfaceLink}.`
   doc``
@@ -632,28 +646,32 @@ export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
 /**
  * Generate enhanced JSDoc for selection set union types.
  */
-export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.UnionType]>((doc, type) => {
-  const kindDocUrl = getKindDocUrl('Union')
-  const members = type.getTypes()
-  const unionLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/graphql-js/type/#graphqluniontype', 'Union')
+export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.UnionType]>(
+  (doc, type) => {
+    const kindDocUrl = getKindDocUrl('Union')
+    const members = type.getTypes()
+    const unionLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/graphql-js/type/#graphqluniontype', 'Union')
 
-  doc`Selection set for ${unionLink}.`
-  doc``
-  doc.add(type.description)
-  doc``
-  doc`# Info`
-  doc``
-  doc.table({
-    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Union ↗'),
-    'Members': `${members.length}`,
-    'Types': members.map(m => Str.Code.TSDoc.template.tag.link(`$Schema.${m.name}`)),
-  })
-})
+    doc`Selection set for ${unionLink}.`
+    doc``
+    doc.add(type.description)
+    doc``
+    doc`# Info`
+    doc``
+    doc.table({
+      'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Union ↗'),
+      'Members': `${members.length}`,
+      'Types': members.map(m => Str.Code.TSDoc.template.tag.link(`$Schema.${m.name}`)),
+    })
+  },
+)
 
 /**
  * Generate enhanced JSDoc for selection set input object types.
  */
-export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.InputObjectType]>(
+export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
+  [type: Grafaid.Schema.InputObjectType]
+>(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('InputObject')
     const fields = Object.values(type.getFields())
@@ -678,40 +696,42 @@ export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory
 /**
  * Generate enhanced JSDoc for selection set enum types.
  */
-export const getEnumTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.EnumType]>((doc, type) => {
-  const kindDocUrl = getKindDocUrl('Enum')
-  const members = type.getValues()
-  const memberCount = members.length
+export const getEnumTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.EnumType]>(
+  (doc, type) => {
+    const kindDocUrl = getKindDocUrl('Enum')
+    const members = type.getValues()
+    const memberCount = members.length
 
-  doc`Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.`
+    doc`Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.`
 
-  if (type.description) {
-    doc``
-    doc`${Str.Code.TSDoc.escape(type.description)}`
-  }
+    if (type.description) {
+      doc``
+      doc`${Str.Code.TSDoc.escape(type.description)}`
+    }
 
-  // Add members list after description
-  if (members.length > 0) {
-    doc``
-    doc`**Members:**`
-    for (const member of members) {
-      const memberDescription = Str.Code.TSDoc.escape(member.description)
-      if (memberDescription) {
-        doc`- \`${member.name}\` - ${memberDescription}`
-      } else {
-        doc`- \`${member.name}\``
+    // Add members list after description
+    if (members.length > 0) {
+      doc``
+      doc`**Members:**`
+      for (const member of members) {
+        const memberDescription = Str.Code.TSDoc.escape(member.description)
+        if (memberDescription) {
+          doc`- \`${member.name}\` - ${memberDescription}`
+        } else {
+          doc`- \`${member.name}\``
+        }
       }
     }
-  }
 
-  doc``
-  doc`# Info`
-  doc``
-  doc.table({
-    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Enum ↗'),
-    'Members': `${memberCount}`,
-  })
-})
+    doc``
+    doc`# Info`
+    doc``
+    doc.table({
+      'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Enum ↗'),
+      'Members': `${memberCount}`,
+    })
+  },
+)
 
 /**
  * Generate JSDoc for $Expanded utility type.
@@ -725,12 +745,14 @@ export const getExpandedTypeDoc = Str.Code.TSDoc.template.factory<[fieldName: st
 /**
  * Generate JSDoc for operation $Infer utility type.
  */
-export const getOperationInferDoc = Str.Code.TSDoc.template.factory<[operationType: 'Query' | 'Mutation']>((doc, operationType) => {
-  doc`Infer the result type of a ${operationType} selection set.`
-  doc``
-  doc`Given a selection set object, this type computes the exact TypeScript type`
-  doc`of the data that will be returned from executing the ${operationType} operation.`
-})
+export const getOperationInferDoc = Str.Code.TSDoc.template.factory<[operationType: 'Query' | 'Mutation']>(
+  (doc, operationType) => {
+    doc`Infer the result type of a ${operationType} selection set.`
+    doc``
+    doc`Given a selection set object, this type computes the exact TypeScript type`
+    doc`of the data that will be returned from executing the ${operationType} operation.`
+  },
+)
 
 /**
  * Generate JSDoc for operation $Variables utility type.
@@ -875,20 +897,22 @@ export const getFragmentInlineFieldDoc = Str.Code.TSDoc.template.factory<[]>((do
  * Generate JSDoc for __typename meta field.
  * Used in SelectionSets.ts for the __typename field documentation.
  */
-export const getTypenameFieldDoc = Str.Code.TSDoc.template.factory<[kind: 'union' | 'interface' | 'object']>((doc, kind) => {
-  if (kind === 'object') {
-    doc`A meta field. Is the name of the type being selected.`
+export const getTypenameFieldDoc = Str.Code.TSDoc.template.factory<[kind: 'union' | 'interface' | 'object']>(
+  (doc, kind) => {
+    if (kind === 'object') {
+      doc`A meta field. Is the name of the type being selected.`
+      doc``
+      doc.$see('https://graphql.org/learn/queries/#meta-fields', 'Meta Fields')
+      return
+    }
+
+    const relation = kind === 'interface' ? 'implementor' : 'member'
+    doc`A meta field. Is the name of the type being selected. Since this is a ${kind} type and thus polymorphic,`
+    doc`the name is one of the ${relation} type names, whichever is ultimately returned at runtime.`
     doc``
     doc.$see('https://graphql.org/learn/queries/#meta-fields', 'Meta Fields')
-    return
-  }
-
-  const relation = kind === 'interface' ? 'implementor' : 'member'
-  doc`A meta field. Is the name of the type being selected. Since this is a ${kind} type and thus polymorphic,`
-  doc`the name is one of the ${relation} type names, whichever is ultimately returned at runtime.`
-  doc``
-  doc.$see('https://graphql.org/learn/queries/#meta-fields', 'Meta Fields')
-})
+  },
+)
 
 /**
  * Generate JSDoc for StaticDocumentContext interface.

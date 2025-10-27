@@ -1,5 +1,5 @@
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'
@@ -20,7 +20,12 @@ export const ModuleGeneratorClient = createModuleGenerator(
     }
 
     code(Str.Code.TS.importAll({ as: $.$$Utilities, from: config.paths.imports.grafflePackage.utilitiesForGenerated }))
-    code(Str.Code.TS.importNamed({ names: 'TransportHttp', from: config.paths.imports.grafflePackage.extensionTransportHttp }))
+    code(
+      Str.Code.TS.importNamed({
+        names: 'TransportHttp',
+        from: config.paths.imports.grafflePackage.extensionTransportHttp,
+      }),
+    )
     code(
       Str.Code.TS.importNamed({
         names: 'DocumentBuilder',

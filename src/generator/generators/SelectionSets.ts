@@ -2,9 +2,9 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { Grafaid } from '#lib/grafaid'
-import { Obj, Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
+import { Obj, Str } from '@wollybeard/kit'
 import { Docpar } from '../../docpar/$.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
@@ -583,7 +583,9 @@ const generateFieldedTypeModule = (
     onTypesRendered = implementorTypes.map(implementorType => {
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
-      const doc = CodeGraphQL.TSDoc(getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'))
+      const doc = CodeGraphQL.TSDoc(
+        getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'),
+      )
       const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
       }`

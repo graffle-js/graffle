@@ -1,6 +1,6 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'

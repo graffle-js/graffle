@@ -1,8 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
-import { Obj, Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { isObjectEmpty } from '#src/lib/prelude.js'
+import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { extractFieldTypeInfo, getKindDocUrl } from '../helpers/jsdoc.js'
@@ -82,7 +82,13 @@ const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType)
 
   // Export names are never escaped - use re-export with aliasing if needed
   if (isCustom) {
-    code(Str.Code.TS.reexportNamed({ names: originalName, from: buildImportPath(config, '..', '..', 'scalar'), type: true }))
+    code(
+      Str.Code.TS.reexportNamed({
+        names: originalName,
+        from: buildImportPath(config, '..', '..', 'scalar'),
+        type: true,
+      }),
+    )
   } else {
     const utilitiesPath = getUtilitiesPath(config, `schema/scalars/${renderedName}.ts`)
     code(Str.Code.TS.reexportNamed({ names: originalName, from: utilitiesPath, type: true }))

@@ -1,8 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
 import { Docpar } from '#src/docpar/$.js'
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
 export const renderInlineType = (type: Grafaid.Schema.Types): string => {

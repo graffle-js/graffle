@@ -1,5 +1,5 @@
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import type { GraphQLObjectType } from 'graphql'
 import {

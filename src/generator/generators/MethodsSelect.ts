@@ -1,6 +1,6 @@
 import { Tex } from '#lib/tex'
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { getMethodsSelectDoc } from '../helpers/jsdoc.js'

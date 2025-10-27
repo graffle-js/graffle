@@ -2,8 +2,8 @@ import { Extension } from '#graffle/extension'
 import { ConfigManager } from '#lib/config-manager'
 import { Grafaid } from '#lib/grafaid'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
-import { Str } from '@wollybeard/kit'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { Str } from '@wollybeard/kit'
 
 const propertyNames = {
   r: `r`,

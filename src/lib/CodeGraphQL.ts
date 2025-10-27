@@ -14,78 +14,67 @@ export namespace CodeGraphQL {
    * @deprecated Use Str.Code.TS.unionItems once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const tsUnionItems = (types: (string | null)[]): string =>
-    types.filter(_ => _ !== null).join(`\n| `)
+  export const tsUnionItems = (types: (string | null)[]): string => types.filter(_ => _ !== null).join(`\n| `)
 
   /**
    * @deprecated Use Str.Code.TS.tuple once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const tsTuple = (types: string[]): string =>
-    `[${types.join(`, `)}]`
+  export const tsTuple = (types: string[]): string => `[${types.join(`, `)}]`
 
   /**
    * @deprecated Use Str.Code.TS.nullable once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const nullable = (type: string): string =>
-    `${type} | null`
+  export const nullable = (type: string): string => `${type} | null`
 
   /**
    * @deprecated Use Str.Code.TS.intersection once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const intersection = (a: string, b: string): string =>
-    `${a} & ${b}`
+  export const intersection = (a: string, b: string): string => `${a} & ${b}`
 
   /**
    * @deprecated Use Str.Code.TS.union once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const union = (name: string, types: string[]): string =>
-    `type ${name} =\n| ${tsUnionItems(types)}`
+  export const union = (name: string, types: string[]): string => `type ${name} =\n| ${tsUnionItems(types)}`
 
   /**
    * @deprecated Use Str.Code.TS.propertyAccess once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const propertyAccess = (object: string, name: string): string =>
-    `${object}.${name}`
+  export const propertyAccess = (object: string, name: string): string => `${object}.${name}`
 
   /**
    * @deprecated Use Str.Code.TS.boolean once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const boolean = (value: boolean): string =>
-    value ? `true` : `false`
+  export const boolean = (value: boolean): string => value ? `true` : `false`
 
   /**
    * @deprecated Use Str.Code.TS.objectFromFields once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const object = (fields: string): string =>
-    `{\n${fields}\n}`
+  export const object = (fields: string): string => `{\n${fields}\n}`
 
   /**
    * @deprecated Use Str.Code.TS.fields once kit #65 is done
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const fields = (fieldTypes: string[]): string =>
-    fieldTypes.join(`\n`)
+  export const fields = (fieldTypes: string[]): string => fieldTypes.join(`\n`)
 
   /**
    * @deprecated Use Str.Code.TS.string once kit #65 is done (already exists in kit)
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const string = (str: string): string =>
-    `"${str}"`
+  export const string = (str: string): string => `"${str}"`
 
   /**
    * @deprecated Use Str.Code.TS.block once kit #65 is done (already exists in kit)
    * @see https://github.com/jasonkuhrt/kit/issues/65
    */
-  export const block = (content: string): string =>
-    `{\n${content}\n}`
+  export const block = (content: string): string => `{\n${content}\n}`
 
   /**
    * @deprecated Use Str.Code.TSDoc.format once kit #65 is done
