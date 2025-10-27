@@ -3,7 +3,8 @@
  */
 
 import { Grafaid } from '#lib/grafaid'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import type { Config } from '../config/config.js'
 
 /**
@@ -39,7 +40,7 @@ export const getSchemaDescription = (
   config: Config,
   node: Grafaid.Schema.DescribableTypes,
 ): string | null => {
-  if (node.description) return Code.escapeJSDocContent(node.description)
+  if (node.description) return Str.Code.TSDoc.escape(node.description)
 
   // Fallback if config says to show messages for missing descriptions
   if (config.options.TSDoc.noDocPolicy === 'message') {
@@ -93,13 +94,13 @@ export const extractFieldTypeInfo = (
 /**
  * Generate enhanced JSDoc for a root type (Query, Mutation, Subscription).
  */
-export const getRootTypeDoc = Code.jsdoc.factory<[
+export const getRootTypeDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
   type: Grafaid.Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, type, operationType) => {
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
-  const typeLink = Code.jsdoc.tag.link(
+  const typeLink = Str.Code.TSDoc.template.tag.link(
     `https://graphql.org/learn/schema/#the-${operationType}-and-mutation-types`,
     operationTypeCapitalized,
   )
@@ -112,13 +113,13 @@ export const getRootTypeDoc = Code.jsdoc.factory<[
 /**
  * Generate JSDoc for root methods interface (QueryMethods, MutationMethods, etc.)
  */
-export const getRootMethodsInterfaceDoc = Code.jsdoc.factory<[
+export const getRootMethodsInterfaceDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
   type: Grafaid.Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, type, operationType) => {
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
-  const typeLink = Code.jsdoc.tag.link(
+  const typeLink = Str.Code.TSDoc.template.tag.link(
     `https://graphql.org/learn/schema/#the-${operationType}-and-mutation-types`,
     operationTypeCapitalized,
   )
@@ -126,7 +127,7 @@ export const getRootMethodsInterfaceDoc = Code.jsdoc.factory<[
   doc`GraphQL ${typeLink} root methods.`
   doc``
   doc`All methods return Promises. Use ${
-    Code.markdownCode(`.${operationType}.$batch(...)`)
+    Str.Code.Md.code(`.${operationType}.$batch(...)`)
   } to select multiple fields at once.`
   doc``
   doc.add(getSchemaDescription(config, type))
@@ -135,7 +136,7 @@ export const getRootMethodsInterfaceDoc = Code.jsdoc.factory<[
 /**
  * Generate JSDoc for $batch method
  */
-export const getBatchMethodDoc = Code.jsdoc.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
+export const getBatchMethodDoc = Str.Code.TSDoc.template.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
   (doc, operationType) => {
     const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
 
@@ -149,25 +150,25 @@ export const getBatchMethodDoc = Code.jsdoc.factory<[operationType: 'query' | 'm
 /**
  * Generate JSDoc for __typename method
  */
-export const getTypenameMethodDoc = Code.jsdoc.factory<[
+export const getTypenameMethodDoc = Str.Code.TSDoc.template.factory<[
   typeName: string,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, typeName, operationType) => {
-  const typenameLink = Code.jsdoc.tag.link('https://graphql.org/learn/schema/#the-__typename-field', '__typename')
+  const typenameLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/learn/schema/#the-__typename-field', '__typename')
 
   doc`Request the ${typenameLink} meta-field.`
   doc``
   doc`The ${
-    Code.markdownCode('__typename')
+    Str.Code.Md.code('__typename')
   } field returns the name of the object type. In this case, it will always return ${
-    Code.markdownCode(`"${typeName}"`)
+    Str.Code.Md.code(`"${typeName}"`)
   }.`
 })
 
 /**
  * Generate JSDoc for BuilderMethodsRoot properties (query, mutation, subscription).
  */
-export const getRootPropertyDoc = Code.jsdoc.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
+export const getRootPropertyDoc = Str.Code.TSDoc.template.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
   (doc, operationType) => {
     const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
 
@@ -214,7 +215,7 @@ export const getRootPropertyDoc = Code.jsdoc.factory<[operationType: 'query' | '
  * Generate JSDoc for static document builder (both interface and const).
  * Used for query, mutation, and subscription builders.
  */
-export const getStaticDocumentBuilderDoc = Code.jsdoc.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
+export const getStaticDocumentBuilderDoc = Str.Code.TSDoc.template.factory<[operationType: 'query' | 'mutation' | 'subscription']>(
   (doc, operationType) => {
     doc`Static ${operationType} builder for compile-time GraphQL document generation.`
     doc``
@@ -287,7 +288,7 @@ const ${
  * Note: This function does not require Config because selection sets use direct field.description
  * without config-based fallbacks.
  */
-export const getOutputFieldSelectionSetDoc = Code.jsdoc.factory<[
+export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
   field: Grafaid.Schema.Field<any, any>,
   parentTypeName: string,
   namedType: Grafaid.Schema.NamedTypes,
@@ -326,10 +327,10 @@ export const getOutputFieldSelectionSetDoc = Code.jsdoc.factory<[
   doc`# Info`
   doc``
   doc.table({
-    'Type': Code.jsDocRaw(typeSignature),
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`),
-    'Parent': Code.jsdoc.tag.link(`$NamedTypes.$${parentTypeName}`),
-    'Path': Code.markdownCode(fieldPath),
+    'Type': Str.Code.TSDoc.raw(typeSignature),
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`),
+    'Parent': Str.Code.TSDoc.template.tag.link(`$NamedTypes.$${parentTypeName}`),
+    'Path': Str.Code.Md.code(fieldPath),
     '⚠ Deprecated': field.deprecationReason,
     'Nullability': isNonNull ? 'Required' : 'Optional',
     'List': isList ? 'Yes' : undefined,
@@ -340,7 +341,7 @@ export const getOutputFieldSelectionSetDoc = Code.jsdoc.factory<[
 /**
  * Generate enhanced JSDoc for a root type method.
  */
-export const getOutputFieldMethodDoc = Code.jsdoc.factory<[
+export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
   field: Grafaid.Schema.Field<any, any>,
   parentType: Grafaid.Schema.ObjectType,
@@ -373,10 +374,10 @@ export const getOutputFieldMethodDoc = Code.jsdoc.factory<[
   doc`# Info`
   doc``
   doc.table({
-    'Type': Code.jsDocRaw(typeSignature),
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`),
-    'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`),
-    'Path': Code.markdownCode(fieldPath),
+    'Type': Str.Code.TSDoc.raw(typeSignature),
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`),
+    'Parent': Str.Code.TSDoc.template.tag.link(`$Schema.${parentType.name}`),
+    'Path': Str.Code.Md.code(fieldPath),
     '⚠ Deprecated': field.deprecationReason,
     'Nullability': isNonNull ? 'Required' : 'Optional',
     'List': isList ? 'Yes' : undefined,
@@ -387,7 +388,7 @@ export const getOutputFieldMethodDoc = Code.jsdoc.factory<[
 /**
  * Generate enhanced JSDoc for inline fragment fields (___on_TypeName) in unions and interfaces.
  */
-export const getInlineFragmentDoc = Code.jsdoc.factory<[
+export const getInlineFragmentDoc = Str.Code.TSDoc.template.factory<[
   memberType: Grafaid.Schema.ObjectType,
   parentType: Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   fragmentKind: 'union' | 'interface',
@@ -408,10 +409,10 @@ export const getInlineFragmentDoc = Code.jsdoc.factory<[
   doc`# Info`
   doc``
   doc.table({
-    'Type': Code.jsdoc.tag.link(`$Schema.${memberTypeName}`),
+    'Type': Str.Code.TSDoc.template.tag.link(`$Schema.${memberTypeName}`),
     'Kind': kindLabel,
-    'Parent': Code.jsdoc.tag.link(`$Schema.${parentTypeName}`),
-    'Path': Code.markdownCode(`${parentTypeName} -> ${memberTypeName}`),
+    'Parent': Str.Code.TSDoc.template.tag.link(`$Schema.${parentTypeName}`),
+    'Path': Str.Code.Md.code(`${parentTypeName} -> ${memberTypeName}`),
   })
   doc``
   doc.$see('https://spec.graphql.org/draft/#sec-Inline-Fragments', 'Inline Fragments')
@@ -439,7 +440,7 @@ export const getInlineFragmentDoc = Code.jsdoc.factory<[
 /**
  * Generate enhanced JSDoc for field arguments in selection sets.
  */
-export const getArgumentDoc = Code.jsdoc.factory<[
+export const getArgumentDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
   arg: Grafaid.Schema.Argument,
   parentField: Grafaid.Schema.Field<any, any>,
@@ -462,11 +463,11 @@ export const getArgumentDoc = Code.jsdoc.factory<[
   doc`# Info`
   doc``
   doc.table({
-    'GraphQL Type': Code.markdownCode(graphqlType),
-    'Parent': Code.jsDocRaw(`{@link $NamedTypes.$${parentType.name}}.${parentField.name}`),
-    'Path': Code.markdownCode(argPath),
+    'GraphQL Type': Str.Code.Md.code(graphqlType),
+    'Parent': Str.Code.TSDoc.raw(`{@link $NamedTypes.$${parentType.name}}.${parentField.name}`),
+    'Path': Str.Code.Md.code(argPath),
     'Nullability': isNonNull ? 'Required' : 'Optional',
-    'Default': defaultValueStr ? Code.markdownCode(defaultValueStr) : undefined,
+    'Default': defaultValueStr ? Str.Code.Md.code(defaultValueStr) : undefined,
     '⚠ Deprecated': arg.deprecationReason,
   })
 })
@@ -474,7 +475,7 @@ export const getArgumentDoc = Code.jsdoc.factory<[
 /**
  * Generate enhanced JSDoc for static document builder fields.
  */
-export const getStaticDocumentFieldDoc = Code.jsdoc.factory<[
+export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
   field: Grafaid.Schema.Field<any, any>,
   parentType: Grafaid.Schema.ObjectType,
@@ -517,10 +518,10 @@ export const getStaticDocumentFieldDoc = Code.jsdoc.factory<[
   doc`# Info`
   doc``
   doc.table({
-    'Type': Code.jsDocRaw(typeSignature),
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`),
-    'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`),
-    'Path': Code.markdownCode(fieldPath),
+    'Type': Str.Code.TSDoc.raw(typeSignature),
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`),
+    'Parent': Str.Code.TSDoc.template.tag.link(`$Schema.${parentType.name}`),
+    'Path': Str.Code.Md.code(fieldPath),
     '⚠ Deprecated': field.deprecationReason,
     'Nullability': isNonNull ? 'Required' : 'Optional',
     'List': isList ? 'Yes' : undefined,
@@ -579,7 +580,7 @@ export const getStaticDocumentFieldDoc = Code.jsdoc.factory<[
 /**
  * Generate enhanced JSDoc for selection set object types.
  */
-export const getObjectTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Schema.ObjectType, isRoot: boolean]>(
+export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.ObjectType, isRoot: boolean]>(
   (doc, type, isRoot) => {
     const kindDocUrl = getKindDocUrl('OutputObject')
     const fields = Object.values(type.getFields())
@@ -596,9 +597,9 @@ export const getObjectTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sc
     doc`# Info`
     doc``
     doc.table({
-      'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Object ↗'),
+      'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Object ↗'),
       'Fields': `${fieldCount}`,
-      'Implements': interfaces.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`)),
+      'Implements': interfaces.map(i => Str.Code.TSDoc.template.tag.link(`$Schema.${i.name}`)),
     })
   },
 )
@@ -606,14 +607,14 @@ export const getObjectTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sc
 /**
  * Generate enhanced JSDoc for selection set interface types.
  */
-export const getInterfaceTypeSelectionSetDoc = Code.jsdoc.factory<
+export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
   [type: Grafaid.Schema.InterfaceType, kindMap: Grafaid.Schema.KindMap]
 >((doc, type, kindMap) => {
   const kindDocUrl = getKindDocUrl('Interface')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
   const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
-  const interfaceLink = Code.jsdoc.tag.link('https://graphql.org/graphql-js/type/#graphqlinterfacetype', 'Interface')
+  const interfaceLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/graphql-js/type/#graphqlinterfacetype', 'Interface')
 
   doc`Selection set for ${interfaceLink}.`
   doc``
@@ -622,19 +623,19 @@ export const getInterfaceTypeSelectionSetDoc = Code.jsdoc.factory<
   doc`# Info`
   doc``
   doc.table({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Interface ↗'),
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Interface ↗'),
     'Fields': `${fieldCount}`,
-    'Implementors': implementors.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`)),
+    'Implementors': implementors.map(i => Str.Code.TSDoc.template.tag.link(`$Schema.${i.name}`)),
   })
 })
 
 /**
  * Generate enhanced JSDoc for selection set union types.
  */
-export const getUnionTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Schema.UnionType]>((doc, type) => {
+export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.UnionType]>((doc, type) => {
   const kindDocUrl = getKindDocUrl('Union')
   const members = type.getTypes()
-  const unionLink = Code.jsdoc.tag.link('https://graphql.org/graphql-js/type/#graphqluniontype', 'Union')
+  const unionLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/graphql-js/type/#graphqluniontype', 'Union')
 
   doc`Selection set for ${unionLink}.`
   doc``
@@ -643,22 +644,22 @@ export const getUnionTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sch
   doc`# Info`
   doc``
   doc.table({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Union ↗'),
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Union ↗'),
     'Members': `${members.length}`,
-    'Types': members.map(m => Code.jsdoc.tag.link(`$Schema.${m.name}`)),
+    'Types': members.map(m => Str.Code.TSDoc.template.tag.link(`$Schema.${m.name}`)),
   })
 })
 
 /**
  * Generate enhanced JSDoc for selection set input object types.
  */
-export const getInputObjectTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Schema.InputObjectType]>(
+export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.InputObjectType]>(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('InputObject')
     const fields = Object.values(type.getFields())
     const fieldCount = fields.length
     const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
-    const inputLink = Code.jsdoc.tag.link('https://graphql.org/learn/schema/#input-types', 'InputObject')
+    const inputLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/learn/schema/#input-types', 'InputObject')
 
     doc`Input for ${inputLink}.`
     doc``
@@ -667,7 +668,7 @@ export const getInputObjectTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafa
     doc`# Info`
     doc``
     doc.table({
-      'Kind': Code.jsdoc.tag.link(kindDocUrl, 'InputObject ↗'),
+      'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'InputObject ↗'),
       'Fields': `${fieldCount}`,
       'All Fields Nullable': isAllFieldsNullable ? 'Yes' : 'No',
     })
@@ -677,7 +678,7 @@ export const getInputObjectTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafa
 /**
  * Generate enhanced JSDoc for selection set enum types.
  */
-export const getEnumTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Schema.EnumType]>((doc, type) => {
+export const getEnumTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.EnumType]>((doc, type) => {
   const kindDocUrl = getKindDocUrl('Enum')
   const members = type.getValues()
   const memberCount = members.length
@@ -686,7 +687,7 @@ export const getEnumTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sche
 
   if (type.description) {
     doc``
-    doc`${Code.escapeJSDocContent(type.description)}`
+    doc`${Str.Code.TSDoc.escape(type.description)}`
   }
 
   // Add members list after description
@@ -694,7 +695,7 @@ export const getEnumTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sche
     doc``
     doc`**Members:**`
     for (const member of members) {
-      const memberDescription = Code.escapeJSDocContent(member.description)
+      const memberDescription = Str.Code.TSDoc.escape(member.description)
       if (memberDescription) {
         doc`- \`${member.name}\` - ${memberDescription}`
       } else {
@@ -707,7 +708,7 @@ export const getEnumTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sche
   doc`# Info`
   doc``
   doc.table({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Enum ↗'),
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Enum ↗'),
     'Members': `${memberCount}`,
   })
 })
@@ -715,8 +716,8 @@ export const getEnumTypeSelectionSetDoc = Code.jsdoc.factory<[type: Grafaid.Sche
 /**
  * Generate JSDoc for $Expanded utility type.
  */
-export const getExpandedTypeDoc = Code.jsdoc.factory<[fieldName: string]>((doc, fieldName) => {
-  doc`This is the "expanded" version of the ${Code.markdownCode(fieldName)} type. It is identical except for the fact`
+export const getExpandedTypeDoc = Str.Code.TSDoc.template.factory<[fieldName: string]>((doc, fieldName) => {
+  doc`This is the "expanded" version of the ${Str.Code.Md.code(fieldName)} type. It is identical except for the fact`
   doc`that IDEs will display its contents (a union type) directly, rather than the name of this type.`
   doc`In some cases, this is a preferable DX, making the types easier to read for users.`
 })
@@ -724,7 +725,7 @@ export const getExpandedTypeDoc = Code.jsdoc.factory<[fieldName: string]>((doc, 
 /**
  * Generate JSDoc for operation $Infer utility type.
  */
-export const getOperationInferDoc = Code.jsdoc.factory<[operationType: 'Query' | 'Mutation']>((doc, operationType) => {
+export const getOperationInferDoc = Str.Code.TSDoc.template.factory<[operationType: 'Query' | 'Mutation']>((doc, operationType) => {
   doc`Infer the result type of a ${operationType} selection set.`
   doc``
   doc`Given a selection set object, this type computes the exact TypeScript type`
@@ -734,12 +735,12 @@ export const getOperationInferDoc = Code.jsdoc.factory<[operationType: 'Query' |
 /**
  * Generate JSDoc for operation $Variables utility type.
  */
-export const getOperationVariablesDoc = Code.jsdoc.factory<[operationType: 'Query' | 'Mutation']>(
+export const getOperationVariablesDoc = Str.Code.TSDoc.template.factory<[operationType: 'Query' | 'Mutation']>(
   (doc, operationType) => {
     doc`Infer the variables type for a ${operationType} selection set.`
     doc``
     doc.$deprecated(
-      `This is temporarily typed as ${Code.markdownCode('any')} and will be replaced with the new analysis system.`,
+      `This is temporarily typed as ${Str.Code.Md.code('any')} and will be replaced with the new analysis system.`,
     )
   },
 )
@@ -747,8 +748,8 @@ export const getOperationVariablesDoc = Code.jsdoc.factory<[operationType: 'Quer
 /**
  * Generate JSDoc for custom scalar codec export.
  */
-export const getScalarCodecDoc = Code.jsdoc.factory<[scalarName: string]>((doc, scalarName) => {
-  doc`Custom scalar codec for the ${Code.markdownCode(scalarName)} type.`
+export const getScalarCodecDoc = Str.Code.TSDoc.template.factory<[scalarName: string]>((doc, scalarName) => {
+  doc`Custom scalar codec for the ${Str.Code.Md.code(scalarName)} type.`
   doc``
   doc`Handles encoding (TypeScript → GraphQL) and decoding (GraphQL → TypeScript)`
   doc`transformations for this custom scalar.`
@@ -757,8 +758,8 @@ export const getScalarCodecDoc = Code.jsdoc.factory<[scalarName: string]>((doc, 
 /**
  * Generate JSDoc for decoded scalar type.
  */
-export const getScalarDecodedDoc = Code.jsdoc.factory<[scalarName: string]>((doc, scalarName) => {
-  doc`The decoded (TypeScript-side) type for the ${Code.markdownCode(scalarName)} scalar.`
+export const getScalarDecodedDoc = Str.Code.TSDoc.template.factory<[scalarName: string]>((doc, scalarName) => {
+  doc`The decoded (TypeScript-side) type for the ${Str.Code.Md.code(scalarName)} scalar.`
   doc``
   doc`This is the type you work with in your application code after the scalar`
   doc`has been decoded from its GraphQL wire format.`
@@ -767,8 +768,8 @@ export const getScalarDecodedDoc = Code.jsdoc.factory<[scalarName: string]>((doc
 /**
  * Generate JSDoc for encoded scalar type.
  */
-export const getScalarEncodedDoc = Code.jsdoc.factory<[scalarName: string]>((doc, scalarName) => {
-  doc`The encoded (GraphQL wire format) type for the ${Code.markdownCode(scalarName)} scalar.`
+export const getScalarEncodedDoc = Str.Code.TSDoc.template.factory<[scalarName: string]>((doc, scalarName) => {
+  doc`The encoded (GraphQL wire format) type for the ${Str.Code.Md.code(scalarName)} scalar.`
   doc``
   doc`This is the type used when transmitting the scalar value over the network.`
 })
@@ -776,7 +777,7 @@ export const getScalarEncodedDoc = Code.jsdoc.factory<[scalarName: string]>((doc
 /**
  * Generate JSDoc for scalar registry const.
  */
-export const getScalarRegistryDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getScalarRegistryDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Runtime registry of custom scalar codecs.`
   doc``
   doc`Maps scalar type names to their codec implementations for encoding/decoding.`
@@ -785,7 +786,7 @@ export const getScalarRegistryDoc = Code.jsdoc.factory<[]>((doc) => {
 /**
  * Generate JSDoc for scalar registry type.
  */
-export const getScalarRegistryTypeDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getScalarRegistryTypeDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Type-level registry of custom scalars.`
   doc``
   doc`Provides type information about custom scalars for the type system.`
@@ -795,7 +796,7 @@ export const getScalarRegistryTypeDoc = Code.jsdoc.factory<[]>((doc) => {
  * Generate JSDoc for Select namespace type utilities.
  * Used in Select.ts for type inference utilities.
  */
-export const getSelectInferDoc = Code.jsdoc.factory<[
+export const getSelectInferDoc = Str.Code.TSDoc.template.factory<[
   type: Grafaid.Schema.NamedTypes,
   kind: 'operation' | 'selectionSet',
 ]>((doc, type, kind) => {
@@ -812,7 +813,7 @@ export const getSelectInferDoc = Code.jsdoc.factory<[
  * Generate JSDoc for MethodsSelect interfaces.
  * Used in MethodsSelect.ts for selection method interfaces.
  */
-export const getMethodsSelectDoc = Code.jsdoc.factory<[type: Grafaid.Schema.NamedTypes]>((doc, type) => {
+export const getMethodsSelectDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.NamedTypes]>((doc, type) => {
   doc.add(type.description)
   doc``
   doc`Build type-safe selection set for ${type.name}.`
@@ -826,12 +827,12 @@ export const getMethodsSelectDoc = Code.jsdoc.factory<[type: Grafaid.Schema.Name
  * Generate JSDoc for $Scalar base utility type.
  * Used in SelectionSets.ts for the raw scalar type utility.
  */
-export const getScalarBaseDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getScalarBaseDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Raw scalar type with context-aware custom scalar resolution.`
   doc``
   doc`This is the base decoded scalar type without any wrappers.`
-  doc`Use ${Code.markdownCode('Nullable')} or ${
-    Code.markdownCode('NonNull')
+  doc`Use ${Str.Code.Md.code('Nullable')} or ${
+    Str.Code.Md.code('NonNull')
   } wrappers, or the pre-generated scalar variants.`
 })
 
@@ -839,7 +840,7 @@ export const getScalarBaseDoc = Code.jsdoc.factory<[]>((doc) => {
  * Generate JSDoc for Nullable wrapper type.
  * Used in SelectionSets.ts for nullable input field wrapper.
  */
-export const getScalarNullableDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getScalarNullableDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Wraps a type for nullable input fields.`
   doc``
   doc`Adds variable marker and allows null/undefined values.`
@@ -849,7 +850,7 @@ export const getScalarNullableDoc = Code.jsdoc.factory<[]>((doc) => {
  * Generate JSDoc for NonNull wrapper type.
  * Used in SelectionSets.ts for non-null input field wrapper.
  */
-export const getScalarNonNullDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getScalarNonNullDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Wraps a type for non-null input fields.`
   doc``
   doc`Adds variable marker but does not allow null (undefined still allowed for optionality).`
@@ -859,11 +860,11 @@ export const getScalarNonNullDoc = Code.jsdoc.factory<[]>((doc) => {
  * Generate JSDoc for inline fragment field (___).
  * Used in SelectionSets.ts for inline fragment syntax.
  */
-export const getFragmentInlineFieldDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getFragmentInlineFieldDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Inline fragments for field groups.`
   doc``
   doc`Generally a niche feature. This can be useful for example to apply an ${
-    Code.markdownCode('@include')
+    Str.Code.Md.code('@include')
   } directive to a subset of the`
   doc`selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.`
   doc``
@@ -874,7 +875,7 @@ export const getFragmentInlineFieldDoc = Code.jsdoc.factory<[]>((doc) => {
  * Generate JSDoc for __typename meta field.
  * Used in SelectionSets.ts for the __typename field documentation.
  */
-export const getTypenameFieldDoc = Code.jsdoc.factory<[kind: 'union' | 'interface' | 'object']>((doc, kind) => {
+export const getTypenameFieldDoc = Str.Code.TSDoc.template.factory<[kind: 'union' | 'interface' | 'object']>((doc, kind) => {
   if (kind === 'object') {
     doc`A meta field. Is the name of the type being selected.`
     doc``
@@ -893,7 +894,7 @@ export const getTypenameFieldDoc = Code.jsdoc.factory<[kind: 'union' | 'interfac
  * Generate JSDoc for StaticDocumentContext interface.
  * Used in Document.ts for context type documentation.
  */
-export const getStaticDocumentContextDoc = Code.jsdoc.factory<[]>((doc) => {
+export const getStaticDocumentContextDoc = Str.Code.TSDoc.template.factory<[]>((doc) => {
   doc`Context for static document type inference.`
   doc``
   doc`Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`

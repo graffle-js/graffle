@@ -1,7 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
-import { Code } from '#src/lib/Code.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
@@ -98,7 +98,7 @@ const generateMethodsFile = (
   // Import pre-curried helpers from core library
   const helpersToImport = Array.from(operationTypes).map(opType => `$$${opType}`)
   lines.push(
-    Code.importNamed({
+    Str.Code.TS.importNamed({
       names: helpersToImport,
       from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
     }),
@@ -120,12 +120,12 @@ const generateMethodsFile = (
     const fieldDef = rootType.getFields()[field.fieldName]!
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      lines.push(Code.TSDoc(docContent))
+      lines.push(CodeGraphQL.TSDoc(docContent))
     }
 
     // Generate method implementation using helper
     const functionDecl = `const ${renderName(methodName)} = ${helperName}('${field.fieldName}')`
-    lines.push(Code.exportValueWithKeywordHandling(methodName, functionDecl))
+    lines.push(CodeGraphQL.exportValueWithKeywordHandling(methodName, functionDecl))
     lines.push(``)
   }
 

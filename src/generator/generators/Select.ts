@@ -1,5 +1,6 @@
 import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { getSelectInferDoc } from '../helpers/jsdoc.js'
@@ -70,7 +71,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(Tex.title2(`Root`))
     for (const [operationType, type] of Obj.entries(config.schema.kindMap.index.Root)) {
       if (!type) continue
-      code(Code.TSDoc(getSelectInferDoc(type, 'operation')))
+      code(CodeGraphQL.TSDoc(getSelectInferDoc(type, 'operation')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
@@ -82,7 +83,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code``
     code(Tex.title2(`OutputObject`))
     for (const type of config.schema.kindMap.list.OutputObject) {
-      code(Code.TSDoc(getSelectInferDoc(type, 'selectionSet')))
+      code(CodeGraphQL.TSDoc(getSelectInferDoc(type, 'selectionSet')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
@@ -92,7 +93,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code``
     code(Tex.title2(`Union`))
     for (const type of config.schema.kindMap.list.Union) {
-      code(Code.TSDoc(getSelectInferDoc(type, 'selectionSet')))
+      code(CodeGraphQL.TSDoc(getSelectInferDoc(type, 'selectionSet')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
@@ -102,7 +103,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code``
     code(Tex.title2(`Interface`))
     for (const type of config.schema.kindMap.list.Interface) {
-      code(Code.TSDoc(getSelectInferDoc(type, 'selectionSet')))
+      code(CodeGraphQL.TSDoc(getSelectInferDoc(type, 'selectionSet')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)

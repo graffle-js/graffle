@@ -1,7 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
 import { Docpar } from '#src/docpar/$.js'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 
 const propertyNames = Docpar.propertyNames
 import { Obj } from '@wollybeard/kit'
@@ -64,14 +65,14 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     code(Tex.title1(`Index`))
     code``
     code`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`
-    code(Code.termObject({
+    code(CodeGraphQL.termObject({
       operations: kindMap.Root.map(type => {
         const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
         if (!operationType) throw new Error(`Operation type not found for ${type.name}`)
         return [operationType, type.name] as const
       }),
       directives: {},
-      types: Code.directiveTermObject({
+      types: CodeGraphQL.directiveTermObject({
         $literal: kinds.map(([, _]) => _).flat().map((_) => _.name).join(`,\n`),
       }),
     }))
@@ -155,7 +156,7 @@ const ScalarType = createCodeGenerator<
   { type: Grafaid.Schema.ScalarType }
 >(
   ({ code, type }) => {
-    code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
+    code(CodeGraphQL.termConst(type.name, `${$.$$Scalar}.${type.name}`))
   },
 )
 
@@ -164,9 +165,9 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
+      code(CodeGraphQL.termConst(type.name, `${$.$$Scalar}.${type.name}`))
     } else {
-      code(Code.termConst(type.name, Code.string(type.name)))
+      code(CodeGraphQL.termConst(type.name, CodeGraphQL.string(type.name)))
     }
   },
 )
@@ -183,11 +184,11 @@ const UnionType = createCodeGenerator<
     //
     // So what we do is inline all the custom scalar paths of all union members knowing
     // that they could never conflict.
-    code(Code.termConstTyped(
+    code(CodeGraphQL.termConstTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
-      Code.termObject({
-        [propertyNames.f]: Code.directiveTermObject({
+      CodeGraphQL.termObject({
+        [propertyNames.f]: CodeGraphQL.directiveTermObject({
           $spread: type.getTypes().filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
@@ -202,11 +203,11 @@ const InterfaceType = createCodeGenerator<
 >(
   ({ code, type, config }) => {
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-    code(Code.termConstTyped(
+    code(CodeGraphQL.termConstTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
-      Code.termObject({
-        [propertyNames.f]: Code.directiveTermObject({
+      CodeGraphQL.termObject({
+        [propertyNames.f]: CodeGraphQL.directiveTermObject({
           $spread: implementorTypes.filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
@@ -220,7 +221,7 @@ const ObjectType = createCodeGenerator<
   { type: Grafaid.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Code.TermObject = {}
+    const o: CodeGraphQL.TermObject = {}
 
     config.extensions.forEach(_ => {
       _.schemaDrivenDataMap?.onObjectType?.({
@@ -232,7 +233,7 @@ const ObjectType = createCodeGenerator<
 
     // Fields of this object.
     // ---------------------
-    const of: Code.TermObject = {}
+    const of: CodeGraphQL.TermObject = {}
     o[propertyNames.f] = of
 
     const condition = typeCondition(config)
@@ -240,7 +241,7 @@ const ObjectType = createCodeGenerator<
     const outputFields = Object.values(type.getFields()).filter(condition)
     for (const outputField of outputFields) {
       const outputFieldNamedType = Grafaid.Schema.getNamedType(outputField.type)
-      const sddmNodeOutputField: Code.DirectiveTermObjectLike<Code.TermObject> = {
+      const sddmNodeOutputField: CodeGraphQL.DirectiveTermObjectLike<CodeGraphQL.TermObject> = {
         $fields: {},
       }
       of[outputField.name] = sddmNodeOutputField
@@ -249,11 +250,11 @@ const ObjectType = createCodeGenerator<
       const inputCondition = inputTypeCondition(config)
       const args = outputField.args.filter(inputCondition)
       if (args.length > 0) {
-        const ofItemAs: Code.TermObject = {}
+        const ofItemAs: CodeGraphQL.TermObject = {}
         sddmNodeOutputField.$fields[propertyNames.a] = ofItemAs
 
         for (const arg of args) {
-          const ofItemA: Code.TermObject = {}
+          const ofItemA: CodeGraphQL.TermObject = {}
           ofItemAs[arg.name] = ofItemA
 
           const argType = Grafaid.Schema.getNamedType(arg.type)
@@ -291,19 +292,19 @@ const ObjectType = createCodeGenerator<
         ) {
           referenceAssignments.push(`${type.name}.f[\`${outputField.name}\`]!.nt = ${outputFieldNamedType.name}`)
           // dprint-ignore
-          sddmNodeOutputField.$literal = `// ${Code.termField(propertyNames.nt, outputFieldNamedType.name)} <-- Assigned later to avoid potential circular dependency.`
+          sddmNodeOutputField.$literal = `// ${CodeGraphQL.termField(propertyNames.nt, outputFieldNamedType.name)} <-- Assigned later to avoid potential circular dependency.`
           // // todo make kitchen sink schema have a pattern where this code path will be traversed.
           // // We just need to have arguments on a field on a nested object.
           // // Nested objects that in turn have custom scalar arguments
           // if (Schema.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
-          //   code(Code.termField(field.name, fieldType.name))
+          //   code(CodeGraphQL.termField(field.name, fieldType.name))
           // }
         }
       }
     }
 
     code(
-      Code.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`, Code.termObject(o)),
+      CodeGraphQL.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`, CodeGraphQL.termObject(o)),
     )
   },
 )
@@ -312,12 +313,12 @@ const EnumType = createCodeGenerator<
   { type: Grafaid.Schema.EnumType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
-    code(Code.termConstTyped(
+    code(CodeGraphQL.termConstTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.Enum`,
-      Code.termObject({
-        [propertyNames.k]: Code.string(`enum`),
-        [propertyNames.n]: Code.string(type.name),
+      CodeGraphQL.termObject({
+        [propertyNames.k]: CodeGraphQL.string(`enum`),
+        [propertyNames.n]: CodeGraphQL.string(type.name),
       }),
     ))
   },
@@ -327,21 +328,21 @@ const InputObjectType = createCodeGenerator<
   { type: Grafaid.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Code.TermObject = {}
+    const o: CodeGraphQL.TermObject = {}
 
     const inputFields = Object.values(type.getFields())
 
     if (config.runtimeFeatures.operationVariables) {
-      o[propertyNames.n] = Code.string(type.name)
+      o[propertyNames.n] = CodeGraphQL.string(type.name)
       const customScalarFields = inputFields
         .filter(Grafaid.Schema.CustomScalars.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
-        .map(Code.string)
+        .map(Str.Code.TS.string)
       if (customScalarFields.length) {
-        o[propertyNames.fcs] = Code.termList(customScalarFields)
+        o[propertyNames.fcs] = CodeGraphQL.termList(customScalarFields)
       }
     }
-    const f: Code.TermObjectOf<Code.DirectiveTermObjectLike<Code.TermObject>> = {}
+    const f: CodeGraphQL.TermObjectOf<CodeGraphQL.DirectiveTermObjectLike<CodeGraphQL.TermObject>> = {}
     o[propertyNames.f] = f
 
     for (const inputField of inputFields) {
@@ -370,13 +371,13 @@ const InputObjectType = createCodeGenerator<
           `${type.name}.${propertyNames.f}![\`${inputField.name}\`]!.${propertyNames.nt} = ${inputFieldType.name}`,
         )
         f[inputField.name]!.$literal = `// ${
-          Code.termField(propertyNames.nt, inputFieldType.name)
+          CodeGraphQL.termField(propertyNames.nt, inputFieldType.name)
         } <-- Assigned later to avoid potential circular dependency.`
       }
     }
 
     code(
-      Code.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.InputObject`, Code.termObject(o)),
+      CodeGraphQL.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.InputObject`, CodeGraphQL.termObject(o)),
     )
   },
 )

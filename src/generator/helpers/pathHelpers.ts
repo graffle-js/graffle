@@ -1,4 +1,4 @@
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from './identifiers.js'
 
@@ -99,7 +99,7 @@ export const getUtilitiesPath = (config: Config, sourceFilePath: string): string
  * ```
  */
 export const importUtilities = (config: Config): string => {
-  return Code.importAll({
+  return Str.Code.TS.importAll({
     as: $.$$Utilities,
     from: config.paths.imports.grafflePackage.utilitiesForGenerated,
     type: true,
@@ -198,7 +198,7 @@ export const codeReexportAll = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Code.reexportAll({
+  return Str.Code.TS.reexportAll({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -218,7 +218,7 @@ export const codeReexportNamespace = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Code.reexportNamespace({
+  return Str.Code.TS.reexportNamespace({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -238,7 +238,7 @@ export const codeReexportNamed = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Code.reexportNamed({
+  return Str.Code.TS.reexportNamed({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -258,7 +258,7 @@ export const codeImportAll = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Code.importAll({
+  return Str.Code.TS.importAll({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -278,7 +278,7 @@ export const codeImportNamed = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Code.importNamed({
+  return Str.Code.TS.importNamed({
     ...input,
     from: applyImportExtension(config, input.from),
   })

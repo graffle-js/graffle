@@ -1,4 +1,5 @@
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator$$ } from './$$.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
@@ -6,11 +7,11 @@ import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
 export const ModuleGenerator$ = createModuleGenerator(
   `$`,
   ({ config, code }) => {
-    code(Code.reexportNamespace({
+    code(Str.Code.TS.reexportNamespace({
       as: config.nameNamespace,
       from: `./${getImportName(config, ModuleGenerator$$)}`,
     }))
-    code(Code.reexportNamed({
+    code(Str.Code.TS.reexportNamed({
       names: { schemaDrivenDataMap: 'schemaMap' },
       from: `./modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}`,
     }))

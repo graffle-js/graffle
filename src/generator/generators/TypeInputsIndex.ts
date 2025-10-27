@@ -1,6 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -64,7 +65,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
       code``
       code`// Enums`
       for (const enumType of config.schema.kindMap.list.Enum) {
-        const members = enumType.getValues().map(v => Code.string(v.name)).join(' | ')
+        const members = enumType.getValues().map(v => CodeGraphQL.string(v.name)).join(' | ')
         const safeName = renderName(enumType.name)
         code`export type ${safeName} = ${members}`
       }

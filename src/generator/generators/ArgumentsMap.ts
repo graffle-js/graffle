@@ -1,7 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
 import { Docpar } from '#src/docpar/$.js'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Obj } from '@wollybeard/kit'
 
 const propertyNames = Docpar.propertyNames
@@ -206,14 +207,14 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     }
 
     code`export interface ArgumentsMap`
-    code(Code.termObject({
-      operations: Code.directiveTermObject({
+    code(CodeGraphQL.termObject({
+      operations: CodeGraphQL.directiveTermObject({
         $fields: operationsEntries.length > 0
           ? Object.fromEntries(operationsEntries)
           : {},
       }),
-      directives: Code.directiveTermObject({}),
-      types: Code.directiveTermObject({
+      directives: CodeGraphQL.directiveTermObject({}),
+      types: CodeGraphQL.directiveTermObject({
         $fields: typesEntries.length > 0
           ? Object.fromEntries(typesEntries)
           : {},

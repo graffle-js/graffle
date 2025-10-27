@@ -2,9 +2,9 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { Grafaid } from '#lib/grafaid'
-import { Code } from '#src/lib/Code.js'
-import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
 import { Docpar } from '../../docpar/$.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
@@ -131,7 +131,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   code(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: './_context', type: true }))
   code()
 
-  code(Code.tsInterface({
+  code(CodeGraphQL.tsInterface({
     export: true,
     name: `$Document`,
     parameters: $ContextTypeParameter,
@@ -204,7 +204,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode()
 
   // Generate JSDoc for $Scalar base utility
-  scalarsCode(Code.TSDoc(getScalarBaseDoc()))
+  scalarsCode(CodeGraphQL.TSDoc(getScalarBaseDoc()))
   scalarsCode(`export type $Scalar<`)
   scalarsCode(`  $ScalarName extends string,`)
   scalarsCode(
@@ -219,13 +219,13 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode()
 
   // Generate wrapper utilities
-  scalarsCode(Code.TSDoc(getScalarNullableDoc()))
+  scalarsCode(CodeGraphQL.TSDoc(getScalarNullableDoc()))
   scalarsCode(
     `export type Nullable<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type | null | undefined>`,
   )
   scalarsCode()
 
-  scalarsCode(Code.TSDoc(getScalarNonNullDoc()))
+  scalarsCode(CodeGraphQL.TSDoc(getScalarNonNullDoc()))
   scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type>`)
   scalarsCode()
 
@@ -307,11 +307,11 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
 const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
-  code(Code.tsAlias$({
+  code(CodeGraphQL.tsAlias$({
     tsDoc: getEnumTypeSelectionSetDoc(enumType),
     export: true,
     name: enumType.name,
-    type: Code.tsUnionItems(enumType.getValues().map((value) => Code.string(value.name))),
+    type: CodeGraphQL.tsUnionItems(enumType.getValues().map((value) => CodeGraphQL.string(value.name))),
   }))
 
   return {
@@ -362,14 +362,14 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   mainCode()
 
   const fragmentsInlineType = unionType.getTypes().map((memberType) => {
-    const doc = Code.TSDoc(getInlineFragmentDoc(memberType, unionType, 'union'))
+    const doc = CodeGraphQL.TSDoc(getInlineFragmentDoc(memberType, unionType, 'union'))
     const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
       H.namedTypesReference(memberType)
     }`
     return `${doc}\n${field}`
   }).join(`\n`)
 
-  mainCode(Code.tsInterface({
+  mainCode(CodeGraphQL.tsInterface({
     tsDoc: getUnionTypeSelectionSetDoc(unionType),
     export: true,
     name: unionType.name,
@@ -444,7 +444,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields', type: true }))
   namespaceCode()
 
-  namespaceCode(Code.tsInterface({
+  namespaceCode(CodeGraphQL.tsInterface({
     tsDoc: getInputObjectTypeSelectionSetDoc(inputObject),
     export: true,
     name: inputObject.name,
@@ -562,7 +562,7 @@ const generateFieldedTypeModule = (
     const argsAnalysis = analyzeArgsNullability(field.args)
     const isCanBeIndicator = (Grafaid.Schema.isScalarType(namedType) || Grafaid.Schema.isEnumType(namedType))
       && argsAnalysis.isAllNullable
-    const doc = Code.TSDoc(getOutputFieldSelectionSetDoc(field, type.name, namedType))
+    const doc = CodeGraphQL.TSDoc(getOutputFieldSelectionSetDoc(field, type.name, namedType))
     const key = H.outputFieldKey(
       field.name,
       `$Fields.${field.name}`, // Use $Fields import to avoid circular reference
@@ -583,7 +583,7 @@ const generateFieldedTypeModule = (
     onTypesRendered = implementorTypes.map(implementorType => {
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
-      const doc = Code.TSDoc(getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'))
+      const doc = CodeGraphQL.TSDoc(getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'))
       const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
       }`
@@ -608,7 +608,7 @@ const generateFieldedTypeModule = (
     ? getInterfaceTypeSelectionSetDoc(type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
     : getObjectTypeSelectionSetDoc(type as Grafaid.Schema.ObjectType, isRoot)
 
-  namespaceCode(Code.tsInterface({
+  namespaceCode(CodeGraphQL.tsInterface({
     tsDoc,
     export: true,
     name: type.name,
@@ -657,7 +657,7 @@ const renderOutputFieldForFields = (
 
   // Main field type - references the namespace's $SelectionSet
   const mainTypeDecl = `${safeName}<${$ContextTypeParameter}> = ${
-    Code.tsUnionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
+    CodeGraphQL.tsUnionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
   }`
   if (isReservedKeyword(field.name)) {
     code(`type ${mainTypeDecl}`)
@@ -695,7 +695,7 @@ const renderOutputFieldForFields = (
   if (argsAnalysis.hasAny) {
     code(`  export interface $Arguments<${$ContextTypeParameter}> {`)
     for (const arg of field.args) {
-      const doc = Code.TSDoc(getArgumentDoc(config, arg, field, parentType as Grafaid.Schema.ObjectType))
+      const doc = CodeGraphQL.TSDoc(getArgumentDoc(config, arg, field, parentType as Grafaid.Schema.ObjectType))
       const key = getInputFieldKey(arg)
       const optional = Grafaid.Schema.isNullableType(arg.type) ? '?' : ''
       const value = renderArgumentType(arg.type)
@@ -707,10 +707,10 @@ const renderOutputFieldForFields = (
   }
 
   // Expanded type
-  code(`  ${Code.TSDoc(getExpandedTypeDoc(field.name))}`)
+  code(`  ${CodeGraphQL.TSDoc(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
-      Code.tsUnionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
+      CodeGraphQL.tsUnionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
     }>`,
   )
 
@@ -743,7 +743,7 @@ const renderFieldPropertyArguments = (
       ? `${lead} are required so you may omit this.`
       : `${lead} are required so you must include this.`
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-    return Code.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
+    return CodeGraphQL.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
       readonly: true,
       tsDoc,
@@ -802,12 +802,12 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   }
 
   if (config.schema.kindMap.index.Root.query) {
-    code(Code.TSDoc(getOperationInferDoc('Query')))
+    code(CodeGraphQL.TSDoc(getOperationInferDoc('Query')))
     code(
       `export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
-    code(Code.TSDoc(getOperationVariablesDoc('Query')))
+    code(CodeGraphQL.TSDoc(getOperationVariablesDoc('Query')))
     code(
       `export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
@@ -815,12 +815,12 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   }
 
   if (config.schema.kindMap.index.Root.mutation) {
-    code(Code.TSDoc(getOperationInferDoc('Mutation')))
+    code(CodeGraphQL.TSDoc(getOperationInferDoc('Mutation')))
     code(
       `export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
-    code(Code.TSDoc(getOperationVariablesDoc('Mutation')))
+    code(CodeGraphQL.TSDoc(getOperationVariablesDoc('Mutation')))
     code(
       `export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
@@ -854,7 +854,7 @@ const generateNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap
  * Check if a name is a reserved keyword and needs escaping
  */
 const isReservedKeyword = (name: string): boolean => {
-  return Code.reservedTypeScriptInterfaceNames.includes(name as any)
+  return CodeGraphQL.reservedTypeScriptInterfaceNames.includes(name as any)
 }
 
 /**
@@ -952,7 +952,7 @@ const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema
 const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
   return [
     getInputFieldKey(inputFieldLike),
-    Code.objectField$({
+    CodeGraphQL.objectField$({
       tsDoc: getTsDocContents(config, inputFieldLike),
       optional: Grafaid.Schema.isNullableType(inputFieldLike.type),
       value: renderArgumentType(inputFieldLike.type),
@@ -1058,7 +1058,7 @@ namespace H {
   export const fragmentInlineField = (
     type: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    const doc = Code.TSDoc(getFragmentInlineFieldDoc())
+    const doc = CodeGraphQL.TSDoc(getFragmentInlineFieldDoc())
 
     return `${doc}\n___?: $FragmentInline<${i._$Context}> | $FragmentInline<${i._$Context}>[]`
   }
@@ -1066,7 +1066,7 @@ namespace H {
   export const fragmentInlineInterface = (
     node: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    return Code.tsInterface({
+    return CodeGraphQL.tsInterface({
       export: true,
       name: `$FragmentInline`,
       parameters: $ContextTypeParameter,
@@ -1079,6 +1079,6 @@ namespace H {
   }
 
   const __typenameDoc = (kind: 'union' | 'interface' | 'object') => {
-    return Code.TSDoc(getTypenameFieldDoc(kind))
+    return CodeGraphQL.TSDoc(getTypenameFieldDoc(kind))
   }
 }

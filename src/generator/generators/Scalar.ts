@@ -1,6 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { $ } from '../helpers/identifiers.js'
 import {
   getScalarCodecDoc,
@@ -38,7 +39,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
 
-        const dualExportResult = Code.dualExport({
+        const dualExportResult = CodeGraphQL.dualExport({
           name: scalar.name,
           const: {
             value: `${$.CustomScalars}.${scalar.name}`,
@@ -50,16 +51,16 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         })
 
         code(dualExportResult.code)
-        code(Code.TSDoc(getScalarDecodedDoc(scalar.name)))
+        code(CodeGraphQL.TSDoc(getScalarDecodedDoc(scalar.name)))
         code(
-          Code.tsTypeExport(
+          CodeGraphQL.tsTypeExport(
             `${scalar.name}Decoded`,
             `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
           ),
         )
-        code(Code.TSDoc(getScalarEncodedDoc(scalar.name)))
+        code(CodeGraphQL.TSDoc(getScalarEncodedDoc(scalar.name)))
         code(
-          Code.tsTypeExport(
+          CodeGraphQL.tsTypeExport(
             `${scalar.name}Encoded`,
             `${$.$$Utilities}.Schema.Scalar.GetEncoded<${dualExportResult.internalName}>`,
           ),
@@ -68,7 +69,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       }
     }
 
-    code(Code.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
+    code(Str.Code.TS.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
     code``
 
     if (isNeedCustomScalarDefaults) {
@@ -81,7 +82,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        code(Code.tsTypeExport(scalar.name, `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`))
+        code(CodeGraphQL.tsTypeExport(scalar.name, `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`))
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
@@ -107,10 +108,10 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       })
       : {}
 
-    code(Code.TSDoc(getScalarRegistryDoc()))
+    code(CodeGraphQL.TSDoc(getScalarRegistryDoc()))
     code`
       export const $registry = {
-        map: ${Code.termObject(runtimeMap)},
+        map: ${CodeGraphQL.termObject(runtimeMap)},
       } as $Registry
     `
     code``
@@ -118,13 +119,13 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     const typeScalarRegistry = config.options.customScalars
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
-          ${Code.termObject(buildtimeMap)},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
+          ${CodeGraphQL.termObject(buildtimeMap)},
+          ${CodeGraphQL.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
+          ${CodeGraphQL.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
         >`
       : `$$Utilities.Schema.Scalar.Registry.Empty`
 
-    code(Code.tsAlias$({
+    code(CodeGraphQL.tsAlias$({
       name: `$Registry`,
       type: typeScalarRegistry,
       tsDoc: getScalarRegistryTypeDoc(),

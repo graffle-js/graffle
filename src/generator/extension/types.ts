@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import type { Code } from '#src/lib/Code.js'
+import type { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import type { Config } from '../config/config.js'
 
 export interface Extension {
@@ -13,17 +13,17 @@ export interface Extension {
 
 export interface SchemaHookParams {
   config: Config
-  schema: Code.TermObject
+  schema: CodeGraphQL.TermObject
 }
 
 export interface ObjectTypeHookParams {
   config: Config
-  sddmNode: Code.TermObject
+  sddmNode: CodeGraphQL.TermObject
   graphqlType: Grafaid.Schema.ObjectType
 }
 
 export interface OutputFieldHookParams {
   config: Config
-  sddmNode: Code.DirectiveTermObjectLike<Code.TermObject>
+  sddmNode: CodeGraphQL.DirectiveTermObjectLike<CodeGraphQL.TermObject>
   graphqlType: Grafaid.Schema.Field<any, any>
 }

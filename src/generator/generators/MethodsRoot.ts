@@ -1,8 +1,8 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '#lib/grafaid'
-import { Code } from '#src/lib/Code.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
+import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { $ } from '../helpers/identifiers.js'
 import {
   getBatchMethodDoc,
@@ -156,7 +156,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     if (config.methodsOrganization.logical) {
       config.schema.kindMap.root.list.forEach(node => {
         const propertyDoc = getRootPropertyDoc(node.operationType)
-        code(Code.TSDocIndented(propertyDoc, `  `))
+        code(CodeGraphQL.TSDocIndented(propertyDoc, `  `))
         code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
       })
     }
@@ -187,7 +187,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // Interface JSDoc
   const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
   if (interfaceDoc) {
-    code(Code.TSDoc(interfaceDoc))
+    code(CodeGraphQL.TSDoc(interfaceDoc))
   }
 
   // dprint-ignore
@@ -195,7 +195,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // $batch JSDoc
   const batchDoc = getBatchMethodDoc(operationType)
-  code(Code.TSDocIndented(batchDoc, `  `))
+  code(CodeGraphQL.TSDocIndented(batchDoc, `  `))
 
   // dprint-ignore
   code`
@@ -224,7 +224,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // __typename JSDoc
   const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(Code.TSDocIndented(typenameDoc, `  `))
+  code(CodeGraphQL.TSDocIndented(typenameDoc, `  `))
 
   // dprint-ignore
   code`
@@ -250,7 +250,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
   for (const field of Object.values(node.getFields())) {
     const docContent = getOutputFieldMethodDoc(config, field, node)
     if (docContent) {
-      code(Code.TSDoc(docContent))
+      code(CodeGraphQL.TSDoc(docContent))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(field.type)
@@ -793,7 +793,7 @@ const renderDomainType = createCodeGenerator<{
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      code(Code.TSDocIndented(docContent, `  `))
+      code(CodeGraphQL.TSDocIndented(docContent, `  `))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)
