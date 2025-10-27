@@ -2,7 +2,7 @@ import { Extension } from '#graffle/extension'
 import { ConfigManager } from '#lib/config-manager'
 import { Grafaid } from '#lib/grafaid'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 
 const propertyNames = {
   r: `r`,
@@ -31,7 +31,7 @@ export const SchemaErrors = (input?: Input) => {
     onSchema: ({ config: genConfig, schema }) => {
       const errorObjects = getErrorObjects(config, genConfig)
       schema[`SchemaErrors`] = {
-        objectNames: errorObjects.map(type => Code.string(type.name)).join(` | `),
+        objectNames: errorObjects.map(type => Str.Code.TS.string(type.name)).join(` | `),
       }
     },
     schemaDrivenDataMap: {

@@ -1,6 +1,6 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -24,7 +24,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
     }
 
     code``
-    code(Tex.title1(`Type Inputs Index`))
+    code(Str.Code.TS.Comment.title1(`Type Inputs Index`))
     code`
       /**
        * Mapping of GraphQL type names to their TypeScript input types.
@@ -64,7 +64,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
       code``
       code`// Enums`
       for (const enumType of config.schema.kindMap.list.Enum) {
-        const members = enumType.getValues().map(v => Code.string(v.name)).join(' | ')
+        const members = enumType.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
         const safeName = renderName(enumType.name)
         code`export type ${safeName} = ${members}`
       }

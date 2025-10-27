@@ -1,7 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { Docpar } from '#src/docpar/$.js'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 
 const propertyNames = Docpar.propertyNames
@@ -86,14 +86,14 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     code``
 
     if (inputObjectTypes.length > 0) {
-      code(Tex.title1(`InputObject`))
+      code(Str.Code.TS.Comment.title1(`InputObject`))
       code``
       for (const inputType of inputObjectTypes) {
         code(renderInputObjectType({ config, type: inputType }))
         code``
       }
     } else {
-      code(Tex.title1(`InputObject`))
+      code(Str.Code.TS.Comment.title1(`InputObject`))
       code``
       code`// No InputObject types in your schema.`
       code``
@@ -101,14 +101,14 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
 
     // Generate Output Objects section
     if (objectTypes.length > 0) {
-      code(Tex.title1(`OutputObject`))
+      code(Str.Code.TS.Comment.title1(`OutputObject`))
       code``
       for (const objectType of objectTypes) {
         code(renderTypeWithArgs({ config, typeInfo: objectType }))
         code``
       }
     } else {
-      code(Tex.title1(`OutputObject`))
+      code(Str.Code.TS.Comment.title1(`OutputObject`))
       code``
       code`// No OutputObject types with arguments in your schema.`
       code``
@@ -116,21 +116,21 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
 
     // Generate Interfaces section
     if (interfaceTypes.length > 0) {
-      code(Tex.title1(`Interface`))
+      code(Str.Code.TS.Comment.title1(`Interface`))
       code``
       for (const interfaceType of interfaceTypes) {
         code(renderTypeWithArgs({ config, typeInfo: interfaceType }))
         code``
       }
     } else {
-      code(Tex.title1(`Interface`))
+      code(Str.Code.TS.Comment.title1(`Interface`))
       code``
       code`// No Interface types with arguments in your schema.`
       code``
     }
 
     // Union section - always empty
-    code(Tex.title1(`Union`))
+    code(Str.Code.TS.Comment.title1(`Union`))
     code``
     code`// No Union types with arguments in your schema.`
     code``
@@ -138,7 +138,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     // Generate Root types section
     const rootTypesArray = Object.values(rootTypes)
     if (rootTypesArray.length > 0) {
-      code(Tex.title1(`Root`))
+      code(Str.Code.TS.Comment.title1(`Root`))
       code``
       for (const rootType of rootTypesArray) {
         // Root types use the same rendering as regular types
@@ -150,7 +150,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     // For root types without fields with arguments, generate empty interfaces
     // These are needed for the operations index to be consistent
     if (queryType && !rootTypes['query']) {
-      code(Tex.title1(`Root`))
+      code(Str.Code.TS.Comment.title1(`Root`))
       code``
       code`export interface Query extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
       code`  readonly ${propertyNames.f}: {}`
@@ -159,7 +159,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     }
     if (mutationType && !rootTypes['mutation']) {
       if (!queryType || rootTypes['query']) {
-        code(Tex.title1(`Root`))
+        code(Str.Code.TS.Comment.title1(`Root`))
         code``
       }
       code`export interface Mutation extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
@@ -169,7 +169,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     }
     if (subscriptionType && !rootTypes['subscription']) {
       if ((!queryType || rootTypes['query']) && (!mutationType || rootTypes['mutation'])) {
-        code(Tex.title1(`Root`))
+        code(Str.Code.TS.Comment.title1(`Root`))
         code``
       }
       code`export interface Subscription extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
@@ -179,7 +179,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     }
 
     // Generate the index following SDDM structure
-    code(Tex.title1(`Index`))
+    code(Str.Code.TS.Comment.title1(`Index`))
     code``
 
     // Build operations object entries - include ALL root types from schema
@@ -206,14 +206,14 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     }
 
     code`export interface ArgumentsMap`
-    code(Code.termObject({
-      operations: Code.directiveTermObject({
+    code(Str.Code.TS.TermObject.termObject({
+      operations: Str.Code.TS.TermObject.directiveTermObject({
         $fields: operationsEntries.length > 0
           ? Object.fromEntries(operationsEntries)
           : {},
       }),
-      directives: Code.directiveTermObject({}),
-      types: Code.directiveTermObject({
+      directives: Str.Code.TS.TermObject.directiveTermObject({}),
+      types: Str.Code.TS.TermObject.directiveTermObject({
         $fields: typesEntries.length > 0
           ? Object.fromEntries(typesEntries)
           : {},

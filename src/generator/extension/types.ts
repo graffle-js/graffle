@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import type { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
 export interface Extension {
@@ -13,17 +13,17 @@ export interface Extension {
 
 export interface SchemaHookParams {
   config: Config
-  schema: Code.TermObject
+  schema: Str.Code.TS.TermObject.TermObject
 }
 
 export interface ObjectTypeHookParams {
   config: Config
-  sddmNode: Code.TermObject
+  sddmNode: Str.Code.TS.TermObject.TermObject
   graphqlType: Grafaid.Schema.ObjectType
 }
 
 export interface OutputFieldHookParams {
   config: Config
-  sddmNode: Code.DirectiveTermObjectLike<Code.TermObject>
+  sddmNode: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
   graphqlType: Grafaid.Schema.Field<any, any>
 }

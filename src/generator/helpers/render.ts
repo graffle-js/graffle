@@ -1,7 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { Docpar } from '#src/docpar/$.js'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
 export const renderInlineType = (type: Grafaid.Schema.Types): string => {
@@ -37,9 +37,9 @@ export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes
     //
     // ${category.toUpperCase()}
     // ${typeLabel.toUpperCase()}
-    // ${Tex.borderThin}
-    // ${Tex.centerTo(Tex.borderThin, type.name)}
-    // ${Tex.borderThin}
+    // ${Str.Code.TS.Comment.borderThin}
+    // ${Str.Code.TS.Comment.centerTo(Str.Code.TS.Comment.borderThin, type.name)}
+    // ${Str.Code.TS.Comment.borderThin}
     //
     //
   `.trim()
@@ -53,14 +53,14 @@ const defaultDescription = (node: Grafaid.Schema.DescribableTypes) => {
 }
 
 export const renderDocumentation = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
-  return Code.TSDoc(getTsDocContents(config, node))
+  return Str.Code.TSDoc.format(getTsDocContents(config, node))
 }
 export const getTsDocContents = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
-  const generalDescription = Code.escapeJSDocContent(node.description)
+  const generalDescription = Str.Code.TSDoc.escape(node.description)
     ?? (config.options.TSDoc.noDocPolicy === `message` ? defaultDescription(node) : null)
 
   const deprecationDescription = Grafaid.Schema.isDeprecatableNode(node) && node.deprecationReason
-    ? `@deprecated ${Code.escapeJSDocContent(node.deprecationReason)}`
+    ? `@deprecated ${Str.Code.TSDoc.escape(node.deprecationReason)}`
     : null
 
   const enumMemberDescriptions: string[] = Grafaid.Schema.isEnumType(node)
@@ -68,9 +68,9 @@ export const getTsDocContents = (config: Config, node: Grafaid.Schema.Describabl
       .getValues()
       .map((_) => {
         const deprecationDescription = _.deprecationReason
-          ? `(DEPRECATED: ${Code.escapeJSDocContent(_.deprecationReason)})`
+          ? `(DEPRECATED: ${Str.Code.TSDoc.escape(_.deprecationReason)})`
           : null
-        const generalDescription = Code.escapeJSDocContent(_.description)
+        const generalDescription = Str.Code.TSDoc.escape(_.description)
           ?? (config.options.TSDoc.noDocPolicy === `message`
             ? `Missing description.`
             : null)
@@ -109,12 +109,5 @@ export const getTsDocContents = (config: Config, node: Grafaid.Schema.Describabl
  */
 export const renderName = (type: string | Grafaid.Schema.NamedTypes | Grafaid.Schema.FieldTypes) => {
   const name_ = typeof type === `string` ? type : type.name
-
-  if (Code.reservedTypeScriptInterfaceNames.includes(name_ as any)) {
-    // todo this could name clash with $ prefix imports.
-    // either make imports use $$ or put the $ here in suffix.
-    return `$${name_}`
-  }
-
-  return name_
+  return Str.Code.TS.Reserved.escapeReserved(name_)
 }

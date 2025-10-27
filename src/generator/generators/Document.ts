@@ -1,4 +1,4 @@
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import type { GraphQLObjectType } from 'graphql'
 import {
@@ -53,7 +53,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(importUtilities(config))
       code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
       code``
-      code(Code.TSDoc(getStaticDocumentContextDoc()))
+      code(Str.Code.TSDoc.format(getStaticDocumentContextDoc()))
       code(`interface StaticDocumentContext {`)
       code(`  typeHookRequestResultDataTypes: never`)
       code(`  scalars: $$Scalar.$Registry`)
@@ -62,7 +62,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Interface JSDoc
       const interfaceDoc = getStaticDocumentBuilderDoc('query')
-      code(Code.TSDoc(interfaceDoc))
+      code(Str.Code.TSDoc.format(interfaceDoc))
       code`
         export interface QueryBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
@@ -76,7 +76,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ${
         Obj.values(queryType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, queryType, 'query')
-          const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
+          const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
@@ -91,7 +91,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const constDoc = getStaticDocumentBuilderDoc('query')
-      code(Code.TSDoc(constDoc))
+      code(Str.Code.TSDoc.format(constDoc))
       code(`export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY, { sddm }) as any`)
       code``
     }
@@ -103,7 +103,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       }
       if (!queryType) {
         code``
-        code(Code.TSDoc(getStaticDocumentContextDoc()))
+        code(Str.Code.TSDoc.format(getStaticDocumentContextDoc()))
         code(`interface StaticDocumentContext {`)
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
@@ -113,7 +113,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Interface JSDoc
       const mutationInterfaceDoc = getStaticDocumentBuilderDoc('mutation')
-      code(Code.TSDoc(mutationInterfaceDoc))
+      code(Str.Code.TSDoc.format(mutationInterfaceDoc))
       code`
         export interface MutationBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
@@ -127,7 +127,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ${
         Obj.values(mutationType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, mutationType, 'mutation')
-          const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
+          const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
@@ -142,7 +142,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
-      code(Code.TSDoc(mutationConstDoc))
+      code(Str.Code.TSDoc.format(mutationConstDoc))
       code(`export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION, { sddm }) as any`)
       code``
     }
@@ -154,7 +154,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       }
       if (!queryType && !mutationType) {
         code``
-        code(Code.TSDoc(getStaticDocumentContextDoc()))
+        code(Str.Code.TSDoc.format(getStaticDocumentContextDoc()))
         code(`interface StaticDocumentContext {`)
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
@@ -164,7 +164,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Interface JSDoc
       const subscriptionInterfaceDoc = getStaticDocumentBuilderDoc('subscription')
-      code(Code.TSDoc(subscriptionInterfaceDoc))
+      code(Str.Code.TSDoc.format(subscriptionInterfaceDoc))
       code`
         export interface SubscriptionBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
@@ -178,7 +178,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ${
         Obj.values(subscriptionType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, subscriptionType, 'subscription')
-          const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
+          const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
@@ -193,7 +193,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
-      code(Code.TSDoc(subscriptionConstDoc))
+      code(Str.Code.TSDoc.format(subscriptionConstDoc))
       code(
         `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION, { sddm }) as any`,
       )

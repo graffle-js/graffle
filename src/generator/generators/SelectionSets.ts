@@ -2,7 +2,6 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { Grafaid } from '#lib/grafaid'
-import { Code } from '#src/lib/Code.js'
 import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
 import { Docpar } from '../../docpar/$.js'
@@ -131,10 +130,10 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   code(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: './_context', type: true }))
   code()
 
-  code(Code.tsInterface({
+  code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `$Document`,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     block: `
       ${queryType ? `query?: Record<string, ${renderName(queryType)}<${i._$Context}>>` : ``}
       ${mutationType ? `mutation?: Record<string, ${renderName(mutationType)}<${i._$Context}>>` : ``}
@@ -204,7 +203,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode()
 
   // Generate JSDoc for $Scalar base utility
-  scalarsCode(Code.TSDoc(getScalarBaseDoc()))
+  scalarsCode(Str.Code.TSDoc.format(getScalarBaseDoc()))
   scalarsCode(`export type $Scalar<`)
   scalarsCode(`  $ScalarName extends string,`)
   scalarsCode(
@@ -219,13 +218,13 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode()
 
   // Generate wrapper utilities
-  scalarsCode(Code.TSDoc(getScalarNullableDoc()))
+  scalarsCode(Str.Code.TSDoc.format(getScalarNullableDoc()))
   scalarsCode(
     `export type Nullable<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type | null | undefined>`,
   )
   scalarsCode()
 
-  scalarsCode(Code.TSDoc(getScalarNonNullDoc()))
+  scalarsCode(Str.Code.TSDoc.format(getScalarNonNullDoc()))
   scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type>`)
   scalarsCode()
 
@@ -307,11 +306,11 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
 const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
-  code(Code.tsAlias$({
+  code(Str.Code.TS.typeAlias$({
     tsDoc: getEnumTypeSelectionSetDoc(enumType),
     export: true,
     name: enumType.name,
-    type: Code.tsUnionItems(enumType.getValues().map((value) => Code.string(value.name))),
+    type: Str.Code.TS.unionItems(enumType.getValues().map((value) => Str.Code.TS.string(value.name))),
   }))
 
   return {
@@ -362,18 +361,18 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   mainCode()
 
   const fragmentsInlineType = unionType.getTypes().map((memberType) => {
-    const doc = Code.TSDoc(getInlineFragmentDoc(memberType, unionType, 'union'))
+    const doc = Str.Code.TSDoc.format(getInlineFragmentDoc(memberType, unionType, 'union'))
     const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
       H.namedTypesReference(memberType)
     }`
     return `${doc}\n${field}`
   }).join(`\n`)
 
-  mainCode(Code.tsInterface({
+  mainCode(Str.Code.TS.interfaceDecl({
     tsDoc: getUnionTypeSelectionSetDoc(unionType),
     export: true,
     name: unionType.name,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     block: `
       ${H.__typenameField(`union`)}
       ${fragmentsInlineType}
@@ -444,12 +443,12 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields', type: true }))
   namespaceCode()
 
-  namespaceCode(Code.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: getInputObjectTypeSelectionSetDoc(inputObject),
     export: true,
     name: inputObject.name,
-    parameters: $ContextTypeParameter,
-    block: Obj.values(inputObject.getFields()).map(field => getInputFieldLike(config, field)),
+    parameters: `<${$ContextTypeParameter}>`,
+    block: Obj.values(inputObject.getFields()).map(field => getInputFieldLike(config, field)) as any,
   }))
 
   modules.push({
@@ -562,7 +561,7 @@ const generateFieldedTypeModule = (
     const argsAnalysis = analyzeArgsNullability(field.args)
     const isCanBeIndicator = (Grafaid.Schema.isScalarType(namedType) || Grafaid.Schema.isEnumType(namedType))
       && argsAnalysis.isAllNullable
-    const doc = Code.TSDoc(getOutputFieldSelectionSetDoc(field, type.name, namedType))
+    const doc = Str.Code.TSDoc.format(getOutputFieldSelectionSetDoc(field, type.name, namedType))
     const key = H.outputFieldKey(
       field.name,
       `$Fields.${field.name}`, // Use $Fields import to avoid circular reference
@@ -583,7 +582,9 @@ const generateFieldedTypeModule = (
     onTypesRendered = implementorTypes.map(implementorType => {
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
-      const doc = Code.TSDoc(getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'))
+      const doc = Str.Code.TSDoc.format(
+        getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'),
+      )
       const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
       }`
@@ -608,11 +609,11 @@ const generateFieldedTypeModule = (
     ? getInterfaceTypeSelectionSetDoc(type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
     : getObjectTypeSelectionSetDoc(type as Grafaid.Schema.ObjectType, isRoot)
 
-  namespaceCode(Code.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc,
     export: true,
     name: type.name,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     extends: [extendsClause],
     block: `
       ${fieldKeys}
@@ -657,7 +658,7 @@ const renderOutputFieldForFields = (
 
   // Main field type - references the namespace's $SelectionSet
   const mainTypeDecl = `${safeName}<${$ContextTypeParameter}> = ${
-    Code.tsUnionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
+    Str.Code.TS.unionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
   }`
   if (isReservedKeyword(field.name)) {
     code(`type ${mainTypeDecl}`)
@@ -695,7 +696,7 @@ const renderOutputFieldForFields = (
   if (argsAnalysis.hasAny) {
     code(`  export interface $Arguments<${$ContextTypeParameter}> {`)
     for (const arg of field.args) {
-      const doc = Code.TSDoc(getArgumentDoc(config, arg, field, parentType as Grafaid.Schema.ObjectType))
+      const doc = Str.Code.TSDoc.format(getArgumentDoc(config, arg, field, parentType as Grafaid.Schema.ObjectType))
       const key = getInputFieldKey(arg)
       const optional = Grafaid.Schema.isNullableType(arg.type) ? '?' : ''
       const value = renderArgumentType(arg.type)
@@ -707,10 +708,10 @@ const renderOutputFieldForFields = (
   }
 
   // Expanded type
-  code(`  ${Code.TSDoc(getExpandedTypeDoc(field.name))}`)
+  code(`  ${Str.Code.TSDoc.format(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
-      Code.tsUnionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
+      Str.Code.TS.unionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
     }>`,
   )
 
@@ -743,7 +744,7 @@ const renderFieldPropertyArguments = (
       ? `${lead} are required so you may omit this.`
       : `${lead} are required so you must include this.`
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-    return Code.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
+    return Str.Code.TS.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
       readonly: true,
       tsDoc,
@@ -802,12 +803,12 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   }
 
   if (config.schema.kindMap.index.Root.query) {
-    code(Code.TSDoc(getOperationInferDoc('Query')))
+    code(Str.Code.TSDoc.format(getOperationInferDoc('Query')))
     code(
       `export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
-    code(Code.TSDoc(getOperationVariablesDoc('Query')))
+    code(Str.Code.TSDoc.format(getOperationVariablesDoc('Query')))
     code(
       `export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
@@ -815,12 +816,12 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   }
 
   if (config.schema.kindMap.index.Root.mutation) {
-    code(Code.TSDoc(getOperationInferDoc('Mutation')))
+    code(Str.Code.TSDoc.format(getOperationInferDoc('Mutation')))
     code(
       `export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
-    code(Code.TSDoc(getOperationVariablesDoc('Mutation')))
+    code(Str.Code.TSDoc.format(getOperationVariablesDoc('Mutation')))
     code(
       `export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
@@ -854,7 +855,7 @@ const generateNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap
  * Check if a name is a reserved keyword and needs escaping
  */
 const isReservedKeyword = (name: string): boolean => {
-  return Code.reservedTypeScriptInterfaceNames.includes(name as any)
+  return Str.Code.TS.Reserved.reservedNames.includes(name as any)
 }
 
 /**
@@ -952,7 +953,7 @@ const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema
 const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
   return [
     getInputFieldKey(inputFieldLike),
-    Code.objectField$({
+    Str.Code.TS.objectField$({
       tsDoc: getTsDocContents(config, inputFieldLike),
       optional: Grafaid.Schema.isNullableType(inputFieldLike.type),
       value: renderArgumentType(inputFieldLike.type),
@@ -1058,7 +1059,7 @@ namespace H {
   export const fragmentInlineField = (
     type: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    const doc = Code.TSDoc(getFragmentInlineFieldDoc())
+    const doc = Str.Code.TSDoc.format(getFragmentInlineFieldDoc())
 
     return `${doc}\n___?: $FragmentInline<${i._$Context}> | $FragmentInline<${i._$Context}>[]`
   }
@@ -1066,10 +1067,10 @@ namespace H {
   export const fragmentInlineInterface = (
     node: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    return Code.tsInterface({
+    return Str.Code.TS.interfaceDecl({
       export: true,
       name: `$FragmentInline`,
-      parameters: $ContextTypeParameter,
+      parameters: `<${$ContextTypeParameter}>`,
       extends: [
         forwardTypeParameter$Context(node),
         `${$.$$Utilities}.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields`,
@@ -1079,6 +1080,6 @@ namespace H {
   }
 
   const __typenameDoc = (kind: 'union' | 'interface' | 'object') => {
-    return Code.TSDoc(getTypenameFieldDoc(kind))
+    return Str.Code.TSDoc.format(getTypenameFieldDoc(kind))
   }
 }

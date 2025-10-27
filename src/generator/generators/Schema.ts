@@ -1,6 +1,4 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
 import { isObjectEmpty } from '#src/lib/prelude.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
@@ -82,10 +80,16 @@ const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType)
 
   // Export names are never escaped - use re-export with aliasing if needed
   if (isCustom) {
-    code(Code.reexportNamed({ names: originalName, from: buildImportPath(config, '..', '..', 'scalar'), type: true }))
+    code(
+      Str.Code.TS.reexportNamed({
+        names: originalName,
+        from: buildImportPath(config, '..', '..', 'scalar'),
+        type: true,
+      }),
+    )
   } else {
     const utilitiesPath = getUtilitiesPath(config, `schema/scalars/${renderedName}.ts`)
-    code(Code.reexportNamed({ names: originalName, from: utilitiesPath, type: true }))
+    code(Str.Code.TS.reexportNamed({ names: originalName, from: utilitiesPath, type: true }))
   }
 
   return {
@@ -105,16 +109,16 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
   }
 
   code(
-    Code.tsInterface({
+    Str.Code.TS.interfaceDecl({
       tsDoc: getEnumTypeDoc(config, enumType),
       export: true,
       name: enumType.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
       block: {
-        kind: Code.string(Grafaid.Schema.TypeKind.Enum),
-        name: Code.string(enumType.name),
-        members: Code.tsTuple(enumType.getValues().map((_) => Code.string(_.name))),
-        membersUnion: Code.tsUnionItems(enumType.getValues().map((_) => Code.string(_.name))),
+        kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.Enum),
+        name: Str.Code.TS.string(enumType.name),
+        members: Str.Code.TS.tuple(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
+        membersUnion: Str.Code.TS.unionItems(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
       },
     }),
   )
@@ -146,16 +150,16 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   }
   code()
 
-  code(Code.tsInterface({
+  code(Str.Code.TS.interfaceDecl({
     tsDoc: getUnionTypeDoc(config, unionType),
     export: true,
     name: unionType.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Union` : null,
     block: {
-      kind: Code.string(Grafaid.Schema.TypeKind.Union),
-      name: Code.string(unionType.name),
-      members: Code.tsTuple(memberNames),
-      membersUnion: Code.tsUnionItems(memberNames),
+      kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.Union),
+      name: Str.Code.TS.string(unionType.name),
+      members: Str.Code.TS.tuple(memberNames),
+      membersUnion: Str.Code.TS.unionItems(memberNames),
       membersIndex: Object.fromEntries(memberNames.map(n => [n, n])),
     },
   }))
@@ -213,13 +217,13 @@ const getInputFieldDoc = (
     field.astNode?.directives?.filter(d => !['deprecated', 'skip', 'include'].includes(d.name.value)) ?? []
 
   // Build markdown table
-  const table = Code.markdownTable({
+  const table = Str.Code.Md.table({
     'Type': typeSignature,
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`).content,
-    'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`).content,
-    'Path': Code.markdownCode(fieldPath).content,
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`).content,
+    'Parent': Str.Code.TSDoc.template.tag.link(`$Schema.${parentType.name}`).content,
+    'Path': Str.Code.Md.code(fieldPath),
     '⚠ Deprecated': deprecationReason,
-    'Default': hasDefaultValue ? Code.markdownCode(JSON.stringify(defaultValue)).content : undefined,
+    'Default': hasDefaultValue ? Str.Code.Md.code(JSON.stringify(defaultValue)) : undefined,
     'Nullability': isNonNull ? 'Required' : 'Optional',
     'List': isList ? 'Yes' : undefined,
     'Directives': customDirectives.length > 0
@@ -264,14 +268,14 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   for (const field of Obj.values(inputObject.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
-    fieldsCode(Code.tsInterface({
+    fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getInputFieldDoc(config, field, inputObject),
       export: true,
       name: field.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputField` : null,
       block: {
-        kind: Code.string(`InputField`),
-        name: Code.string(field.name),
+        kind: Str.Code.TS.string(`InputField`),
+        name: Str.Code.TS.string(field.name),
         inlineType: renderInlineType(field.type),
         namedType: namedTypesTypeReference(namedType),
       },
@@ -305,15 +309,15 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     }),
   )
 
-  namespaceCode(Code.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: getInputObjectTypeDoc(config, inputObject),
     export: true,
     name: inputObject.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputObject` : null,
     block: {
-      kind: Code.string(Grafaid.Schema.TypeKind.InputObject),
-      name: Code.string(inputObject.name),
-      isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(inputObject)),
+      kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.InputObject),
+      name: Str.Code.TS.string(inputObject.name),
+      isAllFieldsNullable: Str.Code.TS.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(inputObject)),
       fields: interfaceFields,
     },
   }))
@@ -351,10 +355,10 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
   ]
   const operationsAvailable = Obj.entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
 
-  const schema: Code.TermObject = {
+  const schema: Str.Code.TS.TermObject.TermObject = {
     name: `$$Data.Name`,
-    operationsAvailable: Code.tsTuple(operationsAvailable.map(_ => Code.string(_))),
-    RootUnion: Code.tsUnionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
+    operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
+    RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
     Root: {
       [Grafaid.Document.OperationTypeNode.QUERY]: config.schema.kindMap.index.Root.query?.name
         ? `$Types.${config.schema.kindMap.index.Root.query.name}`
@@ -376,13 +380,13 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     objects,
     unions,
     interfaces,
-    scalarNamesUnion: Code.tsUnionItems(scalars.map(_ => _[0]).map(Code.string)),
+    scalarNamesUnion: Str.Code.TS.unionItems(scalars.map(_ => _[0]).map(Str.Code.TS.string)),
     scalars,
     scalarRegistry: `$Scalars`,
     extensions: `$.GlobalRegistry.TypeExtensions`,
   }
 
-  const extensions: Code.TermObject = {}
+  const extensions: Str.Code.TS.TermObject.TermObject = {}
   config.extensions.forEach(_ => {
     _.onSchema?.({ config, schema: extensions })
   })
@@ -390,10 +394,10 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     schema[`extensions`] = extensions
   }
 
-  code(Code.tsInterface({
+  code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `Schema`,
-    parameters: `$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry`,
+    parameters: `<$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry>`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema` : null,
     block: schema,
   }))
@@ -482,11 +486,11 @@ const getOutputFieldDoc = (
     field.astNode?.directives?.filter(d => !['deprecated', 'skip', 'include'].includes(d.name.value)) ?? []
 
   // Build markdown table
-  const table = Code.markdownTable({
+  const table = Str.Code.Md.table({
     'Type': typeSignature,
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`).content,
-    'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`).content,
-    'Path': Code.markdownCode(fieldPath).content,
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`).content,
+    'Parent': Str.Code.TSDoc.template.tag.link(`$Schema.${parentType.name}`).content,
+    'Path': Str.Code.Md.code(fieldPath),
     '⚠ Deprecated': deprecationReason,
     'Nullability': isNonNull ? 'Required' : 'Optional',
     'List': isList ? 'Yes' : undefined,
@@ -542,11 +546,11 @@ const getObjectTypeDoc = (
   }
 
   // Build table
-  const table = Code.markdownTable({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Object ↗').content,
+  const table = Str.Code.Md.table({
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Object ↗').content,
     'Fields': `${fieldCount}`,
     'Implements': interfaces.length > 0
-      ? interfaces.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`).content).join(', ')
+      ? interfaces.map(i => Str.Code.TSDoc.template.tag.link(`$Schema.${i.name}`).content).join(', ')
       : undefined,
   })
 
@@ -593,11 +597,11 @@ const getInterfaceTypeDoc = (
   const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
 
   // Build table
-  const table = Code.markdownTable({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Interface ↗').content,
+  const table = Str.Code.Md.table({
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Interface ↗').content,
     'Fields': `${fieldCount}`,
     'Implementors': implementors.length > 0
-      ? implementors.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`).content).join(', ')
+      ? implementors.map(i => Str.Code.TSDoc.template.tag.link(`$Schema.${i.name}`).content).join(', ')
       : undefined,
   })
 
@@ -630,10 +634,10 @@ const getUnionTypeDoc = (
   const members = type.getTypes()
 
   // Build table
-  const table = Code.markdownTable({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Union ↗').content,
+  const table = Str.Code.Md.table({
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Union ↗').content,
     'Members': `${members.length}`,
-    'Types': members.map(m => Code.jsdoc.tag.link(`$Schema.${m.name}`).content).join(', '),
+    'Types': members.map(m => Str.Code.TSDoc.template.tag.link(`$Schema.${m.name}`).content).join(', '),
   })
 
   // Combine parts
@@ -667,8 +671,8 @@ const getInputObjectTypeDoc = (
   const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
 
   // Build table
-  const table = Code.markdownTable({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'InputObject ↗').content,
+  const table = Str.Code.Md.table({
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'InputObject ↗').content,
     'Fields': `${fieldCount}`,
     'All Fields Nullable': isAllFieldsNullable ? 'Yes' : 'No',
   })
@@ -699,7 +703,7 @@ const getEnumTypeDoc = (
 ): string | null => {
   // Get enum description respecting config and escape it for safety
   const schemaDescription = type.description
-    ? Code.escapeJSDocContent(type.description)
+    ? Str.Code.TSDoc.escape(type.description)
     : (config.options.TSDoc.noDocPolicy === 'message'
       ? `Missing description for Enum "${type.name}".`
       : null)
@@ -709,8 +713,8 @@ const getEnumTypeDoc = (
   const memberCount = members.length
 
   // Build table
-  const table = Code.markdownTable({
-    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Enum ↗').content,
+  const table = Str.Code.Md.table({
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Enum ↗').content,
     'Members': `${memberCount}`,
   })
 
@@ -730,7 +734,7 @@ const getEnumTypeDoc = (
     for (const member of members) {
       // Respect config for member descriptions and escape them for safety
       const memberDescription = member.description
-        ? Code.escapeJSDocContent(member.description)
+        ? Str.Code.TSDoc.escape(member.description)
         : (config.options.TSDoc.noDocPolicy === 'message'
           ? `Missing description for member "${member.name}".`
           : null)
@@ -768,19 +772,19 @@ const generateTypeModule = (
   fieldsCode()
 
   // __typename field
-  fieldsCode(Code.tsInterface({
+  fieldsCode(Str.Code.TS.interfaceDecl({
     tsDoc: getTypeNameFieldDoc(type.name),
     export: true,
     name: `__typename`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
     block: {
-      kind: Code.string(`OutputField`),
-      name: Code.string(`__typename`),
+      kind: Str.Code.TS.string(`OutputField`),
+      name: Str.Code.TS.string(`__typename`),
       arguments: {},
       inlineType: `[1]`,
       namedType: {
-        kind: Code.string(`__typename`),
-        value: Code.string(type.name),
+        kind: Str.Code.TS.string(`__typename`),
+        value: Str.Code.TS.string(type.name),
       },
     },
   }))
@@ -790,22 +794,22 @@ const generateTypeModule = (
   for (const field of Obj.values(type.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
-    fieldsCode(Code.tsInterface({
+    fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getOutputFieldDoc(config, field, type),
       export: true,
       name: field.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
       block: {
-        kind: Code.string(`OutputField`),
-        name: Code.string(field.name),
+        kind: Str.Code.TS.string(`OutputField`),
+        name: Str.Code.TS.string(field.name),
         arguments: Object.fromEntries(field.args.map(arg => {
           return [
             arg.name,
-            Code.objectField$({
+            Str.Code.TS.objectField$({
               tsDoc: getTsDocContents(config, arg),
               value: {
-                kind: Code.string(`InputField`),
-                name: Code.string(arg.name),
+                kind: Str.Code.TS.string(`InputField`),
+                name: Str.Code.TS.string(arg.name),
                 inlineType: renderInlineType(arg.type),
                 namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
               },
@@ -861,7 +865,7 @@ const generateTypeModule = (
     ),
   )
 
-  namespaceCode(Code.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: isInterface
       ? getInterfaceTypeDoc(config, type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
       : getObjectTypeDoc(config, type as Grafaid.Schema.ObjectType, kind === 'roots'),
@@ -871,19 +875,19 @@ const generateTypeModule = (
       ? (isInterface ? `$.Schema.Interface` : `$.Schema.OutputObject`)
       : null,
     block: {
-      kind: Code.string(isInterface ? Grafaid.Schema.TypeKind.Interface : Grafaid.Schema.TypeKind.Object),
-      name: Code.string(type.name),
+      kind: Str.Code.TS.string(isInterface ? Grafaid.Schema.TypeKind.Interface : Grafaid.Schema.TypeKind.Object),
+      name: Str.Code.TS.string(type.name),
       fields: interfaceFields,
       ...(isInterface
         ? {
-          implementors: Code.tsTuple(
+          implementors: Str.Code.TS.tuple(
             Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
               .map(_ => _.name),
           ),
           implementorsUnion:
             Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
                 .length > 0
-              ? Code.tsUnionItems(
+              ? Str.Code.TS.unionItems(
                 Grafaid.Schema.KindMap.getInterfaceImplementors(
                   config.schema.kindMap,
                   type as Grafaid.Schema.InterfaceType,

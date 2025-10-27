@@ -1,7 +1,7 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { Docpar } from '#src/docpar/$.js'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 
 const propertyNames = Docpar.propertyNames
 import { Obj } from '@wollybeard/kit'
@@ -34,7 +34,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const referenceAssignments: ReferenceAssignments = []
 
     for (const [kindName, nodes] of kinds) {
-      code(Tex.title1(kindName))
+      code(Str.Code.TS.Comment.title1(kindName))
       code``
       if (nodes.length === 0) {
         code`// None of your ${kindName}s have custom scalars.`
@@ -47,7 +47,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       code``
     }
 
-    code(Tex.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
+    code(Str.Code.TS.Comment.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
     code``
     if (referenceAssignments.length === 0) {
       code`// None of your types have references to other non-scalar/enum types.`
@@ -61,17 +61,17 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     }
     code``
 
-    code(Tex.title1(`Index`))
+    code(Str.Code.TS.Comment.title1(`Index`))
     code``
     code`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`
-    code(Code.termObject({
+    code(Str.Code.TS.TermObject.termObject({
       operations: kindMap.Root.map(type => {
         const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
         if (!operationType) throw new Error(`Operation type not found for ${type.name}`)
         return [operationType, type.name] as const
       }),
       directives: {},
-      types: Code.directiveTermObject({
+      types: Str.Code.TS.TermObject.directiveTermObject({
         $literal: kinds.map(([, _]) => _).flat().map((_) => _.name).join(`,\n`),
       }),
     }))
@@ -155,7 +155,7 @@ const ScalarType = createCodeGenerator<
   { type: Grafaid.Schema.ScalarType }
 >(
   ({ code, type }) => {
-    code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
+    code(Str.Code.TS.constDecl(type.name, `${$.$$Scalar}.${type.name}`))
   },
 )
 
@@ -164,9 +164,9 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
+      code(Str.Code.TS.constDecl(type.name, `${$.$$Scalar}.${type.name}`))
     } else {
-      code(Code.termConst(type.name, Code.string(type.name)))
+      code(Str.Code.TS.constDecl(type.name, Str.Code.TS.string(type.name)))
     }
   },
 )
@@ -183,11 +183,11 @@ const UnionType = createCodeGenerator<
     //
     // So what we do is inline all the custom scalar paths of all union members knowing
     // that they could never conflict.
-    code(Code.termConstTyped(
+    code(Str.Code.TS.constDeclTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
-      Code.termObject({
-        [propertyNames.f]: Code.directiveTermObject({
+      Str.Code.TS.TermObject.termObject({
+        [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
           $spread: type.getTypes().filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
@@ -202,11 +202,11 @@ const InterfaceType = createCodeGenerator<
 >(
   ({ code, type, config }) => {
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-    code(Code.termConstTyped(
+    code(Str.Code.TS.constDeclTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
-      Code.termObject({
-        [propertyNames.f]: Code.directiveTermObject({
+      Str.Code.TS.TermObject.termObject({
+        [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
           $spread: implementorTypes.filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
@@ -220,7 +220,7 @@ const ObjectType = createCodeGenerator<
   { type: Grafaid.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Code.TermObject = {}
+    const o: Str.Code.TS.TermObject.TermObject = {}
 
     config.extensions.forEach(_ => {
       _.schemaDrivenDataMap?.onObjectType?.({
@@ -232,7 +232,7 @@ const ObjectType = createCodeGenerator<
 
     // Fields of this object.
     // ---------------------
-    const of: Code.TermObject = {}
+    const of: Str.Code.TS.TermObject.TermObject = {}
     o[propertyNames.f] = of
 
     const condition = typeCondition(config)
@@ -240,7 +240,7 @@ const ObjectType = createCodeGenerator<
     const outputFields = Object.values(type.getFields()).filter(condition)
     for (const outputField of outputFields) {
       const outputFieldNamedType = Grafaid.Schema.getNamedType(outputField.type)
-      const sddmNodeOutputField: Code.DirectiveTermObjectLike<Code.TermObject> = {
+      const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
         $fields: {},
       }
       of[outputField.name] = sddmNodeOutputField
@@ -249,11 +249,11 @@ const ObjectType = createCodeGenerator<
       const inputCondition = inputTypeCondition(config)
       const args = outputField.args.filter(inputCondition)
       if (args.length > 0) {
-        const ofItemAs: Code.TermObject = {}
+        const ofItemAs: Str.Code.TS.TermObject.TermObject = {}
         sddmNodeOutputField.$fields[propertyNames.a] = ofItemAs
 
         for (const arg of args) {
-          const ofItemA: Code.TermObject = {}
+          const ofItemA: Str.Code.TS.TermObject.TermObject = {}
           ofItemAs[arg.name] = ofItemA
 
           const argType = Grafaid.Schema.getNamedType(arg.type)
@@ -291,19 +291,23 @@ const ObjectType = createCodeGenerator<
         ) {
           referenceAssignments.push(`${type.name}.f[\`${outputField.name}\`]!.nt = ${outputFieldNamedType.name}`)
           // dprint-ignore
-          sddmNodeOutputField.$literal = `// ${Code.termField(propertyNames.nt, outputFieldNamedType.name)} <-- Assigned later to avoid potential circular dependency.`
+          sddmNodeOutputField.$literal = `// ${Str.Code.TS.TermObject.termField(propertyNames.nt, outputFieldNamedType.name)} <-- Assigned later to avoid potential circular dependency.`
           // // todo make kitchen sink schema have a pattern where this code path will be traversed.
           // // We just need to have arguments on a field on a nested object.
           // // Nested objects that in turn have custom scalar arguments
           // if (Schema.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
-          //   code(Code.termField(field.name, fieldType.name))
+          //   code(Str.Code.TS.TermObject.termField(field.name, fieldType.name))
           // }
         }
       }
     }
 
     code(
-      Code.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`, Code.termObject(o)),
+      Str.Code.TS.constDeclTyped(
+        type.name,
+        `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
+        Str.Code.TS.TermObject.termObject(o),
+      ),
     )
   },
 )
@@ -312,12 +316,12 @@ const EnumType = createCodeGenerator<
   { type: Grafaid.Schema.EnumType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
-    code(Code.termConstTyped(
+    code(Str.Code.TS.constDeclTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.Enum`,
-      Code.termObject({
-        [propertyNames.k]: Code.string(`enum`),
-        [propertyNames.n]: Code.string(type.name),
+      Str.Code.TS.TermObject.termObject({
+        [propertyNames.k]: Str.Code.TS.string(`enum`),
+        [propertyNames.n]: Str.Code.TS.string(type.name),
       }),
     ))
   },
@@ -327,21 +331,23 @@ const InputObjectType = createCodeGenerator<
   { type: Grafaid.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Code.TermObject = {}
+    const o: Str.Code.TS.TermObject.TermObject = {}
 
     const inputFields = Object.values(type.getFields())
 
     if (config.runtimeFeatures.operationVariables) {
-      o[propertyNames.n] = Code.string(type.name)
+      o[propertyNames.n] = Str.Code.TS.string(type.name)
       const customScalarFields = inputFields
         .filter(Grafaid.Schema.CustomScalars.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
-        .map(Code.string)
+        .map(Str.Code.TS.string)
       if (customScalarFields.length) {
-        o[propertyNames.fcs] = Code.termList(customScalarFields)
+        o[propertyNames.fcs] = Str.Code.TS.TermObject.termList(customScalarFields)
       }
     }
-    const f: Code.TermObjectOf<Code.DirectiveTermObjectLike<Code.TermObject>> = {}
+    const f: Str.Code.TS.TermObject.TermObjectOf<
+      Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
+    > = {}
     o[propertyNames.f] = f
 
     for (const inputField of inputFields) {
@@ -370,13 +376,17 @@ const InputObjectType = createCodeGenerator<
           `${type.name}.${propertyNames.f}![\`${inputField.name}\`]!.${propertyNames.nt} = ${inputFieldType.name}`,
         )
         f[inputField.name]!.$literal = `// ${
-          Code.termField(propertyNames.nt, inputFieldType.name)
+          Str.Code.TS.TermObject.termField(propertyNames.nt, inputFieldType.name)
         } <-- Assigned later to avoid potential circular dependency.`
       }
     }
 
     code(
-      Code.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.InputObject`, Code.termObject(o)),
+      Str.Code.TS.constDeclTyped(
+        type.name,
+        `${$.$$Utilities}.SchemaDrivenDataMap.InputObject`,
+        Str.Code.TS.TermObject.termObject(o),
+      ),
     )
   },
 )

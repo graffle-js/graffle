@@ -1,6 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
   getScalarCodecDoc,
@@ -38,7 +37,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
 
-        const dualExportResult = Code.dualExport({
+        const dualExportResult = Str.Code.TS.Reserved.dualExport({
           name: scalar.name,
           const: {
             value: `${$.CustomScalars}.${scalar.name}`,
@@ -50,25 +49,27 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         })
 
         code(dualExportResult.code)
-        code(Code.TSDoc(getScalarDecodedDoc(scalar.name)))
+        code(Str.Code.TSDoc.format(getScalarDecodedDoc(scalar.name)))
         code(
-          Code.tsTypeExport(
-            `${scalar.name}Decoded`,
-            `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
-          ),
+          Str.Code.TS.typeAlias$({
+            name: `${scalar.name}Decoded`,
+            type: `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
+            export: true,
+          }),
         )
-        code(Code.TSDoc(getScalarEncodedDoc(scalar.name)))
+        code(Str.Code.TSDoc.format(getScalarEncodedDoc(scalar.name)))
         code(
-          Code.tsTypeExport(
-            `${scalar.name}Encoded`,
-            `${$.$$Utilities}.Schema.Scalar.GetEncoded<${dualExportResult.internalName}>`,
-          ),
+          Str.Code.TS.typeAlias$({
+            name: `${scalar.name}Encoded`,
+            type: `${$.$$Utilities}.Schema.Scalar.GetEncoded<${dualExportResult.internalName}>`,
+            export: true,
+          }),
         )
         code``
       }
     }
 
-    code(Code.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
+    code(Str.Code.TS.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
     code``
 
     if (isNeedCustomScalarDefaults) {
@@ -81,7 +82,11 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        code(Code.tsTypeExport(scalar.name, `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`))
+        code(Str.Code.TS.typeAlias$({
+          name: scalar.name,
+          type: `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`,
+          export: true,
+        }))
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
@@ -92,7 +97,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     }
     code``
 
-    code(Tex.title1(`Registry`))
+    code(Str.Code.TS.Comment.title1(`Registry`))
     code``
 
     const runtimeMap = config.options.customScalars
@@ -107,10 +112,10 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       })
       : {}
 
-    code(Code.TSDoc(getScalarRegistryDoc()))
+    code(Str.Code.TSDoc.format(getScalarRegistryDoc()))
     code`
       export const $registry = {
-        map: ${Code.termObject(runtimeMap)},
+        map: ${Str.Code.TS.TermObject.termObject(runtimeMap)},
       } as $Registry
     `
     code``
@@ -118,13 +123,13 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     const typeScalarRegistry = config.options.customScalars
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
-          ${Code.termObject(buildtimeMap)},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
+          ${Str.Code.TS.TermObject.termObject(buildtimeMap)},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
         >`
       : `$$Utilities.Schema.Scalar.Registry.Empty`
 
-    code(Code.tsAlias$({
+    code(Str.Code.TS.typeAlias$({
       name: `$Registry`,
       type: typeScalarRegistry,
       tsDoc: getScalarRegistryTypeDoc(),

@@ -1,5 +1,4 @@
-import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { getMethodsSelectDoc } from '../helpers/jsdoc.js'
@@ -17,7 +16,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
     code(importUtilities(config))
     code``
-    code(Tex.title1(`Select Methods Interface`))
+    code(Str.Code.TS.Comment.title1(`Select Methods Interface`))
     code``
     code`
       /**
@@ -28,7 +27,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
        * that return the selection set itself (for document building).
        */
     `
-    code(Code.tsInterface({
+    code(Str.Code.TS.interfaceDecl({
       name: `$MethodsSelect`,
       block: Obj.values(kindMap).flatMap(type => {
         return type.map(type => {
@@ -38,11 +37,11 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     }))
     code``
     for (const [kindName, kind] of kinds) {
-      code(Tex.title1(kindName))
+      code(Str.Code.TS.Comment.title1(kindName))
       code``
       for (const type of kind) {
-        code(Code.TSDoc(getMethodsSelectDoc(type)))
-        code(Code.tsInterface({
+        code(Str.Code.TSDoc.format(getMethodsSelectDoc(type)))
+        code(Str.Code.TS.interfaceDecl({
           name: type.name,
           block: `
             <$SelectionSet>(selectionSet: ${$.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${renderName(type)}>):

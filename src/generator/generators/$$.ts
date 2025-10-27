@@ -1,4 +1,4 @@
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator_internals } from './_internals.js'
 import { ModuleGeneratorClient } from './Client.js'
@@ -34,14 +34,18 @@ export const ModuleGenerator$$ = createModuleGenerator(
       documentExports.push('subscription')
     }
 
-    code(Code.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))
-    code(Code.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }))
-    code(Code.reexportNamed({ names: 'create', from: `./modules/${getImportName(config, ModuleGeneratorClient)}` }))
-    code(Code.reexportNamed({ names: 'gql', from: `./modules/${getImportName(config, ModuleGeneratorGql)}` }))
+    code(Str.Code.TS.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))
+    code(
+      Str.Code.TS.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }),
+    )
+    code(
+      Str.Code.TS.reexportNamed({ names: 'create', from: `./modules/${getImportName(config, ModuleGeneratorClient)}` }),
+    )
+    code(Str.Code.TS.reexportNamed({ names: 'gql', from: `./modules/${getImportName(config, ModuleGeneratorGql)}` }))
 
     if (documentExports.length > 0) {
       code(
-        Code.reexportNamed({
+        Str.Code.TS.reexportNamed({
           names: documentExports,
           from: `./modules/${getImportName(config, ModuleGeneratorDocument)}`,
         }),
@@ -49,22 +53,22 @@ export const ModuleGenerator$$ = createModuleGenerator(
     }
 
     code(
-      Code.reexportNamespace({
+      Str.Code.TS.reexportNamespace({
         as: 'SelectionSets',
         from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}`,
       }),
     )
     code(
-      Code.reexportNamespace({
+      Str.Code.TS.reexportNamespace({
         as: '$Fields',
         from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}`,
       }),
     )
-    code(Code.reexportNamed({
+    code(Str.Code.TS.reexportNamed({
       names: { schemaDrivenDataMap: 'schemaMap' },
       from: `./modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}`,
     }))
-    code(Code.reexportNamespace({ as: '$', from: `./${getImportName(config, ModuleGenerator_internals)}` }))
+    code(Str.Code.TS.reexportNamespace({ as: '$', from: `./${getImportName(config, ModuleGenerator_internals)}` }))
 
     return code
   },

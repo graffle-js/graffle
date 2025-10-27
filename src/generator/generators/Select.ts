@@ -1,5 +1,4 @@
-import { Tex } from '#lib/tex'
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { getSelectInferDoc } from '../helpers/jsdoc.js'
@@ -25,7 +24,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code`import type { OperationTypeNode } from 'graphql'`
     code(importUtilities(config))
     code``
-    code(Tex.title1(`Runtime`))
+    code(Str.Code.TS.Comment.title1(`Runtime`))
     code`
       import { createSelect } from '${config.paths.imports.grafflePackage.client}'
 
@@ -44,7 +43,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       export const Select = createSelect(${$.$$Data}.Name)
     `
     code``
-    code(Tex.title1(`Buildtime`))
+    code(Str.Code.TS.Comment.title1(`Buildtime`))
     code`
       /**
        * Type utilities for inferring result types from selection sets.
@@ -67,10 +66,10 @@ export const ModuleGeneratorSelect = createModuleGenerator(
        */
       export namespace Select {
     `
-    code(Tex.title2(`Root`))
+    code(Str.Code.TS.Comment.title2(`Root`))
     for (const [operationType, type] of Obj.entries(config.schema.kindMap.index.Root)) {
       if (!type) continue
-      code(Code.TSDoc(getSelectInferDoc(type, 'operation')))
+      code(Str.Code.TSDoc.format(getSelectInferDoc(type, 'operation')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
@@ -80,9 +79,9 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       )
     }
     code``
-    code(Tex.title2(`OutputObject`))
+    code(Str.Code.TS.Comment.title2(`OutputObject`))
     for (const type of config.schema.kindMap.list.OutputObject) {
-      code(Code.TSDoc(getSelectInferDoc(type, 'selectionSet')))
+      code(Str.Code.TSDoc.format(getSelectInferDoc(type, 'selectionSet')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
@@ -90,9 +89,9 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       )
     }
     code``
-    code(Tex.title2(`Union`))
+    code(Str.Code.TS.Comment.title2(`Union`))
     for (const type of config.schema.kindMap.list.Union) {
-      code(Code.TSDoc(getSelectInferDoc(type, 'selectionSet')))
+      code(Str.Code.TSDoc.format(getSelectInferDoc(type, 'selectionSet')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
@@ -100,9 +99,9 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       )
     }
     code``
-    code(Tex.title2(`Interface`))
+    code(Str.Code.TS.Comment.title2(`Interface`))
     for (const type of config.schema.kindMap.list.Interface) {
-      code(Code.TSDoc(getSelectInferDoc(type, 'selectionSet')))
+      code(Str.Code.TSDoc.format(getSelectInferDoc(type, 'selectionSet')))
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)

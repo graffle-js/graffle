@@ -1,4 +1,4 @@
-import { Code } from '#src/lib/Code.js'
+import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportAll } from '../helpers/pathHelpers.js'
@@ -26,7 +26,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       ? config.options.defaultSchemaUrl.href
       : ``
 
-    const Clients = Code.termObjectFields({
+    const Clients = Str.Code.TS.TermObject.termObjectFields({
       [config.name]: {
         name: `${$.$$Data}.Name`,
         schema: `${$.$$Schema}.${$.Schema}`,

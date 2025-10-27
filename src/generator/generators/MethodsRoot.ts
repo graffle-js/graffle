@@ -1,6 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '#lib/grafaid'
-import { Code } from '#src/lib/Code.js'
 import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
@@ -156,7 +155,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     if (config.methodsOrganization.logical) {
       config.schema.kindMap.root.list.forEach(node => {
         const propertyDoc = getRootPropertyDoc(node.operationType)
-        code(Code.TSDocIndented(propertyDoc, `  `))
+        code(Str.Code.TSDoc.format(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
         code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
       })
     }
@@ -187,7 +186,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // Interface JSDoc
   const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
   if (interfaceDoc) {
-    code(Code.TSDoc(interfaceDoc))
+    code(Str.Code.TSDoc.format(interfaceDoc))
   }
 
   // dprint-ignore
@@ -195,7 +194,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // $batch JSDoc
   const batchDoc = getBatchMethodDoc(operationType)
-  code(Code.TSDocIndented(batchDoc, `  `))
+  code(Str.Code.TSDoc.format(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
   // dprint-ignore
   code`
@@ -224,7 +223,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // __typename JSDoc
   const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(Code.TSDocIndented(typenameDoc, `  `))
+  code(Str.Code.TSDoc.format(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
   // dprint-ignore
   code`
@@ -250,7 +249,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
   for (const field of Object.values(node.getFields())) {
     const docContent = getOutputFieldMethodDoc(config, field, node)
     if (docContent) {
-      code(Code.TSDoc(docContent))
+      code(Str.Code.TSDoc.format(docContent))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(field.type)
@@ -793,7 +792,7 @@ const renderDomainType = createCodeGenerator<{
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      code(Code.TSDocIndented(docContent, `  `))
+      code(Str.Code.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)
