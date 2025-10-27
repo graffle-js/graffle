@@ -1,5 +1,5 @@
 import { Extension } from '#graffle/extension'
-import { ConfigManager } from '#lib/config-manager'
+import { ConfigManager } from '@wollybeard/kit/config-manager'
 import { Grafaid } from '#lib/grafaid'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
 import { Str } from '@wollybeard/kit'

@@ -1,4 +1,4 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import type { Configurator } from '@wollybeard/kit/configurator'
 import { type EmptyObject, emptyObject } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '#src/requestPipeline/RequestPipeline.js'

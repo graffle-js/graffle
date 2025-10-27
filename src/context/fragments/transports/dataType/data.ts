@@ -1,5 +1,5 @@
-import type { Anyware } from '#lib/anyware'
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import { Ware as Anyware } from '@wollybeard/kit/ware'
+import type { Configurator } from '@wollybeard/kit/configurator'
 
 export interface Data<
   $Name extends string = string,

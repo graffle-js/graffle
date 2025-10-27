@@ -1,4 +1,4 @@
-import type { Anyware } from '#lib/anyware'
+import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import type { Ts, Tup } from '@wollybeard/kit'
 import type { Transport } from '../dataType/$.js'

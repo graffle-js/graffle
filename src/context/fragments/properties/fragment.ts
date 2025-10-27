@@ -1,5 +1,5 @@
 import type { Client_justContext } from '#src/client/client.js'
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import type { Configurator } from '@wollybeard/kit/configurator'
 import { type EmptyArray, emptyArray, type EmptyObject, emptyObject } from '#src/lib/prelude.js'
 import { Ts } from '@wollybeard/kit'
 import type { Context } from '../../context.js'

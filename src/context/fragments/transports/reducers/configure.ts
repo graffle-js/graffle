@@ -1,4 +1,4 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import type { Configurator } from '@wollybeard/kit/configurator'
 import { isObjectEmpty } from '#src/lib/prelude.js'
 import type { ContextFragment } from '../fragment.js'
 

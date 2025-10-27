@@ -1,4 +1,4 @@
-import { Configurator } from '#src/lib/configurator/configurator.js'
+import { Configurator } from '@wollybeard/kit/configurator'
 import { Ts } from '@wollybeard/kit'
 import { expect, test } from 'vitest'
 import { contextEmpty } from '../../../$$.js'

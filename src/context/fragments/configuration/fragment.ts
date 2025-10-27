@@ -1,4 +1,4 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import type { Configurator } from '@wollybeard/kit/configurator'
 import { Check } from './check/$.js'
 import { createEntry } from './createEntry.js'
 import { Output } from './output/$.js'

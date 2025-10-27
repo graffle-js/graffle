@@ -1,5 +1,5 @@
-import type { ConfigManager } from '#lib/config-manager'
-import { Configurator as C } from '#src/lib/configurator/configurator.js'
+import type { ConfigManager } from '@wollybeard/kit/config-manager'
+import { Configurator as C } from '@wollybeard/kit/configurator'
 
 export type OutputChannel = 'throw' | 'return'
 

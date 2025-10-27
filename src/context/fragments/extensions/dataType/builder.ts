@@ -1,4 +1,4 @@
-import { Configurator } from '#src/lib/configurator/configurator.js'
+import { Configurator } from '@wollybeard/kit/configurator'
 import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import type { Obj } from '@wollybeard/kit'

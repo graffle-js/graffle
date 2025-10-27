@@ -1,4 +1,4 @@
-// import type { Anyware } from '#lib/anyware'
+// import { Ware as Anyware } from '@wollybeard/kit/ware'
 // import { type UnknownOrAnyToNever } from '#src/lib/prelude.js'
 import type { Context } from '../../../context.js'
 // import type { Properties } from '../../properties/$.js'

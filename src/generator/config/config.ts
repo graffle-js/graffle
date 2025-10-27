@@ -1,5 +1,5 @@
 import { Graffle } from '#graffle'
-import { ConfigManager } from '#lib/config-manager'
+import { ConfigManager } from '@wollybeard/kit/config-manager'
 import { Grafaid } from '#lib/grafaid'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'

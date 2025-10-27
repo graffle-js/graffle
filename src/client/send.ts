@@ -1,4 +1,4 @@
-import { Anyware } from '#lib/anyware'
+import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'

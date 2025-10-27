@@ -1,5 +1,5 @@
-import type { Anyware } from '#lib/anyware'
-import { Configurator } from '#src/lib/configurator/configurator.js'
+import { Ware as Anyware } from '@wollybeard/kit/ware'
+import { Configurator } from '@wollybeard/kit/configurator'
 import { hasSymbolProperty } from '#src/lib/symbol.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'

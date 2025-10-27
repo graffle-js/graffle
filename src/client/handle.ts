@@ -1,5 +1,5 @@
 import type { Normalized } from '#graffle'
-import type { Anyware } from '#lib/anyware'
+import { Ware as Anyware } from '@wollybeard/kit/ware'
 import { Errors } from '#lib/errors'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'

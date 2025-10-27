@@ -1,5 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { Anyware } from '#lib/anyware'
+import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { Grafaid } from '#lib/grafaid'
 import { print } from '#src/lib/grafaid/document.js'
 import { execute } from '#src/lib/grafaid/execute.js'

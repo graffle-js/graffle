@@ -1,4 +1,4 @@
-import { Configurator as C } from '#src/lib/configurator/configurator.js'
+import { Configurator as C } from '@wollybeard/kit/configurator'
 import type { Transports } from '../../transports/$.js'
 import type * as Helpers from './helpers.js'
 
