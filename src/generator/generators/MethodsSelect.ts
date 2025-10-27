@@ -1,4 +1,4 @@
-import { Tex } from '#lib/tex'
+
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
@@ -18,7 +18,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
     code(importUtilities(config))
     code``
-    code(Tex.title1(`Select Methods Interface`))
+    code(Str.Code.TS.Comment.title1(`Select Methods Interface`))
     code``
     code`
       /**
@@ -39,10 +39,10 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     }))
     code``
     for (const [kindName, kind] of kinds) {
-      code(Tex.title1(kindName))
+      code(Str.Code.TS.Comment.title1(kindName))
       code``
       for (const type of kind) {
-        code(CodeGraphQL.TSDoc(getMethodsSelectDoc(type)))
+        code(Str.Code.TSDoc.format(getMethodsSelectDoc(type)))
         code(CodeGraphQL.tsInterface({
           name: type.name,
           block: `

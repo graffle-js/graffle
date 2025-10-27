@@ -1,5 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { isObjectEmpty } from '#src/lib/prelude.js'
 import { Obj, Str } from '@wollybeard/kit'

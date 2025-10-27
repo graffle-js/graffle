@@ -1,5 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { Docpar } from '#src/docpar/$.js'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
@@ -38,9 +38,9 @@ export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes
     //
     // ${category.toUpperCase()}
     // ${typeLabel.toUpperCase()}
-    // ${Tex.borderThin}
-    // ${Tex.centerTo(Tex.borderThin, type.name)}
-    // ${Tex.borderThin}
+    // ${Str.Code.TS.Comment.borderThin}
+    // ${Str.Code.TS.Comment.centerTo(Str.Code.TS.Comment.borderThin, type.name)}
+    // ${Str.Code.TS.Comment.borderThin}
     //
     //
   `.trim()
@@ -54,7 +54,7 @@ const defaultDescription = (node: Grafaid.Schema.DescribableTypes) => {
 }
 
 export const renderDocumentation = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
-  return CodeGraphQL.TSDoc(getTsDocContents(config, node))
+  return Str.Code.TSDoc.format(getTsDocContents(config, node))
 }
 export const getTsDocContents = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
   const generalDescription = Str.Code.TSDoc.escape(node.description)

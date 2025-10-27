@@ -1,5 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
@@ -51,14 +51,14 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         })
 
         code(dualExportResult.code)
-        code(CodeGraphQL.TSDoc(getScalarDecodedDoc(scalar.name)))
+        code(Str.Code.TSDoc.format(getScalarDecodedDoc(scalar.name)))
         code(
           CodeGraphQL.tsTypeExport(
             `${scalar.name}Decoded`,
             `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
           ),
         )
-        code(CodeGraphQL.TSDoc(getScalarEncodedDoc(scalar.name)))
+        code(Str.Code.TSDoc.format(getScalarEncodedDoc(scalar.name)))
         code(
           CodeGraphQL.tsTypeExport(
             `${scalar.name}Encoded`,
@@ -93,7 +93,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     }
     code``
 
-    code(Tex.title1(`Registry`))
+    code(Str.Code.TS.Comment.title1(`Registry`))
     code``
 
     const runtimeMap = config.options.customScalars
@@ -108,7 +108,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       })
       : {}
 
-    code(CodeGraphQL.TSDoc(getScalarRegistryDoc()))
+    code(Str.Code.TSDoc.format(getScalarRegistryDoc()))
     code`
       export const $registry = {
         map: ${CodeGraphQL.termObject(runtimeMap)},

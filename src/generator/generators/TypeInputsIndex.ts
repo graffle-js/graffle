@@ -1,5 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
@@ -25,7 +25,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
     }
 
     code``
-    code(Tex.title1(`Type Inputs Index`))
+    code(Str.Code.TS.Comment.title1(`Type Inputs Index`))
     code`
       /**
        * Mapping of GraphQL type names to their TypeScript input types.

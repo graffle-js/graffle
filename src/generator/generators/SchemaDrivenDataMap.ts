@@ -1,5 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import { Tex } from '#lib/tex'
+
 import { Docpar } from '#src/docpar/$.js'
 import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
@@ -35,7 +35,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const referenceAssignments: ReferenceAssignments = []
 
     for (const [kindName, nodes] of kinds) {
-      code(Tex.title1(kindName))
+      code(Str.Code.TS.Comment.title1(kindName))
       code``
       if (nodes.length === 0) {
         code`// None of your ${kindName}s have custom scalars.`
@@ -48,7 +48,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       code``
     }
 
-    code(Tex.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
+    code(Str.Code.TS.Comment.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
     code``
     if (referenceAssignments.length === 0) {
       code`// None of your types have references to other non-scalar/enum types.`
@@ -62,7 +62,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     }
     code``
 
-    code(Tex.title1(`Index`))
+    code(Str.Code.TS.Comment.title1(`Index`))
     code``
     code`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`
     code(CodeGraphQL.termObject({

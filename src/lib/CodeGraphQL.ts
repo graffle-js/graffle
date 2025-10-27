@@ -1,20 +1,10 @@
 import { Arr, Obj, Str } from '@wollybeard/kit'
-import { linesPrepend, linesTrim } from './tex/tex.js'
 
 type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
 
 export namespace CodeGraphQL {
-  // ================================================================
-  // GRAFFLE-SPECIFIC CODE
-  // ================================================================
-
-  /**
-   * Format TSDoc/JSDoc comments with proper escaping and line prefixes.
-   * Graffle-specific because it uses tex utilities for line processing.
-   */
-  export const TSDoc = (content: string | null): string => {
-    return content === null ? `` : `/**\n${linesPrepend(`* `, linesTrim(content)) || `*`}\n*/`
-  }
+  // All generic utilities have been moved to @wollybeard/kit
+  // This module now only contains GraphQL-specific helpers
 
   // ----------------------------------------------------------------
   // 1. TERM OBJECT SYSTEM (~200 lines)
@@ -132,7 +122,7 @@ export namespace CodeGraphQL {
   }
 
   export const fromDirectiveField = (key: string, field: DirectiveField): string => {
-    const tsDoc = field.$TS_DOC ? TSDoc(field.$TS_DOC) + `\n` : ``
+    const tsDoc = field.$TS_DOC ? Str.Code.TSDoc.format(field.$TS_DOC) + `\n` : ``
     const optional = field.$OPTIONAL ? `?` : ``
     const value = termObjectField(field.$VALUE)
     return `${tsDoc}${key}${optional}: ${value}`
@@ -337,8 +327,8 @@ export namespace CodeGraphQL {
     const escapedName = renderName(input.name)
     const isReserved = escapedName !== input.name
 
-    const constTsDoc = input.const.tsDoc ? TSDoc(input.const.tsDoc) + `\n` : ``
-    const typeTsDoc = input.type.tsDoc ? TSDoc(input.type.tsDoc) + `\n` : ``
+    const constTsDoc = input.const.tsDoc ? Str.Code.TSDoc.format(input.const.tsDoc) + `\n` : ``
+    const typeTsDoc = input.type.tsDoc ? Str.Code.TSDoc.format(input.type.tsDoc) + `\n` : ``
 
     let code: string
 
@@ -384,7 +374,7 @@ export namespace CodeGraphQL {
   }
 
   export const tsAlias$ = ({ name, parameters, type, tsDoc, export: export_ }: AliasDefinitionInput) => {
-    const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
+    const tsDoc_ = tsDoc ? Str.Code.TSDoc.format(tsDoc) + `\n` : ``
     const export__ = export_ === false ? `` : `export `
     const name_ = renderName(name)
     const typeParametersClause = tsTypeParameters(parameters ?? null)
@@ -409,7 +399,7 @@ export namespace CodeGraphQL {
   export const tsInterface = (
     { name, parameters, extends: extends_, block, tsDoc, export: export_ }: InterfaceDefinitionInput,
   ) => {
-    const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
+    const tsDoc_ = tsDoc ? Str.Code.TSDoc.format(tsDoc) + `\n` : ``
     const name_ = renderName(name)
     const typeParametersClause = tsTypeParameters(parameters ?? null)
     const extends__ = Arr.ensure(extends_).filter(_ => Boolean(_))
@@ -462,7 +452,7 @@ export namespace CodeGraphQL {
     value: string | TermObject,
     options?: { tsDoc?: string | null; optional?: boolean; readonly?: boolean },
   ) => {
-    const tsDoc = options?.tsDoc ? TSDoc(options.tsDoc) + `\n` : ``
+    const tsDoc = options?.tsDoc ? Str.Code.TSDoc.format(options.tsDoc) + `\n` : ``
     const readonly = options?.readonly ? `readonly ` : ``
     const optional = options?.optional ? `?` : ``
     const type_ = typeof value === `string` ? value : termObject(value)

@@ -120,7 +120,7 @@ const generateMethodsFile = (
     const fieldDef = rootType.getFields()[field.fieldName]!
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      lines.push(CodeGraphQL.TSDoc(docContent))
+      lines.push(Str.Code.TSDoc.format(docContent))
     }
 
     // Generate method implementation using helper

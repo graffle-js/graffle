@@ -156,7 +156,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     if (config.methodsOrganization.logical) {
       config.schema.kindMap.root.list.forEach(node => {
         const propertyDoc = getRootPropertyDoc(node.operationType)
-        code(CodeGraphQL.TSDoc(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
+        code(Str.Code.TSDoc.format(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
         code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
       })
     }
@@ -187,7 +187,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // Interface JSDoc
   const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
   if (interfaceDoc) {
-    code(CodeGraphQL.TSDoc(interfaceDoc))
+    code(Str.Code.TSDoc.format(interfaceDoc))
   }
 
   // dprint-ignore
@@ -195,7 +195,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // $batch JSDoc
   const batchDoc = getBatchMethodDoc(operationType)
-  code(CodeGraphQL.TSDoc(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
+  code(Str.Code.TSDoc.format(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
   // dprint-ignore
   code`
@@ -224,7 +224,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // __typename JSDoc
   const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(CodeGraphQL.TSDoc(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
+  code(Str.Code.TSDoc.format(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
   // dprint-ignore
   code`
@@ -250,7 +250,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
   for (const field of Object.values(node.getFields())) {
     const docContent = getOutputFieldMethodDoc(config, field, node)
     if (docContent) {
-      code(CodeGraphQL.TSDoc(docContent))
+      code(Str.Code.TSDoc.format(docContent))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(field.type)
@@ -793,7 +793,7 @@ const renderDomainType = createCodeGenerator<{
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      code(CodeGraphQL.TSDoc(docContent).split('\n').map(line => `  ${line}`).join('\n'))
+      code(Str.Code.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)
