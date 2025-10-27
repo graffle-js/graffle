@@ -39,7 +39,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
 
-        const dualExportResult = CodeGraphQL.dualExport({
+        const dualExportResult = Str.Code.TS.Reserved.dualExport({
           name: scalar.name,
           const: {
             value: `${$.CustomScalars}.${scalar.name}`,
@@ -111,7 +111,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     code(Str.Code.TSDoc.format(getScalarRegistryDoc()))
     code`
       export const $registry = {
-        map: ${CodeGraphQL.termObject(runtimeMap)},
+        map: ${Str.Code.TS.TermObject.termObject(runtimeMap)},
       } as $Registry
     `
     code``
@@ -119,7 +119,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     const typeScalarRegistry = config.options.customScalars
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
-          ${CodeGraphQL.termObject(buildtimeMap)},
+          ${Str.Code.TS.TermObject.termObject(buildtimeMap)},
           ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
           ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
         >`

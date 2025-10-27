@@ -207,14 +207,14 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     }
 
     code`export interface ArgumentsMap`
-    code(CodeGraphQL.termObject({
-      operations: CodeGraphQL.directiveTermObject({
+    code(Str.Code.TS.TermObject.termObject({
+      operations: Str.Code.TS.TermObject.directiveTermObject({
         $fields: operationsEntries.length > 0
           ? Object.fromEntries(operationsEntries)
           : {},
       }),
-      directives: CodeGraphQL.directiveTermObject({}),
-      types: CodeGraphQL.directiveTermObject({
+      directives: Str.Code.TS.TermObject.directiveTermObject({}),
+      types: Str.Code.TS.TermObject.directiveTermObject({
         $fields: typesEntries.length > 0
           ? Object.fromEntries(typesEntries)
           : {},

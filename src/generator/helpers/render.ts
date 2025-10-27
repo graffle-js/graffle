@@ -110,5 +110,5 @@ export const getTsDocContents = (config: Config, node: Grafaid.Schema.Describabl
  */
 export const renderName = (type: string | Grafaid.Schema.NamedTypes | Grafaid.Schema.FieldTypes) => {
   const name_ = typeof type === `string` ? type : type.name
-  return CodeGraphQL.renderName(name_)
+  return Str.Code.TS.Reserved.escapeReserved(name_)
 }
