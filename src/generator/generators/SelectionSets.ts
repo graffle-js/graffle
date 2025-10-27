@@ -2,7 +2,6 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { Grafaid } from '#lib/grafaid'
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
 import { Docpar } from '../../docpar/$.js'
@@ -131,7 +130,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   code(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: './_context', type: true }))
   code()
 
-  code(CodeGraphQL.tsInterface({
+  code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `$Document`,
     parameters: $ContextTypeParameter,
@@ -307,7 +306,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
 const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
-  code(CodeGraphQL.tsAlias$({
+  code(Str.Code.TS.typeAlias$({
     tsDoc: getEnumTypeSelectionSetDoc(enumType),
     export: true,
     name: enumType.name,
@@ -369,7 +368,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     return `${doc}\n${field}`
   }).join(`\n`)
 
-  mainCode(CodeGraphQL.tsInterface({
+  mainCode(Str.Code.TS.interfaceDecl({
     tsDoc: getUnionTypeSelectionSetDoc(unionType),
     export: true,
     name: unionType.name,
@@ -444,12 +443,12 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields', type: true }))
   namespaceCode()
 
-  namespaceCode(CodeGraphQL.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: getInputObjectTypeSelectionSetDoc(inputObject),
     export: true,
     name: inputObject.name,
     parameters: $ContextTypeParameter,
-    block: Obj.values(inputObject.getFields()).map(field => getInputFieldLike(config, field)),
+    block: Obj.values(inputObject.getFields()).map(field => getInputFieldLike(config, field)) as any,
   }))
 
   modules.push({
@@ -610,7 +609,7 @@ const generateFieldedTypeModule = (
     ? getInterfaceTypeSelectionSetDoc(type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
     : getObjectTypeSelectionSetDoc(type as Grafaid.Schema.ObjectType, isRoot)
 
-  namespaceCode(CodeGraphQL.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc,
     export: true,
     name: type.name,
@@ -745,7 +744,7 @@ const renderFieldPropertyArguments = (
       ? `${lead} are required so you may omit this.`
       : `${lead} are required so you must include this.`
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-    return CodeGraphQL.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
+    return Str.Code.TS.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
       readonly: true,
       tsDoc,
@@ -856,7 +855,7 @@ const generateNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap
  * Check if a name is a reserved keyword and needs escaping
  */
 const isReservedKeyword = (name: string): boolean => {
-  return CodeGraphQL.reservedTypeScriptInterfaceNames.includes(name as any)
+  return Str.Code.TS.Reserved.reservedNames.includes(name as any)
 }
 
 /**
@@ -954,7 +953,7 @@ const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema
 const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
   return [
     getInputFieldKey(inputFieldLike),
-    CodeGraphQL.objectField$({
+    Str.Code.TS.objectField$({
       tsDoc: getTsDocContents(config, inputFieldLike),
       optional: Grafaid.Schema.isNullableType(inputFieldLike.type),
       value: renderArgumentType(inputFieldLike.type),
@@ -1068,7 +1067,7 @@ namespace H {
   export const fragmentInlineInterface = (
     node: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    return CodeGraphQL.tsInterface({
+    return Str.Code.TS.interfaceDecl({
       export: true,
       name: `$FragmentInline`,
       parameters: $ContextTypeParameter,

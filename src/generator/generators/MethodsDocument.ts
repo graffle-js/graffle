@@ -1,5 +1,4 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -46,7 +45,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
        * \`\`\`
        */
     `
-    code(CodeGraphQL.tsInterface({
+    code(Str.Code.TS.interfaceDecl({
       name: `Document`,
       parameters: [`$Context ${contextExtendsClause}`],
       // dprint-ignore

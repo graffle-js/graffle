@@ -1,6 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
 
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'

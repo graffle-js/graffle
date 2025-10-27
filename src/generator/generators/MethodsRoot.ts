@@ -1,6 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '#lib/grafaid'
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'

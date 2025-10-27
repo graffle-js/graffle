@@ -1,4 +1,3 @@
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
@@ -28,7 +27,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
        * that return the selection set itself (for document building).
        */
     `
-    code(CodeGraphQL.tsInterface({
+    code(Str.Code.TS.interfaceDecl({
       name: `$MethodsSelect`,
       block: Obj.values(kindMap).flatMap(type => {
         return type.map(type => {
@@ -42,7 +41,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
       code``
       for (const type of kind) {
         code(Str.Code.TSDoc.format(getMethodsSelectDoc(type)))
-        code(CodeGraphQL.tsInterface({
+        code(Str.Code.TS.interfaceDecl({
           name: type.name,
           block: `
             <$SelectionSet>(selectionSet: ${$.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${renderName(type)}>):

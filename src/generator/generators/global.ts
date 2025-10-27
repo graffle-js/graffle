@@ -1,4 +1,3 @@
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -27,7 +26,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       ? config.options.defaultSchemaUrl.href
       : ``
 
-    const Clients = CodeGraphQL.termObjectFields({
+    const Clients = Str.Code.TS.TermObject.termObjectFields({
       [config.name]: {
         name: `${$.$$Data}.Name`,
         schema: `${$.$$Schema}.${$.Schema}`,

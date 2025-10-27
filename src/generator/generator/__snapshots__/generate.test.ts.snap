@@ -85,40 +85,39 @@ export type $Registry = $$Utilities.Schema.Scalar.Registry<
 `;
 
 exports[`root-types-mapped 1`] = `
-"import type * as $ from "graffle/utilities-for-generated";
-import * as $$Data from "../data.js";
-import * as $$Scalar from "../scalar.js";
-import * as $Types from "./$$.js";
+"import type * as $ from 'graffle/utilities-for-generated'
+import * as $$Data from '../data.js'
+import * as $$Scalar from '../scalar.js'
+import * as $Types from './$$.js'
 
-export * as Schema from "./$$.js";
+export * as Schema from './$$.js'
 
-export interface Schema<
-  $Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry,
-> {
-  name: $$Data.Name;
-  operationsAvailable: ["query"];
-  RootUnion: $Types.RootTypeCustomNameForQuery;
-  Root: {
-    query: $Types.RootTypeCustomNameForQuery;
-    mutation: null;
-    subscription: null;
-  };
-  allTypes: {
-    RootTypeCustomNameForQuery: $Types.RootTypeCustomNameForQuery;
-  };
-  objects: {};
-  unions: {};
-  interfaces: {};
-  scalarNamesUnion: "ID" | "Boolean" | "String";
-  scalars: {
-    ID: $Types.ID;
-    Boolean: $Types.Boolean;
-    String: $Types.String;
-  };
-  scalarRegistry: $Scalars;
-  extensions: $.GlobalRegistry.TypeExtensions;
-}
-"
+export interface Schema$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry {
+name: $$Data.Name,
+operationsAvailable: ["query"],
+RootUnion: $Types.RootTypeCustomNameForQuery,
+Root: {
+query: $Types.RootTypeCustomNameForQuery,
+mutation: null,
+subscription: null
+},
+allTypes: {
+RootTypeCustomNameForQuery: $Types.RootTypeCustomNameForQuery
+},
+objects: {},
+unions: {},
+interfaces: {},
+scalarNamesUnion: "ID"
+| "Boolean"
+| "String",
+scalars: {
+ID: $Types.ID,
+Boolean: $Types.Boolean,
+String: $Types.String
+},
+scalarRegistry: $Scalars,
+extensions: $.GlobalRegistry.TypeExtensions
+}"
 `;
 
 exports[`root-types-mapped 2`] = `
@@ -286,41 +285,40 @@ export interface BuilderMethodsRootFn extends $$Utilities.Kind.Kind {
 `;
 
 exports[`schema with long type name 1`] = `
-"import type * as $ from "graffle/utilities-for-generated";
-import * as $$Data from "../data.js";
-import * as $$Scalar from "../scalar.js";
-import * as $Types from "./$$.js";
+"import type * as $ from 'graffle/utilities-for-generated'
+import * as $$Data from '../data.js'
+import * as $$Scalar from '../scalar.js'
+import * as $Types from './$$.js'
 
-export * as Schema from "./$$.js";
+export * as Schema from './$$.js'
 
-export interface Schema<
-  $Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry,
-> {
-  name: $$Data.Name;
-  operationsAvailable: ["query"];
-  RootUnion: $Types.Query;
-  Root: {
-    query: $Types.Query;
-    mutation: null;
-    subscription: null;
-  };
-  allTypes: {
-    Query: $Types.Query;
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: $Types.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
-  };
-  objects: {
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: $Types.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
-  };
-  unions: {};
-  interfaces: {};
-  scalarNamesUnion: "ID" | "Boolean" | "String";
-  scalars: {
-    ID: $Types.ID;
-    Boolean: $Types.Boolean;
-    String: $Types.String;
-  };
-  scalarRegistry: $Scalars;
-  extensions: $.GlobalRegistry.TypeExtensions;
-}
-"
+export interface Schema$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry {
+name: $$Data.Name,
+operationsAvailable: ["query"],
+RootUnion: $Types.Query,
+Root: {
+query: $Types.Query,
+mutation: null,
+subscription: null
+},
+allTypes: {
+Query: $Types.Query,
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: $Types.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+},
+objects: {
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: $Types.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+},
+unions: {},
+interfaces: {},
+scalarNamesUnion: "ID"
+| "Boolean"
+| "String",
+scalars: {
+ID: $Types.ID,
+Boolean: $Types.Boolean,
+String: $Types.String
+},
+scalarRegistry: $Scalars,
+extensions: $.GlobalRegistry.TypeExtensions
+}"
 `;

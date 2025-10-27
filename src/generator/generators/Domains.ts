@@ -1,5 +1,4 @@
 import { Grafaid } from '#lib/grafaid'
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
@@ -125,7 +124,7 @@ const generateMethodsFile = (
 
     // Generate method implementation using helper
     const functionDecl = `const ${renderName(methodName)} = ${helperName}('${field.fieldName}')`
-    lines.push(CodeGraphQL.exportValueWithKeywordHandling(methodName, functionDecl))
+    lines.push(Str.Code.TS.Reserved.exportValueWithKeywordHandling(methodName, functionDecl))
     lines.push(``)
   }
 

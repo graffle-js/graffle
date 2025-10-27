@@ -1,6 +1,4 @@
 import { Grafaid } from '#lib/grafaid'
-
-import { CodeGraphQL } from '#src/lib/CodeGraphQL.js'
 import { isObjectEmpty } from '#src/lib/prelude.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
@@ -111,7 +109,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
   }
 
   code(
-    CodeGraphQL.tsInterface({
+    Str.Code.TS.interfaceDecl({
       tsDoc: getEnumTypeDoc(config, enumType),
       export: true,
       name: enumType.name,
@@ -152,7 +150,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   }
   code()
 
-  code(CodeGraphQL.tsInterface({
+  code(Str.Code.TS.interfaceDecl({
     tsDoc: getUnionTypeDoc(config, unionType),
     export: true,
     name: unionType.name,
@@ -270,7 +268,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   for (const field of Obj.values(inputObject.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
-    fieldsCode(CodeGraphQL.tsInterface({
+    fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getInputFieldDoc(config, field, inputObject),
       export: true,
       name: field.name,
@@ -311,7 +309,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     }),
   )
 
-  namespaceCode(CodeGraphQL.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: getInputObjectTypeDoc(config, inputObject),
     export: true,
     name: inputObject.name,
@@ -357,7 +355,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
   ]
   const operationsAvailable = Obj.entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
 
-  const schema: CodeGraphQL.TermObject = {
+  const schema: Str.Code.TS.TermObject.TermObject = {
     name: `$$Data.Name`,
     operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
     RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
@@ -388,7 +386,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     extensions: `$.GlobalRegistry.TypeExtensions`,
   }
 
-  const extensions: CodeGraphQL.TermObject = {}
+  const extensions: Str.Code.TS.TermObject.TermObject = {}
   config.extensions.forEach(_ => {
     _.onSchema?.({ config, schema: extensions })
   })
@@ -396,7 +394,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     schema[`extensions`] = extensions
   }
 
-  code(CodeGraphQL.tsInterface({
+  code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `Schema`,
     parameters: `$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry`,
@@ -774,7 +772,7 @@ const generateTypeModule = (
   fieldsCode()
 
   // __typename field
-  fieldsCode(CodeGraphQL.tsInterface({
+  fieldsCode(Str.Code.TS.interfaceDecl({
     tsDoc: getTypeNameFieldDoc(type.name),
     export: true,
     name: `__typename`,
@@ -796,7 +794,7 @@ const generateTypeModule = (
   for (const field of Obj.values(type.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
-    fieldsCode(CodeGraphQL.tsInterface({
+    fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getOutputFieldDoc(config, field, type),
       export: true,
       name: field.name,
@@ -807,7 +805,7 @@ const generateTypeModule = (
         arguments: Object.fromEntries(field.args.map(arg => {
           return [
             arg.name,
-            CodeGraphQL.objectField$({
+            Str.Code.TS.objectField$({
               tsDoc: getTsDocContents(config, arg),
               value: {
                 kind: Str.Code.TS.string(`InputField`),
@@ -867,7 +865,7 @@ const generateTypeModule = (
     ),
   )
 
-  namespaceCode(CodeGraphQL.tsInterface({
+  namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: isInterface
       ? getInterfaceTypeDoc(config, type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
       : getObjectTypeDoc(config, type as Grafaid.Schema.ObjectType, kind === 'roots'),
