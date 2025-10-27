@@ -4,5 +4,4 @@ import type { CombatantMultiPokemon } from './$.js'
 
 export interface $FragmentInline<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-> extends CombatantMultiPokemon<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {
-}
+> extends CombatantMultiPokemon<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {}

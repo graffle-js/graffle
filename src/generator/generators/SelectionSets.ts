@@ -133,7 +133,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `$Document`,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     block: `
       ${queryType ? `query?: Record<string, ${renderName(queryType)}<${i._$Context}>>` : ``}
       ${mutationType ? `mutation?: Record<string, ${renderName(mutationType)}<${i._$Context}>>` : ``}
@@ -372,7 +372,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     tsDoc: getUnionTypeSelectionSetDoc(unionType),
     export: true,
     name: unionType.name,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     block: `
       ${H.__typenameField(`union`)}
       ${fragmentsInlineType}
@@ -447,7 +447,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     tsDoc: getInputObjectTypeSelectionSetDoc(inputObject),
     export: true,
     name: inputObject.name,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     block: Obj.values(inputObject.getFields()).map(field => getInputFieldLike(config, field)) as any,
   }))
 
@@ -613,7 +613,7 @@ const generateFieldedTypeModule = (
     tsDoc,
     export: true,
     name: type.name,
-    parameters: $ContextTypeParameter,
+    parameters: `<${$ContextTypeParameter}>`,
     extends: [extendsClause],
     block: `
       ${fieldKeys}
@@ -1070,7 +1070,7 @@ namespace H {
     return Str.Code.TS.interfaceDecl({
       export: true,
       name: `$FragmentInline`,
-      parameters: $ContextTypeParameter,
+      parameters: `<${$ContextTypeParameter}>`,
       extends: [
         forwardTypeParameter$Context(node),
         `${$.$$Utilities}.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields`,

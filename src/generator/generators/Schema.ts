@@ -397,7 +397,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
   code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `Schema`,
-    parameters: `$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry`,
+    parameters: `<$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry>`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema` : null,
     block: schema,
   }))
