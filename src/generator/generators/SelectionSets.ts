@@ -311,7 +311,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
     tsDoc: getEnumTypeSelectionSetDoc(enumType),
     export: true,
     name: enumType.name,
-    type: CodeGraphQL.tsUnionItems(enumType.getValues().map((value) => CodeGraphQL.string(value.name))),
+    type: Str.Code.TS.unionItems(enumType.getValues().map((value) => Str.Code.TS.string(value.name))),
   }))
 
   return {
@@ -659,7 +659,7 @@ const renderOutputFieldForFields = (
 
   // Main field type - references the namespace's $SelectionSet
   const mainTypeDecl = `${safeName}<${$ContextTypeParameter}> = ${
-    CodeGraphQL.tsUnionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
+    Str.Code.TS.unionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
   }`
   if (isReservedKeyword(field.name)) {
     code(`type ${mainTypeDecl}`)
@@ -712,7 +712,7 @@ const renderOutputFieldForFields = (
   code(`  ${CodeGraphQL.TSDoc(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
-      CodeGraphQL.tsUnionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
+      Str.Code.TS.unionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
     }>`,
   )
 

@@ -5,97 +5,16 @@ type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
 
 export namespace CodeGraphQL {
   // ================================================================
-  // TEMPORARY SHIMS - Remove once kit #65 is done
+  // GRAFFLE-SPECIFIC CODE
   // ================================================================
-  // These functions will be moved to kit's Str.Code.TS module.
-  // After kit #65 lands, remove these shims and update call sites to use kit.
 
   /**
-   * @deprecated Use Str.Code.TS.unionItems once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const tsUnionItems = (types: (string | null)[]): string => types.filter(_ => _ !== null).join(`\n| `)
-
-  /**
-   * @deprecated Use Str.Code.TS.tuple once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const tsTuple = (types: string[]): string => `[${types.join(`, `)}]`
-
-  /**
-   * @deprecated Use Str.Code.TS.nullable once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const nullable = (type: string): string => `${type} | null`
-
-  /**
-   * @deprecated Use Str.Code.TS.intersection once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const intersection = (a: string, b: string): string => `${a} & ${b}`
-
-  /**
-   * @deprecated Use Str.Code.TS.union once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const union = (name: string, types: string[]): string => `type ${name} =\n| ${tsUnionItems(types)}`
-
-  /**
-   * @deprecated Use Str.Code.TS.propertyAccess once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const propertyAccess = (object: string, name: string): string => `${object}.${name}`
-
-  /**
-   * @deprecated Use Str.Code.TS.boolean once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const boolean = (value: boolean): string => value ? `true` : `false`
-
-  /**
-   * @deprecated Use Str.Code.TS.objectFromFields once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const object = (fields: string): string => `{\n${fields}\n}`
-
-  /**
-   * @deprecated Use Str.Code.TS.fields once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const fields = (fieldTypes: string[]): string => fieldTypes.join(`\n`)
-
-  /**
-   * @deprecated Use Str.Code.TS.string once kit #65 is done (already exists in kit)
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const string = (str: string): string => `"${str}"`
-
-  /**
-   * @deprecated Use Str.Code.TS.block once kit #65 is done (already exists in kit)
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const block = (content: string): string => `{\n${content}\n}`
-
-  /**
-   * @deprecated Use Str.Code.TSDoc.format once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
+   * Format TSDoc/JSDoc comments with proper escaping and line prefixes.
+   * Graffle-specific because it uses tex utilities for line processing.
    */
   export const TSDoc = (content: string | null): string => {
     return content === null ? `` : `/**\n${linesPrepend(`* `, linesTrim(content)) || `*`}\n*/`
   }
-
-  /**
-   * @deprecated Use Str.Code.TSDoc.format with manual splitting once kit #65 is done
-   * @see https://github.com/jasonkuhrt/kit/issues/65
-   */
-  export const TSDocIndented = (content: string | null, indent: string): string => {
-    if (content === null) return ``
-    return TSDoc(content).split('\n').map(line => `${indent}${line}`).join('\n')
-  }
-
-  // ================================================================
-  // GRAFFLE-SPECIFIC CODE (keep permanently)
-  // ================================================================
 
   // ----------------------------------------------------------------
   // 1. TERM OBJECT SYSTEM (~200 lines)
@@ -170,7 +89,7 @@ export namespace CodeGraphQL {
 
   export const directiveTermObject = (objectWith: DirectiveTermObject): string => {
     const spreads = (objectWith.$spread ?? []).map(spread => `...${spread},`)
-    return block(
+    return Str.Code.TS.block(
       spreads.join(`\n`)
         + `\n`
         + termObjectFields(objectWith.$fields ?? {})
@@ -183,7 +102,7 @@ export namespace CodeGraphQL {
   export const termObject = (object: TermObjectLike): string => {
     if (Array.isArray(object)) return termObject(Object.fromEntries(object))
     if (isDirectiveTermObject(object)) return directiveTermObject(object)
-    return block(termObjectFields(object))
+    return Str.Code.TS.block(termObjectFields(object))
   }
 
   export const termObjectFields = (object: TermObject | DirectiveTermObject): string =>
@@ -525,7 +444,7 @@ export namespace CodeGraphQL {
   }
 
   export const tsNamespace = (name: string, content: string) => {
-    return `namespace ${renderName(name)} ${object(content)}`
+    return `namespace ${renderName(name)} ${Str.Code.TS.block(content)}`
   }
 
   // ----------------------------------------------------------------
@@ -561,8 +480,8 @@ export namespace CodeGraphQL {
       null | string | boolean | number | { type: null | string | boolean | number; optional?: boolean; tsdoc?: string }
     >,
   ) => {
-    return object(
-      fields(
+    return Str.Code.TS.objectFromFields(
+      Str.Code.TS.fields(
         Object.entries(objectSpec).map(([name, spec]) =>
           [name, spec && typeof spec === `object` ? spec : { type: spec }] as const
         )

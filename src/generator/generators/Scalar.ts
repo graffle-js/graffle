@@ -120,8 +120,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
           ${CodeGraphQL.termObject(buildtimeMap)},
-          ${CodeGraphQL.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
-          ${CodeGraphQL.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
         >`
       : `$$Utilities.Schema.Scalar.Registry.Empty`
 

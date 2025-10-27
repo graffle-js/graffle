@@ -117,10 +117,10 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
       name: enumType.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
       block: {
-        kind: CodeGraphQL.string(Grafaid.Schema.TypeKind.Enum),
-        name: CodeGraphQL.string(enumType.name),
-        members: CodeGraphQL.tsTuple(enumType.getValues().map((_) => CodeGraphQL.string(_.name))),
-        membersUnion: CodeGraphQL.tsUnionItems(enumType.getValues().map((_) => CodeGraphQL.string(_.name))),
+        kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.Enum),
+        name: Str.Code.TS.string(enumType.name),
+        members: Str.Code.TS.tuple(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
+        membersUnion: Str.Code.TS.unionItems(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
       },
     }),
   )
@@ -158,10 +158,10 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     name: unionType.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Union` : null,
     block: {
-      kind: CodeGraphQL.string(Grafaid.Schema.TypeKind.Union),
-      name: CodeGraphQL.string(unionType.name),
-      members: CodeGraphQL.tsTuple(memberNames),
-      membersUnion: CodeGraphQL.tsUnionItems(memberNames),
+      kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.Union),
+      name: Str.Code.TS.string(unionType.name),
+      members: Str.Code.TS.tuple(memberNames),
+      membersUnion: Str.Code.TS.unionItems(memberNames),
       membersIndex: Object.fromEntries(memberNames.map(n => [n, n])),
     },
   }))
@@ -276,8 +276,8 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
       name: field.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputField` : null,
       block: {
-        kind: CodeGraphQL.string(`InputField`),
-        name: CodeGraphQL.string(field.name),
+        kind: Str.Code.TS.string(`InputField`),
+        name: Str.Code.TS.string(field.name),
         inlineType: renderInlineType(field.type),
         namedType: namedTypesTypeReference(namedType),
       },
@@ -317,9 +317,9 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     name: inputObject.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputObject` : null,
     block: {
-      kind: CodeGraphQL.string(Grafaid.Schema.TypeKind.InputObject),
-      name: CodeGraphQL.string(inputObject.name),
-      isAllFieldsNullable: CodeGraphQL.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(inputObject)),
+      kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.InputObject),
+      name: Str.Code.TS.string(inputObject.name),
+      isAllFieldsNullable: Str.Code.TS.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(inputObject)),
       fields: interfaceFields,
     },
   }))
@@ -359,8 +359,8 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
 
   const schema: CodeGraphQL.TermObject = {
     name: `$$Data.Name`,
-    operationsAvailable: CodeGraphQL.tsTuple(operationsAvailable.map(_ => CodeGraphQL.string(_))),
-    RootUnion: CodeGraphQL.tsUnionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
+    operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
+    RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
     Root: {
       [Grafaid.Document.OperationTypeNode.QUERY]: config.schema.kindMap.index.Root.query?.name
         ? `$Types.${config.schema.kindMap.index.Root.query.name}`
@@ -382,7 +382,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     objects,
     unions,
     interfaces,
-    scalarNamesUnion: CodeGraphQL.tsUnionItems(scalars.map(_ => _[0]).map(Str.Code.TS.string)),
+    scalarNamesUnion: Str.Code.TS.unionItems(scalars.map(_ => _[0]).map(Str.Code.TS.string)),
     scalars,
     scalarRegistry: `$Scalars`,
     extensions: `$.GlobalRegistry.TypeExtensions`,
@@ -780,13 +780,13 @@ const generateTypeModule = (
     name: `__typename`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
     block: {
-      kind: CodeGraphQL.string(`OutputField`),
-      name: CodeGraphQL.string(`__typename`),
+      kind: Str.Code.TS.string(`OutputField`),
+      name: Str.Code.TS.string(`__typename`),
       arguments: {},
       inlineType: `[1]`,
       namedType: {
-        kind: CodeGraphQL.string(`__typename`),
-        value: CodeGraphQL.string(type.name),
+        kind: Str.Code.TS.string(`__typename`),
+        value: Str.Code.TS.string(type.name),
       },
     },
   }))
@@ -802,16 +802,16 @@ const generateTypeModule = (
       name: field.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
       block: {
-        kind: CodeGraphQL.string(`OutputField`),
-        name: CodeGraphQL.string(field.name),
+        kind: Str.Code.TS.string(`OutputField`),
+        name: Str.Code.TS.string(field.name),
         arguments: Object.fromEntries(field.args.map(arg => {
           return [
             arg.name,
             CodeGraphQL.objectField$({
               tsDoc: getTsDocContents(config, arg),
               value: {
-                kind: CodeGraphQL.string(`InputField`),
-                name: CodeGraphQL.string(arg.name),
+                kind: Str.Code.TS.string(`InputField`),
+                name: Str.Code.TS.string(arg.name),
                 inlineType: renderInlineType(arg.type),
                 namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
               },
@@ -877,19 +877,19 @@ const generateTypeModule = (
       ? (isInterface ? `$.Schema.Interface` : `$.Schema.OutputObject`)
       : null,
     block: {
-      kind: CodeGraphQL.string(isInterface ? Grafaid.Schema.TypeKind.Interface : Grafaid.Schema.TypeKind.Object),
-      name: CodeGraphQL.string(type.name),
+      kind: Str.Code.TS.string(isInterface ? Grafaid.Schema.TypeKind.Interface : Grafaid.Schema.TypeKind.Object),
+      name: Str.Code.TS.string(type.name),
       fields: interfaceFields,
       ...(isInterface
         ? {
-          implementors: CodeGraphQL.tsTuple(
+          implementors: Str.Code.TS.tuple(
             Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
               .map(_ => _.name),
           ),
           implementorsUnion:
             Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
                 .length > 0
-              ? CodeGraphQL.tsUnionItems(
+              ? Str.Code.TS.unionItems(
                 Grafaid.Schema.KindMap.getInterfaceImplementors(
                   config.schema.kindMap,
                   type as Grafaid.Schema.InterfaceType,

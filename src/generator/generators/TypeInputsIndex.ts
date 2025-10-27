@@ -65,7 +65,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
       code``
       code`// Enums`
       for (const enumType of config.schema.kindMap.list.Enum) {
-        const members = enumType.getValues().map(v => CodeGraphQL.string(v.name)).join(' | ')
+        const members = enumType.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
         const safeName = renderName(enumType.name)
         code`export type ${safeName} = ${members}`
       }

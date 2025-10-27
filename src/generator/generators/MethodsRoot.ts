@@ -156,7 +156,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     if (config.methodsOrganization.logical) {
       config.schema.kindMap.root.list.forEach(node => {
         const propertyDoc = getRootPropertyDoc(node.operationType)
-        code(CodeGraphQL.TSDocIndented(propertyDoc, `  `))
+        code(CodeGraphQL.TSDoc(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
         code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
       })
     }
@@ -195,7 +195,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // $batch JSDoc
   const batchDoc = getBatchMethodDoc(operationType)
-  code(CodeGraphQL.TSDocIndented(batchDoc, `  `))
+  code(CodeGraphQL.TSDoc(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
   // dprint-ignore
   code`
@@ -224,7 +224,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // __typename JSDoc
   const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(CodeGraphQL.TSDocIndented(typenameDoc, `  `))
+  code(CodeGraphQL.TSDoc(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
   // dprint-ignore
   code`
@@ -793,7 +793,7 @@ const renderDomainType = createCodeGenerator<{
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      code(CodeGraphQL.TSDocIndented(docContent, `  `))
+      code(CodeGraphQL.TSDoc(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)

@@ -167,7 +167,7 @@ const ScalarTypeCustom = createCodeGenerator<
     if (config.options.isImportsCustomScalars) {
       code(CodeGraphQL.termConst(type.name, `${$.$$Scalar}.${type.name}`))
     } else {
-      code(CodeGraphQL.termConst(type.name, CodeGraphQL.string(type.name)))
+      code(CodeGraphQL.termConst(type.name, Str.Code.TS.string(type.name)))
     }
   },
 )
@@ -321,8 +321,8 @@ const EnumType = createCodeGenerator<
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.Enum`,
       CodeGraphQL.termObject({
-        [propertyNames.k]: CodeGraphQL.string(`enum`),
-        [propertyNames.n]: CodeGraphQL.string(type.name),
+        [propertyNames.k]: Str.Code.TS.string(`enum`),
+        [propertyNames.n]: Str.Code.TS.string(type.name),
       }),
     ))
   },
@@ -337,7 +337,7 @@ const InputObjectType = createCodeGenerator<
     const inputFields = Object.values(type.getFields())
 
     if (config.runtimeFeatures.operationVariables) {
-      o[propertyNames.n] = CodeGraphQL.string(type.name)
+      o[propertyNames.n] = Str.Code.TS.string(type.name)
       const customScalarFields = inputFields
         .filter(Grafaid.Schema.CustomScalars.isHasCustomScalarInputs)
         .map(inputField => inputField.name)

@@ -32,7 +32,7 @@ export const SchemaErrors = (input?: Input) => {
     onSchema: ({ config: genConfig, schema }) => {
       const errorObjects = getErrorObjects(config, genConfig)
       schema[`SchemaErrors`] = {
-        objectNames: errorObjects.map(type => CodeGraphQL.string(type.name)).join(` | `),
+        objectNames: errorObjects.map(type => Str.Code.TS.string(type.name)).join(` | `),
       }
     },
     schemaDrivenDataMap: {
