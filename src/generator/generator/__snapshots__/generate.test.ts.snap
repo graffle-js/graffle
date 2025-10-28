@@ -145,7 +145,7 @@ export interface RootTypeCustomNameForQueryMethods<
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.RootTypeCustomNameForQuery<{
           scalars: $Context["scalars"];
@@ -217,7 +217,7 @@ export interface RootTypeCustomNameForQueryMethods<
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.RootTypeCustomNameForQuery.id<{
           scalars: $Context["scalars"];

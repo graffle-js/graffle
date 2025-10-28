@@ -1,7 +1,6 @@
 import type { HandleOutput } from '#src/client/handle.js'
 import type { Docpar } from '#src/docpar/$.js'
-import type { IsTupleMultiple } from '#src/lib/prelude.js'
-import type { UnionToTuple } from 'type-fest'
+import { Arr, type Ts } from '@wollybeard/kit'
 
 // dprint-ignore
 export type DocumentRunner<
@@ -11,7 +10,7 @@ export type DocumentRunner<
   $$Name extends Docpar.Object.Select.Document.GetOperationNames<$$Document> = Docpar.Object.Select.Document.GetOperationNames<$$Document>
 > = {
   run: <
-    $Params extends (IsTupleMultiple<UnionToTuple<$$Name>> extends true ? [name: $$Name] : []),
+    $Params extends (Arr.IsTupleMultiple<Ts.Union.ToTuple<$$Name>> extends true ? [name: $$Name] : []),
     const $Name extends string = $Params extends [] ? $$Name : $Params[0],
   >(...params: $Params) =>
     Promise<

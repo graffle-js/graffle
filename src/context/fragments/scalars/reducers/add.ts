@@ -1,6 +1,7 @@
-import type { UnionIgnoreAnyOrUnknown } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { ContextFragment } from '../fragment.js'
+
+export type UnionIgnoreAnyOrUnknown<T> = unknown extends T ? never : T
 
 export type Add<
   $Context extends ContextFragment,

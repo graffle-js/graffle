@@ -1,5 +1,5 @@
-import { type HasKeys, type IsHasIndexType } from '#src/lib/prelude.js'
 import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core'
+import { Obj } from '@wollybeard/kit'
 import { type DocumentNode, type TypedQueryDocumentNode } from 'graphql'
 import type { HasRequiredKeys, IsNever, IsUnknown } from 'type-fest'
 import type { SomeObjectData, Variables } from '../graphql.js'
@@ -68,11 +68,11 @@ export { type TypedDocumentNode as Node }
 
 // dprint-ignore
 export type GetVariablesInputKind<$Variables extends Variables> =
-  IsNever<$Variables>         extends true  ? VariablesInputKindNone     :
-  IsHasIndexType<$Variables>  extends true  ? VariablesInputKindOptional :
-  HasRequiredKeys<$Variables> extends true  ? VariablesInputKindRequired :
-  HasKeys<$Variables>         extends true  ? VariablesInputKindOptional :
-                                              VariablesInputKindNone
+  IsNever<$Variables>               extends true  ? VariablesInputKindNone     :
+  Obj.IsHasIndexType<$Variables>    extends true  ? VariablesInputKindOptional :
+  HasRequiredKeys<$Variables>       extends true  ? VariablesInputKindRequired :
+  Obj.HasKeys<$Variables>           extends true  ? VariablesInputKindOptional :
+                                                    VariablesInputKindNone
 
 export type VariablesInputKind =
   | VariablesInputKindNone

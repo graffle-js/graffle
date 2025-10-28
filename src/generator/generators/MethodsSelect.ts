@@ -44,7 +44,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
         code(Str.Code.TS.interfaceDecl({
           name: type.name,
           block: `
-            <$SelectionSet>(selectionSet: ${$.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${renderName(type)}>):
+            <$SelectionSet>(selectionSet: ${$.$$Utilities}.NoExcess<$$SelectionSets.${renderName(type)}, $SelectionSet>):
               $SelectionSet
           `,
         }))

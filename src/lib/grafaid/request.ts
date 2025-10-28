@@ -1,5 +1,5 @@
+import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
-import type { Errors } from '../errors/$.js'
 import type { Grafaid } from './$.js'
 import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
 import type { TypedDocument } from './typed-document/$.js'
@@ -24,11 +24,40 @@ export interface RequestAnalyzedDocumentNodeInput extends RequestDocumentNodeInp
   operation: OperationDefinitionNode
 }
 
+/**
+ * GraphQL variables as they exist at runtime.
+ *
+ * Variables can contain any value including custom scalars (Date, Blob, File, etc.).
+ * This reflects the reality that GraphQL variables are opaque to the transport layer.
+ *
+ * For type-safe variables limited to standard JSON-serializable scalars, use {@link VariablesStandardScalars}.
+ */
 export type Variables = {
-  [key: string]: VariableValue
+  [key: string]: unknown
 }
 
-export type VariableValue = string | boolean | null | number | Variables | VariableValue[]
+/**
+ * Variables containing only standard JSON-serializable scalar values.
+ *
+ * Use this type when you want compile-time guarantees that variables only contain
+ * primitive types (string, number, boolean, null) and nested objects/arrays of these.
+ */
+export type VariablesStandardScalars = {
+  [key: string]: VariableValueStandardScalars
+}
+
+export type VariableValueStandardScalars =
+  | string
+  | boolean
+  | null
+  | number
+  | VariablesStandardScalars
+  | VariableValueStandardScalars[]
+
+/**
+ * @deprecated Use `VariableValueStandardScalars` instead. This alias exists for backwards compatibility.
+ */
+export type VariableValue = VariableValueStandardScalars
 
 export type SomeObjectData = {
   [fieldName: string]: any // SomeFieldData <-- If we put this here tsc has crashes with OOM.
@@ -42,7 +71,7 @@ export type SomeFieldData =
     [fieldName: string]: SomeFieldData
   }
 
-export type GraphQLExecutionResultError = Errors.ContextualAggregateError<GraphQLError>
+export type GraphQLExecutionResultError = Err.ContextualAggregateError<GraphQLError>
 
 // dprint-ignore
 export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzedInput>(request: $R):

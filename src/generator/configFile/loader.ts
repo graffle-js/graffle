@@ -1,4 +1,3 @@
-import { Errors } from '#lib/errors'
 import { isPathToADirectory, toAbsolutePath } from '#src/lib/fsp.js'
 import { importFirst } from '#src/lib/import-first.js'
 import { Err } from '@wollybeard/kit'
@@ -43,7 +42,7 @@ export const load = async (
 ): Promise<
   | { builder: null; paths: string[]; path: null }
   | { builder: Builder; path: string; paths: string[] }
-  | Errors.ContextualError
+  | Err.ContextualError
 > => {
   const importPathCandidates = await processInput(input?.filePath)
 
@@ -58,21 +57,21 @@ export const load = async (
   }
 
   if (Err.is(importedModule)) {
-    return new Errors.ContextualError(
-      `Failed to import project Graffle configuration file.`,
-      { importPathCandidates },
-      importedModule,
-    )
+    return new Err.ContextualError({
+      message: `Failed to import project Graffle configuration file.`,
+      context: { importPathCandidates },
+      cause: importedModule,
+    })
   }
 
   if (!isBuilder(importedModule.module[`default`])) {
-    throw new Errors.ContextualError(
-      `Invalid project Graffle configuration file. It does not have a default export of the configuration.`,
-      {
+    throw new Err.ContextualError({
+      message: `Invalid project Graffle configuration file. It does not have a default export of the configuration.`,
+      context: {
         path: importedModule.path,
         value: importedModule.module,
       },
-    )
+    })
   }
 
   return {

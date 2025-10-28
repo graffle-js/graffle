@@ -7,8 +7,7 @@
  */
 
 import type { Grafaid } from '#src/lib/grafaid/$.js'
-import type { PropertySignature } from '#src/lib/prelude.js'
-import type { Ts } from '@wollybeard/kit'
+import { Obj, Ts } from '@wollybeard/kit'
 import type { UnionToIntersection } from 'type-fest'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Select } from '../Select/$.js'
@@ -77,8 +76,8 @@ export type InferFromOperationSchemaLess<
   ___$ExtractedPropSigs =
      ExtractFromOperation<$SS, { f: {} }, { argsMap: { operations: {}, types: {}, directives: {} } }>,
   ___$ExtractedProps =
-    ___$ExtractedPropSigs extends PropertySignature
-      ? PropertySignature.ToProperty<___$ExtractedPropSigs>
+    ___$ExtractedPropSigs extends Obj.PropertySignature
+      ? Obj.PropertySignature.ToProperty<___$ExtractedPropSigs>
       : {}
 > =
 Ts.Simplify.Top<UnionToIntersection<___$ExtractedProps>>
@@ -95,8 +94,8 @@ export type InferFromOperationMap<
   ___$ExtractedPropSigs =
      ExtractFromOperation<$SS, $ArgsMapLocationOperation, { argsMap: $ArgsMap }>,
   ___$ExtractedProps =
-    ___$ExtractedPropSigs extends PropertySignature
-      ? PropertySignature.ToProperty<___$ExtractedPropSigs>
+    ___$ExtractedPropSigs extends Obj.PropertySignature
+      ? Obj.PropertySignature.ToProperty<___$ExtractedPropSigs>
       : {}
 > =
 // ___$ExtractedPropSigs

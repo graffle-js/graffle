@@ -28,7 +28,7 @@ import type * as $$SelectionSets from './selection-sets/$.js'
 
 export interface Document<$Context extends $$Utilities.Context> {
   <$Document>(
-    document: $$Utilities.ExactNonEmpty<
+    document: $$Utilities.NoExcessNonEmpty<
       $Document,
       $$SelectionSets.$Document<
         { scalars: $Context['scalars'] }

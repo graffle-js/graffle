@@ -19,7 +19,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -82,7 +82,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id1<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id1<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ id1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})

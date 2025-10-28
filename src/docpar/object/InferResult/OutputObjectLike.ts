@@ -1,8 +1,6 @@
 import type { Select } from '#src/docpar/object/Select/$.js'
-import type { AssertExtendsObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { Obj } from '@wollybeard/kit'
-import { Ts } from '@wollybeard/kit'
+import { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Alias } from './Alias.js'
 import type {
@@ -119,7 +117,7 @@ type InlineFragmentKeys<
   $Node extends Schema.OutputObjectLike,
 > =
   InlineFragmentKey_<
-    AssertExtendsObject<
+    Ts.AssertExtendsObject<
       Obj.GetOrNever<$SelectionSet, Select.InlineFragment.Key>
     >,
     $Schema,

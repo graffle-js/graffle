@@ -1,4 +1,3 @@
-import { identityProxy } from '#src/lib/prelude.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
 // dprint-ignore
@@ -13,3 +12,7 @@ export const create: Create = (_name) => identityProxy as any
 
 // @ts-ignore generated types
 export const select: TypeSelectionSets<GlobalRegistry.SchemaDefault> = identityProxy
+
+export const identityProxy = new Proxy({}, {
+  get: () => (value: unknown) => value,
+})

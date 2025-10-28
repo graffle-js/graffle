@@ -1,6 +1,5 @@
 import type { Client_justContext } from '#src/client/client.js'
-import { type EmptyArray, emptyArray, type EmptyObject, emptyObject } from '#src/lib/prelude.js'
-import { Ts } from '@wollybeard/kit'
+import { Arr, Obj, Ts } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'
@@ -74,8 +73,8 @@ export interface ContextFragment {
 export interface ContextFragmentEmpty extends ContextFragment {
   readonly properties: {
     readonly computed: ReadonlyArray<PropertiesComputer>
-    readonly static: EmptyObject
-    readonly $computedTypeFunctions: EmptyArray
+    readonly static: Obj.EmptyObject
+    readonly $computedTypeFunctions: Arr.EmptyArray
   }
 }
 
@@ -85,8 +84,8 @@ export const contextFragmentPropertiesTypeLevel = Ts.as<
 
 export const contextFragmentEmpty: ContextFragmentEmpty = Object.freeze({
   properties: Object.freeze({
-    static: emptyObject,
-    computed: emptyArray,
+    static: Obj.emptyObject,
+    computed: Arr.emptyArray,
     ...contextFragmentPropertiesTypeLevel,
   }),
 })

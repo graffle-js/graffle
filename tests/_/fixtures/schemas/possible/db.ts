@@ -1,13 +1,17 @@
+import { Err } from '@wollybeard/kit'
 import { GraphQLError } from 'graphql'
-import { Errors } from '../../../../../src/lib/errors/$.js'
 
 const date0 = new Date(0)
 
 // const error = { errors: [{ message: `Something went wrong.` }] }
-const errorAggregate = new Errors.ContextualAggregateError(`One or more errors in the execution result.`, {}, [
-  new GraphQLError(`Something went wrong.`),
-  // new Error(`Something went wrong.`),
-])
+const errorAggregate = new Err.ContextualAggregateError({
+  message: `One or more errors in the execution result.`,
+  context: {},
+  errors: [
+    new GraphQLError(`Something went wrong.`),
+    // new Error(`Something went wrong.`),
+  ],
+})
 
 const ErrorOneError = new Error(`Failure on field result: ErrorOne`)
 const ErrorTwoError = new Error(`Failure on field result: ErrorTwo`)

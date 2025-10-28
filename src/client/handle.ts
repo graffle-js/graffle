@@ -1,5 +1,4 @@
 import type { Normalized } from '#graffle'
-import { Errors } from '#lib/errors'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
 import type { ErrorCategory } from '#src/context/fragments/configuration/output/configuration.js'
@@ -10,12 +9,13 @@ import {
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
-import { type ExcludeNullAndUndefined } from '#src/lib/prelude.js'
-import { Ware } from '@wollybeard/kit'
+import { Err, Ware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { RequestPipeline } from '../requestPipeline/$.js'
 import type { RequestResult } from '../types/RequestResult/$.js'
+
+export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
@@ -61,15 +61,15 @@ export const handleOutput = (
   }
 
   if (result.value.errors && result.value.errors.length > 0) {
-    const error = new Errors.ContextualAggregateError(
-      `One or more errors in the execution result.`,
-      {},
-      result.value.errors.map(e => {
+    const error = new Err.ContextualAggregateError({
+      message: `One or more errors in the execution result.`,
+      context: {},
+      errors: result.value.errors.map(e => {
         if (e instanceof Error) return e
         const { message, ...context } = e
-        return new Errors.ContextualError(message, context)
+        return new Err.ContextualError({ message, context })
       }),
-    )
+    })
     if (isThrowExecution) throw error
     if (isReturnExecution) return error
     return isEnvelope ? { ...result.value, errors: [...result.value.errors ?? [], error] } : error

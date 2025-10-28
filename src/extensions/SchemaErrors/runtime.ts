@@ -1,7 +1,6 @@
 import { Extension } from '#graffle/extension'
-import { Errors } from '#lib/errors'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
-import { Rec, Str } from '@wollybeard/kit'
+import { Err, Rec, Str } from '@wollybeard/kit'
 
 import { Docpar } from '#src/docpar/$.js'
 // import type { GeneratedExtensions } from './global.js'
@@ -56,7 +55,11 @@ export const SchemaErrors = Extension
     const error = (schemaErrors.length === 1)
       ? schemaErrors[0]!
       : schemaErrors.length > 0
-      ? new Errors.ContextualAggregateError(`Two or more schema errors in the execution result.`, {}, schemaErrors)
+      ? new Err.ContextualAggregateError({
+        message: `Two or more schema errors in the execution result.`,
+        context: {},
+        errors: schemaErrors,
+      })
       : null
 
     if (error) {

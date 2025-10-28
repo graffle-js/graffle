@@ -1,5 +1,4 @@
-import { hasNonUndefinedKeys } from '#src/lib/prelude.js'
-import type { Ts } from '@wollybeard/kit'
+import { Obj, Ts } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { ContextFragment, Index } from '../fragment.js'
 
@@ -7,7 +6,7 @@ export const add = <
   context extends ContextFragment,
   const configurationInput extends Index.Input,
 >(context: context, configurationInput: configurationInput): Add<context, configurationInput> => {
-  if (!hasNonUndefinedKeys(configurationInput)) return context as any
+  if (!Obj.hasNonUndefinedKeys(configurationInput)) return context as any
   // todo: performant checking if input changes configuration. If no change, then no copy context.
   // For default input resolvers we can do this automatically (shallow merge)
   // Any custom input resolvers would need to implement their own "is changed" logic.

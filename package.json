@@ -109,7 +109,7 @@
     "@0no-co/graphql.web": "1.2.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
-    "@wollybeard/kit": "^0.97.1",
+    "@wollybeard/kit": "^0.98.0",
     "es-toolkit": "^1.41.0",
     "type-fest": "^5.1.0"
   },
@@ -204,11 +204,7 @@
     "#graffle/presets/bare": "./build/exports/presets/bare.js",
     "#graffle/presets/basic": "./build/exports/presets/basic.js",
     "#graffle/presets/minimal": "./build/exports/presets/minimal.js",
-    "#lib/errors": "./build/lib/errors/$.js",
     "#lib/grafaid": "./build/lib/grafaid/$.js",
-    "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
-    "#lib/tex": "./build/lib/tex/$.js",
-    "#lib/type-function": "./build/lib/type-function/$.js",
     "#test/schema/*": "./tests/_/fixtures/schemas/*",
     "#test/*.js": "./tests/_/*.js",
     "#test/*": "./tests/_/*"

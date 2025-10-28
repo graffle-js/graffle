@@ -1,4 +1,4 @@
-import { isObjectEmpty } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { ContextFragment } from '../fragment.js'
 
@@ -14,7 +14,7 @@ export const configure = <
   const transport = context.transports.registry[transportName]
   if (!transport) throw new Error(`Unknown transport: ${transportName}`)
 
-  const noChange = isObjectEmpty(configurationInput)
+  const noChange = Obj.isEmpty(configurationInput)
   if (noChange) return context as any
 
   // todo: Graceful error handling. Clearly track error being from which extension.

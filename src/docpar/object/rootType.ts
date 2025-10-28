@@ -1,8 +1,8 @@
 import { Docpar } from '#src/docpar/$.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
-import { isSymbol } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
+import { Lang } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { Options } from './ToGraphQLDocument/nodes/1_Document.js'
 import { toGraphQLDocument } from './ToGraphQLDocument/nodes/1_Document.js'
@@ -139,7 +139,7 @@ export type StaticDocumentBuilder<
 export const createStaticRootType = (operationType: OperationTypeNode, options?: Options) => {
   return new Proxy({}, {
     get: (_, fieldName: string) => {
-      if (isSymbol(fieldName)) throw new Error(`Symbols not supported`)
+      if (Lang.isSymbol(fieldName)) throw new Error(`Symbols not supported`)
 
       // Special $batch method for multi-field selection
       if (fieldName === '$batch') {

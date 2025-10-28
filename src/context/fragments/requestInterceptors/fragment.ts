@@ -1,5 +1,5 @@
-import { emptyArray } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Arr } from '@wollybeard/kit'
 import type { RequestInterceptorComputer } from './helpers.js'
 
 export interface ContextFragment {
@@ -13,6 +13,6 @@ export interface ContextFragmentEmpty extends ContextFragment {
 }
 
 export const contextFragmentEmpty: ContextFragmentEmpty = {
-  requestPipelineInterceptors: emptyArray,
-  requestPipelineInterceptorsComputed: emptyArray,
+  requestPipelineInterceptors: Arr.emptyArray,
+  requestPipelineInterceptorsComputed: Arr.emptyArray,
 }

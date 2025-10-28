@@ -49,7 +49,7 @@ export interface $MethodsSelect {
  * Build type-safe selection set for Query.
  */
 export interface Query {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
 }
 
 //

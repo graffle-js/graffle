@@ -3,7 +3,7 @@ import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
 import { Docpar } from '#src/docpar/$.js'
 import { getOperationDefinition } from '#src/lib/grafaid/document.js'
-import { isSymbol } from '#src/lib/prelude.js'
+import { Lang } from '@wollybeard/kit'
 import { OperationTypeNode, print } from 'graphql'
 
 /**
@@ -43,7 +43,7 @@ export const createMethodDocument = (state: Context) => (document: Docpar.Object
 export const createMethodOperationType = (state: Context, operationType: OperationTypeNode) => {
   return new Proxy({}, {
     get: (_, key) => {
-      if (isSymbol(key)) throw new Error(`Symbols not supported.`)
+      if (Lang.isSymbol(key)) throw new Error(`Symbols not supported.`)
 
       if (key.startsWith(`$batch`)) {
         return (selectionSetOrIndicator: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {

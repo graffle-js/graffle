@@ -2,6 +2,7 @@
  * GraphQL document types representing parsed documents with type information.
  */
 
+import type { Ts } from '@wollybeard/kit'
 import type { Operation } from './operation.js'
 
 // Re-export operation types for convenience
@@ -78,24 +79,17 @@ export type TypedFullDocument = Document<Operation>
 export type IsUntyped<$Doc> = $Doc extends UntypedDocument ? true : false
 
 /**
- * Helper to detect if a type is a union.
- * Returns true if $T is a union type, false otherwise.
- */
-type IsUnion<$T, $U = $T> = $T extends $U ? [$U] extends [$T] ? false
-  : true
-  : false
-
-/**
  * Check if a document contains a single operation.
  */
 export type IsSingleOperation<$Doc> = $Doc extends Document<infer $Operations>
-  ? IsUnion<$Operations> extends false ? true
+  ? Ts.Union.Is<$Operations> extends false ? true
   : false
   : false
 
 /**
  * Check if a document contains multiple operations.
  */
-export type IsMultiOperation<$Doc> = $Doc extends Document<infer $Operations> ? IsUnion<$Operations> extends true ? true
+export type IsMultiOperation<$Doc> = $Doc extends Document<infer $Operations>
+  ? Ts.Union.Is<$Operations> extends true ? true
   : false
   : false

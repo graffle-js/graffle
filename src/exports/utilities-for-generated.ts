@@ -1,3 +1,5 @@
+import type { Ts } from '@wollybeard/kit'
+
 export { createConstructorWithContext } from '#src/client/client.js'
 export {
   type ConfigGetOutputError,
@@ -12,13 +14,17 @@ export { Docpar } from '#src/docpar/$.js'
 export { type SchemaDrivenDataMap } from '#src/docpar/core/sddm/SchemaDrivenDataMap.js'
 export { type DocumentRunner } from '#src/extensions/DocumentBuilder/methods-instance/document.js'
 export { type DocumentRunner as DocumentRunnerDeferred } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
-export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '#src/lib/prelude.js'
 export { type gql } from '#src/static/gql.js'
 export { ContextFragments } from '#src/types/ContextFragment.js'
 export { type GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 export * from '#src/types/Schema/StandardTypes/scalar.js'
+export * from '#src/utils.js'
+export { Ts } from '@wollybeard/kit'
 export { Kind } from '@wollybeard/kit/fn'
 export { pipe } from '@wollybeard/kit/fn'
+// todo
+// export type { NoExcess, NoExcessNonEmpty } from '@wollybeard/kit/obj'
+export type { AssertExtendsObject } from '@wollybeard/kit/ts'
 export type { Simplify } from 'type-fest'
 export { Configuration } from '../context/fragments/configuration/$.js'
 export { Extensions } from '../context/fragments/extensions/$.js'

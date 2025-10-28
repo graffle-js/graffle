@@ -19,7 +19,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -83,7 +83,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   InputObjectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -129,7 +129,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   InputObjectNestedNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -182,7 +182,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -225,7 +228,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   argInputObjectCircular: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
       >,
@@ -276,7 +279,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   bigintField: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
@@ -321,7 +324,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   bigintFieldNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -369,7 +372,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -412,7 +415,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -455,7 +461,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -504,7 +510,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
@@ -550,7 +556,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -596,7 +602,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
@@ -645,7 +651,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -696,7 +702,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateInterface1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
@@ -742,7 +748,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -785,7 +794,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateListList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
@@ -831,7 +840,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -876,7 +885,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -921,7 +930,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateObject1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
@@ -966,7 +975,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1009,7 +1021,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1051,7 +1063,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1093,7 +1105,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -1138,7 +1150,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interface: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1182,7 +1197,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildA: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
       >,
@@ -1235,7 +1250,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildB: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
       >,
@@ -1288,7 +1303,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyGrandparents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
       >,
@@ -1341,7 +1356,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyParents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
       >,
@@ -1392,7 +1407,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -1438,7 +1453,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -1484,7 +1499,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1527,7 +1545,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -1573,7 +1591,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listListInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
@@ -1619,7 +1637,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listListIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -1667,7 +1685,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   lowerCaseUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
@@ -1712,7 +1730,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1755,7 +1773,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
@@ -1801,7 +1819,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -1846,7 +1864,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -1891,7 +1909,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectNestedWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -1942,7 +1960,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -1988,7 +2006,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -2034,7 +2052,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -2077,7 +2095,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   resultNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -2122,7 +2140,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   string: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -2165,7 +2186,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -2211,7 +2232,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -2263,7 +2284,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -2315,7 +2336,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -2369,7 +2390,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -2415,7 +2436,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithListArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
@@ -2461,7 +2482,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithListArgRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -2513,7 +2534,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithRequiredArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>
       >,
@@ -2564,7 +2585,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionFooBar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
@@ -2609,7 +2630,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionFooBarNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -2658,7 +2679,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionFooBarWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -2706,7 +2727,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
@@ -2751,7 +2772,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionObjectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -2801,7 +2822,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -2864,7 +2885,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -2906,7 +2927,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -2954,7 +2975,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   InputObjectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -3000,7 +3021,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   InputObjectNestedNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -3052,7 +3073,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   dateArgNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -3098,7 +3119,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
@@ -3147,7 +3168,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -3200,7 +3221,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildA: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
       >,
@@ -3253,7 +3274,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildB: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
       >,
@@ -3306,7 +3327,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyGrandparents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
       >,
@@ -3359,7 +3380,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyParents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
       >,
@@ -3411,7 +3432,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -3454,7 +3475,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -3506,7 +3527,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -3558,7 +3579,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   stringWithListArgRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -3610,7 +3631,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
   stringWithRequiredArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>
       >,
@@ -3664,7 +3685,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   InputObjectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -3710,7 +3731,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   InputObjectNestedNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -3763,7 +3784,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -3806,7 +3830,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   argInputObjectCircular: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
       >,
@@ -3857,7 +3881,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   bigintField: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
@@ -3902,7 +3926,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   bigintFieldNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -3951,7 +3975,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -3994,7 +4021,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -4043,7 +4070,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   dateArgList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
@@ -4089,7 +4116,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   dateArgNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -4135,7 +4162,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
@@ -4184,7 +4211,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -4236,7 +4263,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -4278,7 +4305,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -4320,7 +4347,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -4365,7 +4392,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   string: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -4408,7 +4438,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithArgEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -4454,7 +4484,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -4506,7 +4536,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -4558,7 +4588,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -4612,7 +4642,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -4658,7 +4688,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithListArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
@@ -4704,7 +4734,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithListArgRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -4756,7 +4786,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
   stringWithRequiredArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>
       >,
@@ -4810,7 +4840,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   InputObjectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -4856,7 +4886,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   InputObjectNestedNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -4908,7 +4938,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   argInputObjectCircular: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
       >,
@@ -4960,7 +4990,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -5009,7 +5039,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -5061,7 +5091,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -5113,7 +5143,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
       >,
@@ -5168,7 +5198,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5210,7 +5243,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   bigintField: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
@@ -5255,7 +5288,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   bigintFieldNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -5303,7 +5336,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5345,7 +5378,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateInterface1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
@@ -5391,7 +5424,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5434,7 +5470,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateListList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
@@ -5480,7 +5516,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -5525,7 +5561,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -5570,7 +5606,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateObject1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
@@ -5615,7 +5651,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5657,7 +5696,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5699,7 +5738,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -5744,7 +5783,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   interface: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5786,7 +5828,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   interfaceNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -5832,7 +5874,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   listInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -5875,7 +5920,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   listIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -5921,7 +5966,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   listListInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
@@ -5967,7 +6012,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   listListIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -6015,7 +6060,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   lowerCaseUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
@@ -6060,7 +6105,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -6103,7 +6148,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   objectList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
@@ -6149,7 +6194,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   objectListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -6194,7 +6239,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   objectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -6239,7 +6284,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   objectNestedWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -6290,7 +6335,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   objectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -6335,7 +6380,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   string: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -6377,7 +6425,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   unionFooBar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
@@ -6422,7 +6470,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   unionFooBarNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -6470,7 +6518,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   unionObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
@@ -6515,7 +6563,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
   unionObjectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -6567,7 +6615,10 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
   abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -6610,7 +6661,7 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
   stringWithArgEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -6656,7 +6707,7 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -6710,7 +6761,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   argInputObjectCircular: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
       >,
@@ -6762,7 +6813,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -6805,7 +6859,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -6854,7 +6908,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   dateArgList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
@@ -6900,7 +6954,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -6943,7 +6997,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   interfaceWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -6989,7 +7043,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   objectWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -7035,7 +7089,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   resultNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -7081,7 +7135,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   stringWithArgEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
@@ -7127,7 +7181,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   stringWithArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -7181,7 +7235,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   stringWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -7227,7 +7281,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   stringWithListArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
@@ -7273,7 +7327,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
   unionFooBarWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -7323,7 +7377,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -7366,7 +7420,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -7409,7 +7466,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
@@ -7458,7 +7515,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateArgList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
@@ -7504,7 +7561,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateArgNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -7550,7 +7607,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
@@ -7599,7 +7656,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -7650,7 +7707,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateInterface1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
@@ -7696,7 +7753,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -7739,7 +7799,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateListList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
@@ -7785,7 +7845,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -7830,7 +7890,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -7875,7 +7935,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateObject1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
@@ -7920,7 +7980,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
   dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -7964,7 +8027,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   dateInterface1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
@@ -8009,7 +8072,10 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interface: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -8053,7 +8119,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildA: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
       >,
@@ -8106,7 +8172,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildB: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
       >,
@@ -8159,7 +8225,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyGrandparents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
       >,
@@ -8212,7 +8278,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyParents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
       >,
@@ -8263,7 +8329,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interfaceNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -8309,7 +8375,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
   interfaceWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -8357,7 +8423,10 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
   dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -8400,7 +8469,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
   dateListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -8446,7 +8515,10 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
   listInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -8489,7 +8561,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
   listIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -8535,7 +8607,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
   objectList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
@@ -8581,7 +8653,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
   objectListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -8629,7 +8701,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
   dateListList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
@@ -8675,7 +8747,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
   listListInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
@@ -8721,7 +8793,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
   listListIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -8771,7 +8843,10 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -8813,7 +8888,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   lowerCaseUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
@@ -8859,7 +8934,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -8902,7 +8977,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   resultNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -8947,7 +9022,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   unionFooBar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
@@ -8992,7 +9067,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   unionFooBarNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -9041,7 +9116,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   unionFooBarWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -9089,7 +9164,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   unionObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
@@ -9134,7 +9209,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
   unionObjectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -9185,7 +9260,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -9228,7 +9303,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -9271,7 +9346,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
   resultNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -9320,7 +9395,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildA: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
       >,
@@ -9373,7 +9448,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyChildB: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
       >,
@@ -9426,7 +9501,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyGrandparents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
       >,
@@ -9479,7 +9554,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
   interfaceHierarchyParents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
       >,
@@ -9532,7 +9607,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -9575,7 +9650,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   objectList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
@@ -9621,7 +9696,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   objectListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -9666,7 +9741,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   objectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
@@ -9711,7 +9786,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   objectNestedWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>
       >,
@@ -9762,7 +9837,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   objectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
@@ -9808,7 +9883,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
   objectWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
