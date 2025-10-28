@@ -344,7 +344,6 @@ export interface ClientBase<$Context extends Context> {
   with: <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
-    // @ts-expect-error Non-index type being used
     Configuration.Add<$Context, configurationInput>
   >
 }
@@ -391,7 +390,6 @@ export type Create<$Context extends Context = ContextEmpty> =
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput?: Exact<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
     Client<
-      // @ts-expect-error: Is missing standard configurators
       Configuration.Add<$Context, configurationInput>
     >
 

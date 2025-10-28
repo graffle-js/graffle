@@ -33,7 +33,7 @@ export const contextFragmentEmpty: ContextFragmentEmpty = {
 // ------------------------------------------------------------
 
 export interface Index {
-  readonly [configuratorName: string]: ConfigurationNamespace<Configurator>
+  readonly [configuratorName: string]: ConfigurationNamespace<Configurator.Configurator>
 }
 
 export namespace Index {
@@ -44,12 +44,12 @@ export namespace Index {
 
 // ------------------------------------------------------------
 
-export interface ConfigurationNamespace<$Configurator extends Configurator> {
+export interface ConfigurationNamespace<$Configurator extends Configurator.Configurator> {
   readonly configurator: $Configurator
   readonly current: $Configurator['normalizedIncremental']
 }
 
-export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator> {
+export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator.Configurator> {
   readonly configurator: $Configurator
   readonly current: $Configurator['default']
 }

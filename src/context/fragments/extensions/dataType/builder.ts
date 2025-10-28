@@ -104,7 +104,7 @@ export interface Chain<
   /**
    * todo
    */
-  configurator: <$Configurator extends Configurator>(
+  configurator: <$Configurator extends Configurator.Configurator>(
     configurator: Configurator.DataInput<$Configurator>,
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'configurator' ? $Configurator : $Data[_]
@@ -177,7 +177,7 @@ export interface Chain<
    */
   // dprint-ignore
   return: () =>
-      & ($Data['configurator'] extends Configurator
+      & ($Data['configurator'] extends Configurator.Configurator
           // ? (...args: Configurator.InferParameters<$Data['configurator']>) => $Data
           ? & (
                 <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) =>

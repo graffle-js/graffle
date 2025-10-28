@@ -18,11 +18,11 @@ export type AddAndApplyMany<
     {
       [
         __name__ in keyof __extensionsIndex as
-          __extensionsIndex[__name__]['configurator'] extends Configurator
+          __extensionsIndex[__name__]['configurator'] extends Configurator.Configurator
             ? __name__
             : never
       ]:
-        __extensionsIndex[__name__]['configurator'] extends Configurator
+        __extensionsIndex[__name__]['configurator'] extends Configurator.Configurator
           ? Configuration.ConfigurationNamespace<__extensionsIndex[__name__]['configurator']>
           : never
     },

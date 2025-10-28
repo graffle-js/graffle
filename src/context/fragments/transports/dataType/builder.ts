@@ -109,7 +109,7 @@ export interface Builder<
      *
      * Its normalized form will become available on step input as `input.transport`.
      */
-    configurator: <$Configurator extends Configurator>(
+    configurator: <$Configurator extends Configurator.Configurator>(
       input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
     ) => Builder<Data<
           $TransportProgressive['name'],

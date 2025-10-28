@@ -1,7 +1,7 @@
 import type * as Configurator from '@wollybeard/kit/configurator'
 
 export const createEntry = <
-  $Configurator extends Configurator,
+  $Configurator extends Configurator.Configurator,
   $InitialInput extends $Configurator['input'],
 >(
   configurator: $Configurator,
@@ -19,7 +19,7 @@ export const createEntry = <
 }
 
 export type CreateEntry<
-  $Configurator extends Configurator,
+  $Configurator extends Configurator.Configurator,
   $InitialInput extends $Configurator['input'],
 > = {
   configurator: $Configurator
