@@ -1,5 +1,5 @@
 import { Ts } from '@wollybeard/kit'
-import { Configurator } from '@wollybeard/kit/configurator'
+import { Configurator } from '@wollybeard/kit'
 import { expect, test } from 'vitest'
 import { contextEmpty } from '../../../$$.js'
 import { addType } from './addType.js'
@@ -8,7 +8,7 @@ const nameA = `a`
 
 test(`registers a configurator into the configuration`, () => {
   // Setup
-  const configurator = Configurator().input<{ a?: number }>().default({ a: 1 }).return()
+  const configurator = Configurator.create().input<{ a?: number }>().default({ a: 1 }).return()
   const context = addType(contextEmpty, nameA, configurator, {})
   const ns = context.configuration[nameA]
   // Assertions: Value Level
@@ -24,7 +24,7 @@ test(`registers a configurator into the configuration`, () => {
 
 test(`if initial input given, then configurator is applied against it with defaults`, () => {
   // Setup
-  const configurator = Configurator().input<{ a?: 1 | 2; b?: 3 | 4 }>().default({ a: 1, b: 3 }).return()
+  const configurator = Configurator.create().input<{ a?: 1 | 2; b?: 3 | 4 }>().default({ a: 1, b: 3 }).return()
   const context = addType(contextEmpty, nameA, configurator, { a: 2 })
   const ns = context.configuration[nameA]
   // Assertions: Value Level

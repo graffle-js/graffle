@@ -1,4 +1,4 @@
-import type * as Configurator from '@wollybeard/kit/configurator'
+import type { Configurator } from '@wollybeard/kit'
 
 export const createEntry = <
   $Configurator extends Configurator.Configurator,

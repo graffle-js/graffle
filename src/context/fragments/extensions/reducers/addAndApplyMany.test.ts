@@ -62,7 +62,7 @@ describe(`extension configuration`, () => {
     // Ts.Assert.exact.ofAs<typeof cEmpty.configuration>().on(c.configuration)
   })
   test(`one extension with configuration -> context configuration has namespace for extension added`, () => {
-    const A = Extension.create(nameA).configurator(Configurator().input<{ a: number }>()).return()
+    const A = Extension.create(nameA).configurator(Configurator.create().input<{ a: number }>()).return()
     const a = A({ a: 1 })
     //
     const c = addAndApplyMany(cEmpty, [a])
@@ -78,8 +78,8 @@ describe(`extension configuration`, () => {
     expect(c.configuration).toEqual(expectedConfiguration)
   })
   test(`multiple extensions with mixed configuration -> context configuration has namespaces for extensions with configuration added`, () => {
-    const A = Extension.create(nameA).configurator(Configurator().input<{ a: number }>()).return()
-    const B = Extension.create(nameB).configurator(Configurator().input<{ b: number }>()).return()
+    const A = Extension.create(nameA).configurator(Configurator.create().input<{ a: number }>()).return()
+    const B = Extension.create(nameB).configurator(Configurator.create().input<{ b: number }>()).return()
     const z = Extension.create(nameZ).return()
     const a = A({ a: 1 })
     const b = B({ b: 2 })

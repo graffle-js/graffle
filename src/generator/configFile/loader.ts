@@ -14,7 +14,7 @@ interface Input {
    * The path to the config file. If is a directory then will look for the configured file
    * name with one of the supported extensions in the directory.
    */
-  filePath?: string
+  filePath?: string | undefined
   options?: {
     /**
      * Config file name.
@@ -28,7 +28,7 @@ interface Input {
      * - `.mjs`
      * - `.mts`
      */
-    fileName?: string
+    fileName?: string | undefined
   }
 }
 

@@ -2,8 +2,7 @@
   "extends": ["./tsconfig.libra.json"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2023"],
-    // TODO enable, leads to lots of errors currently.
-    "exactOptionalPropertyTypes": false,
+    "exactOptionalPropertyTypes": true,
     "plugins": [
       {
         "name": "@0no-co/graphqlsp",

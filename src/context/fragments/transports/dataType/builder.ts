@@ -1,7 +1,7 @@
 import { hasSymbolProperty } from '#src/lib/symbol.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import { Ware as Anyware } from '@wollybeard/kit'
-import * as Configurator from '@wollybeard/kit/configurator'
+import { Configurator } from '@wollybeard/kit'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
 // ------------------------------------------------------------
@@ -47,7 +47,7 @@ export const create = <$Name extends string>(
       value: name,
     },
     steps: {} as any,
-    configurator: Configurator.$.empty,
+    configurator: Configurator.empty,
     configurationMount: `transport`,
   }
   return chain(transport) as any
@@ -83,7 +83,7 @@ const chain = (
     configurator: (configuratorTypeInput) => {
       const newTransport = {
         ...transport,
-        configurator: Configurator.$.normalizeDataInput(configuratorTypeInput as any),
+        configurator: Configurator.normalizeDataInput(configuratorTypeInput as any),
       }
       return chain(newTransport) as any
     },

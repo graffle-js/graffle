@@ -1,5 +1,5 @@
 import { isObjectEmpty } from '#src/lib/prelude.js'
-import type * as Configurator from '@wollybeard/kit/configurator'
+import type { Configurator } from '@wollybeard/kit'
 import type { ContextFragment } from '../fragment.js'
 
 export const configure = <

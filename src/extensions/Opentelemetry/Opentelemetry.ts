@@ -4,7 +4,7 @@ import { trace, type Tracer } from '@opentelemetry/api'
 export const OpenTelemetry = Extension
   .create(`openTelemetry`)
   .configurator(
-    Extension.Configurator()
+    Extension.Configurator.create()
       .input<{
         /**
          * @defaultValue `"opentelemetry"`

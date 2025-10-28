@@ -146,11 +146,11 @@ A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObjectCircular'] | null | 
 // ====================================================================
 
 // Required modifier - forces optional argument to be required
-A.sub.ofAs<{ id: string }>()
+A.sub.ofAs<{ id: string|undefined }>()
      .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $Required } } }, Possible.$.ArgumentsMap>>()
 
 // Default value modifier - makes any argument optional
-A.sub.ofAs<{ string?: string }>()
+A.sub.ofAs<{ string?: string|undefined }>()
      .onAs<InferFromQuery<{ stringWithRequiredArg: { $: { string: $WithDefaultHello } } }, Possible.$.ArgumentsMap>>()
 
 // Combining required with other arguments
@@ -158,5 +158,5 @@ A.sub.ofAs<{ id: string; boolean?: boolean | null | undefined }>()
      .onAs<InferFromQuery<{ objectWithArgs: { $: { id: $Required; boolean: $ } } }, Possible.$.ArgumentsMap>>()
 
 // Default with different types (nullable Int with default still allows null)
-A.sub.ofAs<{ int?: number | null }>()
+A.sub.ofAs<{ int?: number | null|undefined }>()
      .onAs<InferFromQuery<{ objectWithArgs: { $: { int: $WithDefault42 } } }, Possible.$.ArgumentsMap>>()

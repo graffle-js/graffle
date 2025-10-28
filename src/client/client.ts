@@ -556,5 +556,5 @@ export const createWithContext = <$Context extends Context>(
 export type CalcConfigurationInputForContext<$Context extends Context> = {
   readonly [_ in keyof $Context['configuration']]?:
     // @ts-expect-error Non-index type being used
-    $Context['configuration'][_]['configurator']['input']
+    $Context['configuration'][_]['configurator']['input'] | undefined
 }

@@ -1,6 +1,6 @@
 import { hasNonUndefinedKeys } from '#src/lib/prelude.js'
 import type { Ts } from '@wollybeard/kit'
-import type * as Configurator from '@wollybeard/kit/configurator'
+import type { Configurator } from '@wollybeard/kit'
 import type { ContextFragment, Index } from '../fragment.js'
 
 export const add = <

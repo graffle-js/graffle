@@ -26,7 +26,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
     if (!fieldSelection.select) return null
     return Nodes.Field({
       name: Nodes.Name({ value: field.name }),
-      alias,
+      ...(alias !== undefined && { alias }),
     })
   }
 
@@ -112,10 +112,10 @@ export const toGraphQLField: GraphQLPostOperationMapper<
     name: Nodes.Name({
       value: field.name,
     }),
-    alias,
+    ...(alias !== undefined && { alias }),
     arguments: arguments_,
     directives,
-    selectionSet,
+    ...(selectionSet !== undefined && { selectionSet }),
   })
 }
 

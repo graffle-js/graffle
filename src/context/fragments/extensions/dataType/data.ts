@@ -1,6 +1,6 @@
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import { Ts } from '@wollybeard/kit'
-import type * as Configurator from '@wollybeard/kit/configurator'
+import type { Configurator } from '@wollybeard/kit'
 import type { RequestInterceptors } from '../../../$$.js'
 import type { Properties } from '../../properties/$.js'
 import type { Transport } from '../../transports/dataType/$.js'

@@ -1,7 +1,7 @@
 import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import type { Obj } from '@wollybeard/kit'
-import * as Configurator from '@wollybeard/kit/configurator'
+import { Configurator } from '@wollybeard/kit'
 import type { WritableDeep } from 'type-fest'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/$.js'
@@ -47,7 +47,7 @@ export const create: Create = (name) => {
         data.requestInterceptorsComputed.push(requestInterceptorComputer)
       },
       configurator(configurator: Configurator.DataInput) {
-        data.configurator = Configurator.$.normalizeDataInput(configurator)
+        data.configurator = Configurator.normalizeDataInput(configurator)
       },
       properties(properties) {
         if (typeof properties === `function`) {

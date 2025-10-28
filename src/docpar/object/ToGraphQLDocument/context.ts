@@ -43,7 +43,7 @@ export interface CaptureVariableInput {
    * Used when the variable is renamed but needs to map back to the original argument.
    * For example, if `id` is renamed to `id_2`, argName remains `id`.
    */
-  argName?: string
+  argName?: string | undefined
   /**
    * The runtime value to be passed as this variable when executing the operation.
    */
@@ -84,7 +84,7 @@ export interface CaptureVariableInput {
    * When undefined, type inference falls back to heuristics based on the runtime value.
    * When present, enables precise GraphQL type generation (including nullability, list types, etc.).
    */
-  sddmArgument?: SchemaDrivenDataMap.ArgumentOrInputField
+  sddmArgument?: SchemaDrivenDataMap.ArgumentOrInputField | undefined
   /**
    * Provenance of this variable, indicating how it was hoisted.
    *
@@ -95,7 +95,7 @@ export interface CaptureVariableInput {
 }
 
 export interface OperationContext {
-  sddm?: SchemaDrivenDataMap
+  sddm?: SchemaDrivenDataMap | undefined
   scalars: Schema.Scalar.ScalarMap
   variables: {
     /**

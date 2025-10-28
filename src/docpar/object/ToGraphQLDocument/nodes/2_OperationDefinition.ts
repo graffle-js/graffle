@@ -46,7 +46,7 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
 
   const graphqlOperation = Nodes.OperationDefinition({
     operation: operation.type,
-    name,
+    ...(name !== undefined && { name }),
     selectionSet,
     variableDefinitions,
     // todo support directives on operations ??? Check what this feature/capability is about

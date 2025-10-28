@@ -1,5 +1,5 @@
 import type { ConfigManager } from '@wollybeard/kit'
-import { Configurator as C } from '@wollybeard/kit/configurator'
+import { Configurator } from '@wollybeard/kit'
 
 export type OutputChannel = 'throw' | 'return'
 
@@ -85,7 +85,8 @@ const default_ = {
 
 type Default_ = typeof default_
 
-export const configurator = C()
+export const configurator = Configurator
+  .create()
   .input<Input>()
   .normalized<Normalized>()
   .default(default_)
@@ -122,14 +123,14 @@ export const configurator = C()
 
 export type Configurator = typeof configurator
 
-export interface InputResolver$Func extends C.InputResolver.$Func<Input, Normalized, Default_> {
+export interface InputResolver$Func extends Configurator.InputResolver.$Func<Input, Normalized, Default_> {
   // @ts-expect-error: untyped parameters
   return: InputResolver<this['parameters']>
 }
 
 // dprint-ignore
 export interface InputResolver<
-  $Parameters extends C.InputResolver.Parameters<Input, Normalized, Default_>,
+  $Parameters extends Configurator.InputResolver.Parameters<Input, Normalized, Default_>,
   // Variables
   $Input = $Parameters['input'],
   _$Current = $Parameters['current'],

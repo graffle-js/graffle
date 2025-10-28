@@ -1,5 +1,5 @@
 import { Ware as Anyware } from '@wollybeard/kit'
-import type * as Configurator from '@wollybeard/kit/configurator'
+import type { Configurator } from '@wollybeard/kit'
 
 export interface Data<
   $Name extends string = string,

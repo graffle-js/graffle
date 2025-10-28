@@ -12,7 +12,7 @@ export type ConfigurationInput = {
    * The schema instance or endpoint to introspect.
    * By default uses the value the client was constructed with.
    */
-  schema?: SchemaTarget
+  schema?: SchemaTarget | undefined
   /**
    * The introspection query options. By default all kinds of information are sought.
    *
@@ -20,7 +20,7 @@ export type ConfigurationInput = {
    * progressively disabled upon introspection failure until success or no more known potentially
    * unsupported features remain.
    */
-  options?: InputIntrospectionOptions
+  options?: InputIntrospectionOptions | undefined
 }
 
 export interface ConfigurationNormalized {
@@ -48,7 +48,7 @@ type SchemaTarget = string | URL | GraphQLSchema
  */
 export const Introspection = Extension.create(`introspection`)
   .configurator(
-    Extension.Configurator()
+    Extension.Configurator.create()
       .input<ConfigurationInput>()
       .normalized<ConfigurationNormalized>()
       .default({

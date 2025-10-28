@@ -26,13 +26,13 @@ export interface ConfigurationNormalized {
      *
      * If a function is provided, it will be called before each request to get the context value.
      */
-    context?: object | (() => object)
-  }
+    context?: object | (() => object) | undefined
+  } | undefined
 }
 
 export type ConfigurationInput = Partial<ConfigurationNormalized>
 
-type TransportMemoryConfigurator = Extension.Configurator<
+type TransportMemoryConfigurator = Extension.Configurator.Configurator<
   ConfigurationInput,
   ConfigurationNormalized,
   {}
@@ -105,7 +105,7 @@ export const TransportMemory: TransportMemory = Extension
   .transport(
     Extension.Transport.create(`memory`)
       .configurator(
-        Extension.Configurator()
+        Extension.Configurator.create()
           .input<ConfigurationInput>()
           .normalized<ConfigurationNormalized>()
           .inputResolver(({ current, input }) => {

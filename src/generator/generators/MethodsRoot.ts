@@ -479,7 +479,7 @@ const applyRule = (
   fieldName: string,
   operationType: 'query' | 'mutation',
   rule: FieldGroupingRule,
-): { namespacePaths: (string[] | null)[]; methodNames?: string[]; consume: boolean } | null => {
+): { namespacePaths: (string[] | null)[]; methodNames?: string[] | undefined; consume: boolean } | null => {
   if (!matchesRule(fieldName, rule)) return null
 
   let path = rule.path
@@ -523,8 +523,8 @@ const applyRules = (
   fieldName: string,
   operationType: 'query' | 'mutation',
   rules: FieldGroupingRule[],
-): Array<{ namespacePaths: (string[] | null)[]; methodNames?: string[] }> => {
-  const matches: Array<{ namespacePaths: (string[] | null)[]; methodNames?: string[] }> = []
+): Array<{ namespacePaths: (string[] | null)[]; methodNames?: string[] | undefined }> => {
+  const matches: Array<{ namespacePaths: (string[] | null)[]; methodNames?: string[] | undefined }> = []
 
   for (const rule of rules) {
     const result = applyRule(fieldName, operationType, rule)
@@ -549,7 +549,7 @@ const expandAliases = (
   field: {
     fieldName: string
     namespacePaths: (string[] | null)[]
-    methodNames?: string[]
+    methodNames?: string[] | undefined
     operationType: 'query' | 'mutation'
     rootTypeName: string
   },

@@ -82,7 +82,7 @@ export namespace TransportMethod {
 
   export type ArgumentsNormalized =
     | [typeof overloadCase.configureCurrent, config: object]
-    | [typeof overloadCase.setCurrent, name: string, config?: object]
+    | [typeof overloadCase.setCurrent, name: string, config?: object | undefined]
     | [typeof overloadCase.addType, Transports.Transport.Data]
 
   export const overloadCase = {

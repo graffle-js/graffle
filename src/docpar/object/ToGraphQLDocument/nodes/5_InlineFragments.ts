@@ -51,7 +51,7 @@ const toGraphQLInlineFragment: GraphQLPostOperationMapper<
   }
 
   return Nodes.InlineFragment({
-    typeCondition,
+    ...(typeCondition !== undefined && { typeCondition }),
     directives,
     selectionSet: Nodes.SelectionSet({
       selections,

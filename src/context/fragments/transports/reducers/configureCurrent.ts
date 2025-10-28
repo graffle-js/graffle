@@ -1,4 +1,4 @@
-import type * as Configurator from '@wollybeard/kit/configurator'
+import type { Configurator } from '@wollybeard/kit'
 import type { ContextFragment } from '../fragment.js'
 import { type Configure, configure } from './configure.js'
 
