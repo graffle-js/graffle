@@ -23,13 +23,8 @@
     "@tsconfig/strictest": "^2.0.6",
     "@wollybeard/kit": "^0.85.2",
     "effect": "^3.18.4",
-    "graffle": "file:..",
+    "graffle": "workspace:*",
     "tsx": "^4.20.6",
     "vitest": "^4.0.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "graffle": "file:.."
-    }
   }
 }

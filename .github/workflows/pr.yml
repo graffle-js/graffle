@@ -14,9 +14,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm build
-      - name: Install Examples Dependencies
-        working-directory: examples
-        run: pnpm install
       - run: pnpm check:lint
   publint:
     runs-on: ubuntu-latest
@@ -37,9 +34,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm build
-      - name: Install Examples Dependencies
-        working-directory: examples
-        run: pnpm install
       - name: Generate test types
         working-directory: examples
         run: pnpm gen:types
@@ -53,9 +47,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm build
-      - name: Install Website Dependencies
-        working-directory: website
-        run: pnpm install
       - name: Load Types Cache
         id: load-types-cache
         uses: actions/cache/restore@v4
@@ -101,9 +92,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: pnpm build
-      - name: Install Examples Dependencies
-        working-directory: examples
-        run: pnpm install
       - run: pnpm test -- --environment ${{ matrix.environment }}
         working-directory: examples
 
