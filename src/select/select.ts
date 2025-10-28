@@ -1,5 +1,9 @@
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
+export const identityProxy = new Proxy({}, {
+  get: () => (value: unknown) => value,
+})
+
 // dprint-ignore
 type Create = <$Name extends GlobalRegistry.ClientNames>(name: $Name) =>
 
@@ -12,7 +16,3 @@ export const create: Create = (_name) => identityProxy as any
 
 // @ts-ignore generated types
 export const select: TypeSelectionSets<GlobalRegistry.SchemaDefault> = identityProxy
-
-export const identityProxy = new Proxy({}, {
-  get: () => (value: unknown) => value,
-})
