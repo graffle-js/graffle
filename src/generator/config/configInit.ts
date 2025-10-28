@@ -74,13 +74,13 @@ export interface ConfigInit {
    *
    * By default uses the Node.js file system API.
    */
-  fs?: Fs
+  fs?: Fs | undefined
   /**
    * What naming convention to use for generated files and directories.
    *
    * @defaultValue `kebab`
    */
-  outputCase?: InputOutputCase
+  outputCase?: InputOutputCase | undefined
   /**
    * The name of the client. This will affect:
    *
@@ -92,7 +92,7 @@ export interface ConfigInit {
    *
    * Tip: Typically you would only set this if you had multiple Graffle clients (for different GraphQL schemas) in your project.
    */
-  name?: string
+  name?: string | undefined
   /**
    * The namespace name to use.
    *
@@ -102,7 +102,7 @@ export interface ConfigInit {
    *
    * @defaultValue `Graffle`
    */
-  nameNamespace?: boolean | string
+  nameNamespace?: boolean | string | undefined
   /**
    * Control various checks that Graffle performs. For example you could disable the warning about missing custom scalar codecs.
    */
@@ -112,7 +112,7 @@ export interface ConfigInit {
    *
    * By default, is the process current working directory.
    */
-  currentWorkingDirectory?: string
+  currentWorkingDirectory?: string | undefined
   /**
    * The schema to use for generation. Can be one of:
    *
@@ -136,13 +136,13 @@ export interface ConfigInit {
    *
    * @defaultValue `false`
    */
-  outputSDL?: boolean | string
+  outputSDL?: boolean | string | undefined
   /**
    * Directory path to where the generated code should be output.
    *
    * Defaults to the current working directory.
    */
-  outputDirPath?: string
+  outputDirPath?: string | undefined
   /**
    * Control over the client configuration's default schema. Since an introspection URL can be used for `schema`,
    * this option allows you to have this URL propagated to the generated client configuration for your convenience.
@@ -159,19 +159,19 @@ export interface ConfigInit {
    *
    * @defaultValue `true`
    */
-  defaultSchemaUrl?: boolean | URL
+  defaultSchemaUrl?: boolean | URL | undefined
   /**
    * Directory to look for custom scalar codecs.
    *
    * Defaults to the current working directory.
    */
-  sourceDirPath?: string
+  sourceDirPath?: string | undefined
   /**
    * File path to your scalars module.
    *
    * If not set, Graffle will look for a file called `scalars.ts` in the project directory.
    */
-  scalars?: string
+  scalars?: string | undefined
   /**
    * How should import identifiers be generated? Can be one of:
    *
@@ -188,21 +188,21 @@ export interface ConfigInit {
    * There is a planned feature to have a default be dynamic according to the state of your project's tsconfig.json.
    * See https://github.com/graffle-js/graffle/issues/1283.
    */
-  importFormat?: InputImportFormat
+  importFormat?: InputImportFormat | undefined
   /**
    * Override import paths to graffle package within the generated code.
    * Used by Graffle test suite to have generated clients point to source
    * code. Probably not useful to you.
    */
-  libraryPaths?: ConfigInitLibraryPaths
+  libraryPaths?: ConfigInitLibraryPaths | undefined
   /**
    * Should custom scalars definitions be imported into the generated output?
    */
-  customScalars?: boolean
+  customScalars?: boolean | undefined
   /**
    * Should the generated code be formatted?
    */
-  format?: boolean
+  format?: boolean | undefined
   /**
    * Control over how TSDoc (JSDoc) comments are handled.
    */
@@ -214,13 +214,13 @@ export interface ConfigInit {
      * - `message`: Show a message mentioning the lack of documentation and the opportunity for it.
      * - `ignore`: Ignore the lack of documentation and show nothing.
      */
-    noDocPolicy?: 'message' | 'ignore'
-  }
+    noDocPolicy?: 'message' | 'ignore' | undefined
+  } | undefined
   /**
    * Graffle gentime extensions to use. Most Graffle extensions are runtime only but some
    * are or have gentime components.
    */
-  extensions?: Extension[]
+  extensions?: Extension[] | undefined
   /**
    * Configure how root field methods are organized in the generated client.
    * Multiple organizations can be enabled simultaneously.
@@ -231,15 +231,15 @@ export interface ConfigInit {
      *
      * @defaultValue `true`
      */
-    logical?: boolean
+    logical?: boolean | undefined
     /**
      * Enable domain-based organization by resource/entity.
      * Requires explicit rules defining how fields are grouped into domains.
      *
      * @defaultValue `false`
      */
-    domains?: DomainGroupingConfig | false
-  }
+    domains?: DomainGroupingConfig | false | undefined
+  } | undefined
   /**
    * Esoteric options that are not designed for use by regular users and use-cases.
    */
@@ -256,8 +256,8 @@ export interface ConfigInit {
      *
      * @defaultValue `false`
      */
-    schemaInterfaceExtendsEnabled?: boolean
-  }
+    schemaInterfaceExtendsEnabled?: boolean | undefined
+  } | undefined
 }
 
 export interface InputIntrospectionOptions extends IntrospectionOptions {

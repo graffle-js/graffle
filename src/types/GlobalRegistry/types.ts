@@ -1,5 +1,5 @@
 import type { Kind, Schema } from '#graffle/utilities-for-generated'
-import type { ConfigManager } from '#lib/config-manager'
+import type { ConfigManager } from '@wollybeard/kit'
 import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 

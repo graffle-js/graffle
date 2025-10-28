@@ -26,7 +26,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "graffle": "file:.."
+    "graffle": "workspace:*"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.3",

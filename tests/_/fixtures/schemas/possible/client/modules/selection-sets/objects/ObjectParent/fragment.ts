@@ -4,5 +4,4 @@ import type { ObjectParent } from './$.js'
 
 export interface $FragmentInline<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-> extends ObjectParent<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {
-}
+> extends ObjectParent<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {}

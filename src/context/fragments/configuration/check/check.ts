@@ -1,4 +1,4 @@
-import { Configurator as C } from '#src/lib/configurator/configurator.js'
+import { Configurator } from '@wollybeard/kit'
 import type { Transports } from '../../transports/$.js'
 import type * as Helpers from './helpers.js'
 
@@ -12,10 +12,11 @@ export type Input = {
    *
    * @defaultValue `true`
    */
-  preflight?: boolean
+  preflight?: boolean | undefined
 }
 
-export const configurator = C()
+export const configurator = Configurator
+  .create()
   .input<Input>()
   .default({
     preflight: true,

@@ -2,7 +2,7 @@
 outline: [2,5]
 ---
 
-# Anyware
+# Ware
 
 <!--@include: @/_snippets/example-links/anyware.md-->
 
@@ -241,7 +241,7 @@ Graffle
 
 When running there are two stacks that are interleaved as described below:
 
-1. Anyware stack
+1. Ware stack
 2. Hook stack
 
 When an anyware runs a hook it actually passes control to the next anyware in the stack to run it but using input coming from that previous anyware. This process repeats until there are no more anywares in the stack at which point the hook is run with the finally produced input and a return value is produced. That value is sent back to the first anyware to continue execution and repeating this cycle for the next hook. Eventually all hooks are run and the final result is returned.

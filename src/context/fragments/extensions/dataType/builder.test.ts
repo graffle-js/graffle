@@ -1,14 +1,13 @@
-import { Configurator } from '#src/lib/configurator/configurator.js'
-import { Ts } from '@wollybeard/kit'
+import { Configurator, Ts } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
 import type { Context } from '../../../context.js'
 import { type Chain, create } from './builder.js'
 import type { Data, DataEmpty } from './data.js'
 
-const configuratorEmpty = Configurator().return()
+const configuratorEmpty = Configurator.create().return()
 type configuratorEmpty = typeof configuratorEmpty
 
-const configuratorAsymmetric = Configurator().input<{ a?: number }>().default({ a: 1 }).return()
+const configuratorAsymmetric = Configurator.create().input<{ a?: number }>().default({ a: 1 }).return()
 type configuratorAsymmetric = typeof configuratorAsymmetric
 
 const nameA = `a`

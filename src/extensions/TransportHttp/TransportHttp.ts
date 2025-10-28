@@ -34,7 +34,7 @@ export type ConfigurationInput = {
    * - Browser environments where {@link https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API relative URLs are resolved against the page origin}
    * - Framework integrations like {@link https://kit.svelte.dev/docs/load#making-fetch-requests SvelteKit} where the framework provides an enhanced fetch
    */
-  url?: URL | string
+  url?: URL | string | undefined
   /**
    * The HTTP method to use to make the request.
    *
@@ -48,16 +48,16 @@ export type ConfigurationInput = {
    *
    * @defaultValue `post`
    */
-  methodMode?: MethodMode
-  headers?: HeadersInit
-  raw?: RequestInit
+  methodMode?: MethodMode | undefined
+  headers?: HeadersInit | undefined
+  raw?: RequestInit | undefined
 }
 
 export interface ConfigurationNormalized {
   url: URL | string
   methodMode: MethodMode
-  headers?: Headers
-  raw?: RequestInit
+  headers?: Headers | undefined
+  raw?: RequestInit | undefined
 }
 
 export const configurationDefault = {
@@ -92,7 +92,8 @@ export type MethodModePost = typeof MethodMode['post']
 
 export type MethodMode = MethodModePost | MethodModeGetReads
 
-const httpTransportConfigurator = Extension.Configurator()
+const httpTransportConfigurator = Extension.Configurator
+  .create()
   .input<ConfigurationInput>()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
@@ -179,7 +180,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
               input.transport.raw,
             ),
             {
-              headers: input.transport.headers,
+              ...(input.transport.headers !== undefined && { headers: input.transport.headers }),
             },
           )
           // Parse the URL at runtime to determine if it's a path or absolute URL

@@ -6,14 +6,14 @@ import type { TypedDocument } from './typed-document/$.js'
 
 export interface RequestInput {
   query: string | TypedDocument.TypedDocumentLike
-  variables?: Variables
-  operationName?: string
+  variables?: Variables | undefined
+  operationName?: string | undefined
 }
 
 export interface RequestDocumentNodeInput {
   query: TypedDocument.TypedDocumentNodeLike
-  variables?: Variables
-  operationName?: string
+  variables?: Variables | undefined
+  operationName?: string | undefined
 }
 
 export interface RequestAnalyzedInput extends RequestInput {

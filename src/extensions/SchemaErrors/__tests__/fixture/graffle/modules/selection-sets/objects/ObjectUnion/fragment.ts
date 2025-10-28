@@ -4,5 +4,4 @@ import type { ObjectUnion } from './$.js'
 
 export interface $FragmentInline<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-> extends ObjectUnion<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {
-}
+> extends ObjectUnion<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {}

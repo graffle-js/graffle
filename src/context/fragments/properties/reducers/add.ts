@@ -10,8 +10,8 @@ import {
 export const add = <$Context extends ContextFragment>(
   context: $Context,
   propertiesInput: {
-    static?: Properties
-    computed?: ReadonlyArray<PropertiesComputer>
+    static?: Properties | undefined
+    computed?: ReadonlyArray<PropertiesComputer> | undefined
   },
 ): ContextFragment => {
   const isHasStatic = propertiesInput.static && !Obj.isEmpty(propertiesInput.static)

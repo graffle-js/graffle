@@ -1,6 +1,6 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import { Ts } from '@wollybeard/kit'
+import type { Configurator } from '@wollybeard/kit'
 import type { RequestInterceptors } from '../../../$$.js'
 import type { Properties } from '../../properties/$.js'
 import type { Transport } from '../../transports/dataType/$.js'
@@ -8,7 +8,7 @@ import type * as _re_export from './properties.js'
 
 export interface Data<
   $Name extends string = string,
-  $Configurator extends undefined | Configurator = undefined | Configurator,
+  $Configurator extends undefined | Configurator.Configurator = undefined | Configurator.Configurator,
   $NoExpandResultDataType = unknown,
   $PropertiesStatic extends object = object,
   $PropertiesComputersTypeFunctions extends ReadonlyArray<Properties.PropertiesComputer$Func> = ReadonlyArray<

@@ -2,11 +2,11 @@ import { type ExecutionResult } from 'graphql'
 import { describe } from 'node:test'
 import { expect } from 'vitest'
 // import { schema } from '#test/fixtures/schemas/kitchen-sink/schema'
-import type { Anyware } from '#lib/anyware'
 import { type GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
 import { schema } from '#test/fixtures/schemas/query-only/schema'
 import { ATransport } from '#test/fixtures/transports'
 import { g0, test } from '#test/helpers'
+import { Ware } from '@wollybeard/kit'
 import { TransportMemory } from '../../extensions/TransportMemory/TransportMemory.js'
 import { create } from '../client.js'
 
@@ -113,7 +113,7 @@ test('can return errors', async () => {
 //     describe('.errors', () => {
 //       test('defaults to execution errors in envelope', () => {
 //         const g = G({ output: { defaults: { errorChannel: 'return' }, envelope: true }, checkPreflight: false })
-//         expectTypeOf(g.query.__typename()).resolves.toMatchTypeOf<ExecutionResult<{ __typename: 'Query' }> | Anyware.ResultFailure>()
+//         expectTypeOf(g.query.__typename()).resolves.toMatchTypeOf<ExecutionResult<{ __typename: 'Query' }> | Ware.ResultFailure>()
 //       })
 //       test('.execution:false restores errors to return', async () => {
 //         const g = G({
@@ -121,7 +121,7 @@ test('can return errors', async () => {
 //           checkPreflight: false,
 //         })
 //         expectTypeOf(await g.query.__typename()).toEqualTypeOf<
-//           Omit<ExecutionResult<{ __typename: 'Query' }>, 'errors'> | Anyware.ResultFailure | GraphQLExecutionResultError
+//           Omit<ExecutionResult<{ __typename: 'Query' }>, 'errors'> | Ware.ResultFailure | GraphQLExecutionResultError
 //         >()
 //       })
 //       test('.other:true raises them to envelope', () => {
@@ -150,7 +150,7 @@ test('can return errors', async () => {
 //     const g = G({ output: { defaults: { errorChannel: 'return' } }, checkPreflight: false })
 //     test('query.<fieldMethod>', async () => {
 //       expectTypeOf(await g.query.__typename()).toEqualTypeOf<
-//         'Query' | Anyware.ResultFailure | GraphQLExecutionResultError
+//         'Query' | Ware.ResultFailure | GraphQLExecutionResultError
 //       >()
 //     })
 //   })
@@ -160,7 +160,7 @@ test('can return errors', async () => {
 //         output: { defaults: { errorChannel: 'return' }, errors: { execution: 'throw' } },
 //         checkPreflight: false,
 //       })
-//       expectTypeOf(await g.query.__typename()).toEqualTypeOf<'Query' | Anyware.ResultFailure>()
+//       expectTypeOf(await g.query.__typename()).toEqualTypeOf<'Query' | Ware.ResultFailure>()
 //     })
 //     test('.other: throw', async () => {
 //       const g = G({

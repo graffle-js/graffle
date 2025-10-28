@@ -1,6 +1,6 @@
 import type { Docpar } from '#src/docpar/$.js'
-import { Configurator as C } from '#src/lib/configurator/configurator.js'
 import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+import { Configurator } from '@wollybeard/kit'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
@@ -13,14 +13,15 @@ export interface Input {
    *
    * @defaultValue 'default'
    */
-  name?: GlobalRegistry.Client['name']
+  name?: GlobalRegistry.Client['name'] | undefined
   /**
    * todo
    */
-  map?: SchemaDrivenDataMap
+  map?: SchemaDrivenDataMap | undefined
 }
 
-export const configurator = C()
+export const configurator = Configurator
+  .create()
   .input<Input>()
   .normalized<{
     name: GlobalRegistry.Client['name']

@@ -21,7 +21,7 @@
     "es-toolkit": "^1.40.0",
     "floating-vue": "^5.2.2",
     "globby": "^14.1.0",
-    "graffle": "file:..",
+    "graffle": "workspace:*",
     "graphql": "^16.10.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",

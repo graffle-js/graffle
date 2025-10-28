@@ -1,5 +1,5 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
 import type { Ts, Tup } from '@wollybeard/kit'
+import type { Configurator } from '@wollybeard/kit'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'
@@ -18,11 +18,11 @@ export type AddAndApplyMany<
     {
       [
         __name__ in keyof __extensionsIndex as
-          __extensionsIndex[__name__]['configurator'] extends Configurator
+          __extensionsIndex[__name__]['configurator'] extends Configurator.Configurator
             ? __name__
             : never
       ]:
-        __extensionsIndex[__name__]['configurator'] extends Configurator
+        __extensionsIndex[__name__]['configurator'] extends Configurator.Configurator
           ? Configuration.ConfigurationNamespace<__extensionsIndex[__name__]['configurator']>
           : never
     },

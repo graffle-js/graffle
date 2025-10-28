@@ -7,9 +7,9 @@ export type ExecuteParameters = {
   request: RequestInput
   schema: GraphQLSchema
   resolverValues?: {
-    context?: object | (() => object)
-    root?: unknown
-  }
+    context?: object | (() => object) | undefined
+    root?: unknown | undefined
+  } | undefined
 }
 
 export const execute = async (parameters: ExecuteParameters): Promise<ExecutionResult> => {

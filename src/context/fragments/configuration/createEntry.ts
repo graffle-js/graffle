@@ -1,7 +1,7 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import type { Configurator } from '@wollybeard/kit'
 
 export const createEntry = <
-  $Configurator extends Configurator,
+  $Configurator extends Configurator.Configurator,
   $InitialInput extends $Configurator['input'],
 >(
   configurator: $Configurator,
@@ -19,7 +19,7 @@ export const createEntry = <
 }
 
 export type CreateEntry<
-  $Configurator extends Configurator,
+  $Configurator extends Configurator.Configurator,
   $InitialInput extends $Configurator['input'],
 > = {
   configurator: $Configurator

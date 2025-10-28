@@ -1,10 +1,8 @@
-import { Anyware } from '#lib/anyware'
 import type { Grafaid } from '#lib/grafaid'
 import type { GraffleExecutionResultEnvelope } from '#src/client/handle.js'
 import type { Context } from '#src/context/context.js'
-import type { Config } from '#src/lib/anyware/PipelineDefinition/Config.js'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
-import { Err } from '@wollybeard/kit'
+import { Err, Ware } from '@wollybeard/kit'
 import type { FormattedExecutionResult } from 'graphql'
 import { decodeResultData } from './decode.js'
 import { encodeRequestVariables } from './encode.js'
@@ -38,8 +36,8 @@ export namespace RequestPipeline {
 
   export type Output = GraffleExecutionResultEnvelope
 
-  export interface BaseDefinition extends Anyware.PipelineDefinition {
-    readonly config: Config
+  export interface BaseDefinition extends Ware.PipelineDefinition {
+    readonly config: Ware.PipelineDefinition.Config
     readonly input: {
       request: Grafaid.RequestAnalyzedInput
       state: Context
@@ -47,24 +45,24 @@ export namespace RequestPipeline {
       transport: {}
     }
     readonly steps: [
-      Anyware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
-      Anyware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
-      Anyware.StepDefinition<'exchange', {}, {}, {}>,
-      Anyware.StepDefinition<'unpack', {}, {}, {}>,
-      Anyware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
+      Ware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
+      Ware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
+      Ware.StepDefinition<'exchange', {}, {}, {}>,
+      Ware.StepDefinition<'unpack', {}, {}, {}>,
+      Ware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
     ]
   }
   export interface BaseDefinitionEmpty extends BaseDefinition {
     readonly overloads: readonly []
   }
 
-  export type Base = Anyware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinitionEmpty>
+  export type Base = Ware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinitionEmpty>
 
-  export type BaseInterceptor = Anyware.Interceptor.InferFromPipeline<Base>
+  export type BaseInterceptor = Ware.Interceptor.InferFromPipeline<Base>
 }
 
 const { stepName } = RequestPipeline
-export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinitionEmpty = Anyware.PipelineDefinition
+export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinitionEmpty = Ware.PipelineDefinition
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.

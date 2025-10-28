@@ -62,9 +62,9 @@ export interface FieldInfo {
   /** Categorization of where arguments exist */
   argsPlacement: ArgsPlacement
   /** Direct arguments on this field (undefined if no direct arguments) */
-  args?: ReadonlyArray<GraphQLArgument>
+  args?: ReadonlyArray<GraphQLArgument> | undefined
   /** Reference to the return type's TypeInfo if it has fields with arguments (enables circular references) */
-  type?: TypeInfo
+  type?: TypeInfo | undefined
 }
 
 /**

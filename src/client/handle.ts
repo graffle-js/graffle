@@ -1,5 +1,4 @@
 import type { Normalized } from '#graffle'
-import type { Anyware } from '#lib/anyware'
 import { Errors } from '#lib/errors'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
@@ -12,6 +11,7 @@ import {
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
 import { type ExcludeNullAndUndefined } from '#src/lib/prelude.js'
+import { Ware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { RequestPipeline } from '../requestPipeline/$.js'
@@ -30,7 +30,7 @@ export type GraffleExecutionResultEnvelope = {
 
 export const handleOutput = (
   state: Context,
-  result: Anyware.Result<RequestPipeline.Base['output']>,
+  result: Ware.Result<RequestPipeline.Base['output']>,
 ) => {
   const c = state.configuration.output.current
 
@@ -136,7 +136,7 @@ type HandleOutput_Envelope<
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$OutputConfig extends Normalized> =
   | (ConfigGetOutputError<$OutputConfig, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
-  | (ConfigGetOutputError<$OutputConfig, 'other'>      extends 'return'  ? Anyware.ResultFailure : never)
+  | (ConfigGetOutputError<$OutputConfig, 'other'>      extends 'return'  ? Ware.ResultFailure : never)
 
 // dprint-ignore
 export type ConfigGetOutputError<

@@ -1,0 +1,8 @@
+packages:
+  - '.'
+  - 'examples'
+  - 'website'
+  - 'bundle-sizes'
+
+# overrides:
+#   '@wollybeard/kit': link:../../../Library/pnpm/global/5/node_modules/@wollybeard/kit

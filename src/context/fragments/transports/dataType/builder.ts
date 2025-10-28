@@ -1,7 +1,7 @@
-import type { Anyware } from '#lib/anyware'
-import { Configurator } from '#src/lib/configurator/configurator.js'
 import { hasSymbolProperty } from '#src/lib/symbol.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
+import { Ware } from '@wollybeard/kit'
+import { Configurator } from '@wollybeard/kit'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
 // ------------------------------------------------------------
@@ -47,7 +47,7 @@ export const create = <$Name extends string>(
       value: name,
     },
     steps: {} as any,
-    configurator: Configurator.$.empty,
+    configurator: Configurator.empty,
     configurationMount: `transport`,
   }
   return chain(transport) as any
@@ -67,7 +67,7 @@ const chain = (
       slots: {},
       name,
       ...step,
-      ...({} as Anyware.StepDefinition.SubsetTypeProperties),
+      ...({} as Ware.StepDefinition.SubsetTypeProperties),
     }
     const newOverload = {
       ...transport,
@@ -83,7 +83,7 @@ const chain = (
     configurator: (configuratorTypeInput) => {
       const newTransport = {
         ...transport,
-        configurator: Configurator.$.normalizeDataInput(configuratorTypeInput as any),
+        configurator: Configurator.normalizeDataInput(configuratorTypeInput as any),
       }
       return chain(newTransport) as any
     },
@@ -109,7 +109,7 @@ export interface Builder<
      *
      * Its normalized form will become available on step input as `input.transport`.
      */
-    configurator: <$Configurator extends Configurator>(
+    configurator: <$Configurator extends Configurator.Configurator>(
       input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
     ) => Builder<Data<
           $TransportProgressive['name'],
@@ -123,11 +123,11 @@ export interface Builder<
         & __StepInputBase
         & RequestPipeline.PackInput,
       $Output = {},
-      $Slots extends Anyware.StepDefinition.Slots = {}
+      $Slots extends Ware.StepDefinition.Slots = {}
     >(stepImplementation: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<
       $TransportProgressive['name'],
       $TransportProgressive['configurator'],
-      Anyware.StepDefinition<'pack', $Slots, $Input, $Output>
+      Ware.StepDefinition<'pack', $Slots, $Input, $Output>
     >>
     /**
      * TODO
@@ -137,12 +137,12 @@ export interface Builder<
         & __StepInputBase
         & Awaited<$TransportProgressive['steps']['pack']['output']>,
       $Output = {},
-      $Slots extends Anyware.StepDefinition.Slots = {}
+      $Slots extends Ware.StepDefinition.Slots = {}
     >(step: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<
       $TransportProgressive['name'],
       $TransportProgressive['configurator'],
       $TransportProgressive['steps']['pack'],
-      Anyware.StepDefinition<'exchange', $Slots, $Input, $Output>
+      Ware.StepDefinition<'exchange', $Slots, $Input, $Output>
     >>
     /**
      * TODO
@@ -152,13 +152,13 @@ export interface Builder<
         & __StepInputBase
         & Awaited<$TransportProgressive['steps']['exchange']['output']>,
       $Output = {},
-      $Slots extends Anyware.StepDefinition.Slots = {}
+      $Slots extends Ware.StepDefinition.Slots = {}
     >(step: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<
       $TransportProgressive['name'],
       $TransportProgressive['configurator'],
       $TransportProgressive['steps']['pack'],
       $TransportProgressive['steps']['exchange'],
-      Anyware.StepDefinition<'unpack', $Slots, $Input, $Output>
+      Ware.StepDefinition<'unpack', $Slots, $Input, $Output>
     >>
     /**
      * TODO
@@ -172,7 +172,7 @@ export namespace Builder {
   export interface StepMethodParameters<
     $Input = any,
     $Output = any,
-    $Slots extends Anyware.StepDefinition.Slots = {},
+    $Slots extends Ware.StepDefinition.Slots = {},
   > {
     run: (
       input: $Input,

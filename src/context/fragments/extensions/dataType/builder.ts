@@ -1,7 +1,7 @@
-import { Configurator } from '#src/lib/configurator/configurator.js'
 import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import type { Obj } from '@wollybeard/kit'
+import { Configurator } from '@wollybeard/kit'
 import type { WritableDeep } from 'type-fest'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/$.js'
@@ -47,7 +47,7 @@ export const create: Create = (name) => {
         data.requestInterceptorsComputed.push(requestInterceptorComputer)
       },
       configurator(configurator: Configurator.DataInput) {
-        data.configurator = Configurator.$.normalizeDataInput(configurator)
+        data.configurator = Configurator.normalizeDataInput(configurator)
       },
       properties(properties) {
         if (typeof properties === `function`) {
@@ -104,7 +104,7 @@ export interface Chain<
   /**
    * todo
    */
-  configurator: <$Configurator extends Configurator>(
+  configurator: <$Configurator extends Configurator.Configurator>(
     configurator: Configurator.DataInput<$Configurator>,
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'configurator' ? $Configurator : $Data[_]
@@ -177,7 +177,7 @@ export interface Chain<
    */
   // dprint-ignore
   return: () =>
-      & ($Data['configurator'] extends Configurator
+      & ($Data['configurator'] extends Configurator.Configurator
           // ? (...args: Configurator.InferParameters<$Data['configurator']>) => $Data
           ? & (
                 <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) =>

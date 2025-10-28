@@ -1,4 +1,3 @@
-import type { Anyware } from '#lib/anyware'
 import type { Context } from '#src/context/context.js'
 import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
@@ -8,8 +7,9 @@ import { getOperationType } from '#src/lib/grafaid/document.js'
 import type { Exact } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
+import { Ware } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
-import type { Kind } from '@wollybeard/kit/ts'
+import type * as Fn from '@wollybeard/kit/fn'
 import { Configuration } from '../context/fragments/configuration/$.js'
 import { Extensions } from '../context/fragments/extensions/$.js'
 import type { Extension } from '../context/fragments/extensions/dataType/$.js'
@@ -303,8 +303,8 @@ export interface ClientBase<$Context extends Context> {
    * ```
    */
   anyware: (
-    interceptor: Anyware.Interceptor.InferFromPipeline<
-      Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
+    interceptor: Ware.Interceptor.InferFromPipeline<
+      Ware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
   ) => Client<$Context>
   /**
@@ -344,7 +344,7 @@ export interface ClientBase<$Context extends Context> {
   with: <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
-    // @ts-expect-error Non-index type being used
+    // @ts-expect-error fixme
     Configuration.Add<$Context, configurationInput>
   >
 }
@@ -353,7 +353,7 @@ export type ExtensionChainableRegistry = {
   [name: string]: ExtensionChainable
 }
 
-export interface ExtensionChainable extends Kind.Kind {}
+export interface ExtensionChainable extends Fn.Kind.Kind {}
 
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
 
@@ -391,7 +391,7 @@ export type Create<$Context extends Context = ContextEmpty> =
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput?: Exact<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
     Client<
-      // @ts-expect-error: Is missing standard configurators
+      // @ts-expect-error fixme
       Configuration.Add<$Context, configurationInput>
     >
 
@@ -558,5 +558,5 @@ export const createWithContext = <$Context extends Context>(
 export type CalcConfigurationInputForContext<$Context extends Context> = {
   readonly [_ in keyof $Context['configuration']]?:
     // @ts-expect-error Non-index type being used
-    $Context['configuration'][_]['configurator']['input']
+    $Context['configuration'][_]['configurator']['input'] | undefined
 }

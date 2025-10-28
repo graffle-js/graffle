@@ -7,5 +7,4 @@ export interface $FragmentInline<
 > extends
   Object1ImplementingInterface<_$Context>,
   $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields
-{
-}
+{}

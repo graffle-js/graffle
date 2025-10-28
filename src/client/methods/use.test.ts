@@ -13,7 +13,7 @@ import { RequestInterceptors } from '../../context/fragments/requestInterceptors
 const aExtension = Extension.create(`aExtension`).return()
 type aExtension = typeof aExtension
 
-const aConfigurator = Extension.Configurator().input<{ a?: number }>().default({ a: 1 }).return()
+const aConfigurator = Extension.Configurator.create().input<{ a?: number }>().default({ a: 1 }).return()
 
 test(`using an extension returns a client copy; is registered in context`, ({ g0 }) => {
   const g1 = g0.use(aExtension)
@@ -45,7 +45,10 @@ describe(`if extension has configurator`, () => {
   test(`configurator default is used as initial current state even when initial input is given`, ({ g0 }) => {
     const B = Extension.create(`bExtension`)
       .configurator(
-        Extension.Configurator().input<{ a?: number; b?: number }>().default({ a: 1, b: 2 }),
+        Extension.Configurator.create().input<{ a?: number | undefined; b?: number | undefined }>().default({
+          a: 1,
+          b: 2,
+        }),
       )
       .return()
 

@@ -34,9 +34,9 @@ export const toGraphQLDocument = (
 }
 
 export interface Options {
-  sddm?: SchemaDrivenDataMap | null
-  scalars?: Schema.Scalar.ScalarMap
-  hoistArguments?: boolean
+  sddm?: SchemaDrivenDataMap | null | undefined
+  scalars?: Schema.Scalar.ScalarMap | undefined
+  hoistArguments?: boolean | undefined
 }
 
 export interface Encoded {

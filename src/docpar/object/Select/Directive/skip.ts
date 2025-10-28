@@ -20,11 +20,11 @@ export type ArgsInput = InputShortHand | InputLonghand
 type InputShortHand = boolean
 
 type InputLonghand = {
-  if?: boolean
+  if?: boolean | undefined
 }
 
 export interface Field {
-  $skip?: ArgsInput
+  $skip?: ArgsInput | undefined
 }
 
 export namespace FieldStates {

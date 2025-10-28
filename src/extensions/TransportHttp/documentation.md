@@ -138,7 +138,7 @@ Graffle
   })
 ```
 
-## Anyware
+## Ware
 
 <!--@include: @/_snippets/example-links/transport-http_extension.md-->
 
@@ -149,7 +149,7 @@ Hooks are augmented in the following ways:
 | Input     | -      | `url` `headers` `body` | `request` | `response` | `response` |
 | Functions | -      | -                      | `fetch`   |            |            |
 
-### URL Type in Anyware
+### URL Type in Ware
 
 The `request.url` in the Exchange hook is a discriminated union that preserves whether the URL is a relative path or absolute URL:
 

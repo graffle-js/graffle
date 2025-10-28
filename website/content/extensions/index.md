@@ -40,7 +40,7 @@ HTTP transport implementing the [GraphQL Over HTTP](https://github.com/graphql/g
 - GET and POST method modes
 - Relative URL support (browser and frameworks)
 - Configurable headers and fetch options
-- Anyware hooks for request/response manipulation
+- Ware hooks for request/response manipulation
 
 ### [Transport Memory](./transport-memory.md)
 

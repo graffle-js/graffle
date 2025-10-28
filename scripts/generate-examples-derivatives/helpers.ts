@@ -134,7 +134,7 @@ export interface Example {
     blocks: string[]
     encoder?: {
       filePath: string
-    }
+    } | undefined
   }
   isUsingJsonOutput: boolean
   tags: Tag[]

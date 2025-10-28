@@ -5,8 +5,8 @@ import type { Variables } from '../graphql.js'
 
 export interface RequestConfig {
   query: string
-  variables?: Variables
-  operationName?: string
+  variables?: Variables | undefined
+  operationName?: string | undefined
 }
 
 export const parseExecutionResult = (result: unknown): FormattedExecutionResult => {

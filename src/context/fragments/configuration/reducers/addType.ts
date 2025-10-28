@@ -1,4 +1,4 @@
-import type { Configurator } from '#src/lib/configurator/configurator.js'
+import type { Configurator } from '@wollybeard/kit'
 import type { Context } from '../../../context.js'
 import { createEntry } from '../createEntry.js'
 import type { CreateEntry } from '../createEntry.js'
@@ -7,7 +7,7 @@ import type { CreateEntry } from '../createEntry.js'
 export const addType = <
   context extends Context,
   name extends string,
-  configurator extends Configurator,
+  configurator extends Configurator.Configurator,
   const initialInput extends configurator['input'],
 >(
   context: context,
@@ -29,7 +29,7 @@ export const addType = <
 export type AddType<
   $Context extends Context,
   $Name extends string,
-  $Configurator extends Configurator,
+  $Configurator extends Configurator.Configurator,
   $ConfiguratorInputInitial extends $Configurator['input'],
 > =
   // dprint-ignore

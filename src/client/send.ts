@@ -1,7 +1,7 @@
-import { Anyware } from '#lib/anyware'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Ware } from '@wollybeard/kit'
 import { handleOutput } from './handle.js'
 
 export const sendRequest = async (context: Context, analyzedRequest: Grafaid.RequestAnalyzedInput) => {
@@ -16,7 +16,7 @@ export const sendRequest = async (context: Context, analyzedRequest: Grafaid.Req
     request: analyzedRequest,
   } as RequestPipeline.Base['input']
 
-  const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
+  const requestPipeline = Ware.Pipeline.create(context.requestPipelineDefinition)
   // todo [1] calculate interceptors when context changes, not on each request.
   const computedInterceptors = context.requestPipelineInterceptorsComputed.map(computer =>
     computer({
@@ -27,7 +27,7 @@ export const sendRequest = async (context: Context, analyzedRequest: Grafaid.Req
       client: null, // annoying to get client reference here, instead, do above todo where then this doesn't even have to be here anymore.
     })
   )
-  const result = await Anyware.PipelineDefinition.run(requestPipeline, {
+  const result = await Ware.PipelineDefinition.run(requestPipeline, {
     initialInput,
     interceptors: [...context.requestPipelineInterceptors, ...computedInterceptors],
   })

@@ -4,5 +4,4 @@ import type { Patron } from './$.js'
 
 export interface $FragmentInline<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-> extends Patron<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {
-}
+> extends Patron<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {}

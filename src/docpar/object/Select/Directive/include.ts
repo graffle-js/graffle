@@ -30,7 +30,7 @@ export type ArgsInput = ArgsInputShortHand | ArgsInputLonghand
 type ArgsInputShortHand = boolean
 
 type ArgsInputLonghand = {
-  if?: boolean
+  if?: boolean | undefined
 }
 
 export const argumentDefaults: Args = {
@@ -38,7 +38,7 @@ export const argumentDefaults: Args = {
 }
 
 export interface Field {
-  $include?: ArgsInput
+  $include?: ArgsInput | undefined
 }
 
 export namespace FieldStates {

@@ -1,9 +1,9 @@
 import { Extension } from '#graffle/extension'
-import type { Anyware } from '#lib/anyware'
 import type { Grafaid } from '#lib/grafaid'
 import { print } from '#src/lib/grafaid/document.js'
 import { execute } from '#src/lib/grafaid/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Ware } from '@wollybeard/kit'
 
 // ----------------------------
 // Configuration
@@ -26,13 +26,13 @@ export interface ConfigurationNormalized {
      *
      * If a function is provided, it will be called before each request to get the context value.
      */
-    context?: object | (() => object)
-  }
+    context?: object | (() => object) | undefined
+  } | undefined
 }
 
 export type ConfigurationInput = Partial<ConfigurationNormalized>
 
-type TransportMemoryConfigurator = Extension.Configurator<
+type TransportMemoryConfigurator = Extension.Configurator.Configurator<
   ConfigurationInput,
   ConfigurationNormalized,
   {}
@@ -42,7 +42,7 @@ type TransportMemoryConfigurator = Extension.Configurator<
 // Transport
 // ----------------------------
 
-export interface RequestPipelineOverload extends Anyware.Overload.Data {
+export interface RequestPipelineOverload extends Ware.Overload.Data {
   discriminant: {
     name: 'transportType'
     value: 'memory'
@@ -105,7 +105,7 @@ export const TransportMemory: TransportMemory = Extension
   .transport(
     Extension.Transport.create(`memory`)
       .configurator(
-        Extension.Configurator()
+        Extension.Configurator.create()
           .input<ConfigurationInput>()
           .normalized<ConfigurationNormalized>()
           .inputResolver(({ current, input }) => {
