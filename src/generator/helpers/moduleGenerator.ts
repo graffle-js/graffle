@@ -1,5 +1,5 @@
-import { markdownToJsDoc } from '#src/lib/md-jsdoc/md-jsdoc.js'
-import { Lang } from '@wollybeard/kit'
+import { Lang, Paka } from '@wollybeard/kit'
+const { markdownToJsDoc } = Paka
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
 import fs from 'node:fs'
 import path from 'node:path'
