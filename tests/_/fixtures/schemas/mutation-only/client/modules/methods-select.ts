@@ -49,7 +49,7 @@ export interface $MethodsSelect {
  * Build type-safe selection set for Mutation.
  */
 export interface Mutation {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
 }
 
 //

@@ -28,7 +28,7 @@ import type * as $$SelectionSets from './selection-sets/$.js'
 
 export interface Document<$Context> {
   <$Document>(
-    document: $$Utilities.ExactNonEmpty<
+    document: $$Utilities.NoExcessNonEmpty<
       $Document,
       $$SelectionSets.$Document<
         // @ts-expect-error Context constraint missing to avoid TS compare depth limit.

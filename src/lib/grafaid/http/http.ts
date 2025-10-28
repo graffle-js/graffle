@@ -1,6 +1,5 @@
-import { Rec } from '@wollybeard/kit'
+import { Http, Rec } from '@wollybeard/kit'
 import type { FormattedExecutionResult, GraphQLFormattedError } from 'graphql'
-import { CONTENT_TYPE_GQL, CONTENT_TYPE_JSON } from '../../http.js'
 import type { Variables } from '../graphql.js'
 
 export interface RequestConfig {
@@ -49,13 +48,14 @@ export const parseExecutionResult = (result: unknown): FormattedExecutionResult 
 /**
  * @see https://graphql.github.io/graphql-over-http/draft/#sec-Media-Types
  */
-export const CONTENT_TYPE_REC = CONTENT_TYPE_JSON
+export const CONTENT_TYPE_REC = Http.MimeType.applicationJson
 
 /**
  * @see https://graphql.github.io/graphql-over-http/draft/#sec-Accept
  * @see https://graphql.github.io/graphql-over-http/draft/#sec-Legacy-Watershed
  */
-export const ACCEPT_REC = `${CONTENT_TYPE_GQL}; charset=utf-8, ${CONTENT_TYPE_JSON}; charset=utf-8`
+export const ACCEPT_REC =
+  `${Http.MimeType.applicationGraphqlResponseJson}; charset=utf-8, ${Http.MimeType.applicationJson}; charset=utf-8`
 
 export const postRequestHeadersRec = {
   accept: ACCEPT_REC,

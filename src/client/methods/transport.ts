@@ -1,7 +1,8 @@
 import type { Context } from '#src/context/context.js'
 import type { ContextTransports, ContextTransportsNonEmpty } from '#src/context/fragments/transports/fragment.js'
 import type { AddMany } from '#src/context/fragments/transports/reducers/addMany.js'
-import type { Exact, Objekt, StringKeyof } from '#src/lib/prelude.js'
+import type { NoExcess } from '#src/utils.js'
+import type { Obj } from '@wollybeard/kit'
 import { Transports } from '../../context/fragments/transports/$.js'
 import type { Client } from '../client.js'
 
@@ -36,7 +37,7 @@ export type TransportMethod<
         _IsChanged extends boolean =
           {} extends configurationInput ? false : true
       >
-        (configurationInput: Exact<configurationInput, $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input']>):
+        (configurationInput: NoExcess<configurationInput, $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input']>):
           _IsChanged extends false
             ? Client<$Context> // todo: access to current client type?
             : Client<Transports.ConfigureCurrent<$Context, configurationInput>>
@@ -107,9 +108,9 @@ export namespace TransportMethod {
 
 // dprint-ignore
 export type GetNames<$ClientTransports extends ContextTransports> =
-      Objekt.IsEmpty<$ClientTransports['registry']> extends true
+      Obj.IsEmpty<$ClientTransports['registry']> extends true
         ? 'Error: Transport registry is empty. Please add a transport.'
-        : StringKeyof<$ClientTransports['registry']>
+        : Obj.StringKeyof<$ClientTransports['registry']>
 
 // dprint-ignore
 export type ParameterGuardTransportAlreadyRegistered<$Context extends Context, $Transport extends Transports.Transport.Data> =

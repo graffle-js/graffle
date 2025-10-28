@@ -1,4 +1,4 @@
-import { type EmptyArray } from '#src/lib/prelude.js'
+import { Arr } from '@wollybeard/kit'
 import type { Context } from './context.js'
 import { Configuration } from './fragments/configuration/$.js'
 import { Extensions } from './fragments/extensions/$.js'
@@ -17,8 +17,8 @@ export interface ContextEmpty extends Context {
   readonly configuration: Configuration.ContextFragmentEmpty['configuration']
   // type-level properties
   // todo merge typehooks empty from extension type here to DRY
-  readonly typeHookOnRequestDocumentRootType: EmptyArray
-  readonly typeHookOnRequestResult: EmptyArray
+  readonly typeHookOnRequestDocumentRootType: Arr.EmptyArray
+  readonly typeHookOnRequestResult: Arr.EmptyArray
   readonly typeHookRequestResultDataTypes: never
 }
 

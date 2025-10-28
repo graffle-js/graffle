@@ -1,4 +1,4 @@
-import { type EmptyArray, emptyArray, emptyObject } from '#src/lib/prelude.js'
+import { Arr, Obj } from '@wollybeard/kit'
 import type { EmptyObject } from 'type-fest'
 import type { Extension } from './dataType/$.js'
 
@@ -14,11 +14,11 @@ export interface ContextFragment {
 }
 
 export interface ContextFragmentEmpty extends ContextFragment {
-  extensions: EmptyArray
+  extensions: Arr.EmptyArray
   extensionsIndex: EmptyObject
 }
 
 export const contextFragmentEmpty: ContextFragmentEmpty = {
-  extensions: emptyArray,
-  extensionsIndex: emptyObject,
+  extensions: Arr.emptyArray,
+  extensionsIndex: Obj.emptyObject,
 }

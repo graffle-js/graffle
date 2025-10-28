@@ -1,7 +1,6 @@
 import type { Select } from '#src/docpar/object/Select/$.js'
-import type { UnionMerge, ValuesOrEmptyObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { Tup } from '@wollybeard/kit'
+import { Obj, Tup } from '@wollybeard/kit'
 import type { OutputField } from './OutputField.js'
 
 // dprint-ignore
@@ -10,8 +9,8 @@ export type Alias<
 	$Node extends Schema.OutputObjectLike,
 	$SelectionSet,
 > =
- UnionMerge<
-    ValuesOrEmptyObject<
+ Obj.Union.Merge<
+    Obj.ValuesOrEmptyObject<
       {
         [
           $Select in keyof $SelectionSet as

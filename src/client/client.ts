@@ -4,9 +4,9 @@ import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/
 import { Docpar } from '#src/docpar/$.js'
 import { graffleMappedResultToRequest } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
 import { getOperationType } from '#src/lib/grafaid/document.js'
-import type { Exact } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
+import type { NoExcess } from '#src/utils.js'
 import { Ware } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 import type * as Fn from '@wollybeard/kit/fn'
@@ -389,7 +389,7 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
 export type Create<$Context extends Context = ContextEmpty> =
   <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
-  >(configurationInput?: Exact<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
+  >(configurationInput?: NoExcess<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
     Client<
       // @ts-expect-error fixme
       Configuration.Add<$Context, configurationInput>

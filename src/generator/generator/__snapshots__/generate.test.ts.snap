@@ -145,11 +145,11 @@ export interface RootTypeCustomNameForQueryMethods<
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
+      selectionSet: $$Utilities.NoExcess<
         $$SelectionSets.RootTypeCustomNameForQuery<{
           scalars: $Context["scalars"];
-        }>
+        }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -217,11 +217,11 @@ export interface RootTypeCustomNameForQueryMethods<
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
+      selectionSet?: $$Utilities.NoExcess<
         $$SelectionSets.RootTypeCustomNameForQuery.id<{
           scalars: $Context["scalars"];
-        }>
+        }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<

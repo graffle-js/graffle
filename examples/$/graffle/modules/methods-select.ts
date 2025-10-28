@@ -62,7 +62,7 @@ export interface $MethodsSelect {
  * Build type-safe selection set for Query.
  */
 export interface Query {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
 }
 
 /**
@@ -71,7 +71,7 @@ export interface Query {
  * Build type-safe selection set for Mutation.
  */
 export interface Mutation {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
 }
 
 //
@@ -96,7 +96,7 @@ export interface Mutation {
  * Build type-safe selection set for BattleRoyale.
  */
 export interface BattleRoyale {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.BattleRoyale>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.BattleRoyale>): $SelectionSet
 }
 
 /**
@@ -105,7 +105,7 @@ export interface BattleRoyale {
  * Build type-safe selection set for BattleTrainer.
  */
 export interface BattleTrainer {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.BattleTrainer>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.BattleTrainer>): $SelectionSet
 }
 
 /**
@@ -114,7 +114,7 @@ export interface BattleTrainer {
  * Build type-safe selection set for BattleWild.
  */
 export interface BattleWild {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.BattleWild>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.BattleWild>): $SelectionSet
 }
 
 /**
@@ -123,7 +123,9 @@ export interface BattleWild {
  * Build type-safe selection set for CombatantMultiPokemon.
  */
 export interface CombatantMultiPokemon {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.CombatantMultiPokemon>): $SelectionSet
+  <$SelectionSet>(
+    selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.CombatantMultiPokemon>,
+  ): $SelectionSet
 }
 
 /**
@@ -132,7 +134,9 @@ export interface CombatantMultiPokemon {
  * Build type-safe selection set for CombatantSinglePokemon.
  */
 export interface CombatantSinglePokemon {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.CombatantSinglePokemon>): $SelectionSet
+  <$SelectionSet>(
+    selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.CombatantSinglePokemon>,
+  ): $SelectionSet
 }
 
 /**
@@ -141,7 +145,7 @@ export interface CombatantSinglePokemon {
  * Build type-safe selection set for Patron.
  */
 export interface Patron {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Patron>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Patron>): $SelectionSet
 }
 
 /**
@@ -150,7 +154,7 @@ export interface Patron {
  * Build type-safe selection set for Pokemon.
  */
 export interface Pokemon {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Pokemon>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Pokemon>): $SelectionSet
 }
 
 /**
@@ -159,7 +163,7 @@ export interface Pokemon {
  * Build type-safe selection set for Trainer.
  */
 export interface Trainer {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Trainer>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Trainer>): $SelectionSet
 }
 
 //
@@ -184,7 +188,7 @@ export interface Trainer {
  * Build type-safe selection set for Battle.
  */
 export interface Battle {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Battle>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Battle>): $SelectionSet
 }
 
 //
@@ -209,5 +213,5 @@ export interface Battle {
  * Build type-safe selection set for Being.
  */
 export interface Being {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Being>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Being>): $SelectionSet
 }

@@ -17,13 +17,13 @@ const g1 = g0.use(TransportMemory).transport({ schema })
 
 test('default is throws errors', async () => {
   await expect(g1.gql('').$send()).rejects.toThrowErrorMatchingInlineSnapshot(
-    `[ContextualAggregateError: One or more errors in the execution result.]`,
+    `[ContextualAggregateError]`,
   )
 })
 test('can return errors', async () => {
   const g2 = g1.with({ output: { defaults: { errorChannel: 'return' } } })
   const result = await g2.gql('').$send()
-  expect(result).toMatchInlineSnapshot(`[ContextualAggregateError: One or more errors in the execution result.]`)
+  expect(result).toMatchInlineSnapshot(`[ContextualAggregateError]`)
 })
 
 // // test('default is errors thrown, no envelope, no schema errors', async () => {

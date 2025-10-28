@@ -1,5 +1,5 @@
 import type { ContextEmpty } from '#src/context/ContextEmpty.js'
-import type { AnyAndUnknownToNever } from '#src/lib/prelude.js'
+import { Ts } from '@wollybeard/kit'
 
 export type SimplifyWithEmptyContext<$Type> = Simplify<ContextEmpty, $Type>
 
@@ -10,7 +10,7 @@ export type Simplify<$Context, $Type> =
       // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
       | $Context['typeHookRequestResultDataTypes']
       // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
-      | AnyAndUnknownToNever<$Context['scalars']['typesDecoded']>
+      | Ts.AnyAndUnknownToNever<$Context['scalars']['typesDecoded']>
     ),
     $Type
   >

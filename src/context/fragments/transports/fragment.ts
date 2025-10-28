@@ -1,18 +1,18 @@
-import { type EmptyObject, emptyObject } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '#src/requestPipeline/RequestPipeline.js'
+import { Obj } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { Transport } from './dataType/$.js'
 
 export interface ContextTransportsEmpty extends ContextTransports {
-  readonly registry: EmptyObject
-  readonly configurations: EmptyObject
+  readonly registry: Obj.EmptyObject
+  readonly configurations: Obj.EmptyObject
   readonly current: undefined
 }
 
 export const contextTransportsEmpty: ContextTransportsEmpty = Object.freeze({
-  registry: emptyObject,
-  configurations: emptyObject,
+  registry: Obj.emptyObject,
+  configurations: Obj.emptyObject,
   current: undefined,
 })
 

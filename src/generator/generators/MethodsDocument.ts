@@ -50,7 +50,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
       parameters: [`$Context ${contextExtendsClause}`],
       // dprint-ignore
       block: `
-        <$Document>(document: ${$.$$Utilities}.ExactNonEmpty<
+        <$Document>(document: ${$.$$Utilities}.NoExcessNonEmpty<
           $Document,
           ${$.$$SelectionSets}.$Document<
             ${contextTsExpectError}

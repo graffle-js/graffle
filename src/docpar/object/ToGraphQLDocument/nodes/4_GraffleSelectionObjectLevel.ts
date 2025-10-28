@@ -1,8 +1,7 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { ParsedSelectionObjectLevel } from '#src/docpar/object/Select/$parseSelection.js'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
-import { isNonNull } from '#src/lib/prelude.js'
-import { Lang } from '@wollybeard/kit'
+import { Lang, Null } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLField } from './5_Field.js'
@@ -38,7 +37,7 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
           alias: alias[0],
           value: alias[1],
         })
-      }).filter(isNonNull)
+      }).filter(Null.isNonNull)
     }
     case `SelectionSet`: {
       const sddmOutputField = sddm?.f[selection.name]
@@ -47,7 +46,7 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
         name: selection.name,
         value: selection.selectionSet,
       }
-      return [toGraphQLField(context, sddmOutputField, outputField)].filter(isNonNull)
+      return [toGraphQLField(context, sddmOutputField, outputField)].filter(Null.isNonNull)
     }
     // todo make this an extension that requires the schema.
     case `ScalarsWildcard`: {

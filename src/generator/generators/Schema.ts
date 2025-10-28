@@ -1,5 +1,4 @@
 import { Grafaid } from '#lib/grafaid'
-import { isObjectEmpty } from '#src/lib/prelude.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
@@ -390,7 +389,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
   config.extensions.forEach(_ => {
     _.onSchema?.({ config, schema: extensions })
   })
-  if (!isObjectEmpty(extensions)) {
+  if (!Obj.isEmpty(extensions)) {
     schema[`extensions`] = extensions
   }
 

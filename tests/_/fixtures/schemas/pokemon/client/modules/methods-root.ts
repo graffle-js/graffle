@@ -19,7 +19,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -83,7 +83,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   battles: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -126,7 +129,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   beings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -170,7 +173,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   pokemonByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
@@ -217,7 +220,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   pokemons: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -260,7 +266,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   trainerByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
@@ -306,7 +312,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   trainers: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -350,7 +359,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -414,7 +423,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addPokemon: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
@@ -459,7 +468,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   resetData: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
+      selectionSet?: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Mutation.resetData<{ scalars: $Context['scalars'] }>
       >,
@@ -507,7 +516,10 @@ export interface BattleMethods<$Context extends $$Utilities.Context> {
   list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -552,7 +564,7 @@ export interface BeingMethods<$Context extends $$Utilities.Context> {
   list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -598,7 +610,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
   findByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
@@ -645,7 +657,10 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
   list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -688,7 +703,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
   create: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
@@ -736,7 +751,7 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
   findByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
+      selectionSet: $$Utilities.NoExcess<
         $SelectionSet,
         $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
@@ -782,7 +797,10 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
   list: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>
+      >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})

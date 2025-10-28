@@ -1,5 +1,8 @@
-import { identityProxy } from '#src/lib/prelude.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+
+export const identityProxy = new Proxy({}, {
+  get: () => (value: unknown) => value,
+})
 
 // dprint-ignore
 type Create = <$Name extends GlobalRegistry.ClientNames>(name: $Name) =>

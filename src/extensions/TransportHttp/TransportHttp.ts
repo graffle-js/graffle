@@ -3,18 +3,40 @@ import type { Grafaid } from '#lib/grafaid'
 import { OperationTypeToAccessKind, print } from '#src/lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/grafaid/http/http.js'
-import {
-  mergeHeadersInitWithStrategyMerge,
-  mergeRequestInit,
-  parseURLInput,
-  searchParamsAppendAll,
-  searchParamsAppendAllToPath,
-  URLInput,
-  type URLInput as URLInputType,
-} from '#src/lib/http.js'
-import type { httpMethodGet, httpMethodPost } from '#src/lib/http.js'
-import { type Prom, Str } from '@wollybeard/kit'
+import { Http, type Prom, Str } from '@wollybeard/kit'
 import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
+
+// ----------------------------
+// URL Input Types
+// ----------------------------
+
+/**
+ * Discriminated union for URL input that clearly distinguishes between
+ * relative paths and absolute URLs
+ */
+type URLInput =
+  | { _tag: 'path'; value: string } // Relative paths: /api, ./api, ../api
+  | { _tag: 'url'; value: URL } // Absolute URLs
+
+const URLInput = {
+  path: (value: string): URLInput => ({ _tag: 'path', value }),
+  url: (value: URL): URLInput => ({ _tag: 'url', value }),
+}
+
+/**
+ * Parse a string into a URLInput discriminated union.
+ * If the string starts with '/', './', or '../', it's treated as a path.
+ * Otherwise, it must be a valid absolute URL.
+ */
+const parseURLInput = (input: string | URL): URLInput => {
+  if (input instanceof URL) return URLInput.url(input)
+  if (input.startsWith('/') || input.startsWith('./') || input.startsWith('../')) {
+    return URLInput.path(input)
+  }
+  return URLInput.url(new URL(input))
+}
+
+type URLInputType = URLInput
 
 // ----------------------------
 // Configuration
@@ -104,7 +126,7 @@ const httpTransportConfigurator = Extension.Configurator
     if (input.url !== undefined) {
       // Validate the URL by parsing it
       // parseURLInput will throw if the URL is invalid
-      const parsed = parseURLInput(input.url)
+      const _parsed = parseURLInput(input.url)
       // Store back as the original type (string or URL)
       url = input.url
     }
@@ -113,7 +135,7 @@ const httpTransportConfigurator = Extension.Configurator
       methodMode: input.methodMode ?? current.methodMode,
       raw: input.raw ?? current.raw,
       url,
-      headers: mergeHeadersInitWithStrategyMerge(current.headers, input.headers),
+      headers: Http.Headers.mergeInitWithStrategyMerge(current.headers, input.headers),
     }
   })
 
@@ -128,14 +150,14 @@ export type ExchangeRequest = ExchangePostRequest | ExchangeGetRequest
  */
 export type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
   methodMode: MethodModePost | MethodModeGetReads
-  method: httpMethodPost
+  method: Http.Method.post
   url: URLInputType // Preserve discriminated union for anyware extensions
   body: BodyInit
 }
 
 export type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   methodMode: MethodModeGetReads
-  method: httpMethodGet
+  method: Http.Method.get
   url: URLInputType // Preserve discriminated union for anyware extensions
 }
 
@@ -172,8 +194,8 @@ export const TransportHttp = Extension.create(`TransportHttp`)
             ? `get`
             : `post`
 
-          const baseRequestInit = mergeRequestInit(
-            mergeRequestInit(
+          const baseRequestInit = Http.Req.mergeInit(
+            Http.Req.mergeInit(
               {
                 headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
               },
@@ -190,8 +212,8 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           // Handle paths and URLs differently while preserving the discriminated union
           const urlWithParams: URLInputType = requestMethod === `get`
             ? parsedUrl._tag === 'path'
-              ? URLInput.path(searchParamsAppendAllToPath(parsedUrl.value, slots.searchParams(graphqlRequest)))
-              : URLInput.url(searchParamsAppendAll(parsedUrl.value, slots.searchParams(graphqlRequest)))
+              ? URLInput.path(Http.SearchParams.appendAllToPath(parsedUrl.value, slots.searchParams(graphqlRequest)))
+              : URLInput.url(Http.SearchParams.appendAll(parsedUrl.value, slots.searchParams(graphqlRequest)))
             : parsedUrl
 
           const request: ExchangeRequest = requestMethod === `get`

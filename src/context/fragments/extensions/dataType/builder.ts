@@ -1,6 +1,5 @@
-import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
-import type { Obj } from '@wollybeard/kit'
+import { Bldr, Obj } from '@wollybeard/kit'
 import { Configurator } from '@wollybeard/kit'
 import type { WritableDeep } from 'type-fest'
 import type { Context } from '../../../context.js'
@@ -28,7 +27,7 @@ export const create: Create = (name) => {
     ...dataPropertiesTypeOnly,
   }
 
-  return createMutableBuilder({
+  return Bldr.createMutable({
     data,
     builder: {
       static(properties) {

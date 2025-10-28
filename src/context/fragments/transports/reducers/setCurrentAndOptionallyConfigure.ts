@@ -1,4 +1,4 @@
-import { isObjectEmpty } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import type { ContextFragment } from '../fragment.js'
 import { type Configure, configure } from './configure.js'
 
@@ -21,7 +21,7 @@ export const setCurrentAndOptionallyConfigure = <
   const transport = context.transports.registry[transportName]
   if (!transport) throw new Error(`Unknown transport: ${transportName}`)
 
-  const noChange = (!configurationInput || isObjectEmpty(configurationInput))
+  const noChange = (!configurationInput || Obj.isEmpty(configurationInput))
     && transportName === context.transports.current
   if (noChange) return context as any
 

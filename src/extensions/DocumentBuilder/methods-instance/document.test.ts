@@ -1,7 +1,7 @@
 import { Graffle } from '#graffle'
-import type { Errors } from '#lib/errors'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
+import { Err } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 
@@ -42,12 +42,12 @@ describe(`gql with two queries`, () => {
   })
   test(`error if no operation name is provided`, async () => {
     // @ts-expect-error
-    const error = await withTwo.$send().catch((e: unknown) => e) as Errors.ContextualAggregateError
+    const error = await withTwo.$send().catch((e: unknown) => e) as Err.ContextualAggregateError
     expect(error.errors[0]?.message).toEqual(`Must provide operation name if query contains multiple operations.`)
   })
   test(`error if wrong operation name is provided`, async () => {
     // @ts-expect-error
-    const error = await withTwo.$send(`boo`).catch((e: unknown) => e) as Errors.ContextualAggregateError
+    const error = await withTwo.$send(`boo`).catch((e: unknown) => e) as Err.ContextualAggregateError
     expect(error.message).toEqual(`Unknown operation named "boo".`)
   })
   // test(`error if no operations provided`, () => {
