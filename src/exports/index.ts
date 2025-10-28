@@ -2,7 +2,6 @@ export { type TypedDocument } from '../lib/grafaid/typed-document/$.js'
 // todo figure this export out. Was just put there to resolve a type error about "...cannot be named..."
 export { type Client, type Create } from '#src/client/client.js'
 export type * from '#src/lib/grafaid/http/http.js'
-export type * from '#src/lib/prelude.js'
 export type * from '#src/requestPipeline/RequestPipeline.js'
 export type * from '#src/types/Schema/nodes/Scalar/helpers.js'
 export type { Ware } from '@wollybeard/kit'
