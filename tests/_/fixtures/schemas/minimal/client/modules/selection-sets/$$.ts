@@ -23,6 +23,6 @@ export type Query$Infer<$SelectionSet extends object> = $$Utilities.Docpar.Objec
 /**
  * Infer the variables type for a Query selection set.
  *
- * @deprecated This is temporarily typed as [object Object] and will be replaced with the new analysis system.
+ * @deprecated This is temporarily typed as `any` and will be replaced with the new analysis system.
  */
 export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system

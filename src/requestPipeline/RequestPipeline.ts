@@ -3,6 +3,7 @@ import type { GraffleExecutionResultEnvelope } from '#src/client/handle.js'
 import type { Context } from '#src/context/context.js'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
 import { Ware as Anyware } from '@wollybeard/kit'
+import type { Ware } from '@wollybeard/kit'
 import { Err } from '@wollybeard/kit'
 import type { FormattedExecutionResult } from 'graphql'
 import { decodeResultData } from './decode.js'
@@ -38,7 +39,7 @@ export namespace RequestPipeline {
   export type Output = GraffleExecutionResultEnvelope
 
   export interface BaseDefinition extends Anyware.PipelineDefinition {
-    readonly config: Config
+    readonly config: Ware.PipelineDefinition.Config
     readonly input: {
       request: Grafaid.RequestAnalyzedInput
       state: Context
