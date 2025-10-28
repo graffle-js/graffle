@@ -12,7 +12,6 @@
   "dependencies": {
     "@opentelemetry/sdk-trace-base": "^2.2.0",
     "@opentelemetry/sdk-trace-node": "^2.2.0",
-    "gql.tada": "^1.8.13",
     "graphql": "^16.11.0",
     "typescript": "^5.9.3"
   },
