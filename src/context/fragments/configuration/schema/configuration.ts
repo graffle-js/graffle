@@ -1,6 +1,6 @@
 import type { Docpar } from '#src/docpar/$.js'
-import { Configurator as C } from '@wollybeard/kit/configurator'
 import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+import { Configurator as C } from '@wollybeard/kit/configurator'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 

@@ -1,5 +1,4 @@
 import type { Normalized } from '#graffle'
-import { Ware as Anyware } from '@wollybeard/kit/ware'
 import { Errors } from '#lib/errors'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
@@ -12,6 +11,7 @@ import {
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
 import { type ExcludeNullAndUndefined } from '#src/lib/prelude.js'
+import { Ware as Anyware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { RequestPipeline } from '../requestPipeline/$.js'

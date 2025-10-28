@@ -1,5 +1,5 @@
-import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Ware as Anyware } from '@wollybeard/kit'
 import type { Ts, Tup } from '@wollybeard/kit'
 import type { Transport } from '../dataType/$.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'

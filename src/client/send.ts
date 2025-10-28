@@ -1,7 +1,7 @@
-import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Ware as Anyware } from '@wollybeard/kit'
 import { handleOutput } from './handle.js'
 
 export const sendRequest = async (context: Context, analyzedRequest: Grafaid.RequestAnalyzedInput) => {

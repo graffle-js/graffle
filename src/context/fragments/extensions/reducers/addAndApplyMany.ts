@@ -1,5 +1,5 @@
-import type { Configurator } from '@wollybeard/kit/configurator'
 import type { Ts, Tup } from '@wollybeard/kit'
+import type * as Configurator from '@wollybeard/kit/configurator'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'

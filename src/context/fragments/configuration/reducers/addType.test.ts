@@ -1,5 +1,5 @@
-import { Configurator } from '@wollybeard/kit/configurator'
 import { Ts } from '@wollybeard/kit'
+import * as Configurator from '@wollybeard/kit/configurator'
 import { expect, test } from 'vitest'
 import { contextEmpty } from '../../../$$.js'
 import { addType } from './addType.js'

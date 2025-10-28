@@ -1,4 +1,4 @@
-import type { ConfigManager } from '@wollybeard/kit/config-manager'
+import type { ConfigManager } from '@wollybeard/kit'
 import { Configurator as C } from '@wollybeard/kit/configurator'
 
 export type OutputChannel = 'throw' | 'return'

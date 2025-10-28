@@ -1,7 +1,7 @@
 import { Extension } from '#graffle/extension'
-import { ConfigManager } from '@wollybeard/kit/config-manager'
 import { Grafaid } from '#lib/grafaid'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
+import { ConfigManager } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 
 const propertyNames = {

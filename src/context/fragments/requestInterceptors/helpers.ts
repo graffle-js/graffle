@@ -1,7 +1,7 @@
 import type { Configurator } from '#graffle/extension-exports'
-import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { Client_justContext, ClientEmpty } from '#src/client/client.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Ware as Anyware } from '@wollybeard/kit'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'
 

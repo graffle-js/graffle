@@ -1,7 +1,7 @@
-import { Configurator } from '@wollybeard/kit/configurator'
 import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import type { Obj } from '@wollybeard/kit'
+import * as Configurator from '@wollybeard/kit/configurator'
 import type { WritableDeep } from 'type-fest'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/$.js'

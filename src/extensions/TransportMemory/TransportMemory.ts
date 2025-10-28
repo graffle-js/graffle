@@ -1,9 +1,9 @@
 import { Extension } from '#graffle/extension'
-import { Ware as Anyware } from '@wollybeard/kit/ware'
 import type { Grafaid } from '#lib/grafaid'
 import { print } from '#src/lib/grafaid/document.js'
 import { execute } from '#src/lib/grafaid/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Ware as Anyware } from '@wollybeard/kit'
 
 // ----------------------------
 // Configuration
