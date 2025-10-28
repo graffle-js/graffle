@@ -1,5 +1,4 @@
 import { Var } from '#src/docpar/object/var/$.js'
-import { type DeepObjectValue } from '#src/lib/object-utils.js'
 import { Obj } from '@wollybeard/kit'
 import type { DefaultContext } from './context.js'
 
@@ -53,7 +52,7 @@ export const isEnumKey = (key: string) => key.startsWith(enumKeyPrefix)
  * This is useful for processing variable values where enum field names need to have
  * their $ prefix removed for GraphQL compatibility.
  */
-export const enumKeyPrefixStripFromObject = <T extends DeepObjectValue>(value: T): T => {
+export const enumKeyPrefixStripFromObject = <T extends Obj.DeepObject>(value: T): T => {
   return Obj.mapEntriesDeep(value, (key, value) => {
     if (isEnumKey(key)) {
       return {
