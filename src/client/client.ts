@@ -344,6 +344,7 @@ export interface ClientBase<$Context extends Context> {
   with: <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
+    // @ts-expect-error fixme
     Configuration.Add<$Context, configurationInput>
   >
 }
@@ -390,6 +391,7 @@ export type Create<$Context extends Context = ContextEmpty> =
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput?: Exact<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
     Client<
+      // @ts-expect-error fixme
       Configuration.Add<$Context, configurationInput>
     >
 

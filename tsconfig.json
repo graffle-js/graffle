@@ -2,7 +2,7 @@
   "extends": ["./tsconfig.libra.json"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2023"],
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false, // todo true
     "plugins": [
       {
         "name": "@0no-co/graphqlsp",
