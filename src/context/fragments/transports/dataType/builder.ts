@@ -1,6 +1,5 @@
-import { hasSymbolProperty } from '#src/lib/symbol.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
-import { Ware } from '@wollybeard/kit'
+import { Obj, Ware } from '@wollybeard/kit'
 import { Configurator } from '@wollybeard/kit'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
@@ -184,7 +183,5 @@ export namespace Builder {
     export type Empty<$Name extends string> = Builder<Data<$Name, Configurator.States.Empty>>
   }
 
-  export const is = (value: any): value is Builder<Data> => {
-    return hasSymbolProperty(value, TypeSymbol, true, `TransportBuilder`)
-  }
+  export const is: (value: any) => value is Builder<Data> = Obj.hasSymbolLikeWith(TypeSymbol, true) as any
 }
