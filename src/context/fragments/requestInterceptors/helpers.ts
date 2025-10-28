@@ -1,13 +1,13 @@
 import type { Configurator } from '#graffle/extension-exports'
 import type { Client_justContext, ClientEmpty } from '#src/client/client.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
-import { Ware as Anyware } from '@wollybeard/kit'
+import { Ware } from '@wollybeard/kit'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'
 
 export const create = <$Client extends Client_justContext = ClientEmpty>(
-  interceptor: Anyware.Interceptor.InferFromPipeline<
-    Anyware.Pipeline.InferFromDefinition<$Client['_']['requestPipelineDefinition']>
+  interceptor: Ware.Interceptor.InferFromPipeline<
+    Ware.Pipeline.InferFromDefinition<$Client['_']['requestPipelineDefinition']>
   >,
 ) => interceptor
 

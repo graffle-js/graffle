@@ -1,13 +1,13 @@
-import { Ware as Anyware } from '@wollybeard/kit'
+import { Ware } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 
 export interface Data<
   $Name extends string = string,
   $Configurator extends Configurator.Configurator = Configurator.Configurator,
-  $Pack extends Anyware.StepDefinition<'pack'> = Anyware.StepDefinition<'pack'>,
-  $Exchange extends Anyware.StepDefinition<'exchange'> = Anyware.StepDefinition<'exchange'>,
-  $Unpack extends Anyware.StepDefinition<'unpack'> = Anyware.StepDefinition<'unpack'>,
-> extends Anyware.Overload.Data {
+  $Pack extends Ware.StepDefinition<'pack'> = Ware.StepDefinition<'pack'>,
+  $Exchange extends Ware.StepDefinition<'exchange'> = Ware.StepDefinition<'exchange'>,
+  $Unpack extends Ware.StepDefinition<'unpack'> = Ware.StepDefinition<'unpack'>,
+> extends Ware.Overload.Data {
   discriminant: {
     name: 'transportType'
     value: $Name

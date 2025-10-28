@@ -5,7 +5,7 @@ export type * from '#src/lib/grafaid/http/http.js'
 export type * from '#src/lib/prelude.js'
 export type * from '#src/requestPipeline/RequestPipeline.js'
 export type * from '#src/types/Schema/nodes/Scalar/helpers.js'
-export type { Ware as Anyware } from '@wollybeard/kit'
+export type { Ware } from '@wollybeard/kit'
 export { type Normalized } from '../context/fragments/configuration/output/$$.js'
 export type * from '../docpar/object/Select/context.js'
 export type {

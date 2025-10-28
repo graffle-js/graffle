@@ -1,4 +1,4 @@
-// import { Ware as Anyware } from '@wollybeard/kit'
+// import { Ware } from '@wollybeard/kit'
 // import { type UnknownOrAnyToNever } from '#src/lib/prelude.js'
 import type { Context } from '../../../context.js'
 // import type { Properties } from '../../properties/$.js'
@@ -22,7 +22,7 @@ export type AddAndApplyOne<
 //         _ extends 'requestPipelineDefinition' ?
 //           $Extension['transports'] extends readonly []
 //             ? $Context['requestPipelineDefinition']
-//             : Anyware.PipelineDefinition.Updaters.AddOverloadMany<$Context['requestPipelineDefinition'], $Extension['transports']> :
+//             : Ware.PipelineDefinition.Updaters.AddOverloadMany<$Context['requestPipelineDefinition'], $Extension['transports']> :
 //         _ extends 'transports' ?
 //           $Extension['transports'] extends []
 //             ? $Context['transports']

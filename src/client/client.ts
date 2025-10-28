@@ -7,7 +7,7 @@ import { getOperationType } from '#src/lib/grafaid/document.js'
 import type { Exact } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
-import { Ware as Anyware } from '@wollybeard/kit'
+import { Ware } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 import type * as Fn from '@wollybeard/kit/fn'
 import { Configuration } from '../context/fragments/configuration/$.js'
@@ -303,8 +303,8 @@ export interface ClientBase<$Context extends Context> {
    * ```
    */
   anyware: (
-    interceptor: Anyware.Interceptor.InferFromPipeline<
-      Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
+    interceptor: Ware.Interceptor.InferFromPipeline<
+      Ware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
   ) => Client<$Context>
   /**

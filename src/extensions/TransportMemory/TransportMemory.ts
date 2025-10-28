@@ -3,7 +3,7 @@ import type { Grafaid } from '#lib/grafaid'
 import { print } from '#src/lib/grafaid/document.js'
 import { execute } from '#src/lib/grafaid/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
-import { Ware as Anyware } from '@wollybeard/kit'
+import { Ware } from '@wollybeard/kit'
 
 // ----------------------------
 // Configuration
@@ -42,7 +42,7 @@ type TransportMemoryConfigurator = Extension.Configurator.Configurator<
 // Transport
 // ----------------------------
 
-export interface RequestPipelineOverload extends Anyware.Overload.Data {
+export interface RequestPipelineOverload extends Ware.Overload.Data {
   discriminant: {
     name: 'transportType'
     value: 'memory'
