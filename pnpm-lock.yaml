@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: github:jasonkuhrt/kit#ce11d29f18c58a5f12c3c2422352dd95ee110f56
-        version: https://codeload.github.com/jasonkuhrt/kit/tar.gz/ce11d29f18c58a5f12c3c2422352dd95ee110f56(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+        specifier: github:jasonkuhrt/kit#e6f93813c7466683c1339801430a574b19178df2
+        version: https://codeload.github.com/jasonkuhrt/kit/tar.gz/e6f93813c7466683c1339801430a574b19178df2(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit:
         specifier: ^1.41.0
         version: 1.41.0
@@ -1803,8 +1803,8 @@ packages:
     resolution: {integrity: sha512-Otmxo+0mp8az3B48pLI1I4msNOXPIoP7TLm6h5wOEQmynqHt8oP9nR6NJUeJk6iI5OtFpQtkbJFwfGkmplvc3Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@https://codeload.github.com/jasonkuhrt/kit/tar.gz/ce11d29f18c58a5f12c3c2422352dd95ee110f56':
-    resolution: {tarball: https://codeload.github.com/jasonkuhrt/kit/tar.gz/ce11d29f18c58a5f12c3c2422352dd95ee110f56}
+  '@wollybeard/kit@https://codeload.github.com/jasonkuhrt/kit/tar.gz/e6f93813c7466683c1339801430a574b19178df2':
+    resolution: {tarball: https://codeload.github.com/jasonkuhrt/kit/tar.gz/e6f93813c7466683c1339801430a574b19178df2}
     version: 0.0.0-dripip
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
@@ -5471,7 +5471,7 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.2
       tslib: 2.8.1
 
-  '@wollybeard/kit@https://codeload.github.com/jasonkuhrt/kit/tar.gz/ce11d29f18c58a5f12c3c2422352dd95ee110f56(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@https://codeload.github.com/jasonkuhrt/kit/tar.gz/e6f93813c7466683c1339801430a574b19178df2(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@microsoft/tsdoc': 0.15.1

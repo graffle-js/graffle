@@ -109,7 +109,7 @@
     "@0no-co/graphql.web": "1.2.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
-    "@wollybeard/kit": "github:jasonkuhrt/kit#ce11d29f18c58a5f12c3c2422352dd95ee110f56",
+    "@wollybeard/kit": "github:jasonkuhrt/kit#e6f93813c7466683c1339801430a574b19178df2",
     "es-toolkit": "^1.41.0",
     "type-fest": "^5.1.0"
   },
