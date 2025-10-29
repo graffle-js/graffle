@@ -1,0 +1,56 @@
+{
+  "name": "graffle",
+  "version": "0.1.0",
+  "description": "Simple GraphQL Client for JavaScript. Minimal. Extensible. Type Safe. Runs everywhere.",
+  "type": "module",
+  "bin": "build/cli/index.js",
+  "exports": {
+    ".": "./build/index.js",
+    "./client": "./build/re-exports/client.js",
+    "./presets/bare": "./build/presets/bare.js",
+    "./presets/basic": "./build/presets/basic.js",
+    "./presets/minimal": "./build/presets/minimal.js",
+    "./extensions/document-builder": "./build/re-exports/document-builder.js",
+    "./extensions/introspection": "./build/re-exports/introspection.js",
+    "./extensions/throws": "./build/re-exports/throws.js",
+    "./extensions/opentelemetry": "./build/re-exports/opentelemetry.js",
+    "./extensions/schema-errors": "./build/re-exports/schema-errors.js",
+    "./extensions/transport-http": "./build/re-exports/transport-http.js",
+    "./extensions/transport-memory": "./build/re-exports/transport-memory.js",
+    "./extensions/upload": "./build/re-exports/upload.js"
+  },
+  "files": ["build", "src"],
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "postbuild": "chmod +x ./build/cli/index.js",
+    "build:emit": "tsc --build tsconfig.build.json --noCheck",
+    "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
+    "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check:types": "tsc --noEmit",
+    "test": "vitest",
+    "test:unit": "vitest --run"
+  },
+  "dependencies": {
+    "@graffle/client": "workspace:*",
+    "@graffle/generator": "workspace:*",
+    "@graffle/extension-document-builder": "workspace:*",
+    "@graffle/extension-introspection": "workspace:*",
+    "@graffle/extension-throws": "workspace:*",
+    "@graffle/extension-opentelemetry": "workspace:*",
+    "@graffle/extension-schema-errors": "workspace:*",
+    "@graffle/extension-transport-http": "workspace:*",
+    "@graffle/extension-transport-memory": "workspace:*",
+    "@graffle/extension-upload": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graffle-js/graffle.git"
+  },
+  "keywords": ["graphql", "request", "fetch", "graphql-client"],
+  "author": {
+    "name": "Jason Kuhrt",
+    "email": "jasonkuhrt@me.com",
+    "url": "https://kuhrt.me"
+  },
+  "license": "MIT"
+}

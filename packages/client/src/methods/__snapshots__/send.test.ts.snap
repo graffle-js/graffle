@@ -1,0 +1,163 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Multiple operations with variables > send('query getID { id } query getStringWithArg($string: String!) { stringWithRequire..., 'getStringWithArg', { string: 'test' }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } query getStringWithArg($string: String!) { stringWithRequiredArg(string: $string) }
+────────────────────────────────────────────────────
+getStringWithArg
+────────────────────────────────────────────────────
+{
+  string: 'test'
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Multiple operations, select by name > send('query getID { id } mutation mutateID { id }', 'getID') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } mutation mutateID { id }
+────────────────────────────────────────────────────
+getID
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Multiple operations, select by name > send('query getID { id } mutation mutateID { id }', 'mutateID') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } mutation mutateID { id }
+────────────────────────────────────────────────────
+mutateID
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Multiple operations, select by name > send('query getID { id } query getIDNonNull { idNonNull }', 'getID') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } query getIDNonNull { idNonNull }
+────────────────────────────────────────────────────
+getID
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Multiple operations, select by name > send('query getID { id } query getIDNonNull { idNonNull }', 'getIDNonNull') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } query getIDNonNull { idNonNull }
+────────────────────────────────────────────────────
+getIDNonNull
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 1: [document] - Single operation, no variables > send('{ id }') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{ id }
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 2: [document, operationName] - Multiple operations, select by name > send('query getID { id } mutation mutateID { id }', 'getID') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } mutation mutateID { id }
+────────────────────────────────────────────────────
+getID
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 2: [document, operationName] - Multiple operations, select by name > send('query getID { id } mutation mutateID { id }', 'mutateID') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } mutation mutateID { id }
+────────────────────────────────────────────────────
+mutateID
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 2: [document, operationName] - Multiple operations, select by name > send('query getID { id } query getIDNonNull { idNonNull }', 'getID') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } query getIDNonNull { idNonNull }
+────────────────────────────────────────────────────
+getID
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 2: [document, operationName] - Multiple operations, select by name > send('query getID { id } query getIDNonNull { idNonNull }', 'getIDNonNull') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } query getIDNonNull { idNonNull }
+────────────────────────────────────────────────────
+getIDNonNull
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 3: [document, variables] - Single operation with variables > send('query ($string: String!) { stringWithRequiredArg(string: $string) }', { string: 'test' }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query ($string: String!) { stringWithRequiredArg(string: $string) }
+────────────────────────────────────────────────────
+{
+  string: 'test'
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Pattern 4: [document, operationName, variables] - Multiple operations with variables > send('query getID { id } query getStringWithArg($string: String!) { stringWithRequire..., 'getStringWithArg', { string: 'test' }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query getID { id } query getStringWithArg($string: String!) { stringWithRequiredArg(string: $string) }
+────────────────────────────────────────────────────
+getStringWithArg
+────────────────────────────────────────────────────
+{
+  string: 'test'
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Single operation with variables > send('query ($string: String!) { stringWithRequiredArg(string: $string) }', { string: 'test' }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+query ($string: String!) { stringWithRequiredArg(string: $string) }
+────────────────────────────────────────────────────
+{
+  string: 'test'
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Single operation without variables > send('{ id }') 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{ id }
+╠══════════════════════════════════════════════════╣ THEN RETURNS PROMISE
+Promise [Promise] {}
+╚══════════════════════════════════════════════════╝"
+`;

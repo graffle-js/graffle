@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./src",
+    "noEmit": true
+  },
+  "references": [
+    { "path": "../client" },
+    { "path": "../generator" },
+    { "path": "../extensions/document-builder" },
+    { "path": "../extensions/introspection" },
+    { "path": "../extensions/throws" },
+    { "path": "../extensions/opentelemetry" },
+    { "path": "../extensions/schema-errors" },
+    { "path": "../extensions/transport-http" },
+    { "path": "../extensions/transport-memory" },
+    { "path": "../extensions/upload" }
+  ],
+  "include": ["src/**/*"],
+  "exclude": ["build", "node_modules"]
+}

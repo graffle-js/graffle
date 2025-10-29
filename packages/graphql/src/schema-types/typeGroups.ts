@@ -1,0 +1,50 @@
+import type { InputObject } from './$$.js'
+import type { __typename } from './nodes/__typename.js'
+import type { Enum } from './nodes/Enum.js'
+import type { Interface } from './nodes/Interface.js'
+import type { List } from './nodes/List.js'
+import type { Nullable } from './nodes/Nullable.js'
+import type { OutputObject } from './nodes/OutputObject.js'
+import type { Scalar } from './nodes/Scalar/Scalar.js'
+import type { Union } from './nodes/Union.js'
+
+export type NamedTypes = NamedInputTypes | NamedOutputTypes
+
+export type OutputObjectLike = OutputObject | Interface
+
+/**
+ * Types that can show up in the condition of an inline fragment.
+ *
+ * Interfaces can extend other interfaces so they are possible here.
+ */
+export type InlineFragmentTypeConditionTypes = OutputObject | Interface
+
+export type OutputTypes =
+  | InlineTypes
+  | NamedOutputTypes
+  | __typename
+
+export type NamedOutputTypes =
+  | Interface
+  | Enum
+  | OutputObject
+  | Union<string, [OutputObject, ...OutputObject[]]>
+  | Scalar
+  | Scalar.ScalarCodecless
+  | __typename
+
+export type InputTypes =
+  | InlineTypes
+  | NamedInputTypes
+
+export type NamedInputTypes = Enum | Scalar | InputObject | Scalar.ScalarCodecless
+
+export type InlineTypes =
+  | List
+  | Nullable
+
+export type ScalarLikeTypes =
+  | Scalar
+  | Enum
+  | Scalar.ScalarCodecless
+  | __typename

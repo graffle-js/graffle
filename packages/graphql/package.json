@@ -1,0 +1,52 @@
+{
+  "name": "@graffle/graphql",
+  "version": "0.1.0",
+  "description": "Generic GraphQL utilities for schema analysis, document operations, and type definitions",
+  "type": "module",
+  "exports": {
+    ".": "./build/index.js",
+    "./document": "./build/document.js",
+    "./document-types": "./build/document/$$.js",
+    "./schema": "./build/schema/index.js",
+    "./http": "./build/http.js",
+    "./execute": "./build/execute.js",
+    "./schema-types": "./build/schema-types/index.js"
+  },
+  "files": [
+    "build",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "build:emit": "tsc --build tsconfig.build.json --noCheck",
+    "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
+    "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check:types": "tsc --noEmit",
+    "test": "vitest",
+    "test:unit": "vitest --run"
+  },
+  "dependencies": {
+    "@0no-co/graphql.web": "1.2.0",
+    "@wollybeard/kit": "^0.98.0"
+  },
+  "peerDependencies": {
+    "graphql": "14 - 16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graffle-js/graffle.git",
+    "directory": "packages/graphql"
+  },
+  "keywords": [
+    "graphql",
+    "schema",
+    "document",
+    "utilities"
+  ],
+  "author": {
+    "name": "Jason Kuhrt",
+    "email": "jasonkuhrt@me.com",
+    "url": "https://kuhrt.me"
+  },
+  "license": "MIT"
+}

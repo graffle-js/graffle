@@ -1,0 +1,4 @@
+
+> @graffle/graphql@0.1.0 build /Users/jasonkuhrt/projects/jasonkuhrt/graffle/packages/graphql
+> tsc --build tsconfig.build.json
+

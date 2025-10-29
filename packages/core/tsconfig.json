@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./src",
+    "noEmit": true
+  },
+  "references": [
+    { "path": "../graphql" },
+    { "path": "../document" }
+  ],
+  "include": ["src/**/*"],
+  "exclude": ["build", "node_modules"]
+}

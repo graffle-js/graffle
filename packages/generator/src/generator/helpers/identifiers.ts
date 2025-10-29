@@ -1,0 +1,15 @@
+export const $ = {
+  $$Schema: `$$Schema`,
+  $$Scalar: `$$Scalar`,
+  $$SelectionSets: `$$SelectionSets`,
+  $$ArgumentsMap: `$$ArgumentsMap`,
+  $$MethodsSelect: `$$MethodsSelect`,
+  $$MethodsDocument: `$$MethodsDocument`,
+  $$MethodsRoot: `$$MethodsRoot`,
+  $$Data: `$$Data`,
+  $$SchemaDrivenDataMap: `$$SchemaDrivenDataMap`,
+  $$Utilities: `$$Utilities`,
+  Schema: `Schema`,
+  CustomScalars: `CustomScalars`,
+  StandardScalar: `StandardScalar`,
+}

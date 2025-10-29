@@ -1,0 +1,35 @@
+{
+  "name": "@graffle/extension-upload",
+  "version": "0.1.0",
+  "description": "Graffle extension: Upload",
+  "type": "module",
+  "exports": {
+    ".": "./build/index.js"
+  },
+  "files": ["build", "src"],
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "build:emit": "tsc --build tsconfig.build.json --noCheck",
+    "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
+    "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check:types": "tsc --noEmit",
+    "test": "vitest",
+    "test:unit": "vitest --run"
+  },
+  "dependencies": {
+    "@graffle/core": "workspace:*",
+    "@wollybeard/kit": "^0.98.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graffle-js/graffle.git",
+    "directory": "packages/extensions/upload"
+  },
+  "keywords": ["graphql", "graffle", "extension"],
+  "author": {
+    "name": "Jason Kuhrt",
+    "email": "jasonkuhrt@me.com",
+    "url": "https://kuhrt.me"
+  },
+  "license": "MIT"
+}

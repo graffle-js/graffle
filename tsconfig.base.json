@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node-lts/tsconfig.json"
+  ],
+  "compilerOptions": {
+    // Package
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+
+    // Output
+    "verbatimModuleSyntax": true,
+
+    // DX
+    "moduleDetection": "force",
+    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
+    "noErrorTruncation": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // DX covered by ESLint:
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
+    // DX for Downstream
+    "isolatedModules": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Project references
+    "composite": true
+  },
+  "exclude": ["build", "dist", "node_modules"]
+}

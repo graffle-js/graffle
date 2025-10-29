@@ -1,0 +1,48 @@
+{
+  "name": "@graffle/core",
+  "version": "0.1.0",
+  "description": "Graffle-specific shared infrastructure including context system and extension base",
+  "type": "module",
+  "exports": {
+    ".": "./build/index.js",
+    "./context": "./build/context/index.js",
+    "./types": "./build/types/index.js",
+    "./extension": "./build/extension.js",
+    "./utils": "./build/utils.js"
+  },
+  "files": [
+    "build",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "build:emit": "tsc --build tsconfig.build.json --noCheck",
+    "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
+    "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check:types": "tsc --noEmit",
+    "test": "vitest",
+    "test:unit": "vitest --run"
+  },
+  "dependencies": {
+    "@graffle/graphql": "workspace:*",
+    "@wollybeard/kit": "^0.98.0",
+    "type-fest": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graffle-js/graffle.git",
+    "directory": "packages/core"
+  },
+  "keywords": [
+    "graphql",
+    "graffle",
+    "context",
+    "extension"
+  ],
+  "author": {
+    "name": "Jason Kuhrt",
+    "email": "jasonkuhrt@me.com",
+    "url": "https://kuhrt.me"
+  },
+  "license": "MIT"
+}
