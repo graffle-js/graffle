@@ -1,5 +1,5 @@
-import { Var } from '@graffle/document/object/var/$.js'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Var } from '@graffle/document/object/var/_.js'
+import { Possible } from '@test/fixtures/schemas/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse, print } from 'graphql'
 import { expect, test } from 'vitest'

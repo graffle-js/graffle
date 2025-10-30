@@ -1,7 +1,7 @@
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 import type { Ts, Tup } from '@wollybeard/kit'
-import type { Transport } from '../dataType/$.js'
+import type { Transport } from '../dataType/_.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
 
 export const addMany = <

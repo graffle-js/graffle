@@ -1,1 +1,1 @@
-export * as Nodes from './document.js'
+export * as Nodes from './document/ast.js'

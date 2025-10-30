@@ -1,4 +1,4 @@
-import type { Schema } from './$.js'
+import type { Schema } from './_.js'
 import type { __typename } from './nodes/__typename.js'
 import type { List } from './nodes/List.js'
 import type { Nullable } from './nodes/Nullable.js'

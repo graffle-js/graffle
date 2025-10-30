@@ -1,4 +1,4 @@
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import { GraffleBasic } from '#src/exports/presets/basic.js'
 import { Grafaid } from '#src/lib/grafaid/$.js'
 import type { Schema } from '#src/types/Schema/$.js'

@@ -1,6 +1,6 @@
 import { Grafaid } from '@graffle/graphql'
 
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 import { Str } from '@wollybeard/kit'
 
 const propertyNames = Docpar.propertyNames

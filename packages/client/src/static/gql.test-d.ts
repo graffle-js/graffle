@@ -1,9 +1,9 @@
 // dprint-ignore-file
 import type { Grafaid } from '@graffle/graphql'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Possible } from '@test/fixtures/schemas/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import { $ } from '@graffle/document/object/var/var.js'
-import type { Core } from '@graffle/document/core/$.js'
+import type { Core } from '@graffle/document/core/_.js'
 import { test } from 'vitest'
 
 type D<$Op extends Core.Operation> = Core.Doc.Document<$Op>

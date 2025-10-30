@@ -1,5 +1,5 @@
-import { ATransport, BTransport } from '#test/fixtures/transports'
-import { test as t } from '#test/helpers'
+import { ATransport, BTransport } from '@test/fixtures/transports'
+import { test as t } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import type { ContextEmpty } from '../../../ContextEmpty.js'
 import { type AddMany, addMany } from './addMany.js'

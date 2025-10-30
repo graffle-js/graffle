@@ -3,8 +3,8 @@ import {
   type ContextFragmentTransportsEmpty,
   contextFragmentTransportsEmpty,
 } from '@graffle/core/fragments/transports/fragment.js'
-import { ATransport, ATransportBuilder, BTransport } from '#test/fixtures/transports'
-import { test } from '#test/helpers'
+import { ATransport, ATransportBuilder, BTransport } from '@test/fixtures/transports'
+import { test } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { create } from '../client.js'

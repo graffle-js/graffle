@@ -1,7 +1,7 @@
 import type { ExecutionResult, GraphQLSchema } from 'graphql'
 import { execute as graphqlExecute, graphql } from 'graphql'
 import type { RequestInput } from './graphql.js'
-import { TypedDocument } from './typed-document/$.js'
+import { TypedDocument } from './typed-document/_.js'
 
 export type ExecuteParameters = {
   request: RequestInput

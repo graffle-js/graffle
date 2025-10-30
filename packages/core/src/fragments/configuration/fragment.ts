@@ -1,8 +1,8 @@
 import type { Configurator } from '@wollybeard/kit'
-import { Check } from './check/$.js'
+import { Check } from './check/_.js'
 import { createEntry } from './createEntry.js'
-import { Output } from './output/$.js'
-import { Schema } from './schema/$.js'
+import { Output } from './output/_.js'
+import { Schema } from './schema/_.js'
 
 export interface ContextFragment {
   readonly configuration: {

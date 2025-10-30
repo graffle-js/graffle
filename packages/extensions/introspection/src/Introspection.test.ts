@@ -1,5 +1,5 @@
 import { GraffleBasic } from '#graffle/presets/basic'
-import { test } from '#test/helpers'
+import { test } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import type { IntrospectionQuery } from 'graphql'
 import { expect } from 'vitest'

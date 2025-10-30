@@ -1,5 +1,5 @@
 import type { HandleOutput } from '@graffle/client/handle.js'
-import type { Docpar } from '@graffle/document/$.js'
+import type { Docpar } from '@graffle/document/_.js'
 import { Arr, type Ts } from '@wollybeard/kit'
 
 // dprint-ignore

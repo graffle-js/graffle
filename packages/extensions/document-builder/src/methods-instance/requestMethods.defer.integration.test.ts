@@ -4,7 +4,7 @@
  * Tests the core functionality of variable detection and the decision
  * to auto-execute vs defer based on whether variables are present.
  */
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 import { describe, expect, test } from 'vitest'
 
 describe('deferred execution - variable detection', () => {

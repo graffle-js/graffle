@@ -1,7 +1,7 @@
 import { Ts } from '@wollybeard/kit'
 import { Configurator } from '@wollybeard/kit'
 import { expect, test } from 'vitest'
-import { contextEmpty } from '../../../$$.js'
+import { contextEmpty } from '../../../__.js'
 import { addType } from './addType.js'
 
 const nameA = `a`

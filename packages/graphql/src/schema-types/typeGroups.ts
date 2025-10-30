@@ -1,4 +1,4 @@
-import type { InputObject } from './$$.js'
+import type { InputObject } from './__.js'
 import type { __typename } from './nodes/__typename.js'
 import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'

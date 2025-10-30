@@ -6,10 +6,10 @@ import {
   propertiesComputerPreflight$Func,
   propertiesStatic1,
 } from '@graffle/core/fragments/properties/_tests/_fixtures.js'
-import { test } from '#test/helpers'
+import { test } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
-import { type Configuration } from '../../context/fragments/configuration/$.js'
+import { type Configuration } from '../../context/fragments/configuration/_.js'
 import { type Client_justContext } from '../client.js'
 
 test(`initial context is empty`, ({ g0 }) => {

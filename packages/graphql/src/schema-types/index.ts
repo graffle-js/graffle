@@ -1,2 +1,2 @@
-export * from './$.js'
+export * from './_.js'
 export * from './global.js'

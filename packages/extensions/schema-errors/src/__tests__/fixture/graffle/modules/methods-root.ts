@@ -1,7 +1,7 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$ArgumentsMap from './arguments-map.js'
-import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets/$.js'
+import type * as $$Schema from './schema/_.js'
+import type * as $$SelectionSets from './selection-sets/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.

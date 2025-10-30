@@ -1,11 +1,11 @@
 import { type GlobalRegistry } from '#graffle/utilities-for-generated'
 import { contextEmpty } from '@graffle/core/ContextEmpty.js'
-import type { Docpar } from '@graffle/document/$.js'
-import { AScalar, BScalar } from '#test/fixtures/scalars'
-import { g0, test } from '#test/helpers'
+import type { Docpar } from '@graffle/document/_.js'
+import { AScalar, BScalar } from '@test/fixtures/scalars'
+import { g0, test } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import { expect } from 'vitest'
-import type { Schema } from '../../types/Schema/$.js'
+import type { Schema } from '../../types/Schema/_.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 import type { ScalarMethod } from './scalars.js'

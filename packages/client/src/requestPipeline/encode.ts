@@ -1,6 +1,6 @@
 import { Schema } from '#graffle/schema'
 import { Grafaid } from '@graffle/graphql'
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 

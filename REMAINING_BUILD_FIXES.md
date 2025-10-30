@@ -19,8 +19,8 @@ Many files in `packages/graphql/src/document/` still reference old path aliases:
 
 Some imports reference modules that don't exist or were moved:
 - `@graffle/graphql/_Nodes.js` → doesn't exist
-- `@graffle/graphql/typed-document/$.js` → path needs verification
-- `./string/$.js` → disabled but still referenced (now commented out in $$.ts)
+- `@graffle/graphql/typed-document/_.js` → path needs verification
+- `./string/_.js` → disabled but still referenced (now commented out in __.ts)
 
 **Fix strategy**: Find correct paths or stub out missing modules
 

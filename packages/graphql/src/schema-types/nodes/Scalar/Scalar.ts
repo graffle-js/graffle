@@ -1,12 +1,12 @@
-import type { Grafaid } from '../../$$.js'
+import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
 import type { Codec } from './codec.js'
 
-export * as Scalar from './$$.js'
+export * as Scalar from './__.js'
 
 export interface Scalar<
   $Name extends string = string,
   $Decoded = unknown,
-  $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes = Grafaid.Schema.StandardScalarRuntimeTypes,
+  $Encoded extends StandardScalarRuntimeTypes = StandardScalarRuntimeTypes,
 > {
   kind: 'Scalar'
   name: $Name

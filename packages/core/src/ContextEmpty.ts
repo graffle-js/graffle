@@ -1,11 +1,11 @@
 import { Arr } from '@wollybeard/kit'
 import type { Context } from './context.js'
-import { Configuration } from './fragments/configuration/$.js'
-import { Extensions } from './fragments/extensions/$.js'
-import { Properties } from './fragments/properties/$.js'
-import { RequestInterceptors } from './fragments/requestInterceptors/$.js'
-import { Scalars } from './fragments/scalars/$.js'
-import { Transports } from './fragments/transports/$.js'
+import { Configuration } from './fragments/configuration/_.js'
+import { Extensions } from './fragments/extensions/_.js'
+import { Properties } from './fragments/properties/_.js'
+import { RequestInterceptors } from './fragments/requestInterceptors/_.js'
+import { Scalars } from './fragments/scalars/_.js'
+import { Transports } from './fragments/transports/_.js'
 
 export interface ContextEmpty extends Context {
   readonly properties: Properties.ContextFragmentEmpty['properties']

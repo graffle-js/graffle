@@ -12,6 +12,7 @@
     "build:emit": "tsc --build tsconfig.build.json --noCheck",
     "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
     "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check": "pnpm run '/check:.*/'",
     "check:types": "tsc --noEmit",
     "test": "vitest",
     "test:unit": "vitest --run"
@@ -19,6 +20,9 @@
   "dependencies": {
     "@graffle/core": "workspace:*",
     "@wollybeard/kit": "^0.98.0"
+  },
+  "devDependencies": {
+    "@test/fixtures": "workspace:*"
   },
   "repository": {
     "type": "git",

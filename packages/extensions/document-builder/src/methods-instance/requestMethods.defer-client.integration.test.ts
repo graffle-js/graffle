@@ -10,7 +10,7 @@
  */
 import { $ } from '#graffle'
 import { describe, expect, test } from 'vitest'
-import { Pokemon } from '../../../../tests/_/fixtures/schemas/pokemon/client/$.js'
+import { Pokemon } from '../../../../tests/_/fixtures/schemas/pokemon/client/_.js'
 
 describe('deferred execution - end to end', () => {
   describe('without variables - auto-executes', () => {

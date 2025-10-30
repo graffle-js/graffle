@@ -1,0 +1,30 @@
+{
+  "name": "@test/fixtures",
+  "version": "0.0.0",
+  "description": "Test fixtures and utilities for Graffle monorepo",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./schemas/*": "./src/fixtures/schemas/*",
+    "./scalars": "./src/fixtures/scalars.ts",
+    "./transports": "./src/fixtures/transports.ts",
+    "./helpers": "./src/helpers.ts",
+    "./spy": "./src/SpyExtension.ts",
+    "./lib/*": "./src/lib/*",
+    "./services/*": "./src/services/*"
+  },
+  "scripts": {
+    "check": "pnpm run '/check:.*/'",
+    "check:types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@0no-co/graphql.web": "1.2.0",
+    "@graffle/generator": "workspace:*",
+    "@wollybeard/kit": "^0.98.0",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "vitest": "^2.0.0"
+  }
+}

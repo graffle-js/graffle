@@ -27,11 +27,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "isolatedModules": false,
-    "verbatimModuleSyntax": true,
-    "paths": {
-      "#test/schema/*": ["../tests/_/fixtures/schemas/*.ts"],
-      "#test/*": ["../tests/_/*.ts"]
-    }
+    "verbatimModuleSyntax": true
   },
   "include": ["."]
 }

@@ -1,4 +1,4 @@
-import type { Docpar } from '#src/docpar/$.js'
+import type { Docpar } from '#~/docpar/_.js'
 
 type InlineType = Docpar.InlineType
 import type { NamedInputTypes } from '../typeGroups.js'

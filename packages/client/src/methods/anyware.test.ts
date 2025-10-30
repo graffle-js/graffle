@@ -1,8 +1,8 @@
-import { ATransport, BTransport } from '#test/fixtures/transports'
-import { g0, test } from '#test/helpers'
+import { ATransport, BTransport } from '@test/fixtures/transports'
+import { g0, test } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import { expect } from 'vitest'
-import { RequestInterceptors } from '../../context/fragments/requestInterceptors/$.js'
+import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_.js'
 
 const g1 = g0.transport(ATransport)
 

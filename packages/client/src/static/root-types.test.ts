@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql'
 import { describe, expect, test } from 'vitest'
-import { Docpar } from '../docpar/$.js'
+import { Docpar } from '../docpar/_.js'
 
 describe('createStaticRootType', () => {
   const query = Docpar.Object.Static.createStaticRootType(OperationTypeNode.QUERY)

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ES2023", "DOM"],
+    "paths": {
+      "#~/*": ["src/*"]
+    },
+    "composite": false,
+    "noEmit": true
+  },
+  "include": ["src/**/*"]
+}

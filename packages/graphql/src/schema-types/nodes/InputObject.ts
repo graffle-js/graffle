@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../$$.js'
+import { TypeKind } from '#~/schema/schema.js'
 import type { InputFields } from './InputField.js'
 
 export interface InputObject<
@@ -6,7 +6,7 @@ export interface InputObject<
   $Fields extends InputFields = InputFields,
   $IsFieldsAllNullable extends boolean = boolean,
 > {
-  kind: Grafaid.Schema.TypeKind.InputObject
+  kind: TypeKind.InputObject
   name: $Name
   fields: $Fields
   isAllFieldsNullable: $IsFieldsAllNullable

@@ -1,6 +1,6 @@
-import type { Possible } from '#test/schema/possible/client/$.js'
-import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
-import { db } from '#test/schema/possible/db.js'
+import type { Possible } from '@test/fixtures/schemas/possible/client/$.js'
+import type { PossibleNoCustomScalars } from '@test/fixtures/schemas/possible/clientNoCustomScalars/$.js'
+import { db } from '@test/fixtures/schemas/possible/db.js'
 import { Ts } from '@wollybeard/kit'
 import { test } from 'vitest'
 

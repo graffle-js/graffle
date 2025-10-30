@@ -209,7 +209,7 @@ const generateRootIndexFile = (
     // e.g., ['args', 'no'] → 'argsNo', ['pokemon-species'] → 'pokemonSpecies'
     const exportName = Str.Case.camel(fullPath)
 
-    lines.push(`export * as ${exportName} from './${fullPath}/$$.js'`)
+    lines.push(`export * as ${exportName} from './${fullPath}/__.js'`)
   }
 
   return lines.join('\n')

@@ -1,9 +1,9 @@
 import type { Grafaid } from '@graffle/graphql'
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 import { Graffle } from '#src/exports/index.js'
 
 const $ = Docpar.Var.$
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Possible } from '@test/fixtures/schemas/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 
 const client = Possible.create()
@@ -269,9 +269,9 @@ clientWithoutSDDM.gql(sddmDoc)
 //                           TRANSPORT PREFLIGHT CHECKS
 // ==================================================================================================
 
-import type { Context } from '@graffle/core/$.js'
-import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '#test/fixtures/transports'
-import { g0 } from '#test/helpers'
+import type { Context } from '@graffle/core/_.js'
+import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '@test/fixtures/transports'
+import { g0 } from '@test/fixtures/helpers'
 
 const g1 = g0.transport(ATransport)
 const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)

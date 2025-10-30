@@ -9,6 +9,9 @@
     "./cli": "./build/cli/index.js",
     "./helpers/standard-scalar-types": "./build/helpers/standard-scalar-types.js"
   },
+  "imports": {
+    "#~/*": "./build/*"
+  },
   "files": ["build", "src"],
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
@@ -16,6 +19,7 @@
     "build:emit": "tsc --build tsconfig.build.json --noCheck",
     "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
     "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check": "pnpm run '/check:.*/'",
     "check:types": "tsc --noEmit",
     "test": "vitest",
     "test:unit": "vitest --run"
@@ -36,6 +40,9 @@
     "prettier": { "optional": true },
     "@dprint/formatter": { "optional": true },
     "@dprint/typescript": { "optional": true }
+  },
+  "devDependencies": {
+    "@test/fixtures": "workspace:*"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 import { Graffle } from '#graffle'
-import { db } from '#test/schema/possible/db.js'
-import { possibleSchema } from '#test/schema/possible/schema.js'
+import { db } from '@test/fixtures/schemas/possible/db.js'
+import { possibleSchema } from '@test/fixtures/schemas/possible/schema.js'
 import { Err } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'

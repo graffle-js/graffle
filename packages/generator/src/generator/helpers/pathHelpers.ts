@@ -177,7 +177,7 @@ export const buildPath = (...segments: string[]): string => {
  * ```typescript
  * buildImportPath(config, '..', '..', 'scalar') // '../../scalar.js' (jsExtension)
  * buildImportPath(config, 'fields') // './fields.js' (jsExtension)
- * buildImportPath(config, 'schema', '$') // 'schema/$.js' (jsExtension)
+ * buildImportPath(config, 'schema', '$') // 'schema/_.js' (jsExtension)
  * ```
  */
 export const buildImportPath = (config: Config, ...segments: string[]): string => {

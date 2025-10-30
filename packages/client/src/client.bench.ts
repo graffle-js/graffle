@@ -1,7 +1,7 @@
 import type { ContextEmpty } from '@graffle/core/ContextEmpty.js'
 import { bench } from '@ark/attest'
-import { Configuration } from '../context/fragments/configuration/$.js'
-import { Transports } from '../context/fragments/transports/$.js'
+import { Configuration } from '../context/fragments/configuration/_.js'
+import { Transports } from '../context/fragments/transports/_.js'
 import type { Client } from './client.js'
 
 // Baseline: amortize the base cost of Client<ContextEmpty>

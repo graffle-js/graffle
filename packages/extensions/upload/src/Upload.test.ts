@@ -7,7 +7,7 @@ import * as UploadSchema from './__fixtures__/schema.js'
 import { Upload } from './Upload.js'
 
 import type { GraffleKit } from '#graffle/kit'
-import { type SchemaService, serveSchema } from '#test/lib/serveSchema'
+import { type SchemaService, serveSchema } from '@test/fixtures/lib/serveSchema.js'
 
 interface Context {
   graffle: Graffle.Client<

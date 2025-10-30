@@ -4,10 +4,10 @@ import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
-import type * as SelectionSets from './selection-sets/$.js'
+import type * as SelectionSets from './selection-sets/_.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $$Schema from './schema/$.js'
+import type * as $$Schema from './schema/_.js'
 
 /**
  * Context for static document type inference.

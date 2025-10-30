@@ -1,7 +1,8 @@
-import type { Grafaid } from '../../$$.js'
+
 import type { Scalar } from './Scalar.js'
 
-export const create = <$Name extends string, $Decoded, $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes>(
+import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
+export const create = <$Name extends string, $Decoded, $Encoded extends StandardScalarRuntimeTypes>(
   name: $Name,
   codec: {
     encode: (value: $Decoded) => $Encoded

@@ -1,5 +1,5 @@
-import { ATransport, BTransport } from '#test/fixtures/transports'
-import { test } from '#test/helpers'
+import { ATransport, BTransport } from '@test/fixtures/transports'
+import { test } from '@test/fixtures/helpers'
 import { Ts } from '@wollybeard/kit'
 import { addMany } from './addMany.js'
 

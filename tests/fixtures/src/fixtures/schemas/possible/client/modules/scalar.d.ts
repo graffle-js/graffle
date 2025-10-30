@@ -1,0 +1,62 @@
+import type * as $$Utilities from '#graffle/utilities-for-generated';
+import * as CustomScalars from '../../scalars.js';
+/**
+ * Custom scalar codec for the `Date` type.
+ *
+ * Handles encoding (TypeScript → GraphQL) and decoding (GraphQL → TypeScript)
+ * transformations for this custom scalar.
+ */
+export declare const Date: import("../../../../../../../build/exports/index.js").Scalar<"Date", globalThis.Date, string>;
+export type Date = typeof CustomScalars.Date;
+/**
+ * The decoded (TypeScript-side) type for the `Date` scalar.
+ *
+ * This is the type you work with in your application code after the scalar
+ * has been decoded from its GraphQL wire format.
+ */
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date>;
+/**
+ * The encoded (GraphQL wire format) type for the `Date` scalar.
+ *
+ * This is the type used when transmitting the scalar value over the network.
+ */
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date>;
+/**
+ * Custom scalar codec for the `bigint` type.
+ *
+ * Handles encoding (TypeScript → GraphQL) and decoding (GraphQL → TypeScript)
+ * transformations for this custom scalar.
+ */
+declare const $bigint: import("../../../../../../../build/exports/index.js").Scalar<"bigint", bigint, string>;
+type $bigint = typeof CustomScalars.bigint;
+export { $bigint as bigint };
+/**
+ * The decoded (TypeScript-side) type for the `bigint` scalar.
+ *
+ * This is the type you work with in your application code after the scalar
+ * has been decoded from its GraphQL wire format.
+ */
+export type bigintDecoded = $$Utilities.Schema.Scalar.GetDecoded<$bigint>;
+/**
+ * The encoded (GraphQL wire format) type for the `bigint` scalar.
+ *
+ * This is the type used when transmitting the scalar value over the network.
+ */
+export type bigintEncoded = $$Utilities.Schema.Scalar.GetEncoded<$bigint>;
+export * from '#graffle/generator-helpers/standard-scalar-types';
+/**
+ * Runtime registry of custom scalar codecs.
+ *
+ * Maps scalar type names to their codec implementations for encoding/decoding.
+ */
+export declare const $registry: $Registry;
+/**
+ * Type-level registry of custom scalars.
+ *
+ * Provides type information about custom scalars for the type system.
+ */
+export type $Registry = $$Utilities.Schema.Scalar.Registry<{
+    Date: Date;
+    bigint: $bigint;
+}, $$Utilities.Schema.Scalar.GetEncoded<Date> | $$Utilities.Schema.Scalar.GetEncoded<$bigint>, $$Utilities.Schema.Scalar.GetDecoded<Date> | $$Utilities.Schema.Scalar.GetDecoded<$bigint>>;
+//# sourceMappingURL=scalar.d.ts.map

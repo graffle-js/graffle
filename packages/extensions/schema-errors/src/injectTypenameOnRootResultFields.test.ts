@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
-import { Docpar } from '../../docpar/$.js'
+import { Docpar } from '../../docpar/_.js'
 import { graffleMappedResultToRequest } from '../DocumentBuilder/methods-instance/requestMethods.js'
-import { GraffleSchemaErrors } from './__tests__/fixture/graffle/$.js'
+import { GraffleSchemaErrors } from './__tests__/fixture/graffle/_.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
 type CasesQuery = [

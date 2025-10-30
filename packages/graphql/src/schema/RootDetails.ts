@@ -1,5 +1,5 @@
 import type { GraphQLObjectType } from 'graphql'
-import { type OperationType, RootTypeToOperationType } from '../document.js'
+import { type OperationType, RootTypeToOperationType } from '../document/ast.js'
 import type { RootTypeMap } from './RootTypeMap.js'
 import { type StandardRootTypeName } from './StandardRootTypeName.js'
 

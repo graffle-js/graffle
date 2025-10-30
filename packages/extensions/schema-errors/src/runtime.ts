@@ -2,7 +2,7 @@ import { Extension } from '@graffle/core/extension'
 import { normalizeRequestToNode } from '@graffle/graphql/request.js'
 import { Err, Rec, Str } from '@wollybeard/kit'
 
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 // import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 

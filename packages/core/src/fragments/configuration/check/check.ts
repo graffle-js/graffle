@@ -1,5 +1,5 @@
 import { Configurator } from '@wollybeard/kit'
-import type { Transports } from '../../transports/$.js'
+import type { Transports } from '../../transports/_.js'
 import type * as Helpers from './helpers.js'
 
 /**

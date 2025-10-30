@@ -1,5 +1,5 @@
 import { type Fs, writeFileAndCreateDir } from '#src/lib/fsp.js'
-import { test } from '#test/helpers'
+import { test } from '@test/fixtures/helpers'
 import * as Memfs from 'memfs'
 import * as Path from 'node:path'
 import { describe, expect } from 'vitest'

@@ -1,8 +1,8 @@
 import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
-import type { Grafaid } from './$.js'
-import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
-import type { TypedDocument } from './typed-document/$.js'
+import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
+import { getOperationDefinition, normalizeDocumentToNode } from './document/ast.js'
+import type { TypedDocument } from './typed-document/_.js'
 
 export interface RequestInput {
   query: string | TypedDocument.TypedDocumentLike
@@ -65,8 +65,8 @@ export type SomeObjectData = {
 
 export type SomeFieldData =
   | null
-  | Grafaid.Schema.StandardScalarRuntimeTypes
-  | Grafaid.Schema.StandardScalarRuntimeTypes[]
+  | StandardScalarRuntimeTypes
+  | StandardScalarRuntimeTypes[]
   | {
     [fieldName: string]: SomeFieldData
   }

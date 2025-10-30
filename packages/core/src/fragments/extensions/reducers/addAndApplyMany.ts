@@ -1,12 +1,12 @@
 import type { Ts, Tup } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { Context } from '../../../context.js'
-import { Configuration } from '../../configuration/$.js'
-import { Properties } from '../../properties/$.js'
-import { RequestInterceptors } from '../../requestInterceptors/$.js'
-import { Transports } from '../../transports/$.js'
+import { Configuration } from '../../configuration/_.js'
+import { Properties } from '../../properties/_.js'
+import { RequestInterceptors } from '../../requestInterceptors/_.js'
+import { Transports } from '../../transports/_.js'
 import type { Data } from '../../transports/dataType/data.js'
-import type { Extension } from '../dataType/$.js'
+import type { Extension } from '../dataType/_.js'
 
 // dprint-ignore
 export type AddAndApplyMany<

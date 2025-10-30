@@ -1,4 +1,4 @@
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import { Grafaid } from '#src/lib/grafaid/$.js'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'

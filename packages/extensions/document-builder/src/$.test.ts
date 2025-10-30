@@ -1,8 +1,8 @@
 import { Grafaid } from '@graffle/graphql'
-import { Docpar } from '@graffle/document/$.js'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Docpar } from '@graffle/document/_.js'
+import { Possible } from '@test/fixtures/schemas/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
-import { Var } from './$$.js'
+import { Var } from './__.js'
 
 const $ = Var.$
 

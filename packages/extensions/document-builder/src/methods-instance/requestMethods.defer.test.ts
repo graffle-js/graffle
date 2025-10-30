@@ -1,4 +1,4 @@
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 import { describe, expect, test } from 'vitest'
 
 const $ = Docpar.Object.Var.$

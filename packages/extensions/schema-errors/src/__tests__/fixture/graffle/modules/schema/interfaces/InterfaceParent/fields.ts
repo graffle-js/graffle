@@ -1,5 +1,5 @@
 import type * as $ from '#graffle/utilities-for-generated'
-import type { Schema as $Schema } from '../../$.js'
+import type { Schema as $Schema } from '../../_.js'
 
 /**
  * GraphQL `__typename` meta-field. The name of the object type currently being queried.

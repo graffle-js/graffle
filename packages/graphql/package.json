@@ -6,11 +6,16 @@
   "exports": {
     ".": "./build/index.js",
     "./document": "./build/document.js",
-    "./document-types": "./build/document/$$.js",
+    "./document-types": "./build/document/__.js",
     "./schema": "./build/schema/index.js",
     "./http": "./build/http.js",
     "./execute": "./build/execute.js",
-    "./schema-types": "./build/schema-types/index.js"
+    "./schema-types": "./build/schema-types/index.js",
+    "./_Nodes.js": "./build/_Nodes.js",
+    "./typed-document/_.js": "./build/typed-document/_.js"
+  },
+  "imports": {
+    "#~/*": "./build/*"
   },
   "files": [
     "build",
@@ -21,6 +26,7 @@
     "build:emit": "tsc --build tsconfig.build.json --noCheck",
     "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
     "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check": "pnpm run '/check:.*/'",
     "check:types": "tsc --noEmit",
     "test": "vitest",
     "test:unit": "vitest --run"
@@ -31,6 +37,9 @@
   },
   "peerDependencies": {
     "graphql": "14 - 16"
+  },
+  "devDependencies": {
+    "@test/fixtures": "workspace:*"
   },
   "repository": {
     "type": "git",

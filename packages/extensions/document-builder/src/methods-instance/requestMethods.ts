@@ -1,7 +1,7 @@
 import type { Grafaid } from '@graffle/graphql'
 import { sendRequest } from '@graffle/client/send.js'
 import { type Context } from '@graffle/core/context.js'
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 import { getOperationDefinition } from '@graffle/graphql/document.js'
 import { Lang } from '@wollybeard/kit'
 import { OperationTypeNode, print } from 'graphql'

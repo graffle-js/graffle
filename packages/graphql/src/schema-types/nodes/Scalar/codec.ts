@@ -1,8 +1,8 @@
-import type { Grafaid } from '../../$$.js'
+import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
 
 export interface Codec<
   $Decoded = any,
-  $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes = Grafaid.Schema.StandardScalarRuntimeTypes,
+  $Encoded extends StandardScalarRuntimeTypes = StandardScalarRuntimeTypes,
 > {
   encode: <$$Decoded extends $Decoded>(value: $$Decoded) => $Encoded
   decode: <$$Encoded extends $Encoded>(value: $$Encoded) => $Decoded
@@ -10,7 +10,7 @@ export interface Codec<
   _typeDecoded: $Decoded
 }
 
-export const createCodec = <$Decoded, $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes>(codec: {
+export const createCodec = <$Decoded, $Encoded extends StandardScalarRuntimeTypes>(codec: {
   encode: (value: $Decoded) => $Encoded
   decode: (value: $Encoded) => $Decoded
 }): Codec<$Decoded, $Encoded> => codec as any

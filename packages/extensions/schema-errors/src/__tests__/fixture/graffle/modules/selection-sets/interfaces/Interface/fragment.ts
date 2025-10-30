@@ -1,6 +1,6 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
-import type { Interface } from './$.js'
+import type { Interface } from './_.js'
 
 export interface $FragmentInline<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,

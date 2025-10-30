@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "lib": ["ES2023", "DOM"],
-    "outDir": "./build",
-    "rootDir": "./src",
-    "noEmit": true
+    "paths": {
+      "#~/*": ["src/*"]
+    }
   },
   "include": ["src/**/*"],
-  "exclude": ["build", "node_modules"]
+  "references": []
 }

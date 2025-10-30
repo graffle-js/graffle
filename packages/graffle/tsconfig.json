@@ -1,9 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./build",
-    "rootDir": "./src",
-    "noEmit": true
+    "baseUrl": ".",
+    "paths": {
+      "#~/*": ["src/*"]
+    }
   },
   "references": [
     { "path": "../client" },
@@ -16,7 +17,5 @@
     { "path": "../extensions/transport-http" },
     { "path": "../extensions/transport-memory" },
     { "path": "../extensions/upload" }
-  ],
-  "include": ["src/**/*"],
-  "exclude": ["build", "node_modules"]
+  ]
 }

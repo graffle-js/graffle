@@ -1,6 +1,6 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
-import type { lowerCaseUnion } from './$.js'
+import type { lowerCaseUnion } from './_.js'
 
 export interface $FragmentInline<
   _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,

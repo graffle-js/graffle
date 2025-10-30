@@ -10,6 +10,7 @@
 
     // Output
     "verbatimModuleSyntax": true,
+    "noEmit": true,
 
     // DX
     "moduleDetection": "force",

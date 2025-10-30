@@ -1,4 +1,4 @@
-import { Docpar } from '@graffle/document/$.js'
+import { Docpar } from '@graffle/document/_.js'
 import { OperationTypeNode } from 'graphql'
 
 /**
