@@ -1,0 +1,56 @@
+{
+  "name": "@graffle/generator",
+  "version": "0.1.0",
+  "description": "Code generator library for Graffle GraphQL clients",
+  "type": "module",
+  "exports": {
+    ".": "./build/index.js",
+    "./helpers/standard-scalar-types": "./build/helpers/standard-scalar-types.js"
+  },
+  "imports": {
+    "#~/*": "./build/*"
+  },
+  "files": ["build", "src"],
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "build:emit": "tsc --build tsconfig.build.json --noCheck",
+    "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
+    "dev": "tsc --build tsconfig.build.json --watch --noCheck",
+    "check": "pnpm run '/check:.*/'",
+    "check:types": "tsc --noEmit",
+    "test": "vitest",
+    "test:unit": "vitest --run"
+  },
+  "dependencies": {
+    "@graffle/core": "workspace:*",
+    "@graffle/graphql": "workspace:*",
+    "@graffle/extension-introspection": "workspace:*",
+    "@wollybeard/kit": "^0.98.0",
+    "ts-morph": "^27.0.2"
+  },
+  "peerDependencies": {
+    "@dprint/formatter": "^0.4.0",
+    "@dprint/typescript": "^0.93.0",
+    "prettier": "^3.3.3"
+  },
+  "peerDependenciesMeta": {
+    "prettier": { "optional": true },
+    "@dprint/formatter": { "optional": true },
+    "@dprint/typescript": { "optional": true }
+  },
+  "devDependencies": {
+    "@test/fixtures": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graffle-js/graffle.git",
+    "directory": "packages/generator"
+  },
+  "keywords": ["graphql", "generator", "codegen"],
+  "author": {
+    "name": "Jason Kuhrt",
+    "email": "jasonkuhrt@me.com",
+    "url": "https://kuhrt.me"
+  },
+  "license": "MIT"
+}

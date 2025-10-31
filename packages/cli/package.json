@@ -1,0 +1,43 @@
+{
+  "name": "@graffle/cli",
+  "version": "0.1.0",
+  "description": "CLI for Graffle GraphQL client generator",
+  "type": "module",
+  "bin": {
+    "graffle": "./build/index.js"
+  },
+  "exports": {
+    ".": "./build/index.js"
+  },
+  "imports": {
+    "#~/*": "./build/*"
+  },
+  "files": [
+    "build",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "postbuild": "chmod +x ./build/index.js",
+    "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
+    "check:types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@graffle/generator": "workspace:*",
+    "@molt/command": "^0.9.0",
+    "@wollybeard/kit": "^0.98.0",
+    "zod": "^3.24.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graffle-js/graffle.git",
+    "directory": "packages/cli"
+  },
+  "keywords": [
+    "graphql",
+    "cli",
+    "codegen",
+    "graffle"
+  ],
+  "license": "MIT"
+}

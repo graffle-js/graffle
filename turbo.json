@@ -1,0 +1,57 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["NODE_ENV"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["build/**", "dist/**"],
+      "env": ["NODE_ENV"]
+    },
+    "build:emit": {
+      "dependsOn": ["^build:emit"],
+      "outputs": ["build/**", "dist/**"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"],
+      "cache": false
+    },
+    "test:unit": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "test:integration": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "check:types": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "check:format": {
+      "outputs": [],
+      "cache": false
+    },
+    "check:lint": {
+      "outputs": [],
+      "cache": false
+    },
+    "fix:format": {
+      "outputs": [],
+      "cache": false
+    },
+    "fix:lint": {
+      "outputs": [],
+      "cache": false
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

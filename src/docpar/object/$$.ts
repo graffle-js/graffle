@@ -1,6 +1,0 @@
-export { InferResult } from './InferResult/$.js'
-export type { InferOperation, InferOperations, InferOperationsInDocument, Parse } from './Parse.js'
-export * as Static from './rootType.js'
-export { Select } from './Select/$.js'
-export { ToGraphQLDocument } from './ToGraphQLDocument/$.js'
-export { Var } from './var/$.js'

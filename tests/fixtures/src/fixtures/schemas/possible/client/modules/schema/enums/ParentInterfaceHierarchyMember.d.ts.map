@@ -1,0 +1,1 @@
+{"version":3,"file":"ParentInterfaceHierarchyMember.d.ts","sourceRoot":"","sources":["ParentInterfaceHierarchyMember.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;GAcG;AACH,MAAM,WAAW,8BAA8B;IAC7C,IAAI,EAAE,MAAM,CAAA;IACZ,IAAI,EAAE,gCAAgC,CAAA;IACtC,OAAO,EAAE,CAAC,iBAAiB,EAAE,iBAAiB,EAAE,iBAAiB,CAAC,CAAA;IAClE,YAAY,EACR,iBAAiB,GACjB,iBAAiB,GACjB,iBAAiB,CAAA;CACtB"}
