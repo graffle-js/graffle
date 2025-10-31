@@ -58,6 +58,19 @@ features:
     icon: 🎭
 ---
 
+<div class="sponsors-section">
+
+## Sponsors
+
+<div class="sponsors-grid">
+  <a href="https://github.com/LambdaTest-Inc" target="_blank" rel="noopener noreferrer" class="sponsor-item">
+    <img src="/_assets/sponsors/lambdatest.png" alt="LambdaTest" class="sponsor-logo">
+    <span class="sponsor-name">LambdaTest</span>
+  </a>
+</div>
+
+</div>
+
 ::: warning Pre-Release Software
 Graffle is [still in development](https://github.com/graffle-js/graffle/discussions/1163). Install with `npm install graffle@next graphql` to use the latest pre-release version.
 :::
@@ -231,6 +244,60 @@ const members = [
 </script>
 
 <style>
+/* Sponsors section */
+.sponsors-section {
+  max-width: 960px;
+  margin: 48px auto;
+  padding: 32px 24px;
+  text-align: center;
+  border-top: 1px solid var(--vp-c-divider);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.sponsors-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: var(--vp-c-text-1);
+}
+
+.sponsors-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.sponsor-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sponsor-item:hover {
+  transform: translateY(-4px);
+  opacity: 0.8;
+}
+
+.sponsor-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  padding: 16px;
+}
+
+.sponsor-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
 /* Constrain width of content sections for better readability */
 .VPHome .vp-doc {
   max-width: 960px;
@@ -451,6 +518,29 @@ const members = [
 }
 
 @media (max-width: 767px) {
+  .sponsors-section {
+    margin: 32px auto;
+    padding: 24px 20px;
+  }
+
+  .sponsors-section h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .sponsors-grid {
+    gap: 32px;
+  }
+
+  .sponsor-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .sponsor-name {
+    font-size: 14px;
+  }
+
   .VPHome .vp-doc {
     padding: 0 20px;
   }
