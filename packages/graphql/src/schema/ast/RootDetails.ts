@@ -1,5 +1,6 @@
+import { Document } from '#~/__.js'
+import type { OperationType } from '#~/schema/ast/OperationType/_.js'
 import type { GraphQLObjectType } from 'graphql'
-import { type OperationType, RootTypeToOperationType } from '../document/ast.js'
 import type { RootTypeMap } from './RootTypeMap.js'
 import { type StandardRootTypeName } from './StandardRootTypeName.js'
 
@@ -38,7 +39,7 @@ export const createFromObjectType = (
       alias: null,
     },
     type: objectType,
-    operationType: RootTypeToOperationType[standardName],
+    operationType: Document.Ast.RootTypeToOperationType[standardName],
   }
 }
 

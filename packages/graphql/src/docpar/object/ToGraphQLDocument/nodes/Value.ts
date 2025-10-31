@@ -1,9 +1,8 @@
 import { Document } from '#~/document/_.js'
-import { Select } from '../../Select/_.js'
-import { Nodes } from '#~/_Nodes.js'
-import { Schema } from '#~/schema-types/index.js'
+import { Schema } from '#~/schema/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
+import { Select } from '../../Select/_.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 
@@ -20,15 +19,15 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
   }
 
   if (SDDM.isEnum(sddm?.nt)) {
-    return Nodes.EnumValue({ value: String(value) })
+    return Document.Ast.EnumValue({ value: String(value) })
   }
 
   if (value === null) {
-    return Nodes.NullValue()
+    return Document.Ast.NullValue()
   }
 
   if (Array.isArray(value)) {
-    return Nodes.ListValue({
+    return Document.Ast.ListValue({
       values: value.map(oneValue =>
         toGraphQLValue(
           context,
@@ -41,7 +40,7 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
 
   if (typeof value === `object`) {
     const sddmInputObject = sddm?.nt
-    return Nodes.ObjectValue({
+    return Document.Ast.ObjectValue({
       fields: Object.entries(value).map(([fieldName, fieldValue]) => {
         // When processing input object fields, check for the enum prefix ($) that was
         // preserved by parseSelection. This $ prefix is our signal that this field's
@@ -60,8 +59,8 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
         // Pass enum context down so string values are rendered as enum values
         const fieldContext = isEnumField ? { ...context, value: { isEnum: true } } : context
 
-        return Nodes.ObjectField({
-          name: Nodes.Name({ value: actualFieldName }),
+        return Document.Ast.ObjectField({
+          name: Document.Ast.Name({ value: actualFieldName }),
           value: toGraphQLValue(fieldContext, fieldSddm, fieldValue),
         })
       }),
@@ -70,17 +69,17 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
 
   if (typeof value === `string`) {
     if (context.value.isEnum) {
-      return Nodes.EnumValue({ value: String(value) })
+      return Document.Ast.EnumValue({ value: String(value) })
     }
-    return Nodes.StringValue({ value })
+    return Document.Ast.StringValue({ value })
   }
 
   if (typeof value === `boolean`) {
-    return Nodes.BooleanValue({ value })
+    return Document.Ast.BooleanValue({ value })
   }
 
   if (typeof value === `number`) {
-    return Nodes.FloatValue({ value: String(value) })
+    return Document.Ast.FloatValue({ value: String(value) })
   }
 
   throw new Error(`Unsupported value: ${String(value)}`)
@@ -104,10 +103,10 @@ const applyScalar = (
   scalar: Schema.Scalar,
   value: unknown,
 ): Document.Ast.ValueNode => {
-  if (value === null) return Nodes.NullValue()
+  if (value === null) return Document.Ast.NullValue()
 
   if (Array.isArray(value)) {
-    return Nodes.ListValue({
+    return Document.Ast.ListValue({
       values: value.map(oneValue => applyScalar(context, scalar, oneValue)),
     })
   }

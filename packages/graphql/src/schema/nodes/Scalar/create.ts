@@ -1,7 +1,7 @@
 
 import type { Scalar } from './Scalar.js'
 
-import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
+import type { StandardScalarRuntimeTypes } from '#~/schema/ast/scalars.js'
 export const create = <$Name extends string, $Decoded, $Encoded extends StandardScalarRuntimeTypes>(
   name: $Name,
   codec: {

@@ -1,6 +1,6 @@
-import type { Select } from '../../object/Select/_.js'
-import type { Schema } from '#~/schema-types/index.js'
+import type { Schema } from '#~/schema/_.js'
 import { Obj, Tup } from '@wollybeard/kit'
+import type { Select } from '../../object/Select/_.js'
 import type { OutputField } from './OutputField.js'
 
 // dprint-ignore

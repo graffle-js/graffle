@@ -1,8 +1,7 @@
 import { Document } from '#~/document/_.js'
-import type { ParsedSelectionObjectLevel } from '../../Select/$parseSelection.js'
-import { Nodes } from '#~/_Nodes.js'
 import { Lang, Null } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
+import type { ParsedSelectionObjectLevel } from '../../Select/$parseSelection.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLField } from './5_Field.js'
 import { toGraphQLInlineFragments } from './5_InlineFragments.js'
@@ -22,8 +21,8 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
     case `Indicator`: {
       if (!selection.select) return []
 
-      return [Nodes.Field({
-        name: Nodes.Name({ value: selection.name }),
+      return [Document.Ast.Field({
+        name: Document.Ast.Name({ value: selection.name }),
       })]
     }
     case `InlineFragment`: {

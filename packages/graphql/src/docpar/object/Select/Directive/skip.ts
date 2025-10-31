@@ -1,4 +1,4 @@
-import { Schema } from '#~/schema-types/index.js'
+import { Schema } from '#~/schema/_.js'
 import type { Definition } from './$types.js'
 
 export const Skip: Definition = {

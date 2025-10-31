@@ -4,7 +4,7 @@ import { Possible } from '@test/fixtures/schemas/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import type { Core } from './core/_.js'
 import { $ } from './object/var/var.js'
-import { createGql } from '#~/static/gql.js'
+import { Document } from '#~/__.js'
 
 const A = Ts.Assert
 
@@ -34,11 +34,11 @@ type ContextLoose = Docpar.ParserContext<undefined>
 //       : never
 
 // Local gql functions for testing
-const gqlYe = createGql<Possible.$.Schema, any, Possible.$.ArgumentsMap>({
+const gqlYe = Document.createGql<Possible.$.Schema, any, Possible.$.ArgumentsMap>({
   sddm: Possible.schemaMap as any
 })
 
-const gqlNo = createGql<undefined, any, any>({
+const gqlNo = Document.createGql<undefined, any, any>({
   sddm: undefined as any
 })
 

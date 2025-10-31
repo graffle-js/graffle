@@ -1,7 +1,7 @@
-import type { Select } from '../../object/Select/_.js'
-import type { Schema } from '#~/schema-types/index.js'
+import type { Schema } from '#~/schema/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
+import type { Select } from '../../object/Select/_.js'
 import type { Alias } from './Alias.js'
 import type {
   IsArgumentsOrDirectiveKey,

@@ -1,4 +1,4 @@
-import { TypeKind } from '#~/schema/schema.js'
+import { TypeKind } from '#~/schema/ast/__.js'
 import type { InputFields } from './InputField.js'
 
 export interface InputObject<

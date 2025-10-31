@@ -1,4 +1,4 @@
-import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
+import type { StandardScalarRuntimeTypes } from '#~/schema/ast/scalars.js'
 import type { Codec } from './codec.js'
 
 export * as Scalar from './__.js'

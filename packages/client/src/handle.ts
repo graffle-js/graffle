@@ -14,7 +14,7 @@ export type GraffleExecutionResultEnvelope = {
     // unformatted comes from memory transport
     | Graphql.GraphQLError
   >
-  data?: SomeObjectData | null
+  data?: Graphql.Request.SomeObjectData | null
   extensions?: ObjMap
 }
 
@@ -24,23 +24,23 @@ export const handleOutput = (
 ) => {
   const c = state.configuration.output.current
 
-  if (isOutputTraditionalGraphQLOutput(c)) {
+  if (Core.Configuration.Output.isOutputTraditionalGraphQLOutput(c)) {
     if (result instanceof Error) throw result
     return result.value
   }
 
   const isEnvelope = c.envelope.enabled
 
-  const isThrowOther = readErrorCategoryOutputChannel(c, `other`) === `throw`
+  const isThrowOther = Core.Configuration.Output.readErrorCategoryOutputChannel(c, `other`) === `throw`
     && (!c.envelope.enabled || !c.envelope.errors.other)
 
-  const isReturnOther = readErrorCategoryOutputChannel(c, `other`) === `return`
+  const isReturnOther = Core.Configuration.Output.readErrorCategoryOutputChannel(c, `other`) === `return`
     && (!c.envelope.enabled || !c.envelope.errors.other)
 
-  const isThrowExecution = readErrorCategoryOutputChannel(c, `execution`) === `throw`
+  const isThrowExecution = Core.Configuration.Output.readErrorCategoryOutputChannel(c, `execution`) === `throw`
     && (!c.envelope.enabled || !c.envelope.errors.execution)
 
-  const isReturnExecution = readErrorCategoryOutputChannel(c, `execution`) === `return`
+  const isReturnExecution = Core.Configuration.Output.readErrorCategoryOutputChannel(c, `execution`) === `return`
     && (!c.envelope.enabled || !c.envelope.errors.execution)
 
   if (result instanceof Error) {
@@ -79,7 +79,7 @@ export const handleOutput = (
 // dprint-ignore
 export type HandleOutput<
   $Context,
-  $Data extends SomeObjectData,
+  $Data extends Graphql.Request.SomeObjectData,
 > =
   HandleOutput_Extensions<
     $Context,
@@ -194,13 +194,13 @@ type IsEnvelopeWithoutErrors<$OutputConfig extends Normalized> =
 // dprint-ignore
 // export type HandleOutputDocumentBuilderRootField<
 //   $Context extends Context,
-//   $Data extends SomeObjectData,
+//   $Data extends Graphql.Request.SomeObjectData,
 // > = 'ignore me for now'
 
 // dprint-ignore
 export type HandleOutputDocumentBuilderRootField<
   $Context,
-  $Data extends SomeObjectData,
+  $Data extends Graphql.Request.SomeObjectData,
   $RootFieldName extends string,
 > =
   HandleOutputDocumentBuilderRootField_Data<
@@ -215,7 +215,7 @@ export type HandleOutputDocumentBuilderRootField<
 
 // dprint-ignore
 type HandleOutputDocumentBuilderRootField_Data<
-  $Output extends Error | SomeObjectData | GraffleExecutionResultEnvelope,
+  $Output extends Error | Graphql.Request.SomeObjectData | GraffleExecutionResultEnvelope,
   $RootFieldName extends string,
 > =
   $Output extends Error | GraffleExecutionResultEnvelope

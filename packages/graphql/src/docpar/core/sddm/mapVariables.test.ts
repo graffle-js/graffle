@@ -1,15 +1,15 @@
+import type { Request } from '#~/__.js'
+import type { Docpar } from '#~/docpar/_.js'
+import { Document } from '#~/document/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
-import type { Variables, RequestAnalyzedDocumentNodeInput } from '#~/request.js'
-import type { Docpar } from '#~/docpar/_.js'
-import { Document } from '#~/document/_.js'
 import { mapVariablesByTypeNames } from './mapVariables.js'
 
 const createRequest = (
   query: string,
-  variables?: Variables,
-): RequestAnalyzedDocumentNodeInput => {
+  variables?: Request.Variables,
+): Request.RequestAnalyzedDocumentNodeInput => {
   const document = parse(query)
   const operation = document.definitions[0] as Document.Ast.OperationDefinitionNode
   return {
@@ -73,8 +73,8 @@ Test.on(mapVariablesByTypeNames)
   .test()
 
 Test.describe('immutable mode')
-  .inputType<Variables>()
-  .outputType<Variables>()
+  .inputType<Request.Variables>()
+  .outputType<Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )
@@ -96,8 +96,8 @@ Test.describe('immutable mode')
   })
 
 Test.describe('mutable mode')
-  .inputType<Variables>()
-  .outputType<Variables>()
+  .inputType<Request.Variables>()
+  .outputType<Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )

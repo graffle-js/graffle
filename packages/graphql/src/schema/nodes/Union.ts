@@ -1,4 +1,4 @@
-import { TypeKind } from '#~/schema/schema.js'
+import { TypeKind } from '#~/schema/ast/__.js'
 import type { OutputObject } from './OutputObject.js'
 
 export type Union<

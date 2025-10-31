@@ -1,10 +1,10 @@
+import type { Request } from '#~/__.js'
 import { Document } from '#~/document/_.js'
-import type { RequestInput } from '#~/request.js'
 import type { ExecutionResult, GraphQLSchema } from 'graphql'
 import { execute as graphqlExecute, graphql } from 'graphql'
 
 export type ExecuteParameters = {
-  request: RequestInput
+  request: Request.RequestInput
   schema: GraphQLSchema
   resolverValues?: {
     context?: object | (() => object) | undefined

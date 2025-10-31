@@ -1,4 +1,4 @@
-import type { StandardScalarRuntimeTypes } from '#~/schema/scalars.js'
+import type { StandardScalarRuntimeTypes } from '#~/schema/ast/scalars.js'
 
 export interface Codec<
   $Decoded = any,

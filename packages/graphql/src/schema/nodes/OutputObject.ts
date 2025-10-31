@@ -1,4 +1,4 @@
-import { TypeKind } from '#~/schema/schema.js'
+import { TypeKind } from '#~/schema/ast/__.js'
 import type { __typename } from './__typename.js'
 import type { OutputField, OutputFields } from './OutputField.js'
 

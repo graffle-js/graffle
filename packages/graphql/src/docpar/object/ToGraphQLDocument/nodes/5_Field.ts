@@ -1,15 +1,15 @@
-import { Select } from '../../Select/_.js'
-import { Var } from '../../var/_.js'
-import { Nodes } from '#~/_Nodes.js'
+import { Document } from '#~/document/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
+import { Select } from '../../Select/_.js'
+import { Var } from '../../var/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toGraphQLArgument } from './Argument.js'
 
 export const toGraphQLField: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputField,
-  Nodes.FieldNode | null,
+  Document.Ast.FieldNode | null,
   [field: Field]
 > = (
   context,
@@ -19,20 +19,20 @@ export const toGraphQLField: GraphQLPostOperationMapper<
   const fieldSelection = Select.parseSelectionField(field.name, field.value)
 
   const alias = field.alias
-    ? Nodes.Name({ value: field.alias })
+    ? Document.Ast.Name({ value: field.alias })
     : undefined
 
   if (fieldSelection.type === `Indicator`) {
     if (!fieldSelection.select) return null
-    return Nodes.Field({
-      name: Nodes.Name({ value: field.name }),
+    return Document.Ast.Field({
+      name: Document.Ast.Name({ value: field.name }),
       ...(alias !== undefined && { alias }),
     })
   }
 
-  const arguments_: Nodes.ArgumentNode[] = []
-  const directives: Nodes.DirectiveNode[] = []
-  const selections: Nodes.SelectionNode[] = []
+  const arguments_: Document.Ast.ArgumentNode[] = []
+  const directives: Document.Ast.DirectiveNode[] = []
+  const selections: Document.Ast.SelectionNode[] = []
 
   for (const key in fieldSelection.selectionSet) {
     const keyParsed = Select.parseSelection(key, fieldSelection.selectionSet[key])
@@ -106,12 +106,12 @@ export const toGraphQLField: GraphQLPostOperationMapper<
   // @see https://github.com/0no-co/graphql.web/issues/45
   const selectionSet = selections.length === 0
     ? undefined
-    : Nodes.SelectionSet({
+    : Document.Ast.SelectionSet({
       selections,
     })
 
-  return Nodes.Field({
-    name: Nodes.Name({
+  return Document.Ast.Field({
+    name: Document.Ast.Name({
       value: field.name,
     }),
     ...(alias !== undefined && { alias }),

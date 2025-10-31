@@ -1,10 +1,10 @@
+import { Document } from '#~/document/_.js'
+import type { Schema } from '#~/schema/_.js'
+import { inferTypeSyntaxFromValueElseString } from '#~/utils.js'
 import type { ArgumentNode } from 'graphql'
-import { Select } from '../Select/_.js'
-import { Nodes } from '#~/_Nodes.js'
-import type { Schema } from '#~/schema-types/index.js'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
-import { inferTypeSyntaxFromValueElseString } from '#~/utils.js'
+import { Select } from '../Select/_.js'
 import type { Options } from './nodes/1_Document.js'
 
 /**
@@ -154,10 +154,10 @@ export const createOperationContext = (options?: Options): OperationContext => {
           provenance: input.provenance,
         })
 
-        return Nodes.Argument({
-          name: Nodes.Name({ value: input.argName ?? input.name }),
-          value: Nodes.Variable({
-            name: Nodes.Name({ value: potentialVariableName }),
+        return Document.Ast.Argument({
+          name: Document.Ast.Name({ value: input.argName ?? input.name }),
+          value: Document.Ast.Variable({
+            name: Document.Ast.Name({ value: potentialVariableName }),
           }),
         })
       },

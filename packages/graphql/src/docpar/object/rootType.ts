@@ -1,10 +1,9 @@
 import { Document } from '#~/document/_.js'
-import type { Select } from './Select/_.js'
-import * as SelectDocument from './Select/document.js'
-import type { TypedDocument } from '#~/typed-document/_.js'
-import type { Schema } from '#~/schema-types/index.js'
+import type { Schema } from '#~/schema/_.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'
+import type { Select } from './Select/_.js'
+import * as SelectDocument from './Select/document.js'
 import type { Options } from './ToGraphQLDocument/nodes/1_Document.js'
 import { toGraphQLDocument } from './ToGraphQLDocument/nodes/1_Document.js'
 
@@ -92,7 +91,7 @@ export type StaticDocumentBuilder<
   // Note: The actual field mapping and type inference is done by the generator.
   // This type serves as the canonical signature that generated code must conform to.
   // The generator creates explicit field signatures for better IDE performance and JSDoc.
-  [field: string]: (selection?: any) => TypedDocument.String<any, any, $Config['sddmEnabled']>
+  [field: string]: (selection?: any) => Document.Typed.String<any, any, $Config['sddmEnabled']>
 }
 
 //

@@ -1,7 +1,7 @@
-import { OperationTypeNode } from '../../OperationTypeNode.js'
 import { Str } from '@wollybeard/kit'
+import { OperationTypeNode } from '../../OperationTypeNode.js'
 // TODO: Invert this dependency - Schema.Scalar should implement Core.SDDM.Scalar
-import { Schema } from '#~/schema-types/index.js'
+import { Schema } from '#~/schema/_.js'
 import type { InlineType } from './InlineType.js'
 
 export * from './InlineType.js'

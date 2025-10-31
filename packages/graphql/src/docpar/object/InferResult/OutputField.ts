@@ -1,4 +1,4 @@
-import type { Schema } from '#~/schema-types/index.js'
+import type { Schema } from '#~/schema/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../core/sddm/InlineType.js'
 import type { Interface } from './Interface.js'

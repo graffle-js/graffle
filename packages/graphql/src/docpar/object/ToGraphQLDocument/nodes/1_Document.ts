@@ -1,9 +1,8 @@
+import { Document, type Request } from '#~/__.js'
+import type { Schema } from '#~/schema/_.js'
 import type { DocumentNode } from 'graphql'
-import type { Schema } from '#~/schema-types/index.js'
-import type { Variables } from '../../../../graphql.js'
-import type { Select } from '../../Select/_.js'
-import { Nodes } from '#~/_Nodes.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
+import type { Select } from '../../Select/_.js'
 import { toGraphQLOperationDefinition } from './2_OperationDefinition.js'
 
 const defaultOperationName = `$default`
@@ -19,7 +18,7 @@ export const toGraphQLDocument = (
       return toGraphQLOperationDefinition(sddm, graffleOperation, options)
     })
 
-  const graphqlDocument = Nodes.Document({
+  const graphqlDocument = Document.Ast.Document({
     definitions: operationsAndVariables.map(_ => _.operation),
   })
 
@@ -42,5 +41,5 @@ export interface Options {
 
 export interface Encoded {
   document: DocumentNode
-  operationsVariables: Record<string, Variables>
+  operationsVariables: Record<string, Request.Variables>
 }

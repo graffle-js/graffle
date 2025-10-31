@@ -1,7 +1,7 @@
 import type { GraphQLInputObjectType } from 'graphql'
 import { type GraphQLField, type GraphQLScalarType, isNonNullType, isScalarType } from 'graphql'
 import { standardScalarTypeNames } from './scalars.js'
-import type { InputFieldLikeTypes } from './schema.js'
+import type { InputFieldLikeTypes } from './__.js'
 
 export const isScalarTypeCustom = (node: GraphQLScalarType): boolean => {
   return !(node.name in standardScalarTypeNames)

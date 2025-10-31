@@ -6,7 +6,7 @@
  * - Future extensibility for other context-dependent features
  */
 
-import type { Schema } from '#~/schema-types/index.js'
+import type { Schema } from '#~/schema/_.js'
 
 /**
  * Generic context type - widest context that accepts any scalar registry.

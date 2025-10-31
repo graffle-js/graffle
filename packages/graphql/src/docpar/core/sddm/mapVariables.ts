@@ -1,18 +1,16 @@
-import type { RequestAnalyzedDocumentNodeInput, Variables } from '../../../graphql.js'
+import { Request } from '#~/request/_.js'
 import { Document } from '#~/document/_.js'
 import { Docpar } from '../../_.js'
-
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 export interface MapVariablesByTypeNamesInput {
   /**
    * Schema-driven data map containing type information
    */
-  sddm: SchemaDrivenDataMap
+  sddm: Docpar.SchemaDrivenDataMap
   /**
    * GraphQL request with operation and variables
    */
-  request: RequestAnalyzedDocumentNodeInput
+  request: Request.RequestAnalyzedDocumentNodeInput
   /**
    * GraphQL type names to match (e.g., ['Upload', 'File'])
    */
@@ -51,7 +49,7 @@ export interface MapVariablesByTypeNamesInput {
  * })
  * ```
  */
-export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Variables => {
+export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Request.Variables => {
   const { sddm, request, typeNames, visitor, immutable = false } = input
 
   const variableDefinitions = request.operation.variableDefinitions

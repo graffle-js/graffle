@@ -1,7 +1,6 @@
 import { Document } from '#~/document/_.js'
-import { Select } from '../../Select/_.js'
-import { Nodes } from '#~/_Nodes.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
+import { Select } from '../../Select/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 
@@ -32,15 +31,15 @@ const toGraphQLInlineFragment: GraphQLPostOperationMapper<
   inlineFragment,
 ) => {
   const typeCondition = inlineFragment.typeCondition
-    ? Nodes.NamedType({
-      name: Nodes.Name({
+    ? Document.Ast.NamedType({
+      name: Document.Ast.Name({
         value: inlineFragment.typeCondition,
       }),
     })
     : undefined
 
-  const directives: Nodes.DirectiveNode[] = []
-  const selections: Nodes.SelectionNode[] = []
+  const directives: Document.Ast.DirectiveNode[] = []
+  const selections: Document.Ast.SelectionNode[] = []
 
   for (const key in inlineFragment.selectionSet) {
     const keyParsed = Select.parseSelectionInlineFragment(key, inlineFragment.selectionSet[key])
@@ -50,10 +49,10 @@ const toGraphQLInlineFragment: GraphQLPostOperationMapper<
     })
   }
 
-  return Nodes.InlineFragment({
+  return Document.Ast.InlineFragment({
     ...(typeCondition !== undefined && { typeCondition }),
     directives,
-    selectionSet: Nodes.SelectionSet({
+    selectionSet: Document.Ast.SelectionSet({
       selections,
     }),
   })

@@ -1,5 +1,5 @@
+import { Request } from '#~/__.js'
 import { getOperationDefinition } from '../../../document/ast.js'
-import type { RequestAnalyzedDocumentNodeInput } from '../../../request.js'
 import type { Encoded } from './nodes/1_Document.js'
 
 /**
@@ -25,7 +25,7 @@ import type { Encoded } from './nodes/1_Document.js'
 export const graffleMappedResultToRequest = (
   { document, operationsVariables }: Encoded,
   operationName?: string,
-): RequestAnalyzedDocumentNodeInput => {
+): Request.RequestAnalyzedDocumentNodeInput => {
   // We get back variables for every operation in the Graffle document.
   // However, we only need the variables for the operation that was selected to be executed.
   // If there was NO operation name provided then we assume that the first operation in the document is the one that should be executed.

@@ -1,6 +1,6 @@
 import { Document } from '#~/document/_.js'
+import type { Schema } from '#~/schema/_.js'
 import type { Ts } from '@wollybeard/kit'
-import type { Schema } from '#~/schema-types/index.js'
 import type { Core, ParserContext } from '../core/_.js'
 import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
 import type { InferResult } from './InferResult/_.js'
