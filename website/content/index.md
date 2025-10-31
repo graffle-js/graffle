@@ -60,7 +60,7 @@ features:
 
 <div class="sponsors-section">
   <div class="sponsors-container">
-    <p class="sponsors-label">Proudly Sponsored By</p>
+    <p class="sponsors-label">Thank you to our sponsors!</p>
     <div class="sponsors-grid">
       <a href="https://github.com/LambdaTest-Inc" target="_blank" rel="noopener noreferrer" class="sponsor-item">
         <div class="sponsor-card">
