@@ -1,6 +1,6 @@
 import { Docpar } from '#src/docpar/_.js'
 import { GraffleBasic } from '#src/exports/presets/basic.js'
-import { Grafaid } from '#src/lib/grafaid/$.js'
+import { Graphql } from '#src/lib/grafaid/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { db } from '#test/schema/possible/db.js'
@@ -50,7 +50,7 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
       scalars: { Date: DateScalar },
     },
   )
-  const documentString = Grafaid.Document.print(document)
+  const documentString = Graphql.Document.print(document)
   await (g.gql(documentString) as any).$send(operationsVariables[`$default`])
   expect(RequestSpy.spy.data.pack.input?.request.variables).toEqual(expectedVariables)
 })

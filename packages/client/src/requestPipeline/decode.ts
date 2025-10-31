@@ -1,9 +1,5 @@
-import { Schema } from '#graffle/schema'
-import type { Grafaid } from '@graffle/graphql'
-import { Docpar } from '@graffle/document/_.js'
+import { Graphql, SchemaTypes } from '@graffle/graphql'
 import { Kind } from 'graphql'
-
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 /**
  * If a document is given then aliases will be decoded as well.
@@ -12,7 +8,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Result data to decode.
    */
-  data: Grafaid.SomeObjectData | null | undefined
+  data: Graphql.Request.SomeObjectData | null | undefined
   /**
    * Schema Driven Data Map that contains codecs for custom scalars.
    */
@@ -20,7 +16,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Request is used to traverse aliases if any were used.
    */
-  request: Grafaid.RequestAnalyzedDocumentNodeInput
+  request: Graphql.Request.RequestAnalyzedDocumentNodeInput
   /**
    * Registered custom scalars.
    */
@@ -52,9 +48,9 @@ const decodeResultValue = (input: {
       object: any[]
       index: number
     }
-  value: Grafaid.SomeFieldData
+  value: Graphql.Request.SomeFieldData
   sddmNode: Docpar.OutputNodes
-  documentPart: null | Grafaid.Document.SelectionSetNode
+  documentPart: null | Graphql.Document.Ast.SelectionSetNode
   scalars: Schema.Scalar.ScalarMap
 }): void => {
   const { parentContext, value, sddmNode, documentPart, scalars } = input
@@ -124,9 +120,9 @@ const decodeResultValue = (input: {
 }
 
 const findDocumentField = (
-  selectionSet: null | Grafaid.Document.SelectionSetNode,
+  selectionSet: null | Graphql.Document.Ast.SelectionSetNode,
   fieldName: string,
-): Grafaid.Document.FieldNode | null => {
+): Graphql.Document.Ast.FieldNode | null => {
   if (!selectionSet) return null
 
   for (const selection of selectionSet.selections) {

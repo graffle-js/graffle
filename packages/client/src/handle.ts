@@ -1,35 +1,25 @@
-import type { Normalized } from '#graffle'
-import type { Grafaid } from '@graffle/graphql'
-import type { Context } from '@graffle/core/context.js'
-import type { ErrorCategory } from '@graffle/core/fragments/configuration/output/configuration.js'
-import {
-  isOutputTraditionalGraphQLOutput,
-  type OutputChannelConfig,
-  readErrorCategoryOutputChannel,
-} from '@graffle/core/fragments/configuration/output/configuration.js'
-import type { SomeObjectData } from '@graffle/graphql/graphql.js'
-import type { GraphQLExecutionResultError } from '@graffle/graphql/graphql.js'
+import { Graphql } from '@graffle/graphql'
+import { Core } from '@graffle/core'
 import { Err, Ware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
-import type { RequestPipeline } from '../requestPipeline/_.js'
-import type { RequestResult } from '../types/RequestResult/_.js'
+import type { RequestPipeline } from './requestPipeline/RequestPipeline.js'
 
 export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
     // formatted comes from http transport
-    | Grafaid.FormattedExecutionResultError
+    | Graphql.FormattedExecutionResultError
     // unformatted comes from memory transport
-    | Grafaid.GraphQLError
+    | Graphql.GraphQLError
   >
   data?: SomeObjectData | null
   extensions?: ObjMap
 }
 
 export const handleOutput = (
-  state: Context,
+  state: Core.Context,
   result: Ware.Result<RequestPipeline.Base['output']>,
 ) => {
   const c = state.configuration.output.current

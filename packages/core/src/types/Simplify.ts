@@ -1,4 +1,4 @@
-import type { ContextEmpty } from '#src/context/ContextEmpty.js'
+import type { ContextEmpty } from '#~/ContextEmpty.js'
 import { Ts } from '@wollybeard/kit'
 
 export type SimplifyWithEmptyContext<$Type> = Simplify<ContextEmpty, $Type>

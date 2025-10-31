@@ -1,8 +1,9 @@
-import { Docpar } from '@graffle/graphql/docpar/_.js'
-import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+import { Graphql, Docpar, Static } from '@graffle/graphql'
+import { Core } from '@graffle/core'
 
 // Re-export core gql functionality from graphql package
-export { createGql, gql, type gql as GqlInterface, Gql, defaults } from '@graffle/graphql/static/gql.js'
+export const { createGql, gql, Gql, defaults } = Static
+export type GqlInterface = typeof Static.gql
 
 //
 //

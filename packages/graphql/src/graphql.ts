@@ -1,19 +1,9 @@
+import { Schema } from '#~/schema/_.js'
 import { Lang } from '@wollybeard/kit'
 import type { GraphQLNamedType, GraphQLScalarType } from 'graphql'
 import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
-import type { KindMap } from './schema/schema.js'
-import { isScalarTypeCustom } from './schema/schema.js'
-
-export {
-  type ExecutionResult,
-  type FormattedExecutionResult,
-  GraphQLError,
-  type GraphQLFormattedError as FormattedExecutionResultError,
-} from 'graphql'
-
-export * from './_Nodes.js'
-
-export * from './request.js'
+// import type { KindMap } from './schema/schema.js'
+// import { isScalarTypeCustom } from './schema/schema.js'
 
 export const StandardScalarTypeNames = {
   String: `String`,
@@ -55,14 +45,14 @@ export const getTypeAndKind = (
   node: GraphQLNamedType,
 ): {
   typeName: string
-  kindName: KindMap.KindName
+  kindName: Schema.Ast.KindMap.KindName
 } => {
   const typeName = node.name
 
-  let kindName: KindMap.KindName
+  let kindName: Schema.Ast.KindMap.KindName
 
   if (isScalarType(node)) {
-    kindName = isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
+    kindName = Schema.Ast.isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
   } else if (isUnionType(node)) {
     kindName = `Union`
   } else if (isInterfaceType(node)) {

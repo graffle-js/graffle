@@ -1,5 +1,5 @@
 import { Document } from '#~/document/_.js'
-import type { RequestInput } from '#~/request.js'
+import type { Request } from '#~/request/_.js'
 import { OperationTypeNode } from 'graphql'
 import { describe, expect, test } from 'vitest'
 
@@ -12,7 +12,7 @@ const docOverloadedTerms = `query { queryX }`
 
 type CaseParameters = [
   description: string,
-  request: RequestInput,
+  request: Request.RequestInput,
   result: null | OperationTypeNode,
 ]
 

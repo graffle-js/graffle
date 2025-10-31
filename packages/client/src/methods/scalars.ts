@@ -1,11 +1,9 @@
-import type { Context } from '@graffle/core/context.js'
-import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
-import type { Scalars } from '../../context/fragments/scalars/_.js'
-import { Schema } from '../../types/Schema/_.js'
+import { Core } from '@graffle/core'
+import { SchemaTypes } from '@graffle/graphql'
 import type { Client } from '../client.js'
 
 export interface ScalarMethod<
-  $Context extends Context,
+  $Context extends Core.Context,
   // Variables
   _Schema extends GlobalRegistry.GetOrGeneric<
     $Context['configuration']['schema']['current']['name']

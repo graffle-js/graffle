@@ -1,4 +1,5 @@
-import type { Grafaid } from '@graffle/graphql'
+import type { Graphql } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
@@ -19,11 +20,11 @@ export interface SchemaHookParams {
 export interface ObjectTypeHookParams {
   config: Config
   sddmNode: Str.Code.TS.TermObject.TermObject
-  graphqlType: Grafaid.Schema.ObjectType
+  graphqlType: Schema.ObjectType
 }
 
 export interface OutputFieldHookParams {
   config: Config
   sddmNode: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
-  graphqlType: Grafaid.Schema.Field<any, any>
+  graphqlType: Schema.Field<any, any>
 }

@@ -1,1 +1,1 @@
-export * as Grafaid from './__.js'
+export * as Graphql from './__.js'

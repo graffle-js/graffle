@@ -1,11 +1,10 @@
-import { Grafaid } from '@graffle/graphql'
-
-import { Docpar } from '@graffle/document/_.js'
+import { Graphql } from '@graffle/graphql'
+import { Docpar } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
-export const renderInlineType = (type: Grafaid.Schema.Types): string => {
-  const [ofType, nonNull] = Grafaid.Schema.isNonNullType(type)
+export const renderInlineType = (type: Graphql.Schema.Types): string => {
+  const [ofType, nonNull] = Graphql.Schema.isNonNullType(type)
     ? [type.ofType, true]
     : [type, false]
 
@@ -13,7 +12,7 @@ export const renderInlineType = (type: Grafaid.Schema.Types): string => {
     ? Docpar.nullabilityFlags.nonNull
     : Docpar.nullabilityFlags.nullable
 
-  const rest = Grafaid.Schema.isListType(ofType)
+  const rest = Schema.isListType(ofType)
     ? renderInlineType(ofType.ofType)
     : ``
 
@@ -24,8 +23,8 @@ export const maybeList = (type: string) => {
   return `${type} | Array<${type}>`
 }
 
-export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes) => {
-  const typeKind = Grafaid.getTypeAndKind(type)
+export const typeTitle2 = (category: string) => (type: Schema.NamedTypes) => {
+  const typeKind = Graphql.getTypeAndKind(type)
   const nameOrKind = typeKind.kindName === `ScalarCustom` || typeKind.kindName === `ScalarStandard`
     ? typeKind.typeName
     : typeKind.kindName
@@ -47,23 +46,23 @@ export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes
   return title
 }
 
-const defaultDescription = (node: Grafaid.Schema.DescribableTypes) => {
-  const entity = Grafaid.Schema.isField(node) ? `Field` : Grafaid.getTypeAndKind(node).kindName
+const defaultDescription = (node: Schema.DescribableTypes) => {
+  const entity = Schema.isField(node) ? `Field` : Graphql.getTypeAndKind(node).kindName
   return `There is no documentation for this ${entity}.`
 }
 
-export const renderDocumentation = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
+export const renderDocumentation = (config: Config, node: Schema.DescribableTypes) => {
   return Str.Code.TSDoc.format(getTsDocContents(config, node))
 }
-export const getTsDocContents = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
+export const getTsDocContents = (config: Config, node: Schema.DescribableTypes) => {
   const generalDescription = Str.Code.TSDoc.escape(node.description)
     ?? (config.options.TSDoc.noDocPolicy === `message` ? defaultDescription(node) : null)
 
-  const deprecationDescription = Grafaid.Schema.isDeprecatableNode(node) && node.deprecationReason
+  const deprecationDescription = Schema.isDeprecatableNode(node) && node.deprecationReason
     ? `@deprecated ${Str.Code.TSDoc.escape(node.deprecationReason)}`
     : null
 
-  const enumMemberDescriptions: string[] = Grafaid.Schema.isEnumType(node)
+  const enumMemberDescriptions: string[] = Schema.isEnumType(node)
     ? node
       .getValues()
       .map((_) => {
@@ -80,7 +79,7 @@ export const getTsDocContents = (config: Config, node: Grafaid.Schema.Describabl
           .join(` `)
         return [_, content] as const
       })
-      .filter((_): _ is [Grafaid.Schema.EnumValue, string] => _ !== null)
+      .filter((_): _ is [Schema.EnumValue, string] => _ !== null)
       .map(([node, description]) => {
         const content = `"${node.name}" - ${description}`
         return content
@@ -107,7 +106,7 @@ export const getTsDocContents = (config: Config, node: Grafaid.Schema.Describabl
  * this guards against GraphQL type or property names that
  * would be illegal in TypeScript such as `namespace` or `interface`.
  */
-export const renderName = (type: string | Grafaid.Schema.NamedTypes | Grafaid.Schema.FieldTypes) => {
+export const renderName = (type: string | Schema.NamedTypes | Schema.FieldTypes) => {
   const name_ = typeof type === `string` ? type : type.name
   return Str.Code.TS.Reserved.escapeReserved(name_)
 }

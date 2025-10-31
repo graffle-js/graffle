@@ -1,4 +1,4 @@
-import { Document } from '#~/__.js'
+import { Document } from '#~/document/_.js'
 import type { ParsedSelectionObjectLevel } from '../../Select/$parseSelection.js'
 import { Nodes } from '#~/_Nodes.js'
 import { Lang, Null } from '@wollybeard/kit'

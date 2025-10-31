@@ -1,5 +1,5 @@
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
-import { requestPipelineBaseDefinition } from '#src/requestPipeline/RequestPipeline.js'
+import type { RequestPipeline } from '#~/requestPipeline/RequestPipeline.js'
+import { requestPipelineBaseDefinition } from '#~/requestPipeline/RequestPipeline.js'
 import { Obj } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { Transport } from './dataType/_.js'

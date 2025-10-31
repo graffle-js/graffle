@@ -1,12 +1,10 @@
 {
   "name": "@graffle/generator",
   "version": "0.1.0",
-  "description": "Code generator and CLI for Graffle GraphQL clients",
+  "description": "Code generator library for Graffle GraphQL clients",
   "type": "module",
-  "bin": "./build/cli/index.js",
   "exports": {
     ".": "./build/index.js",
-    "./cli": "./build/cli/index.js",
     "./helpers/standard-scalar-types": "./build/helpers/standard-scalar-types.js"
   },
   "imports": {
@@ -15,7 +13,6 @@
   "files": ["build", "src"],
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
-    "postbuild": "chmod +x ./build/cli/index.js",
     "build:emit": "tsc --build tsconfig.build.json --noCheck",
     "build:clean": "tsc --build tsconfig.build.json --clean && rm -rf build",
     "dev": "tsc --build tsconfig.build.json --watch --noCheck",
@@ -27,7 +24,7 @@
   "dependencies": {
     "@graffle/core": "workspace:*",
     "@graffle/graphql": "workspace:*",
-    "@molt/command": "^0.9.0",
+    "@graffle/extension-introspection": "workspace:*",
     "@wollybeard/kit": "^0.98.0",
     "ts-morph": "^27.0.2"
   },
@@ -49,7 +46,7 @@
     "url": "git+https://github.com/graffle-js/graffle.git",
     "directory": "packages/generator"
   },
-  "keywords": ["graphql", "generator", "cli", "codegen"],
+  "keywords": ["graphql", "generator", "codegen"],
   "author": {
     "name": "Jason Kuhrt",
     "email": "jasonkuhrt@me.com",

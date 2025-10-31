@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-import { type ConfigInit, ImportFormat, OutputCase } from './generator/config/configInit.js'
-import { toAbsolutePath } from '#src/lib/fsp.js'
+import { type ConfigInit, ImportFormat, OutputCase, Generator } from '@graffle/generator'
+import { toAbsolutePath } from './lib/path.js'
 import { Command } from '@molt/command'
 import { Err, Url } from '@wollybeard/kit'
 import * as Path from 'node:path'
 import { z } from 'zod'
-import { Generator } from '../generator/_.js'
 
 const args = Command.create()
   .description(`Generate a type safe GraphQL client.`)

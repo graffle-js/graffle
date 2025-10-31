@@ -1,5 +1,5 @@
 // import { Ware } from '@wollybeard/kit'
-// import { type UnknownOrAnyToNever } from '#src/lib/prelude.js'
+// import { type UnknownOrAnyToNever } from '#~/lib/prelude.js'
 import type { Context } from '../../../context.js'
 // import type { Properties } from '../../properties/_.js'
 // import type { Transports } from '../../transports/_.js'

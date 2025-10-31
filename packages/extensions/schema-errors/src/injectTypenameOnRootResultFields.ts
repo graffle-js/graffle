@@ -1,5 +1,5 @@
-import type { Grafaid } from '@graffle/graphql'
 import type { Docpar } from '@graffle/document/_.js'
+import type { Graphql } from '@graffle/graphql'
 import { Nodes } from '@graffle/graphql/graphql.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
@@ -7,7 +7,7 @@ type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 export const injectTypenameOnRootResultFields = (
   { request, sddm }: {
     sddm: SchemaDrivenDataMap
-    request: Grafaid.RequestAnalyzedDocumentNodeInput
+    request: Graphql.RequestAnalyzedDocumentNodeInput
   },
 ): void => {
   injectTypenameOnRootResultFields_({
@@ -20,7 +20,7 @@ export const injectTypenameOnRootResultFields = (
 const injectTypenameOnRootResultFields_ = (
   { selectionSet, sddm, operationType }: {
     sddm: SchemaDrivenDataMap
-    operationType: Grafaid.Document.OperationTypeNode
+    operationType: Graphql.Document.OperationTypeNode
     selectionSet: Nodes.SelectionSetNode
   },
 ): void => {

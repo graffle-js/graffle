@@ -1,5 +1,5 @@
-import { Extension } from '#graffle/extension'
-import { Configurator } from '#graffle/extension-exports'
+import { Extension } from '#~/extension.js'
+import { Configurator } from '@wollybeard/kit'
 import { ATransport } from '@test/fixtures/transports'
 import { test } from '@test/fixtures/helpers'
 import { Fn, Ts } from '@wollybeard/kit'

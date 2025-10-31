@@ -10,11 +10,9 @@
 
     // Output
     "verbatimModuleSyntax": true,
-    "noEmit": true,
 
     // DX
     "moduleDetection": "force",
-    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
     "noErrorTruncation": true,
     "incremental": true,
     "skipLibCheck": true,

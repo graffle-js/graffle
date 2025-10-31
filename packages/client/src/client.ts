@@ -1,36 +1,23 @@
-import type { Context } from '@graffle/core/context.js'
-import { type ContextEmpty, contextEmpty } from '@graffle/core/ContextEmpty.js'
-import type { AddAndApplyOne } from '@graffle/core/fragments/extensions/reducers/addAndApplyOne.js'
-import { Docpar } from '@graffle/document/_.js'
-import { graffleMappedResultToRequest } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
-import { getOperationType } from '@graffle/graphql/document.js'
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
-import { type ContextFragment, ContextFragments } from '@graffle/core.js'
-import type { NoExcess } from '#src/utils.js'
+import { Core } from '@graffle/core'
+import { Docpar, Graphql } from '@graffle/graphql'
+import type { RequestPipeline } from '#~/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 import type * as Fn from '@wollybeard/kit/fn'
-import { Configuration } from '../context/fragments/configuration/_.js'
-import { Extensions } from '../context/fragments/extensions/_.js'
-import type { Extension } from '../context/fragments/extensions/dataType/_.js'
-import { Properties } from '../context/fragments/properties/_.js'
-import { RequestInterceptors } from '../context/fragments/requestInterceptors/_.js'
-import { Scalars } from '../context/fragments/scalars/_.js'
-import { Transports } from '../context/fragments/transports/_.js'
 import { createDocumentSender } from './methods/gql/DocumentSender.js'
 import { GqlMethod } from './methods/gql/gql.js'
 import { ScalarMethod } from './methods/scalars.js'
 import { TransportMethod } from './methods/transport.js'
 import { sendRequest } from './send.js'
 
-export type ClientEmpty = Client<ContextEmpty>
+export type ClientEmpty = Client<Core.ContextEmpty>
 
 export interface Client_justContext {
-  _: Context
+  _: Core.Context
 }
 
 export type Client<
-  $Context extends Context = Context,
+  $Context extends Core.Context = Core.Context,
   __ =
     & ClientBase<$Context>
     & $Context['properties']['static']
@@ -386,7 +373,7 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
  * })
  * ```
  */
-export type Create<$Context extends Context = ContextEmpty> =
+export type Create<$Context extends Core.Context = ContextEmpty> =
   <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput?: NoExcess<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
@@ -494,7 +481,7 @@ export const createWithContext = <$Context extends Context>(
           })
 
           // Reuse the shared helper that handles variable extraction and operation analysis
-          request = graffleMappedResultToRequest(encoded, operationName)
+          request = Docpar.Object.ToGraphQLDocument.graffleMappedResultToRequest(encoded, operationName)
         } else {
           // For TypedDocumentLike (strings): manually build the request
           const query = normalized.document as string

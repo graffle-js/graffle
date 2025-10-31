@@ -5,9 +5,5 @@
     "paths": {
       "#~/*": ["src/*"]
     }
-  },
-  "references": [
-    { "path": "../graphql" },
-    { "path": "../core" }
-  ]
+  }
 }

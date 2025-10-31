@@ -1,4 +1,5 @@
-import { Grafaid } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -16,7 +17,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
   `scalar`,
   ({ config, code }) => {
     // todo test case for when this is true
-    const isNeedCustomScalarDefaults = Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)
+    const isNeedCustomScalarDefaults = Schema.KindMap.hasCustomScalars(config.schema.kindMap)
       && !config.options.customScalars
 
     // TODO: to get this information we would need to parse the exports of the module with tsc.
@@ -28,7 +29,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
     code(importUtilities(config))
 
-    if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
+    if (Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
       code`
         import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'
       `

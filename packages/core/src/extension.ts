@@ -1,2 +1,2 @@
 // Extension base class export
-export { Extension } from './context/fragments/extensions/dataType/_.js'
+export { Extension } from './fragments/extensions/dataType/_.js'

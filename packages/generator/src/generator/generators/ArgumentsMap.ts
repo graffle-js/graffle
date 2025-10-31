@@ -1,6 +1,7 @@
-import { Grafaid } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
 
-import { Docpar } from '@graffle/document/_.js'
+import { Docpar } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 
@@ -43,7 +44,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
   import.meta.url,
   ({ config, code }) => {
     // Use the new ArgsIndex from grafaid
-    const argsIndex = Grafaid.Schema.ArgsIndex.getArgsIndex(config.schema.instance)
+    const argsIndex = Schema.ArgsIndex.getArgsIndex(config.schema.instance)
 
     // Get root type names for the final index
     const queryType = config.schema.instance.getQueryType()
@@ -53,9 +54,9 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     code(importUtilities(config))
 
     // Group types by kind for organized output
-    const objectTypes: Grafaid.Schema.ArgsIndex.TypeInfo[] = []
-    const interfaceTypes: Grafaid.Schema.ArgsIndex.TypeInfo[] = []
-    const rootTypes: Record<string, Grafaid.Schema.ArgsIndex.TypeInfo> = {}
+    const objectTypes: Schema.ArgsIndex.TypeInfo[] = []
+    const interfaceTypes: Schema.ArgsIndex.TypeInfo[] = []
+    const rootTypes: Record<string, Schema.ArgsIndex.TypeInfo> = {}
 
     for (const [typeName, typeInfo] of Obj.entries(argsIndex)) {
       const graphqlType = typeInfo.reference
@@ -67,7 +68,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
         rootTypes['mutation'] = typeInfo
       } else if (graphqlType === subscriptionType) {
         rootTypes['subscription'] = typeInfo
-      } else if (Grafaid.Schema.isInterfaceType(graphqlType)) {
+      } else if (Schema.isInterfaceType(graphqlType)) {
         interfaceTypes.push(typeInfo)
       } else {
         objectTypes.push(typeInfo)
@@ -238,8 +239,8 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
  * @returns Sorted array of InputObject types found in arguments
  */
 const collectInputObjectTypes = (
-  argsIndex: Grafaid.Schema.ArgsIndex.ArgsIndex,
-  schema: Grafaid.Schema.Schema,
+  argsIndex: Schema.ArgsIndex.ArgsIndex,
+  schema: Schema.Schema,
 ) => {
   const inputTypes = new Set<string>()
   const result = []
@@ -259,7 +260,7 @@ const collectInputObjectTypes = (
   const typeMap = schema.getTypeMap()
   for (const typeName of inputTypes) {
     const type = typeMap[typeName]
-    if (type && Grafaid.Schema.isInputObjectType(type)) {
+    if (type && Schema.isInputObjectType(type)) {
       result.push(type)
     }
   }
@@ -275,8 +276,8 @@ const collectInputTypesFromType = (
   inputTypes: Set<string>,
   visited: Set<string> = new Set(),
 ) => {
-  const namedType = Grafaid.Schema.getNamedType(type)
-  if (Grafaid.Schema.isInputObjectType(namedType)) {
+  const namedType = Schema.getNamedType(type)
+  if (Schema.isInputObjectType(namedType)) {
     // Prevent infinite recursion for circular references
     if (visited.has(namedType.name)) {
       return
@@ -314,7 +315,7 @@ const collectInputTypesFromType = (
  * ```
  */
 const renderTypeWithArgs = createCodeGenerator<
-  { typeInfo: Grafaid.Schema.ArgsIndex.TypeInfo }
+  { typeInfo: Schema.ArgsIndex.TypeInfo }
 >(
   ({ config, code, typeInfo }) => {
     const typeName = typeInfo.reference.name
@@ -332,7 +333,7 @@ const renderTypeWithArgs = createCodeGenerator<
         code`      readonly ${propertyNames.a}: {`
 
         for (const arg of fieldInfo.args) {
-          const argType = Grafaid.Schema.getNamedType(arg.type)
+          const argType = Schema.getNamedType(arg.type)
           const inlineType = renderInlineType(arg.type)
           const resolvedType = renderResolvedType(arg.type, 'TypeInputsIndex')
 
@@ -387,7 +388,7 @@ const renderTypeWithArgs = createCodeGenerator<
  * ```
  */
 const renderInputObjectType = createCodeGenerator<
-  { type: Grafaid.Schema.InputObjectType }
+  { type: Schema.InputObjectType }
 >(
   ({ config, code, type }) => {
     const fields = Object.values(type.getFields())
@@ -397,7 +398,7 @@ const renderInputObjectType = createCodeGenerator<
     code`  readonly ${propertyNames.f}: {`
 
     for (const field of fields) {
-      const fieldType = Grafaid.Schema.getNamedType(field.type)
+      const fieldType = Schema.getNamedType(field.type)
       const inlineType = renderInlineType(field.type)
       const resolvedType = renderResolvedType(field.type, 'TypeInputsIndex')
 
@@ -442,8 +443,8 @@ const renderInputObjectType = createCodeGenerator<
  * // Returns: "readonly TypeInputsIndex.String[]"
  * ```
  */
-const renderResolvedType = (type: Grafaid.Schema.Types, indexName: string): string => {
-  const namedType = Grafaid.Schema.getNamedType(type)
+const renderResolvedType = (type: Schema.Types, indexName: string): string => {
+  const namedType = Schema.getNamedType(type)
   const typeName = renderName(namedType.name)
 
   // Build the base type reference
@@ -455,15 +456,15 @@ const renderResolvedType = (type: Grafaid.Schema.Types, indexName: string): stri
   const listNullability: boolean[] = []
 
   // Unwrap NonNull if present
-  if (Grafaid.Schema.isNonNullType(currentType)) {
+  if (Schema.isNonNullType(currentType)) {
     currentType = currentType.ofType
   }
 
   // Count list depth and track nullability
-  while (Grafaid.Schema.isListType(currentType)) {
+  while (Schema.isListType(currentType)) {
     listDepth++
-    listNullability.push(Grafaid.Schema.isNullableType(currentType))
-    currentType = Grafaid.Schema.isNonNullType(currentType.ofType) ? currentType.ofType.ofType : currentType.ofType
+    listNullability.push(Schema.isNullableType(currentType))
+    currentType = Schema.isNonNullType(currentType.ofType) ? currentType.ofType.ofType : currentType.ofType
   }
 
   // Apply list wrappers
@@ -477,7 +478,7 @@ const renderResolvedType = (type: Grafaid.Schema.Types, indexName: string): stri
   // - undefined (omitted)
   // - null (explicitly null)
   // - the actual value
-  if (Grafaid.Schema.isNullableType(type)) {
+  if (Schema.isNullableType(type)) {
     resultType = `${resultType} | null | undefined`
   }
 

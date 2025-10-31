@@ -1,8 +1,8 @@
 // dprint-ignore-file
-import type { ContextEmpty } from '#src/context/ContextEmpty.js'
-import type { Add } from '#src/context/fragments/scalars/fragment.js'
+import type { ContextEmpty } from '#~/ContextEmpty.js'
+import type { Add } from '#~/fragments/scalars/fragment.js'
 import { Ts } from '@wollybeard/kit'
-import type { Schema } from '../Schema/_.js'
+import type { Schema } from '@graffle/graphql/schema-types'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 
 const A = Ts.Assert

@@ -2,7 +2,8 @@
  * Reusable JSDoc generation helpers for consistent documentation across generated modules.
  */
 
-import { Grafaid } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
@@ -37,7 +38,7 @@ export const getKindDocUrl = (kindName: string): string => {
  */
 export const getSchemaDescription = (
   config: Config,
-  node: Grafaid.Schema.DescribableTypes,
+  node: Schema.DescribableTypes,
 ): string | null => {
   if (node.description) return Str.Code.TSDoc.escape(node.description)
 
@@ -56,19 +57,19 @@ export const getSchemaDescription = (
  * Returns structured information about nullability, list wrapping, and type signature.
  */
 export const extractFieldTypeInfo = (
-  field: Grafaid.Schema.Field<any, any>,
+  field: Schema.Field<any, any>,
   linkPrefix: '$Schema' | '$NamedTypes' = '$Schema',
 ): {
-  namedType: Grafaid.Schema.NamedTypes
+  namedType: Schema.NamedTypes
   typeAndKind: { typeName: string; kindName: string }
   isNonNull: boolean
   isList: boolean
   typeSignature: string
 } => {
-  const namedType = Grafaid.Schema.getNamedType(field.type)
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
+  const namedType = Schema.getNamedType(field.type)
+  const typeAndKind = Graphql.getTypeAndKind(namedType)
+  const isNonNull = Schema.isNonNullType(field.type)
+  const isList = Schema.isListType(Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
 
   const listMarker = isList ? '[]' : ''
   const nullMarker = isNonNull ? '!' : ''
@@ -95,7 +96,7 @@ export const extractFieldTypeInfo = (
  */
 export const getRootTypeDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  type: Grafaid.Schema.ObjectType,
+  type: Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, type, operationType) => {
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
@@ -114,7 +115,7 @@ export const getRootTypeDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getRootMethodsInterfaceDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  type: Grafaid.Schema.ObjectType,
+  type: Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, type, operationType) => {
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
@@ -297,9 +298,9 @@ const ${
  * without config-based fallbacks.
  */
 export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
-  field: Grafaid.Schema.Field<any, any>,
+  field: Schema.Field<any, any>,
   parentTypeName: string,
-  namedType: Grafaid.Schema.NamedTypes,
+  namedType: Schema.NamedTypes,
 ]>((doc, field, parentTypeName, namedType) => {
   // Extract type information
   const { typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$NamedTypes')
@@ -318,11 +319,11 @@ export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
 
   // Add SDL signature
   if (field.astNode) {
-    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
+    const fieldSignature = Graphql.Document.printWithoutDescriptions(field.astNode)
     let sdlContent = fieldSignature
 
     if (namedType.astNode) {
-      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+      const typeDefinition = Graphql.Document.printWithoutDescriptions(namedType.astNode)
       if (typeDefinition.trim()) {
         sdlContent += `\n\n${typeDefinition}`
       }
@@ -351,8 +352,8 @@ export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  field: Grafaid.Schema.Field<any, any>,
-  parentType: Grafaid.Schema.ObjectType,
+  field: Schema.Field<any, any>,
+  parentType: Schema.ObjectType,
 ]>((doc, config, field, parentType) => {
   const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
@@ -362,11 +363,11 @@ export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
   // Build SDL signature
   let sdlContent: string | null = null
   if (field.astNode) {
-    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
+    const fieldSignature = Graphql.Document.printWithoutDescriptions(field.astNode)
     sdlContent = fieldSignature
 
     if (namedType.astNode) {
-      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+      const typeDefinition = Graphql.Document.printWithoutDescriptions(namedType.astNode)
       if (typeDefinition.trim()) {
         sdlContent += `\n\n${typeDefinition}`
       }
@@ -397,8 +398,8 @@ export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
  * Generate enhanced JSDoc for inline fragment fields (___on_TypeName) in unions and interfaces.
  */
 export const getInlineFragmentDoc = Str.Code.TSDoc.template.factory<[
-  memberType: Grafaid.Schema.ObjectType,
-  parentType: Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
+  memberType: Schema.ObjectType,
+  parentType: Schema.UnionType | Schema.InterfaceType,
   fragmentKind: 'union' | 'interface',
 ]>((doc, memberType, parentType, fragmentKind) => {
   const memberTypeName = memberType.name
@@ -450,13 +451,13 @@ export const getInlineFragmentDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getArgumentDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  arg: Grafaid.Schema.Argument,
-  parentField: Grafaid.Schema.Field<any, any>,
-  parentType: Grafaid.Schema.ObjectType,
+  arg: Schema.Argument,
+  parentField: Schema.Field<any, any>,
+  parentType: Schema.ObjectType,
 ]>((doc, config, arg, parentField, parentType) => {
   const graphqlType = String(arg.type)
   const argPath = `${parentType.name}.${parentField.name}(${arg.name})`
-  const isNonNull = Grafaid.Schema.isNonNullType(arg.type)
+  const isNonNull = Schema.isNonNullType(arg.type)
   const hasDefault = arg.defaultValue !== undefined && arg.defaultValue !== null
   const defaultValueStr = hasDefault
     ? typeof arg.defaultValue === 'string'
@@ -485,8 +486,8 @@ export const getArgumentDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  field: Grafaid.Schema.Field<any, any>,
-  parentType: Grafaid.Schema.ObjectType,
+  field: Schema.Field<any, any>,
+  parentType: Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, field, parentType, operationType) => {
   // Extract type information
@@ -509,11 +510,11 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 
   // Add GraphQL SDL signature
   if (field.astNode) {
-    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
+    const fieldSignature = Graphql.Document.printWithoutDescriptions(field.astNode)
     let sdlContent = fieldSignature
 
     if (namedType.astNode) {
-      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+      const typeDefinition = Graphql.Document.printWithoutDescriptions(namedType.astNode)
       if (typeDefinition.trim()) {
         sdlContent += `\n\n${typeDefinition}`
       }
@@ -539,9 +540,9 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 
   // Generate example based on field characteristics
   const hasArgs = field.args.length > 0
-  const isObject = Grafaid.Schema.isObjectType(namedType)
-  const isInterface = Grafaid.Schema.isInterfaceType(namedType)
-  const isUnion = Grafaid.Schema.isUnionType(namedType)
+  const isObject = Schema.isObjectType(namedType)
+  const isInterface = Schema.isInterfaceType(namedType)
+  const isUnion = Schema.isUnionType(namedType)
 
   let exampleCode: string
   if (isUnion || isInterface) {
@@ -561,7 +562,7 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 })`
     }
   } else if (isObject) {
-    const objectType = namedType as Grafaid.Schema.ObjectType
+    const objectType = namedType as Schema.ObjectType
     const fields = Object.values(objectType.getFields()).slice(0, 3)
     const fieldLines = fields.map((f, index) => {
       const isLast = index === fields.length - 1
@@ -589,7 +590,7 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
  * Generate enhanced JSDoc for selection set object types.
  */
 export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: Grafaid.Schema.ObjectType, isRoot: boolean]
+  [type: Schema.ObjectType, isRoot: boolean]
 >(
   (doc, type, isRoot) => {
     const kindDocUrl = getKindDocUrl('OutputObject')
@@ -618,12 +619,12 @@ export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
  * Generate enhanced JSDoc for selection set interface types.
  */
 export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: Grafaid.Schema.InterfaceType, kindMap: Grafaid.Schema.KindMap]
+  [type: Schema.InterfaceType, kindMap: Schema.KindMap]
 >((doc, type, kindMap) => {
   const kindDocUrl = getKindDocUrl('Interface')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
-  const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
+  const implementors = Schema.KindMap.getInterfaceImplementors(kindMap, type)
   const interfaceLink = Str.Code.TSDoc.template.tag.link(
     'https://graphql.org/graphql-js/type/#graphqlinterfacetype',
     'Interface',
@@ -645,7 +646,7 @@ export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
 /**
  * Generate enhanced JSDoc for selection set union types.
  */
-export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.UnionType]>(
+export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Schema.UnionType]>(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('Union')
     const members = type.getTypes()
@@ -669,13 +670,13 @@ export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type
  * Generate enhanced JSDoc for selection set input object types.
  */
 export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: Grafaid.Schema.InputObjectType]
+  [type: Schema.InputObjectType]
 >(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('InputObject')
     const fields = Object.values(type.getFields())
     const fieldCount = fields.length
-    const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
+    const isAllFieldsNullable = Schema.isAllInputObjectFieldsNullable(type)
     const inputLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/learn/schema/#input-types', 'InputObject')
 
     doc`Input for ${inputLink}.`
@@ -695,7 +696,7 @@ export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory
 /**
  * Generate enhanced JSDoc for selection set enum types.
  */
-export const getEnumTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.EnumType]>(
+export const getEnumTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<[type: Schema.EnumType]>(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('Enum')
     const members = type.getValues()
@@ -818,7 +819,7 @@ export const getScalarRegistryTypeDoc = Str.Code.TSDoc.template.factory<[]>((doc
  * Used in Select.ts for type inference utilities.
  */
 export const getSelectInferDoc = Str.Code.TSDoc.template.factory<[
-  type: Grafaid.Schema.NamedTypes,
+  type: Schema.NamedTypes,
   kind: 'operation' | 'selectionSet',
 ]>((doc, type, kind) => {
   const text = kind === 'operation'
@@ -834,7 +835,7 @@ export const getSelectInferDoc = Str.Code.TSDoc.template.factory<[
  * Generate JSDoc for MethodsSelect interfaces.
  * Used in MethodsSelect.ts for selection method interfaces.
  */
-export const getMethodsSelectDoc = Str.Code.TSDoc.template.factory<[type: Grafaid.Schema.NamedTypes]>((doc, type) => {
+export const getMethodsSelectDoc = Str.Code.TSDoc.template.factory<[type: Schema.NamedTypes]>((doc, type) => {
   doc.add(type.description)
   doc``
   doc`Build type-safe selection set for ${type.name}.`

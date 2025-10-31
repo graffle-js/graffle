@@ -1,6 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Grafaid } from '@graffle/graphql'
-import { createFromObjectTypeAndMapOrThrow } from '@graffle/graphql/schema/RootDetails.js'
+import { Graphql } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -179,9 +178,9 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   },
 )
 
-const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
+const renderRootType = createCodeGenerator<{ node: Schema.ObjectType }>(({ node, config, code }) => {
   const fieldMethods = renderFieldMethods({ config, node })
-  const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
+  const { operationType } = Schema.createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
 
   // Interface JSDoc
   const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
@@ -245,19 +244,19 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   `
 })
 
-const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
+const renderFieldMethods = createCodeGenerator<{ node: Schema.ObjectType }>(({ node, config, code }) => {
   for (const field of Object.values(node.getFields())) {
     const docContent = getOutputFieldMethodDoc(config, field, node)
     if (docContent) {
       code(Str.Code.TSDoc.format(docContent))
     }
 
-    const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(field.type)
+    const fieldTypeUnwrapped = Schema.getNamedType(field.type)
 
-    const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
-      && Grafaid.Schema.Args.isAllArgsNullable(field.args)
+    const isOptional = Schema.isScalarType(fieldTypeUnwrapped)
+      && Schema.Args.isAllArgsNullable(field.args)
 
-    const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
+    const { operationType } = Schema.createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
     // dprint-ignore
     code`
       ${field.name}:
@@ -638,7 +637,7 @@ export const groupFieldsByDomain = (config: Config): Record<string, DomainField[
 
   // Process all root fields
   config.schema.kindMap.list.Root.forEach(rootType => {
-    const rootDetails = createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
+    const rootDetails = Schema.createFromObjectTypeAndMapOrThrow(rootType, config.schema.kindMap.root)
     const operationType = rootDetails.operationType
 
     // Skip subscription for now (domain grouping only supports query/mutation)
@@ -787,7 +786,7 @@ const renderDomainType = createCodeGenerator<{
     const rootTypeName = field.rootTypeName
     const { operationType } = field
 
-    const rootType = config.schema.instance.getType(rootTypeName) as Grafaid.Schema.ObjectType
+    const rootType = config.schema.instance.getType(rootTypeName) as Schema.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
@@ -795,9 +794,9 @@ const renderDomainType = createCodeGenerator<{
       code(Str.Code.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
-    const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)
-    const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
-      && Grafaid.Schema.Args.isAllArgsNullable(fieldDef.args)
+    const fieldTypeUnwrapped = Schema.getNamedType(fieldDef.type)
+    const isOptional = Schema.isScalarType(fieldTypeUnwrapped)
+      && Schema.Args.isAllArgsNullable(fieldDef.args)
 
     // dprint-ignore
     code`

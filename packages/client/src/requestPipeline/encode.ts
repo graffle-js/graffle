@@ -1,13 +1,9 @@
-import { Schema } from '#graffle/schema'
-import { Grafaid } from '@graffle/graphql'
-import { Docpar } from '@graffle/document/_.js'
-
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+import { Graphql, SchemaTypes } from '@graffle/graphql'
 
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
-  sddm: SchemaDrivenDataMap
-  scalars: Schema.Scalar.ScalarMap
-  request: Grafaid.RequestAnalyzedDocumentNodeInput
+  sddm: Graphql.Docpar.SchemaDrivenDataMap
+  scalars: SchemaTypes.Schema.Scalar.ScalarMap
+  request: Graphql.Request.RequestAnalyzedDocumentNodeInput
 }): void => {
   const variableDefinitions = request.operation.variableDefinitions
   if (!variableDefinitions) return
@@ -24,7 +20,7 @@ export const encodeRequestVariables = ({ sddm, request, scalars }: {
     const argValue = args[argName]
     if (argValue === undefined) continue
 
-    const namedType = Grafaid.Document.getNamedType(parameter.type)
+    const namedType = Graphql.Document.Ast.getNamedType(parameter.type)
     const sddmNamedType = sddm.types[namedType.name.value]
     if (!sddmNamedType) continue // todo in a strict mode could be error.
 
@@ -37,7 +33,7 @@ const encodeInputFieldLike = (
   argName: any,
   argValue: any,
   sddmNode: Docpar.InputNodes,
-  scalars: Schema.Scalar.ScalarMap,
+  scalars: SchemaTypes.Schema.Scalar.ScalarMap,
 ) => {
   /**
    * The SDDM for custom scalars can take two forms:

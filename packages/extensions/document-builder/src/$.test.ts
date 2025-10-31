@@ -1,5 +1,5 @@
-import { Grafaid } from '@graffle/graphql'
 import { Docpar } from '@graffle/document/_.js'
+import { Graphql } from '@graffle/graphql'
 import { Possible } from '@test/fixtures/schemas/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { Var } from './__.js'
@@ -78,5 +78,5 @@ Test
   .test(({ input, matrix }) => {
     const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(input)
     const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, matrix)
-    return Grafaid.Document.print(document)
+    return Graphql.Document.print(document)
   })

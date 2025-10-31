@@ -1,10 +1,10 @@
-import type { Grafaid } from '@graffle/graphql'
-import type { Context } from '@graffle/core/context.js'
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { Graphql } from '@graffle/graphql'
+import { Core } from '@graffle/core'
+import type { RequestPipeline } from '#~/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 import { handleOutput } from './handle.js'
 
-export const sendRequest = async (context: Context, analyzedRequest: Grafaid.RequestAnalyzedInput) => {
+export const sendRequest = async (context: Core.Context, analyzedRequest: Graphql.Request.RequestAnalyzedInput) => {
   if (!context.transports.current) throw new Error(`No transport selected`)
 
   const initialInput = {

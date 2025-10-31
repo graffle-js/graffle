@@ -1,9 +1,5 @@
-import type { Context } from '@graffle/core/context.js'
-import type { ContextTransports, ContextTransportsNonEmpty } from '@graffle/core/fragments/transports/fragment.js'
-import type { AddMany } from '@graffle/core/fragments/transports/reducers/addMany.js'
-import type { NoExcess } from '#src/utils.js'
+import { Core } from '@graffle/core'
 import type { Obj } from '@wollybeard/kit'
-import { Transports } from '../../context/fragments/transports/_.js'
 import type { Client } from '../client.js'
 
 // todo remove the JSDoc comments below. They will not be shown.
@@ -11,7 +7,7 @@ import type { Client } from '../client.js'
 
 // dprint-ignore
 export type TransportMethod<
-  $Context extends Context,
+  $Context extends Core.Context,
 > =
   & (
       <transport extends Transports.Transport.Data>(
@@ -113,7 +109,7 @@ export type GetNames<$ClientTransports extends ContextTransports> =
         : Obj.StringKeyof<$ClientTransports['registry']>
 
 // dprint-ignore
-export type ParameterGuardTransportAlreadyRegistered<$Context extends Context, $Transport extends Transports.Transport.Data> =
+export type ParameterGuardTransportAlreadyRegistered<$Context extends Core.Context, $Transport extends Transports.Transport.Data> =
   $Transport['name'] extends keyof $Context['transports']['registry'] ?
     [`Error: ${Transports.AlreadyRegisteredError<$Transport['name']>}`] :
     []

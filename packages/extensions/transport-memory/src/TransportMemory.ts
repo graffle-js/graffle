@@ -1,8 +1,8 @@
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Extension } from '@graffle/core/extension'
-import type { Grafaid } from '@graffle/graphql'
+import type { Graphql } from '@graffle/graphql'
 import { print } from '@graffle/graphql/document.js'
 import { execute } from '@graffle/graphql/execute.js'
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 
 // ----------------------------
@@ -13,7 +13,7 @@ export interface ConfigurationNormalized {
   /**
    * The schema to execute documents against.
    */
-  schema: Grafaid.Schema.Schema
+  schema: Graphql.Schema.Schema
   resolverValues?: {
     /**
      * The value to use for parent (aka. source) on _root_ resolvers.
@@ -76,7 +76,7 @@ export interface PackInput extends RequestPipeline.PackInput {
 }
 
 export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
-  request: Grafaid.HTTP.RequestConfig
+  request: Graphql.HTTP.RequestConfig
 }
 
 export interface ExchangeOutput extends PackOutput {}
@@ -127,7 +127,7 @@ export const TransportMemory: TransportMemory = Extension
       )
       .pack({
         run(input) {
-          const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+          const graphqlRequest: Graphql.HTTP.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
             query: print(input.request.query),

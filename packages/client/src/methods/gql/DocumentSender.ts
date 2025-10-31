@@ -1,14 +1,11 @@
-import type { Grafaid } from '@graffle/graphql'
-import type { Configuration } from '@graffle/core/fragments/configuration/_.js'
-import type { Docpar } from '@graffle/document/_.js'
-import type { GetVariablesInputKind, ResultOf, VariablesOf } from '@graffle/graphql/typed-document/TypedDocument.js'
+import { Graphql, Docpar } from '@graffle/graphql'
+import { Core } from '@graffle/core'
 import type { Ts } from '@wollybeard/kit'
-import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/_.js'
 import type { HandleOutput } from '../../handle.js'
 
 export type DocumentInput =
-  | Grafaid.Document.Typed.TypedDocumentLike
-  | TypedFullDocument.TypedFullDocument
+  | Graphql.Document.Typed.TypedDocumentLike
+  | Docpar.TypedFullDocument
 
 // ================================================================================================
 // STATIC EXECUTORS - Function signatures for $send method
@@ -117,7 +114,7 @@ type OperationToNamedExecutor<
  * Named executor for operations with no variables.
  * Operation name is encoded in the method itself.
  */
-export interface NoVarsNamedExecutor<$Context, $Result extends Grafaid.SomeObjectData> {
+export interface NoVarsNamedExecutor<$Context, $Result extends Graphql.Request.SomeObjectData> {
   (): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
 }
 
@@ -127,7 +124,7 @@ export interface NoVarsNamedExecutor<$Context, $Result extends Grafaid.SomeObjec
  */
 export interface OptionalVarsNamedExecutor<
   $Context,
-  $Result extends Grafaid.SomeObjectData,
+  $Result extends Graphql.Request.SomeObjectData,
   $Variables,
 > {
   (variables?: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
@@ -139,7 +136,7 @@ export interface OptionalVarsNamedExecutor<
  */
 export interface RequiredVarsNamedExecutor<
   $Context,
-  $Result extends Grafaid.SomeObjectData,
+  $Result extends Graphql.Request.SomeObjectData,
   $Variables,
 > {
   (variables: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
@@ -168,23 +165,23 @@ export interface RequiredVarsNamedExecutor<
  */
 // dprint-ignore
 export type DocumentSender<$Doc extends DocumentInput, $Context> =
-$Doc extends TypedFullDocument.TypedFullDocument
+$Doc extends Docpar.TypedFullDocument
   ? Sender<$Doc, $Context>
   : $Doc extends string
     ? UntypedSender<$Context>
-    : $Doc extends Grafaid.Document.Typed.TypedDocumentLike
+    : $Doc extends Graphql.Document.Typed.TypedDocumentLike
       ? TypedDocumentLikeSender<ResultOf<$Doc>, VariablesOf<$Doc>, $Context>
       : UntypedSender<$Context>
 
 type Sender<
-  $Doc extends TypedFullDocument.TypedFullDocument,
+  $Doc extends Docpar.TypedFullDocument,
   $Context,
 > =
   & SenderStatic<$Doc, $Context>
   & SenderNamed<$Doc, $Context>
 
 type SenderStatic<
-  $Doc extends TypedFullDocument.TypedFullDocument,
+  $Doc extends Docpar.TypedFullDocument,
   $Context,
 > = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation>
   ? Docpar.Doc.IsSingleOperation<$Doc> extends true
@@ -193,7 +190,7 @@ type SenderStatic<
   : never
 
 type SenderNamed<
-  $Doc extends TypedFullDocument.TypedFullDocument,
+  $Doc extends Docpar.TypedFullDocument,
   $Context,
 > = $Doc extends TypedFullDocument.Document<infer $Operations extends TypedFullDocument.Operation> ? {
     [k in $Operations['name'] & string]: Configuration.Check.Preflight<
@@ -220,8 +217,8 @@ export interface UntypedSender<$Context = any> {
  * Only `.$send()` is available (no named operation methods).
  */
 type TypedDocumentLikeSender<
-  $Result extends Grafaid.SomeObjectData,
-  $Variables extends Grafaid.Variables,
+  $Result extends Graphql.Request.SomeObjectData,
+  $Variables extends Graphql.Request.Variables,
   $Context,
   ___$VarKind = GetVariablesInputKind<$Variables>,
   ___$SendMethod = ___$VarKind extends 'none' ? (() => Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>)

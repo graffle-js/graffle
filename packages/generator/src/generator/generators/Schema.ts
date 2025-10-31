@@ -1,4 +1,5 @@
-import { Grafaid } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
+import { Graphql } from '@graffle/graphql'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
@@ -71,7 +72,7 @@ export const ModuleGeneratorSchema = {
 
 // Individual module generators
 
-const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType): GeneratedModule => {
+const generateScalarModule = (config: Config, scalar: Schema.ScalarType): GeneratedModule => {
   const code = Str.Builder()
   const renderedName = renderName(scalar)
   const originalName = scalar.name
@@ -98,7 +99,7 @@ const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType)
   }
 }
 
-const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
+const generateEnumModule = (config: Config, enumType: Schema.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
@@ -114,7 +115,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
       name: enumType.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
       block: {
-        kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.Enum),
+        kind: Str.Code.TS.string(Schema.TypeKind.Enum),
         name: Str.Code.TS.string(enumType.name),
         members: Str.Code.TS.tuple(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
         membersUnion: Str.Code.TS.unionItems(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
@@ -129,7 +130,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
   }
 }
 
-const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType): GeneratedModule => {
+const generateUnionModule = (config: Config, unionType: Schema.UnionType): GeneratedModule => {
   const code = Str.Builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
@@ -155,7 +156,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     name: unionType.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Union` : null,
     block: {
-      kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.Union),
+      kind: Str.Code.TS.string(Schema.TypeKind.Union),
       name: Str.Code.TS.string(unionType.name),
       members: Str.Code.TS.tuple(memberNames),
       membersUnion: Str.Code.TS.unionItems(memberNames),
@@ -186,18 +187,18 @@ Type: \`"${typeName}"\`
  */
 const getInputFieldDoc = (
   config: Config,
-  field: Grafaid.Schema.InputField,
-  parentType: Grafaid.Schema.InputObjectType,
+  field: Schema.InputField,
+  parentType: Schema.InputObjectType,
 ): string | null => {
-  const namedType = Grafaid.Schema.getNamedType(field.type)
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+  const namedType = Schema.getNamedType(field.type)
+  const typeAndKind = Graphql.getTypeAndKind(namedType)
 
   // Get the base description from the schema
   const schemaDescription = getTsDocContents(config, field)
 
   // Type information
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
+  const isNonNull = Schema.isNonNullType(field.type)
+  const isList = Schema.isListType(Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
   const listMarker = isList ? '[]' : ''
   const nullMarker = isNonNull ? '!' : ''
   const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
@@ -251,7 +252,7 @@ const getInputFieldDoc = (
   return parts.join('\n')
 }
 
-const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.InputObjectType): GeneratedModule[] => {
+const generateInputObjectModule = (config: Config, inputObject: Schema.InputObjectType): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
   // Generate fields.ts
@@ -265,7 +266,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
 
   // Generate field interfaces
   for (const field of Obj.values(inputObject.getFields())) {
-    const namedType = Grafaid.Schema.getNamedType(field.type)
+    const namedType = Schema.getNamedType(field.type)
 
     fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getInputFieldDoc(config, field, inputObject),
@@ -314,9 +315,9 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     name: inputObject.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputObject` : null,
     block: {
-      kind: Str.Code.TS.string(Grafaid.Schema.TypeKind.InputObject),
+      kind: Str.Code.TS.string(Schema.TypeKind.InputObject),
       name: Str.Code.TS.string(inputObject.name),
-      isAllFieldsNullable: Str.Code.TS.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(inputObject)),
+      isAllFieldsNullable: Str.Code.TS.boolean(Schema.isAllInputObjectFieldsNullable(inputObject)),
       fields: interfaceFields,
     },
   }))
@@ -330,7 +331,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   return modules
 }
 
-const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+const generateSchemaNamespaceModule = (config: Config, kindMap: Schema.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
 
@@ -359,13 +360,13 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
     RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
     Root: {
-      [Grafaid.Document.OperationTypeNode.QUERY]: config.schema.kindMap.index.Root.query?.name
+      [Graphql.Document.OperationTypeNode.QUERY]: config.schema.kindMap.index.Root.query?.name
         ? `$Types.${config.schema.kindMap.index.Root.query.name}`
         : null,
-      [Grafaid.Document.OperationTypeNode.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
+      [Graphql.Document.OperationTypeNode.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
         ? `$Types.${config.schema.kindMap.index.Root.mutation.name}`
         : null,
-      [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
+      [Graphql.Document.OperationTypeNode.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
         ? `$Types.${config.schema.kindMap.index.Root.subscription.name}`
         : null,
     },
@@ -408,7 +409,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
   }
 }
 
-const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+const generateSchemaBarrelModule = (config: Config, kindMap: Schema.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   // Re-export roots
@@ -464,8 +465,8 @@ const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.Kind
  */
 const getOutputFieldDoc = (
   config: Config,
-  field: Grafaid.Schema.Field<any, any>,
-  parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+  field: Schema.Field<any, any>,
+  parentType: Schema.ObjectType | Schema.InterfaceType,
 ): string | null => {
   // Extract type information using foundation helper
   const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
@@ -525,7 +526,7 @@ const getOutputFieldDoc = (
  */
 const getObjectTypeDoc = (
   config: Config,
-  type: Grafaid.Schema.ObjectType,
+  type: Schema.ObjectType,
   isRoot: boolean,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
@@ -584,8 +585,8 @@ const getObjectTypeDoc = (
  */
 const getInterfaceTypeDoc = (
   config: Config,
-  type: Grafaid.Schema.InterfaceType,
-  kindMap: Grafaid.Schema.KindMap,
+  type: Schema.InterfaceType,
+  kindMap: Schema.KindMap,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
   const kindDocUrl = getKindDocUrl('Interface')
@@ -593,7 +594,7 @@ const getInterfaceTypeDoc = (
   const fieldCount = fields.length
 
   // Get implementors
-  const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
+  const implementors = Schema.KindMap.getInterfaceImplementors(kindMap, type)
 
   // Build table
   const table = Str.Code.Md.table({
@@ -626,7 +627,7 @@ const getInterfaceTypeDoc = (
  */
 const getUnionTypeDoc = (
   config: Config,
-  type: Grafaid.Schema.UnionType,
+  type: Schema.UnionType,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
   const kindDocUrl = getKindDocUrl('Union')
@@ -661,13 +662,13 @@ const getUnionTypeDoc = (
  */
 const getInputObjectTypeDoc = (
   config: Config,
-  type: Grafaid.Schema.InputObjectType,
+  type: Schema.InputObjectType,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
   const kindDocUrl = getKindDocUrl('InputObject')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
-  const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
+  const isAllFieldsNullable = Schema.isAllInputObjectFieldsNullable(type)
 
   // Build table
   const table = Str.Code.Md.table({
@@ -698,7 +699,7 @@ const getInputObjectTypeDoc = (
  */
 const getEnumTypeDoc = (
   config: Config,
-  type: Grafaid.Schema.EnumType,
+  type: Schema.EnumType,
 ): string | null => {
   // Get enum description respecting config and escape it for safety
   const schemaDescription = type.description
@@ -756,7 +757,7 @@ const getEnumTypeDoc = (
 
 const generateTypeModule = (
   config: Config,
-  type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+  type: Schema.ObjectType | Schema.InterfaceType,
   kind: 'roots' | 'objects' | 'interfaces',
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
@@ -791,7 +792,7 @@ const generateTypeModule = (
 
   // Regular fields
   for (const field of Obj.values(type.getFields())) {
-    const namedType = Grafaid.Schema.getNamedType(field.type)
+    const namedType = Schema.getNamedType(field.type)
 
     fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getOutputFieldDoc(config, field, type),
@@ -810,7 +811,7 @@ const generateTypeModule = (
                 kind: Str.Code.TS.string(`InputField`),
                 name: Str.Code.TS.string(arg.name),
                 inlineType: renderInlineType(arg.type),
-                namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
+                namedType: namedTypesTypeReference(Schema.getNamedType(arg.type)),
               },
             }),
           ]
@@ -837,11 +838,11 @@ const generateTypeModule = (
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
 
   // For interfaces, import implementor types from the barrel
-  const isInterface = type instanceof Grafaid.Schema.InterfaceType
+  const isInterface = type instanceof Schema.InterfaceType
   if (isInterface) {
-    const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(
+    const implementors = Schema.KindMap.getInterfaceImplementors(
       config.schema.kindMap,
-      type as Grafaid.Schema.InterfaceType,
+      type as Schema.InterfaceType,
     )
     if (implementors.length > 0) {
       // Import from barrel which is 2 levels up from schema/{kind}/{TypeName}/
@@ -866,35 +867,35 @@ const generateTypeModule = (
 
   namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: isInterface
-      ? getInterfaceTypeDoc(config, type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
-      : getObjectTypeDoc(config, type as Grafaid.Schema.ObjectType, kind === 'roots'),
+      ? getInterfaceTypeDoc(config, type as Schema.InterfaceType, config.schema.kindMap)
+      : getObjectTypeDoc(config, type as Schema.ObjectType, kind === 'roots'),
     export: true,
     name: type.name,
     extends: config.code.schemaInterfaceExtendsEnabled
       ? (isInterface ? `$.Schema.Interface` : `$.Schema.OutputObject`)
       : null,
     block: {
-      kind: Str.Code.TS.string(isInterface ? Grafaid.Schema.TypeKind.Interface : Grafaid.Schema.TypeKind.Object),
+      kind: Str.Code.TS.string(isInterface ? Schema.TypeKind.Interface : Schema.TypeKind.Object),
       name: Str.Code.TS.string(type.name),
       fields: interfaceFields,
       ...(isInterface
         ? {
           implementors: Str.Code.TS.tuple(
-            Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
+            Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Schema.InterfaceType)
               .map(_ => _.name),
           ),
           implementorsUnion:
-            Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
+            Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Schema.InterfaceType)
                 .length > 0
               ? Str.Code.TS.unionItems(
-                Grafaid.Schema.KindMap.getInterfaceImplementors(
+                Schema.KindMap.getInterfaceImplementors(
                   config.schema.kindMap,
-                  type as Grafaid.Schema.InterfaceType,
+                  type as Schema.InterfaceType,
                 ).map(_ => _.name),
               )
               : `never`,
           implementorsIndex: Object.fromEntries(
-            Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
+            Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Schema.InterfaceType)
               .map(n => [n.name, n.name]),
           ),
         }
@@ -911,7 +912,7 @@ const generateTypeModule = (
   return modules
 }
 
-const namedTypesTypeReference = (name: string | Grafaid.Schema.NamedTypes) => {
+const namedTypesTypeReference = (name: string | Schema.NamedTypes) => {
   const name_ = typeof name === `string` ? name : name.name
   return `$Schema.${name_}`
 }

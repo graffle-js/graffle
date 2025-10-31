@@ -1,8 +1,7 @@
-import type { Grafaid } from '@graffle/graphql'
 import { sendRequest } from '@graffle/client/send.js'
 import { type Context } from '@graffle/core/context.js'
 import { Docpar } from '@graffle/document/_.js'
-import { getOperationDefinition } from '@graffle/graphql/document.js'
+import type { Graphql } from '@graffle/graphql'
 import { Lang } from '@wollybeard/kit'
 import { OperationTypeNode, print } from 'graphql'
 
@@ -16,7 +15,7 @@ import { OperationTypeNode, print } from 'graphql'
  * @typeParam $Variables - The variables type inferred from the selection set
  * @typeParam $Result - The result type inferred from the selection set
  */
-export interface DocumentRunner<$Variables = Grafaid.Variables, $Result = unknown> {
+export interface DocumentRunner<$Variables = Graphql.Variables, $Result = unknown> {
   /**
    * The GraphQL document string.
    * Can be used with any GraphQL client or for inspection.
@@ -89,8 +88,8 @@ const buildDocumentRunnerForRootField = (
 
   return {
     document: documentString,
-    run: async (variables: Grafaid.Variables) => {
-      const request = graffleMappedResultToRequest(
+    run: async (variables: Graphql.Variables) => {
+      const request = Docpar.Object.ToGraphQLDocument.graffleMappedResultToRequest(
         { ...encoded, operationsVariables: { $default: variables } },
         undefined,
       )
@@ -125,8 +124,8 @@ const buildDocumentRunner = (
 
   return {
     document: documentString,
-    run: async (variables: Grafaid.Variables) => {
-      const request = graffleMappedResultToRequest(
+    run: async (variables: Graphql.Variables) => {
+      const request = Docpar.Object.ToGraphQLDocument.graffleMappedResultToRequest(
         { ...encoded, operationsVariables: { $default: variables } },
         undefined,
       )
@@ -194,7 +193,7 @@ const executeDocument = async (
   document: Docpar.Object.Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {
-  const request = graffleMappedResultToRequest(
+  const request = Docpar.Object.ToGraphQLDocument.graffleMappedResultToRequest(
     Docpar.Object.ToGraphQLDocument.toGraphQL(document, {
       sddm: context.configuration.schema.current.map,
       // todo test that when custom scalars are used they are mapped correctly
@@ -204,29 +203,4 @@ const executeDocument = async (
   )
 
   return sendRequest(context, request)
-}
-
-export const graffleMappedResultToRequest = (
-  { document, operationsVariables }: Docpar.Object.ToGraphQLDocument.Encoded,
-  operationName?: string,
-): Grafaid.RequestAnalyzedDocumentNodeInput => {
-  // We get back variables for every operation in the Graffle document.
-  // However, we only need the variables for the operation that was selected to be executed.
-  // If there was NO operation name provided then we assume that the first operation in the document is the one that should be executed.
-  // If there are MULTIPLE operations in the Graffle document AND the user has supplied an invalid operation name (either none or given matches none)
-  // then what happens here is the variables from one operation can be mixed into another operation.
-  // This shouldn't matter because such a state would be rejected by the server since it wouldn't know what operation to execute.
-  const variables_ = operationName
-    ? operationsVariables[operationName]
-    : Object.values(operationsVariables)[0]
-
-  const operation_ = getOperationDefinition({ query: document, operationName })
-  if (!operation_) throw new Error(`Unknown operation named "${String(operationName)}".`)
-
-  return {
-    operationName,
-    operation: operation_,
-    query: document,
-    variables: variables_,
-  }
 }

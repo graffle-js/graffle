@@ -1,4 +1,4 @@
-import { Document } from '#~/__.js'
+import { Document } from '#~/document/_.js'
 import type { Select } from './Select/_.js'
 import * as SelectDocument from './Select/document.js'
 import type { TypedDocument } from '#~/typed-document/_.js'

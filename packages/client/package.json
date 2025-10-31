@@ -29,6 +29,7 @@
     "type-fest": "^5.1.0"
   },
   "devDependencies": {
+    "@graffle/extension-transport-memory": "workspace:*",
     "@test/fixtures": "workspace:*"
   },
   "repository": {

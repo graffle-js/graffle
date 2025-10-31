@@ -1,4 +1,4 @@
-import { type Fs, writeFileAndCreateDir } from '#src/lib/fsp.js'
+import { type Fs, writeFileAndCreateDir } from '#~/lib/fsp.js'
 import { test } from '@test/fixtures/helpers'
 import * as Memfs from 'memfs'
 import * as Path from 'node:path'

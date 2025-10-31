@@ -1,4 +1,4 @@
-import { Document } from '#~/__.js'
+import { Document } from '#~/document/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { Schema } from '#~/schema-types/index.js'
 import type { Core, ParserContext } from '../core/_.js'

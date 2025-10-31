@@ -1,5 +1,5 @@
 import type { Docpar } from '@graffle/graphql'
-import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+import { GlobalRegistry } from '#~/types/GlobalRegistry/GlobalRegistry.js'
 import { Configurator } from '@wollybeard/kit'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap

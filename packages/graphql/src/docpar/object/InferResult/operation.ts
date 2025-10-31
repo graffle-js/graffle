@@ -1,6 +1,6 @@
-import type { Grafaid } from '../__.js'
 import type { Null } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
+import type { Graphql } from '../__.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore

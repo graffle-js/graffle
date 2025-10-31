@@ -1,4 +1,6 @@
+export * as Ast from './ast/__.js'
 export * as Directives from './Directive.js'
+export * from './global.js'
 export * from './helpers.js'
 export * from './Named/_.js'
 export * from './nodes/__typename.js'

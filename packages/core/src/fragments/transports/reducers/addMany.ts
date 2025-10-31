@@ -1,4 +1,4 @@
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import type { RequestPipeline } from '#~/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 import type { Ts, Tup } from '@wollybeard/kit'
 import type { Transport } from '../dataType/_.js'
@@ -37,7 +37,7 @@ export const addMany = <
 
     contextNewRegistry[name] = transport
     contextNewConfigurations[name] = transport.configurator.default
-    contextNewOverloads.push(transport)
+    contextNewOverloads['push'](transport)
   }
 
   return {

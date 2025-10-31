@@ -1,4 +1,4 @@
-import type { Context } from '#src/context/context.js'
+import type { Context } from '#~/context.js'
 import type { Obj } from '@wollybeard/kit'
 
 export type ContextFragment = Partial<Context>

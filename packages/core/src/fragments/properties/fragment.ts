@@ -1,4 +1,4 @@
-import type { Client_justContext } from '#src/client/client.js'
+import type { Client_justContext } from '#~/client/client.js'
 import { Arr, Obj, Ts } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { Context } from '../../context.js'

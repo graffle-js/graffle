@@ -1,5 +1,5 @@
 import { Docpar } from '#~/docpar/_.js'
-import type { Schema } from '#~/schema-types/index.js'
+import { Schema } from '#~/schema/_.js'
 import { print } from '@0no-co/graphql.web'
 
 //

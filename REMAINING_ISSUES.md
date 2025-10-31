@@ -13,6 +13,7 @@ The monorepo migration is **architecturally complete** (100%) with a unified `@g
 **Problem**: Files still use old TypeScript path aliases that don't exist in the new structure.
 
 **Errors**:
+
 ```typescript
 // Error: Cannot find module '#src/types/RequestResult/_.js'
 import type { RequestResult } from '#src/types/RequestResult/_.js'
@@ -25,6 +26,7 @@ import type { Kind } from '#graffle/utilities-for-generated'
 ```
 
 **Files with Issues**:
+
 ```
 src/document/$.test-d.ts
 src/document/$.test.ts
@@ -44,20 +46,22 @@ src/document/object/ToGraphQLDocument/nodes/Argument.ts
 **Fix Options**:
 
 **Option A - Update tsconfig.json** (Recommended):
+
 ```json
 // packages/graphql/tsconfig.json
 {
   "compilerOptions": {
     "paths": {
-      "#src/*": ["../../src/*"],           // Map to monorepo root src
-      "#test/*": ["../../tests/*"],        // Map to monorepo root tests
-      "#graffle/*": ["./src/*"]            // Map to graphql package src
+      "#src/*": ["../../src/*"], // Map to monorepo root src
+      "#test/*": ["../../tests/*"], // Map to monorepo root tests
+      "#graffle/*": ["./src/*"] // Map to graphql package src
     }
   }
 }
 ```
 
 **Option B - Convert to Relative Imports**:
+
 ```bash
 cd packages/graphql/src/document
 find . -name "*.ts" -exec sed -i '' "s|#src/|../../src/|g" {} \;
@@ -66,30 +70,34 @@ find . -name "*.ts" -exec sed -i '' "s|#graffle/utilities-for-generated|@graffle
 ```
 
 **Option C - Convert to Package Imports**:
+
 ```typescript
 // Before
 import type { RequestResult } from '#src/types/RequestResult/_.js'
 
 // After
-import type { RequestResult } from '@graffle/core'
+import type { Core } from '@graffle/core'
+// Use: Core.RequestResult
 ```
 
 **Estimated Time**: 1-2 hours
 
 ---
 
-### 2. Missing Grafaid Export
+### 2. Missing Graphql Export
 
 **Affected Files**: ~15 files in `packages/graphql/src/document/`
 
-**Problem**: Files expect `Grafaid` export from parent module but it wasn't re-exported.
+**Problem**: Files expect `Graphql` export from parent module but it wasn't re-exported.
 
 **Error**:
+
 ```
-Module '"../__.js"' has no exported member 'Grafaid'
+Module '"../__.js"' has no exported member 'Graphql'
 ```
 
 **Files with Issues**:
+
 ```
 src/document/core/sddm/mapVariables.test.ts
 src/document/core/sddm/mapVariables.ts
@@ -105,9 +113,10 @@ src/document/object/ToGraphQLDocument/nodes/_collect.ts
 ```
 
 **Fix**: Already partially fixed in `packages/graphql/src/document/__.ts`:
+
 ```typescript
-// Re-export Grafaid from parent for backward compatibility
-export * as Grafaid from '../__.js'
+// Re-export Graphql from parent for backward compatibility
+export * as Graphql from '../__.js'
 ```
 
 **Remaining Work**: Verify this resolves all errors or add to individual files if needed.
@@ -123,6 +132,7 @@ export * as Grafaid from '../__.js'
 **Problem**: Imports reference modules that don't exist or have incorrect paths.
 
 **Errors**:
+
 ```typescript
 // Error: Cannot find module '@graffle/graphql/_Nodes.js'
 import { _Nodes } from '@graffle/graphql/_Nodes.js'
@@ -135,6 +145,7 @@ import * from './string/_.js'
 ```
 
 **Files with Issues**:
+
 ```
 src/document/object/Parse.ts
 src/document/object/rootType.ts
@@ -147,6 +158,7 @@ src/document/object/ToGraphQLDocument/nodes/Argument.ts
 ```
 
 **Fix Strategy**:
+
 1. **_Nodes.js**: Investigate - likely refers to AST node constructors in `document.ts`
    - Should probably be `import * as Nodes from '../document.js'`
 2. **typed-document**: Verify path - should be `../typed-document/_.js` (relative)
@@ -163,6 +175,7 @@ src/document/object/ToGraphQLDocument/nodes/Argument.ts
 **Problem**: Generic types missing arguments, implicit any types, missing properties.
 
 **Errors**:
+
 ```
 Generic type 'Parse' requires 1 type argument(s)
 Property 'type' does not exist on type '{}'
@@ -173,6 +186,7 @@ Argument of type 'ParsedSelectionObjectLevel' is not assignable to parameter of 
 ```
 
 **Files with Issues**:
+
 ```
 src/document/$.test-d.ts (line 16, 17)
 src/document/core/sddm/mapVariables.ts (line 60, 73)
@@ -194,6 +208,7 @@ src/document/object/ToGraphQLDocument/nodes/5_InlineFragments.ts (line 17)
 **Status**: Temporarily commented out in `packages/graphql/src/document/__.ts`
 
 **Code**:
+
 ```typescript
 // Temporarily disabled - string parser has schema dependencies
 // export * from './string/_.js'
@@ -202,6 +217,7 @@ src/document/object/ToGraphQLDocument/nodes/5_InlineFragments.ts (line 17)
 **Issue**: String parser has dependencies on schema types that may need refactoring.
 
 **Decision Needed**:
+
 - Should string parser be re-enabled?
 - Does it need refactoring to work with new structure?
 
@@ -214,6 +230,7 @@ src/document/object/ToGraphQLDocument/nodes/5_InlineFragments.ts (line 17)
 **Problem**: Test files may have outdated imports or references.
 
 **Examples**:
+
 - `src/document/$.test-d.ts` - has multiple issues
 - `src/document/$.test.ts` - has import path issues
 
@@ -225,14 +242,14 @@ src/document/object/ToGraphQLDocument/nodes/5_InlineFragments.ts (line 17)
 
 ## Summary Table
 
-| Issue | Severity | Files Affected | Estimated Time | Fix Complexity |
-|-------|----------|----------------|----------------|----------------|
-| Path Alias References | 🔴 Critical | ~30 | 1-2 hours | Medium |
-| Missing Grafaid Export | 🔴 Critical | ~15 | 30 min | Low |
-| Missing Module References | 🔴 Critical | ~5-10 | 30 min | Medium |
-| Type Errors | 🔴 Critical | ~10 | 30 min | Low |
-| String Parser | 🟡 Medium | 1 dir | 1-2 hours | Medium |
-| Test Files | 🟢 Low | ~5 | (included) | Low |
+| Issue                     | Severity    | Files Affected | Estimated Time | Fix Complexity |
+| ------------------------- | ----------- | -------------- | -------------- | -------------- |
+| Path Alias References     | 🔴 Critical | ~30            | 1-2 hours      | Medium         |
+| Missing Graphql Export    | 🔴 Critical | ~15            | 30 min         | Low            |
+| Missing Module References | 🔴 Critical | ~5-10          | 30 min         | Medium         |
+| Type Errors               | 🔴 Critical | ~10            | 30 min         | Low            |
+| String Parser             | 🟡 Medium   | 1 dir          | 1-2 hours      | Medium         |
+| Test Files                | 🟢 Low      | ~5             | (included)     | Low            |
 
 **Total Estimated Time**: 2.5-4 hours
 
@@ -244,7 +261,7 @@ src/document/object/ToGraphQLDocument/nodes/5_InlineFragments.ts (line 17)
    - Unblocks most other issues
    - Cleanest solution
 
-2. **Second**: Verify Grafaid export fix
+2. **Second**: Verify Graphql export fix
    - Should already be working
    - Quick verification
 
@@ -300,14 +317,22 @@ echo "Done! Now run: pnpm build"
 
 ## Progress Tracking
 
-- [ ] 1. Fix path alias references
-- [ ] 2. Verify Grafaid export fix
-- [ ] 3. Fix missing module references
-- [ ] 4. Fix type errors
-- [ ] 5. Run `pnpm build` successfully
-- [ ] 6. Run tests
-- [ ] 7. Regenerate fixtures
-- [ ] 8. Merge PR
+-
+  1. [ ] Fix path alias references
+-
+  2. [ ] Verify Graphql export fix
+-
+  3. [ ] Fix missing module references
+-
+  4. [ ] Fix type errors
+-
+  5. [ ] Run `pnpm build` successfully
+-
+  6. [ ] Run tests
+-
+  7. [ ] Regenerate fixtures
+-
+  8. [ ] Merge PR
 
 ---
 

@@ -23,7 +23,9 @@ pnpm add @graffle/core @graffle/document @graffle/graphql
 ## Usage
 
 ```typescript
-import { Extension, Context, GlobalRegistry } from '@graffle/core'
+import { Core } from '@graffle/core'
+
+// Use: Core.Extension, Core.Context, Core.GlobalRegistry
 ```
 
 ## License

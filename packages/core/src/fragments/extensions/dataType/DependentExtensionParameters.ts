@@ -1,4 +1,4 @@
-import type { Client } from '#src/client/client.js'
+import type { Client } from '#~/client/client.js'
 import type { Configurator } from '@wollybeard/kit'
 import type { Context } from '../../../context.js'
 

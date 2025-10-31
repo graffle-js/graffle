@@ -1,1 +1,1 @@
-export * as GraphQLHTTP from './http.js'
+export * as Http from './__.js'

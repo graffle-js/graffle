@@ -3,7 +3,7 @@ import { parse } from 'graphql'
 import { expect } from 'vitest'
 import type { Variables, RequestAnalyzedDocumentNodeInput } from '#~/request.js'
 import type { Docpar } from '#~/docpar/_.js'
-import { Document } from '#~/__.js'
+import { Document } from '#~/document/_.js'
 import { mapVariablesByTypeNames } from './mapVariables.js'
 
 const createRequest = (

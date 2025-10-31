@@ -1,4 +1,4 @@
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import type { RequestPipeline } from '#~/requestPipeline/RequestPipeline.js'
 import type { ContextFragment } from '../fragment.js'
 import type { RequestInterceptorComputer } from '../helpers.js'
 

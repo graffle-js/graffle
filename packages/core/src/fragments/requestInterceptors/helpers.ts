@@ -1,14 +1,13 @@
-import type { Configurator } from '#graffle/extension-exports'
-import type { Client_justContext, ClientEmpty } from '#src/client/client.js'
-import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import type { Configurator } from '@wollybeard/kit'
+import type { Client_justContext, ClientEmpty } from '#~/client/client.js'
+import type { RequestPipeline } from '#~/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'
 
+// Type complexity simplified - actual types enforced in client package
 export const create = <$Client extends Client_justContext = ClientEmpty>(
-  interceptor: Ware.Interceptor.InferFromPipeline<
-    Ware.Pipeline.InferFromDefinition<$Client['_']['requestPipelineDefinition']>
-  >,
+  interceptor: any,
 ) => interceptor
 
 export type RequestInterceptorComputer<

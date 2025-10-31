@@ -1,4 +1,4 @@
-import { Document } from '#~/__.js'
+import { Document } from '#~/document/_.js'
 import { Arr, Obj, Ts } from '@wollybeard/kit'
 import type { Select } from './_.js'
 import type { DefaultContext } from './context.js'

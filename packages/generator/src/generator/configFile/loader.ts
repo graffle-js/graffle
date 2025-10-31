@@ -1,5 +1,5 @@
-import { isPathToADirectory, toAbsolutePath } from '#src/lib/fsp.js'
-import { importFirst } from '#src/lib/import-first.js'
+import { isPathToADirectory, toAbsolutePath } from '#~/lib/fsp.js'
+import { importFirst } from '#~/lib/import-first.js'
 import { Err } from '@wollybeard/kit'
 import * as Path from 'node:path'
 import { type Builder, isBuilder } from './builder.js'

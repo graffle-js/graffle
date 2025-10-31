@@ -1,7 +1,6 @@
-import type { Grafaid } from '@graffle/graphql'
-import type { GraffleExecutionResultEnvelope } from '#src/client/handle.js'
-import type { Context } from '@graffle/core/context.js'
-import { normalizeRequestToNode } from '@graffle/graphql/request.js'
+import { Graphql, Request } from '@graffle/graphql'
+import { Core } from '@graffle/core'
+import type { GraffleExecutionResultEnvelope } from '../handle.js'
 import { Err, Ware } from '@wollybeard/kit'
 import type { FormattedExecutionResult } from 'graphql'
 import { decodeResultData } from './decode.js'
@@ -18,18 +17,18 @@ export namespace RequestPipeline {
   export type StepName = keyof typeof stepName
 
   export interface Input {
-    request: Grafaid.RequestAnalyzedInput
-    state: Context
+    request: Graphql.Request.RequestAnalyzedInput
+    state: Core.Context
   }
 
   export interface DecodeInput {
-    state: Context
+    state: Core.Context
     result: FormattedExecutionResult
   }
 
   export interface EncodeOutput {
-    request: Grafaid.RequestAnalyzedInput
-    state: Context
+    request: Graphql.Request.RequestAnalyzedInput
+    state: Core.Context
   }
 
   export type PackInput = EncodeOutput
@@ -39,8 +38,8 @@ export namespace RequestPipeline {
   export interface BaseDefinition extends Ware.PipelineDefinition {
     readonly config: Ware.PipelineDefinition.Config
     readonly input: {
-      request: Grafaid.RequestAnalyzedInput
-      state: Context
+      request: Graphql.Request.RequestAnalyzedInput
+      state: Core.Context
       transportType: 'none'
       transport: {}
     }
@@ -95,7 +94,7 @@ export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinitionEmpty 
   .step(stepName.decode, {
     run: (
       input: {
-        state: Context
+        state: Core.Context
         result: FormattedExecutionResult
       },
       _,

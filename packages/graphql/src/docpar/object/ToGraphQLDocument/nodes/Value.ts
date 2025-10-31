@@ -1,4 +1,4 @@
-import { Document } from '#~/__.js'
+import { Document } from '#~/document/_.js'
 import { Select } from '../../Select/_.js'
 import { Nodes } from '#~/_Nodes.js'
 import { Schema } from '#~/schema-types/index.js'

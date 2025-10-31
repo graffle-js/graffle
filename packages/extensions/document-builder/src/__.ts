@@ -8,5 +8,4 @@ export {
   createMethodOperationType,
   createRootFieldExecutor,
   type DocumentRunner as DocumentRunnerDeferred,
-  graffleMappedResultToRequest,
 } from './methods-instance/requestMethods.js'

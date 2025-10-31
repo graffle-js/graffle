@@ -1,5 +1,4 @@
-import { Grafaid } from '@graffle/graphql'
-import { createFromObjectTypeAndMapOrThrow } from '@graffle/graphql/schema/RootDetails.js'
+import { Graphql } from '@graffle/graphql'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'
@@ -115,7 +114,7 @@ const generateMethodsFile = (
     const helperName = helperNames.get(field.operationType)!
 
     // Get field definition and JSDoc
-    const rootType = config.schema.instance.getType(field.rootTypeName) as Grafaid.Schema.ObjectType
+    const rootType = config.schema.instance.getType(field.rootTypeName) as Schema.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {

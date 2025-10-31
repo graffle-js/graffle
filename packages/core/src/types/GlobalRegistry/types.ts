@@ -1,4 +1,5 @@
-import type { Kind, Schema } from '#graffle/utilities-for-generated'
+import type { Kind } from '@wollybeard/kit/fn'
+import type { Schema } from '@graffle/graphql/schema-types'
 import type { ConfigManager } from '@wollybeard/kit'
 import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'

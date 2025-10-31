@@ -1,3 +1,3 @@
-import type { Grafaid } from '@graffle/graphql'
+import type { Graphql } from '@graffle/graphql'
 
-export type KindRenderers = Record<keyof Grafaid.Schema.KindMap['list'], Function | null>
+export type KindRenderers = Record<keyof Schema.KindMap['list'], Function | null>

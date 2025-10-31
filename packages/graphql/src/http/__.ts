@@ -1,10 +1,10 @@
+import { Request } from '#~/request/_.js'
 import { Http, Rec } from '@wollybeard/kit'
 import type { FormattedExecutionResult, GraphQLFormattedError } from 'graphql'
-import type { Variables } from '../graphql.js'
 
 export interface RequestConfig {
   query: string
-  variables?: Variables | undefined
+  variables?: Request.Variables | undefined
   operationName?: string | undefined
 }
 

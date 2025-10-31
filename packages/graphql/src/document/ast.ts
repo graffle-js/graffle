@@ -1,3 +1,4 @@
+import { Typed } from '#~/document/typed/_.js'
 import { parse, print as graphqlWebPrint } from '@0no-co/graphql.web'
 import { Str } from '@wollybeard/kit'
 import { print as graphqlPrint } from 'graphql'
@@ -29,9 +30,7 @@ import {
 import type { HasRequiredKeys } from 'type-fest'
 import { Kind } from '../docpar/kind.js'
 import { OperationTypeNode } from '../docpar/OperationTypeNode.js'
-import type { RequestDocumentNodeInput, RequestInput } from '../graphql.js'
-import { TypedDocument } from '../typed-document/_.js'
-export { OperationType } from '../schema/OperationType/_.js'
+import { Request } from '#~/request/_.js'
 
 export type {
   ArgumentNode,
@@ -62,8 +61,6 @@ export type {
 export { OperationTypeNode } from '../docpar/OperationTypeNode.js'
 
 export { Kind } from '../docpar/kind.js'
-
-export * as Typed from '../typed-document/TypedDocument.js'
 
 export type $Any =
   | DirectiveNode
@@ -269,8 +266,8 @@ export const OperationTypeToAccessKind = {
   subscription: `read`,
 } as const
 
-export const print = (document: TypedDocument.TypedDocumentLike): string => {
-  const documentUntyped = TypedDocument.unType(document)
+export const print = (document: Typed.TypedDocumentLike): string => {
+  const documentUntyped = Typed.unType(document)
   return Str.Type.is(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
 }
 
@@ -320,7 +317,7 @@ export const getNamedType = (type: TypeNode): NamedTypeNode => {
 }
 
 export const getOperationDefinition = (
-  request: RequestDocumentNodeInput,
+  request: Request.RequestDocumentNodeInput,
 ): OperationDefinitionNode | null => {
   for (const node of request.query.definitions) {
     const opDefNode = isOperationDefinitionNode(node) ? node : null
@@ -340,11 +337,11 @@ const definedOperationPattern = new RegExp(`^\\b(${Object.values(OperationTypeNo
  * If document is string then regular expressions are used to extract the operation type
  * to avoid document encode/decode performance costs.
  */
-export const getOperationType = (request: RequestInput): OperationTypeNode | null => {
+export const getOperationType = (request: Request.RequestInput): OperationTypeNode | null => {
   // return null
   const { operationName, query: document } = request
 
-  const documentUntyped = TypedDocument.unType(document)
+  const documentUntyped = Typed.unType(document)
 
   if (!Str.Type.is(documentUntyped)) {
     const operationDefinition = getOperationDefinition({ query: documentUntyped, operationName })
@@ -390,7 +387,7 @@ export const getOperationType = (request: RequestInput): OperationTypeNode | nul
   return definedOperationToAnalyze.operationType
 }
 
-export const normalizeDocumentToNode = (document: TypedDocument.TypedDocumentLike): DocumentNode => {
-  const d = TypedDocument.unType(document)
+export const normalizeDocumentToNode = (document: Typed.TypedDocumentLike): DocumentNode => {
+  const d = Typed.unType(document)
   return Str.Type.is(d) ? parse(d) : d
 }

@@ -3,8 +3,12 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "./build",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo"
   },
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test-d.ts", "src/**/*.bench.ts"]
+  "exclude": ["src/**/*.test.ts", "src/**/*.test-d.ts", "src/**/*.bench.ts"],
+  "references": [
+    { "path": "../graphql/tsconfig.build.json" }
+  ]
 }

@@ -1,12 +1,12 @@
-import { Graffle } from '#graffle'
-import { Grafaid } from '@graffle/graphql'
-import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
-import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
+import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#~/lib/fsp.js'
+import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#~/lib/typescript-formatter.js'
+import { create } from '@graffle/client'
+import { Introspection } from '@graffle/extension-introspection'
+import { Graphql } from '@graffle/graphql'
 import { ConfigManager } from '@wollybeard/kit'
 import { Obj, Str } from '@wollybeard/kit'
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
-import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import type { Extension } from '../extension/types.js'
 import { detectDefaultImportFormat } from '../helpers/detectImportFormat.js'
 import {
@@ -78,8 +78,8 @@ interface ConfigSchema {
   via: ConfigInit['schema']['type']
   sdl: string
   sdlFilePath: null | string
-  instance: Grafaid.Schema.Schema
-  kindMap: Grafaid.Schema.KindMap
+  instance: Schema.Schema
+  kindMap: Schema.KindMap
 }
 
 export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
@@ -151,7 +151,7 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
     configInit.defaultSchemaUrl === false
       ? null
       : typeof configInit.defaultSchemaUrl === `boolean` || configInit.defaultSchemaUrl === undefined
-        ? configInit.schema instanceof Grafaid.Schema.Schema
+        ? configInit.schema instanceof Schema.Schema
           ? null
           : configInit.schema.type === `url`
             ? configInit.schema.url
@@ -313,9 +313,9 @@ const createConfigSchema = async (
 ): Promise<ConfigSchema> => {
   switch (input.schema.type) {
     case `instance`: {
-      const sdl = Grafaid.Schema.print(input.schema.instance)
+      const sdl = Schema.print(input.schema.instance)
       const instance = input.schema.instance
-      const kindMap = Grafaid.Schema.KindMap.getKindMap(instance)
+      const kindMap = Schema.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
         sdlFilePath: null,
@@ -338,8 +338,8 @@ const createConfigSchema = async (
       } else {
         sdl = input.schema.sdl
       }
-      const instance = Grafaid.Schema.buildSchema(sdl)
-      const kindMap = Grafaid.Schema.KindMap.getKindMap(instance)
+      const instance = Schema.buildSchema(sdl)
+      const kindMap = Schema.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
         sdlFilePath,
@@ -350,8 +350,7 @@ const createConfigSchema = async (
     }
     case `url`: {
       const introspection = Introspection({ options: input.schema.options })
-      const graffle = Graffle
-        .create()
+      const graffle = create()
         .use(introspection)
         .transport({
           url: input.schema.url,
@@ -361,9 +360,9 @@ const createConfigSchema = async (
       if (!data) {
         throw new Error(`No data returned for introspection query.`)
       }
-      const instance = Grafaid.Schema.buildClientSchema(data)
-      const sdl = Grafaid.Schema.print(instance)
-      const kindMap = Grafaid.Schema.KindMap.getKindMap(instance)
+      const instance = Schema.buildClientSchema(data)
+      const sdl = Schema.print(instance)
+      const kindMap = Schema.KindMap.getKindMap(instance)
       return {
         via: `url`,
         sdlFilePath: null,

@@ -1,4 +1,4 @@
-import type { RequestPipeline } from '#src/requestPipeline/_.js'
+import type { RequestPipeline } from '#~/requestPipeline/_.js'
 import { Ts } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
 import type { RequestInterceptors } from '../../../__.js'

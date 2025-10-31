@@ -1,10 +1,9 @@
 // New modular selection sets generator
 // TODO: This will replace SelectionSets.ts once complete
 
-import { Grafaid } from '@graffle/graphql'
-import { analyzeArgsNullability } from '@graffle/graphql/schema/args.js'
+import { Graphql } from '@graffle/graphql'
+import { Docpar } from '@graffle/graphql'
 import { Obj, Str } from '@wollybeard/kit'
-import { Docpar } from '../../docpar/_.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -147,7 +146,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   }
 }
 
-const generateNamedTypesModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+const generateNamedTypesModule = (config: Config, kindMap: Schema.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   const allTypes = [
@@ -161,13 +160,13 @@ const generateNamedTypesModule = (config: Config, kindMap: Grafaid.Schema.KindMa
 
   // Re-export all named types (no $ prefix since the namespace itself is $Named)
   for (const type of allTypes) {
-    const from = Grafaid.Schema.isEnumType(type)
+    const from = Schema.isEnumType(type)
       ? `./enums/${type.name}`
-      : Grafaid.Schema.isUnionType(type)
+      : Schema.isUnionType(type)
       ? `./unions/${type.name}/$`
-      : Grafaid.Schema.isInputObjectType(type)
+      : Schema.isInputObjectType(type)
       ? `./input-objects/${type.name}/$`
-      : Grafaid.Schema.isInterfaceType(type)
+      : Schema.isInterfaceType(type)
       ? `./interfaces/${type.name}/$`
       : kindMap.Root.some(r => r.name === type.name)
       ? `./roots/${type.name}/$`
@@ -189,7 +188,7 @@ const generateNamedTypesModule = (config: Config, kindMap: Grafaid.Schema.KindMa
 
 // ===== Scalars Generator =====
 
-const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule[] => {
+const generateScalarsModule = (config: Config, kindMap: Schema.KindMap['list']): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
   // Collect all scalar types (standard + custom)
@@ -303,7 +302,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
 
 // ===== Enum Generator =====
 
-const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
+const generateEnumModule = (config: Config, enumType: Schema.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
   code(Str.Code.TS.typeAlias$({
@@ -322,7 +321,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
 
 // ===== Union Generator =====
 
-const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType): GeneratedModule[] => {
+const generateUnionModule = (config: Config, unionType: Schema.UnionType): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
   // Generate fragment.ts with $FragmentInline interface
@@ -391,7 +390,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
 
 // ===== Input Object Generator =====
 
-const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.InputObjectType): GeneratedModule[] => {
+const generateInputObjectModule = (config: Config, inputObject: Schema.InputObjectType): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
   // Analyze what imports are needed
@@ -462,19 +461,19 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
 
 // ===== Interface Generator =====
 
-const generateInterfaceModule = (config: Config, iface: Grafaid.Schema.InterfaceType): GeneratedModule[] => {
+const generateInterfaceModule = (config: Config, iface: Schema.InterfaceType): GeneratedModule[] => {
   return generateFieldedTypeModule(config, iface, 'interfaces')
 }
 
 // ===== Root Generator =====
 
-const generateRootModule = (config: Config, root: Grafaid.Schema.ObjectType): GeneratedModule[] => {
+const generateRootModule = (config: Config, root: Schema.ObjectType): GeneratedModule[] => {
   return generateFieldedTypeModule(config, root, 'roots')
 }
 
 // ===== Object Generator =====
 
-const generateObjectModule = (config: Config, object: Grafaid.Schema.ObjectType): GeneratedModule[] => {
+const generateObjectModule = (config: Config, object: Schema.ObjectType): GeneratedModule[] => {
   return generateFieldedTypeModule(config, object, 'objects')
 }
 
@@ -482,13 +481,13 @@ const generateObjectModule = (config: Config, object: Grafaid.Schema.ObjectType)
 
 const generateFieldedTypeModule = (
   config: Config,
-  type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+  type: Schema.ObjectType | Schema.InterfaceType,
   kind: 'roots' | 'objects' | 'interfaces',
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
   const fields = Object.values(type.getFields())
   const isRoot = kind === 'roots'
-  const isInterface = Grafaid.Schema.isInterfaceType(type)
+  const isInterface = Schema.isInterfaceType(type)
 
   // Analyze what imports are needed for fields.ts (based on field arguments)
   const usage = analyzeOutputTypeUsage(type)
@@ -557,9 +556,9 @@ const generateFieldedTypeModule = (
   namespaceCode()
 
   const fieldKeys = fields.map(field => {
-    const namedType = Grafaid.Schema.getNamedType(field.type)
-    const argsAnalysis = analyzeArgsNullability(field.args)
-    const isCanBeIndicator = (Grafaid.Schema.isScalarType(namedType) || Grafaid.Schema.isEnumType(namedType))
+    const namedType = Schema.getNamedType(field.type)
+    const argsAnalysis = Schema.Args.analyzeArgsNullability(field.args)
+    const isCanBeIndicator = (Schema.isScalarType(namedType) || Schema.isEnumType(namedType))
       && argsAnalysis.isAllNullable
     const doc = Str.Code.TSDoc.format(getOutputFieldSelectionSetDoc(field, type.name, namedType))
     const key = H.outputFieldKey(
@@ -575,15 +574,15 @@ const generateFieldedTypeModule = (
   // For interfaces, add inline fragments
   let onTypesRendered = ''
   if (isInterface) {
-    const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(
+    const implementorTypes = Schema.KindMap.getInterfaceImplementors(
       config.schema.kindMap,
-      type as Grafaid.Schema.InterfaceType,
+      type as Schema.InterfaceType,
     )
     onTypesRendered = implementorTypes.map(implementorType => {
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
       const doc = Str.Code.TSDoc.format(
-        getInlineFragmentDoc(implementorType as Grafaid.Schema.ObjectType, type, 'interface'),
+        getInlineFragmentDoc(implementorType as Schema.ObjectType, type, 'interface'),
       )
       const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
@@ -604,10 +603,10 @@ const generateFieldedTypeModule = (
   }
 
   const tsDoc = isRoot && operationType
-    ? getRootTypeDoc(config, type as Grafaid.Schema.ObjectType, operationType)
+    ? getRootTypeDoc(config, type as Schema.ObjectType, operationType)
     : isInterface
-    ? getInterfaceTypeSelectionSetDoc(type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
-    : getObjectTypeSelectionSetDoc(type as Grafaid.Schema.ObjectType, isRoot)
+    ? getInterfaceTypeSelectionSetDoc(type as Schema.InterfaceType, config.schema.kindMap)
+    : getObjectTypeSelectionSetDoc(type as Schema.ObjectType, isRoot)
 
   namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc,
@@ -634,17 +633,17 @@ const generateFieldedTypeModule = (
 
 const renderOutputFieldForFields = (
   config: Config,
-  field: Grafaid.Schema.Field<any, any>,
-  parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+  field: Schema.Field<any, any>,
+  parentType: Schema.ObjectType | Schema.InterfaceType,
 ): string => {
   const code = Str.Builder()
-  const argsAnalysis = analyzeArgsNullability(field.args)
-  const fieldNamedType = Grafaid.Schema.getNamedType(field.type)
+  const argsAnalysis = Schema.Args.analyzeArgsNullability(field.args)
+  const fieldNamedType = Schema.getNamedType(field.type)
 
   const fieldName = renderName(field)
   const safeName = getSafeName(field.name)
 
-  const isCanBeIndicator = (Grafaid.Schema.isScalarType(fieldNamedType) || Grafaid.Schema.isEnumType(fieldNamedType))
+  const isCanBeIndicator = (Schema.isScalarType(fieldNamedType) || Schema.isEnumType(fieldNamedType))
     && argsAnalysis.isAllNullable
   const indicator = isCanBeIndicator
     ? `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
@@ -671,8 +670,8 @@ const renderOutputFieldForFields = (
   const namespaceDecl = isReservedKeyword(field.name) ? `namespace ${safeName}` : `export namespace ${safeName}`
   code(`${namespaceDecl} {`)
 
-  const isHasObjectLikeTypeReference = Grafaid.Schema.isObjectType(fieldNamedType)
-    || Grafaid.Schema.isInterfaceType(fieldNamedType) || Grafaid.Schema.isUnionType(fieldNamedType)
+  const isHasObjectLikeTypeReference = Schema.isObjectType(fieldNamedType)
+    || Schema.isInterfaceType(fieldNamedType) || Schema.isUnionType(fieldNamedType)
 
   const objectLikeTypeReference = isHasObjectLikeTypeReference
     ? H.namedTypesReference(fieldNamedType)
@@ -696,9 +695,9 @@ const renderOutputFieldForFields = (
   if (argsAnalysis.hasAny) {
     code(`  export interface $Arguments<${$ContextTypeParameter}> {`)
     for (const arg of field.args) {
-      const doc = Str.Code.TSDoc.format(getArgumentDoc(config, arg, field, parentType as Grafaid.Schema.ObjectType))
+      const doc = Str.Code.TSDoc.format(getArgumentDoc(config, arg, field, parentType as Schema.ObjectType))
       const key = getInputFieldKey(arg)
-      const optional = Grafaid.Schema.isNullableType(arg.type) ? '?' : ''
+      const optional = Schema.isNullableType(arg.type) ? '?' : ''
       const value = renderArgumentType(arg.type)
       code(`    ${doc}`)
       code(`    readonly ${key}${optional}: ${value}`)
@@ -729,10 +728,10 @@ const renderOutputFieldForFields = (
 
 const renderFieldPropertyArguments = (
   config: Config,
-  field: Grafaid.Schema.Field<any, any>,
+  field: Schema.Field<any, any>,
   argFieldsRendered: string,
 ): string => {
-  const argsAnalysis = analyzeArgsNullability(field.args)
+  const argsAnalysis = Schema.Args.analyzeArgsNullability(field.args)
 
   if (argsAnalysis.hasAny) {
     const lead = argsAnalysis.isAllNullable
@@ -755,7 +754,7 @@ const renderFieldPropertyArguments = (
 
 // ===== Barrel Files =====
 
-const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+const generateBarrelModule = (config: Config, kindMap: Schema.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   // Export namespaces
@@ -835,7 +834,7 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   }
 }
 
-const generateNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+const generateNamespaceModule = (config: Config, kindMap: Schema.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   // Main entry point re-exports everything directly from $$.ts
@@ -873,21 +872,21 @@ interface TypeUsageAnalysis {
   usesNamedTypes: boolean // enums, input objects, other object types
 }
 
-const analyzeTypeUsage = (type: Grafaid.Schema.InputTypes): TypeUsageAnalysis => {
+const analyzeTypeUsage = (type: Schema.InputTypes): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,
     usesNamedTypes: false,
   }
 
-  const analyzeRecursive = (t: Grafaid.Schema.InputTypes): void => {
-    const nakedType = Grafaid.Schema.getNullableType(t)
+  const analyzeRecursive = (t: Schema.InputTypes): void => {
+    const nakedType = Schema.getNullableType(t)
 
-    if (Grafaid.Schema.isListType(nakedType)) {
+    if (Schema.isListType(nakedType)) {
       analyzeRecursive(nakedType.ofType)
       return
     }
 
-    if (Grafaid.Schema.isScalarType(nakedType)) {
+    if (Schema.isScalarType(nakedType)) {
       result.usesScalars = true
       return
     }
@@ -903,7 +902,7 @@ const analyzeTypeUsage = (type: Grafaid.Schema.InputTypes): TypeUsageAnalysis =>
 /**
  * Analyze all fields in an input object to determine what imports are needed
  */
-const analyzeInputObjectTypeUsage = (inputObject: Grafaid.Schema.InputObjectType): TypeUsageAnalysis => {
+const analyzeInputObjectTypeUsage = (inputObject: Schema.InputObjectType): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,
     usesNamedTypes: false,
@@ -921,7 +920,7 @@ const analyzeInputObjectTypeUsage = (inputObject: Grafaid.Schema.InputObjectType
 /**
  * Analyze all fields and their arguments in an output type to determine what imports are needed
  */
-const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType): TypeUsageAnalysis => {
+const analyzeOutputTypeUsage = (type: Schema.ObjectType | Schema.InterfaceType): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,
     usesNamedTypes: false,
@@ -930,10 +929,10 @@ const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema
   for (const field of Object.values(type.getFields())) {
     // Check if field return type is an object-like type (object, interface, union)
     // These get referenced via $Named in the field namespace's extends clause
-    const fieldNamedType = Grafaid.Schema.getNamedType(field.type)
-    const isHasObjectLikeTypeReference = Grafaid.Schema.isObjectType(fieldNamedType)
-      || Grafaid.Schema.isInterfaceType(fieldNamedType)
-      || Grafaid.Schema.isUnionType(fieldNamedType)
+    const fieldNamedType = Schema.getNamedType(field.type)
+    const isHasObjectLikeTypeReference = Schema.isObjectType(fieldNamedType)
+      || Schema.isInterfaceType(fieldNamedType)
+      || Schema.isUnionType(fieldNamedType)
 
     if (isHasObjectLikeTypeReference) {
       result.usesNamedTypes = true
@@ -950,36 +949,36 @@ const analyzeOutputTypeUsage = (type: Grafaid.Schema.ObjectType | Grafaid.Schema
   return result
 }
 
-const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
+const getInputFieldLike = (config: Config, inputFieldLike: Schema.Argument | Schema.InputField) => {
   return [
     getInputFieldKey(inputFieldLike),
     Str.Code.TS.objectField$({
       tsDoc: getTsDocContents(config, inputFieldLike),
-      optional: Grafaid.Schema.isNullableType(inputFieldLike.type),
+      optional: Schema.isNullableType(inputFieldLike.type),
       value: renderArgumentType(inputFieldLike.type),
     }),
   ] as const
 }
 
-const getInputFieldKey = (inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
-  return Grafaid.Schema.isEnumType(Grafaid.Schema.getNamedType(inputFieldLike.type))
+const getInputFieldKey = (inputFieldLike: Schema.Argument | Schema.InputField) => {
+  return Schema.isEnumType(Schema.getNamedType(inputFieldLike.type))
     ? Docpar.Object.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 
-const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
-  const sansNullabilityType = Grafaid.Schema.getNullableType(type)
-  const isNullable = Grafaid.Schema.isNullableType(type)
+const renderArgumentType = (type: Schema.InputTypes): string => {
+  const sansNullabilityType = Schema.getNullableType(type)
+  const isNullable = Schema.isNullableType(type)
 
-  if (Grafaid.Schema.isListType(sansNullabilityType)) {
-    const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
+  if (Schema.isListType(sansNullabilityType)) {
+    const innerType = Schema.getNullableType(sansNullabilityType.ofType)
     const innerTypeRendered = renderArgumentType(innerType)
     const arrayType = `Array<${innerTypeRendered}>`
     const fullType = isNullable ? `${arrayType} | null | undefined` : arrayType
     return `${i.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<${fullType}>`
   }
 
-  if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
+  if (Schema.isScalarType(sansNullabilityType)) {
     // Use $Scalars namespace for cleaner generated code
     // Add $ prefix for scalars that conflict with TypeScript built-in types
     const scalarName = ['bigint', 'symbol', 'undefined', 'null'].includes(sansNullabilityType.name)
@@ -1000,18 +999,18 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 // ===== Helper Namespace =====
 
 namespace H {
-  export type Name = string | Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>
+  export type Name = string | Schema.NamedTypes | Schema.Field<any, any>
 
   export const forwardTypeParameter$Context = (type: Name) => {
     return `${renderName(type)}<${i._$Context}>`
   }
 
-  export const namedTypesReference = (type: Grafaid.Schema.NamedTypes) => {
+  export const namedTypesReference = (type: Schema.NamedTypes) => {
     return `$Named.${reference(type)}`
   }
 
   export const reference = (name: Name) => {
-    if (Grafaid.Schema.isEnumType(name)) {
+    if (Schema.isEnumType(name)) {
       return renderName(name)
     }
     return `${renderName(name)}<${i._$Context}>`
@@ -1057,7 +1056,7 @@ namespace H {
   }
 
   export const fragmentInlineField = (
-    type: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
+    type: Schema.ObjectType | Schema.UnionType | Schema.InterfaceType,
   ) => {
     const doc = Str.Code.TSDoc.format(getFragmentInlineFieldDoc())
 
@@ -1065,7 +1064,7 @@ namespace H {
   }
 
   export const fragmentInlineInterface = (
-    node: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
+    node: Schema.ObjectType | Schema.UnionType | Schema.InterfaceType,
   ) => {
     return Str.Code.TS.interfaceDecl({
       export: true,

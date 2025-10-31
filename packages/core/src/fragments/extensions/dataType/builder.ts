@@ -1,4 +1,4 @@
-import type { RequestPipeline } from '#src/requestPipeline/_.js'
+import type { RequestPipeline } from '#~/requestPipeline/_.js'
 import { Bldr, Obj } from '@wollybeard/kit'
 import { Configurator } from '@wollybeard/kit'
 import type { WritableDeep } from 'type-fest'
