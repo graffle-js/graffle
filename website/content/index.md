@@ -59,16 +59,20 @@ features:
 ---
 
 <div class="sponsors-section">
-
-## Sponsors
-
-<div class="sponsors-grid">
-  <a href="https://github.com/LambdaTest-Inc" target="_blank" rel="noopener noreferrer" class="sponsor-item">
-    <img src="/_assets/sponsors/lambdatest.png" alt="LambdaTest" class="sponsor-logo">
-    <span class="sponsor-name">LambdaTest</span>
-  </a>
-</div>
-
+  <div class="sponsors-container">
+    <p class="sponsors-label">Proudly Sponsored By</p>
+    <div class="sponsors-grid">
+      <a href="https://github.com/LambdaTest-Inc" target="_blank" rel="noopener noreferrer" class="sponsor-item">
+        <div class="sponsor-card">
+          <img src="/_assets/sponsors/lambdatest.png" alt="LambdaTest" class="sponsor-logo">
+          <div class="sponsor-info">
+            <span class="sponsor-name">LambdaTest</span>
+            <span class="sponsor-tagline">Cloud-based testing platform</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
 
 ::: warning Pre-Release Software
@@ -246,56 +250,95 @@ const members = [
 <style>
 /* Sponsors section */
 .sponsors-section {
-  max-width: 960px;
-  margin: 48px auto;
-  padding: 32px 24px;
-  text-align: center;
-  border-top: 1px solid var(--vp-c-divider);
-  border-bottom: 1px solid var(--vp-c-divider);
+  max-width: 1200px;
+  margin: 64px auto;
+  padding: 0 24px;
 }
 
-.sponsors-section h2 {
-  font-size: 24px;
+.sponsors-container {
+  background: linear-gradient(135deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg) 100%);
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.sponsors-label {
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 32px;
-  color: var(--vp-c-text-1);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--vp-c-text-2);
+  margin: 0 0 32px 0;
+  opacity: 0.7;
 }
 
 .sponsors-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 48px;
+  gap: 32px;
   flex-wrap: wrap;
 }
 
 .sponsor-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
   text-decoration: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
 .sponsor-item:hover {
-  transform: translateY(-4px);
-  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+.sponsor-card {
+  background: var(--vp-c-bg);
+  border-radius: 12px;
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  min-width: 320px;
+}
+
+.sponsor-item:hover .sponsor-card {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .sponsor-logo {
-  width: 120px;
-  height: 120px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
-  border-radius: 12px;
+  flex-shrink: 0;
+  border-radius: 8px;
   background: var(--vp-c-bg-soft);
-  padding: 16px;
+  padding: 8px;
+}
+
+.sponsor-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
 }
 
 .sponsor-name {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  line-height: 1.2;
+}
+
+.sponsor-tagline {
+  font-size: 14px;
   color: var(--vp-c-text-2);
+  opacity: 0.8;
 }
 
 /* Constrain width of content sections for better readability */
@@ -488,6 +531,14 @@ const members = [
 
 /* Responsive adjustments */
 @media (min-width: 767px) and (max-width: 1023px) {
+  .sponsors-container {
+    padding: 40px 28px;
+  }
+
+  .sponsor-card {
+    padding: 28px 40px;
+  }
+
   .VPHome .vp-doc {
     max-width: 720px;
   }
@@ -519,26 +570,49 @@ const members = [
 
 @media (max-width: 767px) {
   .sponsors-section {
-    margin: 32px auto;
-    padding: 24px 20px;
+    margin: 48px auto;
+    padding: 0 20px;
   }
 
-  .sponsors-section h2 {
-    font-size: 20px;
+  .sponsors-container {
+    padding: 32px 20px;
+    border-radius: 12px;
+  }
+
+  .sponsors-label {
+    font-size: 12px;
+    letter-spacing: 1.2px;
     margin-bottom: 24px;
   }
 
   .sponsors-grid {
-    gap: 32px;
+    gap: 20px;
+  }
+
+  .sponsor-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+    min-width: auto;
+    gap: 16px;
   }
 
   .sponsor-logo {
-    width: 100px;
-    height: 100px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .sponsor-info {
+    align-items: center;
+    text-align: center;
   }
 
   .sponsor-name {
-    font-size: 14px;
+    font-size: 18px;
+  }
+
+  .sponsor-tagline {
+    font-size: 13px;
   }
 
   .VPHome .vp-doc {
