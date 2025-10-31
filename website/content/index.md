@@ -283,13 +283,19 @@ const members = [
 }
 
 .sponsor-item {
-  text-decoration: none;
+  text-decoration: none !important;
   display: block;
   transition: transform 0.3s ease;
 }
 
 .sponsor-item:hover {
   transform: scale(1.02);
+  text-decoration: none !important;
+}
+
+.sponsor-item:hover .sponsor-name,
+.sponsor-item:hover .sponsor-tagline {
+  text-decoration: none !important;
 }
 
 .sponsor-card {
