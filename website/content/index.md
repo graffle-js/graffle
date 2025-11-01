@@ -358,8 +358,8 @@ const members = [
 .sponsor-card-cta {
   border: 2px dashed var(--vp-c-divider);
   background: transparent;
-  min-height: 200px;
   justify-content: center;
+  height: 100%;
 }
 
 .sponsor-item.sponsor-cta:hover .sponsor-card-cta {
