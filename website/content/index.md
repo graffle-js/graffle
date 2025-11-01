@@ -60,7 +60,7 @@ features:
 
 <div class="sponsors-section">
   <div class="sponsors-container">
-    <p class="sponsors-label">Sponsors</p>
+    <p class="sponsors-label">Sponsors ❤️</p>
     <div class="sponsors-grid">
       <a href="https://www.lambdatest.com/" target="_blank" rel="noopener noreferrer" class="sponsor-item">
         <div class="sponsor-card">
