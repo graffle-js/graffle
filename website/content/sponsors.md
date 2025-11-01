@@ -67,7 +67,6 @@
 
 .sponsor-card {
   background: var(--vp-c-bg);
-  border-radius: 12px;
   padding: 32px;
   display: flex;
   flex-direction: column;
