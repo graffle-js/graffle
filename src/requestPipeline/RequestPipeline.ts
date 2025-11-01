@@ -1,7 +1,7 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { GraffleExecutionResultEnvelope } from '#src/client/handle.js'
 import type { Context } from '#src/context/context.js'
-import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { normalizeRequestToNode } from '#src/lib/graphql-kit/request.js'
 import { Err, Ware } from '@wollybeard/kit'
 import type { FormattedExecutionResult } from 'graphql'
 import { decodeResultData } from './decode.js'
@@ -18,7 +18,7 @@ export namespace RequestPipeline {
   export type StepName = keyof typeof stepName
 
   export interface Input {
-    request: Grafaid.RequestAnalyzedInput
+    request: GraphqlKit.RequestAnalyzedInput
     state: Context
   }
 
@@ -28,7 +28,7 @@ export namespace RequestPipeline {
   }
 
   export interface EncodeOutput {
-    request: Grafaid.RequestAnalyzedInput
+    request: GraphqlKit.RequestAnalyzedInput
     state: Context
   }
 
@@ -39,7 +39,7 @@ export namespace RequestPipeline {
   export interface BaseDefinition extends Ware.PipelineDefinition {
     readonly config: Ware.PipelineDefinition.Config
     readonly input: {
-      request: Grafaid.RequestAnalyzedInput
+      request: GraphqlKit.RequestAnalyzedInput
       state: Context
       transportType: 'none'
       transport: {}

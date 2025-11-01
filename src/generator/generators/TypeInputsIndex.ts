@@ -1,4 +1,4 @@
-import { Grafaid } from '#lib/grafaid'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
@@ -12,7 +12,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
   import.meta.url,
   ({ config, code }) => {
     // Only import utilities if we need them (for GetEncoded type)
-    if (config.options.isImportsCustomScalars && Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
+    if (config.options.isImportsCustomScalars && GraphqlKit.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
       code(importUtilities(config))
     }
 
@@ -43,7 +43,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
     code`export type ID = string`
 
     // Custom scalars - always reference the scalar module types
-    if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
+    if (GraphqlKit.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
       code``
       code`// Custom scalars (decoded types for variables)`
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
@@ -120,7 +120,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
 /**
  * Generate the TypeScript type for an input object
  */
-function generateInputObjectType(config: Config, inputObject: Grafaid.Schema.InputObjectType): string {
+function generateInputObjectType(config: Config, inputObject: GraphqlKit.Schema.InputObjectType): string {
   const fields = Object.values(inputObject.getFields())
 
   if (fields.length === 0) {
@@ -128,10 +128,10 @@ function generateInputObjectType(config: Config, inputObject: Grafaid.Schema.Inp
   }
 
   const fieldTypes = fields.map(field => {
-    const fieldType = Grafaid.Schema.getNamedType(field.type)
+    const fieldType = GraphqlKit.Schema.getNamedType(field.type)
     // Use renderName to handle reserved keywords
     const typeName = renderName(fieldType.name)
-    const isNullable = Grafaid.Schema.isNullableType(field.type)
+    const isNullable = GraphqlKit.Schema.isNullableType(field.type)
     const fieldName = field.name
     const optionalMarker = isNullable ? '?' : ''
 

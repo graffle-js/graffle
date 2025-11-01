@@ -1,6 +1,6 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Grafaid } from '#lib/grafaid'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -179,7 +179,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   },
 )
 
-const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
+const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType }>(({ node, config, code }) => {
   const fieldMethods = renderFieldMethods({ config, node })
   const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
 
@@ -245,17 +245,17 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   `
 })
 
-const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
+const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType }>(({ node, config, code }) => {
   for (const field of Object.values(node.getFields())) {
     const docContent = getOutputFieldMethodDoc(config, field, node)
     if (docContent) {
       code(Str.Code.TSDoc.format(docContent))
     }
 
-    const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(field.type)
+    const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(field.type)
 
-    const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
-      && Grafaid.Schema.Args.isAllArgsNullable(field.args)
+    const isOptional = GraphqlKit.Schema.isScalarType(fieldTypeUnwrapped)
+      && GraphqlKit.Schema.Args.isAllArgsNullable(field.args)
 
     const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
     // dprint-ignore
@@ -787,7 +787,7 @@ const renderDomainType = createCodeGenerator<{
     const rootTypeName = field.rootTypeName
     const { operationType } = field
 
-    const rootType = config.schema.instance.getType(rootTypeName) as Grafaid.Schema.ObjectType
+    const rootType = config.schema.instance.getType(rootTypeName) as GraphqlKit.Schema.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
@@ -795,9 +795,9 @@ const renderDomainType = createCodeGenerator<{
       code(Str.Code.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
-    const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(fieldDef.type)
-    const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
-      && Grafaid.Schema.Args.isAllArgsNullable(fieldDef.args)
+    const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(fieldDef.type)
+    const isOptional = GraphqlKit.Schema.isScalarType(fieldTypeUnwrapped)
+      && GraphqlKit.Schema.Args.isAllArgsNullable(fieldDef.args)
 
     // dprint-ignore
     code`

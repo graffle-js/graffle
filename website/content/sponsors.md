@@ -5,7 +5,7 @@
     <p>Graffle is supported by these generous sponsors. If you find Graffle valuable and would like to support its development, please consider becoming a sponsor.</p>
   </div>
 
-  <div class="sponsors-grid">
+<div class="sponsors-grid">
     <a href="https://www.lambdatest.com/" target="_blank" rel="noopener noreferrer" class="sponsor-item">
       <div class="sponsor-card">
         <img src="/_assets/sponsors/lambdatest-logo.png" alt="LambdaTest" class="sponsor-logo">

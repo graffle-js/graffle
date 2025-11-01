@@ -1,4 +1,4 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
 // TODO: Invert this dependency - Schema.Scalar should implement Core.SDDM.Scalar
 import { Schema } from '#src/types/Schema/$.js'
@@ -11,21 +11,21 @@ declare global {
     // Types are defined in this namespace so that they can be globally augmented.
 
     export interface SchemaDrivenDataMapOperations {
-      [Grafaid.Document.OperationTypeNode.MUTATION]?: SchemaDrivenDataMap.OutputObject
-      [Grafaid.Document.OperationTypeNode.QUERY]?: SchemaDrivenDataMap.OutputObject
-      [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]?: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Document.OperationTypeNode.MUTATION]?: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Document.OperationTypeNode.QUERY]?: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Document.OperationTypeNode.SUBSCRIPTION]?: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMapOperationsWithQuery extends SchemaDrivenDataMapOperations {
-      [Grafaid.Document.OperationTypeNode.QUERY]: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Document.OperationTypeNode.QUERY]: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMapOperationsWithMutation extends SchemaDrivenDataMapOperations {
-      [Grafaid.Document.OperationTypeNode.MUTATION]: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Document.OperationTypeNode.MUTATION]: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMapOperationsWithSubscription extends SchemaDrivenDataMapOperations {
-      [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Document.OperationTypeNode.SUBSCRIPTION]: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMap {

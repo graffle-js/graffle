@@ -1,6 +1,6 @@
-import { Grafaid } from '#lib/grafaid'
 import { Select } from '#src/docpar/object/Select/$.js'
-import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
@@ -102,7 +102,7 @@ export interface OperationContext {
      * Should variables be used for arguments?
      */
     enabled: boolean
-    capture: (input: CaptureVariableInput) => Grafaid.Document.ArgumentNode
+    capture: (input: CaptureVariableInput) => GraphqlKit.Document.ArgumentNode
     data: CapturedVariable[]
   }
 }
@@ -145,7 +145,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
           name: potentialVariableName,
           type: input.sddmArgument
             ? SDDM.argumentTypeToSyntax(input.sddmArgument)
-            : Grafaid.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
+            : GraphqlKit.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
           value: processedValue,
           defaultValue: processedDefaultValue,
           isEnum: input.isEnum,

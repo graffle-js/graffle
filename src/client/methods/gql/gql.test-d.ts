@@ -1,6 +1,6 @@
-import type { Grafaid } from '#lib/grafaid'
 import { Docpar } from '#src/docpar/$.js'
 import { Graffle } from '#src/exports/index.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 const $ = Docpar.Var.$
 import { Possible } from '#test/schema/possible/client/$.js'
@@ -239,15 +239,15 @@ client.gql(multiRequiredVarsString).$send('getById', { id: 0 })
 // ==================================================================================================
 
 // TypedDocumentString
-declare const typedDocString: Grafaid.Document.Typed.String<{ id: string | null }, { userId: string }>
+declare const typedDocString: GraphqlKit.Document.Typed.String<{ id: string | null }, { userId: string }>
 Ts.Assert.exact.ofAs<{ id: string | null } | null>().on(await client.gql(typedDocString).$send({ userId: '123' }))
 
 // TypedDocumentNode
-declare const typedDocNode: Grafaid.Document.Typed.Node<{ name: string | null }, { id: string }>
+declare const typedDocNode: GraphqlKit.Document.Typed.Node<{ name: string | null }, { id: string }>
 Ts.Assert.exact.ofAs<{ name: string | null } | null>().on(await client.gql(typedDocNode).$send({ id: '456' }))
 
 // TypedQueryDocumentNode
-declare const typedQueryDocNode: Grafaid.Document.Typed.Query<{ title: string | null }, {}>
+declare const typedQueryDocNode: GraphqlKit.Document.Typed.Query<{ title: string | null }, {}>
 Ts.Assert.exact.ofAs<{ title: string | null } | null>().on(await client.gql(typedQueryDocNode).$send())
 
 // ==================================================================================================
@@ -255,7 +255,7 @@ Ts.Assert.exact.ofAs<{ title: string | null } | null>().on(await client.gql(type
 // ==================================================================================================
 
 // Document that requires SDDM (has custom scalars with RequiresSDDM = true)
-declare const sddmDoc: Grafaid.Document.Typed.String<{ id: string | null }, {}, true>
+declare const sddmDoc: GraphqlKit.Document.Typed.String<{ id: string | null }, {}, true>
 
 // Client with SDDM support - should work
 const clientWithSDDM = Possible.create()

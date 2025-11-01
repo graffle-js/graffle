@@ -1,6 +1,6 @@
-import type { Grafaid } from '#lib/grafaid'
 import { Select } from '#src/docpar/object/Select/$.js'
-import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
@@ -85,7 +85,7 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
 
 export type ValueMapper = GraphQLPostOperationMapper<
   SchemaDrivenDataMap.ArgumentOrInputField,
-  Grafaid.Document.ValueNode,
+  GraphqlKit.Document.ValueNode,
   [value: unknown],
   AdditionalContext
 >
@@ -100,7 +100,7 @@ const applyScalar = (
   context: OperationContext & AdditionalContext,
   scalar: Schema.Scalar,
   value: unknown,
-): Grafaid.Document.ValueNode => {
+): GraphqlKit.Document.ValueNode => {
   if (value === null) return Nodes.NullValue()
 
   if (Array.isArray(value)) {

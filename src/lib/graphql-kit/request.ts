@@ -1,6 +1,6 @@
 import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
-import type { Grafaid } from './$.js'
+import type { GraphqlKit } from './_.js'
 import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
 import type { TypedDocument } from './typed-document/$.js'
 
@@ -65,8 +65,8 @@ export type SomeObjectData = {
 
 export type SomeFieldData =
   | null
-  | Grafaid.Schema.StandardScalarRuntimeTypes
-  | Grafaid.Schema.StandardScalarRuntimeTypes[]
+  | GraphqlKit.Schema.StandardScalarRuntimeTypes
+  | GraphqlKit.Schema.StandardScalarRuntimeTypes[]
   | {
     [fieldName: string]: SomeFieldData
   }

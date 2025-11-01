@@ -1,4 +1,4 @@
-import { Grafaid } from '#lib/grafaid'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
@@ -7,10 +7,10 @@ import { mapVariablesByTypeNames } from './mapVariables.js'
 
 const createRequest = (
   query: string,
-  variables?: Grafaid.Variables,
-): Grafaid.RequestAnalyzedDocumentNodeInput => {
+  variables?: GraphqlKit.Variables,
+): GraphqlKit.RequestAnalyzedDocumentNodeInput => {
   const document = parse(query)
-  const operation = document.definitions[0] as Grafaid.Document.OperationDefinitionNode
+  const operation = document.definitions[0] as GraphqlKit.Document.OperationDefinitionNode
   return {
     query: document,
     operation,
@@ -72,8 +72,8 @@ Test.on(mapVariablesByTypeNames)
   .test()
 
 Test.describe('immutable mode')
-  .inputType<Grafaid.Variables>()
-  .outputType<Grafaid.Variables>()
+  .inputType<GraphqlKit.Variables>()
+  .outputType<GraphqlKit.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )
@@ -95,8 +95,8 @@ Test.describe('immutable mode')
   })
 
 Test.describe('mutable mode')
-  .inputType<Grafaid.Variables>()
-  .outputType<Grafaid.Variables>()
+  .inputType<GraphqlKit.Variables>()
+  .outputType<GraphqlKit.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )

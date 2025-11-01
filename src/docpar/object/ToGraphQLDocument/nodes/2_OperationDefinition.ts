@@ -1,6 +1,6 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Select } from '#src/docpar/object/Select/$.js'
-import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import { parseType } from 'graphql'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
@@ -12,7 +12,7 @@ import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  { operation: Nodes.OperationDefinitionNode; variables: Grafaid.Variables },
+  { operation: Nodes.OperationDefinitionNode; variables: GraphqlKit.Variables },
   [
     operation: Select.Document.OperationNormalized,
     options?: Options,
@@ -53,7 +53,7 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
     // directives
   })
 
-  const variables: Grafaid.Variables = Object.fromEntries(context.variables.data.map(_ => {
+  const variables: GraphqlKit.Variables = Object.fromEntries(context.variables.data.map(_ => {
     return [_.name, _.value as any]
   }))
 

@@ -1,6 +1,6 @@
 import { Extension } from '#graffle/extension'
-import { Grafaid } from '#lib/grafaid'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { ConfigManager } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 
@@ -10,11 +10,11 @@ const propertyNames = {
 }
 
 interface Input {
-  isErrorType?: (value: Grafaid.Schema.ObjectType) => boolean
+  isErrorType?: (value: GraphqlKit.Schema.ObjectType) => boolean
 }
 
 interface Config {
-  isErrorType: (value: Grafaid.Schema.ObjectType) => boolean
+  isErrorType: (value: GraphqlKit.Schema.ObjectType) => boolean
 }
 
 const defaults: Config = {
@@ -44,8 +44,8 @@ export const SchemaErrors = (input?: Input) => {
       },
       onOutputField: ({ config: genConfig, sddmNode, graphqlType }) => {
         const errorObjects = getErrorObjects(config, genConfig)
-        const outputFieldNamedType = Grafaid.Schema.getNamedType(graphqlType.type)
-        const memberTypes = Grafaid.Schema.isUnionType(outputFieldNamedType) ? outputFieldNamedType.getTypes() : null
+        const outputFieldNamedType = GraphqlKit.Schema.getNamedType(graphqlType.type)
+        const memberTypes = GraphqlKit.Schema.isUnionType(outputFieldNamedType) ? outputFieldNamedType.getTypes() : null
 
         if (memberTypes && errorObjects.find(_ => memberTypes.find(__ => __.name === _.name))) {
           sddmNode.$fields[propertyNames.r] = 1

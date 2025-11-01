@@ -1,6 +1,6 @@
 import { Select } from '#src/docpar/object/Select/$.js'
 import { Var } from '#src/docpar/object/var/$.js'
-import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'

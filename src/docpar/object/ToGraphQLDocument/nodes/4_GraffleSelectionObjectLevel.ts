@@ -1,6 +1,6 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { ParsedSelectionObjectLevel } from '#src/docpar/object/Select/$parseSelection.js'
-import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import { Lang, Null } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
@@ -9,7 +9,7 @@ import { toGraphQLInlineFragments } from './5_InlineFragments.js'
 
 export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  Grafaid.Document.SelectionNode[],
+  GraphqlKit.Document.SelectionNode[],
   [
     keyParsed: ParsedSelectionObjectLevel,
   ]

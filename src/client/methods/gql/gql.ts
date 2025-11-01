@@ -1,8 +1,8 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { Docpar } from '#src/docpar/$.js'
-import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { TypedFullDocument } from '#src/lib/graphql-kit/typed-full-document/$.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
@@ -21,8 +21,8 @@ import type { DocumentSender, UntypedSender } from './DocumentSender.js'
  * Documents with RequiresSDDM=true require clients configured with schema.map.
  */
 // dprint-ignore
-type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
-  Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
+type ValidateSDDMRequirement<$Document extends GraphqlKit.Document.Typed.TypedDocumentLike, $Context> =
+  GraphqlKit.Document.Typed.RequiresSDDMOf<$Document> extends true
     ? Configuration.Schema.HasMap<$Context> extends true
       ? $Document
       : `Error: This document requires SDDM but your client configuration lacks it.`
@@ -113,11 +113,11 @@ type DocumentObjectConstraint<$Context> =
 export interface GqlMethod<$Context extends Context.Context> {
   // Overload
   // dprint-ignore
-  <const $doc extends Grafaid.Document.Typed.String | string | DocumentNode | TypedFullDocument.TypedFullDocument>(
+  <const $doc extends GraphqlKit.Document.Typed.String | string | DocumentNode | TypedFullDocument.TypedFullDocument>(
     document: ValidateSDDMRequirement<$doc, $Context>
   ):
   string extends $doc                                   ?
-    $doc extends Grafaid.Document.Typed.String            ? DocumentSender<$doc, $Context> :
+    $doc extends GraphqlKit.Document.Typed.String            ? DocumentSender<$doc, $Context> :
                                                             UntypedSender<$Context> :
   $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
@@ -129,7 +129,7 @@ export interface GqlMethod<$Context extends Context.Context> {
                                                                   : never
                                                               : never
                                                             : UntypedSender<$Context> :
-  $doc extends Grafaid.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
+  $doc extends GraphqlKit.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
                                                           never
 
   // Overload: Inline document builder object (must be last as it's least specific)
@@ -184,11 +184,11 @@ export namespace GqlMethod {
    * - Document builder object
    */
   export type Arguments =
-    | [document: Grafaid.Document.Typed.TypedDocumentLike]
+    | [document: GraphqlKit.Document.Typed.TypedDocumentLike]
     | [documentObject: object]
 
   export type NormalizedArguments =
-    | { type: 'typedDocument'; document: Grafaid.Document.Typed.TypedDocumentLike }
+    | { type: 'typedDocument'; document: GraphqlKit.Document.Typed.TypedDocumentLike }
     | { type: 'object'; document: object }
 
   export const normalizeArguments = (args: Arguments): NormalizedArguments => {
@@ -202,7 +202,7 @@ export namespace GqlMethod {
     if (isTypedDocumentLike) {
       return {
         type: 'typedDocument',
-        document: first as Grafaid.Document.Typed.TypedDocumentLike,
+        document: first as GraphqlKit.Document.Typed.TypedDocumentLike,
       }
     }
 

@@ -1,5 +1,5 @@
-import { Grafaid } from '#lib/grafaid'
 import { Docpar } from '#src/docpar/$.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
@@ -11,7 +11,7 @@ export interface MapVariablesByTypeNamesInput {
   /**
    * GraphQL request with operation and variables
    */
-  request: Grafaid.RequestAnalyzedDocumentNodeInput
+  request: GraphqlKit.RequestAnalyzedDocumentNodeInput
   /**
    * GraphQL type names to match (e.g., ['Upload', 'File'])
    */
@@ -50,7 +50,7 @@ export interface MapVariablesByTypeNamesInput {
  * })
  * ```
  */
-export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Grafaid.Variables => {
+export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): GraphqlKit.Variables => {
   const { sddm, request, typeNames, visitor, immutable = false } = input
 
   const variableDefinitions = request.operation.variableDefinitions
@@ -70,7 +70,7 @@ export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Gr
     const varValue = variables[varName]
     if (varValue === undefined) continue
 
-    const namedType = Grafaid.Document.getNamedType(parameter.type)
+    const namedType = GraphqlKit.Document.getNamedType(parameter.type)
     const sddmNamedType = sddm.types[namedType.name.value]
     if (!sddmNamedType) continue
 

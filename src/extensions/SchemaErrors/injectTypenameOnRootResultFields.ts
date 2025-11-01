@@ -1,13 +1,13 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Docpar } from '#src/docpar/$.js'
-import { Nodes } from '#src/lib/grafaid/graphql.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/graphql.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 export const injectTypenameOnRootResultFields = (
   { request, sddm }: {
     sddm: SchemaDrivenDataMap
-    request: Grafaid.RequestAnalyzedDocumentNodeInput
+    request: GraphqlKit.RequestAnalyzedDocumentNodeInput
   },
 ): void => {
   injectTypenameOnRootResultFields_({
@@ -20,7 +20,7 @@ export const injectTypenameOnRootResultFields = (
 const injectTypenameOnRootResultFields_ = (
   { selectionSet, sddm, operationType }: {
     sddm: SchemaDrivenDataMap
-    operationType: Grafaid.Document.OperationTypeNode
+    operationType: GraphqlKit.Document.OperationTypeNode
     selectionSet: Nodes.SelectionSetNode
   },
 ): void => {

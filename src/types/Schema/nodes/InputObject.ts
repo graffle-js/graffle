@@ -1,4 +1,4 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { InputFields } from './InputField.js'
 
 export interface InputObject<
@@ -6,7 +6,7 @@ export interface InputObject<
   $Fields extends InputFields = InputFields,
   $IsFieldsAllNullable extends boolean = boolean,
 > {
-  kind: Grafaid.Schema.TypeKind.InputObject
+  kind: GraphqlKit.Schema.TypeKind.InputObject
   name: $Name
   fields: $Fields
   isAllFieldsNullable: $IsFieldsAllNullable
