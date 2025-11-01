@@ -62,7 +62,7 @@ features:
   <div class="sponsors-container">
     <p class="sponsors-label">Sponsors</p>
     <div class="sponsors-grid">
-      <a href="https://github.com/LambdaTest-Inc" target="_blank" rel="noopener noreferrer" class="sponsor-item">
+      <a href="https://www.lambdatest.com/" target="_blank" rel="noopener noreferrer" class="sponsor-item">
         <div class="sponsor-card">
           <img src="/_assets/sponsors/lambdatest.png" alt="LambdaTest" class="sponsor-logo">
           <div class="sponsor-info">
