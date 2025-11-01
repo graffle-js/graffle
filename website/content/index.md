@@ -65,10 +65,6 @@ features:
       <a href="https://www.lambdatest.com/" target="_blank" rel="noopener noreferrer" class="sponsor-item">
         <div class="sponsor-card">
           <img src="/_assets/sponsors/lambdatest-logo.png" alt="LambdaTest" class="sponsor-logo">
-          <div class="sponsor-info">
-            <span class="sponsor-name">LambdaTest</span>
-            <span class="sponsor-tagline">Cloud-based testing platform</span>
-          </div>
         </div>
       </a>
       <a href="https://github.com/sponsors/jasonkuhrt" target="_blank" rel="noopener noreferrer" class="sponsor-item sponsor-cta">
@@ -326,13 +322,10 @@ const members = [
 }
 
 .sponsor-logo {
-  width: 90px;
-  height: 90px;
+  width: 200px;
+  height: auto;
   object-fit: contain;
   flex-shrink: 0;
-  border-radius: 50%;
-  background: #ffffff;
-  padding: 16px;
 }
 
 .sponsor-info {
@@ -635,9 +628,8 @@ const members = [
   }
 
   .sponsor-logo {
-    width: 72px;
-    height: 72px;
-    padding: 12px;
+    width: 150px;
+    height: auto;
   }
 
   .sponsor-name {
