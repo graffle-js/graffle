@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: ^0.98.0
-        version: 0.98.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+        specifier: ^0.99.0
+        version: 0.99.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit:
         specifier: ^1.41.0
         version: 1.41.0
@@ -1930,24 +1930,48 @@ packages:
     resolution: {integrity: sha512-SvUHQgZJg0d7Mc1yec+5lF2DFiwbEgikCvdqXdxWAxjSdXhj7d6vNUH3MitrZCJPiUpdvOejS4DVHanLfcwI9g==}
     engines: {node: '>=22'}
 
+  '@vltpkg/dep-id@1.0.0-rc.2':
+    resolution: {integrity: sha512-l5wXNupDRoZ2B9zOMtsL4CbbPPSGxh3gQ4h8pCzNdEunnIS5UMGiJAf0IDFrCjsBUWmidLSUxphdRMTY1kwegg==}
+    engines: {node: '>=22'}
+
   '@vltpkg/error-cause@0.0.0-30':
     resolution: {integrity: sha512-j+rjUo0m1C81HdoW7qLgQFHGedg4YypzAYEdrUT04f4DGLZB3Qf9OS1Wd26IzICjMxB8OSAxFqKHikst3KR4wA==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/error-cause@1.0.0-rc.2':
+    resolution: {integrity: sha512-1nyMt9i4m3hgBs8jsKC1uECofL762TwcQv4YOMc0u2aSJ1Y1xqrjeDsdRCsQYiRabqfvi5x8ALvBsVcfltcwhQ==}
     engines: {node: '>=22'}
 
   '@vltpkg/fast-split@0.0.0-30':
     resolution: {integrity: sha512-UhCch9sy30lyR5Ry8knwIi46MGCr8fMQ/Z3TG2dBxH2kkTWKkOPc0s8wa9uz8y0BkE9fqku2gVkTAnz1yCeROg==}
     engines: {node: '>=22'}
 
+  '@vltpkg/fast-split@1.0.0-rc.2':
+    resolution: {integrity: sha512-PnDwu/zP1xRB5UJOn0CnwgvTqO8IXFe9KZicAQ0ByxPC8Z+L6U2xfWMJnhRRJqYSkxDLIH6W5MenW7h9wFmCwg==}
+    engines: {node: '>=22'}
+
   '@vltpkg/semver@0.0.0-30':
     resolution: {integrity: sha512-GWqy5Rr5L9VeJDE6Yb0BscLehLWc1GWDAShxFFmfGBqr68Vy0DF5YSWb0NvVpfQ0r+uIxA5FK7b7bK0oJKThPw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/semver@1.0.0-rc.2':
+    resolution: {integrity: sha512-nyFWhPDTftgAV66IDc+IoRTPohj+tcVNpz9rNc63pkAwfT1x+z82U/ixZ5FAXyQJHz4EtzXSZO7dH1643YhyUg==}
     engines: {node: '>=22'}
 
   '@vltpkg/spec@0.0.0-30':
     resolution: {integrity: sha512-0eYijND+UJBNkrEpL7+Ammc6Sjk7bAOZC33PETYXkV3JGl8npoV3o4w3rigtwfZVuedfi81RmMcr0Nb2JjNaMw==}
     engines: {node: '>=22'}
 
+  '@vltpkg/spec@1.0.0-rc.2':
+    resolution: {integrity: sha512-FBDAj9k4cORp/PAFBdwtzcWBcUTCFTvsapLMMHowH3spQlaMgnLS69eXVMiqoyoe3LnhQmg6/gV10eKA2nF3Rg==}
+    engines: {node: '>=22'}
+
   '@vltpkg/types@0.0.0-30':
     resolution: {integrity: sha512-gUqYAZwVQjmjbM+xnyZNHnpMyXIvDN5nIzifWY9RKJ9XEmPVJg8Nql5zMXXPbr1MekMZzBvqvCgMeoDV53dX2g==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/types@1.0.0-rc.2':
+    resolution: {integrity: sha512-P0ZeKNdoisXL0qghjjwL4wbDjmUsjI/oXm2ZcxFCFG5zBDi0nx6A1+lxgsGZBJdZALk9wVXxD4NGf/nuZdWG0g==}
     engines: {node: '>=22'}
 
   '@volar/language-core@2.4.23':
@@ -2082,8 +2106,8 @@ packages:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
-  '@wollybeard/kit@0.98.0':
-    resolution: {integrity: sha512-a9leCLIgJKOz11L4Arohz0aGfXVJ376w099HDybIl9hNQAmYoRNf+zeUOweOAk/IeMQ5tCnJezfLJZWq4AGVWA==}
+  '@wollybeard/kit@0.99.0':
+    resolution: {integrity: sha512-o7Yg2b/RRKrCxTxSOh8GRpAf5jBMw3g/xg3LcElyaW6wdgktZ2xUeqdM88/uB/7yzTDnnLdZQWCNmtRyn9xtYA==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -2179,6 +2203,9 @@ packages:
 
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
+
+  bail@2.0.2:
+    resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -3350,6 +3377,27 @@ packages:
   micromark-core-commonmark@2.0.3:
     resolution: {integrity: sha512-RDBrHEMSxVFLg6xvnXmb1Ayr2WzLAWjeSATAoxwKYJV94TeNavgoIdA0a9ytzDSVzBy2YKFK+emCPOEibLeCrg==}
 
+  micromark-extension-gfm-autolink-literal@2.1.0:
+    resolution: {integrity: sha512-oOg7knzhicgQ3t4QCjCWgTmfNhvQbDDnJeVu9v81r7NltNCVmhPy1fJRX27pISafdjL+SVc4d3l48Gb6pbRypw==}
+
+  micromark-extension-gfm-footnote@2.1.0:
+    resolution: {integrity: sha512-/yPhxI1ntnDNsiHtzLKYnE3vf9JZ6cAisqVDauhp4CEHxlb4uoOTxOCJ+9s51bIB8U1N1FJ1RXOKTIlD5B/gqw==}
+
+  micromark-extension-gfm-strikethrough@2.1.0:
+    resolution: {integrity: sha512-ADVjpOOkjz1hhkZLlBiYA9cR2Anf8F4HqZUO6e5eDcPQd0Txw5fxLzzxnEkSkfnD0wziSGiv7sYhk/ktvbf1uw==}
+
+  micromark-extension-gfm-table@2.1.1:
+    resolution: {integrity: sha512-t2OU/dXXioARrC6yWfJ4hqB7rct14e8f7m0cbI5hUmDyyIlwv5vEtooptH8INkbLzOatzKuVbQmAYcbWoyz6Dg==}
+
+  micromark-extension-gfm-tagfilter@2.0.0:
+    resolution: {integrity: sha512-xHlTOmuCSotIA8TW1mDIM6X2O1SiX5P9IuDtqGonFhEK0qgRI4yeC6vMxEV2dgyr2TiD+2PQ10o+cOhdVAcwfg==}
+
+  micromark-extension-gfm-task-list-item@2.1.0:
+    resolution: {integrity: sha512-qIBZhqxqI6fjLDYFTBIa4eivDMnP+OZqsNwmQ3xNLE4Cxwc+zfQEfbs6tzAo2Hjq+bh6q5F+Z8/cksrLFYWQQw==}
+
+  micromark-extension-gfm@3.0.0:
+    resolution: {integrity: sha512-vsKArQsicm7t0z2GugkCKtZehqUm31oeGBV/KVSorWSy8ZlNAv7ytjFhvaryUiCUJYqs+NoE6AFhpQvBTM6Q4w==}
+
   micromark-factory-destination@2.0.1:
     resolution: {integrity: sha512-Xe6rDdJlkmbFRExpTOmRj9N3MaWmbAgdpSrBQvCFqhezUn4AHqJHbaEnfbVYYiexVSs//tqOdY/DxhjdCiJnIA==}
 
@@ -3770,6 +3818,15 @@ packages:
   regex@6.0.1:
     resolution: {integrity: sha512-uorlqlzAKjKQZ5P+kTJr3eeJGSVroLKoHmquUj4zHWuR+hEyNqlXsSKlYYF5F4NI6nl7tWCs0apKJ0lmfsXAPA==}
 
+  remark-gfm@4.0.1:
+    resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
+
+  remark-parse@11.0.0:
+    resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
+
+  remark-stringify@11.0.0:
+    resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
+
   remeda@1.61.0:
     resolution: {integrity: sha512-caKfSz9rDeSKBQQnlJnVW3mbVdFgxgGWQKq1XlFokqjf+hQD5gxutLGTTY2A/x24UxVyJe9gH5fAkFI63ULw4A==}
 
@@ -4174,6 +4231,9 @@ packages:
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
 
+  trough@2.2.0:
+    resolution: {integrity: sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==}
+
   ts-dedent@2.2.0:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
@@ -4263,6 +4323,9 @@ packages:
   unicorn-magic@0.3.0:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
     engines: {node: '>=18'}
+
+  unified@11.0.5:
+    resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
   unist-util-is@6.0.1:
     resolution: {integrity: sha512-LsiILbtBETkDz8I9p1dQ0uyRUWuaQzd/cuEeS1hoRSyW5E5XGmTzlwY1OrNzzakGowI9Dr/I8HVaw4hTtnxy8g==}
@@ -6229,9 +6292,19 @@ snapshots:
       '@vltpkg/spec': 0.0.0-30
       '@vltpkg/types': 0.0.0-30
 
+  '@vltpkg/dep-id@1.0.0-rc.2':
+    dependencies:
+      '@vltpkg/error-cause': 1.0.0-rc.2
+      '@vltpkg/spec': 1.0.0-rc.2
+      '@vltpkg/types': 1.0.0-rc.2
+
   '@vltpkg/error-cause@0.0.0-30': {}
 
+  '@vltpkg/error-cause@1.0.0-rc.2': {}
+
   '@vltpkg/fast-split@0.0.0-30': {}
+
+  '@vltpkg/fast-split@1.0.0-rc.2': {}
 
   '@vltpkg/semver@0.0.0-30':
     dependencies:
@@ -6239,10 +6312,21 @@ snapshots:
       '@vltpkg/fast-split': 0.0.0-30
       '@vltpkg/types': 0.0.0-30
 
+  '@vltpkg/semver@1.0.0-rc.2':
+    dependencies:
+      '@vltpkg/error-cause': 1.0.0-rc.2
+      '@vltpkg/fast-split': 1.0.0-rc.2
+      '@vltpkg/types': 1.0.0-rc.2
+
   '@vltpkg/spec@0.0.0-30':
     dependencies:
       '@vltpkg/error-cause': 0.0.0-30
       '@vltpkg/semver': 0.0.0-30
+
+  '@vltpkg/spec@1.0.0-rc.2':
+    dependencies:
+      '@vltpkg/error-cause': 1.0.0-rc.2
+      '@vltpkg/semver': 1.0.0-rc.2
 
   '@vltpkg/types@0.0.0-30':
     dependencies:
@@ -6250,6 +6334,13 @@ snapshots:
       '@vltpkg/error-cause': 0.0.0-30
       '@vltpkg/semver': 0.0.0-30
       '@vltpkg/spec': 0.0.0-30
+
+  '@vltpkg/types@1.0.0-rc.2':
+    dependencies:
+      '@vltpkg/dep-id': 1.0.0-rc.2
+      '@vltpkg/error-cause': 1.0.0-rc.2
+      '@vltpkg/semver': 1.0.0-rc.2
+      '@vltpkg/spec': 1.0.0-rc.2
 
   '@volar/language-core@2.4.23':
     dependencies:
@@ -6421,25 +6512,32 @@ snapshots:
       ts-morph: 27.0.2
       type-fest: 5.1.0
 
-  '@wollybeard/kit@0.98.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.99.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@microsoft/tsdoc': 0.15.1
       '@types/node': 24.9.1
       '@types/object-inspect': 1.13.0
-      '@vltpkg/semver': 0.0.0-30
+      '@vltpkg/semver': 1.0.0-rc.2
       ansis: 4.2.0
       consola: 3.4.2
       effect: 3.18.4
       es-toolkit: 1.41.0
       fast-check: 4.3.0
       jsonc-parser: 3.3.1
+      mdast-util-to-string: 4.0.0
       object-inspect: 1.13.4
       pathe: 2.0.3
       pluralize-esm: 9.0.5
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-stringify: 11.0.0
       tinyglobby: 0.2.15
       ts-morph: 27.0.2
       type-fest: 5.1.0
+      unified: 11.0.5
+    transitivePeerDependencies:
+      - supports-color
 
   acorn@8.15.0: {}
 
@@ -6531,6 +6629,8 @@ snapshots:
   aws-sign2@0.7.0: {}
 
   aws4@1.13.2: {}
+
+  bail@2.0.2: {}
 
   balanced-match@1.0.2: {}
 
@@ -7909,6 +8009,64 @@ snapshots:
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.2
 
+  micromark-extension-gfm-autolink-literal@2.1.0:
+    dependencies:
+      micromark-util-character: 2.1.1
+      micromark-util-sanitize-uri: 2.0.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+
+  micromark-extension-gfm-footnote@2.1.0:
+    dependencies:
+      devlop: 1.1.0
+      micromark-core-commonmark: 2.0.3
+      micromark-factory-space: 2.0.1
+      micromark-util-character: 2.1.1
+      micromark-util-normalize-identifier: 2.0.1
+      micromark-util-sanitize-uri: 2.0.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+
+  micromark-extension-gfm-strikethrough@2.1.0:
+    dependencies:
+      devlop: 1.1.0
+      micromark-util-chunked: 2.0.1
+      micromark-util-classify-character: 2.0.1
+      micromark-util-resolve-all: 2.0.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+
+  micromark-extension-gfm-table@2.1.1:
+    dependencies:
+      devlop: 1.1.0
+      micromark-factory-space: 2.0.1
+      micromark-util-character: 2.1.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+
+  micromark-extension-gfm-tagfilter@2.0.0:
+    dependencies:
+      micromark-util-types: 2.0.2
+
+  micromark-extension-gfm-task-list-item@2.1.0:
+    dependencies:
+      devlop: 1.1.0
+      micromark-factory-space: 2.0.1
+      micromark-util-character: 2.1.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+
+  micromark-extension-gfm@3.0.0:
+    dependencies:
+      micromark-extension-gfm-autolink-literal: 2.1.0
+      micromark-extension-gfm-footnote: 2.1.0
+      micromark-extension-gfm-strikethrough: 2.1.0
+      micromark-extension-gfm-table: 2.1.1
+      micromark-extension-gfm-tagfilter: 2.0.0
+      micromark-extension-gfm-task-list-item: 2.1.0
+      micromark-util-combine-extensions: 2.0.1
+      micromark-util-types: 2.0.2
+
   micromark-factory-destination@2.0.1:
     dependencies:
       micromark-util-character: 2.1.1
@@ -8344,6 +8502,32 @@ snapshots:
     dependencies:
       regex-utilities: 2.3.0
 
+  remark-gfm@4.0.1:
+    dependencies:
+      '@types/mdast': 4.0.4
+      mdast-util-gfm: 3.1.0
+      micromark-extension-gfm: 3.0.0
+      remark-parse: 11.0.0
+      remark-stringify: 11.0.0
+      unified: 11.0.5
+    transitivePeerDependencies:
+      - supports-color
+
+  remark-parse@11.0.0:
+    dependencies:
+      '@types/mdast': 4.0.4
+      mdast-util-from-markdown: 2.0.2
+      micromark-util-types: 2.0.2
+      unified: 11.0.5
+    transitivePeerDependencies:
+      - supports-color
+
+  remark-stringify@11.0.0:
+    dependencies:
+      '@types/mdast': 4.0.4
+      mdast-util-to-markdown: 2.1.2
+      unified: 11.0.5
+
   remeda@1.61.0: {}
 
   request@2.88.2:
@@ -8752,6 +8936,8 @@ snapshots:
 
   trim-lines@3.0.1: {}
 
+  trough@2.2.0: {}
+
   ts-dedent@2.2.0: {}
 
   ts-morph@27.0.2:
@@ -8826,6 +9012,16 @@ snapshots:
   unicode-emoji-modifier-base@1.0.0: {}
 
   unicorn-magic@0.3.0: {}
+
+  unified@11.0.5:
+    dependencies:
+      '@types/unist': 3.0.3
+      bail: 2.0.2
+      devlop: 1.1.0
+      extend: 3.0.2
+      is-plain-obj: 4.1.0
+      trough: 2.2.0
+      vfile: 6.0.3
 
   unist-util-is@6.0.1:
     dependencies:
