@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Sponsors ❤️</h1>
+<h1 style="text-align: center;">Sponsors<br/>❤️</h1>
 
 <div class="sponsors-page">
   <div class="sponsors-intro">
