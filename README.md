@@ -31,20 +31,6 @@
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-Ready-blue.svg?style=flat&colorA=18181B&colorB=28CF8D" alt="TypeScript"></a>
 </p>
 
-## Sponsors ❤️
-
-<p align="center">
-  Graffle is supported by these generous sponsors.<br/>
-  If you find Graffle valuable and would like to support its development,<br/>
-  please consider <a href="https://github.com/sponsors/jasonkuhrt">becoming a sponsor</a>.
-</p>
-
-<p align="center" style="font-size:21px; color:black;">Browser testing via
-  <a href="https://www.lambdatest.com/?utm_source=graffle&utm_medium=sponsor" target="_blank">
-    <img src="https://www.lambdatest.com/blue-logo.png" style="vertical-align: middle;" width="250" height="45" />
-  </a>
-</p>
-
 ## Getting Started
 
 Visit **[graffle.js.org/guides/getting-started](https://graffle.js.org/guides/getting-started)** for installation instructions, quick start guide, and examples.
@@ -58,3 +44,18 @@ Visit **[graffle.js.org](https://graffle.js.org)** for full documentation, guide
 ## License
 
 MIT
+
+## Sponsors ❤️
+
+<p align="center">
+  Graffle is supported by these generous sponsors.<br/>
+  If you find Graffle valuable and would like to support its development,<br/>
+  please consider <a href="https://github.com/sponsors/jasonkuhrt">becoming a sponsor</a>.
+</p>
+
+<p align="center" style="font-size:21px; color:black;">
+  Browser testing via<br/>
+  <a href="https://www.lambdatest.com/?utm_source=graffle&utm_medium=sponsor" target="_blank">
+    <img src="https://www.lambdatest.com/blue-logo.png" style="vertical-align: middle;" width="250" height="45" />
+  </a>
+</p>
