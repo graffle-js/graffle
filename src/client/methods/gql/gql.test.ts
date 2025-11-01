@@ -1,5 +1,5 @@
 import { Graffle } from '#graffle'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { test } from '#test/helpers'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'

@@ -1,6 +1,6 @@
 import { Graffle } from '#graffle'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
 import { ConfigManager } from '@wollybeard/kit'
 import { Obj, Str } from '@wollybeard/kit'

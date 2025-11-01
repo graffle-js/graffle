@@ -1,4 +1,4 @@
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {

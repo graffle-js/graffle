@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { OutputObject } from './OutputObject.js'
 
 export type Union<

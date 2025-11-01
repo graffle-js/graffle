@@ -1,8 +1,8 @@
 // New modular selection sets generator
 // TODO: This will replace SelectionSets.ts once complete
 
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { analyzeArgsNullability } from '#src/lib/graphql-kit/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
 import { Docpar } from '../../docpar/$.js'
 import type { Config } from '../config/config.js'

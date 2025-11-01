@@ -1,5 +1,5 @@
 import { Docpar } from '#src/docpar/$.js'
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { Var } from './$$.js'

@@ -1,8 +1,8 @@
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { Docpar } from '#src/docpar/$.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { TypedFullDocument } from '#src/lib/graphql-kit/typed-full-document/$.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 

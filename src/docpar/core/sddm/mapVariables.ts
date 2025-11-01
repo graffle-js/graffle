@@ -1,5 +1,5 @@
 import { Docpar } from '#src/docpar/$.js'
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 

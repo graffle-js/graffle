@@ -1,5 +1,5 @@
 import type { Fs } from '#src/lib/fsp.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { IntrospectionOptions } from 'graphql'
 import type { Extension } from '../extension/types.js'
 

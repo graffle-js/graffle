@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
 // TODO: Invert this dependency - Schema.Scalar should implement Core.SDDM.Scalar
 import { Schema } from '#src/types/Schema/$.js'

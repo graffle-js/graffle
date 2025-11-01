@@ -1,6 +1,6 @@
 import type { Docpar } from '#src/docpar/$.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { Nodes } from '#src/lib/grafaid/graphql.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/graphql.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 

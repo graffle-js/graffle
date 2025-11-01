@@ -1,4 +1,4 @@
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Arr, Obj, Ts } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'

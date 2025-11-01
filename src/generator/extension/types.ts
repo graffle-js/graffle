@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 

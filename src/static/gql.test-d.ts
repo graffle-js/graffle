@@ -1,5 +1,5 @@
 // dprint-ignore-file
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import { $ } from '#src/docpar/object/var/var.js'

@@ -1,7 +1,7 @@
 import { Extension } from '#graffle/extension'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { print } from '#src/lib/grafaid/document.js'
-import { execute } from '#src/lib/grafaid/execute.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { print } from '#src/lib/graphql-kit/document.js'
+import { execute } from '#src/lib/graphql-kit/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 

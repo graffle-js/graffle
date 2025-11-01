@@ -1,8 +1,8 @@
 import { Extension } from '#graffle/extension'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { OperationTypeToAccessKind, print } from '#src/lib/grafaid/document.js'
-import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/grafaid/http/http.js'
-import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/grafaid/http/http.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { OperationTypeToAccessKind, print } from '#src/lib/graphql-kit/document.js'
+import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/graphql-kit/http/http.js'
+import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/graphql-kit/http/http.js'
 import { Http, type Prom, Str } from '@wollybeard/kit'
 import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
 

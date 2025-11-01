@@ -1,6 +1,6 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {

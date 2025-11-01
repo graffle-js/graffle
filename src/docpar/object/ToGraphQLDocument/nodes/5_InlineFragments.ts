@@ -1,6 +1,6 @@
 import { Select } from '#src/docpar/object/Select/$.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'

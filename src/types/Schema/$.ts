@@ -1,6 +1,6 @@
 export * as Schema from './$$.js'
 
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GlobalRegistry } from '../GlobalRegistry/GlobalRegistry.js'
 import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'

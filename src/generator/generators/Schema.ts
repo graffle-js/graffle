@@ -1,4 +1,4 @@
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
@@ -891,19 +891,18 @@ const generateTypeModule = (
             )
               .map(_ => _.name),
           ),
-          implementorsUnion:
-            GraphqlKit.Schema.KindMap.getInterfaceImplementors(
+          implementorsUnion: GraphqlKit.Schema.KindMap.getInterfaceImplementors(
+              config.schema.kindMap,
+              type as GraphqlKit.Schema.InterfaceType,
+            )
+              .length > 0
+            ? Str.Code.TS.unionItems(
+              GraphqlKit.Schema.KindMap.getInterfaceImplementors(
                 config.schema.kindMap,
                 type as GraphqlKit.Schema.InterfaceType,
-              )
-                .length > 0
-              ? Str.Code.TS.unionItems(
-                GraphqlKit.Schema.KindMap.getInterfaceImplementors(
-                  config.schema.kindMap,
-                  type as GraphqlKit.Schema.InterfaceType,
-                ).map(_ => _.name),
-              )
-              : `never`,
+              ).map(_ => _.name),
+            )
+            : `never`,
           implementorsIndex: Object.fromEntries(
             GraphqlKit.Schema.KindMap.getInterfaceImplementors(
               config.schema.kindMap,

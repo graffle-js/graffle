@@ -1,9 +1,9 @@
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { Docpar } from '#src/docpar/$.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/graphql-kit/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
-import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
+import type { TypedFullDocument } from '../../../lib/graphql-kit/typed-full-document/$.js'
 import type { HandleOutput } from '../../handle.js'
 
 export type DocumentInput =

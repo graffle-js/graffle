@@ -1,5 +1,5 @@
 import { Docpar } from '#src/docpar/$.js'
-import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
+import type { TypedDocument } from '#src/lib/graphql-kit/typed-document/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'

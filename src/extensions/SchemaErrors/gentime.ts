@@ -1,6 +1,6 @@
 import { Extension } from '#graffle/extension'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
-import { GraphqlKit } from '#src/lib/grafaid/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { ConfigManager } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 

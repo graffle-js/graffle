@@ -1,8 +1,8 @@
 import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
 import { Docpar } from '#src/docpar/$.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import { getOperationDefinition } from '#src/lib/grafaid/document.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { getOperationDefinition } from '#src/lib/graphql-kit/document.js'
 import { Lang } from '@wollybeard/kit'
 import { OperationTypeNode, print } from 'graphql'
 

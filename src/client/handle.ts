@@ -6,9 +6,9 @@ import {
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
 } from '#src/context/fragments/configuration/output/configuration.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
-import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
-import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { SomeObjectData } from '#src/lib/graphql-kit/graphql.js'
+import type { GraphQLExecutionResultError } from '#src/lib/graphql-kit/graphql.js'
 import { Err, Ware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'

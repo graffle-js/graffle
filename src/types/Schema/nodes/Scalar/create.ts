@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Scalar } from './Scalar.js'
 
 export const create = <$Name extends string, $Decoded, $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes>(

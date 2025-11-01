@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Null } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { OutputObjectLike } from './OutputObjectLike.js'

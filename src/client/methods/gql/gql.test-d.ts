@@ -1,6 +1,6 @@
 import { Docpar } from '#src/docpar/$.js'
 import { Graffle } from '#src/exports/index.js'
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 const $ = Docpar.Var.$
 import { Possible } from '#test/schema/possible/client/$.js'

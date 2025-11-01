@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/grafaid/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { __typename } from './__typename.js'
 import type { OutputField, OutputFields } from './OutputField.js'
 

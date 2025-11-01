@@ -1,5 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { RequestAnalyzedInput } from '#src/lib/grafaid/graphql.js'
+import type { RequestAnalyzedInput } from '#src/lib/graphql-kit/graphql.js'
 import * as _ from '@wollybeard/kit/ware'
 import { createBody } from './createBody.js'
 
