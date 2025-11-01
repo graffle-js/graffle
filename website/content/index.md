@@ -71,6 +71,13 @@ features:
           </div>
         </div>
       </a>
+      <a href="https://github.com/sponsors/jasonkuhrt" target="_blank" rel="noopener noreferrer" class="sponsor-item sponsor-cta">
+        <div class="sponsor-card sponsor-card-cta">
+          <div class="sponsor-cta-content">
+            <span class="sponsor-cta-text">Become a sponsor</span>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </div>
@@ -346,6 +353,31 @@ const members = [
   font-size: 14px;
   color: var(--vp-c-text-2);
   opacity: 0.8;
+}
+
+.sponsor-card-cta {
+  border: 2px dashed var(--vp-c-divider);
+  background: transparent;
+  min-height: 200px;
+  justify-content: center;
+}
+
+.sponsor-item.sponsor-cta:hover .sponsor-card-cta {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+}
+
+.sponsor-cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sponsor-cta-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
 }
 
 /* Constrain width of content sections for better readability */
