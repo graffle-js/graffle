@@ -1,13 +1,13 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { Docpar } from '#src/docpar/$.js'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
 import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
 import type { HandleOutput } from '../../handle.js'
 
 export type DocumentInput =
-  | Grafaid.Document.Typed.TypedDocumentLike
+  | GraphqlKit.Document.Typed.TypedDocumentLike
   | TypedFullDocument.TypedFullDocument
 
 // ================================================================================================
@@ -117,7 +117,7 @@ type OperationToNamedExecutor<
  * Named executor for operations with no variables.
  * Operation name is encoded in the method itself.
  */
-export interface NoVarsNamedExecutor<$Context, $Result extends Grafaid.SomeObjectData> {
+export interface NoVarsNamedExecutor<$Context, $Result extends GraphqlKit.SomeObjectData> {
   (): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
 }
 
@@ -127,7 +127,7 @@ export interface NoVarsNamedExecutor<$Context, $Result extends Grafaid.SomeObjec
  */
 export interface OptionalVarsNamedExecutor<
   $Context,
-  $Result extends Grafaid.SomeObjectData,
+  $Result extends GraphqlKit.SomeObjectData,
   $Variables,
 > {
   (variables?: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
@@ -139,7 +139,7 @@ export interface OptionalVarsNamedExecutor<
  */
 export interface RequiredVarsNamedExecutor<
   $Context,
-  $Result extends Grafaid.SomeObjectData,
+  $Result extends GraphqlKit.SomeObjectData,
   $Variables,
 > {
   (variables: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
@@ -172,7 +172,7 @@ $Doc extends TypedFullDocument.TypedFullDocument
   ? Sender<$Doc, $Context>
   : $Doc extends string
     ? UntypedSender<$Context>
-    : $Doc extends Grafaid.Document.Typed.TypedDocumentLike
+    : $Doc extends GraphqlKit.Document.Typed.TypedDocumentLike
       ? TypedDocumentLikeSender<ResultOf<$Doc>, VariablesOf<$Doc>, $Context>
       : UntypedSender<$Context>
 
@@ -220,8 +220,8 @@ export interface UntypedSender<$Context = any> {
  * Only `.$send()` is available (no named operation methods).
  */
 type TypedDocumentLikeSender<
-  $Result extends Grafaid.SomeObjectData,
-  $Variables extends Grafaid.Variables,
+  $Result extends GraphqlKit.SomeObjectData,
+  $Variables extends GraphqlKit.Variables,
   $Context,
   ___$VarKind = GetVariablesInputKind<$Variables>,
   ___$SendMethod = ___$VarKind extends 'none' ? (() => Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>)

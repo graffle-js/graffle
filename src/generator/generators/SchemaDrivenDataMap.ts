@@ -1,4 +1,4 @@
-import { Grafaid } from '#lib/grafaid'
+import { GraphqlKit } from '#src/lib/grafaid/_.js'
 
 import { Docpar } from '#src/docpar/$.js'
 import { Str } from '@wollybeard/kit'
@@ -25,7 +25,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
         if (_[1] === null) return null
         return { operationType: _[0], objectType: _[1] }
       }).filter(_ => _ !== null)
-    const kindMap: Grafaid.Schema.KindMap['list'] = getKindMap(config)
+    const kindMap: GraphqlKit.Schema.KindMap['list'] = getKindMap(config)
     const kinds = Obj.entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
@@ -118,7 +118,7 @@ const typeCondition = (config: Config) => {
       const isHasInputOrOutputCustomScalar = () => true // todo
       return isHasInputOrOutputCustomScalar
     }
-    return Grafaid.Schema.CustomScalars.isHasCustomScalars
+    return GraphqlKit.Schema.CustomScalars.isHasCustomScalars
   }
 
   if (config.runtimeFeatures.operationVariables) {
@@ -136,7 +136,7 @@ const inputTypeCondition = (config: Config) => {
   if (config.runtimeFeatures.operationVariables) return trueFilter
 
   if (config.runtimeFeatures.customScalars) {
-    return Grafaid.Schema.CustomScalars.isHasCustomScalars
+    return GraphqlKit.Schema.CustomScalars.isHasCustomScalars
   }
 
   return falseFilter
@@ -152,7 +152,7 @@ const inputTypeCondition = (config: Config) => {
 //
 
 const ScalarType = createCodeGenerator<
-  { type: Grafaid.Schema.ScalarType }
+  { type: GraphqlKit.Schema.ScalarType }
 >(
   ({ code, type }) => {
     code(Str.Code.TS.constDecl(type.name, `${$.$$Scalar}.${type.name}`))
@@ -160,7 +160,7 @@ const ScalarType = createCodeGenerator<
 )
 
 const ScalarTypeCustom = createCodeGenerator<
-  { type: Grafaid.Schema.ScalarType }
+  { type: GraphqlKit.Schema.ScalarType }
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
@@ -172,7 +172,7 @@ const ScalarTypeCustom = createCodeGenerator<
 )
 
 const UnionType = createCodeGenerator<
-  { type: Grafaid.Schema.UnionType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.UnionType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
     // This takes advantage of the fact that in GraphQL, in a union type, all members that happen
@@ -188,7 +188,7 @@ const UnionType = createCodeGenerator<
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
         [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
-          $spread: type.getTypes().filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
+          $spread: type.getTypes().filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
         }),
@@ -198,16 +198,16 @@ const UnionType = createCodeGenerator<
 )
 
 const InterfaceType = createCodeGenerator<
-  { type: Grafaid.Schema.InterfaceType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.InterfaceType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type, config }) => {
-    const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
+    const implementorTypes = GraphqlKit.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     code(Str.Code.TS.constDeclTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
         [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
-          $spread: implementorTypes.filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
+          $spread: implementorTypes.filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
         }),
@@ -217,7 +217,7 @@ const InterfaceType = createCodeGenerator<
 )
 
 const ObjectType = createCodeGenerator<
-  { type: Grafaid.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
     const o: Str.Code.TS.TermObject.TermObject = {}
@@ -239,7 +239,7 @@ const ObjectType = createCodeGenerator<
 
     const outputFields = Object.values(type.getFields()).filter(condition)
     for (const outputField of outputFields) {
-      const outputFieldNamedType = Grafaid.Schema.getNamedType(outputField.type)
+      const outputFieldNamedType = GraphqlKit.Schema.getNamedType(outputField.type)
       const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
         $fields: {},
       }
@@ -256,10 +256,10 @@ const ObjectType = createCodeGenerator<
           const ofItemA: Str.Code.TS.TermObject.TermObject = {}
           ofItemAs[arg.name] = ofItemA
 
-          const argType = Grafaid.Schema.getNamedType(arg.type)
+          const argType = GraphqlKit.Schema.getNamedType(arg.type)
           // dprint-ignore
           if (
-             (config.runtimeFeatures.customScalars && Grafaid.Schema.isScalarTypeAndCustom(argType)) ||
+             (config.runtimeFeatures.customScalars && GraphqlKit.Schema.isScalarTypeAndCustom(argType)) ||
              // For variables, we need to know the variable type to write it out, so we always need the named type.
              (config.runtimeFeatures.operationVariables)
           ) {
@@ -281,13 +281,13 @@ const ObjectType = createCodeGenerator<
       })
 
       if (condition(outputFieldNamedType)) {
-        if (Grafaid.Schema.isScalarTypeAndCustom(outputFieldNamedType)) {
+        if (GraphqlKit.Schema.isScalarTypeAndCustom(outputFieldNamedType)) {
           if (config.runtimeFeatures.customScalars) {
             sddmNodeOutputField.$fields[propertyNames.nt] = outputFieldNamedType.name
           }
         } else if (
-          Grafaid.Schema.isUnionType(outputFieldNamedType) || Grafaid.Schema.isObjectType(outputFieldNamedType)
-          || Grafaid.Schema.isInterfaceType(outputFieldNamedType)
+          GraphqlKit.Schema.isUnionType(outputFieldNamedType) || GraphqlKit.Schema.isObjectType(outputFieldNamedType)
+          || GraphqlKit.Schema.isInterfaceType(outputFieldNamedType)
         ) {
           referenceAssignments.push(`${type.name}.f[\`${outputField.name}\`]!.nt = ${outputFieldNamedType.name}`)
           // dprint-ignore
@@ -313,7 +313,7 @@ const ObjectType = createCodeGenerator<
 )
 
 const EnumType = createCodeGenerator<
-  { type: Grafaid.Schema.EnumType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.EnumType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
     code(Str.Code.TS.constDeclTyped(
@@ -328,7 +328,7 @@ const EnumType = createCodeGenerator<
 )
 
 const InputObjectType = createCodeGenerator<
-  { type: Grafaid.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
     const o: Str.Code.TS.TermObject.TermObject = {}
@@ -338,7 +338,7 @@ const InputObjectType = createCodeGenerator<
     if (config.runtimeFeatures.operationVariables) {
       o[propertyNames.n] = Str.Code.TS.string(type.name)
       const customScalarFields = inputFields
-        .filter(Grafaid.Schema.CustomScalars.isHasCustomScalarInputs)
+        .filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
         .map(Str.Code.TS.string)
       if (customScalarFields.length) {
@@ -351,14 +351,14 @@ const InputObjectType = createCodeGenerator<
     o[propertyNames.f] = f
 
     for (const inputField of inputFields) {
-      const inputFieldType = Grafaid.Schema.getNamedType(inputField.type)
+      const inputFieldType = GraphqlKit.Schema.getNamedType(inputField.type)
 
       // dprint-ignore
       const isPresent =
         config.runtimeFeatures.operationVariables ||
         (config.runtimeFeatures.customScalars &&
-          (Grafaid.Schema.isScalarTypeAndCustom(inputFieldType) ||
-          (Grafaid.Schema.isInputObjectType(inputFieldType) && Grafaid.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType))))
+          (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType) ||
+          (GraphqlKit.Schema.isInputObjectType(inputFieldType) && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType))))
 
       if (!isPresent) continue
 
@@ -366,11 +366,11 @@ const InputObjectType = createCodeGenerator<
         $fields: {},
       }
 
-      if (Grafaid.Schema.isScalarTypeAndCustom(inputFieldType)) {
+      if (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType)) {
         f[inputField.name]!.$fields[propertyNames.nt] = inputFieldType.name
       } else if (
-        Grafaid.Schema.isInputObjectType(inputFieldType)
-        && Grafaid.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType)
+        GraphqlKit.Schema.isInputObjectType(inputFieldType)
+        && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType)
       ) {
         referenceAssignments.push(
           `${type.name}.${propertyNames.f}![\`${inputField.name}\`]!.${propertyNames.nt} = ${inputFieldType.name}`,

@@ -1,5 +1,5 @@
 // dprint-ignore-file
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import { $ } from '#src/docpar/object/var/var.js'
@@ -18,63 +18,63 @@ const A = Ts.Assert.exact
 test('static root type builder > type output inference', () => {
   // Nested object args
   const q0 = Q.objectNestedWithArgs({ object: { $: { int: $ }, id:true}})
-  A.ofAs<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | null | undefined }, true>>().on(q0)
+  A.ofAs<GraphqlKit.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | null | undefined }, true>>().on(q0)
 
   // Scalar fields
   const q1 = Q.string(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ string: string | null }, {}, true>>().on(q1)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ string: string | null }, {}, true>>().on(q1)
 
   const q2 = Q.idNonNull(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ idNonNull: string }, {}, true>>().on(q2)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ idNonNull: string }, {}, true>>().on(q2)
 
   // Custom scalar - without custom scalar codecs defined
   const q3 = Q.date(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ date: Date | null }, {}, true>>().on(q3)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ date: Date | null }, {}, true>>().on(q3)
 
   // Lists
   const q5 = Q.listInt(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, {}, true>>().on(q5)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ listInt: Array<number | null> | null }, {}, true>>().on(q5)
 
   const q6 = Q.listIntNonNull(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, {}, true>>().on(q6)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ listIntNonNull: Array<number> }, {}, true>>().on(q6)
 
   const q7 = Q.listListInt(true)
-  A.ofAs<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}, true>>().on(q7)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}, true>>().on(q7)
 
   // Object with fields
   const q8 = Q.object({ id: true })
-  A.ofAs<Grafaid.Document.Typed.String<{ object: { id:string|null } | null }, {}, true>>().on(q8)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ object: { id:string|null } | null }, {}, true>>().on(q8)
 
   // Field with $
   const q9 = Q.stringWithArgs({ $: { boolean: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | null | undefined }, true>>().on(q9)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | null | undefined }, true>>().on(q9)
 
   // Required argument with $
   const q10 = Q.stringWithRequiredArg({ $: { string: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }, true>>().on(q10) // NOT undefined!
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }, true>>().on(q10) // NOT undefined!
 
   // Required argument with $ with default
   const q11 = Q.stringWithRequiredArg({ $: { string: $.default('abc') } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string?: string | undefined }, true>>().on(q11)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string?: string | undefined }, true>>().on(q11)
 
   // $ with custom name
   const q12 = Q.stringWithArgs({ $: { boolean: $.name('isActive') } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | null | undefined }, true>>().on(q12)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | null | undefined }, true>>().on(q12)
 
   // $.required() on optional argument
   const q12b = Q.stringWithArgs({ $: { string: $.required() } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }, true>>().on(q12b) // NOT undefined!
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }, true>>().on(q12b) // NOT undefined!
 
   // List argument with $
   const q13 = Q.stringWithListArg({ $: { ints: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | null | undefined }, true>>().on(q13)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | null | undefined }, true>>().on(q13)
 
   const q14 = Q.stringWithListArgRequired({ $: { ints: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }, true>>().on(q14)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }, true>>().on(q14)
 
   // Multiple $ types
   const q15 = Q.stringWithArgs({ $: { boolean: $, string: $ } })
-  A.ofAs<Grafaid.Document.Typed.String<
+  A.ofAs<GraphqlKit.Document.Typed.String<
     { stringWithArgs: string | null },
     { boolean?: boolean | null | undefined, string?: string | null | undefined },
     true
@@ -82,7 +82,7 @@ test('static root type builder > type output inference', () => {
 
   // Mixed $ and literals
   const q16 = Q.stringWithArgs({ $: { boolean: true, string: $, int: 42 } })
-  A.ofAs<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | null | undefined }, true>>().on(q16)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | null | undefined }, true>>().on(q16)
 
   // Alias with $ on nested object field
   const q20 = Q.objectNestedWithArgs({
@@ -93,7 +93,7 @@ test('static root type builder > type output inference', () => {
     // id: ['id2', {$:{filter:$}}]
   })
 
-  A.ofAs<Grafaid.Document.Typed.String<
+  A.ofAs<GraphqlKit.Document.Typed.String<
     { objectNestedWithArgs: { object2: { id: string | null } | null } | null },
     { int?: number | null | undefined },
     true
@@ -101,23 +101,23 @@ test('static root type builder > type output inference', () => {
 
   // Alias short array syntax (scalars/enums without required args only)
   const q21 = Q.$batch({ id: ['myId'] })
-  A.ofAs<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>().on(q21)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ myId: string | null }, {}, true>>().on(q21)
 
   const q22 = Q.$batch({ string: ['myString'] })
-  A.ofAs<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>().on(q22)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ myString: string | null }, {}, true>>().on(q22)
 
   const q23 = Q.$batch({ abcEnum: ['myEnum'] })
-  A.ofAs<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>().on(q23)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>().on(q23)
 
   // Alias string syntax (scalars/enums without required args only)
   const q24 = Q.$batch({ id: 'myId' })
-  A.ofAs<Grafaid.Document.Typed.String<{ myId: string | null }, {}, true>>().on(q24)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ myId: string | null }, {}, true>>().on(q24)
 
   const q25 = Q.$batch({ string: 'myString' })
-  A.ofAs<Grafaid.Document.Typed.String<{ myString: string | null }, {}, true>>().on(q25)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ myString: string | null }, {}, true>>().on(q25)
 
   const q26 = Q.$batch({ abcEnum: 'myEnum' })
-  A.ofAs<Grafaid.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>().on(q26)
+  A.ofAs<GraphqlKit.Document.Typed.String<{ myEnum: 'A' | 'B' | 'C' | null }, {}, true>>().on(q26)
 
   // @ts-expect-error - short array alias not allowed on non-scalar
   const q27 = Q.$batch({ object: ['myObject'] })

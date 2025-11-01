@@ -1,5 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { OperationTypeToAccessKind, print } from '#src/lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/grafaid/http/http.js'
@@ -178,7 +178,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           body: postRequestEncodeBody,
         },
         run(input, slots) {
-          const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+          const graphqlRequest: GraphqlKit.HTTP.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
             query: print(input.request.query),

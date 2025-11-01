@@ -6,7 +6,7 @@
  * using the ArgumentsMap literal types to determine proper types for each variable.
  */
 
-import type { Grafaid } from '#src/lib/grafaid/$.js'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { UnionToIntersection } from 'type-fest'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
@@ -19,7 +19,7 @@ import type { ExtractFromOperation } from './extract.js'
 export type InferFromQuery<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery,
-> = InferFromOperation<$SS, $ArgsMap, typeof Grafaid.Document.OperationTypeNode.QUERY>
+> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Document.OperationTypeNode.QUERY>
 
 /**
  * Infer variables from a mutation operation selection set.
@@ -27,7 +27,7 @@ export type InferFromQuery<
 export type InferFromMutation<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
-> = InferFromOperation<$SS, $ArgsMap, typeof Grafaid.Document.OperationTypeNode.MUTATION>
+> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Document.OperationTypeNode.MUTATION>
 
 /**
  * Infer variables from a subscription operation selection set.
@@ -35,7 +35,7 @@ export type InferFromMutation<
 export type InferFromSubscription<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription,
-> = InferFromOperation<$SS, $ArgsMap, typeof Grafaid.Document.OperationTypeNode.SUBSCRIPTION>
+> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Document.OperationTypeNode.SUBSCRIPTION>
 
 /**
  * Infer variables from a subscription operation selection set.
@@ -44,7 +44,7 @@ export type InferFromSubscription<
 export type InferFromOperation<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMap,
-  $OperationType extends Grafaid.Document.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.OperationTypeNode,
   ___$OperationMap = $ArgsMap['operations'][$OperationType],
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject

@@ -1,4 +1,4 @@
-import type { Grafaid } from '#src/lib/grafaid/$.js'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { Core, ParserContext } from '../core/$.js'
@@ -35,7 +35,7 @@ export type Parse<
         InferOperation<
           $Document[operationType][operationName],
           $Context,
-          Grafaid.Document.OperationTypeNode.FromString<operationType & string>,
+          GraphqlKit.Document.OperationTypeNode.FromString<operationType & string>,
           operationName
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
@@ -95,7 +95,7 @@ export type InferOperations<
 export type InferOperation<
   $DocOp,
   $Context,
-  $OperationType extends Grafaid.Document.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.OperationTypeNode,
   $OperationName,
 > =
   $DocOp extends object

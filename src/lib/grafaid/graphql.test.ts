@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql'
 import { describe, expect, test } from 'vitest'
-import { Grafaid } from './$.js'
+import { GraphqlKit } from './_.js'
 
 const operationNameOne = `one`
 const operationNameTwo = `two`
@@ -11,7 +11,7 @@ const docOverloadedTerms = `query { queryX }`
 
 type CaseParameters = [
   description: string,
-  request: Grafaid.RequestInput,
+  request: GraphqlKit.RequestInput,
   result: null | OperationTypeNode,
 ]
 
@@ -30,6 +30,6 @@ describe(`getOperationType`, () => {
     [ `mutation if only operation without name and no operation given `, 									  { query: `mutation { user { name } }` }, 						                    OperationTypeNode.MUTATION ],
     [ `overloaded terms do not confuse parser`, 	                                          { query: docOverloadedTerms },                                          OperationTypeNode.QUERY ],
   ])(`%s`, (_, request, result) => {
-    expect(Grafaid.Document.getOperationType(request)).toEqual(result)
+    expect(GraphqlKit.Document.getOperationType(request)).toEqual(result)
   })
 })

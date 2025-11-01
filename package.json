@@ -204,7 +204,7 @@
     "#graffle/presets/bare": "./build/exports/presets/bare.js",
     "#graffle/presets/basic": "./build/exports/presets/basic.js",
     "#graffle/presets/minimal": "./build/exports/presets/minimal.js",
-    "#lib/grafaid": "./build/lib/grafaid/$.js",
+    "#lib/grafaid": "./build/lib/grafaid/_.js",
     "#test/schema/*": "./tests/_/fixtures/schemas/*",
     "#test/*.js": "./tests/_/*.js",
     "#test/*": "./tests/_/*"

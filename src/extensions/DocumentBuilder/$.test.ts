@@ -1,5 +1,5 @@
-import { Grafaid } from '#lib/grafaid'
 import { Docpar } from '#src/docpar/$.js'
+import { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { Var } from './$$.js'
@@ -78,5 +78,5 @@ Test
   .test(({ input, matrix }) => {
     const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(input)
     const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, matrix)
-    return Grafaid.Document.print(document)
+    return GraphqlKit.Document.print(document)
   })

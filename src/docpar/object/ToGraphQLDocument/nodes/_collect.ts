@@ -1,5 +1,5 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Select } from '#src/docpar/object/Select/$.js'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { fromGraffleSelectionObjectLevel } from './4_GraffleSelectionObjectLevel.js'
@@ -11,8 +11,8 @@ export const collectForInlineFragmentLike: GraphQLPostOperationMapper<
   [
     keyParsed: Select.ParsedInlineFragmentLevelSelection,
     basket: {
-      directives: Grafaid.Document.DirectiveNode[]
-      selections: Grafaid.Document.SelectionNode[]
+      directives: GraphqlKit.Document.DirectiveNode[]
+      selections: GraphqlKit.Document.SelectionNode[]
     },
   ]
 > = (

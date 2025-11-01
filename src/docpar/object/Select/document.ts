@@ -1,4 +1,4 @@
-import { Grafaid } from '#lib/grafaid'
+import { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { Arr, Obj, Ts } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'
@@ -70,13 +70,13 @@ export const createDocumentNormalizedFromQuerySelection = <$SelectionSet extends
   operationName?: string,
 ): DocumentNormalized =>
   createDocumentNormalizedFromRootTypeSelection(
-    Grafaid.Document.OperationTypeNode.QUERY,
+    GraphqlKit.Document.OperationTypeNode.QUERY,
     selectionSet as Select.SelectionSet.AnySelectionSet<DefaultContext, keyof $SelectionSet & string>,
     operationName,
   )
 
 export const createDocumentNormalizedFromRootTypeSelection = (
-  operationType: Grafaid.Document.OperationTypeNode,
+  operationType: GraphqlKit.Document.OperationTypeNode,
   selectionSet: Select.SelectionSet.AnySelectionSet,
   operationName?: string,
 ): DocumentNormalized =>
@@ -98,14 +98,14 @@ export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized =
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: Grafaid.Document.OperationTypeNode.QUERY,
+    type: GraphqlKit.Document.OperationTypeNode.QUERY,
     selectionSet,
   }])
   const mutationOperations = Object.entries(document.mutation ?? {}).map((
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: Grafaid.Document.OperationTypeNode.MUTATION,
+    type: GraphqlKit.Document.OperationTypeNode.MUTATION,
     selectionSet,
   }])
   const operations = [

@@ -1,4 +1,4 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { DateScalar } from '#test/fixtures/scalars'
 import { test as testBase } from '#test/helpers'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
@@ -7,7 +7,7 @@ import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 
-const createPossible = (schema: Grafaid.Schema.Schema) =>
+const createPossible = (schema: GraphqlKit.Schema.Schema) =>
   PossibleNoCustomScalars
     .create({ check: { preflight: false } })
     .use(TransportMemory)

@@ -1,4 +1,4 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { Codec } from './codec.js'
 
 export * as Scalar from './$$.js'
@@ -6,7 +6,7 @@ export * as Scalar from './$$.js'
 export interface Scalar<
   $Name extends string = string,
   $Decoded = unknown,
-  $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes = Grafaid.Schema.StandardScalarRuntimeTypes,
+  $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes = GraphqlKit.Schema.StandardScalarRuntimeTypes,
 > {
   kind: 'Scalar'
   name: $Name

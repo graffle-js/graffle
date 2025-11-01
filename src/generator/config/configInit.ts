@@ -1,5 +1,5 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Fs } from '#src/lib/fsp.js'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { IntrospectionOptions } from 'graphql'
 import type { Extension } from '../extension/types.js'
 
@@ -43,7 +43,7 @@ export interface ConfigInitSchemaSdl {
 }
 export interface ConfigInitSchemaInstance {
   type: `instance`
-  instance: Grafaid.Schema.Schema
+  instance: GraphqlKit.Schema.Schema
 }
 export interface ConfigInitSchemaSdlFile {
   type: `sdlFile`

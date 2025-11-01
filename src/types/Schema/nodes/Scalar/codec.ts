@@ -1,8 +1,8 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 
 export interface Codec<
   $Decoded = any,
-  $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes = Grafaid.Schema.StandardScalarRuntimeTypes,
+  $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes = GraphqlKit.Schema.StandardScalarRuntimeTypes,
 > {
   encode: <$$Decoded extends $Decoded>(value: $$Decoded) => $Encoded
   decode: <$$Encoded extends $Encoded>(value: $$Encoded) => $Decoded
@@ -10,7 +10,7 @@ export interface Codec<
   _typeDecoded: $Decoded
 }
 
-export const createCodec = <$Decoded, $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes>(codec: {
+export const createCodec = <$Decoded, $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes>(codec: {
   encode: (value: $Decoded) => $Encoded
   decode: (value: $Encoded) => $Decoded
 }): Codec<$Decoded, $Encoded> => codec as any

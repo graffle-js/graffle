@@ -1,4 +1,4 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { Null } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { OutputObjectLike } from './OutputObjectLike.js'
@@ -18,7 +18,7 @@ export type OperationSubscription<$SelectionSet extends object, $Schema> =
 export type Operation<
   $SelectionSet extends object,
   $Schema,
-  $OperationType extends Grafaid.Document.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.OperationTypeNode,
 > = OutputObjectLike<
   $SelectionSet,
   $Schema,

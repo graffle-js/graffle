@@ -1,5 +1,4 @@
 import type { Normalized } from '#graffle'
-import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/context.js'
 import type { ErrorCategory } from '#src/context/fragments/configuration/output/configuration.js'
 import {
@@ -7,6 +6,7 @@ import {
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
 } from '#src/context/fragments/configuration/output/configuration.js'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
 import { Err, Ware } from '@wollybeard/kit'
@@ -20,9 +20,9 @@ export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
     // formatted comes from http transport
-    | Grafaid.FormattedExecutionResultError
+    | GraphqlKit.FormattedExecutionResultError
     // unformatted comes from memory transport
-    | Grafaid.GraphQLError
+    | GraphqlKit.GraphQLError
   >
   data?: SomeObjectData | null
   extensions?: ObjMap

@@ -1,5 +1,5 @@
 import { Docpar } from '#src/docpar/$.js'
-import { Grafaid } from '#src/lib/grafaid/$.js'
+import { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
@@ -46,7 +46,7 @@ const withGqlString: TestCaseWith = [
     const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(
       Docpar.Object.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).$send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(GraphqlKit.Document.print(document)).$send()).toEqual(expectedData)
   },
 ]
 

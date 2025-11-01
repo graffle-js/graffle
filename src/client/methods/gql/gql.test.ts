@@ -1,5 +1,5 @@
 import { Graffle } from '#graffle'
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import { test } from '#test/helpers'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
@@ -19,7 +19,7 @@ const g = Graffle
 describe(`given typed document node`, () => {
   test(`returns typed result`, async () => {
     type ResultData = { id: string | null }
-    const doc = Ts.as<Grafaid.Document.Typed.Node<ResultData, {}>>(
+    const doc = Ts.as<GraphqlKit.Document.Typed.Node<ResultData, {}>>(
       parse(`query GetId { id }`),
     )
     const result = await g.gql(doc).$send()
@@ -30,7 +30,7 @@ describe(`given typed document node`, () => {
   test(`accepts no variables if none in TDN`, async () => {
     type ResultData = { id: string | null }
     type Variables = {}
-    const doc = Ts.as<Grafaid.Document.Typed.Node<ResultData, Variables>>(
+    const doc = Ts.as<GraphqlKit.Document.Typed.Node<ResultData, Variables>>(
       parse(`query GetId { id }`),
     )
 

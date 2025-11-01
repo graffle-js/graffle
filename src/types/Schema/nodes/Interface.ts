@@ -1,4 +1,4 @@
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { OutputFields } from './OutputField.js'
 import type { OutputObject } from './OutputObject.js'
 
@@ -6,7 +6,7 @@ export type Interface<
   $Name extends string = string,
   $Fields extends OutputFields = OutputFields,
 > = {
-  kind: Grafaid.Schema.TypeKind.Interface
+  kind: GraphqlKit.Schema.TypeKind.Interface
   name: $Name
   fields: $Fields
   implementors: (OutputObject | Interface)[]

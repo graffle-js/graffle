@@ -1,6 +1,6 @@
 export * as Schema from './$$.js'
 
-import type { Grafaid } from '#lib/grafaid'
+import type { GraphqlKit } from '#src/lib/grafaid/_.js'
 import type { GlobalRegistry } from '../GlobalRegistry/GlobalRegistry.js'
 import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'
@@ -19,7 +19,7 @@ export interface Schema<
   $Scalars extends Scalar.Registry = Scalar.Registry,
 > {
   name: GlobalRegistry.ClientNames
-  operationsAvailable: Grafaid.Document.OperationType[]
+  operationsAvailable: GraphqlKit.Document.OperationType[]
   RootUnion: OutputObject
   Root: {
     query: null | OutputObject
