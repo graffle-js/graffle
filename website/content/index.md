@@ -323,8 +323,8 @@ const members = [
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--vp-c-bg-soft);
-  padding: 8px;
+  background: #ffffff;
+  padding: 16px;
 }
 
 .sponsor-info {
@@ -605,6 +605,7 @@ const members = [
   .sponsor-logo {
     width: 64px;
     height: 64px;
+    padding: 12px;
   }
 
   .sponsor-name {
