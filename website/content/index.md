@@ -318,8 +318,8 @@ const members = [
 }
 
 .sponsor-logo {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 50%;
@@ -603,8 +603,8 @@ const members = [
   }
 
   .sponsor-logo {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     padding: 12px;
   }
 
