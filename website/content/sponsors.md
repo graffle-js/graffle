@@ -2,7 +2,7 @@
 
 <div class="sponsors-page">
   <div class="sponsors-intro">
-    <p>Graffle is made possible by the generous support of our sponsors. If you find Graffle valuable and would like to support its development, please consider becoming a sponsor.</p>
+    <p>Graffle is supported by these generous sponsors. If you find Graffle valuable and would like to support its development, please consider becoming a sponsor.</p>
   </div>
 
   <div class="sponsors-grid">
