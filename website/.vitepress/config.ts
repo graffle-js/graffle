@@ -160,6 +160,7 @@ export default defineConfig({
       { text: 'Guides', link: '/guides' },
       { text: 'Examples', link: '/examples' },
       { text: 'Extensions', link: '/extensions' },
+      { text: 'Sponsors', link: '/sponsors' },
     ],
     sidebar: {
       ...sidebars,
