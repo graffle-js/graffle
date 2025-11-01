@@ -45,7 +45,7 @@ Visit **[graffle.js.org](https://graffle.js.org)** for full documentation, guide
 
 MIT
 
-## Sponsors ❤️
+## Sponsors
 
 <p align="center">
   Graffle is supported by these generous sponsors.<br/>
