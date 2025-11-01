@@ -39,9 +39,9 @@
   please consider <a href="https://github.com/sponsors/jasonkuhrt">becoming a sponsor</a>.
 </p>
 
-<p align="center">
-  <a href="https://www.lambdatest.com/">
-    <img src="./website/content/public/_assets/sponsors/lambdatest.png" width="120" alt="LambdaTest">
+<p align="center" style="font-size:21px; color:black;">Browser testing via
+  <a href="https://www.lambdatest.com/?utm_source=graffle&utm_medium=sponsor" target="_blank">
+    <img src="https://www.lambdatest.com/blue-logo.png" style="vertical-align: middle;" width="250" height="45" />
   </a>
 </p>
 
