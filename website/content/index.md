@@ -256,12 +256,12 @@ const members = [
 }
 
 .sponsors-container {
-  background: linear-gradient(135deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg) 100%);
+  background: none;
   border-radius: 16px;
   padding: 48px 32px;
   text-align: center;
-  border: 1px solid var(--vp-c-divider);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: none;
+  box-shadow: none;
 }
 
 .sponsors-label {
