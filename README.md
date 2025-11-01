@@ -34,7 +34,7 @@
 ## Sponsors ❤️
 
 <p align="center">
-  Graffle is made possible by the generous support of our sponsors.<br/>
+  Graffle is supported by these generous sponsors.<br/>
   If you find Graffle valuable and would like to support its development,<br/>
   please consider <a href="https://github.com/sponsors/jasonkuhrt">becoming a sponsor</a>.
 </p>
