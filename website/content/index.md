@@ -60,7 +60,7 @@ features:
 
 <div class="sponsors-section">
   <div class="sponsors-container">
-    <p class="sponsors-label">Thank you to our sponsors!</p>
+    <p class="sponsors-label">Sponsors</p>
     <div class="sponsors-grid">
       <a href="https://github.com/LambdaTest-Inc" target="_blank" rel="noopener noreferrer" class="sponsor-item">
         <div class="sponsor-card">
@@ -301,14 +301,15 @@ const members = [
 .sponsor-card {
   background: var(--vp-c-bg);
   border-radius: 12px;
-  padding: 32px 48px;
+  padding: 32px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   border: 1px solid var(--vp-c-divider);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
-  min-width: 320px;
+  min-width: 240px;
 }
 
 .sponsor-item:hover .sponsor-card {
@@ -317,11 +318,11 @@ const members = [
 }
 
 .sponsor-logo {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
   flex-shrink: 0;
-  border-radius: 8px;
+  border-radius: 50%;
   background: var(--vp-c-bg-soft);
   padding: 8px;
 }
@@ -329,9 +330,9 @@ const members = [
 .sponsor-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 4px;
-  text-align: left;
+  text-align: center;
 }
 
 .sponsor-name {
@@ -542,7 +543,7 @@ const members = [
   }
 
   .sponsor-card {
-    padding: 28px 40px;
+    padding: 28px;
   }
 
   .VPHome .vp-doc {
@@ -596,21 +597,14 @@ const members = [
   }
 
   .sponsor-card {
-    flex-direction: column;
-    text-align: center;
     padding: 24px;
     min-width: auto;
     gap: 16px;
   }
 
   .sponsor-logo {
-    width: 56px;
-    height: 56px;
-  }
-
-  .sponsor-info {
-    align-items: center;
-    text-align: center;
+    width: 64px;
+    height: 64px;
   }
 
   .sponsor-name {
