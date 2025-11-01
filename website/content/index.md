@@ -58,6 +58,30 @@ features:
     icon: 🎭
 ---
 
+<div class="sponsors-section">
+  <div class="sponsors-container">
+    <p class="sponsors-label">Sponsors ❤️</p>
+    <div class="sponsors-grid">
+      <a href="https://www.lambdatest.com/" target="_blank" rel="noopener noreferrer" class="sponsor-item">
+        <div class="sponsor-card">
+          <img src="/_assets/sponsors/lambdatest.png" alt="LambdaTest" class="sponsor-logo">
+          <div class="sponsor-info">
+            <span class="sponsor-name">LambdaTest</span>
+            <span class="sponsor-tagline">Cloud-based testing platform</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://github.com/sponsors/jasonkuhrt" target="_blank" rel="noopener noreferrer" class="sponsor-item sponsor-cta">
+        <div class="sponsor-card sponsor-card-cta">
+          <div class="sponsor-cta-content">
+            <span class="sponsor-cta-text">Become a sponsor</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
 ::: warning Pre-Release Software
 Graffle is [still in development](https://github.com/graffle-js/graffle/discussions/1163). Install with `npm install graffle@next graphql` to use the latest pre-release version.
 :::
@@ -231,6 +255,131 @@ const members = [
 </script>
 
 <style>
+/* Sponsors section */
+.sponsors-section {
+  max-width: 1200px;
+  margin: 64px auto;
+  padding: 0 24px;
+}
+
+.sponsors-container {
+  background: none;
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  border: none;
+  box-shadow: none;
+}
+
+.sponsors-label {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--vp-c-text-2);
+  margin: 0 0 32px 0;
+  opacity: 0.7;
+}
+
+.sponsors-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.sponsor-item {
+  text-decoration: none !important;
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.sponsor-item:hover {
+  transform: scale(1.02);
+  text-decoration: none !important;
+}
+
+.sponsor-item:hover .sponsor-name,
+.sponsor-item:hover .sponsor-tagline {
+  text-decoration: none !important;
+}
+
+.sponsor-card {
+  background: var(--vp-c-bg);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  min-width: 240px;
+  flex: 1;
+}
+
+.sponsor-item:hover .sponsor-card {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.sponsor-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.sponsor-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.sponsor-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  line-height: 1.2;
+}
+
+.sponsor-tagline {
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+  opacity: 0.8;
+}
+
+.sponsor-card-cta {
+  border: 2px dashed var(--vp-c-divider);
+  background: transparent;
+  justify-content: center;
+}
+
+.sponsor-item.sponsor-cta:hover .sponsor-card-cta {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+}
+
+.sponsor-cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sponsor-cta-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+}
+
 /* Constrain width of content sections for better readability */
 .VPHome .vp-doc {
   max-width: 960px;
@@ -421,6 +570,14 @@ const members = [
 
 /* Responsive adjustments */
 @media (min-width: 767px) and (max-width: 1023px) {
+  .sponsors-container {
+    padding: 40px 28px;
+  }
+
+  .sponsor-card {
+    padding: 28px;
+  }
+
   .VPHome .vp-doc {
     max-width: 720px;
   }
@@ -451,6 +608,46 @@ const members = [
 }
 
 @media (max-width: 767px) {
+  .sponsors-section {
+    margin: 48px auto;
+    padding: 0 20px;
+  }
+
+  .sponsors-container {
+    padding: 32px 20px;
+    border-radius: 12px;
+  }
+
+  .sponsors-label {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    margin-bottom: 24px;
+  }
+
+  .sponsors-grid {
+    gap: 20px;
+  }
+
+  .sponsor-card {
+    padding: 24px;
+    min-width: auto;
+    gap: 16px;
+  }
+
+  .sponsor-logo {
+    width: 72px;
+    height: 72px;
+    padding: 12px;
+  }
+
+  .sponsor-name {
+    font-size: 18px;
+  }
+
+  .sponsor-tagline {
+    font-size: 13px;
+  }
+
   .VPHome .vp-doc {
     padding: 0 20px;
   }
