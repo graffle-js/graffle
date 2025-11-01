@@ -8,7 +8,7 @@
   <div class="sponsors-grid">
     <a href="https://www.lambdatest.com/" target="_blank" rel="noopener noreferrer" class="sponsor-item">
       <div class="sponsor-card">
-        <img src="/_assets/sponsors/lambdatest.png" alt="LambdaTest" class="sponsor-logo">
+        <img src="/_assets/sponsors/lambdatest-logo.png" alt="LambdaTest" class="sponsor-logo">
         <div class="sponsor-info">
           <span class="sponsor-name">LambdaTest</span>
           <span class="sponsor-tagline">Cloud-based testing platform</span>
