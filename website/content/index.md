@@ -284,14 +284,14 @@ const members = [
 .sponsors-grid {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 32px;
   flex-wrap: wrap;
 }
 
 .sponsor-item {
   text-decoration: none !important;
-  display: block;
+  display: flex;
   transition: transform 0.3s ease;
 }
 
@@ -317,6 +317,7 @@ const members = [
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
   min-width: 240px;
+  flex: 1;
 }
 
 .sponsor-item:hover .sponsor-card {
@@ -359,7 +360,6 @@ const members = [
   border: 2px dashed var(--vp-c-divider);
   background: transparent;
   justify-content: center;
-  height: 100%;
 }
 
 .sponsor-item.sponsor-cta:hover .sponsor-card-cta {
