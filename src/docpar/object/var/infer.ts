@@ -44,7 +44,7 @@ export type InferFromSubscription<
 export type InferFromOperation<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMap,
-  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
   ___$OperationMap = $ArgsMap['operations'][$OperationType],
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject

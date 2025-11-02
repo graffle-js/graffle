@@ -54,6 +54,7 @@
   },
   "homepage": "https://github.com/graffle-js/graffle",
   "scripts": {
+    "gen": "pnpm run '/^gen:.*/' && pnpm examples:gen",
     "extension:schema-errors:test:generate-fixtures": "rm -rf src/extensions/SchemaErrors/__tests__/fixture/graffle && pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
     "test:generate-schema-clients": "tsx tests/_/fixtures/schemas/generate-clients.ts",
     "graffle": "tsx ./src/cli/index.ts",

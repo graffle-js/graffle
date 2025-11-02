@@ -1,10 +1,10 @@
-import { OperationTypeNode } from 'graphql'
 import { describe, expect, test } from 'vitest'
 import { Docpar } from '../docpar/$.js'
+import { GraphqlKit } from '../lib/graphql-kit/_.js'
 
 describe('createStaticRootType', () => {
-  const query = Docpar.Object.Static.createStaticRootType(OperationTypeNode.QUERY)
-  const mutation = Docpar.Object.Static.createStaticRootType(OperationTypeNode.MUTATION)
+  const query = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY)
+  const mutation = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.MUTATION)
 
   describe('single field selection', () => {
     test('query field', () => {

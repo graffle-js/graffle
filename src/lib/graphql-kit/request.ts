@@ -1,5 +1,5 @@
 import type { Err } from '@wollybeard/kit'
-import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
+import type { GraphQLError, OperationDefinitionNode } from 'graphql'
 import type { GraphqlKit } from './_.js'
 import { Document } from './document/_.js'
 
@@ -16,7 +16,7 @@ export interface RequestDocumentNodeInput {
 }
 
 export interface RequestAnalyzedInput extends RequestInput {
-  operation: OperationTypeNode | OperationDefinitionNode
+  operation: Document.Ast.OperationType.OperationType | OperationDefinitionNode
 }
 
 export interface RequestAnalyzedDocumentNodeInput extends RequestDocumentNodeInput {

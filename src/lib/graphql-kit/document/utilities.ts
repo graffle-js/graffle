@@ -10,9 +10,9 @@ import type {
   TypeNode,
 } from 'graphql'
 import type { RequestDocumentNodeInput, RequestInput } from '../graphql.js'
+import { Ast } from './ast/_.js'
 import { isOperationDefinitionNode } from './ast/guards.js'
 import * as Kind from './ast/kind.js'
-import * as OperationTypeNode from './ast/operation-type.js'
 import { Typed } from './typed/_.js'
 
 export const print = (document: Typed.TypedDocumentLike): string => {
@@ -77,7 +77,7 @@ export const getOperationDefinition = (
   return null
 }
 
-const definedOperationPattern = new RegExp(`^\\b(${Object.values(OperationTypeNode).join(`|`)})\\b`)
+const definedOperationPattern = new RegExp(`^\\b(${Object.values(Ast.OperationType).join(`|`)})\\b`)
 
 /**
  * Get the _type_ (query, mutation, subscription) of operation a request will execute as.
@@ -87,7 +87,7 @@ const definedOperationPattern = new RegExp(`^\\b(${Object.values(OperationTypeNo
  * If document is string then regular expressions are used to extract the operation type
  * to avoid document encode/decode performance costs.
  */
-export const getOperationType = (request: RequestInput): OperationTypeNode.OperationTypeNode | null => {
+export const getOperationType = (request: RequestInput): Ast.OperationType.OperationType | null => {
   // return null
   const { operationName, query: document } = request
 
@@ -104,7 +104,7 @@ export const getOperationType = (request: RequestInput): OperationTypeNode.Opera
     if (!match) return null
     return {
       line,
-      operationType: match[0] as OperationTypeNode.OperationTypeNode,
+      operationType: match[0] as Ast.OperationType.OperationType,
     }
   }).filter(_ => _ !== null)
 
@@ -122,7 +122,7 @@ export const getOperationType = (request: RequestInput): OperationTypeNode.Opera
     // Assume that the implicit query syntax is being used.
     // This is a non-validated optimistic approach for performance, not aimed at correctness.
     // For example its not checked if the document is actually of the syntactic form `{ ... }`
-    return OperationTypeNode.QUERY
+    return Ast.OperationType.QUERY
   }
 
   // Continue to the full search.
