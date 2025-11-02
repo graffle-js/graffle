@@ -1,6 +1,5 @@
 export * as Directives from './Directive.js'
 export * from './helpers.js'
-export * from './Named/_.js'
 export * from './nodes/__typename.js'
 export * from './nodes/Args.js'
 export * from './nodes/Enum.js'
