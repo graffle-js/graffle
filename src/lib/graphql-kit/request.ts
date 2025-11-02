@@ -2,16 +2,16 @@ import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
 import type { GraphqlKit } from './_.js'
 import { getOperationDefinition, normalizeDocumentToNode } from './document/__.js'
-import type { Typed } from './document/typed/_.js'
+import { TypedDocument } from './document/typed/_.js'
 
 export interface RequestInput {
-  query: string | Typed.TypedDocumentLike
+  query: string | TypedDocument.TypedDocumentLike
   variables?: Variables | undefined
   operationName?: string | undefined
 }
 
 export interface RequestDocumentNodeInput {
-  query: Typed.TypedDocumentNodeLike
+  query: TypedDocument.TypedDocumentNodeLike
   variables?: Variables | undefined
   operationName?: string | undefined
 }

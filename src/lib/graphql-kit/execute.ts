@@ -1,6 +1,6 @@
 import type { ExecutionResult, GraphQLSchema } from 'graphql'
 import { execute as graphqlExecute, graphql } from 'graphql'
-import { Typed } from './document/typed/_.js'
+import { TypedDocument } from './document/typed/_.js'
 import type { RequestInput } from './graphql.js'
 
 export type ExecuteParameters = {
@@ -14,7 +14,7 @@ export type ExecuteParameters = {
 
 export const execute = async (parameters: ExecuteParameters): Promise<ExecutionResult> => {
   const schema = parameters.schema
-  const document = Typed.unType(parameters.request.query)
+  const document = TypedDocument.unType(parameters.request.query)
   const operationName = parameters.request.operationName
   const variableValues = parameters.request.variables
   const contextValue = typeof parameters.resolverValues?.context === `function`

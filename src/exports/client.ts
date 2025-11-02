@@ -2,4 +2,6 @@ export { type Client, create } from '#src/client/client.js'
 export { type Operation, type TypedFullDocument } from '#src/lib/graphql-kit/typed-full-document/typed-full-document.js'
 export { create as createSelect, select } from '#src/select/select.js'
 export { Var } from '../docpar/object/var/$.js'
-export { type Typed } from '../lib/graphql-kit/document/typed/_.js'
+export { type TypedDocument } from '../lib/graphql-kit/document/typed/_.js'
+// Re-export as Typed for generated code
+export { type TypedDocument as Typed } from '../lib/graphql-kit/document/typed/_.js'
