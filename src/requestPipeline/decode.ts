@@ -54,7 +54,7 @@ const decodeResultValue = (input: {
     }
   value: GraphqlKit.SomeFieldData
   sddmNode: Docpar.OutputNodes
-  documentPart: null | GraphqlKit.Document.SelectionSetNode
+  documentPart: null | GraphqlKit.Document.Ast.SelectionSetNode
   scalars: Schema.Scalar.ScalarMap
 }): void => {
   const { parentContext, value, sddmNode, documentPart, scalars } = input
@@ -124,9 +124,9 @@ const decodeResultValue = (input: {
 }
 
 const findDocumentField = (
-  selectionSet: null | GraphqlKit.Document.SelectionSetNode,
+  selectionSet: null | GraphqlKit.Document.Ast.SelectionSetNode,
   fieldName: string,
-): GraphqlKit.Document.FieldNode | null => {
+): GraphqlKit.Document.Ast.FieldNode | null => {
   if (!selectionSet) return null
 
   for (const selection of selectionSet.selections) {

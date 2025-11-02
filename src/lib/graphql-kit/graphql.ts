@@ -11,7 +11,7 @@ export {
   type GraphQLFormattedError as FormattedExecutionResultError,
 } from 'graphql'
 
-export * from './_Nodes.js'
+export * as Nodes from './document/ast/__.js'
 
 export * from './request.js'
 

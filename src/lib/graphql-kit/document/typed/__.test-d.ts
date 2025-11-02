@@ -13,7 +13,7 @@ import type {
   VariablesInputKindOptional,
   VariablesInputKindRequired,
   VariablesOf,
-} from './TypedDocument.js'
+} from './__.js'
 // We want to test both internal/external Node to ensure they both work. See jsdoc for `Node` for more context.
 import type { TypedDocumentNode as Node2 } from '@graphql-typed-document-node/core'
 

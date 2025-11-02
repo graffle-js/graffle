@@ -1,4 +1,4 @@
-import type { TypedDocument } from '#graffle/client'
+import type { Typed } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
@@ -58,7 +58,7 @@ interface StaticDocumentContext {
 export interface QueryBuilder {
   $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
@@ -88,7 +88,7 @@ export interface QueryBuilder {
    */
   id: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
@@ -120,7 +120,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['idNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>

@@ -18,7 +18,7 @@ export type OperationSubscription<$SelectionSet extends object, $Schema> =
 export type Operation<
   $SelectionSet extends object,
   $Schema,
-  $OperationType extends GraphqlKit.Document.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationTypeNode,
 > = OutputObjectLike<
   $SelectionSet,
   $Schema,

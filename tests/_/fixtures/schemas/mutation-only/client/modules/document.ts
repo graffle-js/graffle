@@ -1,4 +1,4 @@
-import type { TypedDocument } from '#graffle/client'
+import type { Typed } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
@@ -47,7 +47,7 @@ interface StaticDocumentContext {
 export interface MutationBuilder {
   $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
@@ -77,7 +77,7 @@ export interface MutationBuilder {
    */
   id: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
@@ -114,7 +114,7 @@ export interface MutationBuilder {
     >['idNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>

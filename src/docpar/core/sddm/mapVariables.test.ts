@@ -10,7 +10,7 @@ const createRequest = (
   variables?: GraphqlKit.Variables,
 ): GraphqlKit.RequestAnalyzedDocumentNodeInput => {
   const document = parse(query)
-  const operation = document.definitions[0] as GraphqlKit.Document.OperationDefinitionNode
+  const operation = document.definitions[0] as GraphqlKit.Document.Ast.OperationDefinitionNode
   return {
     query: document,
     operation,
