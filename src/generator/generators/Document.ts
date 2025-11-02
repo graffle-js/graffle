@@ -40,7 +40,13 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     )
     code(`import { OperationTypeNode } from 'graphql'`)
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
-    code(codeImportNamed(config, { names: ['GraphqlKit'], from: config.paths.imports.grafflePackage.utilitiesForGenerated, type: true }))
+    code(
+      codeImportNamed(config, {
+        names: ['GraphqlKit'],
+        from: config.paths.imports.grafflePackage.utilitiesForGenerated,
+        type: true,
+      }),
+    )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
     code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
