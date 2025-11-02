@@ -13,10 +13,10 @@ import type { RequestDocumentNodeInput, RequestInput } from '../graphql.js'
 import { isOperationDefinitionNode } from './ast/guards.js'
 import * as Kind from './ast/kind.js'
 import * as OperationTypeNode from './ast/operation-type.js'
-import { TypedDocument } from './typed/_.js'
+import { Typed } from './typed/_.js'
 
-export const print = (document: TypedDocument.TypedDocumentLike): string => {
-  const documentUntyped = TypedDocument.unType(document)
+export const print = (document: Typed.TypedDocumentLike): string => {
+  const documentUntyped = Typed.unType(document)
   return Str.Type.is(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
 }
 
@@ -91,7 +91,7 @@ export const getOperationType = (request: RequestInput): OperationTypeNode.Opera
   // return null
   const { operationName, query: document } = request
 
-  const documentUntyped = TypedDocument.unType(document)
+  const documentUntyped = Typed.unType(document)
 
   if (!Str.Type.is(documentUntyped)) {
     const operationDefinition = getOperationDefinition({ query: documentUntyped, operationName })
@@ -137,7 +137,7 @@ export const getOperationType = (request: RequestInput): OperationTypeNode.Opera
   return definedOperationToAnalyze.operationType
 }
 
-export const normalizeDocumentToNode = (document: TypedDocument.TypedDocumentLike): DocumentNode => {
-  const d = TypedDocument.unType(document)
+export const normalizeDocumentToNode = (document: Typed.TypedDocumentLike): DocumentNode => {
+  const d = Typed.unType(document)
   return Str.Type.is(d) ? parse(d) : d
 }

@@ -1,1 +1,1 @@
-export * as TypedDocument from './__.js'
+export * as Typed from './__.js'
