@@ -18,7 +18,7 @@
     "./presets/bare": "./build/exports/presets/bare.js",
     "./presets/basic": "./build/exports/presets/basic.js",
     "./presets/minimal": "./build/exports/presets/minimal.js",
-    "./generator-helpers/standard-scalar-types": "./build/exports/generator-helpers/standardScalarTypes.js",
+    "./generator-helpers/standard-scalar-types": "./build/exports/generator-helpers/standard-scalar-types.js",
     "./extensions/introspection": "./build/exports/extensions/introspection/runtime.js",
     "./extensions/document-builder": "./build/exports/extensions/document-builder/runtime.js",
     "./extensions/throws": "./build/exports/extensions/throws/runtime.js",
