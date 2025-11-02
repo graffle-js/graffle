@@ -1,5 +1,6 @@
-import type { Typed } from '#graffle/client'
+import type { TypedDocument } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
@@ -58,7 +59,7 @@ interface StaticDocumentContext {
 export interface QueryBuilder {
   $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
@@ -96,7 +97,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['battles'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema>
@@ -137,7 +138,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['beings'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema>
@@ -182,7 +183,7 @@ export interface QueryBuilder {
     >['pokemonByName'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema>
@@ -225,7 +226,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['pokemons'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema>
@@ -269,7 +270,7 @@ export interface QueryBuilder {
     >['trainerByName'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema>
@@ -310,7 +311,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['trainers'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema>
@@ -391,7 +392,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY,
 export interface MutationBuilder {
   $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
@@ -432,7 +433,7 @@ export interface MutationBuilder {
     >['addPokemon'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema>
@@ -469,7 +470,7 @@ export interface MutationBuilder {
     >['resetData'],
   >(
     selection?: $SelectionSet,
-  ) => Typed.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<{ resetData: $SelectionSet }, $$Schema.Schema>

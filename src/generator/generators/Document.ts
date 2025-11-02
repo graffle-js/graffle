@@ -41,9 +41,6 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code(`import { OperationTypeNode } from 'graphql'`)
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(
-      `import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`,
-    )
-    code(
       codeImportNamed(config, {
         names: ['GraphqlKit'],
         from: config.paths.imports.grafflePackage.utilitiesForGenerated,
