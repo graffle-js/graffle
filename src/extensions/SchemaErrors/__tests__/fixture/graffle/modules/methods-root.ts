@@ -19,7 +19,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$$SelectionSets.Query<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -84,8 +84,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -130,8 +130,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -183,8 +183,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -229,8 +229,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -280,8 +280,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -325,8 +325,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintFieldNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -372,7 +372,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -416,8 +416,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -462,8 +462,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgInputObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -511,8 +511,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -557,8 +557,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -603,8 +603,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNullList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -652,8 +652,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -703,8 +703,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -749,8 +749,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -795,8 +795,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -841,8 +841,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -886,8 +886,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -931,8 +931,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -976,8 +976,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1021,7 +1021,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1063,7 +1063,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1106,8 +1106,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1151,8 +1151,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1198,8 +1198,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -1251,8 +1251,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -1304,8 +1304,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -1357,8 +1357,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -1408,8 +1408,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1454,8 +1454,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1500,8 +1500,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1546,8 +1546,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1592,8 +1592,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1638,8 +1638,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1686,8 +1686,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1730,7 +1730,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -1774,8 +1774,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1820,8 +1820,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1865,8 +1865,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -1910,8 +1910,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -1961,8 +1961,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2007,8 +2007,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2052,7 +2052,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -2096,8 +2096,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2141,8 +2141,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2187,8 +2187,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2233,8 +2233,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -2285,8 +2285,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -2337,8 +2337,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -2391,8 +2391,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2437,8 +2437,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2483,8 +2483,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -2535,8 +2535,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -2586,8 +2586,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2631,8 +2631,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2680,8 +2680,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2728,8 +2728,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2773,8 +2773,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObjectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
@@ -2822,7 +2822,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -2885,7 +2885,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -2928,8 +2928,8 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,

@@ -19,7 +19,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.NoExcess<$$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
@@ -82,7 +82,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.NoExcess<$$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>, $SelectionSet>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
       & (null | {})
@@ -125,8 +125,8 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
-        $SelectionSet,
-        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>,
+        $SelectionSet
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
