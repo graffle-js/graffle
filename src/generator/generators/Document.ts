@@ -43,7 +43,13 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code(
       `import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`,
     )
-    code(codeImportNamed(config, { names: ['GraphqlKit'], from: config.paths.imports.grafflePackage.utilitiesForGenerated, type: true }))
+    code(
+      codeImportNamed(config, {
+        names: ['GraphqlKit'],
+        from: config.paths.imports.grafflePackage.utilitiesForGenerated,
+        type: true,
+      }),
+    )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
     code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
@@ -68,7 +74,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface QueryBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
             selection: $SelectionSet
-          ) => TypedDocument.String<
+          ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>>,
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
             true
@@ -80,7 +86,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
-          ) => TypedDocument.String<
+          ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationQuery<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
             true
@@ -119,7 +125,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface MutationBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
             selection: $SelectionSet
-          ) => TypedDocument.String<
+          ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>>,
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
             true
@@ -131,7 +137,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
-          ) => TypedDocument.String<
+          ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationMutation<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
             true
@@ -170,7 +176,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface SubscriptionBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
             selection: $SelectionSet
-          ) => TypedDocument.String<
+          ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationSubscription<$SelectionSet, $$Schema.Schema>>,
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
             true
@@ -182,7 +188,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
-          ) => TypedDocument.String<
+          ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationSubscription<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
             true
