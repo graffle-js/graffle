@@ -11,7 +11,7 @@ import {
 
 import { getRootTypeMap, isObjectRootType } from '../RootTypeMap.js'
 import { isScalarTypeCustom } from '../typeGuards.js'
-import type { KindMap } from './$.js'
+import type { KindMap } from './_.js'
 
 export const Name = {
   Root: `Root`,

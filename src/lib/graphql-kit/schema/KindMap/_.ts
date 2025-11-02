@@ -8,7 +8,7 @@ import type {
 } from 'graphql'
 import type { RootTypeMap } from '../RootTypeMap.js'
 
-export * as KindMap from './$$.js'
+export * as KindMap from './__.js'
 
 export interface KindMap {
   root: RootTypeMap
