@@ -1,4 +1,4 @@
-export { OperationType } from '../schema/OperationType/$.js'
+export { OperationType } from '../schema/OperationType/_.js'
 export * from './ast/_.js'
 export * from './mappings.js'
 export { Typed } from './typed/_.js'

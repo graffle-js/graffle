@@ -1,4 +1,3 @@
-import type { TypedDocument } from 'graffle/client'
 import { createStaticRootType } from 'graffle/extensions/document-builder'
 import type { GraphqlKit } from 'graffle/utilities-for-generated'
 import { OperationTypeNode } from 'graphql'

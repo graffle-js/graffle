@@ -1,6 +1,6 @@
 import { Extension } from '#graffle/extension'
 import type { GlobalRegistry, Kind } from '#graffle/utilities-for-generated'
-import { OperationTypeNode } from 'graphql'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { createMethodOperationType } from './methods-instance/requestMethods.js'
 
 export type ConfigurationInput = {
@@ -25,8 +25,8 @@ export const DocumentBuilder = Extension
   // todo add an extensions unit test that this adds properties to the context
   .properties(({ context, configuration }) => {
     const props: any = {
-      query: createMethodOperationType(context, OperationTypeNode.QUERY),
-      mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
+      query: createMethodOperationType(context, GraphqlKit.Document.Ast.OperationType.QUERY),
+      mutation: createMethodOperationType(context, GraphqlKit.Document.Ast.OperationType.MUTATION),
     }
 
     // Add domain namespaces if configured

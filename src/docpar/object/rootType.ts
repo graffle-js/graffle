@@ -3,7 +3,6 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'
-import type { OperationTypeNode } from 'graphql'
 import type { Options } from './ToGraphQLDocument/nodes/1_Document.js'
 import { toGraphQLDocument } from './ToGraphQLDocument/nodes/1_Document.js'
 
@@ -81,12 +80,12 @@ export type Config = {
  *   sddmEnabled: true
  * }
  *
- * type MyQueryBuilder = StaticDocumentBuilder<MyConfig, OperationTypeNode.QUERY>
+ * type MyQueryBuilder = StaticDocumentBuilder<MyConfig, GraphqlKit.Document.Ast.OperationType.QUERY>
  * ```
  */
 export type StaticDocumentBuilder<
   $Config extends Config,
-  $OperationType extends OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
 > = {
   // Note: The actual field mapping and type inference is done by the generator.
   // This type serves as the canonical signature that generated code must conform to.
@@ -118,9 +117,9 @@ export type StaticDocumentBuilder<
  * @example
  * ```ts
  * import { createStaticRootType } from 'graffle'
- * import { OperationTypeNode } from 'graphql'
+ * import { GraphqlKit } from 'graffle'
  *
- * const query = createStaticRootType(OperationTypeNode.QUERY)
+ * const query = createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY)
  *
  * // Generate a typed document string
  * const userQuery = query.user({
@@ -136,7 +135,10 @@ export type StaticDocumentBuilder<
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const createStaticRootType = (operationType: OperationTypeNode, options?: Options) => {
+export const createStaticRootType = (
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
+  options?: Options,
+) => {
   return new Proxy({}, {
     get: (_, fieldName: string) => {
       if (Lang.isSymbol(fieldName)) throw new Error(`Symbols not supported`)
@@ -166,7 +168,7 @@ export const createStaticRootType = (operationType: OperationTypeNode, options?:
 }
 
 export const createStaticRootField = (
-  operationType: OperationTypeNode,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
   fieldName: string,
   factoryLevelDefaults?: Options,
 ) => {

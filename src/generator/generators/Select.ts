@@ -21,7 +21,6 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorSchema))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
-    code`import type { OperationTypeNode } from 'graphql'`
     code(importUtilities(config))
     code``
     code(Str.Code.TS.Comment.title1(`Runtime`))
@@ -73,7 +72,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
+        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Operation<$SelectionSet, ${iSchema}, ${$.$$Utilities}.GraphqlKit.Document.Ast.OperationType.${
           enumMemberName[operationType]
         }>`,
       )

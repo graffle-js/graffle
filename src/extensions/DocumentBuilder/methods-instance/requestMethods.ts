@@ -1,10 +1,10 @@
 import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
 import { Docpar } from '#src/docpar/$.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { getOperationDefinition } from '#src/lib/graphql-kit/document/__.js'
 import { Lang } from '@wollybeard/kit'
-import { OperationTypeNode, print } from 'graphql'
+import { print } from 'graphql'
 
 /**
  * Document runner for deferred execution when variables are present.
@@ -40,7 +40,10 @@ export const createMethodDocument = (state: Context) => (document: Docpar.Object
   }
 }
 
-export const createMethodOperationType = (state: Context, operationType: OperationTypeNode) => {
+export const createMethodOperationType = (
+  state: Context,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
+) => {
   return new Proxy({}, {
     get: (_, key) => {
       if (Lang.isSymbol(key)) throw new Error(`Symbols not supported.`)
@@ -70,7 +73,7 @@ export const createMethodOperationType = (state: Context, operationType: Operati
 
 const buildDocumentRunnerForRootField = (
   context: Context,
-  operationType: OperationTypeNode,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
   rootFieldName: string,
   rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ): DocumentRunner => {
@@ -108,7 +111,7 @@ const buildDocumentRunnerForRootField = (
 
 const buildDocumentRunner = (
   context: Context,
-  operationType: OperationTypeNode,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
   rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ): DocumentRunner => {
   const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
@@ -137,7 +140,7 @@ const buildDocumentRunner = (
 
 export const executeRootField = async (
   context: Context,
-  operationType: OperationTypeNode,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
   rootFieldName: string,
   rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
@@ -157,7 +160,7 @@ export const executeRootField = async (
  * Helper to create a curried root field executor for domain-organized methods.
  * Used by the domain generator to reduce boilerplate.
  */
-export const createRootFieldExecutor = (operationType: OperationTypeNode) => {
+export const createRootFieldExecutor = (operationType: GraphqlKit.Document.Ast.OperationType.OperationType) => {
   return (rootFieldName: string) => {
     return (context: Context) => {
       return (rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
@@ -171,13 +174,13 @@ export const createRootFieldExecutor = (operationType: OperationTypeNode) => {
  * Pre-curried helpers for domain-organized methods.
  * Exported for use by generated domain modules.
  */
-export const $$query = createRootFieldExecutor(OperationTypeNode.QUERY)
-export const $$mutation = createRootFieldExecutor(OperationTypeNode.MUTATION)
-export const $$subscription = createRootFieldExecutor(OperationTypeNode.SUBSCRIPTION)
+export const $$query = createRootFieldExecutor(GraphqlKit.Document.Ast.OperationType.QUERY)
+export const $$mutation = createRootFieldExecutor(GraphqlKit.Document.Ast.OperationType.MUTATION)
+export const $$subscription = createRootFieldExecutor(GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION)
 
 const executeOperation = async (
   context: Context,
-  operationType: OperationTypeNode,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
   rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
   return executeDocument(

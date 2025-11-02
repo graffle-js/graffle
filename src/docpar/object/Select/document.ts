@@ -1,6 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Arr, Obj, Ts } from '@wollybeard/kit'
-import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'
 import type { DefaultContext } from './context.js'
 
@@ -37,24 +36,24 @@ export type GetOperationNames<$Document extends SomeDocument> = Obj.values<
 
 // dprint-ignore
 export type GetOperationType<$Document extends SomeDocument, $Name extends string> =
-  $Name extends keyof $Document[OperationTypeNode.MUTATION] ? OperationTypeNode.MUTATION :
-  $Name extends keyof $Document[OperationTypeNode.QUERY]    ? OperationTypeNode.QUERY    :
-                                                              never
+  $Name extends keyof $Document[GraphqlKit.Document.Ast.OperationType.MUTATION] ? GraphqlKit.Document.Ast.OperationType.MUTATION :
+  $Name extends keyof $Document[GraphqlKit.Document.Ast.OperationType.QUERY]    ? GraphqlKit.Document.Ast.OperationType.QUERY    :
+                                                                                   never
 
 // dprint-ignore
 export type GetOperation<$Document extends SomeDocument, $Name extends string> =
   Ts.AssertExtendsObject<
     Arr.FirstNonUnknownNever<[
       // @ts-expect-error could be unknown
-      $Document[OperationTypeNode.MUTATION][$Name],
+      $Document[GraphqlKit.Document.Ast.OperationType.MUTATION][$Name],
       // @ts-expect-error could be unknown
-      $Document[OperationTypeNode.QUERY][$Name]
+      $Document[GraphqlKit.Document.Ast.OperationType.QUERY][$Name]
     ]>
   >
 
 export interface OperationNormalized {
   name: string | null
-  type: OperationTypeNode
+  type: GraphqlKit.Document.Ast.OperationType.OperationType
   selectionSet: Select.SelectionSet.AnySelectionSet
 }
 
@@ -76,7 +75,7 @@ export const createDocumentNormalizedFromQuerySelection = <$SelectionSet extends
   )
 
 export const createDocumentNormalizedFromRootTypeSelection = (
-  operationType: GraphqlKit.Document.Ast.OperationType.OperationTypeNode,
+  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
   selectionSet: Select.SelectionSet.AnySelectionSet,
   operationName?: string,
 ): DocumentNormalized =>

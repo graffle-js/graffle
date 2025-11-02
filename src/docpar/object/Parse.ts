@@ -85,7 +85,7 @@ export type InferOperations<
  * type Op = InferOperation<
  *   { id: true, name: true },
  *   MyContext,
- *   OperationTypeNode.QUERY,
+ *   GraphqlKit.Document.Ast.OperationType.QUERY,
  *   'getUser'
  * >
  * // Result: Operation<'getUser', { id: string, name: string }, {}>
@@ -95,7 +95,7 @@ export type InferOperations<
 export type InferOperation<
   $DocOp,
   $Context,
-  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
   $OperationName,
 > =
   $DocOp extends object

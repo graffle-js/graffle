@@ -24,7 +24,7 @@ export interface RootDetails {
     alias: string | null
   }
   type: GraphQLObjectType
-  operationType: Document.Ast.OperationType.OperationTypeNode
+  operationType: Document.Ast.OperationType.OperationType
 }
 
 export const createFromObjectType = (

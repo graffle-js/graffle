@@ -1,24 +1,23 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Null } from '@wollybeard/kit'
-import type { OperationTypeNode } from 'graphql'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore
 export type OperationQuery<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, OperationTypeNode.QUERY>
+  Operation<$SelectionSet, $Schema, GraphqlKit.Document.Ast.OperationType.QUERY>
 
 // dprint-ignore
 export type OperationMutation<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, OperationTypeNode.MUTATION>
+  Operation<$SelectionSet, $Schema, GraphqlKit.Document.Ast.OperationType.MUTATION>
 
 // dprint-ignore
 export type OperationSubscription<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, OperationTypeNode.SUBSCRIPTION>
+  Operation<$SelectionSet, $Schema, GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION>
 
 export type Operation<
   $SelectionSet extends object,
   $Schema,
-  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
 > = OutputObjectLike<
   $SelectionSet,
   $Schema,
