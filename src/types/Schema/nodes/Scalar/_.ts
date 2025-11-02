@@ -5,8 +5,8 @@ export * as Scalar from './__.js'
 
 export interface Scalar<
   $Name extends string = string,
-  $Decoded = unknown,
-  $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes = GraphqlKit.Schema.StandardScalarRuntimeTypes,
+  $Decoded = any, // unknown,
+  $Encoded = any, // extends GraphqlKit.Schema.StandardScalarRuntimeTypes = GraphqlKit.Schema.StandardScalarRuntimeTypes,
 > {
   kind: 'Scalar'
   name: $Name

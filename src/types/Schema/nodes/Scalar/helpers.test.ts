@@ -1,6 +1,7 @@
 import { Ts } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
-import { Float, ID, Int, String as StringScalar } from '../../StandardTypes/scalar.js'
+import { Float, ID, Int, String as StringScalar } from '../../standard/scalars/scalars.js'
+import type { Scalar } from './_.js'
 import { createCodec } from './codec.js'
 import {
   type LookupCustomScalarOrFallbackToUnknown,
@@ -8,7 +9,6 @@ import {
   UnknownScalar,
 } from './helpers.js'
 import type { Registry } from './helpers.js'
-import type { Scalar } from './Scalar.js'
 
 describe('LookupCustomScalarOrFallbackToUnknown', () => {
   test('standard scalars are resolved correctly', () => {

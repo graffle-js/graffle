@@ -5,10 +5,10 @@ import type { Interface } from './nodes/Interface.js'
 import type { List } from './nodes/List.js'
 import type { Nullable } from './nodes/Nullable.js'
 import type { OutputObject } from './nodes/OutputObject.js'
-import type { Scalar } from './nodes/Scalar/Scalar.js'
+import type { Scalar } from './nodes/Scalar/_.js'
 import type { Union } from './nodes/Union.js'
 
-export type NamedTypes = NamedInputTypes | NamedOutputTypes
+export type Named = NamedInput | NamedOutput
 
 export type OutputObjectLike = OutputObject | Interface
 
@@ -17,14 +17,14 @@ export type OutputObjectLike = OutputObject | Interface
  *
  * Interfaces can extend other interfaces so they are possible here.
  */
-export type InlineFragmentTypeConditionTypes = OutputObject | Interface
+export type InlineFragmentTypeCondition = OutputObject | Interface
 
-export type OutputTypes =
-  | InlineTypes
-  | NamedOutputTypes
+export type Output =
+  | Inline
+  | NamedOutput
   | __typename
 
-export type NamedOutputTypes =
+export type NamedOutput =
   | Interface
   | Enum
   | OutputObject
@@ -33,17 +33,17 @@ export type NamedOutputTypes =
   | Scalar.ScalarCodecless
   | __typename
 
-export type InputTypes =
-  | InlineTypes
-  | NamedInputTypes
+export type Input =
+  | Inline
+  | NamedInput
 
-export type NamedInputTypes = Enum | Scalar | InputObject | Scalar.ScalarCodecless
+export type NamedInput = Enum | Scalar | InputObject | Scalar.ScalarCodecless
 
-export type InlineTypes =
+export type Inline =
   | List
   | Nullable
 
-export type ScalarLikeTypes =
+export type ScalarLike =
   | Scalar
   | Enum
   | Scalar.ScalarCodecless

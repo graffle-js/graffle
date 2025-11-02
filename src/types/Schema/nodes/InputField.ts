@@ -1,12 +1,12 @@
 import type { Docpar } from '#src/docpar/$.js'
 
 type InlineType = Docpar.InlineType
-import type { NamedInputTypes } from '../typeGroups.js'
+import type { NamedInput } from '../node-groups.js'
 
 export interface InputField<
   $Name extends string = string,
   $InlineType extends InlineType = InlineType,
-  $NamedType extends NamedInputTypes = NamedInputTypes,
+  $NamedType extends NamedInput = NamedInput,
 > {
   kind: 'InputField'
   name: $Name

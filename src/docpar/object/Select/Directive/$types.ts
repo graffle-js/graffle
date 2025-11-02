@@ -3,7 +3,7 @@ import type { Include, Skip } from './$$.js'
 
 export interface Definition {
   name: string
-  type: Schema.Directives.Directive
+  type: Schema.Directive
   normalizeArguments: (args: any) => Record<string, any>
 }
 

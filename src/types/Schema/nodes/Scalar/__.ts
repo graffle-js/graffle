@@ -1,4 +1,4 @@
-export * from '../../StandardTypes/scalar.js'
+export * from '../../standard/scalars/scalars.js'
 export * from '../ScalarCodecless.js'
 export * from './codec.js'
 export * from './create.js'

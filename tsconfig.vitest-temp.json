@@ -57,7 +57,7 @@
         "./src/exports/utilities-for-generated.ts"
       ],
       "#graffle/generator-helpers/standard-scalar-types": [
-        "./src/types/Schema/StandardTypes/scalar.ts"
+        "./src/types/Schema/standard/scalar.ts"
       ],
       "#graffle/extensions/transport-http": [
         "./src/exports/extensions/transport-http/runtime.ts"
