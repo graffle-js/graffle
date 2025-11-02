@@ -1,4 +1,5 @@
-export { type TypedDocument } from '../lib/graphql-kit/document/typed/_.js'
+// TODO this is a hack remove
+export { type Typed as TypedDocument } from '../lib/graphql-kit/document/typed/_.js'
 // todo figure this export out. Was just put there to resolve a type error about "...cannot be named..."
 export { type Client, type Create } from '#src/client/client.js'
 export type * from '#src/lib/graphql-kit/http/http.js'
