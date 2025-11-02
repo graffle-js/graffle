@@ -43,6 +43,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code(
       `import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`,
     )
+    code(codeImportNamed(config, { names: ['GraphqlKit'], from: config.paths.imports.grafflePackage.utilitiesForGenerated, type: true }))
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
     code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
