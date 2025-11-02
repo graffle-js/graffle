@@ -30,7 +30,7 @@
       "#graffle/kit": ["./src/exports/kit.ts"],
       "#graffle/schema": ["./src/exports/schema.ts"],
       "#graffle/utilities-for-generated": ["./src/exports/utilities-for-generated.ts"],
-      "#graffle/generator-helpers/standard-scalar-types": ["./src/types/Schema/standard/scalar.ts"],
+      "#graffle/generator-helpers/standard-scalar-types": ["./src/types/Schema/standard/scalars/scalars.ts"],
       "#graffle/extensions/transport-http": ["./src/exports/extensions/transport-http/runtime.ts"],
       "#graffle/extensions/document-builder": ["./src/exports/extensions/document-builder/runtime.ts"],
       "#graffle/extension-exports": ["./src/exports/extension_exports.ts"],
