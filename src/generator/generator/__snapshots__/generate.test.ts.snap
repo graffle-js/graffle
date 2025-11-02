@@ -146,10 +146,10 @@ export interface RootTypeCustomNameForQueryMethods<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
         $$SelectionSets.RootTypeCustomNameForQuery<{
           scalars: $Context["scalars"];
-        }>,
-        $SelectionSet
+        }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
@@ -218,10 +218,10 @@ export interface RootTypeCustomNameForQueryMethods<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<
+        $SelectionSet,
         $$SelectionSets.RootTypeCustomNameForQuery.id<{
           scalars: $Context["scalars"];
-        }>,
-        $SelectionSet
+        }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
