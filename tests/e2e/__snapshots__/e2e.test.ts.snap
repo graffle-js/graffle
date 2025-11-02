@@ -1,5 +1,21 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`client uses prettier formatter if installed 1`] = `
+[
+  undefined,
+  \`[
+  {
+    name: 'Pikachu',
+    hp: 35,
+    attack: 55,
+    defense: 40,
+    trainer: { name: 'Ash' }
+  }
+]\`,
+  "",
+]
+`;
+
 exports[`client works with generation 1`] = `
 [
   undefined,
