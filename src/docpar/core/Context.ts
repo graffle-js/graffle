@@ -4,7 +4,7 @@
  * Supports both schema-driven and schema-less parsing modes through conditional types.
  */
 
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 
 /**
  * Unified parser context that supports both schema-driven and schema-less modes.

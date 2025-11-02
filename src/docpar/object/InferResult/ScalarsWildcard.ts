@@ -1,4 +1,4 @@
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 import type { OutputField } from './OutputField.js'
 
 export type ScalarsWildcard<

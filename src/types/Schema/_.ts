@@ -1,4 +1,4 @@
-export * as Schema from './$$.js'
+export * as Schema from './__.js'
 
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GlobalRegistry } from '../GlobalRegistry/GlobalRegistry.js'

@@ -1,1 +1,1 @@
-export * from '../types/Schema/$.js'
+export * from '../types/Schema/_.js'

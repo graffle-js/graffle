@@ -1,5 +1,5 @@
 import type { Select } from '#src/docpar/object/Select/$.js'
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Alias } from './Alias.js'

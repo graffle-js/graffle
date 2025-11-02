@@ -1,4 +1,4 @@
-import { Schema } from '#src/types/Schema/$.js'
+import { Schema } from '#src/types/Schema/_.js'
 
 export * from './reducers/add.js'
 export * from './reducers/set.js'

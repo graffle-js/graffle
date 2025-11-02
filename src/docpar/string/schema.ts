@@ -4,9 +4,9 @@
  * Re-exports Graffle's existing schema types.
  */
 
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 
-export type { Schema } from '#src/types/Schema/$.js'
+export type { Schema } from '#src/types/Schema/_.js'
 export type { Enum } from '#src/types/Schema/nodes/Enum.js'
 export type { Interface } from '#src/types/Schema/nodes/Interface.js'
 export type { OutputField } from '#src/types/Schema/nodes/OutputField.js'

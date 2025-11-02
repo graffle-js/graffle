@@ -1,4 +1,4 @@
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 import type { ContextFragment } from '../fragment.js'
 
 export type UnionIgnoreAnyOrUnknown<T> = unknown extends T ? never : T

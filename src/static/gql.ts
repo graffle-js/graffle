@@ -1,6 +1,6 @@
 import { Docpar } from '#src/docpar/$.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 import { print } from '@0no-co/graphql.web'
 import type { Ts } from '@wollybeard/kit'
 

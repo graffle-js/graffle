@@ -1,7 +1,7 @@
 import type { Docpar } from '#src/docpar/$.js'
 
 type InlineType = Docpar.InlineType
-import type { __typename } from '../$$.js'
+import type { __typename } from '../__.js'
 import type { NamedOutputTypes } from '../typeGroups.js'
 import type { InputFields } from './InputField.js'
 

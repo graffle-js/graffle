@@ -1,7 +1,7 @@
 import { Docpar } from '#src/docpar/$.js'
 import { GraffleBasic } from '#src/exports/presets/basic.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { Schema } from '#src/types/Schema/$.js'
+import type { Schema } from '#src/types/Schema/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'

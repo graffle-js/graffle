@@ -1,4 +1,4 @@
-import { Schema } from '#src/types/Schema/$.js'
+import { Schema } from '#src/types/Schema/_.js'
 import { Obj } from '@wollybeard/kit'
 import type { Definition } from './$types.js'
 

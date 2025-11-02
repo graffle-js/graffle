@@ -1,7 +1,7 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Codec } from './codec.js'
 
-export * as Scalar from './$$.js'
+export * as Scalar from './__.js'
 
 export interface Scalar<
   $Name extends string = string,

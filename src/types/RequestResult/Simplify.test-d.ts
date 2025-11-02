@@ -2,7 +2,7 @@
 import type { ContextEmpty } from '#src/context/ContextEmpty.js'
 import type { Add } from '#src/context/fragments/scalars/fragment.js'
 import { Ts } from '@wollybeard/kit'
-import type { Schema } from '../Schema/$.js'
+import type { Schema } from '../Schema/_.js'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 
 const A = Ts.Assert

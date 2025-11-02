@@ -5,7 +5,7 @@ import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
 import { expect } from 'vitest'
-import type { Schema } from '../../types/Schema/$.js'
+import type { Schema } from '../../types/Schema/_.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 import type { ScalarMethod } from './scalars.js'
