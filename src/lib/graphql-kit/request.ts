@@ -1,17 +1,16 @@
 import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
 import type { GraphqlKit } from './_.js'
-import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
-import type { TypedDocument } from './typed-document/$.js'
+import { Document } from './document/_.js'
 
 export interface RequestInput {
-  query: string | TypedDocument.TypedDocumentLike
+  query: string | Document.Typed.TypedDocumentLike
   variables?: Variables | undefined
   operationName?: string | undefined
 }
 
 export interface RequestDocumentNodeInput {
-  query: TypedDocument.TypedDocumentNodeLike
+  query: Document.Typed.TypedDocumentNodeLike
   variables?: Variables | undefined
   operationName?: string | undefined
 }
@@ -79,13 +78,13 @@ export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzed
   $R extends RequestInput ? RequestDocumentNodeInput :
 						 never => {
 
-	const query = normalizeDocumentToNode(request.query)
+	const query = Document.normalizeDocumentToNode(request.query)
   // we have to strip the $ from the variables keys (enum types)
 
 	if (`operation` in request) {
-		const operation = getOperationDefinition({
+		const operation = Document.getOperationDefinition({
 			...request,
-			query: normalizeDocumentToNode(request.query),
+			query: Document.normalizeDocumentToNode(request.query),
 		})
 
 		return {

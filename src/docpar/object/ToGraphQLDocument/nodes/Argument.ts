@@ -1,5 +1,5 @@
 import { Select } from '#src/docpar/object/Select/$.js'
-import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLValue } from './Value.js'
@@ -11,20 +11,20 @@ export interface Argument {
 
 export const toGraphQLArgument: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.ArgumentOrInputField,
-  Nodes.ArgumentNode,
+  GraphqlKit.Document.Ast.ArgumentNode,
   [arg: Argument]
 > = (
   context,
   sddm,
   arg,
 ) => {
-  // return Nodes.Variable({ name: Nodes.Name({ value: `abc` }) })
+  // return GraphqlKit.Document.Ast.Variable({ name: GraphqlKit.Document.Ast.Name({ value: `abc` }) })
   const valueContext = { ...context, value: { isEnum: Select.Arguments.isEnumKey(arg.name) } }
   const value = toGraphQLValue(valueContext, sddm, arg.value)
 
-  const name = Nodes.Name({ value: arg.name.replace(Select.Arguments.enumKeyPrefixPattern, ``) })
+  const name = GraphqlKit.Document.Ast.Name({ value: arg.name.replace(Select.Arguments.enumKeyPrefixPattern, ``) })
 
-  return Nodes.Argument({
+  return GraphqlKit.Document.Ast.Argument({
     name,
     value,
   })

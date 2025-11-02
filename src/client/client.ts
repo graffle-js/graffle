@@ -3,7 +3,9 @@ import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
 import { Docpar } from '#src/docpar/$.js'
 import { graffleMappedResultToRequest } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
-import { getOperationType } from '#src/lib/graphql-kit/document.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+
+const { getOperationType } = GraphqlKit.Document
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
 import type { NoExcess } from '#src/utils.js'

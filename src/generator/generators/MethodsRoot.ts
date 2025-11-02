@@ -201,7 +201,7 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType 
       $batch:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet: ${$.$$Utilities}.NoExcess<${$.$$SelectionSets}.${node.name}<{ scalars: $Context['scalars'] }>, $SelectionSet>) =>
+          <$SelectionSet>(selectionSet: ${$.$$Utilities}.NoExcess<$SelectionSet, ${$.$$SelectionSets}.${node.name}<{ scalars: $Context['scalars'] }>>) =>
             ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
               ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$ArgumentsMap.ArgumentsMap>,
               & (null | {})
@@ -263,7 +263,7 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectT
       ${field.name}:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.NoExcess<${$.$$SelectionSets}.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>, $SelectionSet>) =>
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.NoExcess<$SelectionSet, ${$.$$SelectionSets}.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>>) =>
             ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
               ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$ArgumentsMap.ArgumentsMap>,
               & (null | {})
@@ -804,7 +804,7 @@ const renderDomainType = createCodeGenerator<{
       ${methodName}:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.NoExcess<${$.$$SelectionSets}.${renderName(rootTypeName)}.${field.fieldName}<{ scalars: $Context['scalars'] }>, $SelectionSet>) =>
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.NoExcess<$SelectionSet, ${$.$$SelectionSets}.${renderName(rootTypeName)}.${field.fieldName}<{ scalars: $Context['scalars'] }>>) =>
             ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
               ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$ArgumentsMap.ArgumentsMap>,
               & (null | {})

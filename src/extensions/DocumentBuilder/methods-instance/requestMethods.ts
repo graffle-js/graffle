@@ -2,7 +2,7 @@ import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
 import { Docpar } from '#src/docpar/$.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { getOperationDefinition } from '#src/lib/graphql-kit/document.js'
+import { getOperationDefinition } from '#src/lib/graphql-kit/document/__.js'
 import { Lang } from '@wollybeard/kit'
 import { OperationTypeNode, print } from 'graphql'
 

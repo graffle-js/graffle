@@ -1,6 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { OperationTypeToAccessKind, print } from '#src/lib/graphql-kit/document.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/graphql-kit/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/graphql-kit/http/http.js'
 import { Http, type Prom, Str } from '@wollybeard/kit'
@@ -181,7 +180,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           const graphqlRequest: GraphqlKit.HTTP.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
-            query: print(input.request.query),
+            query: GraphqlKit.Document.print(input.request.query),
           }
 
           const operationType = Str.Type.is(input.request.operation)
@@ -190,7 +189,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           const methodMode = input.transport.methodMode
           const requestMethod = methodMode === MethodMode.post
             ? `post`
-            : OperationTypeToAccessKind[operationType] === `read`
+            : GraphqlKit.Document.OperationTypeToAccessKind[operationType] === `read`
             ? `get`
             : `post`
 

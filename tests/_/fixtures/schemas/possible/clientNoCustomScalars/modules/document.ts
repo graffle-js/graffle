@@ -1,5 +1,5 @@
-import type { TypedDocument } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
@@ -58,7 +58,7 @@ interface StaticDocumentContext {
 export interface QueryBuilder {
   $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
@@ -93,7 +93,7 @@ export interface QueryBuilder {
     >['InputObjectNested'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, $$Schema.Schema>
@@ -131,7 +131,7 @@ export interface QueryBuilder {
     >['InputObjectNestedNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ InputObjectNestedNonNull: $SelectionSet }, $$Schema.Schema>
@@ -168,7 +168,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['abcEnum'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ abcEnum: $SelectionSet }, $$Schema.Schema>
@@ -206,7 +206,7 @@ export interface QueryBuilder {
     >['argInputObjectCircular'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ argInputObjectCircular: $SelectionSet }, $$Schema.Schema>
@@ -243,7 +243,7 @@ export interface QueryBuilder {
     >['bigintField'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ bigintField: $SelectionSet }, $$Schema.Schema>
@@ -280,7 +280,7 @@ export interface QueryBuilder {
     >['bigintFieldNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ bigintFieldNonNull: $SelectionSet }, $$Schema.Schema>
@@ -315,7 +315,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['date'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ date: $SelectionSet }, $$Schema.Schema>
@@ -351,7 +351,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['dateArg'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArg: $SelectionSet }, $$Schema.Schema>
@@ -389,7 +389,7 @@ export interface QueryBuilder {
     >['dateArgInputObject'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, $$Schema.Schema>
@@ -427,7 +427,7 @@ export interface QueryBuilder {
     >['dateArgList'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgList: $SelectionSet }, $$Schema.Schema>
@@ -465,7 +465,7 @@ export interface QueryBuilder {
     >['dateArgNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, $$Schema.Schema>
@@ -503,7 +503,7 @@ export interface QueryBuilder {
     >['dateArgNonNullList'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, $$Schema.Schema>
@@ -541,7 +541,7 @@ export interface QueryBuilder {
     >['dateArgNonNullListNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<
@@ -586,7 +586,7 @@ export interface QueryBuilder {
     >['dateInterface1'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, $$Schema.Schema>
@@ -622,7 +622,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['dateList'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateList: $SelectionSet }, $$Schema.Schema>
@@ -660,7 +660,7 @@ export interface QueryBuilder {
     >['dateListList'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateListList: $SelectionSet }, $$Schema.Schema>
@@ -698,7 +698,7 @@ export interface QueryBuilder {
     >['dateListNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, $$Schema.Schema>
@@ -735,7 +735,7 @@ export interface QueryBuilder {
     >['dateNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, $$Schema.Schema>
@@ -774,7 +774,7 @@ export interface QueryBuilder {
     >['dateObject1'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateObject1: $SelectionSet }, $$Schema.Schema>
@@ -814,7 +814,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['dateUnion'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ dateUnion: $SelectionSet }, $$Schema.Schema>
@@ -850,7 +850,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['error'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ error: $SelectionSet }, $$Schema.Schema>
@@ -883,7 +883,7 @@ export interface QueryBuilder {
    */
   id: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
@@ -915,7 +915,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['idNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>
@@ -955,7 +955,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['interface'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interface: $SelectionSet }, $$Schema.Schema>
@@ -999,7 +999,7 @@ export interface QueryBuilder {
     >['interfaceHierarchyChildA'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceHierarchyChildA: $SelectionSet }, $$Schema.Schema>
@@ -1043,7 +1043,7 @@ export interface QueryBuilder {
     >['interfaceHierarchyChildB'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceHierarchyChildB: $SelectionSet }, $$Schema.Schema>
@@ -1087,7 +1087,7 @@ export interface QueryBuilder {
     >['interfaceHierarchyGrandparents'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<
@@ -1134,7 +1134,7 @@ export interface QueryBuilder {
     >['interfaceHierarchyParents'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<
@@ -1179,7 +1179,7 @@ export interface QueryBuilder {
     >['interfaceNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, $$Schema.Schema>
@@ -1222,7 +1222,7 @@ export interface QueryBuilder {
     >['interfaceWithArgs'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, $$Schema.Schema>
@@ -1258,7 +1258,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['listInt'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listInt: $SelectionSet }, $$Schema.Schema>
@@ -1296,7 +1296,7 @@ export interface QueryBuilder {
     >['listIntNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, $$Schema.Schema>
@@ -1334,7 +1334,7 @@ export interface QueryBuilder {
     >['listListInt'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listListInt: $SelectionSet }, $$Schema.Schema>
@@ -1372,7 +1372,7 @@ export interface QueryBuilder {
     >['listListIntNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, $$Schema.Schema>
@@ -1414,7 +1414,7 @@ export interface QueryBuilder {
     >['lowerCaseUnion'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, $$Schema.Schema>
@@ -1454,7 +1454,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['object'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ object: $SelectionSet }, $$Schema.Schema>
@@ -1497,7 +1497,7 @@ export interface QueryBuilder {
     >['objectList'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectList: $SelectionSet }, $$Schema.Schema>
@@ -1540,7 +1540,7 @@ export interface QueryBuilder {
     >['objectListNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, $$Schema.Schema>
@@ -1580,7 +1580,7 @@ export interface QueryBuilder {
     >['objectNested'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectNested: $SelectionSet }, $$Schema.Schema>
@@ -1620,7 +1620,7 @@ export interface QueryBuilder {
     >['objectNestedWithArgs'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectNestedWithArgs: $SelectionSet }, $$Schema.Schema>
@@ -1662,7 +1662,7 @@ export interface QueryBuilder {
     >['objectNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, $$Schema.Schema>
@@ -1706,7 +1706,7 @@ export interface QueryBuilder {
     >['objectWithArgs'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, $$Schema.Schema>
@@ -1747,7 +1747,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['result'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ result: $SelectionSet }, $$Schema.Schema>
@@ -1790,7 +1790,7 @@ export interface QueryBuilder {
     >['resultNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, $$Schema.Schema>
@@ -1825,7 +1825,7 @@ export interface QueryBuilder {
     const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['string'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ string: $SelectionSet }, $$Schema.Schema>
@@ -1863,7 +1863,7 @@ export interface QueryBuilder {
     >['stringWithArgEnum'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, $$Schema.Schema>
@@ -1901,7 +1901,7 @@ export interface QueryBuilder {
     >['stringWithArgInputObject'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithArgInputObject: $SelectionSet }, $$Schema.Schema>
@@ -1939,7 +1939,7 @@ export interface QueryBuilder {
     >['stringWithArgInputObjectEnum'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<
@@ -1980,7 +1980,7 @@ export interface QueryBuilder {
     >['stringWithArgInputObjectRequired'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<
@@ -2023,7 +2023,7 @@ export interface QueryBuilder {
     >['stringWithArgs'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, $$Schema.Schema>
@@ -2061,7 +2061,7 @@ export interface QueryBuilder {
     >['stringWithListArg'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, $$Schema.Schema>
@@ -2099,7 +2099,7 @@ export interface QueryBuilder {
     >['stringWithListArgRequired'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<
@@ -2140,7 +2140,7 @@ export interface QueryBuilder {
     >['stringWithRequiredArg'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ stringWithRequiredArg: $SelectionSet }, $$Schema.Schema>
@@ -2182,7 +2182,7 @@ export interface QueryBuilder {
     >['unionFooBar'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, $$Schema.Schema>
@@ -2224,7 +2224,7 @@ export interface QueryBuilder {
     >['unionFooBarNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, $$Schema.Schema>
@@ -2267,7 +2267,7 @@ export interface QueryBuilder {
     >['unionFooBarWithArgs'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, $$Schema.Schema>
@@ -2306,7 +2306,7 @@ export interface QueryBuilder {
     >['unionObject'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionObject: $SelectionSet }, $$Schema.Schema>
@@ -2345,7 +2345,7 @@ export interface QueryBuilder {
     >['unionObjectNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, $$Schema.Schema>
@@ -2426,7 +2426,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY,
 export interface MutationBuilder {
   $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
@@ -2456,7 +2456,7 @@ export interface MutationBuilder {
    */
   id: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
@@ -2493,7 +2493,7 @@ export interface MutationBuilder {
     >['idNonNull'],
   >(
     selection?: $SelectionSet,
-  ) => TypedDocument.String<
+  ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
       $$Utilities.Docpar.Object.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
