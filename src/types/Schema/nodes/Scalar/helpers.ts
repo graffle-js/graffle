@@ -1,5 +1,5 @@
 import { Obj, Ts } from '@wollybeard/kit'
-import { Boolean, Float, ID, Int, String } from '../../StandardTypes/scalar.js'
+import { Boolean, Float, ID, Int, String } from '../../standard/scalars/scalars.js'
 import { createCodec, type Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'
 

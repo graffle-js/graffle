@@ -1,5 +1,5 @@
-import { createCodec } from '../nodes/Scalar/codec.js'
-import { create } from '../nodes/Scalar/create.js'
+import { createCodec } from '../../nodes/Scalar/codec.js'
+import { create } from '../../nodes/Scalar/create.js'
 
 export const JavaScriptScalarCodecs = {
   String: createCodec({

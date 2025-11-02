@@ -1,1 +1,1 @@
-export * from '#src/types/Schema/StandardTypes/scalar.js'
+export * from '#src/types/Schema/standard/scalars/scalars.js'

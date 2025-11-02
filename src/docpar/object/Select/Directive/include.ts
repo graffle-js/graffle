@@ -4,7 +4,7 @@ import type { Definition } from './$types.js'
 
 export const Include: Definition = {
   name: `include`,
-  type: Schema.Directives.standardDirectivesByName.include,
+  type: Schema.Standard.Directives.include,
   normalizeArguments: (input: ArgsInput): Args => {
     return typeof input === `boolean`
       ? expandShortHand(input)

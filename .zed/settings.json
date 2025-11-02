@@ -1,0 +1,3 @@
+{
+  "file_scan_exclusions": ["**/bundle-sizes/**", "**/bundle-stats.json"]
+}

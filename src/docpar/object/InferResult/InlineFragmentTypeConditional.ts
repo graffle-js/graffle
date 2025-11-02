@@ -6,7 +6,7 @@ import type { OutputObjectLike } from './OutputObjectLike.js'
 // dprint-ignore
 export type InlineFragmentTypeConditional<
   $SelectionSet,
-  $Node extends Schema.InlineFragmentTypeConditionTypes,
+  $Node extends Schema.NodeGroups.InlineFragmentTypeCondition,
   $Schema,
 > =
   $Node extends any // force distribution

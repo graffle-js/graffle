@@ -3,7 +3,7 @@ import type { Definition } from './$types.js'
 
 export const Skip: Definition = {
   name: `skip`,
-  type: Schema.Directives.standardDirectivesByName.skip,
+  type: Schema.Standard.Directives.skip,
   normalizeArguments: (args: ArgsInput): Args => {
     return {
       if: typeof args === `boolean` ? args : args.if === undefined ? true : args.if,

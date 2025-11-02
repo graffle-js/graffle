@@ -8,7 +8,7 @@ import type { OutputObject } from './nodes/OutputObject.js'
 import type { Scalar } from './nodes/Scalar/Scalar.js'
 import type { ScalarCodecless } from './nodes/ScalarCodecless.js'
 import type { Union } from './nodes/Union.js'
-// import type { Mutation, Query, RootType, Subscription } from './StandardTypes/object.js'
+// import type { Mutation, Query, RootType, Subscription } from './standard/object.js'
 
 /**
  * A generic schema type. Any particular schema will be a subtype of this, with
