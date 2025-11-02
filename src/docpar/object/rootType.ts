@@ -1,5 +1,5 @@
 import { Docpar } from '#src/docpar/$.js'
-import type { TypedDocument } from '#src/lib/graphql-kit/typed-document/$.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'
@@ -91,7 +91,7 @@ export type StaticDocumentBuilder<
   // Note: The actual field mapping and type inference is done by the generator.
   // This type serves as the canonical signature that generated code must conform to.
   // The generator creates explicit field signatures for better IDE performance and JSDoc.
-  [field: string]: (selection?: any) => TypedDocument.String<any, any, $Config['sddmEnabled']>
+  [field: string]: (selection?: any) => GraphqlKit.Document.Typed.String<any, any, $Config['sddmEnabled']>
 }
 
 //

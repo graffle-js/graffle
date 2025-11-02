@@ -364,13 +364,13 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: GraphqlKit.Schem
     operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
     RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
     Root: {
-      [GraphqlKit.Document.OperationTypeNode.QUERY]: config.schema.kindMap.index.Root.query?.name
+      [GraphqlKit.Document.Ast.OperationType.QUERY]: config.schema.kindMap.index.Root.query?.name
         ? `$Types.${config.schema.kindMap.index.Root.query.name}`
         : null,
-      [GraphqlKit.Document.OperationTypeNode.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
+      [GraphqlKit.Document.Ast.OperationType.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
         ? `$Types.${config.schema.kindMap.index.Root.mutation.name}`
         : null,
-      [GraphqlKit.Document.OperationTypeNode.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
+      [GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
         ? `$Types.${config.schema.kindMap.index.Root.subscription.name}`
         : null,
     },

@@ -1,6 +1,5 @@
 import { Select } from '#src/docpar/object/Select/$.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
@@ -102,7 +101,7 @@ export interface OperationContext {
      * Should variables be used for arguments?
      */
     enabled: boolean
-    capture: (input: CaptureVariableInput) => GraphqlKit.Document.ArgumentNode
+    capture: (input: CaptureVariableInput) => GraphqlKit.Document.Ast.ArgumentNode
     data: CapturedVariable[]
   }
 }
@@ -153,10 +152,10 @@ export const createOperationContext = (options?: Options): OperationContext => {
           provenance: input.provenance,
         })
 
-        return Nodes.Argument({
-          name: Nodes.Name({ value: input.argName ?? input.name }),
-          value: Nodes.Variable({
-            name: Nodes.Name({ value: potentialVariableName }),
+        return GraphqlKit.Document.Ast.Argument({
+          name: GraphqlKit.Document.Ast.Name({ value: input.argName ?? input.name }),
+          value: GraphqlKit.Document.Ast.Variable({
+            name: GraphqlKit.Document.Ast.Name({ value: potentialVariableName }),
           }),
         })
       },

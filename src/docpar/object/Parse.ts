@@ -35,7 +35,7 @@ export type Parse<
         InferOperation<
           $Document[operationType][operationName],
           $Context,
-          GraphqlKit.Document.OperationTypeNode.FromString<operationType & string>,
+          GraphqlKit.Document.Ast.OperationType.FromString<operationType & string>,
           operationName
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
@@ -95,7 +95,7 @@ export type InferOperations<
 export type InferOperation<
   $DocOp,
   $Context,
-  $OperationType extends GraphqlKit.Document.OperationTypeNode,
+  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationTypeNode,
   $OperationName,
 > =
   $DocOp extends object

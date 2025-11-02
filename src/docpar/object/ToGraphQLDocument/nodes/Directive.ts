@@ -1,12 +1,12 @@
 import type { Select } from '#src/docpar/object/Select/$.js'
-import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLDirective: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.ArgumentsOrInputObjectFields,
-  Nodes.DirectiveNode | null,
+  GraphqlKit.Document.Ast.DirectiveNode | null,
   [graffleExpressions: Select.ParsedSelectionDirective]
 > = (
   context,
@@ -15,13 +15,13 @@ export const toGraphQLDirective: GraphQLPostOperationMapper<
 ) => {
   if (directive.arguments === null) return null
 
-  const arguments_: Nodes.ArgumentNode[] = []
+  const arguments_: GraphqlKit.Document.Ast.ArgumentNode[] = []
 
   for (const argumentName in directive.arguments.parsed) {
     const argumentValue = directive.arguments.parsed[argumentName]
 
     const sddmArgument = sddmArguments?.[argumentName]
-    let argument: Nodes.ArgumentNode
+    let argument: GraphqlKit.Document.Ast.ArgumentNode
 
     if (context.variables.enabled && sddmArgument) {
       // Automatic hoisting for directive arguments
@@ -33,20 +33,20 @@ export const toGraphQLDirective: GraphQLPostOperationMapper<
         provenance: `automatic`,
       })
     } else {
-      const name = Nodes.Name({ value: argumentName })
+      const name = GraphqlKit.Document.Ast.Name({ value: argumentName })
       const value = toGraphQLValue(
         { ...context, value: { isEnum: false } },
         sddmArgument,
         argumentValue,
       )
-      argument = Nodes.Argument({ name, value })
+      argument = GraphqlKit.Document.Ast.Argument({ name, value })
     }
 
     arguments_.push(argument)
   }
 
-  return Nodes.Directive({
-    name: Nodes.Name({ value: directive.name }),
+  return GraphqlKit.Document.Ast.Directive({
+    name: GraphqlKit.Document.Ast.Name({ value: directive.name }),
     arguments: arguments_,
   })
 }

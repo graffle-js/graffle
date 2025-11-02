@@ -1,4 +1,3 @@
-export { type TypedDocument } from '../lib/graphql-kit/typed-document/$.js'
 // todo figure this export out. Was just put there to resolve a type error about "...cannot be named..."
 export { type Client, type Create } from '#src/client/client.js'
 export type * from '#src/lib/graphql-kit/http/http.js'

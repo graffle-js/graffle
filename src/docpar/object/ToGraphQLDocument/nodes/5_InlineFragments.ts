@@ -1,13 +1,12 @@
 import { Select } from '#src/docpar/object/Select/$.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 
 export const toGraphQLInlineFragments: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  GraphqlKit.Document.InlineFragmentNode[],
+  GraphqlKit.Document.Ast.InlineFragmentNode[],
   [inlineFragments: Select.ParsedSelectionInlineFragments]
 > = (
   context,
@@ -24,7 +23,7 @@ export const toGraphQLInlineFragments: GraphQLPostOperationMapper<
 
 const toGraphQLInlineFragment: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  GraphqlKit.Document.InlineFragmentNode,
+  GraphqlKit.Document.Ast.InlineFragmentNode,
   [inlineFragment: InlineFragment]
 > = (
   context,
@@ -32,15 +31,15 @@ const toGraphQLInlineFragment: GraphQLPostOperationMapper<
   inlineFragment,
 ) => {
   const typeCondition = inlineFragment.typeCondition
-    ? Nodes.NamedType({
-      name: Nodes.Name({
+    ? GraphqlKit.Document.Ast.NamedType({
+      name: GraphqlKit.Document.Ast.Name({
         value: inlineFragment.typeCondition,
       }),
     })
     : undefined
 
-  const directives: Nodes.DirectiveNode[] = []
-  const selections: Nodes.SelectionNode[] = []
+  const directives: GraphqlKit.Document.Ast.DirectiveNode[] = []
+  const selections: GraphqlKit.Document.Ast.SelectionNode[] = []
 
   for (const key in inlineFragment.selectionSet) {
     const keyParsed = Select.parseSelectionInlineFragment(key, inlineFragment.selectionSet[key])
@@ -50,10 +49,10 @@ const toGraphQLInlineFragment: GraphQLPostOperationMapper<
     })
   }
 
-  return Nodes.InlineFragment({
+  return GraphqlKit.Document.Ast.InlineFragment({
     ...(typeCondition !== undefined && { typeCondition }),
     directives,
-    selectionSet: Nodes.SelectionSet({
+    selectionSet: GraphqlKit.Document.Ast.SelectionSet({
       selections,
     }),
   })

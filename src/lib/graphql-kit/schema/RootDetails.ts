@@ -1,5 +1,5 @@
 import type { GraphQLObjectType } from 'graphql'
-import { type OperationType, RootTypeToOperationType } from '../document.js'
+import { Document } from '../document/_.js'
 import type { RootTypeMap } from './RootTypeMap.js'
 import { type StandardRootTypeName } from './StandardRootTypeName.js'
 
@@ -24,7 +24,7 @@ export interface RootDetails {
     alias: string | null
   }
   type: GraphQLObjectType
-  operationType: OperationType
+  operationType: Document.Ast.OperationType.OperationTypeNode
 }
 
 export const createFromObjectType = (
@@ -38,7 +38,7 @@ export const createFromObjectType = (
       alias: null,
     },
     type: objectType,
-    operationType: RootTypeToOperationType[standardName],
+    operationType: Document.RootTypeToOperationType[standardName],
   }
 }
 

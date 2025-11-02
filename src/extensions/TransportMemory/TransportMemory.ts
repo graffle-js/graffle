@@ -1,6 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { print } from '#src/lib/graphql-kit/document.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { execute } from '#src/lib/graphql-kit/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
@@ -130,7 +129,7 @@ export const TransportMemory: TransportMemory = Extension
           const graphqlRequest: GraphqlKit.HTTP.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
-            query: print(input.request.query),
+            query: GraphqlKit.Document.print(input.request.query),
           }
           return {
             ...input,

@@ -1,7 +1,6 @@
 import type { Schema } from '#graffle/utilities-for-generated'
 import type { Select } from '#src/docpar/object/Select/$.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import { toGraphQLOperationDefinition } from './2_OperationDefinition.js'
 
@@ -18,7 +17,7 @@ export const toGraphQLDocument = (
       return toGraphQLOperationDefinition(sddm, graffleOperation, options)
     })
 
-  const graphqlDocument = Nodes.Document({
+  const graphqlDocument = GraphqlKit.Document.Ast.Document({
     definitions: operationsAndVariables.map(_ => _.operation),
   })
 
@@ -40,6 +39,6 @@ export interface Options {
 }
 
 export interface Encoded {
-  document: GraphqlKit.Document.DocumentNode
+  document: GraphqlKit.Document.Ast.DocumentNode
   operationsVariables: Record<string, GraphqlKit.Variables>
 }

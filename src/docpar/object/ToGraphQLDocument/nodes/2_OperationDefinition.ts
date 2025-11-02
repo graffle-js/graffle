@@ -1,9 +1,7 @@
 import type { Select } from '#src/docpar/object/Select/$.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Nodes } from '#src/lib/graphql-kit/_Nodes.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { parseType } from 'graphql'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
-import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
 import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'
 import type { Options } from './1_Document.js'
@@ -12,7 +10,7 @@ import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  { operation: Nodes.OperationDefinitionNode; variables: GraphqlKit.Variables },
+  { operation: GraphqlKit.Document.Ast.OperationDefinitionNode; variables: GraphqlKit.Variables },
   [
     operation: Select.Document.OperationNormalized,
     options?: Options,
@@ -25,14 +23,14 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   const context = createOperationContext(options)
 
   const name = operation.name
-    ? Nodes.Name({ value: operation.name })
+    ? GraphqlKit.Document.Ast.Name({ value: operation.name })
     : undefined
 
   const selectionSet = toGraphQLSelectionSetRoot(context, sddmNode, operation.selectionSet)
 
   const variableDefinitions = context.variables.data.map((captured) => {
-    return Nodes.VariableDefinition({
-      variable: Nodes.Variable({ name: Nodes.Name({ value: captured.name }) }),
+    return GraphqlKit.Document.Ast.VariableDefinition({
+      variable: GraphqlKit.Document.Ast.Variable({ name: GraphqlKit.Document.Ast.Name({ value: captured.name }) }),
       type: parseType(captured.type),
       defaultValue: captured.defaultValue !== undefined
         ? toGraphQLValue(
@@ -44,7 +42,7 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
     })
   })
 
-  const graphqlOperation = Nodes.OperationDefinition({
+  const graphqlOperation = GraphqlKit.Document.Ast.OperationDefinition({
     operation: operation.type,
     ...(name !== undefined && { name }),
     selectionSet,

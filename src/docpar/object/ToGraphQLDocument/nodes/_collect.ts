@@ -11,8 +11,8 @@ export const collectForInlineFragmentLike: GraphQLPostOperationMapper<
   [
     keyParsed: Select.ParsedInlineFragmentLevelSelection,
     basket: {
-      directives: GraphqlKit.Document.DirectiveNode[]
-      selections: GraphqlKit.Document.SelectionNode[]
+      directives: GraphqlKit.Document.Ast.DirectiveNode[]
+      selections: GraphqlKit.Document.Ast.SelectionNode[]
     },
   ]
 > = (
