@@ -59,6 +59,7 @@ Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).$send())
 Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).myQuery())
 Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVarsString).$send())
 // Inline string
+const y = await client.gql(`query myQuery { id }`).$send()
 Ts.Assert.exact.ofAs<R1>().on(await client.gql(`query myQuery { id }`).$send())
 
 // Inline object

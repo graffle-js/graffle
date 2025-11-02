@@ -1,13 +1,9 @@
-/**
- * Single-pass GraphQL string parser exports
- */
-
+import type { Schema } from '#src/types/Schema/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { Doc } from '../$$.js'
 import type { ParseDocument } from './parser.js'
-
 export type { ParseDocument } from './parser.js'
-export type { AbstractSetupSchema, OutputField, OutputObject, Schema, SchemaOfSetup } from './schema.js'
+export type { AbstractSetupSchema, SchemaOfSetup } from './schema.js'
 
 /**
  * Parse GraphQL string into operations (raw, unwrapped).
@@ -52,8 +48,7 @@ export type getDocumentOperations<
   $Definitions,
   $Schema,
 > = $Definitions extends string
-  ? $Schema extends import('./schema.js').Schema
-    ? ParseDocument<$Definitions, import('../core/Context.js').ParserContext<$Schema>>
+  ? $Schema extends Schema ? ParseDocument<$Definitions, import('../core/Context.js').ParserContext<$Schema>>
   : ParseDocument<$Definitions, import('../core/Context.js').ParserContext<undefined>>
   : never
 

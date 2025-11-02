@@ -138,6 +138,7 @@ test('static root type builder > type output inference', () => {
 
 type SingleOpNoVars = D<{ name: 'myQuery'; result: { date: Date | null }; variables: {} }>
 
+const x = Possible.gql(`query myQuery { date }`)
 A.ofAs<SingleOpNoVars>().on(Possible.gql(`query myQuery { date }`))
 Ts.Assert.equiv.ofAs<SingleOpNoVars>().on(Possible.gql({ query: { myQuery: { date: true } } }))
 

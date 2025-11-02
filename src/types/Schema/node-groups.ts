@@ -5,7 +5,7 @@ import type { Interface } from './nodes/Interface.js'
 import type { List } from './nodes/List.js'
 import type { Nullable } from './nodes/Nullable.js'
 import type { OutputObject } from './nodes/OutputObject.js'
-import type { Scalar } from './nodes/Scalar/Scalar.js'
+import type { Scalar } from './nodes/Scalar/_.js'
 import type { Union } from './nodes/Union.js'
 
 export type Named = NamedInput | NamedOutput

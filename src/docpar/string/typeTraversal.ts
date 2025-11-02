@@ -4,9 +4,9 @@
  * These utilities decode inlineType format and extract TypeScript types.
  */
 
+import type { Schema } from '#src/types/Schema/_.js'
+import type { Scalar } from '#src/types/Schema/nodes/Scalar/_.js'
 import type { GetDecoded } from '#src/types/Schema/nodes/Scalar/helpers.js'
-import type { Scalar } from '#src/types/Schema/nodes/Scalar/Scalar.js'
-import type { OutputField, OutputObject, Schema } from './schema.js'
 
 /**
  * Decode inlineType array into TypeScript type.
@@ -33,7 +33,7 @@ export type DecodeInlineType<$InlineType, $NamedType, $Schema extends Schema> = 
 /**
  * Get the output type for a field, resolving inlineType and applying nullability/list wrappers.
  */
-export type GetFieldOutputType<$Field extends OutputField, $Schema extends Schema> = DecodeInlineType<
+export type GetFieldOutputType<$Field extends Schema.OutputField, $Schema extends Schema> = DecodeInlineType<
   $Field['inlineType'],
   $Field['namedType'],
   $Schema
@@ -60,7 +60,7 @@ export type ApplyInlineType<$InlineType, $ResolvedType> = $InlineType extends [i
  * Scalars are decoded using GetDecoded, objects require nested selection.
  */
 type ResolveNamedType<$Type, $Schema extends Schema> = $Type extends Scalar ? GetDecoded<$Type>
-  : $Type extends OutputObject ? $Type // Objects need nested selection - return the type itself
+  : $Type extends Schema.OutputObject ? $Type // Objects need nested selection - return the type itself
   : $Type extends { kind: 'Interface' } ? $Type // Interfaces need nested selection
   : $Type extends { kind: 'Union' } ? $Type // Unions need nested selection
   : $Type extends { kind: 'Enum'; membersUnion: infer $Union } ? $Union

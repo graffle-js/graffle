@@ -1,7 +1,7 @@
 import { Obj, Ts } from '@wollybeard/kit'
 import { Boolean, Float, ID, Int, String } from '../../standard/scalars/scalars.js'
+import type { Scalar } from './_.js'
 import { createCodec, type Mapper } from './codec.js'
-import type { Scalar } from './Scalar.js'
 
 /**
  * Scalar representing an unknown custom scalar type without a codec definition.

@@ -2,10 +2,12 @@ import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 export interface Codec<
   $Decoded = any,
-  $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes = GraphqlKit.Schema.StandardScalarRuntimeTypes,
+  $Encoded = any, // extends GraphqlKit.Schema.StandardScalarRuntimeTypes = GraphqlKit.Schema.StandardScalarRuntimeTypes,
 > {
-  encode: <$$Decoded extends $Decoded>(value: $$Decoded) => $Encoded
-  decode: <$$Encoded extends $Encoded>(value: $$Encoded) => $Decoded
+  // encode: <$$Decoded extends $Decoded>(value: $$Decoded) => $Encoded
+  // decode: <$$Encoded extends $Encoded>(value: $$Encoded) => $Decoded
+  encode: (value: $Decoded) => $Encoded
+  decode: (value: $Encoded) => $Decoded
   _typeEncoded: $Encoded
   _typeDecoded: $Decoded
 }
