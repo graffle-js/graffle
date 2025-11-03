@@ -1,3 +1,5 @@
+import * as Nodes from './nodes.js'
+
 /**
  * GraphQL-JS runtime utilities with clearer naming.
  */
@@ -12,17 +14,6 @@ export { getNamedType } from 'graphql'
  */
 export { getNullableType } from 'graphql'
 
-/**
- * Build GraphQLSchema from SDL string.
- */
-export { buildSchema as fromString } from 'graphql'
-
-/**
- * Build GraphQLSchema from introspection query result.
- */
-export { buildClientSchema as fromIntrospection } from 'graphql'
-
-/**
- * Convert GraphQLSchema to SDL string.
- */
-export { printSchema as toString } from 'graphql'
+export const isAllInputObjectFieldsNullable = (node: Nodes.InputObjectType) => {
+  return Object.values(node.getFields()).some(_ => !Nodes.isNonNullType(_.type))
+}

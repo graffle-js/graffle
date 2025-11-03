@@ -52,7 +52,7 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
       scalars: { Date: DateScalar },
     },
   )
-  const documentString = GraphqlKit.Document.print(document)
+  const documentString = GraphqlKit.Document.toString(document)
   await (g.gql(documentString) as any).$send(operationsVariables[`$default`])
   expect(RequestSpy.spy.data.pack.input?.request.variables).toEqual(expectedVariables)
 })

@@ -128,7 +128,7 @@ export const TransportMemory: TransportMemory = Extension
           const graphqlRequest: GraphqlKit.Http.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
-            query: GraphqlKit.Document.print(input.request.query),
+            query: GraphqlKit.Document.toString(input.request.query),
           }
           return {
             ...input,

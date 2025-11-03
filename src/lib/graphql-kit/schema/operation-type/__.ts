@@ -27,3 +27,18 @@ export type OperationTypeStringToNode<$OperationTypeString extends string> = $Op
   : $OperationTypeString extends SUBSCRIPTION ? OperationTypeNode.SUBSCRIPTION
   : $OperationTypeString extends QUERY ? OperationTypeNode.QUERY
   : never
+
+export const LookupFromRootType = {
+  Query: QUERY,
+  Mutation: MUTATION,
+  Subscription: SUBSCRIPTION,
+} as const
+
+export type LookupFromRootType = typeof LookupFromRootType
+
+
+export const LookupToAccessKind = {
+  query: `read`,
+  mutation: `write`,
+  subscription: `read`,
+} as const

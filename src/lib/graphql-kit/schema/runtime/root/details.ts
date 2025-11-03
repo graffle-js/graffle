@@ -1,6 +1,5 @@
 import type { GraphQLObjectType } from 'graphql'
-import { Document } from '../../../document/_.js'
-import type { OperationType } from '../../operation-type/_.js'
+import { OperationType } from '../../operation-type/_.js'
 import type { Map } from './map.js'
 import { type StandardRootTypeName } from './standard.js'
 
@@ -39,7 +38,7 @@ export const detailsFromObjectType = (
       alias: null,
     },
     type: objectType,
-    operationType: Document.RootTypeToOperationType[standardName],
+    operationType: OperationType.LookupFromRootType[standardName],
   }
 }
 

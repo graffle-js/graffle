@@ -46,7 +46,7 @@ const withGqlString: TestCaseWith = [
     const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(
       Docpar.Object.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await possible.scalar(DateScalar).gql(GraphqlKit.Document.print(document)).$send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(GraphqlKit.Document.toString(document)).$send()).toEqual(expectedData)
   },
 ]
 
