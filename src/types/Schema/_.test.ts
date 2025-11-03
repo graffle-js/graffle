@@ -5,7 +5,7 @@ import { Schema } from './_.js'
 
 describe('LookupCustomScalarOrFallbackToUnknown', () => {
   test('standard scalars are resolved correctly', () => {
-    type EmptyRegistry = Schema.Scalar.Registry<{}, any, any>
+    type EmptyRegistry = Schema.Scalars.Registry<{}, any, any>
 
     // Standard scalars should resolve to their types
     Ts.Assert.exact.ofAs<Schema.LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()
@@ -20,7 +20,7 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
 
   test('custom scalars in registry are resolved', () => {
     type DateScalar = Schema.Scalar<'Date', Date, string>
-    type RegistryWithDate = Schema.Scalar.Registry<{ Date: DateScalar }, string, Date>
+    type RegistryWithDate = Schema.Scalars.Registry<{ Date: DateScalar }, string, Date>
 
     const DateScalar: DateScalar = {
       kind: 'Scalar',
@@ -34,7 +34,7 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
   })
 
   test('unknown custom scalars default to UnknownScalar', () => {
-    type EmptyRegistry = Schema.Scalar.Registry<{}, any, any>
+    type EmptyRegistry = Schema.Scalars.Registry<{}, any, any>
 
     // Unknown custom scalar should default to UnknownScalar (not String)
     Ts.Assert.exact.ofAs<Schema.LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()

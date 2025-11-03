@@ -10,11 +10,11 @@ import type { $DefaultSelectionContext } from '../_context.js'
 export type $Scalar<
   $ScalarName extends string,
   $Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Schema.Scalar.GetDecoded<
+> = $$Utilities.Codec.Codec.GetDecoded<
   $$Utilities.Schema.LookupCustomScalarOrFallbackToUnknown<
     $ScalarName,
-    $Context extends { scalars: infer $S } ? $S : $$Utilities.Schema.Scalar.Registry.Empty
-  >
+    $Context extends { scalars: infer $S } ? $S : $$Utilities.Schema.Scalars.Registry.Empty
+  >['codec']
 >
 
 /**

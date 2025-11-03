@@ -8,6 +8,7 @@ import type { OutputObject } from './nodes/OutputObject.js'
 import type { Scalar } from './nodes/Scalar/_.js'
 import type { ScalarCodecless } from './nodes/ScalarCodecless.js'
 import type { Union } from './nodes/Union.js'
+import type * as Scalars from './scalars/__.js'
 // import type { Mutation, Query, RootType, Subscription } from './standard/object.js'
 
 /**
@@ -16,7 +17,7 @@ import type { Union } from './nodes/Union.js'
  */
 export interface Schema<
   $Extensions extends GlobalRegistry.TypeExtensions = GlobalRegistry.TypeExtensions,
-  $Scalars extends Scalar.Registry = Scalar.Registry,
+  $Scalars extends Scalars.Registry = Scalars.Registry,
 > {
   name: GlobalRegistry.ClientNames
   operationsAvailable: GraphqlKit.Document.OperationType[]

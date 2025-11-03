@@ -95,7 +95,7 @@ export interface CaptureVariableInput {
 
 export interface OperationContext {
   sddm?: SchemaDrivenDataMap | undefined
-  scalars: Schema.Scalar.ScalarMap
+  scalars: Schema.Scalars.ScalarMap
   variables: {
     /**
      * Should variables be used for arguments?

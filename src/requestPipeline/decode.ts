@@ -24,7 +24,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Registered custom scalars.
    */
-  scalars: Schema.Scalar.ScalarMap
+  scalars: Schema.Scalars.ScalarMap
 }) => {
   const sddmOutputObject = sddm.operations[request.operation.operation]
   if (!sddmOutputObject) return
@@ -55,7 +55,7 @@ const decodeResultValue = (input: {
   value: GraphqlKit.SomeFieldData
   sddmNode: Docpar.OutputNodes
   documentPart: null | GraphqlKit.Document.Ast.SelectionSetNode
-  scalars: Schema.Scalar.ScalarMap
+  scalars: Schema.Scalars.ScalarMap
 }): void => {
   const { parentContext, value, sddmNode, documentPart, scalars } = input
 
@@ -103,7 +103,7 @@ const decodeResultValue = (input: {
       return
     }
     if (Docpar.isScalar(sddmNode)) {
-      const decodedValue = Schema.Scalar.applyCodec(sddmNode.codec.decode, value)
+      const decodedValue = Schema.Scalars.applyCodec(sddmNode.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {
@@ -111,7 +111,7 @@ const decodeResultValue = (input: {
       }
     } else if (Docpar.isCustomScalarName(sddmNode)) {
       const scalar = Schema.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
-      const decodedValue = Schema.Scalar.applyCodec(scalar.codec.decode, value)
+      const decodedValue = Schema.Scalars.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {

@@ -51,7 +51,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
         const safeName = renderName(scalarName)
         if (config.options.isImportsCustomScalars) {
           // Use the decoded type from the custom scalar implementation (for variable inputs)
-          code`export type ${safeName} = ${$.$$Utilities}.Schema.Scalar.GetDecoded<typeof ${$.CustomScalars}.${scalarName}>`
+          code`export type ${safeName} = ${$.$$Utilities}.Codec.Codec.GetDecoded<typeof ${$.CustomScalars}.${scalarName}['codec']>`
         } else {
           // Use string for ScalarCodecless types (their encoded type is always string)
           code`export type ${safeName} = string`

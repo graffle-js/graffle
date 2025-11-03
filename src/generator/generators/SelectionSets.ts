@@ -209,11 +209,11 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.KindMa
   scalarsCode(
     `  $Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`,
   )
-  scalarsCode(`> = ${$.$$Utilities}.Schema.Scalar.GetDecoded<`)
+  scalarsCode(`> = ${$.$$Utilities}.Codec.Codec.GetDecoded<`)
   scalarsCode(`  ${$.$$Utilities}.Schema.LookupCustomScalarOrFallbackToUnknown<`)
   scalarsCode(`    $ScalarName,`)
-  scalarsCode(`    $Context extends { scalars: infer $S } ? $S : ${$.$$Utilities}.Schema.Scalar.Registry.Empty`)
-  scalarsCode(`  >`)
+  scalarsCode(`    $Context extends { scalars: infer $S } ? $S : ${$.$$Utilities}.Schema.Scalars.Registry.Empty`)
+  scalarsCode(`  >['codec']`)
   scalarsCode(`>`)
   scalarsCode()
 

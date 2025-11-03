@@ -1,3 +1,4 @@
+import { Codec } from '#src/types/Codec/_.js'
 import type { Schema } from '#src/types/Schema/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
 import type { Core, ParserContext } from '../core/$.js'
@@ -295,7 +296,7 @@ type MapGraphQLType<$TypeName extends string, $Schema extends Schema | undefined
     // Look up custom scalars from schema
     : $Schema extends Schema
       ? $TypeName extends keyof $Schema['scalars']
-        ? $Schema['scalars'][$TypeName] extends Schema.Scalar ? Schema.Scalar.GetDecoded<$Schema['scalars'][$TypeName]>
+        ? $Schema['scalars'][$TypeName] extends Schema.Scalar ? Codec.GetDecoded<$Schema['scalars'][$TypeName]['codec']>
         : unknown
       : unknown // Input types or unknown scalars
     : unknown // Schema-less mode - no custom scalar mapping

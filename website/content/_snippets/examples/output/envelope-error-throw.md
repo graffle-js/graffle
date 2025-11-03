@@ -37,7 +37,6 @@ await pokemon.query.pokemons({ name: true })
           return new ContextualError(message, {
                  ^
 
-
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
     at async <anonymous> (/some/path/to/runner.ts:XX:XX)

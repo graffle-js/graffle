@@ -401,7 +401,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: GraphqlKit.Schem
   code(Str.Code.TS.interfaceDecl({
     export: true,
     name: `Schema`,
-    parameters: `<$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry>`,
+    parameters: `<$Scalars extends $.Schema.Scalars.Registry = $$Scalar.$Registry>`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema` : null,
     block: schema,
   }))

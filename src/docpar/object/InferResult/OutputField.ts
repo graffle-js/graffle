@@ -1,3 +1,4 @@
+import { Codec } from '#src/types/Codec/_.js'
 import type { Schema } from '#src/types/Schema/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../core/sddm/InlineType.js'
@@ -25,8 +26,7 @@ type FieldType<
   $Node extends Schema.OutputObject                      ? $SelectionSet extends object
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>
                                                             : Ts.Err.StaticError<'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
-  // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
-  $Node extends Schema.Scalar.ScalarCodecless            ? Schema.Scalar.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
+  $Node extends Schema.Scalar.ScalarCodecless            ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
   $Node extends Schema.__typename                        ? $Node['value'] :
   [Schema.ResolveLeafType<$Node>] extends [never]        ? $Node extends Schema.Interface
                                                               ? Interface<$SelectionSet, $Schema, $Node>
