@@ -11,7 +11,7 @@ export interface MapVariablesByTypeNamesInput {
   /**
    * GraphQL request with operation and variables
    */
-  request: GraphqlKit.RequestAnalyzedDocumentNodeInput
+  request: GraphqlKit.Request.RequestAnalyzedDocumentNodeInput
   /**
    * GraphQL type names to match (e.g., ['Upload', 'File'])
    */
@@ -50,7 +50,7 @@ export interface MapVariablesByTypeNamesInput {
  * })
  * ```
  */
-export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): GraphqlKit.Variables => {
+export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): GraphqlKit.Request.Variables => {
   const { sddm, request, typeNames, visitor, immutable = false } = input
 
   const variableDefinitions = request.operation.variableDefinitions

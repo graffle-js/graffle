@@ -71,7 +71,7 @@ export const ModuleGeneratorSchema = {
 
 // Individual module generators
 
-const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema2.Runtime.Nodes.ScalarType): GeneratedModule => {
+const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema.Runtime.Nodes.ScalarType): GeneratedModule => {
   const code = Str.Builder()
   const renderedName = renderName(scalar)
   const originalName = scalar.name
@@ -98,7 +98,7 @@ const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema2.Runtime
   }
 }
 
-const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema2.Runtime.Nodes.EnumType): GeneratedModule => {
+const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.Nodes.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
@@ -131,7 +131,7 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema2.Runtime
 
 const generateUnionModule = (
   config: Config,
-  unionType: GraphqlKit.Schema2.Runtime.Nodes.UnionType,
+  unionType: GraphqlKit.Schema.Runtime.Nodes.UnionType,
 ): GeneratedModule => {
   const code = Str.Builder()
 
@@ -189,8 +189,8 @@ Type: \`"${typeName}"\`
  */
 const getInputFieldDoc = (
   config: Config,
-  field: GraphqlKit.Schema2.Runtime.Nodes.InputField,
-  parentType: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
+  field: GraphqlKit.Schema.Runtime.Nodes.InputField,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.InputObject,
 ): string | null => {
   const namedType = GraphqlKit.Schema.getNamedType(field.type)
   const typeAndKind = GraphqlKit.getTypeAndKind(namedType)
@@ -199,9 +199,9 @@ const getInputFieldDoc = (
   const schemaDescription = getTsDocContents(config, field)
 
   // Type information
-  const isNonNull = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type)
-  const isList = GraphqlKit.Schema2.Runtime.Nodes.isListType(
-    GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
+  const isNonNull = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type)
+  const isList = GraphqlKit.Schema.Runtime.Nodes.isListType(
+    GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
   )
   const listMarker = isList ? '[]' : ''
   const nullMarker = isNonNull ? '!' : ''
@@ -258,7 +258,7 @@ const getInputFieldDoc = (
 
 const generateInputObjectModule = (
   config: Config,
-  inputObject: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
+  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObject,
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
@@ -338,7 +338,10 @@ const generateInputObjectModule = (
   return modules
 }
 
-const generateSchemaNamespaceModule = (config: Config, kindMap: GraphqlKit.Schema.KindMap['list']): GeneratedModule => {
+const generateSchemaNamespaceModule = (
+  config: Config,
+  kindMap: GraphqlKit.Schema.KindMap['list'],
+): GeneratedModule => {
   const code = Str.Builder()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
 
@@ -472,8 +475,8 @@ const generateSchemaBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.K
  */
 const getOutputFieldDoc = (
   config: Config,
-  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
-  parentType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+  field: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.ObjectType | GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
 ): string | null => {
   // Extract type information using foundation helper
   const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
@@ -533,7 +536,7 @@ const getOutputFieldDoc = (
  */
 const getObjectTypeDoc = (
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+  type: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
   isRoot: boolean,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
@@ -592,7 +595,7 @@ const getObjectTypeDoc = (
  */
 const getInterfaceTypeDoc = (
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+  type: GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
   kindMap: GraphqlKit.Schema.KindMap,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
@@ -634,7 +637,7 @@ const getInterfaceTypeDoc = (
  */
 const getUnionTypeDoc = (
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.UnionType,
+  type: GraphqlKit.Schema.Runtime.Nodes.UnionType,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
   const kindDocUrl = getKindDocUrl('Union')
@@ -669,7 +672,7 @@ const getUnionTypeDoc = (
  */
 const getInputObjectTypeDoc = (
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
+  type: GraphqlKit.Schema.Runtime.Nodes.InputObject,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
   const kindDocUrl = getKindDocUrl('InputObject')
@@ -706,7 +709,7 @@ const getInputObjectTypeDoc = (
  */
 const getEnumTypeDoc = (
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.EnumType,
+  type: GraphqlKit.Schema.Runtime.Nodes.EnumType,
 ): string | null => {
   // Get enum description respecting config and escape it for safety
   const schemaDescription = type.description
@@ -764,7 +767,7 @@ const getEnumTypeDoc = (
 
 const generateTypeModule = (
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+  type: GraphqlKit.Schema.Runtime.Nodes.ObjectType | GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
   kind: 'roots' | 'objects' | 'interfaces',
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
@@ -845,11 +848,11 @@ const generateTypeModule = (
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
 
   // For interfaces, import implementor types from the barrel
-  const isInterface = type instanceof GraphqlKit.Schema2.Runtime.Nodes.InterfaceType
+  const isInterface = type instanceof GraphqlKit.Schema.Runtime.Nodes.InterfaceType
   if (isInterface) {
     const implementors = GraphqlKit.Schema.KindMap.getInterfaceImplementors(
       config.schema.kindMap,
-      type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+      type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
     )
     if (implementors.length > 0) {
       // Import from barrel which is 2 levels up from schema/{kind}/{TypeName}/
@@ -874,15 +877,17 @@ const generateTypeModule = (
 
   namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: isInterface
-      ? getInterfaceTypeDoc(config, type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType, config.schema.kindMap)
-      : getObjectTypeDoc(config, type as GraphqlKit.Schema2.Runtime.Nodes.ObjectType, kind === 'roots'),
+      ? getInterfaceTypeDoc(config, type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType, config.schema.kindMap)
+      : getObjectTypeDoc(config, type as GraphqlKit.Schema.Runtime.Nodes.ObjectType, kind === 'roots'),
     export: true,
     name: type.name,
     extends: config.code.schemaInterfaceExtendsEnabled
       ? (isInterface ? `$.Schema.Interface` : `$.Schema.OutputObject`)
       : null,
     block: {
-      kind: Str.Code.TS.string(isInterface ? GraphqlKit.Schema.TypeKind.Interface : GraphqlKit.Schema.TypeKind.Object),
+      kind: Str.Code.TS.string(
+        isInterface ? GraphqlKit.Schema.TypeKind.Interface : GraphqlKit.Schema.TypeKind.Object,
+      ),
       name: Str.Code.TS.string(type.name),
       fields: interfaceFields,
       ...(isInterface
@@ -890,26 +895,26 @@ const generateTypeModule = (
           implementors: Str.Code.TS.tuple(
             GraphqlKit.Schema.KindMap.getInterfaceImplementors(
               config.schema.kindMap,
-              type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+              type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
             )
               .map(_ => _.name),
           ),
           implementorsUnion: GraphqlKit.Schema.KindMap.getInterfaceImplementors(
               config.schema.kindMap,
-              type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+              type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
             )
               .length > 0
             ? Str.Code.TS.unionItems(
               GraphqlKit.Schema.KindMap.getInterfaceImplementors(
                 config.schema.kindMap,
-                type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+                type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
               ).map(_ => _.name),
             )
             : `never`,
           implementorsIndex: Object.fromEntries(
             GraphqlKit.Schema.KindMap.getInterfaceImplementors(
               config.schema.kindMap,
-              type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+              type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
             )
               .map(n => [n.name, n.name]),
           ),
@@ -927,7 +932,7 @@ const generateTypeModule = (
   return modules
 }
 
-const namedTypesTypeReference = (name: string | GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes) => {
+const namedTypesTypeReference = (name: string | GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes) => {
   const name_ = typeof name === `string` ? name : name.name
   return `$Schema.${name_}`
 }

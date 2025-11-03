@@ -122,7 +122,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
  */
 function generateInputObjectType(
   config: Config,
-  inputObject: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
+  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObject,
 ): string {
   const fields = Object.values(inputObject.getFields())
 
@@ -134,7 +134,7 @@ function generateInputObjectType(
     const fieldType = GraphqlKit.Schema.getNamedType(field.type)
     // Use renderName to handle reserved keywords
     const typeName = renderName(fieldType.name)
-    const isNullable = GraphqlKit.Schema2.Runtime.Nodes.isNullableType(field.type)
+    const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(field.type)
     const fieldName = field.name
     const optionalMarker = isNullable ? '?' : ''
 

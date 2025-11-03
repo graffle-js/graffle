@@ -12,7 +12,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Result data to decode.
    */
-  data: GraphqlKit.SomeObjectData | null | undefined
+  data: GraphqlKit.Request.SomeObjectData | null | undefined
   /**
    * Schema Driven Data Map that contains codecs for custom scalars.
    */
@@ -20,7 +20,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Request is used to traverse aliases if any were used.
    */
-  request: GraphqlKit.RequestAnalyzedDocumentNodeInput
+  request: GraphqlKit.Request.RequestAnalyzedDocumentNodeInput
   /**
    * Registered custom scalars.
    */
@@ -52,7 +52,7 @@ const decodeResultValue = (input: {
       object: any[]
       index: number
     }
-  value: GraphqlKit.SomeFieldData
+  value: GraphqlKit.Request.SomeFieldData
   sddmNode: Docpar.OutputNodes
   documentPart: null | GraphqlKit.Document.Ast.SelectionSetNode
   scalars: Schema.Scalars.ScalarMap

@@ -6,7 +6,7 @@ type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 export const injectTypenameOnRootResultFields = (
   { request, sddm }: {
     sddm: SchemaDrivenDataMap
-    request: GraphqlKit.RequestAnalyzedDocumentNodeInput
+    request: GraphqlKit.Request.RequestAnalyzedDocumentNodeInput
   },
 ): void => {
   injectTypenameOnRootResultFields_({

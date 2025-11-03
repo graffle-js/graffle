@@ -179,7 +179,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   },
 )
 
-const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtime.Nodes.ObjectType }>(
+const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime.Nodes.ObjectType }>(
   ({ node, config, code }) => {
     const fieldMethods = renderFieldMethods({ config, node })
     const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
@@ -247,7 +247,7 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtime.No
   },
 )
 
-const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtime.Nodes.ObjectType }>(
+const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime.Nodes.ObjectType }>(
   ({ node, config, code }) => {
     for (const field of Object.values(node.getFields())) {
       const docContent = getOutputFieldMethodDoc(config, field, node)
@@ -257,8 +257,8 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtim
 
       const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(field.type)
 
-      const isOptional = GraphqlKit.Schema2.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
-        && GraphqlKit.Schema2.Runtime.Args.analyzeNullability(field.args).isAllNullable
+      const isOptional = GraphqlKit.Schema.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
+        && GraphqlKit.Schema.Runtime.Args.analyzeNullability(field.args).isAllNullable
 
       const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
       // dprint-ignore
@@ -791,7 +791,7 @@ const renderDomainType = createCodeGenerator<{
     const rootTypeName = field.rootTypeName
     const { operationType } = field
 
-    const rootType = config.schema.instance.getType(rootTypeName) as GraphqlKit.Schema2.Runtime.Nodes.ObjectType
+    const rootType = config.schema.instance.getType(rootTypeName) as GraphqlKit.Schema.Runtime.Nodes.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
@@ -800,8 +800,8 @@ const renderDomainType = createCodeGenerator<{
     }
 
     const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(fieldDef.type)
-    const isOptional = GraphqlKit.Schema2.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
-      && GraphqlKit.Schema2.Runtime.Args.analyzeNullability(fieldDef.args).isAllNullable
+    const isOptional = GraphqlKit.Schema.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
+      && GraphqlKit.Schema.Runtime.Args.analyzeNullability(fieldDef.args).isAllNullable
 
     // dprint-ignore
     code`

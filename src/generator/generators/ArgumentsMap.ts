@@ -43,7 +43,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
   import.meta.url,
   ({ config, code }) => {
     // Use the new ArgsIndex from grafaid
-    const argsIndex = GraphqlKit.Schema2.Runtime.Args.Index.getArgsIndex(config.schema.instance)
+    const argsIndex = GraphqlKit.Schema.Runtime.Args.Index.getArgsIndex(config.schema.instance)
 
     // Get root type names for the final index
     const queryType = config.schema.instance.getQueryType()
@@ -53,9 +53,9 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     code(importUtilities(config))
 
     // Group types by kind for organized output
-    const objectTypes: GraphqlKit.Schema2.Runtime.Args.Index.TypeInfo[] = []
-    const interfaceTypes: GraphqlKit.Schema2.Runtime.Args.Index.TypeInfo[] = []
-    const rootTypes: Record<string, GraphqlKit.Schema2.Runtime.Args.Index.TypeInfo> = {}
+    const objectTypes: GraphqlKit.Schema.Runtime.Args.Index.TypeInfo[] = []
+    const interfaceTypes: GraphqlKit.Schema.Runtime.Args.Index.TypeInfo[] = []
+    const rootTypes: Record<string, GraphqlKit.Schema.Runtime.Args.Index.TypeInfo> = {}
 
     for (const [typeName, typeInfo] of Obj.entries(argsIndex)) {
       const graphqlType = typeInfo.reference
@@ -67,7 +67,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
         rootTypes['mutation'] = typeInfo
       } else if (graphqlType === subscriptionType) {
         rootTypes['subscription'] = typeInfo
-      } else if (GraphqlKit.Schema2.Runtime.Nodes.isInterfaceType(graphqlType)) {
+      } else if (GraphqlKit.Schema.Runtime.Nodes.isInterfaceType(graphqlType)) {
         interfaceTypes.push(typeInfo)
       } else {
         objectTypes.push(typeInfo)
@@ -238,8 +238,8 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
  * @returns Sorted array of InputObject types found in arguments
  */
 const collectInputObjectTypes = (
-  argsIndex: GraphqlKit.Schema2.Runtime.Args.Index.ArgsIndex,
-  schema: GraphqlKit.Schema2.Runtime.Nodes.Schema,
+  argsIndex: GraphqlKit.Schema.Runtime.Args.Index.ArgsIndex,
+  schema: GraphqlKit.Schema.Runtime.Nodes.Schema,
 ) => {
   const inputTypes = new Set<string>()
   const result = []
@@ -259,7 +259,7 @@ const collectInputObjectTypes = (
   const typeMap = schema.getTypeMap()
   for (const typeName of inputTypes) {
     const type = typeMap[typeName]
-    if (type && GraphqlKit.Schema2.Runtime.Nodes.isInputObjectType(type)) {
+    if (type && GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(type)) {
       result.push(type)
     }
   }
@@ -276,7 +276,7 @@ const collectInputTypesFromType = (
   visited: Set<string> = new Set(),
 ) => {
   const namedType = GraphqlKit.Schema.getNamedType(type)
-  if (GraphqlKit.Schema2.Runtime.Nodes.isInputObjectType(namedType)) {
+  if (GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(namedType)) {
     // Prevent infinite recursion for circular references
     if (visited.has(namedType.name)) {
       return
@@ -314,7 +314,7 @@ const collectInputTypesFromType = (
  * ```
  */
 const renderTypeWithArgs = createCodeGenerator<
-  { typeInfo: GraphqlKit.Schema2.Runtime.Args.Index.TypeInfo }
+  { typeInfo: GraphqlKit.Schema.Runtime.Args.Index.TypeInfo }
 >(
   ({ config, code, typeInfo }) => {
     const typeName = typeInfo.reference.name
@@ -387,7 +387,7 @@ const renderTypeWithArgs = createCodeGenerator<
  * ```
  */
 const renderInputObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.InputObject }
+  { type: GraphqlKit.Schema.Runtime.Nodes.InputObject }
 >(
   ({ config, code, type }) => {
     const fields = Object.values(type.getFields())
@@ -442,7 +442,7 @@ const renderInputObjectType = createCodeGenerator<
  * // Returns: "readonly TypeInputsIndex.String[]"
  * ```
  */
-const renderResolvedType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Types, indexName: string): string => {
+const renderResolvedType = (type: GraphqlKit.Schema.Runtime.NodeGroups.Types, indexName: string): string => {
   const namedType = GraphqlKit.Schema.getNamedType(type)
   const typeName = renderName(namedType.name)
 
@@ -455,15 +455,15 @@ const renderResolvedType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Types, i
   const listNullability: boolean[] = []
 
   // Unwrap NonNull if present
-  if (GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(currentType)) {
+  if (GraphqlKit.Schema.Runtime.Nodes.isNonNullType(currentType)) {
     currentType = currentType.ofType
   }
 
   // Count list depth and track nullability
-  while (GraphqlKit.Schema2.Runtime.Nodes.isListType(currentType)) {
+  while (GraphqlKit.Schema.Runtime.Nodes.isListType(currentType)) {
     listDepth++
-    listNullability.push(GraphqlKit.Schema2.Runtime.Nodes.isNullableType(currentType))
-    currentType = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(currentType.ofType)
+    listNullability.push(GraphqlKit.Schema.Runtime.Nodes.isNullableType(currentType))
+    currentType = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(currentType.ofType)
       ? currentType.ofType.ofType
       : currentType.ofType
   }
@@ -479,7 +479,7 @@ const renderResolvedType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Types, i
   // - undefined (omitted)
   // - null (explicitly null)
   // - the actual value
-  if (GraphqlKit.Schema2.Runtime.Nodes.isNullableType(type)) {
+  if (GraphqlKit.Schema.Runtime.Nodes.isNullableType(type)) {
     resultType = `${resultType} | null | undefined`
   }
 

@@ -12,8 +12,8 @@ import {
   isUnionType,
 } from 'graphql'
 import type { GraphQLInputObjectType, GraphQLNamedOutputType } from 'graphql'
-import { isInputFieldLike } from './runtime/node-groups.js'
-import { isOutputField } from './runtime/nodes.js'
+import { isInputFieldLike } from '../runtime/node-groups.js'
+import { isOutputField } from '../runtime/nodes.js'
 import { isScalarTypeAndCustom } from './typeGuards.js'
 
 export const isHasCustomScalars = (

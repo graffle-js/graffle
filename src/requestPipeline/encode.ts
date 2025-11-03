@@ -7,7 +7,7 @@ type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
   sddm: SchemaDrivenDataMap
   scalars: Schema.Scalars.ScalarMap
-  request: GraphqlKit.RequestAnalyzedDocumentNodeInput
+  request: GraphqlKit.Request.RequestAnalyzedDocumentNodeInput
 }): void => {
   const variableDefinitions = request.operation.variableDefinitions
   if (!variableDefinitions) return

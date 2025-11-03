@@ -1,5 +1,5 @@
 import { Lang } from '@wollybeard/kit'
-import type { GraphQLNamedType, GraphQLScalarType } from 'graphql'
+import type { GraphQLNamedType } from 'graphql'
 import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
 import type { KindMap } from './schema/schema.js'
 import { isScalarTypeCustom } from './schema/schema.js'
@@ -10,46 +10,6 @@ export {
   GraphQLError,
   type GraphQLFormattedError as FormattedExecutionResultError,
 } from 'graphql'
-
-export * as Nodes from './document/ast/__.js'
-
-export * from './request.js'
-
-export const StandardScalarTypeNames = {
-  String: `String`,
-  ID: `ID`,
-  Int: `Int`,
-  Float: `Float`,
-  Boolean: `Boolean`,
-}
-
-export type StandardScalarTypeNames = keyof typeof StandardScalarTypeNames
-
-const TypeScriptPrimitiveTypeNames = {
-  string: `string`,
-  number: `number`,
-  boolean: `boolean`,
-}
-type TypeScriptPrimitiveTypeNames = keyof typeof TypeScriptPrimitiveTypeNames
-
-export const StandardScalarTypeTypeScriptMapping = {
-  String: `string`,
-  ID: `string`,
-  Int: `number`,
-  Float: `number`,
-  Boolean: `boolean`,
-} satisfies Record<
-  StandardScalarTypeNames,
-  TypeScriptPrimitiveTypeNames
->
-
-export const isStandardScalarType = (type: GraphQLScalarType) => {
-  return type.name in StandardScalarTypeNames
-}
-
-/**
- * Groups
- */
 
 export const getTypeAndKind = (
   node: GraphQLNamedType,

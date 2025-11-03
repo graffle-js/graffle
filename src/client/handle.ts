@@ -7,8 +7,6 @@ import {
   readErrorCategoryOutputChannel,
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { SomeObjectData } from '#src/lib/graphql-kit/graphql.js'
-import type { GraphQLExecutionResultError } from '#src/lib/graphql-kit/graphql.js'
 import { Err, Ware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
@@ -24,7 +22,7 @@ export type GraffleExecutionResultEnvelope = {
     // unformatted comes from memory transport
     | GraphqlKit.GraphQLError
   >
-  data?: SomeObjectData | null
+  data?: GraphqlKit.Request.SomeObjectData | null
   extensions?: ObjMap
 }
 
@@ -89,7 +87,7 @@ export const handleOutput = (
 // dprint-ignore
 export type HandleOutput<
   $Context,
-  $Data extends SomeObjectData,
+  $Data extends GraphqlKit.Request.SomeObjectData,
 > =
   HandleOutput_Extensions<
     $Context,
@@ -135,7 +133,7 @@ type HandleOutput_Envelope<
 
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$OutputConfig extends Normalized> =
-  | (ConfigGetOutputError<$OutputConfig, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
+  | (ConfigGetOutputError<$OutputConfig, 'execution'>  extends 'return'  ? GraphqlKit.Request.GraphQLExecutionResultError   : never)
   | (ConfigGetOutputError<$OutputConfig, 'other'>      extends 'return'  ? Ware.ResultFailure : never)
 
 // dprint-ignore
@@ -210,7 +208,7 @@ type IsEnvelopeWithoutErrors<$OutputConfig extends Normalized> =
 // dprint-ignore
 export type HandleOutputDocumentBuilderRootField<
   $Context,
-  $Data extends SomeObjectData,
+  $Data extends GraphqlKit.Request.SomeObjectData,
   $RootFieldName extends string,
 > =
   HandleOutputDocumentBuilderRootField_Data<
@@ -225,7 +223,7 @@ export type HandleOutputDocumentBuilderRootField<
 
 // dprint-ignore
 type HandleOutputDocumentBuilderRootField_Data<
-  $Output extends Error | SomeObjectData | GraffleExecutionResultEnvelope,
+  $Output extends Error | GraphqlKit.Request.SomeObjectData | GraffleExecutionResultEnvelope,
   $RootFieldName extends string,
 > =
   $Output extends Error | GraffleExecutionResultEnvelope

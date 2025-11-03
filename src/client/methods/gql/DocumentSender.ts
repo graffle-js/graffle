@@ -117,7 +117,7 @@ type OperationToNamedExecutor<
  * Named executor for operations with no variables.
  * Operation name is encoded in the method itself.
  */
-export interface NoVarsNamedExecutor<$Context, $Result extends GraphqlKit.SomeObjectData> {
+export interface NoVarsNamedExecutor<$Context, $Result extends GraphqlKit.Request.SomeObjectData> {
   (): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
 }
 
@@ -127,7 +127,7 @@ export interface NoVarsNamedExecutor<$Context, $Result extends GraphqlKit.SomeOb
  */
 export interface OptionalVarsNamedExecutor<
   $Context,
-  $Result extends GraphqlKit.SomeObjectData,
+  $Result extends GraphqlKit.Request.SomeObjectData,
   $Variables,
 > {
   (variables?: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
@@ -139,7 +139,7 @@ export interface OptionalVarsNamedExecutor<
  */
 export interface RequiredVarsNamedExecutor<
   $Context,
-  $Result extends GraphqlKit.SomeObjectData,
+  $Result extends GraphqlKit.Request.SomeObjectData,
   $Variables,
 > {
   (variables: $Variables): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>
@@ -220,8 +220,8 @@ export interface UntypedSender<$Context = any> {
  * Only `.$send()` is available (no named operation methods).
  */
 type TypedDocumentLikeSender<
-  $Result extends GraphqlKit.SomeObjectData,
-  $Variables extends GraphqlKit.Variables,
+  $Result extends GraphqlKit.Request.SomeObjectData,
+  $Variables extends GraphqlKit.Request.Variables,
   $Context,
   ___$VarKind = GetVariablesInputKind<$Variables>,
   ___$SendMethod = ___$VarKind extends 'none' ? (() => Promise<Ts.Simplify.Top<HandleOutput<$Context, $Result>>>)

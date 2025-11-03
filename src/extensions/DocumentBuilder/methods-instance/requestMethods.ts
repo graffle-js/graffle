@@ -16,7 +16,7 @@ import { print } from 'graphql'
  * @typeParam $Variables - The variables type inferred from the selection set
  * @typeParam $Result - The result type inferred from the selection set
  */
-export interface DocumentRunner<$Variables = GraphqlKit.Variables, $Result = unknown> {
+export interface DocumentRunner<$Variables = GraphqlKit.Request.Variables, $Result = unknown> {
   /**
    * The GraphQL document string.
    * Can be used with any GraphQL client or for inspection.
@@ -92,7 +92,7 @@ const buildDocumentRunnerForRootField = (
 
   return {
     document: documentString,
-    run: async (variables: GraphqlKit.Variables) => {
+    run: async (variables: GraphqlKit.Request.Variables) => {
       const request = graffleMappedResultToRequest(
         { ...encoded, operationsVariables: { $default: variables } },
         undefined,
@@ -128,7 +128,7 @@ const buildDocumentRunner = (
 
   return {
     document: documentString,
-    run: async (variables: GraphqlKit.Variables) => {
+    run: async (variables: GraphqlKit.Request.Variables) => {
       const request = graffleMappedResultToRequest(
         { ...encoded, operationsVariables: { $default: variables } },
         undefined,
@@ -212,7 +212,7 @@ const executeDocument = async (
 export const graffleMappedResultToRequest = (
   { document, operationsVariables }: Docpar.Object.ToGraphQLDocument.Encoded,
   operationName?: string,
-): GraphqlKit.RequestAnalyzedDocumentNodeInput => {
+): GraphqlKit.Request.RequestAnalyzedDocumentNodeInput => {
   // We get back variables for every operation in the Graffle document.
   // However, we only need the variables for the operation that was selected to be executed.
   // If there was NO operation name provided then we assume that the first operation in the document is the one that should be executed.

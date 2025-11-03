@@ -2,7 +2,7 @@ import type { GraphQLInterfaceType, GraphQLSchema } from 'graphql'
 import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
 
 import { createMap, isObjectRootType } from '../runtime/root/map.js'
-import { isScalarTypeCustom } from '../typeGuards.js'
+import { isScalarTypeCustom } from '../scalars/typeGuards.js'
 import type { KindMap } from './_.js'
 
 export const Name = {

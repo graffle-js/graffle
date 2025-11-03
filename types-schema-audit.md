@@ -290,13 +290,13 @@ export * from './typeGroups.js'
 1. **TypeKind Enum** (used in 7 files):
    ```typescript
    // OutputObject.ts
-   kind: GraphqlKit.Schema.TypeKind.Object
+   kind: GraphqlKit.Schema2.TypeKind.Object
 
    // Interface.ts
-   kind: GraphqlKit.Schema.TypeKind.Interface
+   kind: GraphqlKit.Schema2.TypeKind.Interface
 
    // InputObject.ts
-   kind: GraphqlKit.Schema.TypeKind.InputObject
+   kind: GraphqlKit.Schema2.TypeKind.InputObject
    ```
    - **Problem**: Schema types depend on runtime enum from GraphqlKit
    - **Impact**: Can't use types/Schema without GraphqlKit
@@ -306,7 +306,7 @@ export * from './typeGroups.js'
    ```typescript
    import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-   $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes = ...
+   $Encoded extends GraphqlKit.Schema2.StandardScalarRuntimeTypes = ...
    ```
    - **Problem**: Type-level definition depends on GraphqlKit
    - **Impact**: Cross-module coupling
@@ -711,8 +711,8 @@ Need to verify usage of:
 
 - **Used in**: 7 files
 - **Imports**:
-  - `GraphqlKit.Schema.TypeKind` (enum for kind discriminators)
-  - `GraphqlKit.Schema.StandardScalarRuntimeTypes`
+  - `GraphqlKit.Schema2.TypeKind` (enum for kind discriminators)
+  - `GraphqlKit.Schema2.StandardScalarRuntimeTypes`
   - `GraphqlKit.Document.OperationType`
 - **Impact**: types/Schema cannot function without GraphqlKit
 - **Question**: Acceptable since moving INTO graphql-kit?
@@ -786,7 +786,7 @@ Need to verify usage of:
 **Issues**:
 
 1. **TypeKind vs String Literals**:
-   - Some use: `kind: GraphqlKit.Schema.TypeKind.Object`
+   - Some use: `kind: GraphqlKit.Schema2.TypeKind.Object`
    - Could use: `kind: 'Object'` (string literal)
    - **Question**: Is enum necessary or prefer literals?
 
@@ -1295,7 +1295,7 @@ export type InputObject<
   $Fields extends InputFields = InputFields,
   $IsAllFieldsNullable extends boolean = boolean,
 > = {
-  kind: GraphqlKit.Schema.TypeKind.InputObject
+  kind: GraphqlKit.Schema2.TypeKind.InputObject
   name: $Name
   fields: $Fields
   isAllFieldsNullable: $IsAllFieldsNullable // ← What's this for?
@@ -1327,7 +1327,7 @@ export type Interface<
   $Name extends string = string,
   $Fields extends OutputFields = OutputFields,
 > = {
-  kind: GraphqlKit.Schema.TypeKind.Interface
+  kind: GraphqlKit.Schema2.TypeKind.Interface
   name: $Name
   fields: $Fields
   implementors: (OutputObject | Interface)[] // Who implements this interface
@@ -1441,7 +1441,7 @@ export interface OutputObject<
   $Name extends string = string,
   $Fields extends OutputFields = OutputFields,
 > {
-  kind: GraphqlKit.Schema.TypeKind.Object
+  kind: GraphqlKit.Schema2.TypeKind.Object
   name: $Name
   fields: {
     __typename: OutputField<'__typename', {}, [1], __typename<$Name>>
@@ -1512,7 +1512,7 @@ export type Union<
     ...OutputObject[],
   ],
 > = {
-  kind: GraphqlKit.Schema.TypeKind.Union
+  kind: GraphqlKit.Schema2.TypeKind.Union
   name: $Name
   members: $Members // Tuple preserves order
   membersUnion: $Members[number] // Union for type narrowing
@@ -1545,7 +1545,7 @@ export type Union<
 export interface Scalar<
   $Name extends string = string,
   $Decoded = unknown,
-  $Encoded extends GraphqlKit.Schema.StandardScalarRuntimeTypes = ...,
+  $Encoded extends GraphqlKit.Schema2.StandardScalarRuntimeTypes = ...,
 > {
   kind: 'Scalar'
   name: $Name

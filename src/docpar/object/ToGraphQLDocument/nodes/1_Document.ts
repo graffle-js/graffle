@@ -40,5 +40,5 @@ export interface Options {
 
 export interface Encoded {
   document: GraphqlKit.Document.Ast.DocumentNode
-  operationsVariables: Record<string, GraphqlKit.Variables>
+  operationsVariables: Record<string, GraphqlKit.Request.Variables>
 }

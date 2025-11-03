@@ -1,5 +1,5 @@
 import { Extension } from '#graffle/extension'
-import { normalizeRequestToNode } from '#src/lib/graphql-kit/request.js'
+import { normalizeRequestToNode } from '#src/lib/graphql-kit/request/__.js'
 import { Err, Rec, Str } from '@wollybeard/kit'
 
 import { Docpar } from '#src/docpar/_.js'

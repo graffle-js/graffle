@@ -12,7 +12,7 @@ export interface ConfigurationNormalized {
   /**
    * The schema to execute documents against.
    */
-  schema: GraphqlKit.Schema2.Runtime.Nodes.Schema
+  schema: GraphqlKit.Schema.Runtime.Nodes.Schema
   resolverValues?: {
     /**
      * The value to use for parent (aka. source) on _root_ resolvers.
@@ -75,7 +75,7 @@ export interface PackInput extends RequestPipeline.PackInput {
 }
 
 export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
-  request: GraphqlKit.HTTP.RequestConfig
+  request: GraphqlKit.Http.RequestConfig
 }
 
 export interface ExchangeOutput extends PackOutput {}
@@ -126,7 +126,7 @@ export const TransportMemory: TransportMemory = Extension
       )
       .pack({
         run(input) {
-          const graphqlRequest: GraphqlKit.HTTP.RequestConfig = {
+          const graphqlRequest: GraphqlKit.Http.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
             query: GraphqlKit.Document.print(input.request.query),

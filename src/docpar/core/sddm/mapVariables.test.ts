@@ -7,8 +7,8 @@ import { mapVariablesByTypeNames } from './mapVariables.js'
 
 const createRequest = (
   query: string,
-  variables?: GraphqlKit.Variables,
-): GraphqlKit.RequestAnalyzedDocumentNodeInput => {
+  variables?: GraphqlKit.Request.Variables,
+): GraphqlKit.Request.RequestAnalyzedDocumentNodeInput => {
   const document = parse(query)
   const operation = document.definitions[0] as GraphqlKit.Document.Ast.OperationDefinitionNode
   return {
@@ -72,8 +72,8 @@ Test.on(mapVariablesByTypeNames)
   .test()
 
 Test.describe('immutable mode')
-  .inputType<GraphqlKit.Variables>()
-  .outputType<GraphqlKit.Variables>()
+  .inputType<GraphqlKit.Request.Variables>()
+  .outputType<GraphqlKit.Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )
@@ -95,8 +95,8 @@ Test.describe('immutable mode')
   })
 
 Test.describe('mutable mode')
-  .inputType<GraphqlKit.Variables>()
-  .outputType<GraphqlKit.Variables>()
+  .inputType<GraphqlKit.Request.Variables>()
+  .outputType<GraphqlKit.Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )

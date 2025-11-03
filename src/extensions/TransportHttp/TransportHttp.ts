@@ -1,7 +1,7 @@
 import { Extension } from '#graffle/extension'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/graphql-kit/http/http.js'
-import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/graphql-kit/http/http.js'
+import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/graphql-kit/http/__.js'
+import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/graphql-kit/http/__.js'
 import { Http, type Prom, Str } from '@wollybeard/kit'
 import { Transport } from '../../context/fragments/transports/dataType/_.js' // TODO import from entrypoint
 
@@ -177,7 +177,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           body: postRequestEncodeBody,
         },
         run(input, slots) {
-          const graphqlRequest: GraphqlKit.HTTP.RequestConfig = {
+          const graphqlRequest: GraphqlKit.Http.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
             query: GraphqlKit.Document.print(input.request.query),

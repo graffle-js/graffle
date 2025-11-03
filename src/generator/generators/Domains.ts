@@ -115,7 +115,7 @@ const generateMethodsFile = (
     const helperName = helperNames.get(field.operationType)!
 
     // Get field definition and JSDoc
-    const rootType = config.schema.instance.getType(field.rootTypeName) as GraphqlKit.Schema2.Runtime.Nodes.ObjectType
+    const rootType = config.schema.instance.getType(field.rootTypeName) as GraphqlKit.Schema.Runtime.Nodes.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {

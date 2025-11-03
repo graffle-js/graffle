@@ -10,11 +10,11 @@ const propertyNames = {
 }
 
 interface Input {
-  isErrorType?: (value: GraphqlKit.Schema2.Runtime.Nodes.ObjectType) => boolean
+  isErrorType?: (value: GraphqlKit.Schema.Runtime.Nodes.ObjectType) => boolean
 }
 
 interface Config {
-  isErrorType: (value: GraphqlKit.Schema2.Runtime.Nodes.ObjectType) => boolean
+  isErrorType: (value: GraphqlKit.Schema.Runtime.Nodes.ObjectType) => boolean
 }
 
 const defaults: Config = {
@@ -45,7 +45,7 @@ export const SchemaErrors = (input?: Input) => {
       onOutputField: ({ config: genConfig, sddmNode, graphqlType }) => {
         const errorObjects = getErrorObjects(config, genConfig)
         const outputFieldNamedType = GraphqlKit.Schema.getNamedType(graphqlType.type)
-        const memberTypes = GraphqlKit.Schema2.Runtime.Nodes.isUnionType(outputFieldNamedType)
+        const memberTypes = GraphqlKit.Schema.Runtime.Nodes.isUnionType(outputFieldNamedType)
           ? outputFieldNamedType.getTypes()
           : null
 

@@ -1,5 +1,5 @@
 import { Extension } from '#graffle/extension'
-import type { RequestAnalyzedInput } from '#src/lib/graphql-kit/graphql.js'
+import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 import * as _ from '@wollybeard/kit/ware'
 import { createBody } from './createBody.js'
 
@@ -64,7 +64,7 @@ export const Upload = Extension
   })
   .return()
 
-const isUploadRequest = (request: RequestAnalyzedInput) => {
+const isUploadRequest = (request: GraphqlKit.Request.RequestAnalyzedInput) => {
   if (!request.variables) return false
   return Object.values(request.variables).some(_ => _ instanceof Blob)
 }
