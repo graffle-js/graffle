@@ -53,7 +53,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(
           Str.Code.TS.typeAlias$({
             name: `${scalar.name}Decoded`,
-            type: `${$.$$Utilities}.Codec.Codec.GetDecoded<${dualExportResult.internalName}['codec']>`,
+            type: `${$.$$Utilities}.Codec.GetDecoded<${dualExportResult.internalName}['codec']>`,
             export: true,
           }),
         )
@@ -61,7 +61,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(
           Str.Code.TS.typeAlias$({
             name: `${scalar.name}Encoded`,
-            type: `${$.$$Utilities}.Schema.Scalar.Codec.GetEncoded<${dualExportResult.internalName}>`,
+            type: `${$.$$Utilities}.Codec.GetEncoded<${dualExportResult.internalName}['codec']>`,
             export: true,
           }),
         )
@@ -124,8 +124,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       // dprint-ignore
       ? `$$Utilities.Schema.Scalars.Registry<
           ${Str.Code.TS.TermObject.termObject(buildtimeMap)},
-          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.Codec.GetEncoded<${renderName(_.name)}['codec']>`))},
-          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.Codec.GetDecoded<${renderName(_.name)}['codec']>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetEncoded<${renderName(_.name)}['codec']>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetDecoded<${renderName(_.name)}['codec']>`))},
         >`
       : `$$Utilities.Schema.Scalars.Registry.Empty`
 

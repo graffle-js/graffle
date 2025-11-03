@@ -28,13 +28,13 @@ export type Date = typeof CustomScalars.Date
  * This is the type you work with in your application code after the scalar
  * has been decoded from its GraphQL wire format.
  */
-export type DateDecoded = $$Utilities.Codec.Codec.GetDecoded<Date['codec']>
+export type DateDecoded = $$Utilities.Codec.GetDecoded<Date['codec']>
 /**
  * The encoded (GraphQL wire format) type for the `Date` scalar.
  *
  * This is the type used when transmitting the scalar value over the network.
  */
-export type DateEncoded = $$Utilities.Schema.Scalar.Codec.GetEncoded<Date>
+export type DateEncoded = $$Utilities.Codec.GetEncoded<Date['codec']>
 
 export * from 'graffle/generator-helpers/standard-scalar-types'
 
@@ -75,6 +75,6 @@ export type $Registry = $$Utilities.Schema.Scalars.Registry<
   {
     Date: Date
   },
-  $$Utilities.Codec.Codec.GetEncoded<Date['codec']>,
-  $$Utilities.Codec.Codec.GetDecoded<Date['codec']>
+  $$Utilities.Codec.GetEncoded<Date['codec']>,
+  $$Utilities.Codec.GetDecoded<Date['codec']>
 >
