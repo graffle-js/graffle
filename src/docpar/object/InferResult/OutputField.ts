@@ -43,5 +43,5 @@ type GetCodecForCodecless<
   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   $Node['name'] extends keyof $Schema['scalarRegistry']['map']
     // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
-    ? $Schema['scalarRegistry']['map'][$Node['name']]
-    : Schema.Standard.Scalars.String
+    ? $Schema['scalarRegistry']['map'][$Node['name']]['codec']
+    : Schema.Standard.Scalars.String['codec']
