@@ -19,7 +19,7 @@ import type { ExtractFromOperation } from './extract.js'
 export type InferFromQuery<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery,
-> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Schema.Runtime.OperationType.QUERY>
+> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Schema.OperationType.QUERY>
 
 /**
  * Infer variables from a mutation operation selection set.
@@ -27,7 +27,7 @@ export type InferFromQuery<
 export type InferFromMutation<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
-> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Schema.Runtime.OperationType.MUTATION>
+> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Schema.OperationType.MUTATION>
 
 /**
  * Infer variables from a subscription operation selection set.
@@ -35,7 +35,7 @@ export type InferFromMutation<
 export type InferFromSubscription<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription,
-> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Schema.Runtime.OperationType.SUBSCRIPTION>
+> = InferFromOperation<$SS, $ArgsMap, typeof GraphqlKit.Schema.OperationType.SUBSCRIPTION>
 
 /**
  * Infer variables from a subscription operation selection set.
@@ -44,7 +44,7 @@ export type InferFromSubscription<
 export type InferFromOperation<
   $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMap,
-  $OperationType extends GraphqlKit.Schema.Runtime.OperationType.OperationType,
+  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
   ___$OperationMap = $ArgsMap['operations'][$OperationType],
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject

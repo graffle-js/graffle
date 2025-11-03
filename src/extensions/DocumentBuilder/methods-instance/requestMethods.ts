@@ -42,7 +42,7 @@ export const createMethodDocument = (state: Context) => (document: Docpar.Object
 
 export const createMethodOperationType = (
   state: Context,
-  operationType: GraphqlKit.Schema.Runtime.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
 ) => {
   return new Proxy({}, {
     get: (_, key) => {
@@ -73,7 +73,7 @@ export const createMethodOperationType = (
 
 const buildDocumentRunnerForRootField = (
   context: Context,
-  operationType: GraphqlKit.Schema.Runtime.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   rootFieldName: string,
   rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ): DocumentRunner => {
@@ -111,7 +111,7 @@ const buildDocumentRunnerForRootField = (
 
 const buildDocumentRunner = (
   context: Context,
-  operationType: GraphqlKit.Schema.Runtime.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ): DocumentRunner => {
   const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
@@ -140,7 +140,7 @@ const buildDocumentRunner = (
 
 export const executeRootField = async (
   context: Context,
-  operationType: GraphqlKit.Schema.Runtime.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   rootFieldName: string,
   rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
@@ -160,7 +160,7 @@ export const executeRootField = async (
  * Helper to create a curried root field executor for domain-organized methods.
  * Used by the domain generator to reduce boilerplate.
  */
-export const createRootFieldExecutor = (operationType: GraphqlKit.Schema.Runtime.OperationType.OperationType) => {
+export const createRootFieldExecutor = (operationType: GraphqlKit.Schema.OperationType.OperationType) => {
   return (rootFieldName: string) => {
     return (context: Context) => {
       return (rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
@@ -174,13 +174,13 @@ export const createRootFieldExecutor = (operationType: GraphqlKit.Schema.Runtime
  * Pre-curried helpers for domain-organized methods.
  * Exported for use by generated domain modules.
  */
-export const $$query = createRootFieldExecutor(GraphqlKit.Schema.Runtime.OperationType.QUERY)
-export const $$mutation = createRootFieldExecutor(GraphqlKit.Schema.Runtime.OperationType.MUTATION)
-export const $$subscription = createRootFieldExecutor(GraphqlKit.Schema.Runtime.OperationType.SUBSCRIPTION)
+export const $$query = createRootFieldExecutor(GraphqlKit.Schema.OperationType.QUERY)
+export const $$mutation = createRootFieldExecutor(GraphqlKit.Schema.OperationType.MUTATION)
+export const $$subscription = createRootFieldExecutor(GraphqlKit.Schema.OperationType.SUBSCRIPTION)
 
 const executeOperation = async (
   context: Context,
-  operationType: GraphqlKit.Schema.Runtime.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
   return executeDocument(

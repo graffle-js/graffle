@@ -1,7 +1,5 @@
-export * as Type from './__.js'
-
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GlobalRegistry } from '../../../../types/GlobalRegistry/GlobalRegistry.js'
+import type { OperationType } from '../operation-type/_.js'
 import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'
 import type { OutputObject } from './nodes/OutputObject.js'
@@ -9,6 +7,8 @@ import type { Scalar } from './nodes/Scalar/_.js'
 import type { ScalarCodecless } from './nodes/ScalarCodecless.js'
 import type { Union } from './nodes/Union.js'
 import type * as Scalars from './scalars/__.js'
+
+export * as Type from './__.js'
 
 /**
  * A generic schema type. Any particular schema will be a subtype of this, with
@@ -19,7 +19,7 @@ export interface Type<
   $Scalars extends Scalars.Registry = Scalars.Registry,
 > {
   name: GlobalRegistry.ClientNames
-  operationsAvailable: GraphqlKit.Schema.Runtime.OperationType.OperationType[]
+  operationsAvailable: OperationType.OperationType[]
   RootUnion: OutputObject
   Root: {
     query: null | OutputObject

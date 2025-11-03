@@ -81,7 +81,7 @@ export namespace Select {
   export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
-    $$Utilities.GraphqlKit.Schema.Runtime.OperationType.QUERY
+    $$Utilities.GraphqlKit.Schema.OperationType.QUERY
   >
 
   //                                            OutputObject

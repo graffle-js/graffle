@@ -25,8 +25,8 @@ export const DocumentBuilder = Extension
   // todo add an extensions unit test that this adds properties to the context
   .properties(({ context, configuration }) => {
     const props: any = {
-      query: createMethodOperationType(context, GraphqlKit.Schema.Runtime.OperationType.QUERY),
-      mutation: createMethodOperationType(context, GraphqlKit.Schema.Runtime.OperationType.MUTATION),
+      query: createMethodOperationType(context, GraphqlKit.Schema.OperationType.QUERY),
+      mutation: createMethodOperationType(context, GraphqlKit.Schema.OperationType.MUTATION),
     }
 
     // Add domain namespaces if configured

@@ -1,7 +1,7 @@
+import { Document } from '#src/lib/graphql-kit/document/_.js'
+import type { Schema } from '#src/lib/graphql-kit/schema/_.js'
 import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode } from 'graphql'
-import type { GraphqlKit } from '../_.js'
-import { Document } from '../document/_.js'
 
 export * from './infer.js'
 
@@ -18,7 +18,7 @@ export interface RequestDocumentNodeInput {
 }
 
 export interface RequestAnalyzedInput extends RequestInput {
-  operation: GraphqlKit.Schema.Runtime.OperationType.OperationType | OperationDefinitionNode
+  operation: Schema.OperationType.OperationType | OperationDefinitionNode
 }
 
 export interface RequestAnalyzedDocumentNodeInput extends RequestDocumentNodeInput {
@@ -66,8 +66,8 @@ export type SomeObjectData = {
 
 export type SomeFieldData =
   | null
-  | GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes
-  | GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes[]
+  | Schema.Scalars.StandardScalarRuntimeTypes
+  | Schema.Scalars.StandardScalarRuntimeTypes[]
   | {
     [fieldName: string]: SomeFieldData
   }
