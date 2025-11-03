@@ -25,7 +25,7 @@ export interface Details {
     alias: string | null
   }
   type: GraphQLObjectType
-  operationType: OperationType
+  operationType: OperationType.OperationType
 }
 
 export const detailsFromObjectType = (
