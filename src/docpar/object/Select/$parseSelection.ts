@@ -1,6 +1,6 @@
-import { Select } from './../Select/$.js'
-import type { SelectionSet } from './$$.js'
-import { Arguments, Directive, Indicator, InlineFragment, SelectAlias, SelectScalarsWildcard } from './$$.js'
+import { Select } from './../Select/_.js'
+import type { SelectionSet } from './__.js'
+import { Arguments, Directive, Indicator, InlineFragment, SelectAlias, SelectScalarsWildcard } from './__.js'
 
 export interface ParsedSelectionArguments {
   type: 'Arguments'

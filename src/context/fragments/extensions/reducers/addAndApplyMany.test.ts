@@ -5,7 +5,7 @@ import { test } from '#test/helpers'
 import { Fn, Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { contextEmpty } from '../../../ContextEmpty.js'
-import { Configuration } from '../../configuration/$.js'
+import { Configuration } from '../../configuration/_.js'
 import { propertiesComputerPreflight$Func } from '../../properties/_tests/_fixtures.js'
 import { addAndApplyMany } from './addAndApplyMany.js'
 

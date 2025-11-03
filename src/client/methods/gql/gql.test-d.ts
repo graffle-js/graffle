@@ -1,4 +1,4 @@
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import { Graffle } from '#src/exports/index.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
@@ -270,7 +270,7 @@ clientWithoutSDDM.gql(sddmDoc)
 //                           TRANSPORT PREFLIGHT CHECKS
 // ==================================================================================================
 
-import type { Context } from '#src/context/$.js'
+import type { Context } from '#src/context/_.js'
 import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '#test/fixtures/transports'
 import { g0 } from '#test/helpers'
 

@@ -3,7 +3,7 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/graphql-kit/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/graphql-kit/http/http.js'
 import { Http, type Prom, Str } from '@wollybeard/kit'
-import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
+import { Transport } from '../../context/fragments/transports/dataType/_.js' // TODO import from entrypoint
 
 // ----------------------------
 // URL Input Types

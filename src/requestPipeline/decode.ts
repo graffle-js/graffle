@@ -1,5 +1,5 @@
 import { Schema } from '#graffle/schema'
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Kind } from 'graphql'
 

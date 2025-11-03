@@ -1,4 +1,4 @@
-import type { Select } from '#src/docpar/object/Select/$.js'
+import type { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { parseType } from 'graphql'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'

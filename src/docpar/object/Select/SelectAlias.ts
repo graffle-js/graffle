@@ -1,4 +1,4 @@
-import type { Indicator } from './Indicator/$.js'
+import type { Indicator } from './Indicator/_.js'
 import type { AnyExceptAlias } from './selectionSet.js'
 
 export type SelectAlias<$SelectionSet = AnyExceptAlias> =

@@ -6,7 +6,7 @@ export type * from '#src/lib/graphql-kit/http/http.js'
 export type * from '#src/requestPipeline/RequestPipeline.js'
 export type * from '#src/types/Schema/scalars/__.js'
 export type { Ware } from '@wollybeard/kit'
-export { type Normalized } from '../context/fragments/configuration/output/$$.js'
+export { type Normalized } from '../context/fragments/configuration/output/__.js'
 export type * from '../docpar/object/Select/context.js'
 export type {
   AnyExceptAlias as SelectionSetAnyExceptAlias,

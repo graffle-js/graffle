@@ -2,7 +2,7 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
-import type { Docpar } from '../../$.js'
+import type { Docpar } from '../../_.js'
 import { mapVariablesByTypeNames } from './mapVariables.js'
 
 const createRequest = (

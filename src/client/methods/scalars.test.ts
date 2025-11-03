@@ -1,6 +1,6 @@
 import { type GlobalRegistry } from '#graffle/utilities-for-generated'
 import { contextEmpty } from '#src/context/ContextEmpty.js'
-import type { Docpar } from '#src/docpar/$.js'
+import type { Docpar } from '#src/docpar/_.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'

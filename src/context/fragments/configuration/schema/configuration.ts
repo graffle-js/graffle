@@ -1,4 +1,4 @@
-import type { Docpar } from '#src/docpar/$.js'
+import type { Docpar } from '#src/docpar/_.js'
 import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import { Configurator } from '@wollybeard/kit'
 

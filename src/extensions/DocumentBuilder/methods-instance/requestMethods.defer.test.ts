@@ -1,4 +1,4 @@
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import { describe, expect, test } from 'vitest'
 
 const $ = Docpar.Object.Var.$

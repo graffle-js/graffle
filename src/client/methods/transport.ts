@@ -3,7 +3,7 @@ import type { ContextTransports, ContextTransportsNonEmpty } from '#src/context/
 import type { AddMany } from '#src/context/fragments/transports/reducers/addMany.js'
 import type { NoExcess } from '#src/utils.js'
 import type { Obj } from '@wollybeard/kit'
-import { Transports } from '../../context/fragments/transports/$.js'
+import { Transports } from '../../context/fragments/transports/_.js'
 import type { Client } from '../client.js'
 
 // todo remove the JSDoc comments below. They will not be shown.

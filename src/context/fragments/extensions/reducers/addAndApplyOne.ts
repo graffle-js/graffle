@@ -3,7 +3,7 @@
 import type { Context } from '../../../context.js'
 // import type { Properties } from '../../properties/$.js'
 // import type { Transports } from '../../transports/$.js'
-import type { Extension } from '../dataType/$.js'
+import type { Extension } from '../dataType/_.js'
 import type { AddAndApplyMany } from './addAndApplyMany.js'
 
 // dprint-ignore

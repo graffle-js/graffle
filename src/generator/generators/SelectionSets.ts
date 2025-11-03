@@ -4,7 +4,7 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { analyzeArgsNullability } from '#src/lib/graphql-kit/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
-import { Docpar } from '../../docpar/$.js'
+import { Docpar } from '../../docpar/_.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {

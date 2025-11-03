@@ -1,6 +1,6 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import { Str } from '@wollybeard/kit'
 
 const propertyNames = Docpar.propertyNames

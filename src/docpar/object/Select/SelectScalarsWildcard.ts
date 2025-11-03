@@ -1,4 +1,4 @@
-import type { Indicator } from './$$.js'
+import type { Indicator } from './__.js'
 
 export const key = `$scalars`
 

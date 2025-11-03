@@ -1,8 +1,8 @@
 // dprint-ignore-file
-import type { Docpar } from './$.js'
+import type { Docpar } from './_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
-import type { Core } from './core/$.js'
+import type { Core } from './core/_.js'
 import { $ } from './object/var/var.js'
 import { createGql } from '#src/static/gql.js'
 

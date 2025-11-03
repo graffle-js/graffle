@@ -3,7 +3,7 @@ import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import { $ } from '#src/docpar/object/var/var.js'
-import type { Core } from '#src/docpar/core/$.js'
+import type { Core } from '#src/docpar/core/_.js'
 import { test } from 'vitest'
 
 type D<$Op extends Core.Operation> = Core.Doc.Document<$Op>

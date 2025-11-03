@@ -1,6 +1,6 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Arr, Obj, Ts } from '@wollybeard/kit'
-import type { Select } from './$.js'
+import type { Select } from './_.js'
 import type { DefaultContext } from './context.js'
 
 export type OperationName = string

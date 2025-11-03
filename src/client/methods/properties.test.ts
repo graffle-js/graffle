@@ -9,7 +9,7 @@ import {
 import { test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
-import { type Configuration } from '../../context/fragments/configuration/$.js'
+import { type Configuration } from '../../context/fragments/configuration/_.js'
 import { type Client_justContext } from '../client.js'
 
 test(`initial context is empty`, ({ g0 }) => {

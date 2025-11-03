@@ -1,4 +1,4 @@
-import type { Select } from '#src/docpar/object/Select/$.js'
+import type { Select } from '#src/docpar/object/Select/_.js'
 
 // dprint-ignore
 export type IsNeverViaDirective<$SelectionSet> =

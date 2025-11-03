@@ -1,4 +1,4 @@
-export * from './dataType/$.js'
+export * from './dataType/_.js'
 export * from './fragment.js'
 export * from './reducers/addMany.js'
 export * from './reducers/configure.js'

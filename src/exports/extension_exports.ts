@@ -1,5 +1,5 @@
-export * from '../context/fragments/extensions/dataType/$$.js'
+export * from '../context/fragments/extensions/dataType/__.js'
 // export * from '../context/fragments/properties/$.js'
 export { Configurator } from '@wollybeard/kit'
-export * from '../context/fragments/transports/dataType/$.js'
+export * from '../context/fragments/transports/dataType/_.js'
 export * from '../generator/extension/$.js'

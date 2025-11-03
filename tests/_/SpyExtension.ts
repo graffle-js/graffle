@@ -1,5 +1,5 @@
 import { Extension } from '#src/exports/extension.js'
-import type { RequestPipeline } from '#src/requestPipeline/$.js'
+import type { RequestPipeline } from '#src/requestPipeline/__.js'
 import { beforeEach } from 'vitest'
 
 interface SpyData {

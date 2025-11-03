@@ -5,7 +5,7 @@
  * that tell you exactly what went wrong and where.
  */
 
-import type { Core } from '../core/$.js'
+import type { Core } from '../core/_.js'
 
 /**
  * Failed to parse operation keyword (query/mutation/subscription).

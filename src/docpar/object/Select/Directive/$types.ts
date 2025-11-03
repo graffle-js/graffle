@@ -1,5 +1,5 @@
 import type { Schema } from '#src/types/Schema/_.js'
-import type { Include, Skip } from './$$.js'
+import type { Include, Skip } from './__.js'
 
 export interface Definition {
   name: string

@@ -1,6 +1,6 @@
-import type { Core } from './core/$.js'
-import type { Object } from './object/$.js'
-import type { String } from './string/$.js'
+import type { Core } from './core/_.js'
+import type { Object } from './object/_.js'
+import type { String } from './string/_.js'
 
 /**
  * Unified GraphQL document parser that dispatches based on input type.

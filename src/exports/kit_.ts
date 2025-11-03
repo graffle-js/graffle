@@ -1,4 +1,4 @@
-export { Context } from '../context/$.js'
+export { Context } from '../context/_.js'
 import { type Context as Context_ } from '#src/context/context.js'
 export type Context = Context_
 

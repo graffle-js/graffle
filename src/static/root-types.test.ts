@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { Docpar } from '../docpar/$.js'
+import { Docpar } from '../docpar/_.js'
 import { GraphqlKit } from '../lib/graphql-kit/_.js'
 
 describe('createStaticRootType', () => {

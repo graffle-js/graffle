@@ -1,4 +1,4 @@
-import { Docpar } from '#src/docpar/$.js'
+import { Docpar } from '#src/docpar/_.js'
 import { GraffleBasic } from '#src/exports/presets/basic.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Schema } from '#src/types/Schema/_.js'

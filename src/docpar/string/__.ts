@@ -1,6 +1,6 @@
 import type { Schema } from '#src/types/Schema/_.js'
 import type { Ts } from '@wollybeard/kit'
-import type { Doc } from '../$$.js'
+import type { Doc } from '../__.js'
 import type { ParseDocument } from './parser.js'
 export type { ParseDocument } from './parser.js'
 export type { AbstractSetupSchema, SchemaOfSetup } from './schema.js'

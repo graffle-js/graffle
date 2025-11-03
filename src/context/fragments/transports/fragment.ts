@@ -2,7 +2,7 @@ import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '#src/requestPipeline/RequestPipeline.js'
 import { Obj } from '@wollybeard/kit'
 import type { Configurator } from '@wollybeard/kit'
-import type { Transport } from './dataType/$.js'
+import type { Transport } from './dataType/_.js'
 
 export interface ContextTransportsEmpty extends ContextTransports {
   readonly registry: Obj.EmptyObject

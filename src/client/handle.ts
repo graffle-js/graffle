@@ -12,8 +12,8 @@ import type { GraphQLExecutionResultError } from '#src/lib/graphql-kit/graphql.j
 import { Err, Ware } from '@wollybeard/kit'
 import type { Null, Obj, Ts, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
-import type { RequestPipeline } from '../requestPipeline/$.js'
-import type { RequestResult } from '../types/RequestResult/$.js'
+import type { RequestPipeline } from '../requestPipeline/__.js'
+import type { RequestResult } from '../types/RequestResult/_.js'
 
 export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 

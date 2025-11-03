@@ -1,6 +1,6 @@
 import { Arr, Obj } from '@wollybeard/kit'
 import type { EmptyObject } from 'type-fest'
-import type { Extension } from './dataType/$.js'
+import type { Extension } from './dataType/_.js'
 
 export * from '#src/client/methods/transport.js'
 export * from './reducers/addAndApplyMany.js'

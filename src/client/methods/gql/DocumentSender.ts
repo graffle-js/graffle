@@ -1,5 +1,5 @@
-import type { Configuration } from '#src/context/fragments/configuration/$.js'
-import type { Docpar } from '#src/docpar/$.js'
+import type { Configuration } from '#src/context/fragments/configuration/_.js'
+import type { Docpar } from '#src/docpar/_.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/graphql-kit/document/typed/__.js'
 import type { Ts } from '@wollybeard/kit'

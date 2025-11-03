@@ -1,12 +1,12 @@
 // dprint-ignore-file
-import type { RequestResult } from '#src/types/RequestResult/$.js'
+import type { RequestResult } from '#src/types/RequestResult/_.js'
 import type { Schema } from '#src/types/Schema/_.js'
 import type { DateScalar } from '#test/fixtures/scalars'
 import type { Possible } from '#test/schema/possible/client/$.js'
 import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import type { db } from '#test/schema/possible/db.js'
 import { Ts } from '@wollybeard/kit'
-import type { InferResult } from './$.js'
+import type { InferResult } from './_.js'
 
 const A = Ts.Assert
 

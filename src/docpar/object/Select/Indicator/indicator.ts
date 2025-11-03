@@ -1,5 +1,5 @@
 import type { Ts } from '@wollybeard/kit'
-import type { Directive } from '../$$.js'
+import type { Directive } from '../__.js'
 import { isNegativeIndicator, type Negative } from './negative.js'
 import { isPositiveIndicator, type Positive } from './positive.js'
 

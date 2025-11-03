@@ -1,5 +1,5 @@
 import type { HandleOutput } from '#src/client/handle.js'
-import type { Docpar } from '#src/docpar/$.js'
+import type { Docpar } from '#src/docpar/_.js'
 import { Arr, type Ts } from '@wollybeard/kit'
 
 // dprint-ignore
