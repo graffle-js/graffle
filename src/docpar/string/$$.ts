@@ -76,6 +76,3 @@ export interface AbstractSetupCache {
   readonly __cacheDisabled: unknown
   [key: string]: unknown
 }
-
-// Re-export commonly used types
-export type { GetFieldOutputType } from './typeTraversal.js'

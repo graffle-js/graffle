@@ -273,6 +273,82 @@ A.exact.ofAs<OpDefaultStatus>().onAs<Loose<'{ status }'>>()
 A.exact.ofAs<OpDefaultStatus>().onAs<Loose<{ query: { default: { status: true } } }>>()
 
 // ==================================================================================================
+//                                   List Types
+// ==================================================================================================
+
+// Expected operation types - Scalar lists
+type OpDefaultListIntNonNull = D<{ name: 'default'; result: { listIntNonNull: number[] }; variables: {} }>
+type OpDefaultListInt = D<{ name: 'default'; result: { listInt: null | (null | number)[] }; variables: {} }>
+type OpDefaultListListIntNonNull = D<{ name: 'default'; result: { listListIntNonNull: number[][] }; variables: {} }>
+type OpDefaultListListInt = D<{ name: 'default'; result: { listListInt: null | (null | (null | number)[])[] }; variables: {} }>
+
+// Expected operation types - Custom scalar lists
+type OpDefaultDateList = D<{ name: 'default'; result: { dateList: Date[] | null }; variables: {} }>
+type OpDefaultDateListNonNull = D<{ name: 'default'; result: { dateListNonNull: Date[] }; variables: {} }>
+
+// Expected operation types - Object lists
+type OpDefaultObjectList = D<{ name: 'default'; result: { objectList: { id: string | null }[] | null }; variables: {} }>
+type OpDefaultObjectListNonNull = D<{ name: 'default'; result: { objectListNonNull: { id: string | null }[] }; variables: {} }>
+
+// Loose mode operation types
+type OpDefaultListIntNonNullLoose = D<{ name: 'default'; result: { listIntNonNull: unknown }; variables: {} }>
+type OpDefaultListIntLoose = D<{ name: 'default'; result: { listInt: unknown }; variables: {} }>
+type OpDefaultDateListLoose = D<{ name: 'default'; result: { dateList: unknown }; variables: {} }>
+type OpDefaultObjectListLoose = D<{ name: 'default'; result: { objectList: { id: unknown } | null }; variables: {} }>
+
+// Non-null list of non-null scalars - [Int!]!
+A.exact.ofAs<OpDefaultListIntNonNull>().onAs<Strict<'{ listIntNonNull }'>>()
+A.exact.ofAs<OpDefaultListIntNonNull>()
+       .onAs<Strict<{ query: { default: { listIntNonNull: true } } }>>()
+A.exact.ofAs<OpDefaultListIntNonNullLoose>().onAs<Loose<'{ listIntNonNull }'>>()
+A.exact.ofAs<OpDefaultListIntNonNullLoose>()
+       .onAs<Loose<{ query: { default: { listIntNonNull: true } } }>>()
+
+// Nullable list of nullable scalars - [Int]
+A.exact.ofAs<OpDefaultListInt>().onAs<Strict<'{ listInt }'>>()
+A.exact.ofAs<OpDefaultListInt>()
+       .onAs<Strict<{ query: { default: { listInt: true } } }>>()
+A.exact.ofAs<OpDefaultListIntLoose>().onAs<Loose<'{ listInt }'>>()
+A.exact.ofAs<OpDefaultListIntLoose>()
+       .onAs<Loose<{ query: { default: { listInt: true } } }>>()
+
+// Non-null list of non-null lists of non-null scalars - [[Int!]!]!
+A.exact.ofAs<OpDefaultListListIntNonNull>().onAs<Strict<'{ listListIntNonNull }'>>()
+A.exact.ofAs<OpDefaultListListIntNonNull>()
+       .onAs<Strict<{ query: { default: { listListIntNonNull: true } } }>>()
+
+// Nullable list of nullable lists of nullable scalars - [[Int]]
+A.exact.ofAs<OpDefaultListListInt>().onAs<Strict<'{ listListInt }'>>()
+A.exact.ofAs<OpDefaultListListInt>()
+       .onAs<Strict<{ query: { default: { listListInt: true } } }>>()
+
+// Custom scalar lists - [Date]
+A.exact.ofAs<OpDefaultDateList>().onAs<Strict<'{ dateList }'>>()
+A.exact.ofAs<OpDefaultDateList>()
+       .onAs<Strict<{ query: { default: { dateList: true } } }>>()
+A.exact.ofAs<OpDefaultDateListLoose>().onAs<Loose<'{ dateList }'>>()
+A.exact.ofAs<OpDefaultDateListLoose>()
+       .onAs<Loose<{ query: { default: { dateList: true } } }>>()
+
+// Custom scalar lists - [Date!]!
+A.exact.ofAs<OpDefaultDateListNonNull>().onAs<Strict<'{ dateListNonNull }'>>()
+A.exact.ofAs<OpDefaultDateListNonNull>()
+       .onAs<Strict<{ query: { default: { dateListNonNull: true } } }>>()
+
+// Object lists with selections - [Object]
+A.exact.ofAs<OpDefaultObjectList>().onAs<Strict<'{ objectList { id } }'>>()
+A.exact.ofAs<OpDefaultObjectList>()
+       .onAs<Strict<{ query: { default: { objectList: { id: true } } } }>>()
+A.exact.ofAs<OpDefaultObjectListLoose>().onAs<Loose<'{ objectList { id } }'>>()
+A.exact.ofAs<OpDefaultObjectListLoose>()
+       .onAs<Loose<{ query: { default: { objectList: { id: true } } } }>>()
+
+// Object lists with selections - [Object!]!
+A.exact.ofAs<OpDefaultObjectListNonNull>().onAs<Strict<'{ objectListNonNull { id } }'>>()
+A.exact.ofAs<OpDefaultObjectListNonNull>()
+       .onAs<Strict<{ query: { default: { objectListNonNull: { id: true } } } }>>()
+
+// ==================================================================================================
 //                                   Variable Definitions
 // ==================================================================================================
 
