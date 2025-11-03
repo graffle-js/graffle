@@ -1,5 +1,6 @@
 export * from './document/_.js'
 export * from './graphql.js'
 export * as HTTP from './http/http.js'
+export { Schema as Schema2 } from './schema/_.js'
 export * as Schema from './schema/schema.js'
 export * from './utils.js'

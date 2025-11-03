@@ -78,7 +78,7 @@ interface ConfigSchema {
   via: ConfigInit['schema']['type']
   sdl: string
   sdlFilePath: null | string
-  instance: GraphqlKit.Schema.Schema
+  instance: GraphqlKit.Schema2.Runtime.Nodes.Schema
   kindMap: GraphqlKit.Schema.KindMap
 }
 
@@ -151,7 +151,7 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
     configInit.defaultSchemaUrl === false
       ? null
       : typeof configInit.defaultSchemaUrl === `boolean` || configInit.defaultSchemaUrl === undefined
-        ? configInit.schema instanceof GraphqlKit.Schema.Schema
+        ? configInit.schema instanceof GraphqlKit.Schema2.Runtime.Nodes.Schema
           ? null
           : configInit.schema.type === `url`
             ? configInit.schema.url

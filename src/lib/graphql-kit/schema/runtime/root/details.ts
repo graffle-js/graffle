@@ -1,12 +1,12 @@
 import type { GraphQLObjectType } from 'graphql'
-import { Document } from '../document/_.js'
-import type { RootTypeMap } from './RootTypeMap.js'
-import { type StandardRootTypeName } from './StandardRootTypeName.js'
+import { Document } from '../../../document/_.js'
+import type { Map } from './map.js'
+import { type StandardRootTypeName } from './standard.js'
 
 /**
  * Details about if and how the root type name has been customized in this schema.
  */
-export interface RootDetails {
+export interface Details {
   name: {
     /**
      * If alias present then the alias, otherwise the standard.
@@ -27,10 +27,10 @@ export interface RootDetails {
   operationType: Document.Ast.OperationType.OperationType
 }
 
-export const createFromObjectType = (
+export const detailsFromObjectType = (
   objectType: GraphQLObjectType,
   standardName: StandardRootTypeName,
-): RootDetails => {
+): Details => {
   return {
     name: {
       canonical: objectType.name,
@@ -44,11 +44,11 @@ export const createFromObjectType = (
 
 export const createFromObjectTypeAndMapOrThrow = (
   objectType: GraphQLObjectType,
-  rootTypeMap: RootTypeMap,
-): RootDetails => {
+  rootTypeMap: Map,
+): Details => {
   const standardName = rootTypeMap.names.fromActual[objectType.name]
   if (!standardName) {
     throw new Error(`Given object type does not map to any of the root type names: ${objectType.name}`)
   }
-  return createFromObjectType(objectType, standardName)
+  return detailsFromObjectType(objectType, standardName)
 }

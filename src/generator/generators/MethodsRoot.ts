@@ -1,6 +1,6 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/RootDetails.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/runtime/root/details.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -179,25 +179,26 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   },
 )
 
-const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType }>(({ node, config, code }) => {
-  const fieldMethods = renderFieldMethods({ config, node })
-  const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
+const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtime.Nodes.ObjectType }>(
+  ({ node, config, code }) => {
+    const fieldMethods = renderFieldMethods({ config, node })
+    const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
 
-  // Interface JSDoc
-  const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
-  if (interfaceDoc) {
-    code(Str.Code.TSDoc.format(interfaceDoc))
-  }
+    // Interface JSDoc
+    const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
+    if (interfaceDoc) {
+      code(Str.Code.TSDoc.format(interfaceDoc))
+    }
 
-  // dprint-ignore
-  code`export interface ${node.name}Methods<$Context extends ${$.$$Utilities}.Context> {`
+    // dprint-ignore
+    code`export interface ${node.name}Methods<$Context extends ${$.$$Utilities}.Context> {`
 
-  // $batch JSDoc
-  const batchDoc = getBatchMethodDoc(operationType)
-  code(Str.Code.TSDoc.format(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
+    // $batch JSDoc
+    const batchDoc = getBatchMethodDoc(operationType)
+    code(Str.Code.TSDoc.format(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
-  // dprint-ignore
-  code`
+    // dprint-ignore
+    code`
       $batch:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
@@ -221,12 +222,12 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType 
         >
   `
 
-  // __typename JSDoc
-  const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(Str.Code.TSDoc.format(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
+    // __typename JSDoc
+    const typenameDoc = getTypenameMethodDoc(node.name, operationType)
+    code(Str.Code.TSDoc.format(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
-  // dprint-ignore
-  code`
+    // dprint-ignore
+    code`
       __typename:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
@@ -243,23 +244,25 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType 
       ${fieldMethods}
     }
   `
-})
+  },
+)
 
-const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectType }>(({ node, config, code }) => {
-  for (const field of Object.values(node.getFields())) {
-    const docContent = getOutputFieldMethodDoc(config, field, node)
-    if (docContent) {
-      code(Str.Code.TSDoc.format(docContent))
-    }
+const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtime.Nodes.ObjectType }>(
+  ({ node, config, code }) => {
+    for (const field of Object.values(node.getFields())) {
+      const docContent = getOutputFieldMethodDoc(config, field, node)
+      if (docContent) {
+        code(Str.Code.TSDoc.format(docContent))
+      }
 
-    const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(field.type)
+      const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(field.type)
 
-    const isOptional = GraphqlKit.Schema.isScalarType(fieldTypeUnwrapped)
-      && GraphqlKit.Schema.Args.isAllArgsNullable(field.args)
+      const isOptional = GraphqlKit.Schema2.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
+        && GraphqlKit.Schema2.Runtime.Args.analyzeNullability(field.args).isAllNullable
 
-    const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
-    // dprint-ignore
-    code`
+      const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
+      // dprint-ignore
+      code`
       ${field.name}:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
@@ -284,8 +287,9 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.ObjectT
             >
         >
     `
-  }
-})
+    }
+  },
+)
 
 // ========================================
 // Domain Grouping Helpers
@@ -787,7 +791,7 @@ const renderDomainType = createCodeGenerator<{
     const rootTypeName = field.rootTypeName
     const { operationType } = field
 
-    const rootType = config.schema.instance.getType(rootTypeName) as GraphqlKit.Schema.ObjectType
+    const rootType = config.schema.instance.getType(rootTypeName) as GraphqlKit.Schema2.Runtime.Nodes.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
@@ -796,8 +800,8 @@ const renderDomainType = createCodeGenerator<{
     }
 
     const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(fieldDef.type)
-    const isOptional = GraphqlKit.Schema.isScalarType(fieldTypeUnwrapped)
-      && GraphqlKit.Schema.Args.isAllArgsNullable(fieldDef.args)
+    const isOptional = GraphqlKit.Schema2.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
+      && GraphqlKit.Schema2.Runtime.Args.analyzeNullability(fieldDef.args).isAllNullable
 
     // dprint-ignore
     code`

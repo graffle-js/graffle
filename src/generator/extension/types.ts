@@ -19,11 +19,11 @@ export interface SchemaHookParams {
 export interface ObjectTypeHookParams {
   config: Config
   sddmNode: Str.Code.TS.TermObject.TermObject
-  graphqlType: GraphqlKit.Schema.ObjectType
+  graphqlType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType
 }
 
 export interface OutputFieldHookParams {
   config: Config
   sddmNode: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
-  graphqlType: GraphqlKit.Schema.Field<any, any>
+  graphqlType: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>
 }

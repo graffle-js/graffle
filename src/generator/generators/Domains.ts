@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/RootDetails.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/runtime/root/details.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'
@@ -115,7 +115,7 @@ const generateMethodsFile = (
     const helperName = helperNames.get(field.operationType)!
 
     // Get field definition and JSDoc
-    const rootType = config.schema.instance.getType(field.rootTypeName) as GraphqlKit.Schema.ObjectType
+    const rootType = config.schema.instance.getType(field.rootTypeName) as GraphqlKit.Schema2.Runtime.Nodes.ObjectType
     const fieldDef = rootType.getFields()[field.fieldName]!
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
