@@ -4,13 +4,6 @@ import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarT
 import type { KindMap } from './schema/schema.js'
 import { isScalarTypeCustom } from './schema/schema.js'
 
-export {
-  type ExecutionResult,
-  type FormattedExecutionResult,
-  GraphQLError,
-  type GraphQLFormattedError as FormattedExecutionResultError,
-} from 'graphql'
-
 export const getTypeAndKind = (
   node: GraphQLNamedType,
 ): {

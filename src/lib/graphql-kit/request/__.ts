@@ -3,6 +3,8 @@ import type { GraphQLError, OperationDefinitionNode } from 'graphql'
 import type { GraphqlKit } from '../_.js'
 import { Document } from '../document/_.js'
 
+export * from './infer.js'
+
 export interface RequestInput {
   query: string | Document.Typed.TypedDocumentLike
   variables?: Variables | undefined

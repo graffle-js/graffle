@@ -1,6 +1,5 @@
 import { Extension } from '#graffle/extension'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { execute } from '#src/lib/graphql-kit/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 
@@ -139,7 +138,7 @@ export const TransportMemory: TransportMemory = Extension
       })
       .exchange({
         run: async (input) => {
-          const result = await execute({
+          const result = await GraphqlKit.Execute.execute({
             schema: input.transport.schema,
             request: input.request,
             resolverValues: input.transport.resolverValues, // todo: test case that this is passed correctly

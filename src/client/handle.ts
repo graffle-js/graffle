@@ -18,9 +18,9 @@ export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
     // formatted comes from http transport
-    | GraphqlKit.FormattedExecutionResultError
+    | GraphqlKit.Execute.FormattedExecutionResultError
     // unformatted comes from memory transport
-    | GraphqlKit.GraphQLError
+    | GraphqlKit.Execute.GraphQLError
   >
   data?: GraphqlKit.Request.SomeObjectData | null
   extensions?: ObjMap

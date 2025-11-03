@@ -1,6 +1,6 @@
 export * from './document/_.js'
+export * from './execute/_.js'
 export * from './graphql.js'
 export * from './http/_.js'
 export * from './request/_.js'
 export * from './schema/_.js'
-export * from './utils.js'
