@@ -25,14 +25,15 @@ type FieldType<
   $Node extends Schema.OutputObject                      ? $SelectionSet extends object
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>
                                                             : Ts.Err.StaticError<'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
-  $Node extends Schema.Scalar                            ? Schema.Scalar.GetDecoded<$Node> : // TODO use TS compiler API to extract this type at build time.
   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   $Node extends Schema.Scalar.ScalarCodecless            ? Schema.Scalar.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
   $Node extends Schema.__typename                        ? $Node['value'] :
-  $Node extends Schema.Enum                              ? $Node['membersUnion'] :
-  $Node extends Schema.Interface                         ? Interface<$SelectionSet, $Schema, $Node> :
-  $Node extends Schema.Union                             ? Union<$SelectionSet, $Schema, $Node> :
-                                                           Ts.Err.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }>
+  [Schema.ResolveLeafType<$Node>] extends [never]        ? $Node extends Schema.Interface
+                                                              ? Interface<$SelectionSet, $Schema, $Node>
+                                                              : $Node extends Schema.Union
+                                                                ? Union<$SelectionSet, $Schema, $Node>
+                                                                : Ts.Err.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }> :
+                                                           Schema.ResolveLeafType<$Node>
 
 // dprint-ignore
 type GetCodecForCodecless<

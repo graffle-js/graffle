@@ -14,6 +14,36 @@ export type GetNamedType<$Type> =
       $Type
 
 /**
+ * Resolve a leaf schema node to its TypeScript type.
+ *
+ * A "leaf type" is a schema type that doesn't require a selection set:
+ * - **Scalar**: Resolved using its codec's decoded type
+ * - **Enum**: Resolved to its union of member values
+ *
+ * For non-leaf types (OutputObject, Interface, Union), returns `never` to indicate
+ * the caller must handle selection set traversal separately.
+ *
+ * @example
+ * ```typescript
+ * type T1 = ResolveLeafType<Schema.Scalar.String>  // string
+ * type T2 = ResolveLeafType<Schema.Scalar.Int>     // number
+ * type T3 = ResolveLeafType<MyEnumType>            // 'A' | 'B' | 'C'
+ * type T4 = ResolveLeafType<OutputObjectType>      // never (not a leaf)
+ * ```
+ *
+ * @remarks
+ * This utility is used by both the string and object parsers to avoid duplicating
+ * the same Scalar/Enum resolution logic. It consolidates the shared transformation
+ * of schema nodes to TypeScript types for terminal/leaf types.
+ *
+ * @see {@link GetNamedType} - Unwraps List/Nullable wrappers to get the named type
+ */
+export type ResolveLeafType<$Type> =
+  $Type extends Schema.Scalar ? Schema.Scalar.GetDecoded<$Type>
+  : $Type extends Schema.Enum ? $Type['membersUnion']
+  : never
+
+/**
  * Define a schema type
  */
 export type Define<$Type extends Partial<Schema>> = $Type & Schema

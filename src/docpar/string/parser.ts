@@ -1,7 +1,7 @@
 import type { Schema } from '#src/types/Schema/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
 import type { Core, ParserContext } from '../core/$.js'
-import type { ApplyInlineType } from './typeTraversal.js'
+import type { InlineType } from '../core/sddm/InlineType.js'
 
 // ============================================================================
 // Schema-less Mode Support
@@ -407,7 +407,7 @@ type ParseFieldAfterName<
       $ParentType,
       $Schema,
       & $Result
-      & Record<$FieldName, ApplyInlineType<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
+      & Record<$FieldName, InlineType.Infer<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
       $Depth
     >
 
@@ -432,7 +432,7 @@ type ParseFieldAfterArguments<
       $ParentType,
       $Schema,
       & $Result
-      & Record<$FieldName, ApplyInlineType<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
+      & Record<$FieldName, InlineType.Infer<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
       $Depth
     >
 
@@ -453,7 +453,7 @@ type ParseFieldWithNestedSelection<
       SkipIgnored<$Rest & string>,
       $ParentType,
       $Schema,
-      $Result & Record<$FieldName, ApplyInlineType<$Field['inlineType'], $NestedResult>>,
+      $Result & Record<$FieldName, InlineType.Infer<$Field['inlineType'], $NestedResult>>,
       $Depth
     >
   : ParseSelectionSet<$Input, $Field['namedType'], $Schema> // Error
@@ -464,7 +464,7 @@ type ParseFieldWithNestedSelection<
         SkipIgnored<$Rest & string>,
         $ParentType,
         $Schema,
-        $Result & Record<$FieldName, ApplyInlineType<$Field['inlineType'], $NestedResult>>,
+        $Result & Record<$FieldName, InlineType.Infer<$Field['inlineType'], $NestedResult>>,
         $Depth
       >
     : ParseSelectionSet<$Input, UniversalObject, $Schema> // Error
@@ -474,16 +474,21 @@ type ParseFieldWithNestedSelection<
   }>
 
 /**
- * Resolve a named type to its TypeScript type (for scalars/enums).
+ * Resolve a named type to its TypeScript type.
+ *
+ * Uses {@link Schema.ResolveLeafType} for leaf types (Scalar/Enum),
+ * and passes through non-leaf types (OutputObject/Interface/Union) for
+ * the caller to handle with selection set traversal.
+ *
  * Handles UnknownScalar for schema-less mode.
  */
 type ResolveNamedType<$Type, $Schema extends Schema | undefined> = $Type extends UnknownScalar ? unknown
-  : $Type extends Schema.Scalar ? Schema.Scalar.GetDecoded<$Type>
-  : $Type extends Schema.OutputObject ? $Type // Objects need nested selection
-  : $Type extends { kind: 'Interface' } ? $Type
-  : $Type extends { kind: 'Union' } ? $Type
-  : $Type extends Schema.Enum ? $Type['membersUnion']
-  : unknown
+  : [Schema.ResolveLeafType<$Type>] extends [never]
+    ? $Type extends Schema.OutputObject ? $Type // Objects need nested selection
+    : $Type extends { kind: 'Interface' } ? $Type
+    : $Type extends { kind: 'Union' } ? $Type
+    : unknown
+  : Schema.ResolveLeafType<$Type>
 
 // ============================================================================
 // Character-by-character utilities
