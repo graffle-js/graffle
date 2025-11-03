@@ -82,7 +82,7 @@ export namespace Select {
     $$Utilities.Docpar.Object.InferResult.Operation<
       $SelectionSet,
       $$Schema.Schema,
-      $$Utilities.GraphqlKit.Document.Ast.OperationType.MUTATION
+      $$Utilities.GraphqlKit.Schema.Runtime.OperationType.MUTATION
     >
 
   //                                            OutputObject

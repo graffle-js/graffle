@@ -34,7 +34,7 @@ export type Parse<
         InferOperation<
           $Document[operationType][operationName],
           $Context,
-          GraphqlKit.Document.Ast.OperationType.FromString<operationType & string>,
+          GraphqlKit.Schema.Runtime.OperationType.FromString<operationType & string>,
           operationName
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
@@ -84,7 +84,7 @@ export type InferOperations<
  * type Op = InferOperation<
  *   { id: true, name: true },
  *   MyContext,
- *   GraphqlKit.Document.Ast.OperationType.QUERY,
+ *   GraphqlKit.Schema.Runtime.OperationType.QUERY,
  *   'getUser'
  * >
  * // Result: Operation<'getUser', { id: string, name: string }, {}>
@@ -94,7 +94,7 @@ export type InferOperations<
 export type InferOperation<
   $DocOp,
   $Context,
-  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
+  $OperationType extends GraphqlKit.Schema.Runtime.OperationType.OperationType,
   $OperationName,
 > =
   $DocOp extends object

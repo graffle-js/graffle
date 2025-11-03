@@ -18,7 +18,7 @@ export interface RequestDocumentNodeInput {
 }
 
 export interface RequestAnalyzedInput extends RequestInput {
-  operation: Document.Ast.OperationType.OperationType | OperationDefinitionNode
+  operation: GraphqlKit.Schema.Runtime.OperationType.OperationType | OperationDefinitionNode
 }
 
 export interface RequestAnalyzedDocumentNodeInput extends RequestDocumentNodeInput {

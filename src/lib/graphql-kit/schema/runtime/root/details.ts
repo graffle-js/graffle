@@ -1,5 +1,6 @@
 import type { GraphQLObjectType } from 'graphql'
 import { Document } from '../../../document/_.js'
+import type { OperationType } from '../../OperationType/_.js'
 import type { Map } from './map.js'
 import { type StandardRootTypeName } from './standard.js'
 
@@ -24,7 +25,7 @@ export interface Details {
     alias: string | null
   }
   type: GraphQLObjectType
-  operationType: Document.Ast.OperationType.OperationType
+  operationType: OperationType
 }
 
 export const detailsFromObjectType = (

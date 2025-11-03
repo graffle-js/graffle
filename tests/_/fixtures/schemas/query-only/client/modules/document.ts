@@ -170,4 +170,4 @@ export interface QueryBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const query: QueryBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY, { sddm }) as any
+export const query: QueryBuilder = createStaticRootType(GraphqlKit.Schema.Runtime.OperationType.QUERY, { sddm }) as any

@@ -57,7 +57,7 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
  *
  * @see {@link https://graffle.js.org/guides/documents/static | Static Document Guide}
  */
-export const query = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY)
+export const query = Docpar.Object.Static.createStaticRootType(GraphqlKit.Schema.Runtime.OperationType.QUERY)
 
 /**
  * Schema-less mutation document builder.
@@ -113,4 +113,4 @@ export const query = Docpar.Object.Static.createStaticRootType(GraphqlKit.Docume
  *
  * @see {@link https://graffle.js.org/guides/documents/static | Static Document Guide}
  */
-export const mutation = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.MUTATION)
+export const mutation = Docpar.Object.Static.createStaticRootType(GraphqlKit.Schema.Runtime.OperationType.MUTATION)

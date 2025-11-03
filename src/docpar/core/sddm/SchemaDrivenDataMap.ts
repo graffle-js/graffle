@@ -10,21 +10,21 @@ declare global {
     // Types are defined in this namespace so that they can be globally augmented.
 
     export interface SchemaDrivenDataMapOperations {
-      [GraphqlKit.Document.Ast.OperationType.MUTATION]?: SchemaDrivenDataMap.OutputObject
-      [GraphqlKit.Document.Ast.OperationType.QUERY]?: SchemaDrivenDataMap.OutputObject
-      [GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION]?: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Schema.Runtime.OperationType.MUTATION]?: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Schema.Runtime.OperationType.QUERY]?: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Schema.Runtime.OperationType.SUBSCRIPTION]?: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMapOperationsWithQuery extends SchemaDrivenDataMapOperations {
-      [GraphqlKit.Document.Ast.OperationType.QUERY]: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Schema.Runtime.OperationType.QUERY]: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMapOperationsWithMutation extends SchemaDrivenDataMapOperations {
-      [GraphqlKit.Document.Ast.OperationType.MUTATION]: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Schema.Runtime.OperationType.MUTATION]: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMapOperationsWithSubscription extends SchemaDrivenDataMapOperations {
-      [GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION]: SchemaDrivenDataMap.OutputObject
+      [GraphqlKit.Schema.Runtime.OperationType.SUBSCRIPTION]: SchemaDrivenDataMap.OutputObject
     }
 
     export interface SchemaDrivenDataMap {

@@ -10,7 +10,7 @@ import type {
   TypeNode,
 } from 'graphql'
 import type * as Request from '../request/__.js'
-import { Ast } from './ast/_.js'
+import { OperationType } from '../schema/runtime/__.js'
 import { isOperationDefinitionNode } from './ast/guards.js'
 import * as Kind from './ast/kind.js'
 import { Typed } from './typed/_.js'
@@ -77,7 +77,7 @@ export const getOperationDefinition = (
   return null
 }
 
-const definedOperationPattern = new RegExp(`^\\b(${Object.values(Ast.OperationType).join(`|`)})\\b`)
+const definedOperationPattern = new RegExp(`^\\b(${Object.values(OperationType).join(`|`)})\\b`)
 
 /**
  * Get the _type_ (query, mutation, subscription) of operation a request will execute as.
@@ -87,7 +87,7 @@ const definedOperationPattern = new RegExp(`^\\b(${Object.values(Ast.OperationTy
  * If document is string then regular expressions are used to extract the operation type
  * to avoid document encode/decode performance costs.
  */
-export const getOperationType = (request: Request.RequestInput): Ast.OperationType.OperationType | null => {
+export const getOperationType = (request: Request.RequestInput): OperationType.OperationType | null => {
   // return null
   const { operationName, query: document } = request
 
@@ -104,7 +104,7 @@ export const getOperationType = (request: Request.RequestInput): Ast.OperationTy
     if (!match) return null
     return {
       line,
-      operationType: match[0] as Ast.OperationType.OperationType,
+      operationType: match[0] as OperationType.OperationType,
     }
   }).filter(_ => _ !== null)
 
@@ -122,7 +122,7 @@ export const getOperationType = (request: Request.RequestInput): Ast.OperationTy
     // Assume that the implicit query syntax is being used.
     // This is a non-validated optimistic approach for performance, not aimed at correctness.
     // For example its not checked if the document is actually of the syntactic form `{ ... }`
-    return Ast.OperationType.QUERY
+    return OperationType.QUERY
   }
 
   // Continue to the full search.

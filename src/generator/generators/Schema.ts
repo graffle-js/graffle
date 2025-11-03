@@ -370,13 +370,13 @@ const generateSchemaNamespaceModule = (
     operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
     RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
     Root: {
-      [GraphqlKit.Document.Ast.OperationType.QUERY]: config.schema.kindMap.index.Root.query?.name
+      [GraphqlKit.Schema.Runtime.OperationType.QUERY]: config.schema.kindMap.index.Root.query?.name
         ? `$Types.${config.schema.kindMap.index.Root.query.name}`
         : null,
-      [GraphqlKit.Document.Ast.OperationType.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
+      [GraphqlKit.Schema.Runtime.OperationType.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
         ? `$Types.${config.schema.kindMap.index.Root.mutation.name}`
         : null,
-      [GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
+      [GraphqlKit.Schema.Runtime.OperationType.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
         ? `$Types.${config.schema.kindMap.index.Root.subscription.name}`
         : null,
     },

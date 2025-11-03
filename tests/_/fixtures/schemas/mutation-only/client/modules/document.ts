@@ -153,6 +153,6 @@ export interface MutationBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.MUTATION, {
+export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Schema.Runtime.OperationType.MUTATION, {
   sddm,
 }) as any
