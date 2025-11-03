@@ -67,9 +67,9 @@ export const extractFieldTypeInfo = (
 } => {
   const namedType = GraphqlKit.Schema.getNamedType(field.type)
   const typeAndKind = GraphqlKit.getTypeAndKind(namedType)
-  const isNonNull = GraphqlKit.Schema.isNonNullType(field.type)
-  const isList = GraphqlKit.Schema.isListType(
-    GraphqlKit.Schema.isNonNullType(field.type) ? field.type.ofType : field.type,
+  const isNonNull = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type)
+  const isList = GraphqlKit.Schema2.Runtime.Nodes.isListType(
+    GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
   )
 
   const listMarker = isList ? '[]' : ''
@@ -458,7 +458,7 @@ export const getArgumentDoc = Str.Code.TSDoc.template.factory<[
 ]>((doc, config, arg, parentField, parentType) => {
   const graphqlType = String(arg.type)
   const argPath = `${parentType.name}.${parentField.name}(${arg.name})`
-  const isNonNull = GraphqlKit.Schema.isNonNullType(arg.type)
+  const isNonNull = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(arg.type)
   const hasDefault = arg.defaultValue !== undefined && arg.defaultValue !== null
   const defaultValueStr = hasDefault
     ? typeof arg.defaultValue === 'string'
@@ -541,9 +541,9 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 
   // Generate example based on field characteristics
   const hasArgs = field.args.length > 0
-  const isObject = GraphqlKit.Schema.isObjectType(namedType)
-  const isInterface = GraphqlKit.Schema.isInterfaceType(namedType)
-  const isUnion = GraphqlKit.Schema.isUnionType(namedType)
+  const isObject = GraphqlKit.Schema2.Runtime.Nodes.isObjectType(namedType)
+  const isInterface = GraphqlKit.Schema2.Runtime.Nodes.isInterfaceType(namedType)
+  const isUnion = GraphqlKit.Schema2.Runtime.Nodes.isUnionType(namedType)
 
   let exampleCode: string
   if (isUnion || isInterface) {

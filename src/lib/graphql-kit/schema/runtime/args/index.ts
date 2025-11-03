@@ -118,31 +118,22 @@ export interface ArgsIndex {
 }
 
 /**
- * Determine the placement based on boolean flags
- */
-const getPlacement = (hasArgsDirect: boolean, hasArgsDescendant: boolean): ArgsPlacement => {
-  if (hasArgsDirect && hasArgsDescendant) return 'both'
-  if (hasArgsDirect) return 'direct'
-  return 'descendant'
-}
-
-/**
  * Check if a type has any descendant fields with arguments
  * Uses memoization to avoid re-checking types
  */
-const hasDescendantArgs = (
-  typeInfo: TypeInfo | undefined,
-  visited = new Set<string>(),
-): boolean => {
-  if (!typeInfo) return false
+// const hasDescendantArgs = (
+//   typeInfo: TypeInfo | undefined,
+//   visited = new Set<string>(),
+// ): boolean => {
+//   if (!typeInfo) return false
 
-  const typeName = typeInfo.reference.name
-  if (visited.has(typeName)) return false
-  visited.add(typeName)
+//   const typeName = typeInfo.reference.name
+//   if (visited.has(typeName)) return false
+//   visited.add(typeName)
 
-  // Check if any field has args or leads to types with args
-  return Object.values(typeInfo.fields).some(field => field.isHasArgsDirect || field.isHasArgsDescendant)
-}
+//   // Check if any field has args or leads to types with args
+//   return Object.values(typeInfo.fields).some(field => field.isHasArgsDirect || field.isHasArgsDescendant)
+// }
 
 /**
  * Build an index of all types and fields that have arguments.
@@ -269,10 +260,15 @@ export const buildArgsIndex = (schema: GraphQLSchema): ArgsIndex => {
 
       // Only include field if it has args somewhere in its tree
       if (hasArgsDirect || hasArgsDescendant) {
+        const argsPlacement = hasArgsDirect && hasArgsDescendant
+          ? 'both'
+          : hasArgsDirect
+          ? 'direct'
+          : 'descendant'
         typeInfo.fields[fieldName] = {
           isHasArgsDirect: hasArgsDirect,
           isHasArgsDescendant: hasArgsDescendant,
-          argsPlacement: getPlacement(hasArgsDirect, hasArgsDescendant),
+          argsPlacement,
           args: hasArgsDirect ? field.args : undefined,
           type: descendantTypeInfo,
         }

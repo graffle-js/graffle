@@ -5,7 +5,7 @@ import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
 export const renderInlineType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Types): string => {
-  const [ofType, nonNull] = GraphqlKit.Schema.isNonNullType(type)
+  const [ofType, nonNull] = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(type)
     ? [type.ofType, true]
     : [type, false]
 
@@ -13,7 +13,7 @@ export const renderInlineType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Typ
     ? Docpar.nullabilityFlags.nonNull
     : Docpar.nullabilityFlags.nullable
 
-  const rest = GraphqlKit.Schema.isListType(ofType)
+  const rest = GraphqlKit.Schema2.Runtime.Nodes.isListType(ofType)
     ? renderInlineType(ofType.ofType)
     : ``
 
@@ -63,7 +63,7 @@ export const getTsDocContents = (config: Config, node: GraphqlKit.Schema.Describ
     ? `@deprecated ${Str.Code.TSDoc.escape(node.deprecationReason)}`
     : null
 
-  const enumMemberDescriptions: string[] = GraphqlKit.Schema.isEnumType(node)
+  const enumMemberDescriptions: string[] = GraphqlKit.Schema2.Runtime.Nodes.isEnumType(node)
     ? node
       .getValues()
       .map((_) => {

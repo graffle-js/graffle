@@ -4,6 +4,7 @@ import {
   type GraphQLEnumValue,
   type GraphQLField,
   type GraphQLInputField,
+  GraphQLInputObjectType,
   GraphQLInterfaceType,
   GraphQLList,
   type GraphQLNamedType,
@@ -15,9 +16,9 @@ import {
   isInputObjectType,
   isInterfaceType,
   isObjectType,
+  isScalarType,
   isUnionType,
 } from 'graphql'
-import { GraphQLInputObjectType, isScalarType } from 'graphql'
 
 export * from './RootDetails.js'
 
@@ -25,27 +26,7 @@ export * from './RootTypeMap.js'
 
 export * from './StandardRootTypeName.js'
 
-export {
-  buildClientSchema,
-  buildSchema,
-  getNamedType,
-  getNullableType,
-  isEnumType,
-  isInputObjectType,
-  isInterfaceType,
-  isListType,
-  isNamedType,
-  isNonNullType,
-  isNullableType,
-  isObjectType,
-  isRequiredArgument,
-  isRequiredInputField,
-  isScalarType,
-  isUnionType,
-  printSchema as print,
-} from 'graphql'
-
-export * as ArgsIndex from './argsIndex.js'
+export { buildClientSchema, buildSchema, getNamedType, getNullableType, printSchema as print } from 'graphql'
 
 export * as CustomScalars from './customScalars.js'
 

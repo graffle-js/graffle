@@ -1,14 +1,6 @@
 import { type GraphQLArgument, isNonNullType } from 'graphql'
 
-export const isAllArgsNonNullType = (args: readonly GraphQLArgument[]) => {
-  return args.every(_ => isNonNullType(_.type))
-}
-
-export const isAllArgsNullable = (args: readonly GraphQLArgument[]) => {
-  return !args.some(_ => isNonNullType(_.type))
-}
-
-export const analyzeArgsNullability = (args: readonly GraphQLArgument[]) => {
+export const analyzeNullability = (args: readonly GraphQLArgument[]) => {
   let required = 0
   let optional = 0
   const total = args.length

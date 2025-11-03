@@ -134,7 +134,7 @@ function generateInputObjectType(
     const fieldType = GraphqlKit.Schema.getNamedType(field.type)
     // Use renderName to handle reserved keywords
     const typeName = renderName(fieldType.name)
-    const isNullable = GraphqlKit.Schema.isNullableType(field.type)
+    const isNullable = GraphqlKit.Schema2.Runtime.Nodes.isNullableType(field.type)
     const fieldName = field.name
     const optionalMarker = isNullable ? '?' : ''
 

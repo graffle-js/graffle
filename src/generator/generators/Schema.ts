@@ -199,9 +199,9 @@ const getInputFieldDoc = (
   const schemaDescription = getTsDocContents(config, field)
 
   // Type information
-  const isNonNull = GraphqlKit.Schema.isNonNullType(field.type)
-  const isList = GraphqlKit.Schema.isListType(
-    GraphqlKit.Schema.isNonNullType(field.type) ? field.type.ofType : field.type,
+  const isNonNull = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type)
+  const isList = GraphqlKit.Schema2.Runtime.Nodes.isListType(
+    GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
   )
   const listMarker = isList ? '[]' : ''
   const nullMarker = isNonNull ? '!' : ''

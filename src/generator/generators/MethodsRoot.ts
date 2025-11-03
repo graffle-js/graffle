@@ -257,8 +257,8 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema2.Runtim
 
       const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(field.type)
 
-      const isOptional = GraphqlKit.Schema.isScalarType(fieldTypeUnwrapped)
-        && GraphqlKit.Schema2.Runtime.Args.isAllArgsNullable(field.args)
+      const isOptional = GraphqlKit.Schema2.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
+        && GraphqlKit.Schema2.Runtime.Args.analyzeNullability(field.args).isAllNullable
 
       const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
       // dprint-ignore
@@ -800,8 +800,8 @@ const renderDomainType = createCodeGenerator<{
     }
 
     const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(fieldDef.type)
-    const isOptional = GraphqlKit.Schema.isScalarType(fieldTypeUnwrapped)
-      && GraphqlKit.Schema2.Runtime.Args.isAllArgsNullable(fieldDef.args)
+    const isOptional = GraphqlKit.Schema2.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
+      && GraphqlKit.Schema2.Runtime.Args.analyzeNullability(fieldDef.args).isAllNullable
 
     // dprint-ignore
     code`

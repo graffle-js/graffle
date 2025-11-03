@@ -1,7 +1,7 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-
 import { Docpar } from '#src/docpar/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
+import * as GraphQL from 'graphql'
 
 const propertyNames = Docpar.propertyNames
 import { Obj } from '@wollybeard/kit'
@@ -286,8 +286,9 @@ const ObjectType = createCodeGenerator<
             sddmNodeOutputField.$fields[propertyNames.nt] = outputFieldNamedType.name
           }
         } else if (
-          GraphqlKit.Schema.isUnionType(outputFieldNamedType) || GraphqlKit.Schema.isObjectType(outputFieldNamedType)
-          || GraphqlKit.Schema.isInterfaceType(outputFieldNamedType)
+          GraphqlKit.Schema2.Runtime.Nodes.isUnionType(outputFieldNamedType)
+          || GraphqlKit.Schema2.Runtime.Nodes.isObjectType(outputFieldNamedType)
+          || GraphqlKit.Schema2.Runtime.Nodes.isInterfaceType(outputFieldNamedType)
         ) {
           referenceAssignments.push(`${type.name}.f[\`${outputField.name}\`]!.nt = ${outputFieldNamedType.name}`)
           // dprint-ignore
@@ -295,7 +296,7 @@ const ObjectType = createCodeGenerator<
           // // todo make kitchen sink schema have a pattern where this code path will be traversed.
           // // We just need to have arguments on a field on a nested object.
           // // Nested objects that in turn have custom scalar arguments
-          // if (Schema.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
+          // if (Schema.GraphqlKit.Schema2.Runtime.Nodes.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
           //   code(Str.Code.TS.TermObject.termField(field.name, fieldType.name))
           // }
         }
@@ -358,7 +359,7 @@ const InputObjectType = createCodeGenerator<
         config.runtimeFeatures.operationVariables ||
         (config.runtimeFeatures.customScalars &&
           (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType) ||
-          (GraphqlKit.Schema.isInputObjectType(inputFieldType) && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType))))
+          (GraphqlKit.Schema2.Runtime.Nodes.isInputObjectType(inputFieldType) && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType))))
 
       if (!isPresent) continue
 
@@ -369,7 +370,7 @@ const InputObjectType = createCodeGenerator<
       if (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType)) {
         f[inputField.name]!.$fields[propertyNames.nt] = inputFieldType.name
       } else if (
-        GraphqlKit.Schema.isInputObjectType(inputFieldType)
+        GraphqlKit.Schema2.Runtime.Nodes.isInputObjectType(inputFieldType)
         && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType)
       ) {
         referenceAssignments.push(
