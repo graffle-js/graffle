@@ -22,12 +22,6 @@ export type FromString<$OperationTypeString extends string> =
   : $OperationTypeString extends 'query'          ? QUERY
   : never
 
-export type OperationTypeStringToNode<$OperationTypeString extends string> = $OperationTypeString extends MUTATION
-  ? OperationTypeNode.MUTATION
-  : $OperationTypeString extends SUBSCRIPTION ? OperationTypeNode.SUBSCRIPTION
-  : $OperationTypeString extends QUERY ? OperationTypeNode.QUERY
-  : never
-
 export const LookupFromRootType = {
   Query: QUERY,
   Mutation: MUTATION,
