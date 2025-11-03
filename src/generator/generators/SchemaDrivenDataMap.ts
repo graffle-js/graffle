@@ -1,7 +1,6 @@
 import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
-import * as GraphQL from 'graphql'
 
 const propertyNames = Docpar.propertyNames
 import { Obj } from '@wollybeard/kit'
@@ -10,7 +9,7 @@ import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
-import { renderInlineType, renderName } from '../helpers/render.js'
+import { renderInlineType } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 

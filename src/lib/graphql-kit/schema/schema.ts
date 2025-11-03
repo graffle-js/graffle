@@ -70,8 +70,6 @@ export type DescribableTypes =
   | GraphQLNamedType
   | InputOrOutputField
 
-export type InputFieldLikeTypes = GraphQLArgument | GraphQLInputField
-
 export const NameToClassNamedType = {
   GraphQLScalarType: GraphQLScalarType,
   GraphQLObjectType: GraphQLObjectType,

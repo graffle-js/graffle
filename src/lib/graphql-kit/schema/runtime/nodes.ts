@@ -1,4 +1,4 @@
-import { type GraphQLField, type GraphQLInputField } from 'graphql'
+import { type GraphQLField, type GraphQLInputField as InputField } from 'graphql'
 
 export {
   type GraphQLArgument as Argument,
@@ -27,4 +27,8 @@ export {
   isUnionType,
 } from 'graphql'
 
-export type FieldTypes = GraphQLField<any, any> | GraphQLInputField
+export type OutputField<TSource = any, TContext = any, TArgs = any> = GraphQLField<TSource, TContext, TArgs>
+
+export const isOutputField = (value: object): value is OutputField => {
+  return `args` in value
+}

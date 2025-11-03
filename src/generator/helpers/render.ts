@@ -48,7 +48,9 @@ export const typeTitle2 = (category: string) => (type: GraphqlKit.Schema2.Runtim
 }
 
 const defaultDescription = (node: GraphqlKit.Schema.DescribableTypes) => {
-  const entity = GraphqlKit.Schema.isField(node) ? `Field` : GraphqlKit.getTypeAndKind(node).kindName
+  const entity = GraphqlKit.Schema2.Runtime.NodeGroups.isField(node)
+    ? `Field`
+    : GraphqlKit.getTypeAndKind(node).kindName
   return `There is no documentation for this ${entity}.`
 }
 
@@ -108,7 +110,7 @@ export const getTsDocContents = (config: Config, node: GraphqlKit.Schema.Describ
  * would be illegal in TypeScript such as `namespace` or `interface`.
  */
 export const renderName = (
-  type: string | GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes | GraphqlKit.Schema2.Runtime.Nodes.FieldTypes,
+  type: string | GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes | GraphqlKit.Schema2.Runtime.NodeGroups.Field,
 ) => {
   const name_ = typeof type === `string` ? type : type.name
   return Str.Code.TS.Reserved.escapeReserved(name_)
