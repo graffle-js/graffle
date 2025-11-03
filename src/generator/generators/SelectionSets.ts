@@ -568,7 +568,7 @@ const generateFieldedTypeModule = (
   namespaceCode()
 
   const fieldKeys = fields.map(field => {
-    const namedType = GraphqlKit.Schema.getNamedType(field.type)
+    const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
     const argsAnalysis = GraphqlKit.Schema.Runtime.Args.analyzeNullability(field.args)
     const isCanBeIndicator = (GraphqlKit.Schema.Runtime.Nodes.isScalarType(namedType)
       || GraphqlKit.Schema.Runtime.Nodes.isEnumType(namedType))
@@ -651,7 +651,7 @@ const renderOutputFieldForFields = (
 ): string => {
   const code = Str.Builder()
   const argsAnalysis = GraphqlKit.Schema.Runtime.Args.analyzeNullability(field.args)
-  const fieldNamedType = GraphqlKit.Schema.getNamedType(field.type)
+  const fieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
 
   const fieldName = renderName(field)
   const safeName = getSafeName(field.name)
@@ -896,7 +896,7 @@ const analyzeTypeUsage = (type: GraphqlKit.Schema.Runtime.NodeGroups.InputTypes)
   }
 
   const analyzeRecursive = (t: GraphqlKit.Schema.Runtime.NodeGroups.InputTypes): void => {
-    const nakedType = GraphqlKit.Schema.getNullableType(t)
+    const nakedType = GraphqlKit.Schema.Runtime.getNullableType(t)
 
     if (GraphqlKit.Schema.Runtime.Nodes.isListType(nakedType)) {
       analyzeRecursive(nakedType.ofType)
@@ -950,7 +950,7 @@ const analyzeOutputTypeUsage = (
   for (const field of Object.values(type.getFields())) {
     // Check if field return type is an object-like type (object, interface, union)
     // These get referenced via $Named in the field namespace's extends clause
-    const fieldNamedType = GraphqlKit.Schema.getNamedType(field.type)
+    const fieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
     const isHasObjectLikeTypeReference = GraphqlKit.Schema.Runtime.Nodes.isObjectType(fieldNamedType)
       || GraphqlKit.Schema.Runtime.Nodes.isInterfaceType(fieldNamedType)
       || GraphqlKit.Schema.Runtime.Nodes.isUnionType(fieldNamedType)
@@ -987,17 +987,17 @@ const getInputFieldLike = (
 const getInputFieldKey = (
   inputFieldLike: GraphqlKit.Schema.Runtime.Nodes.Argument | GraphqlKit.Schema.Runtime.Nodes.InputField,
 ) => {
-  return GraphqlKit.Schema.Runtime.Nodes.isEnumType(GraphqlKit.Schema.getNamedType(inputFieldLike.type))
+  return GraphqlKit.Schema.Runtime.Nodes.isEnumType(GraphqlKit.Schema.Runtime.getNamedType(inputFieldLike.type))
     ? Docpar.Object.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 
 const renderArgumentType = (type: GraphqlKit.Schema.Runtime.NodeGroups.InputTypes): string => {
-  const sansNullabilityType = GraphqlKit.Schema.getNullableType(type)
+  const sansNullabilityType = GraphqlKit.Schema.Runtime.getNullableType(type)
   const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(type)
 
   if (GraphqlKit.Schema.Runtime.Nodes.isListType(sansNullabilityType)) {
-    const innerType = GraphqlKit.Schema.getNullableType(sansNullabilityType.ofType)
+    const innerType = GraphqlKit.Schema.Runtime.getNullableType(sansNullabilityType.ofType)
     const innerTypeRendered = renderArgumentType(innerType)
     const arrayType = `Array<${innerTypeRendered}>`
     const fullType = isNullable ? `${arrayType} | null | undefined` : arrayType

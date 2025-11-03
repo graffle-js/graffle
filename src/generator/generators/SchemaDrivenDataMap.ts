@@ -238,7 +238,7 @@ const ObjectType = createCodeGenerator<
 
     const outputFields = Object.values(type.getFields()).filter(condition)
     for (const outputField of outputFields) {
-      const outputFieldNamedType = GraphqlKit.Schema.getNamedType(outputField.type)
+      const outputFieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(outputField.type)
       const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
         $fields: {},
       }
@@ -255,7 +255,7 @@ const ObjectType = createCodeGenerator<
           const ofItemA: Str.Code.TS.TermObject.TermObject = {}
           ofItemAs[arg.name] = ofItemA
 
-          const argType = GraphqlKit.Schema.getNamedType(arg.type)
+          const argType = GraphqlKit.Schema.Runtime.getNamedType(arg.type)
           // dprint-ignore
           if (
              (config.runtimeFeatures.customScalars && GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(argType)) ||
@@ -295,7 +295,7 @@ const ObjectType = createCodeGenerator<
           // // todo make kitchen sink schema have a pattern where this code path will be traversed.
           // // We just need to have arguments on a field on a nested object.
           // // Nested objects that in turn have custom scalar arguments
-          // if (Schema.GraphqlKit.Schema2.Runtime.Nodes.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
+          // if (Schema.GraphqlKit.Schema.Runtime.Nodes.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
           //   code(Str.Code.TS.TermObject.termField(field.name, fieldType.name))
           // }
         }
@@ -351,7 +351,7 @@ const InputObjectType = createCodeGenerator<
     o[propertyNames.f] = f
 
     for (const inputField of inputFields) {
-      const inputFieldType = GraphqlKit.Schema.getNamedType(inputField.type)
+      const inputFieldType = GraphqlKit.Schema.Runtime.getNamedType(inputField.type)
 
       // dprint-ignore
       const isPresent =

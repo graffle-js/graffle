@@ -313,7 +313,7 @@ const createConfigSchema = async (
 ): Promise<ConfigSchema> => {
   switch (input.schema.type) {
     case `instance`: {
-      const sdl = GraphqlKit.Schema.print(input.schema.instance)
+      const sdl = GraphqlKit.Schema.Runtime.toString(input.schema.instance)
       const instance = input.schema.instance
       const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
@@ -338,7 +338,7 @@ const createConfigSchema = async (
       } else {
         sdl = input.schema.sdl
       }
-      const instance = GraphqlKit.Schema.buildSchema(sdl)
+      const instance = GraphqlKit.Schema.Runtime.fromString(sdl)
       const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
@@ -361,8 +361,8 @@ const createConfigSchema = async (
       if (!data) {
         throw new Error(`No data returned for introspection query.`)
       }
-      const instance = GraphqlKit.Schema.buildClientSchema(data)
-      const sdl = GraphqlKit.Schema.print(instance)
+      const instance = GraphqlKit.Schema.Runtime.fromIntrospection(data)
+      const sdl = GraphqlKit.Schema.Runtime.toString(instance)
       const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: `url`,

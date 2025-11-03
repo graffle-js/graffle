@@ -192,7 +192,7 @@ const getInputFieldDoc = (
   field: GraphqlKit.Schema.Runtime.Nodes.InputField,
   parentType: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): string | null => {
-  const namedType = GraphqlKit.Schema.getNamedType(field.type)
+  const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
   const typeAndKind = GraphqlKit.Schema.Kind.getTypeAndKind(namedType)
 
   // Get the base description from the schema
@@ -273,7 +273,7 @@ const generateInputObjectModule = (
 
   // Generate field interfaces
   for (const field of Obj.values(inputObject.getFields())) {
-    const namedType = GraphqlKit.Schema.getNamedType(field.type)
+    const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
 
     fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getInputFieldDoc(config, field, inputObject),
@@ -805,7 +805,7 @@ const generateTypeModule = (
 
   // Regular fields
   for (const field of Obj.values(type.getFields())) {
-    const namedType = GraphqlKit.Schema.getNamedType(field.type)
+    const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
 
     fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getOutputFieldDoc(config, field, type),
@@ -824,7 +824,7 @@ const generateTypeModule = (
                 kind: Str.Code.TS.string(`InputField`),
                 name: Str.Code.TS.string(arg.name),
                 inlineType: renderInlineType(arg.type),
-                namedType: namedTypesTypeReference(GraphqlKit.Schema.getNamedType(arg.type)),
+                namedType: namedTypesTypeReference(GraphqlKit.Schema.Runtime.getNamedType(arg.type)),
               },
             }),
           ]

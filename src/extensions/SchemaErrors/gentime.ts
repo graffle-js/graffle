@@ -44,7 +44,7 @@ export const SchemaErrors = (input?: Input) => {
       },
       onOutputField: ({ config: genConfig, sddmNode, graphqlType }) => {
         const errorObjects = getErrorObjects(config, genConfig)
-        const outputFieldNamedType = GraphqlKit.Schema.getNamedType(graphqlType.type)
+        const outputFieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(graphqlType.type)
         const memberTypes = GraphqlKit.Schema.Runtime.Nodes.isUnionType(outputFieldNamedType)
           ? outputFieldNamedType.getTypes()
           : null

@@ -275,7 +275,7 @@ const collectInputTypesFromType = (
   inputTypes: Set<string>,
   visited: Set<string> = new Set(),
 ) => {
-  const namedType = GraphqlKit.Schema.getNamedType(type)
+  const namedType = GraphqlKit.Schema.Runtime.getNamedType(type)
   if (GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(namedType)) {
     // Prevent infinite recursion for circular references
     if (visited.has(namedType.name)) {
@@ -332,7 +332,7 @@ const renderTypeWithArgs = createCodeGenerator<
         code`      readonly ${propertyNames.a}: {`
 
         for (const arg of fieldInfo.args) {
-          const argType = GraphqlKit.Schema.getNamedType(arg.type)
+          const argType = GraphqlKit.Schema.Runtime.getNamedType(arg.type)
           const inlineType = renderInlineType(arg.type)
           const resolvedType = renderResolvedType(arg.type, 'TypeInputsIndex')
 
@@ -397,7 +397,7 @@ const renderInputObjectType = createCodeGenerator<
     code`  readonly ${propertyNames.f}: {`
 
     for (const field of fields) {
-      const fieldType = GraphqlKit.Schema.getNamedType(field.type)
+      const fieldType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
       const inlineType = renderInlineType(field.type)
       const resolvedType = renderResolvedType(field.type, 'TypeInputsIndex')
 
@@ -443,7 +443,7 @@ const renderInputObjectType = createCodeGenerator<
  * ```
  */
 const renderResolvedType = (type: GraphqlKit.Schema.Runtime.NodeGroups.Types, indexName: string): string => {
-  const namedType = GraphqlKit.Schema.getNamedType(type)
+  const namedType = GraphqlKit.Schema.Runtime.getNamedType(type)
   const typeName = renderName(namedType.name)
 
   // Build the base type reference

@@ -65,7 +65,7 @@ export const extractFieldTypeInfo = (
   isList: boolean
   typeSignature: string
 } => {
-  const namedType = GraphqlKit.Schema.getNamedType(field.type)
+  const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
   const typeAndKind = GraphqlKit.Schema.Kind.getTypeAndKind(namedType)
   const isNonNull = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type)
   const isList = GraphqlKit.Schema.Runtime.Nodes.isListType(

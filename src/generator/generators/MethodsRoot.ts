@@ -255,7 +255,7 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime
         code(Str.Code.TSDoc.format(docContent))
       }
 
-      const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(field.type)
+      const fieldTypeUnwrapped = GraphqlKit.Schema.Runtime.getNamedType(field.type)
 
       const isOptional = GraphqlKit.Schema.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
         && GraphqlKit.Schema.Runtime.Args.analyzeNullability(field.args).isAllNullable
@@ -799,7 +799,7 @@ const renderDomainType = createCodeGenerator<{
       code(Str.Code.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
-    const fieldTypeUnwrapped = GraphqlKit.Schema.getNamedType(fieldDef.type)
+    const fieldTypeUnwrapped = GraphqlKit.Schema.Runtime.getNamedType(fieldDef.type)
     const isOptional = GraphqlKit.Schema.Runtime.Nodes.isScalarType(fieldTypeUnwrapped)
       && GraphqlKit.Schema.Runtime.Args.analyzeNullability(fieldDef.args).isAllNullable
 

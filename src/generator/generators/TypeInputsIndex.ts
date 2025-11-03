@@ -133,7 +133,7 @@ function generateInputObjectType(
   }
 
   const fieldTypes = fields.map(field => {
-    const fieldType = GraphqlKit.Schema.getNamedType(field.type)
+    const fieldType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
     // Use renderName to handle reserved keywords
     const typeName = renderName(fieldType.name)
     const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(field.type)
