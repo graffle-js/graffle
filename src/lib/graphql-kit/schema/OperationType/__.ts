@@ -2,28 +2,28 @@
  * Runtime operation type values and type utilities
  */
 
-import type { OperationTypeNode } from 'graphql'
+import { OperationTypeNode } from 'graphql'
 
-export const QUERY = `query`
-export type QUERY = typeof QUERY
+export const QUERY = OperationTypeNode.QUERY
+export type QUERY = typeof OperationTypeNode.QUERY
 
-export const MUTATION = `mutation`
-export type MUTATION = typeof MUTATION
+export const MUTATION = OperationTypeNode.MUTATION
+export type MUTATION = typeof OperationTypeNode.MUTATION
 
-export const SUBSCRIPTION = `subscription`
-export type SUBSCRIPTION = typeof SUBSCRIPTION
+export const SUBSCRIPTION = OperationTypeNode.SUBSCRIPTION
+export type SUBSCRIPTION = typeof OperationTypeNode.SUBSCRIPTION
 
-export type OperationType = QUERY | MUTATION | SUBSCRIPTION
+export type OperationType = OperationTypeNode
 
 // dprint-ignore
 export type FromString<$OperationTypeString extends string> =
-    $OperationTypeString extends 'mutation'       ? MUTATION
-  : $OperationTypeString extends 'subscription'   ? SUBSCRIPTION
-  : $OperationTypeString extends 'query'          ? QUERY
+    $OperationTypeString extends MUTATION       ? MUTATION
+  : $OperationTypeString extends SUBSCRIPTION   ? SUBSCRIPTION
+  : $OperationTypeString extends QUERY          ? QUERY
   : never
 
-export type OperationTypeStringToNode<$OperationTypeString extends string> = $OperationTypeString extends 'mutation'
+export type OperationTypeStringToNode<$OperationTypeString extends string> = $OperationTypeString extends MUTATION
   ? OperationTypeNode.MUTATION
-  : $OperationTypeString extends 'subscription' ? OperationTypeNode.SUBSCRIPTION
-  : $OperationTypeString extends 'query' ? OperationTypeNode.QUERY
+  : $OperationTypeString extends SUBSCRIPTION ? OperationTypeNode.SUBSCRIPTION
+  : $OperationTypeString extends QUERY ? OperationTypeNode.QUERY
   : never
