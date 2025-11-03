@@ -80,7 +80,7 @@ test(`root-types-mapped`, async () => {
   })
 
   const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
-  expect(SchemaTs).includes(`operationsAvailable: ["query"]`)
+  expect(SchemaTs).toMatch(/operationsAvailable: \[.*QUERY\]/)
   expect(SchemaTs).includes(`RootUnion: $Types.${RootTypeCustomNameForQuery}`)
   expect(SchemaTs).toMatchSnapshot()
 
