@@ -6,7 +6,7 @@ type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
   sddm: SchemaDrivenDataMap
-  scalars: Schema.Scalar.ScalarMap
+  scalars: Schema.Scalars.ScalarMap
   request: GraphqlKit.RequestAnalyzedDocumentNodeInput
 }): void => {
   const variableDefinitions = request.operation.variableDefinitions
@@ -37,7 +37,7 @@ const encodeInputFieldLike = (
   argName: any,
   argValue: any,
   sddmNode: Docpar.InputNodes,
-  scalars: Schema.Scalar.ScalarMap,
+  scalars: Schema.Scalars.ScalarMap,
 ) => {
   /**
    * The SDDM for custom scalars can take two forms:
@@ -57,12 +57,12 @@ const encodeInputFieldLike = (
 
   if (Docpar.isCustomScalarName(sddmNode)) {
     const scalar = Schema.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
-    args[argName] = Schema.Scalar.applyCodec(scalar.codec.encode, argValue)
+    args[argName] = Schema.Scalars.applyCodec(scalar.codec.encode, argValue)
     return
   }
 
   if (Docpar.isScalar(sddmNode)) {
-    args[argName] = Schema.Scalar.applyCodec(sddmNode.codec.encode, argValue)
+    args[argName] = Schema.Scalars.applyCodec(sddmNode.codec.encode, argValue)
     return
   }
 

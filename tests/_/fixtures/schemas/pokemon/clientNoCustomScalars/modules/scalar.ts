@@ -46,4 +46,4 @@ export const $registry = {
  *
  * Provides type information about custom scalars for the type system.
  */
-export type $Registry = $$Utilities.Schema.Scalar.Registry.Empty
+export type $Registry = $$Utilities.Schema.Scalars.Registry.Empty

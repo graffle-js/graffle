@@ -1,4 +1,4 @@
-import type { Codec } from '../../../Codec.js'
+import { Codec } from '../../../Codec/_.js'
 
 export * as Scalar from './__.js'
 
@@ -9,5 +9,5 @@ export interface Scalar<
 > {
   kind: 'Scalar'
   name: $Name
-  codec: Codec<$Decoded, $Encoded>
+  codec: Codec.Codec<$Decoded, $Encoded>
 }

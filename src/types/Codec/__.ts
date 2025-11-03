@@ -43,7 +43,7 @@ export interface Codec<$Decoded = any, $Encoded = any> {
  * @param codec - Object with encode and decode functions
  * @returns Typed Codec instance
  */
-export const createCodec = <$Decoded, $Encoded>(codec: {
+export const create = <$Decoded, $Encoded>(codec: {
   encode: (value: $Decoded) => $Encoded
   decode: (value: $Encoded) => $Decoded
 }): Codec<$Decoded, $Encoded> => codec as any
@@ -52,3 +52,25 @@ export const createCodec = <$Decoded, $Encoded>(codec: {
  * Generic mapper function type for codec operations.
  */
 export type Mapper = (value: any) => any
+
+/**
+ * Extract the decoded (application-side) type from a Codec.
+ *
+ * @example
+ * ```typescript
+ * type DateCodec = Codec<Date, string>
+ * type Decoded = Codec.GetDecoded<DateCodec>  // Date
+ * ```
+ */
+export type GetDecoded<$Codec> = $Codec extends Codec<infer $Decoded, infer _> ? $Decoded : never
+
+/**
+ * Extract the encoded (wire-format) type from a Codec.
+ *
+ * @example
+ * ```typescript
+ * type DateCodec = Codec<Date, string>
+ * type Encoded = GetEncoded<DateCodec>  // string
+ * ```
+ */
+export type GetEncoded<$Codec> = $Codec extends Codec<infer _, infer $Encoded> ? $Encoded : never

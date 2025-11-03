@@ -31,8 +31,8 @@ export type Boolean = boolean
 export type ID = string
 
 // Custom scalars (decoded types for variables)
-export type Date = $$Utilities.Schema.Scalar.GetDecoded<typeof CustomScalars.Date>
-export type $bigint = $$Utilities.Schema.Scalar.GetDecoded<typeof CustomScalars.bigint>
+export type Date = $$Utilities.Codec.GetDecoded<typeof CustomScalars.Date['codec']>
+export type $bigint = $$Utilities.Codec.GetDecoded<typeof CustomScalars.bigint['codec']>
 
 // Enums
 export type ABCEnum = 'A' | 'B' | 'C'

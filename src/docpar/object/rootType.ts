@@ -59,7 +59,7 @@ export type Config = {
    */
   sddmEnabled: boolean
   // Future extensibility:
-  // customScalars?: Schema.Scalar.Registry
+  // customScalars?: Schema.Scalars.Registry
   // namingConvention?: 'camelCase' | 'snake_case'
   // fragmentsEnabled?: boolean
 }

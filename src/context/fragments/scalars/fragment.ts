@@ -4,13 +4,13 @@ export * from './reducers/add.js'
 export * from './reducers/set.js'
 
 export interface ContextFragment {
-  readonly scalars: Schema.Scalar.Registry
+  readonly scalars: Schema.Scalars.Registry
 }
 
 export interface ContextFragmentEmpty extends ContextFragment {
-  readonly scalars: Schema.Scalar.Registry.Empty
+  readonly scalars: Schema.Scalars.Registry.Empty
 }
 
 export const contextFragmentScalarsEmpty: ContextFragmentEmpty = {
-  scalars: Schema.Scalar.Registry.empty,
+  scalars: Schema.Scalars.Registry.empty,
 }

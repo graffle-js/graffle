@@ -1,5 +1,7 @@
+import { Codec } from '../Codec/_.js'
 import type { Schema } from './_.js'
 import { Nodes } from './nodes/_.js'
+import { Scalars } from './scalars/_.js'
 import { Standard } from './standard/_.js'
 
 /**
@@ -38,7 +40,7 @@ export type GetNamedType<$Type> =
  *
  * @see {@link GetNamedType} - Unwraps List/Nullable wrappers to get the named type
  */
-export type ResolveLeafType<$Type> = $Type extends Schema.Scalar ? Schema.Scalar.GetDecoded<$Type>
+export type ResolveLeafType<$Type> = $Type extends Schema.Scalar ? Codec.GetDecoded<$Type['codec']>
   : $Type extends Schema.Enum ? $Type['membersUnion']
   : never
 
@@ -58,14 +60,14 @@ export type Define<$Type extends Partial<Schema>> = $Type & Schema
  * @see {@link lookupCustomScalarOrFallbackToUnknown} Runtime version
  */
 // dprint-ignore
-export type LookupCustomScalarOrFallbackToUnknown<$Name extends string, $Scalars extends Nodes.Scalar.Registry> =
+export type LookupCustomScalarOrFallbackToUnknown<$Name extends string, $Scalars extends Scalars.Registry> =
   $Name extends keyof $Scalars['map']  ? $Scalars['map'][$Name]
   : $Name extends 'String'              ? typeof Standard.Scalars.String
   : $Name extends 'Int'                 ? typeof Standard.Scalars.Int
   : $Name extends 'Float'               ? typeof Standard.Scalars.Float
   : $Name extends 'Boolean'             ? typeof Standard.Scalars.Boolean
   : $Name extends 'ID'                  ? typeof Standard.Scalars.ID
-  :                                       typeof Nodes.Scalar.UnknownScalar
+  :                                       typeof Scalars.UnknownScalar
 
 /**
  * Runtime lookup of a scalar by name from registry, with fallback to standard scalars or unknown.
@@ -81,7 +83,7 @@ export type LookupCustomScalarOrFallbackToUnknown<$Name extends string, $Scalars
  *
  * @see {@link LookupCustomScalarOrFallbackToUnknown} Type-level version
  */
-export const lookupCustomScalarOrFallbackToUnknown = (scalars: Nodes.Scalar.ScalarMap, name: string): Nodes.Scalar => {
+export const lookupCustomScalarOrFallbackToUnknown = (scalars: Scalars.ScalarMap, name: string): Nodes.Scalar => {
   const scalar = scalars[name]
   if (scalar) return scalar
 
@@ -98,6 +100,6 @@ export const lookupCustomScalarOrFallbackToUnknown = (scalars: Nodes.Scalar.Scal
     case 'ID':
       return Standard.Scalars.ID
     default:
-      return Nodes.Scalar.UnknownScalar
+      return Scalars.UnknownScalar
   }
 }

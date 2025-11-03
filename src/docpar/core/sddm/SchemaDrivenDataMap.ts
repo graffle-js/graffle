@@ -258,10 +258,10 @@ export const isEnum = (
 
 export const isCustomScalarName = (value: unknown): value is CustomScalarName => Str.Type.is(value)
 
-export const isScalar = Schema.Scalar.isScalar
+export const isScalar = Schema.Scalars.isScalar
 
 export const isScalarLike = (value: unknown): value is ScalarLikeNodes =>
-  Schema.Scalar.isScalar(value) || isCustomScalarName(value)
+  Schema.Scalars.isScalar(value) || isCustomScalarName(value)
 
 export const isOutputObject = (
   node?: Node,

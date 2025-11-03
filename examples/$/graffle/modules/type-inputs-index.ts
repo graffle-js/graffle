@@ -31,7 +31,7 @@ export type Boolean = boolean
 export type ID = string
 
 // Custom scalars (decoded types for variables)
-export type Date = $$Utilities.Schema.Scalar.GetDecoded<typeof CustomScalars.Date>
+export type Date = $$Utilities.Codec.GetDecoded<typeof CustomScalars.Date['codec']>
 
 // Enums
 export type BattleWildResult = 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated'

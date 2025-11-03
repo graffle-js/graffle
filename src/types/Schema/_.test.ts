@@ -1,11 +1,11 @@
 import { Ts } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
-import { createCodec } from '../Codec.js'
+import { Codec } from '../Codec/_.js'
 import { Schema } from './_.js'
 
 describe('LookupCustomScalarOrFallbackToUnknown', () => {
   test('standard scalars are resolved correctly', () => {
-    type EmptyRegistry = Schema.Scalar.Registry<{}, any, any>
+    type EmptyRegistry = Schema.Scalars.Registry<{}, any, any>
 
     // Standard scalars should resolve to their types
     Ts.Assert.exact.ofAs<Schema.LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()
@@ -20,12 +20,12 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
 
   test('custom scalars in registry are resolved', () => {
     type DateScalar = Schema.Scalar<'Date', Date, string>
-    type RegistryWithDate = Schema.Scalar.Registry<{ Date: DateScalar }, string, Date>
+    type RegistryWithDate = Schema.Scalars.Registry<{ Date: DateScalar }, string, Date>
 
     const DateScalar: DateScalar = {
       kind: 'Scalar',
       name: 'Date',
-      codec: createCodec({ encode: () => '', decode: () => new Date() }),
+      codec: Codec.create({ encode: () => '', decode: () => new Date() }),
     }
 
     // Custom scalar in registry should resolve
@@ -34,11 +34,11 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
   })
 
   test('unknown custom scalars default to UnknownScalar', () => {
-    type EmptyRegistry = Schema.Scalar.Registry<{}, any, any>
+    type EmptyRegistry = Schema.Scalars.Registry<{}, any, any>
 
     // Unknown custom scalar should default to UnknownScalar (not String)
     Ts.Assert.exact.ofAs<Schema.LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()
-      .on(Schema.Scalar.UnknownScalar)
+      .on(Schema.Scalars.UnknownScalar)
   })
 })
 
@@ -54,7 +54,7 @@ describe('lookupCustomScalarOrFallbackToUnknown (runtime)', () => {
     const DateScalar = {
       kind: 'Scalar' as const,
       name: 'Date',
-      codec: createCodec({ encode: () => '', decode: () => new Date() }),
+      codec: Codec.create({ encode: () => '', decode: () => new Date() }),
     }
     const scalars = { Date: DateScalar }
 
@@ -65,7 +65,7 @@ describe('lookupCustomScalarOrFallbackToUnknown (runtime)', () => {
     const result = Schema.lookupCustomScalarOrFallbackToUnknown({}, 'UnknownCustomScalar')
 
     // Should return UnknownScalar (not String)
-    expect(result).toBe(Schema.Scalar.UnknownScalar)
+    expect(result).toBe(Schema.Scalars.UnknownScalar)
     expect(result.name).toBe('__unknown__')
   })
 })

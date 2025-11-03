@@ -1,6 +1,6 @@
 // dprint-ignore-file
 import type { RequestResult } from '#src/types/RequestResult/$.js'
-import type { Registry } from '#src/types/Schema/nodes/Scalar/helpers.js'
+import type { Schema } from '#src/types/Schema/_.js'
 import type { DateScalar } from '#test/fixtures/scalars'
 import type { Possible } from '#test/schema/possible/client/$.js'
 import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
@@ -19,7 +19,7 @@ type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Quer
     InferResult.OperationQuery<$SelectionSet, PossibleNoCustomScalars.$.Schema>
   >
 
-type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
+type $Registry = Schema.Scalars.Registry.AddScalar<Schema.Scalars.Registry.Empty, typeof DateScalar>
 type $Context = { scalars: $Registry; variablesEnabled: false }
 
 type $WithDate<$SelectionSet extends Possible.SelectionSets.Query<$Context>> = InferResult.OperationQuery<
@@ -155,4 +155,3 @@ A.exact.ofAs<{ interfaceHierarchyGrandparents: ({} | { a: string })[] }>().onAs<
 A.exact.ofAs<{ interfaceHierarchyGrandparents: ({} | { a: string })[] }>().onAs<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceChildB: { a: true } } }>>()
 // @ts-expect-error cannot select child interface field
 A.exact.ofAs<{ interfaceHierarchyGrandparents: { a: string }[] }>().onAs<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { c1: true } } }>>()
-

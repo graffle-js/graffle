@@ -25,6 +25,7 @@ export { Kind } from '@wollybeard/kit/fn'
 export { pipe } from '@wollybeard/kit/fn'
 // todo
 // export type { NoExcess, NoExcessNonEmpty } from '@wollybeard/kit/obj'
+export * from '#src/types/Codec/_.js'
 export type { AssertExtendsObject } from '@wollybeard/kit/ts'
 export type { Simplify } from 'type-fest'
 export { Configuration } from '../context/fragments/configuration/$.js'

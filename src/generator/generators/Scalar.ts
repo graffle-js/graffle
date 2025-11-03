@@ -53,7 +53,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(
           Str.Code.TS.typeAlias$({
             name: `${scalar.name}Decoded`,
-            type: `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
+            type: `${$.$$Utilities}.Codec.GetDecoded<${dualExportResult.internalName}['codec']>`,
             export: true,
           }),
         )
@@ -61,7 +61,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(
           Str.Code.TS.typeAlias$({
             name: `${scalar.name}Encoded`,
-            type: `${$.$$Utilities}.Schema.Scalar.GetEncoded<${dualExportResult.internalName}>`,
+            type: `${$.$$Utilities}.Codec.GetEncoded<${dualExportResult.internalName}['codec']>`,
             export: true,
           }),
         )
@@ -90,8 +90,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
-        // code(`export type ${scalar.name}Decoded = Schema.Scalar.GetDecoded<${scalar.name}>`)
-        // code(`export type ${scalar.name}Encoded = Schema.Scalar.GetEncoded<${scalar.name}>`)
+        // code(`export type ${scalar.name}Decoded = Schema.Scalar.Codec.GetDecoded<${scalar.name}>`)
+        // code(`export type ${scalar.name}Encoded = Schema.Scalar.Codec.GetEncoded<${scalar.name}>`)
         // code()
       }
     }
@@ -122,12 +122,12 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
     const typeScalarRegistry = config.options.customScalars
       // dprint-ignore
-      ? `$$Utilities.Schema.Scalar.Registry<
+      ? `$$Utilities.Schema.Scalars.Registry<
           ${Str.Code.TS.TermObject.termObject(buildtimeMap)},
-          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
-          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetEncoded<${renderName(_.name)}['codec']>`))},
+          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetDecoded<${renderName(_.name)}['codec']>`))},
         >`
-      : `$$Utilities.Schema.Scalar.Registry.Empty`
+      : `$$Utilities.Schema.Scalars.Registry.Empty`
 
     code(Str.Code.TS.typeAlias$({
       name: `$Registry`,

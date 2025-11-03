@@ -5,7 +5,7 @@ import * as $Types from './$$.js'
 
 export * as Schema from './$$.js'
 
-export interface Schema<$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry> extends $.Schema {
+export interface Schema<$Scalars extends $.Schema.Scalars.Registry = $$Scalar.$Registry> extends $.Schema {
   name: $$Data.Name
   operationsAvailable: ['query', 'mutation']
   RootUnion:
