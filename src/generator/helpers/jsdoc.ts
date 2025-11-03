@@ -37,7 +37,7 @@ export const getKindDocUrl = (kindName: string): string => {
  */
 export const getSchemaDescription = (
   config: Config,
-  node: GraphqlKit.Schema2.Runtime.NodeGroups.DescribableTypes,
+  node: GraphqlKit.Schema.Runtime.NodeGroups.DescribableTypes,
 ): string | null => {
   if (node.description) return Str.Code.TSDoc.escape(node.description)
 
@@ -56,20 +56,20 @@ export const getSchemaDescription = (
  * Returns structured information about nullability, list wrapping, and type signature.
  */
 export const extractFieldTypeInfo = (
-  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
+  field: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>,
   linkPrefix: '$Schema' | '$NamedTypes' = '$Schema',
 ): {
-  namedType: GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes
+  namedType: GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes
   typeAndKind: { typeName: string; kindName: string }
   isNonNull: boolean
   isList: boolean
   typeSignature: string
 } => {
-  const namedType = GraphqlKit.Schema.getNamedType(field.type)
-  const typeAndKind = GraphqlKit.getTypeAndKind(namedType)
-  const isNonNull = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type)
-  const isList = GraphqlKit.Schema2.Runtime.Nodes.isListType(
-    GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
+  const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
+  const typeAndKind = GraphqlKit.Schema.Kind.getTypeAndKind(namedType)
+  const isNonNull = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type)
+  const isList = GraphqlKit.Schema.Runtime.Nodes.isListType(
+    GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
   )
 
   const listMarker = isList ? '[]' : ''
@@ -97,7 +97,7 @@ export const extractFieldTypeInfo = (
  */
 export const getRootTypeDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+  type: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, type, operationType) => {
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
@@ -116,7 +116,7 @@ export const getRootTypeDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getRootMethodsInterfaceDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+  type: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, type, operationType) => {
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
@@ -299,9 +299,9 @@ const ${
  * without config-based fallbacks.
  */
 export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
-  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
+  field: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>,
   parentTypeName: string,
-  namedType: GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes,
+  namedType: GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes,
 ]>((doc, field, parentTypeName, namedType) => {
   // Extract type information
   const { typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$NamedTypes')
@@ -353,8 +353,8 @@ export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
-  parentType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+  field: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
 ]>((doc, config, field, parentType) => {
   const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
@@ -399,8 +399,8 @@ export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
  * Generate enhanced JSDoc for inline fragment fields (___on_TypeName) in unions and interfaces.
  */
 export const getInlineFragmentDoc = Str.Code.TSDoc.template.factory<[
-  memberType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
-  parentType: GraphqlKit.Schema2.Runtime.Nodes.UnionType | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+  memberType: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.UnionType | GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
   fragmentKind: 'union' | 'interface',
 ]>((doc, memberType, parentType, fragmentKind) => {
   const memberTypeName = memberType.name
@@ -452,13 +452,13 @@ export const getInlineFragmentDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getArgumentDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  arg: GraphqlKit.Schema2.Runtime.Nodes.Argument,
-  parentField: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
-  parentType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+  arg: GraphqlKit.Schema.Runtime.Nodes.Argument,
+  parentField: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
 ]>((doc, config, arg, parentField, parentType) => {
   const graphqlType = String(arg.type)
   const argPath = `${parentType.name}.${parentField.name}(${arg.name})`
-  const isNonNull = GraphqlKit.Schema2.Runtime.Nodes.isNonNullType(arg.type)
+  const isNonNull = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(arg.type)
   const hasDefault = arg.defaultValue !== undefined && arg.defaultValue !== null
   const defaultValueStr = hasDefault
     ? typeof arg.defaultValue === 'string'
@@ -487,8 +487,8 @@ export const getArgumentDoc = Str.Code.TSDoc.template.factory<[
  */
 export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
   config: Config,
-  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
-  parentType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+  field: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ]>((doc, config, field, parentType, operationType) => {
   // Extract type information
@@ -541,9 +541,9 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 
   // Generate example based on field characteristics
   const hasArgs = field.args.length > 0
-  const isObject = GraphqlKit.Schema2.Runtime.Nodes.isObjectType(namedType)
-  const isInterface = GraphqlKit.Schema2.Runtime.Nodes.isInterfaceType(namedType)
-  const isUnion = GraphqlKit.Schema2.Runtime.Nodes.isUnionType(namedType)
+  const isObject = GraphqlKit.Schema.Runtime.Nodes.isObjectType(namedType)
+  const isInterface = GraphqlKit.Schema.Runtime.Nodes.isInterfaceType(namedType)
+  const isUnion = GraphqlKit.Schema.Runtime.Nodes.isUnionType(namedType)
 
   let exampleCode: string
   if (isUnion || isInterface) {
@@ -563,7 +563,7 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 })`
     }
   } else if (isObject) {
-    const objectType = namedType as GraphqlKit.Schema2.Runtime.Nodes.ObjectType
+    const objectType = namedType as GraphqlKit.Schema.Runtime.Nodes.ObjectType
     const fields = Object.values(objectType.getFields()).slice(0, 3)
     const fieldLines = fields.map((f, index) => {
       const isLast = index === fields.length - 1
@@ -591,7 +591,7 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
  * Generate enhanced JSDoc for selection set object types.
  */
 export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType, isRoot: boolean]
+  [type: GraphqlKit.Schema.Runtime.Nodes.ObjectType, isRoot: boolean]
 >(
   (doc, type, isRoot) => {
     const kindDocUrl = getKindDocUrl('OutputObject')
@@ -620,12 +620,12 @@ export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
  * Generate enhanced JSDoc for selection set interface types.
  */
 export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema2.Runtime.Nodes.InterfaceType, kindMap: GraphqlKit.Schema.KindMap]
+  [type: GraphqlKit.Schema.Runtime.Nodes.InterfaceType, kindMap: GraphqlKit.Schema.Kind.KindMap]
 >((doc, type, kindMap) => {
   const kindDocUrl = getKindDocUrl('Interface')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
-  const implementors = GraphqlKit.Schema.KindMap.getInterfaceImplementors(kindMap, type)
+  const implementors = GraphqlKit.Schema.Kind.KindMap.getInterfaceImplementors(kindMap, type)
   const interfaceLink = Str.Code.TSDoc.template.tag.link(
     'https://graphql.org/graphql-js/type/#graphqlinterfacetype',
     'Interface',
@@ -648,7 +648,7 @@ export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
  * Generate enhanced JSDoc for selection set union types.
  */
 export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema2.Runtime.Nodes.UnionType]
+  [type: GraphqlKit.Schema.Runtime.Nodes.UnionType]
 >(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('Union')
@@ -673,13 +673,13 @@ export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
  * Generate enhanced JSDoc for selection set input object types.
  */
 export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema2.Runtime.Nodes.InputObject]
+  [type: GraphqlKit.Schema.Runtime.Nodes.InputObjectType]
 >(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('InputObject')
     const fields = Object.values(type.getFields())
     const fieldCount = fields.length
-    const isAllFieldsNullable = GraphqlKit.Schema.isAllInputObjectFieldsNullable(type)
+    const isAllFieldsNullable = GraphqlKit.Schema.Runtime.isAllInputObjectFieldsNullable(type)
     const inputLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/learn/schema/#input-types', 'InputObject')
 
     doc`Input for ${inputLink}.`
@@ -700,7 +700,7 @@ export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory
  * Generate enhanced JSDoc for selection set enum types.
  */
 export const getEnumTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema2.Runtime.Nodes.EnumType]
+  [type: GraphqlKit.Schema.Runtime.Nodes.EnumType]
 >(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('Enum')
@@ -824,7 +824,7 @@ export const getScalarRegistryTypeDoc = Str.Code.TSDoc.template.factory<[]>((doc
  * Used in Select.ts for type inference utilities.
  */
 export const getSelectInferDoc = Str.Code.TSDoc.template.factory<[
-  type: GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes,
+  type: GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes,
   kind: 'operation' | 'selectionSet',
 ]>((doc, type, kind) => {
   const text = kind === 'operation'
@@ -841,7 +841,7 @@ export const getSelectInferDoc = Str.Code.TSDoc.template.factory<[
  * Used in MethodsSelect.ts for selection method interfaces.
  */
 export const getMethodsSelectDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes]
+  [type: GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes]
 >(
   (doc, type) => {
     doc.add(type.description)

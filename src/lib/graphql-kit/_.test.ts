@@ -12,7 +12,7 @@ const ot = GraphqlKit.Document.Ast.OperationType
 
 type CaseParameters = [
   description: string,
-  request: GraphqlKit.RequestInput,
+  request: GraphqlKit.Request.RequestInput,
   result: null | GraphqlKit.Document.Ast.OperationType.OperationType,
 ]
 

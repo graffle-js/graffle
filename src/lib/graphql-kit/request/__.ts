@@ -1,7 +1,9 @@
 import type { Err } from '@wollybeard/kit'
 import type { GraphQLError, OperationDefinitionNode } from 'graphql'
-import type { GraphqlKit } from './_.js'
-import { Document } from './document/_.js'
+import type { GraphqlKit } from '../_.js'
+import { Document } from '../document/_.js'
+
+export * from './infer.js'
 
 export interface RequestInput {
   query: string | Document.Typed.TypedDocumentLike
@@ -64,8 +66,8 @@ export type SomeObjectData = {
 
 export type SomeFieldData =
   | null
-  | GraphqlKit.Schema.StandardScalarRuntimeTypes
-  | GraphqlKit.Schema.StandardScalarRuntimeTypes[]
+  | GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes
+  | GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes[]
   | {
     [fieldName: string]: SomeFieldData
   }

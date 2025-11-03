@@ -4,7 +4,7 @@ import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 import { handleOutput } from './handle.js'
 
-export const sendRequest = async (context: Context, analyzedRequest: GraphqlKit.RequestAnalyzedInput) => {
+export const sendRequest = async (context: Context, analyzedRequest: GraphqlKit.Request.RequestAnalyzedInput) => {
   if (!context.transports.current) throw new Error(`No transport selected`)
 
   const initialInput = {

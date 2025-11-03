@@ -10,7 +10,7 @@ import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  { operation: GraphqlKit.Document.Ast.OperationDefinitionNode; variables: GraphqlKit.Variables },
+  { operation: GraphqlKit.Document.Ast.OperationDefinitionNode; variables: GraphqlKit.Request.Variables },
   [
     operation: Select.Document.OperationNormalized,
     options?: Options,
@@ -51,7 +51,7 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
     // directives
   })
 
-  const variables: GraphqlKit.Variables = Object.fromEntries(context.variables.data.map(_ => {
+  const variables: GraphqlKit.Request.Variables = Object.fromEntries(context.variables.data.map(_ => {
     return [_.name, _.value as any]
   }))
 

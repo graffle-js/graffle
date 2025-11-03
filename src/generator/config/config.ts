@@ -78,8 +78,8 @@ interface ConfigSchema {
   via: ConfigInit['schema']['type']
   sdl: string
   sdlFilePath: null | string
-  instance: GraphqlKit.Schema2.Runtime.Nodes.Schema
-  kindMap: GraphqlKit.Schema.KindMap
+  instance: GraphqlKit.Schema.Runtime.Nodes.Schema
+  kindMap: GraphqlKit.Schema.Kind.KindMap
 }
 
 export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
@@ -151,7 +151,7 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
     configInit.defaultSchemaUrl === false
       ? null
       : typeof configInit.defaultSchemaUrl === `boolean` || configInit.defaultSchemaUrl === undefined
-        ? configInit.schema instanceof GraphqlKit.Schema2.Runtime.Nodes.Schema
+        ? configInit.schema instanceof GraphqlKit.Schema.Runtime.Nodes.Schema
           ? null
           : configInit.schema.type === `url`
             ? configInit.schema.url
@@ -313,9 +313,9 @@ const createConfigSchema = async (
 ): Promise<ConfigSchema> => {
   switch (input.schema.type) {
     case `instance`: {
-      const sdl = GraphqlKit.Schema.print(input.schema.instance)
+      const sdl = GraphqlKit.Schema.Runtime.toString(input.schema.instance)
       const instance = input.schema.instance
-      const kindMap = GraphqlKit.Schema.KindMap.getKindMap(instance)
+      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
         sdlFilePath: null,
@@ -338,8 +338,8 @@ const createConfigSchema = async (
       } else {
         sdl = input.schema.sdl
       }
-      const instance = GraphqlKit.Schema.buildSchema(sdl)
-      const kindMap = GraphqlKit.Schema.KindMap.getKindMap(instance)
+      const instance = GraphqlKit.Schema.Runtime.fromString(sdl)
+      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
         sdlFilePath,
@@ -361,9 +361,9 @@ const createConfigSchema = async (
       if (!data) {
         throw new Error(`No data returned for introspection query.`)
       }
-      const instance = GraphqlKit.Schema.buildClientSchema(data)
-      const sdl = GraphqlKit.Schema.print(instance)
-      const kindMap = GraphqlKit.Schema.KindMap.getKindMap(instance)
+      const instance = GraphqlKit.Schema.Runtime.fromIntrospection(data)
+      const sdl = GraphqlKit.Schema.Runtime.toString(instance)
+      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: `url`,
         sdlFilePath: null,

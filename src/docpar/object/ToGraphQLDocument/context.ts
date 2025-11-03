@@ -144,7 +144,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
           name: potentialVariableName,
           type: input.sddmArgument
             ? SDDM.argumentTypeToSyntax(input.sddmArgument)
-            : GraphqlKit.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
+            : GraphqlKit.Request.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
           value: processedValue,
           defaultValue: processedDefaultValue,
           isEnum: input.isEnum,

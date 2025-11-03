@@ -42,7 +42,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
        * @example GraphQL string syntax
        * \`\`\`ts
        * const doc = gql(\`query { user { id } }\`)
-       * // Returns: TypedFullDocument.SingleOperation<{ user: { id: string } }, {}>
+       * // Returns: GraphqlKit.Document.TypedFull.SingleOperation<{ user: { id: string } }, {}>
        * \`\`\`
        *
        * @example Document object syntax
@@ -52,7 +52,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
        *     getUser: { user: { id: true, name: true } }
        *   }
        * })
-       * // Returns: TypedFullDocument.SingleOperation with operation metadata
+       * // Returns: GraphqlKit.Document.TypedFull.SingleOperation with operation metadata
        * \`\`\`
        */
       export const gql = createGql<

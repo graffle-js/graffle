@@ -6,7 +6,7 @@ export type Interface<
   $Name extends string = string,
   $Fields extends OutputFields = OutputFields,
 > = {
-  kind: GraphqlKit.Schema.TypeKind.Interface
+  kind: GraphqlKit.Schema.Kind.TypeKind.Interface
   name: $Name
   fields: $Fields
   implementors: (OutputObject | Interface)[]

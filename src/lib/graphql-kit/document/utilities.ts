@@ -9,7 +9,7 @@ import type {
   OperationDefinitionNode,
   TypeNode,
 } from 'graphql'
-import type { RequestDocumentNodeInput, RequestInput } from '../graphql.js'
+import type * as Request from '../request/__.js'
 import { Ast } from './ast/_.js'
 import { isOperationDefinitionNode } from './ast/guards.js'
 import * as Kind from './ast/kind.js'
@@ -67,7 +67,7 @@ export const getNamedType = (type: TypeNode): NamedTypeNode => {
 }
 
 export const getOperationDefinition = (
-  request: RequestDocumentNodeInput,
+  request: Request.RequestDocumentNodeInput,
 ): OperationDefinitionNode | null => {
   for (const node of request.query.definitions) {
     const opDefNode = isOperationDefinitionNode(node) ? node : null
@@ -87,7 +87,7 @@ const definedOperationPattern = new RegExp(`^\\b(${Object.values(Ast.OperationTy
  * If document is string then regular expressions are used to extract the operation type
  * to avoid document encode/decode performance costs.
  */
-export const getOperationType = (request: RequestInput): Ast.OperationType.OperationType | null => {
+export const getOperationType = (request: Request.RequestInput): Ast.OperationType.OperationType | null => {
   // return null
   const { operationName, query: document } = request
 

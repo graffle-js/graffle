@@ -1,0 +1,36 @@
+export * from './enum.js'
+export * from './KindMap/_.js'
+
+import { Lang } from '@wollybeard/kit'
+import type { GraphQLNamedType } from 'graphql'
+import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
+import { Scalars } from '../scalars/_.js'
+import type { KindMap } from './__.js'
+
+export const getTypeAndKind = (
+  node: GraphQLNamedType,
+): {
+  typeName: string
+  kindName: KindMap.KindName
+} => {
+  const typeName = node.name
+
+  let kindName: KindMap.KindName
+
+  if (isScalarType(node)) {
+    kindName = Scalars.isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
+  } else if (isUnionType(node)) {
+    kindName = `Union`
+  } else if (isInterfaceType(node)) {
+    kindName = `Interface`
+  } else if (isObjectType(node)) {
+    kindName = `OutputObject`
+  } else if (isInputObjectType(node)) {
+    kindName = `InputObject`
+  } else if (isEnumType(node)) {
+    kindName = `Enum`
+  } else {
+    throw Lang.neverCase(node)
+  }
+  return { typeName, kindName }
+}

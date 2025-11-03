@@ -43,7 +43,7 @@ export interface ConfigInitSchemaSdl {
 }
 export interface ConfigInitSchemaInstance {
   type: `instance`
-  instance: GraphqlKit.Schema2.Runtime.Nodes.Schema
+  instance: GraphqlKit.Schema.Runtime.Nodes.Schema
 }
 export interface ConfigInitSchemaSdlFile {
   type: `sdlFile`

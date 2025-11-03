@@ -1,6 +1,6 @@
 import { Http, Rec } from '@wollybeard/kit'
 import type { FormattedExecutionResult, GraphQLFormattedError } from 'graphql'
-import type { Variables } from '../graphql.js'
+import type { Variables } from '../request/__.js'
 
 export interface RequestConfig {
   query: string

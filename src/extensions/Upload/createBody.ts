@@ -1,4 +1,4 @@
-import type { RequestConfig } from '#src/lib/graphql-kit/http/http.js'
+import type { RequestConfig } from '#src/lib/graphql-kit/http/__.js'
 import extractFiles from './extractFiles.js'
 
 export const createBody = (input: RequestConfig): FormData => {

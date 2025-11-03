@@ -2,9 +2,8 @@ import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core'
 import { Obj } from '@wollybeard/kit'
 import { type DocumentNode, type TypedQueryDocumentNode } from 'graphql'
 import type { HasRequiredKeys, IsNever, IsUnknown } from 'type-fest'
-import type { SomeObjectData, Variables } from '../../graphql.js'
-
-export type { SomeObjectData, Variables } from '../../graphql.js'
+import type * as Request from '../../request/__.js'
+// export type { SomeObjectData, Variables } from '../../graphql.js'
 
 export { type TypedQueryDocumentNode as Query } from 'graphql'
 
@@ -15,15 +14,18 @@ export { type TypedQueryDocumentNode as Query } from 'graphql'
 
 // dprint-ignore
 export type TypedDocumentLike<
-  $Result extends SomeObjectData = SomeObjectData,
-  $Variables extends Variables = any,
+  $Result extends Request.SomeObjectData = Request.SomeObjectData,
+  $Variables extends Request.Variables = any,
   $RequiresSDDM extends boolean = boolean
 > =
   | TypedQueryDocumentNode<$Result, $Variables>
   | TypedDocumentString   <$Result, $Variables, $RequiresSDDM>
   | TypedDocumentNode     <$Result, $Variables>
 
-export type TypedDocumentNodeLike<$Result extends SomeObjectData = SomeObjectData, $Variables extends Variables = any> =
+export type TypedDocumentNodeLike<
+  $Result extends Request.SomeObjectData = Request.SomeObjectData,
+  $Variables extends Request.Variables = any,
+> =
   | TypedQueryDocumentNode<$Result, $Variables>
   | TypedDocumentNode<$Result, $Variables>
 
@@ -33,7 +35,7 @@ export type TypedDocumentNodeLike<$Result extends SomeObjectData = SomeObjectDat
  */
 // dprint-ignore
 interface TypedDocumentString<
-  $Result = SomeObjectData,
+  $Result = Request.SomeObjectData,
   $Variables = any,
   $RequiresSDDM extends boolean = boolean
 > extends String, DocumentTypeDecoration<$Result, $Variables> {
@@ -54,7 +56,7 @@ export { type TypedDocumentString as String }
  * @see https://github.com/dotansimha/graphql-typed-document-node
  */
 // dprint-ignore
-interface TypedDocumentNode<$Result = SomeObjectData, $Variables = Variables> extends DocumentNode, DocumentTypeDecoration<$Result, $Variables> {
+interface TypedDocumentNode<$Result = Request.SomeObjectData, $Variables = Request.Variables> extends DocumentNode, DocumentTypeDecoration<$Result, $Variables> {
   // nothing
 }
 
@@ -67,7 +69,7 @@ export { type TypedDocumentNode as Node }
 // Variables Helpers
 
 // dprint-ignore
-export type GetVariablesInputKind<$Variables extends Variables> =
+export type GetVariablesInputKind<$Variables extends Request.Variables> =
   IsNever<$Variables>               extends true  ? VariablesInputKindNone     :
   Obj.IsHasIndexType<$Variables>    extends true  ? VariablesInputKindOptional :
   HasRequiredKeys<$Variables>       extends true  ? VariablesInputKindRequired :
@@ -99,10 +101,10 @@ export const unType = (document: TypedDocumentLike): string | DocumentNode => do
 
 // dprint-ignore
 export type ResultOf<$Document extends TypedDocumentLike> =
-  $Document extends string                                                                                ? SomeObjectData :
-  $Document extends TypedQueryDocumentNode <infer $R extends SomeObjectData, infer __vars>                ? $R :
-  $Document extends TypedDocumentNode      <infer $R extends SomeObjectData, infer __vars>                ? $R :
-  $Document extends TypedDocumentString    <infer $R extends SomeObjectData, infer __vars, infer __sddm>  ? $R :
+  $Document extends string                                                                                ? Request.SomeObjectData :
+  $Document extends TypedQueryDocumentNode <infer $R extends Request.SomeObjectData, infer __vars>                ? $R :
+  $Document extends TypedDocumentNode      <infer $R extends Request.SomeObjectData, infer __vars>                ? $R :
+  $Document extends TypedDocumentString    <infer $R extends Request.SomeObjectData, infer __vars, infer __sddm>  ? $R :
                                                                    never
 
 // dprint-ignore
@@ -114,7 +116,7 @@ export type VariablesOf<$Document extends TypedDocumentLike> =
                                                                                            // which is a subtype of TypedDocumentNode, however,
                                                                                            // extracting variables from it will always yield
                                                                                            // unknown.
-                                                                                           ? Variables
+                                                                                           ? Request.Variables
                                                                                            : $V :
                                                                                          never
 

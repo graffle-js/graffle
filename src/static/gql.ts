@@ -112,7 +112,7 @@ export const createGql = <
       sddm: config.sddm as any,
     })
 
-    // Print and return as TypedFullDocument
+    // Print and return as GraphqlKit.Document.TypedFull
     return print(result.document) as any
   }) as any
 }

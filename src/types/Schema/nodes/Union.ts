@@ -5,7 +5,7 @@ export type Union<
   $Name extends string = string,
   $Members extends [OutputObject, ...OutputObject[]] = [OutputObject, ...OutputObject[]],
 > = {
-  kind: GraphqlKit.Schema.TypeKind.Union
+  kind: GraphqlKit.Schema.Kind.TypeKind.Union
   name: $Name
   members: $Members
   membersUnion: $Members[number]

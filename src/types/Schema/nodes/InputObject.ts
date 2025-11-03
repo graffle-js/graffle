@@ -6,7 +6,7 @@ export interface InputObject<
   $Fields extends InputFields = InputFields,
   $IsFieldsAllNullable extends boolean = boolean,
 > {
-  kind: GraphqlKit.Schema.TypeKind.InputObject
+  kind: GraphqlKit.Schema.Kind.TypeKind.InputObject
   name: $Name
   fields: $Fields
   isAllFieldsNullable: $IsFieldsAllNullable

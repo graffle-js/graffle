@@ -6,7 +6,7 @@ export {
   type GraphQLEnumValue as EnumValue,
   type GraphQLField as Field,
   type GraphQLInputField as InputField,
-  GraphQLInputObjectType as InputObject,
+  GraphQLInputObjectType as InputObjectType,
   GraphQLInterfaceType as InterfaceType,
   GraphQLList as ListType,
   GraphQLNonNull as NonNullType,

@@ -24,7 +24,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
         if (_[1] === null) return null
         return { operationType: _[0], objectType: _[1] }
       }).filter(_ => _ !== null)
-    const kindMap: GraphqlKit.Schema.KindMap['list'] = getKindMap(config)
+    const kindMap: GraphqlKit.Schema.Kind.KindMap['list'] = getKindMap(config)
     const kinds = Obj.entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
@@ -117,7 +117,7 @@ const typeCondition = (config: Config) => {
       const isHasInputOrOutputCustomScalar = () => true // todo
       return isHasInputOrOutputCustomScalar
     }
-    return GraphqlKit.Schema.CustomScalars.isHasCustomScalars
+    return GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars
   }
 
   if (config.runtimeFeatures.operationVariables) {
@@ -135,7 +135,7 @@ const inputTypeCondition = (config: Config) => {
   if (config.runtimeFeatures.operationVariables) return trueFilter
 
   if (config.runtimeFeatures.customScalars) {
-    return GraphqlKit.Schema.CustomScalars.isHasCustomScalars
+    return GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars
   }
 
   return falseFilter
@@ -151,7 +151,7 @@ const inputTypeCondition = (config: Config) => {
 //
 
 const ScalarType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.ScalarType }
+  { type: GraphqlKit.Schema.Runtime.Nodes.ScalarType }
 >(
   ({ code, type }) => {
     code(Str.Code.TS.constDecl(type.name, `${$.$$Scalar}.${type.name}`))
@@ -159,7 +159,7 @@ const ScalarType = createCodeGenerator<
 )
 
 const ScalarTypeCustom = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.ScalarType }
+  { type: GraphqlKit.Schema.Runtime.Nodes.ScalarType }
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
@@ -171,7 +171,7 @@ const ScalarTypeCustom = createCodeGenerator<
 )
 
 const UnionType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.UnionType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.Runtime.Nodes.UnionType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
     // This takes advantage of the fact that in GraphQL, in a union type, all members that happen
@@ -187,7 +187,7 @@ const UnionType = createCodeGenerator<
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
         [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
-          $spread: type.getTypes().filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
+          $spread: type.getTypes().filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
         }),
@@ -197,16 +197,16 @@ const UnionType = createCodeGenerator<
 )
 
 const InterfaceType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.InterfaceType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.Runtime.Nodes.InterfaceType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type, config }) => {
-    const implementorTypes = GraphqlKit.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
+    const implementorTypes = GraphqlKit.Schema.Kind.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     code(Str.Code.TS.constDeclTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
         [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
-          $spread: implementorTypes.filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
+          $spread: implementorTypes.filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
         }),
@@ -216,7 +216,7 @@ const InterfaceType = createCodeGenerator<
 )
 
 const ObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
     const o: Str.Code.TS.TermObject.TermObject = {}
@@ -238,7 +238,7 @@ const ObjectType = createCodeGenerator<
 
     const outputFields = Object.values(type.getFields()).filter(condition)
     for (const outputField of outputFields) {
-      const outputFieldNamedType = GraphqlKit.Schema.getNamedType(outputField.type)
+      const outputFieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(outputField.type)
       const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
         $fields: {},
       }
@@ -255,10 +255,10 @@ const ObjectType = createCodeGenerator<
           const ofItemA: Str.Code.TS.TermObject.TermObject = {}
           ofItemAs[arg.name] = ofItemA
 
-          const argType = GraphqlKit.Schema.getNamedType(arg.type)
+          const argType = GraphqlKit.Schema.Runtime.getNamedType(arg.type)
           // dprint-ignore
           if (
-             (config.runtimeFeatures.customScalars && GraphqlKit.Schema.isScalarTypeAndCustom(argType)) ||
+             (config.runtimeFeatures.customScalars && GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(argType)) ||
              // For variables, we need to know the variable type to write it out, so we always need the named type.
              (config.runtimeFeatures.operationVariables)
           ) {
@@ -280,14 +280,14 @@ const ObjectType = createCodeGenerator<
       })
 
       if (condition(outputFieldNamedType)) {
-        if (GraphqlKit.Schema.isScalarTypeAndCustom(outputFieldNamedType)) {
+        if (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(outputFieldNamedType)) {
           if (config.runtimeFeatures.customScalars) {
             sddmNodeOutputField.$fields[propertyNames.nt] = outputFieldNamedType.name
           }
         } else if (
-          GraphqlKit.Schema2.Runtime.Nodes.isUnionType(outputFieldNamedType)
-          || GraphqlKit.Schema2.Runtime.Nodes.isObjectType(outputFieldNamedType)
-          || GraphqlKit.Schema2.Runtime.Nodes.isInterfaceType(outputFieldNamedType)
+          GraphqlKit.Schema.Runtime.Nodes.isUnionType(outputFieldNamedType)
+          || GraphqlKit.Schema.Runtime.Nodes.isObjectType(outputFieldNamedType)
+          || GraphqlKit.Schema.Runtime.Nodes.isInterfaceType(outputFieldNamedType)
         ) {
           referenceAssignments.push(`${type.name}.f[\`${outputField.name}\`]!.nt = ${outputFieldNamedType.name}`)
           // dprint-ignore
@@ -295,7 +295,7 @@ const ObjectType = createCodeGenerator<
           // // todo make kitchen sink schema have a pattern where this code path will be traversed.
           // // We just need to have arguments on a field on a nested object.
           // // Nested objects that in turn have custom scalar arguments
-          // if (Schema.GraphqlKit.Schema2.Runtime.Nodes.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
+          // if (Schema.GraphqlKit.Schema.Runtime.Nodes.isObjectType(fieldType) && Schema.isHasCustomScalars(fieldType)) {
           //   code(Str.Code.TS.TermObject.termField(field.name, fieldType.name))
           // }
         }
@@ -313,7 +313,7 @@ const ObjectType = createCodeGenerator<
 )
 
 const EnumType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.EnumType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.Runtime.Nodes.EnumType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
     code(Str.Code.TS.constDeclTyped(
@@ -328,7 +328,7 @@ const EnumType = createCodeGenerator<
 )
 
 const InputObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
     const o: Str.Code.TS.TermObject.TermObject = {}
@@ -338,7 +338,7 @@ const InputObjectType = createCodeGenerator<
     if (config.runtimeFeatures.operationVariables) {
       o[propertyNames.n] = Str.Code.TS.string(type.name)
       const customScalarFields = inputFields
-        .filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs)
+        .filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
         .map(Str.Code.TS.string)
       if (customScalarFields.length) {
@@ -351,14 +351,14 @@ const InputObjectType = createCodeGenerator<
     o[propertyNames.f] = f
 
     for (const inputField of inputFields) {
-      const inputFieldType = GraphqlKit.Schema.getNamedType(inputField.type)
+      const inputFieldType = GraphqlKit.Schema.Runtime.getNamedType(inputField.type)
 
       // dprint-ignore
       const isPresent =
         config.runtimeFeatures.operationVariables ||
         (config.runtimeFeatures.customScalars &&
-          (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType) ||
-          (GraphqlKit.Schema2.Runtime.Nodes.isInputObjectType(inputFieldType) && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType))))
+          (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(inputFieldType) ||
+          (GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(inputFieldType) && GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs(inputFieldType))))
 
       if (!isPresent) continue
 
@@ -366,11 +366,11 @@ const InputObjectType = createCodeGenerator<
         $fields: {},
       }
 
-      if (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType)) {
+      if (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(inputFieldType)) {
         f[inputField.name]!.$fields[propertyNames.nt] = inputFieldType.name
       } else if (
-        GraphqlKit.Schema2.Runtime.Nodes.isInputObjectType(inputFieldType)
-        && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType)
+        GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(inputFieldType)
+        && GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs(inputFieldType)
       ) {
         referenceAssignments.push(
           `${type.name}.${propertyNames.f}![\`${inputField.name}\`]!.${propertyNames.nt} = ${inputFieldType.name}`,

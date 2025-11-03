@@ -6,7 +6,7 @@ import type {
   GraphQLScalarType,
   GraphQLUnionType,
 } from 'graphql'
-import type { Map } from '../runtime/root/map.js'
+import type { Map } from '../../runtime/root/map.js'
 
 export * as KindMap from './__.js'
 

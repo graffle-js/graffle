@@ -1,6 +1,5 @@
 import { Extension } from '#graffle/extension'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { execute } from '#src/lib/graphql-kit/execute.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { Ware } from '@wollybeard/kit'
 
@@ -12,7 +11,7 @@ export interface ConfigurationNormalized {
   /**
    * The schema to execute documents against.
    */
-  schema: GraphqlKit.Schema2.Runtime.Nodes.Schema
+  schema: GraphqlKit.Schema.Runtime.Nodes.Schema
   resolverValues?: {
     /**
      * The value to use for parent (aka. source) on _root_ resolvers.
@@ -75,7 +74,7 @@ export interface PackInput extends RequestPipeline.PackInput {
 }
 
 export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
-  request: GraphqlKit.HTTP.RequestConfig
+  request: GraphqlKit.Http.RequestConfig
 }
 
 export interface ExchangeOutput extends PackOutput {}
@@ -126,7 +125,7 @@ export const TransportMemory: TransportMemory = Extension
       )
       .pack({
         run(input) {
-          const graphqlRequest: GraphqlKit.HTTP.RequestConfig = {
+          const graphqlRequest: GraphqlKit.Http.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
             query: GraphqlKit.Document.print(input.request.query),
@@ -139,7 +138,7 @@ export const TransportMemory: TransportMemory = Extension
       })
       .exchange({
         run: async (input) => {
-          const result = await execute({
+          const result = await GraphqlKit.Execute.execute({
             schema: input.transport.schema,
             request: input.request,
             resolverValues: input.transport.resolverValues, // todo: test case that this is passed correctly
