@@ -17,7 +17,13 @@ export type FromString<$OperationTypeString extends string> =
     $OperationTypeString extends 'mutation'       ? MUTATION
   : $OperationTypeString extends 'subscription'   ? SUBSCRIPTION
   : $OperationTypeString extends 'query'          ? QUERY
-  : Ts.Err.StaticError<'Unknown operation type given', { $OperationTypeString: $OperationTypeString }>
+  // TODO: Would prefer StaticError in the error case for better error messages, but currently too disruptive:
+  // The `operationType & string` in Parse.ts line 37 widens literal types to generic `string`,
+  // causing FromString to return OperationTypeNode | StaticError union, which breaks constraint checks.
+  // We should push the GraphQL enum as far to edges as possible and keep internal types as string literals.
+  //
+  //                                              : Ts.Err.StaticError<'Unknown operation type given', { value: $OperationTypeString }>
+                                                  : never
 
 export const LookupFromRootType = {
   Query: QUERY,
