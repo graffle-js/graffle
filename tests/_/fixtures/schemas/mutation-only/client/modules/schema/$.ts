@@ -7,7 +7,7 @@ export * as Schema from './$$.js'
 
 export interface Schema<$Scalars extends $.Schema.Scalars.Registry = $$Scalar.$Registry> {
   name: $$Data.Name
-  operationsAvailable: ['mutation']
+  operationsAvailable: [$.GraphqlKit.Schema.OperationType.MUTATION]
   RootUnion: $Types.Mutation
   Root: {
     query: null

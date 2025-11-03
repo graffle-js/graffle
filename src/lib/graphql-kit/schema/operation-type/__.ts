@@ -36,7 +36,6 @@ export const LookupFromRootType = {
 
 export type LookupFromRootType = typeof LookupFromRootType
 
-
 export const LookupToAccessKind = {
   query: `read`,
   mutation: `write`,
