@@ -239,7 +239,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
  */
 const collectInputObjectTypes = (
   argsIndex: GraphqlKit.Schema.ArgsIndex.ArgsIndex,
-  schema: GraphqlKit.Schema.Schema,
+  schema: GraphqlKit.Schema2.Runtime.Nodes.Schema,
 ) => {
   const inputTypes = new Set<string>()
   const result = []
@@ -387,7 +387,7 @@ const renderTypeWithArgs = createCodeGenerator<
  * ```
  */
 const renderInputObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema.InputObjectType }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.InputObject }
 >(
   ({ config, code, type }) => {
     const fields = Object.values(type.getFields())
@@ -442,7 +442,7 @@ const renderInputObjectType = createCodeGenerator<
  * // Returns: "readonly TypeInputsIndex.String[]"
  * ```
  */
-const renderResolvedType = (type: GraphqlKit.Schema.Types, indexName: string): string => {
+const renderResolvedType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Types, indexName: string): string => {
   const namedType = GraphqlKit.Schema.getNamedType(type)
   const typeName = renderName(namedType.name)
 

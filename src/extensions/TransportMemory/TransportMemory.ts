@@ -12,7 +12,7 @@ export interface ConfigurationNormalized {
   /**
    * The schema to execute documents against.
    */
-  schema: GraphqlKit.Schema.Schema
+  schema: GraphqlKit.Schema2.Runtime.Nodes.Schema
   resolverValues?: {
     /**
      * The value to use for parent (aka. source) on _root_ resolvers.

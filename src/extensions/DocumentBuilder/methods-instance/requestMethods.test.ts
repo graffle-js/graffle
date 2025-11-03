@@ -7,7 +7,7 @@ import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 
-const createPossible = (schema: GraphqlKit.Schema.Schema) =>
+const createPossible = (schema: GraphqlKit.Schema2.Runtime.Nodes.Schema) =>
   PossibleNoCustomScalars
     .create({ check: { preflight: false } })
     .use(TransportMemory)

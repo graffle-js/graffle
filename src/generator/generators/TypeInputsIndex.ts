@@ -120,7 +120,10 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
 /**
  * Generate the TypeScript type for an input object
  */
-function generateInputObjectType(config: Config, inputObject: GraphqlKit.Schema.InputObjectType): string {
+function generateInputObjectType(
+  config: Config,
+  inputObject: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
+): string {
   const fields = Object.values(inputObject.getFields())
 
   if (fields.length === 0) {

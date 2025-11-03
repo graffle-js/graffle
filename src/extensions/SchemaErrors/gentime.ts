@@ -10,11 +10,11 @@ const propertyNames = {
 }
 
 interface Input {
-  isErrorType?: (value: GraphqlKit.Schema.ObjectType) => boolean
+  isErrorType?: (value: GraphqlKit.Schema2.Runtime.Nodes.ObjectType) => boolean
 }
 
 interface Config {
-  isErrorType: (value: GraphqlKit.Schema.ObjectType) => boolean
+  isErrorType: (value: GraphqlKit.Schema2.Runtime.Nodes.ObjectType) => boolean
 }
 
 const defaults: Config = {

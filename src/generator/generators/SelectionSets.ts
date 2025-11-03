@@ -2,7 +2,6 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { analyzeArgsNullability } from '#src/lib/graphql-kit/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
 import { Docpar } from '../../docpar/_.js'
 import type { Config } from '../config/config.js'
@@ -33,7 +32,6 @@ import {
   codeImportNamed,
   codeReexportAll,
   codeReexportNamespace,
-  getUtilitiesPath,
   importUtilities,
 } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderName } from '../helpers/render.js'
@@ -303,7 +301,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.KindMa
 
 // ===== Enum Generator =====
 
-const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.EnumType): GeneratedModule => {
+const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema2.Runtime.Nodes.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
   code(Str.Code.TS.typeAlias$({
@@ -322,7 +320,10 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.EnumType
 
 // ===== Union Generator =====
 
-const generateUnionModule = (config: Config, unionType: GraphqlKit.Schema.UnionType): GeneratedModule[] => {
+const generateUnionModule = (
+  config: Config,
+  unionType: GraphqlKit.Schema2.Runtime.Nodes.UnionType,
+): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
   // Generate fragment.ts with $FragmentInline interface
@@ -393,7 +394,7 @@ const generateUnionModule = (config: Config, unionType: GraphqlKit.Schema.UnionT
 
 const generateInputObjectModule = (
   config: Config,
-  inputObject: GraphqlKit.Schema.InputObjectType,
+  inputObject: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
@@ -465,19 +466,25 @@ const generateInputObjectModule = (
 
 // ===== Interface Generator =====
 
-const generateInterfaceModule = (config: Config, iface: GraphqlKit.Schema.InterfaceType): GeneratedModule[] => {
+const generateInterfaceModule = (
+  config: Config,
+  iface: GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
+): GeneratedModule[] => {
   return generateFieldedTypeModule(config, iface, 'interfaces')
 }
 
 // ===== Root Generator =====
 
-const generateRootModule = (config: Config, root: GraphqlKit.Schema.ObjectType): GeneratedModule[] => {
+const generateRootModule = (config: Config, root: GraphqlKit.Schema2.Runtime.Nodes.ObjectType): GeneratedModule[] => {
   return generateFieldedTypeModule(config, root, 'roots')
 }
 
 // ===== Object Generator =====
 
-const generateObjectModule = (config: Config, object: GraphqlKit.Schema.ObjectType): GeneratedModule[] => {
+const generateObjectModule = (
+  config: Config,
+  object: GraphqlKit.Schema2.Runtime.Nodes.ObjectType,
+): GeneratedModule[] => {
   return generateFieldedTypeModule(config, object, 'objects')
 }
 
@@ -485,7 +492,7 @@ const generateObjectModule = (config: Config, object: GraphqlKit.Schema.ObjectTy
 
 const generateFieldedTypeModule = (
   config: Config,
-  type: GraphqlKit.Schema.ObjectType | GraphqlKit.Schema.InterfaceType,
+  type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
   kind: 'roots' | 'objects' | 'interfaces',
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
@@ -561,7 +568,7 @@ const generateFieldedTypeModule = (
 
   const fieldKeys = fields.map(field => {
     const namedType = GraphqlKit.Schema.getNamedType(field.type)
-    const argsAnalysis = analyzeArgsNullability(field.args)
+    const argsAnalysis = GraphqlKit.Schema2.Runtime.Args.analyzeArgsNullability(field.args)
     const isCanBeIndicator = (GraphqlKit.Schema.isScalarType(namedType) || GraphqlKit.Schema.isEnumType(namedType))
       && argsAnalysis.isAllNullable
     const doc = Str.Code.TSDoc.format(getOutputFieldSelectionSetDoc(field, type.name, namedType))
@@ -580,13 +587,13 @@ const generateFieldedTypeModule = (
   if (isInterface) {
     const implementorTypes = GraphqlKit.Schema.KindMap.getInterfaceImplementors(
       config.schema.kindMap,
-      type as GraphqlKit.Schema.InterfaceType,
+      type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
     )
     onTypesRendered = implementorTypes.map(implementorType => {
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
       const doc = Str.Code.TSDoc.format(
-        getInlineFragmentDoc(implementorType as GraphqlKit.Schema.ObjectType, type, 'interface'),
+        getInlineFragmentDoc(implementorType as GraphqlKit.Schema2.Runtime.Nodes.ObjectType, type, 'interface'),
       )
       const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
@@ -607,10 +614,10 @@ const generateFieldedTypeModule = (
   }
 
   const tsDoc = isRoot && operationType
-    ? getRootTypeDoc(config, type as GraphqlKit.Schema.ObjectType, operationType)
+    ? getRootTypeDoc(config, type as GraphqlKit.Schema2.Runtime.Nodes.ObjectType, operationType)
     : isInterface
-    ? getInterfaceTypeSelectionSetDoc(type as GraphqlKit.Schema.InterfaceType, config.schema.kindMap)
-    : getObjectTypeSelectionSetDoc(type as GraphqlKit.Schema.ObjectType, isRoot)
+    ? getInterfaceTypeSelectionSetDoc(type as GraphqlKit.Schema2.Runtime.Nodes.InterfaceType, config.schema.kindMap)
+    : getObjectTypeSelectionSetDoc(type as GraphqlKit.Schema2.Runtime.Nodes.ObjectType, isRoot)
 
   namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc,
@@ -637,11 +644,11 @@ const generateFieldedTypeModule = (
 
 const renderOutputFieldForFields = (
   config: Config,
-  field: GraphqlKit.Schema.Field<any, any>,
-  parentType: GraphqlKit.Schema.ObjectType | GraphqlKit.Schema.InterfaceType,
+  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
+  parentType: GraphqlKit.Schema2.Runtime.Nodes.ObjectType | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
 ): string => {
   const code = Str.Builder()
-  const argsAnalysis = analyzeArgsNullability(field.args)
+  const argsAnalysis = GraphqlKit.Schema2.Runtime.Args.analyzeArgsNullability(field.args)
   const fieldNamedType = GraphqlKit.Schema.getNamedType(field.type)
 
   const fieldName = renderName(field)
@@ -700,7 +707,9 @@ const renderOutputFieldForFields = (
   if (argsAnalysis.hasAny) {
     code(`  export interface $Arguments<${$ContextTypeParameter}> {`)
     for (const arg of field.args) {
-      const doc = Str.Code.TSDoc.format(getArgumentDoc(config, arg, field, parentType as GraphqlKit.Schema.ObjectType))
+      const doc = Str.Code.TSDoc.format(
+        getArgumentDoc(config, arg, field, parentType as GraphqlKit.Schema2.Runtime.Nodes.ObjectType),
+      )
       const key = getInputFieldKey(arg)
       const optional = GraphqlKit.Schema.isNullableType(arg.type) ? '?' : ''
       const value = renderArgumentType(arg.type)
@@ -733,10 +742,10 @@ const renderOutputFieldForFields = (
 
 const renderFieldPropertyArguments = (
   config: Config,
-  field: GraphqlKit.Schema.Field<any, any>,
+  field: GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>,
   argFieldsRendered: string,
 ): string => {
-  const argsAnalysis = analyzeArgsNullability(field.args)
+  const argsAnalysis = GraphqlKit.Schema2.Runtime.Args.analyzeArgsNullability(field.args)
 
   if (argsAnalysis.hasAny) {
     const lead = argsAnalysis.isAllNullable
@@ -877,13 +886,13 @@ interface TypeUsageAnalysis {
   usesNamedTypes: boolean // enums, input objects, other object types
 }
 
-const analyzeTypeUsage = (type: GraphqlKit.Schema.InputTypes): TypeUsageAnalysis => {
+const analyzeTypeUsage = (type: GraphqlKit.Schema2.Runtime.NodeGroups.InputTypes): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,
     usesNamedTypes: false,
   }
 
-  const analyzeRecursive = (t: GraphqlKit.Schema.InputTypes): void => {
+  const analyzeRecursive = (t: GraphqlKit.Schema2.Runtime.NodeGroups.InputTypes): void => {
     const nakedType = GraphqlKit.Schema.getNullableType(t)
 
     if (GraphqlKit.Schema.isListType(nakedType)) {
@@ -907,7 +916,9 @@ const analyzeTypeUsage = (type: GraphqlKit.Schema.InputTypes): TypeUsageAnalysis
 /**
  * Analyze all fields in an input object to determine what imports are needed
  */
-const analyzeInputObjectTypeUsage = (inputObject: GraphqlKit.Schema.InputObjectType): TypeUsageAnalysis => {
+const analyzeInputObjectTypeUsage = (
+  inputObject: GraphqlKit.Schema2.Runtime.Nodes.InputObject,
+): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,
     usesNamedTypes: false,
@@ -926,7 +937,7 @@ const analyzeInputObjectTypeUsage = (inputObject: GraphqlKit.Schema.InputObjectT
  * Analyze all fields and their arguments in an output type to determine what imports are needed
  */
 const analyzeOutputTypeUsage = (
-  type: GraphqlKit.Schema.ObjectType | GraphqlKit.Schema.InterfaceType,
+  type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
 ): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,
@@ -958,7 +969,7 @@ const analyzeOutputTypeUsage = (
 
 const getInputFieldLike = (
   config: Config,
-  inputFieldLike: GraphqlKit.Schema.Argument | GraphqlKit.Schema.InputField,
+  inputFieldLike: GraphqlKit.Schema2.Runtime.Nodes.Argument | GraphqlKit.Schema2.Runtime.Nodes.InputField,
 ) => {
   return [
     getInputFieldKey(inputFieldLike),
@@ -970,13 +981,15 @@ const getInputFieldLike = (
   ] as const
 }
 
-const getInputFieldKey = (inputFieldLike: GraphqlKit.Schema.Argument | GraphqlKit.Schema.InputField) => {
+const getInputFieldKey = (
+  inputFieldLike: GraphqlKit.Schema2.Runtime.Nodes.Argument | GraphqlKit.Schema2.Runtime.Nodes.InputField,
+) => {
   return GraphqlKit.Schema.isEnumType(GraphqlKit.Schema.getNamedType(inputFieldLike.type))
     ? Docpar.Object.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 
-const renderArgumentType = (type: GraphqlKit.Schema.InputTypes): string => {
+const renderArgumentType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.InputTypes): string => {
   const sansNullabilityType = GraphqlKit.Schema.getNullableType(type)
   const isNullable = GraphqlKit.Schema.isNullableType(type)
 
@@ -1009,13 +1022,16 @@ const renderArgumentType = (type: GraphqlKit.Schema.InputTypes): string => {
 // ===== Helper Namespace =====
 
 namespace H {
-  export type Name = string | GraphqlKit.Schema.NamedTypes | GraphqlKit.Schema.Field<any, any>
+  export type Name =
+    | string
+    | GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes
+    | GraphqlKit.Schema2.Runtime.Nodes.Field<any, any>
 
   export const forwardTypeParameter$Context = (type: Name) => {
     return `${renderName(type)}<${i._$Context}>`
   }
 
-  export const namedTypesReference = (type: GraphqlKit.Schema.NamedTypes) => {
+  export const namedTypesReference = (type: GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes) => {
     return `$Named.${reference(type)}`
   }
 
@@ -1066,7 +1082,10 @@ namespace H {
   }
 
   export const fragmentInlineField = (
-    type: GraphqlKit.Schema.ObjectType | GraphqlKit.Schema.UnionType | GraphqlKit.Schema.InterfaceType,
+    type:
+      | GraphqlKit.Schema2.Runtime.Nodes.ObjectType
+      | GraphqlKit.Schema2.Runtime.Nodes.UnionType
+      | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
   ) => {
     const doc = Str.Code.TSDoc.format(getFragmentInlineFieldDoc())
 
@@ -1074,7 +1093,10 @@ namespace H {
   }
 
   export const fragmentInlineInterface = (
-    node: GraphqlKit.Schema.ObjectType | GraphqlKit.Schema.UnionType | GraphqlKit.Schema.InterfaceType,
+    node:
+      | GraphqlKit.Schema2.Runtime.Nodes.ObjectType
+      | GraphqlKit.Schema2.Runtime.Nodes.UnionType
+      | GraphqlKit.Schema2.Runtime.Nodes.InterfaceType,
   ) => {
     return Str.Code.TS.interfaceDecl({
       export: true,

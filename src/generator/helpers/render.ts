@@ -4,7 +4,7 @@ import { Docpar } from '#src/docpar/_.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
-export const renderInlineType = (type: GraphqlKit.Schema.Types): string => {
+export const renderInlineType = (type: GraphqlKit.Schema2.Runtime.NodeGroups.Types): string => {
   const [ofType, nonNull] = GraphqlKit.Schema.isNonNullType(type)
     ? [type.ofType, true]
     : [type, false]
@@ -24,7 +24,7 @@ export const maybeList = (type: string) => {
   return `${type} | Array<${type}>`
 }
 
-export const typeTitle2 = (category: string) => (type: GraphqlKit.Schema.NamedTypes) => {
+export const typeTitle2 = (category: string) => (type: GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes) => {
   const typeKind = GraphqlKit.getTypeAndKind(type)
   const nameOrKind = typeKind.kindName === `ScalarCustom` || typeKind.kindName === `ScalarStandard`
     ? typeKind.typeName
@@ -80,7 +80,7 @@ export const getTsDocContents = (config: Config, node: GraphqlKit.Schema.Describ
           .join(` `)
         return [_, content] as const
       })
-      .filter((_): _ is [GraphqlKit.Schema.EnumValue, string] => _ !== null)
+      .filter((_): _ is [GraphqlKit.Schema2.Runtime.Nodes.EnumValue, string] => _ !== null)
       .map(([node, description]) => {
         const content = `"${node.name}" - ${description}`
         return content
@@ -107,7 +107,9 @@ export const getTsDocContents = (config: Config, node: GraphqlKit.Schema.Describ
  * this guards against GraphQL type or property names that
  * would be illegal in TypeScript such as `namespace` or `interface`.
  */
-export const renderName = (type: string | GraphqlKit.Schema.NamedTypes | GraphqlKit.Schema.FieldTypes) => {
+export const renderName = (
+  type: string | GraphqlKit.Schema2.Runtime.NodeGroups.NamedTypes | GraphqlKit.Schema2.Runtime.Nodes.FieldTypes,
+) => {
   const name_ = typeof type === `string` ? type : type.name
   return Str.Code.TS.Reserved.escapeReserved(name_)
 }

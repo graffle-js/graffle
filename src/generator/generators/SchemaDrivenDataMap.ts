@@ -152,7 +152,7 @@ const inputTypeCondition = (config: Config) => {
 //
 
 const ScalarType = createCodeGenerator<
-  { type: GraphqlKit.Schema.ScalarType }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.ScalarType }
 >(
   ({ code, type }) => {
     code(Str.Code.TS.constDecl(type.name, `${$.$$Scalar}.${type.name}`))
@@ -160,7 +160,7 @@ const ScalarType = createCodeGenerator<
 )
 
 const ScalarTypeCustom = createCodeGenerator<
-  { type: GraphqlKit.Schema.ScalarType }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.ScalarType }
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
@@ -172,7 +172,7 @@ const ScalarTypeCustom = createCodeGenerator<
 )
 
 const UnionType = createCodeGenerator<
-  { type: GraphqlKit.Schema.UnionType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.UnionType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
     // This takes advantage of the fact that in GraphQL, in a union type, all members that happen
@@ -198,7 +198,7 @@ const UnionType = createCodeGenerator<
 )
 
 const InterfaceType = createCodeGenerator<
-  { type: GraphqlKit.Schema.InterfaceType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.InterfaceType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type, config }) => {
     const implementorTypes = GraphqlKit.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
@@ -217,7 +217,7 @@ const InterfaceType = createCodeGenerator<
 )
 
 const ObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
     const o: Str.Code.TS.TermObject.TermObject = {}
@@ -313,7 +313,7 @@ const ObjectType = createCodeGenerator<
 )
 
 const EnumType = createCodeGenerator<
-  { type: GraphqlKit.Schema.EnumType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.EnumType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type }) => {
     code(Str.Code.TS.constDeclTyped(
@@ -328,7 +328,7 @@ const EnumType = createCodeGenerator<
 )
 
 const InputObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema.ObjectType; referenceAssignments: ReferenceAssignments }
+  { type: GraphqlKit.Schema2.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
     const o: Str.Code.TS.TermObject.TermObject = {}

@@ -30,22 +30,6 @@ export {
   buildSchema,
   getNamedType,
   getNullableType,
-  type GraphQLArgument as Argument,
-  GraphQLEnumType as EnumType,
-  type GraphQLEnumValue as EnumValue,
-  type GraphQLField as Field,
-  type GraphQLInputField as InputField,
-  GraphQLInputObjectType as InputObjectType,
-  type GraphQLInputType as InputTypes,
-  GraphQLInterfaceType as InterfaceType,
-  GraphQLList as ListType,
-  type GraphQLNamedType as NamedTypes,
-  GraphQLNonNull as NonNullType,
-  GraphQLObjectType as ObjectType,
-  GraphQLScalarType as ScalarType,
-  GraphQLSchema as Schema,
-  type GraphQLType as Types,
-  GraphQLUnionType as UnionType,
   isEnumType,
   isInputObjectType,
   isInterfaceType,
@@ -60,8 +44,6 @@ export {
   isUnionType,
   printSchema as print,
 } from 'graphql'
-
-export * as Args from './args.js'
 
 export * as ArgsIndex from './argsIndex.js'
 
