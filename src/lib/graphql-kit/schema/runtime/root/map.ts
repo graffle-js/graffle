@@ -1,9 +1,9 @@
 import type { GraphQLObjectType, GraphQLSchema } from 'graphql'
-import { createFromObjectType, type RootDetails } from './RootDetails.js'
-import { type StandardRootTypeName, StandardRootTypeNameEnum } from './StandardRootTypeName.js'
+import { type Details, detailsFromObjectType } from './details.js'
+import { type StandardRootTypeName, StandardRootTypeNameEnum } from './standard.js'
 
-export interface RootTypeMap {
-  list: RootDetails[]
+export interface Map {
+  list: Details[]
   types: {
     Query: null | GraphQLObjectType
     Mutation: null | GraphQLObjectType
@@ -19,7 +19,7 @@ export interface RootTypeMap {
   }
 }
 
-export const getRootTypeMap = (schema: GraphQLSchema): RootTypeMap => {
+export const createMap = (schema: GraphQLSchema): Map => {
   const objectTypeQuery = schema.getQueryType() ?? null
   const objectTypeMutation = schema.getMutationType() ?? null
   const objectTypeSubscription = schema.getSubscriptionType() ?? null
@@ -38,9 +38,9 @@ export const getRootTypeMap = (schema: GraphQLSchema): RootTypeMap => {
 
   const fromActual: Record<string, StandardRootTypeName> = {}
 
-  const list: RootDetails[] = []
+  const list: Details[] = []
 
-  const map: RootTypeMap = {
+  const map: Map = {
     list,
     types,
     names: {
@@ -51,20 +51,20 @@ export const getRootTypeMap = (schema: GraphQLSchema): RootTypeMap => {
 
   if (objectTypeQuery?.name) {
     fromActual[objectTypeQuery.name] = StandardRootTypeNameEnum.Query
-    list.push(createFromObjectType(objectTypeQuery, StandardRootTypeNameEnum.Query))
+    list.push(detailsFromObjectType(objectTypeQuery, StandardRootTypeNameEnum.Query))
   }
   if (objectTypeMutation?.name) {
     fromActual[objectTypeMutation.name] = StandardRootTypeNameEnum.Mutation
-    list.push(createFromObjectType(objectTypeMutation, StandardRootTypeNameEnum.Mutation))
+    list.push(detailsFromObjectType(objectTypeMutation, StandardRootTypeNameEnum.Mutation))
   }
   if (objectTypeSubscription?.name) {
     fromActual[objectTypeSubscription.name] = StandardRootTypeNameEnum.Subscription
-    list.push(createFromObjectType(objectTypeSubscription, StandardRootTypeNameEnum.Subscription))
+    list.push(detailsFromObjectType(objectTypeSubscription, StandardRootTypeNameEnum.Subscription))
   }
 
   return map
 }
 
-export const isObjectRootType = (map: RootTypeMap, type: GraphQLObjectType): boolean => {
+export const isObjectRootType = (map: Map, type: GraphQLObjectType): boolean => {
   return map.list.some(_ => _.name.canonical === type.name)
 }

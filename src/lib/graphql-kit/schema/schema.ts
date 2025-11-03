@@ -1,9 +1,5 @@
 import {
-  type GraphQLArgument,
   GraphQLEnumType,
-  type GraphQLEnumValue,
-  type GraphQLField,
-  type GraphQLInputField,
   GraphQLInputObjectType,
   GraphQLInterfaceType,
   GraphQLList,
@@ -20,12 +16,6 @@ import {
   isUnionType,
 } from 'graphql'
 
-export * from './RootDetails.js'
-
-export * from './RootTypeMap.js'
-
-export * from './StandardRootTypeName.js'
-
 export { buildClientSchema, buildSchema, getNamedType, getNullableType, printSchema as print } from 'graphql'
 
 export * as CustomScalars from './customScalars.js'
@@ -35,14 +25,6 @@ export * from './KindMap/_.js'
 export * from './typeGuards.js'
 
 export * from './scalars.js'
-
-export type DeprecatableNodes = GraphQLEnumValue | InputOrOutputField
-
-export const isDeprecatableNode = (node: object): node is DeprecatableNodes => {
-  return `deprecationReason` in node
-}
-
-export type InputOrOutputField = GraphQLField<any, any> | GraphQLInputField
 
 export type AnyNamedClassName = keyof NamedNameToClass
 
@@ -64,11 +46,6 @@ export const NameToClass = {
   GraphQLList: GraphQLList,
   ...NamedNameToClass,
 } as const
-
-export type FieldTypes = GraphQLField<any, any> | GraphQLInputField
-export type DescribableTypes =
-  | GraphQLNamedType
-  | InputOrOutputField
 
 export const NameToClassNamedType = {
   GraphQLScalarType: GraphQLScalarType,

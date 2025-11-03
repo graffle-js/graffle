@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/RootDetails.js'
+import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/runtime/root/details.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'

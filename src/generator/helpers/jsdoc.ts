@@ -37,7 +37,7 @@ export const getKindDocUrl = (kindName: string): string => {
  */
 export const getSchemaDescription = (
   config: Config,
-  node: GraphqlKit.Schema.DescribableTypes,
+  node: GraphqlKit.Schema2.Runtime.NodeGroups.DescribableTypes,
 ): string | null => {
   if (node.description) return Str.Code.TSDoc.escape(node.description)
 

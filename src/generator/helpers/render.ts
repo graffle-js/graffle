@@ -47,23 +47,24 @@ export const typeTitle2 = (category: string) => (type: GraphqlKit.Schema2.Runtim
   return title
 }
 
-const defaultDescription = (node: GraphqlKit.Schema.DescribableTypes) => {
+const defaultDescription = (node: GraphqlKit.Schema2.Runtime.NodeGroups.DescribableTypes) => {
   const entity = GraphqlKit.Schema2.Runtime.NodeGroups.isField(node)
     ? `Field`
     : GraphqlKit.getTypeAndKind(node).kindName
   return `There is no documentation for this ${entity}.`
 }
 
-export const renderDocumentation = (config: Config, node: GraphqlKit.Schema.DescribableTypes) => {
+export const renderDocumentation = (config: Config, node: GraphqlKit.Schema2.Runtime.NodeGroups.DescribableTypes) => {
   return Str.Code.TSDoc.format(getTsDocContents(config, node))
 }
-export const getTsDocContents = (config: Config, node: GraphqlKit.Schema.DescribableTypes) => {
+export const getTsDocContents = (config: Config, node: GraphqlKit.Schema2.Runtime.NodeGroups.DescribableTypes) => {
   const generalDescription = Str.Code.TSDoc.escape(node.description)
     ?? (config.options.TSDoc.noDocPolicy === `message` ? defaultDescription(node) : null)
 
-  const deprecationDescription = GraphqlKit.Schema.isDeprecatableNode(node) && node.deprecationReason
-    ? `@deprecated ${Str.Code.TSDoc.escape(node.deprecationReason)}`
-    : null
+  const deprecationDescription =
+    GraphqlKit.Schema2.Runtime.NodeGroups.isDeprecatableNode(node) && node.deprecationReason
+      ? `@deprecated ${Str.Code.TSDoc.escape(node.deprecationReason)}`
+      : null
 
   const enumMemberDescriptions: string[] = GraphqlKit.Schema2.Runtime.Nodes.isEnumType(node)
     ? node

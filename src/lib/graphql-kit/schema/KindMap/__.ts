@@ -1,15 +1,7 @@
-import type { GraphQLInterfaceType } from 'graphql'
-import {
-  type GraphQLSchema,
-  isEnumType,
-  isInputObjectType,
-  isInterfaceType,
-  isObjectType,
-  isScalarType,
-  isUnionType,
-} from 'graphql'
+import type { GraphQLInterfaceType, GraphQLSchema } from 'graphql'
+import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
 
-import { getRootTypeMap, isObjectRootType } from '../RootTypeMap.js'
+import { createMap, isObjectRootType } from '../runtime/root/map.js'
 import { isScalarTypeCustom } from '../typeGuards.js'
 import type { KindMap } from './_.js'
 
@@ -27,7 +19,7 @@ export const Name = {
 export type KindName = keyof KindMap['list']
 
 export const getKindMap = (schema: GraphQLSchema): KindMap => {
-  const rootTypeMap = getRootTypeMap(schema)
+  const rootTypeMap = createMap(schema)
   const typeMap = schema.getTypeMap()
   const typeMapValues = Object.values(typeMap)
 

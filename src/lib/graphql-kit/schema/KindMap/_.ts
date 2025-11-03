@@ -6,12 +6,12 @@ import type {
   GraphQLScalarType,
   GraphQLUnionType,
 } from 'graphql'
-import type { RootTypeMap } from '../RootTypeMap.js'
+import type { Map } from '../runtime/root/map.js'
 
 export * as KindMap from './__.js'
 
 export interface KindMap {
-  root: RootTypeMap
+  root: Map
   index: {
     /**
      * @deprecated use .root
