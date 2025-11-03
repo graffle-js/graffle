@@ -1,13 +1,3 @@
-export { buildClientSchema, buildSchema, getNamedType, getNullableType, printSchema as print } from 'graphql'
-
-export * as CustomScalars from './scalars/customScalars.js'
-
-export * from './KindMap/_.js'
-
-export * from './scalars/typeGuards.js'
-
-export * from './scalars/scalars.js'
-
 export const TypeKind = {
   Scalar: `Scalar`,
   Enum: `Enum`,

@@ -4,7 +4,7 @@ export interface Enum<
   $Name extends string = string,
   $Members extends [string, ...string[]] = [string, ...string[]],
 > {
-  kind: GraphqlKit.Schema.TypeKind.Enum
+  kind: GraphqlKit.Schema.Kind.TypeKind.Enum
   name: $Name
   members: $Members
   membersUnion: $Members[number]

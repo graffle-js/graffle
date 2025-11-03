@@ -66,7 +66,7 @@ export const extractFieldTypeInfo = (
   typeSignature: string
 } => {
   const namedType = GraphqlKit.Schema.getNamedType(field.type)
-  const typeAndKind = GraphqlKit.getTypeAndKind(namedType)
+  const typeAndKind = GraphqlKit.Schema.Kind.getTypeAndKind(namedType)
   const isNonNull = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type)
   const isList = GraphqlKit.Schema.Runtime.Nodes.isListType(
     GraphqlKit.Schema.Runtime.Nodes.isNonNullType(field.type) ? field.type.ofType : field.type,
@@ -620,12 +620,12 @@ export const getObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
  * Generate enhanced JSDoc for selection set interface types.
  */
 export const getInterfaceTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema.Runtime.Nodes.InterfaceType, kindMap: GraphqlKit.Schema.KindMap]
+  [type: GraphqlKit.Schema.Runtime.Nodes.InterfaceType, kindMap: GraphqlKit.Schema.Kind.KindMap]
 >((doc, type, kindMap) => {
   const kindDocUrl = getKindDocUrl('Interface')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
-  const implementors = GraphqlKit.Schema.KindMap.getInterfaceImplementors(kindMap, type)
+  const implementors = GraphqlKit.Schema.Kind.KindMap.getInterfaceImplementors(kindMap, type)
   const interfaceLink = Str.Code.TSDoc.template.tag.link(
     'https://graphql.org/graphql-js/type/#graphqlinterfacetype',
     'Interface',

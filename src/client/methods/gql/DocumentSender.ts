@@ -185,7 +185,8 @@ type Sender<
 type SenderStatic<
   $Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument,
   $Context,
-> = $Doc extends GraphqlKit.Document.TypedFull.Document<infer $Operations extends GraphqlKit.Document.TypedFull.Operation>
+> = $Doc extends
+  GraphqlKit.Document.TypedFull.Document<infer $Operations extends GraphqlKit.Document.TypedFull.Operation>
   ? Docpar.Doc.IsSingleOperation<$Doc> extends true
     ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
   : { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
@@ -194,7 +195,8 @@ type SenderStatic<
 type SenderNamed<
   $Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument,
   $Context,
-> = $Doc extends GraphqlKit.Document.TypedFull.Document<infer $Operations extends GraphqlKit.Document.TypedFull.Operation> ? {
+> = $Doc extends
+  GraphqlKit.Document.TypedFull.Document<infer $Operations extends GraphqlKit.Document.TypedFull.Operation> ? {
     [k in $Operations['name'] & string]: Configuration.Check.Preflight<
       $Context,
       OperationToNamedExecutor<Extract<$Operations, { name: k }>, $Context>

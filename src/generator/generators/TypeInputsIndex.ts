@@ -12,7 +12,9 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
   import.meta.url,
   ({ config, code }) => {
     // Only import utilities if we need them (for GetEncoded type)
-    if (config.options.isImportsCustomScalars && GraphqlKit.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
+    if (
+      config.options.isImportsCustomScalars && GraphqlKit.Schema.Kind.KindMap.hasCustomScalars(config.schema.kindMap)
+    ) {
       code(importUtilities(config))
     }
 
@@ -43,7 +45,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
     code`export type ID = string`
 
     // Custom scalars - always reference the scalar module types
-    if (GraphqlKit.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
+    if (GraphqlKit.Schema.Kind.KindMap.hasCustomScalars(config.schema.kindMap)) {
       code``
       code`// Custom scalars (decoded types for variables)`
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {

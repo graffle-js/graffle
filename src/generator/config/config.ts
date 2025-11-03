@@ -79,7 +79,7 @@ interface ConfigSchema {
   sdl: string
   sdlFilePath: null | string
   instance: GraphqlKit.Schema.Runtime.Nodes.Schema
-  kindMap: GraphqlKit.Schema.KindMap
+  kindMap: GraphqlKit.Schema.Kind.KindMap
 }
 
 export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
@@ -315,7 +315,7 @@ const createConfigSchema = async (
     case `instance`: {
       const sdl = GraphqlKit.Schema.print(input.schema.instance)
       const instance = input.schema.instance
-      const kindMap = GraphqlKit.Schema.KindMap.getKindMap(instance)
+      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
         sdlFilePath: null,
@@ -339,7 +339,7 @@ const createConfigSchema = async (
         sdl = input.schema.sdl
       }
       const instance = GraphqlKit.Schema.buildSchema(sdl)
-      const kindMap = GraphqlKit.Schema.KindMap.getKindMap(instance)
+      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: input.schema.type,
         sdlFilePath,
@@ -363,7 +363,7 @@ const createConfigSchema = async (
       }
       const instance = GraphqlKit.Schema.buildClientSchema(data)
       const sdl = GraphqlKit.Schema.print(instance)
-      const kindMap = GraphqlKit.Schema.KindMap.getKindMap(instance)
+      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
       return {
         via: `url`,
         sdlFilePath: null,

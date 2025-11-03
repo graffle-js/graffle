@@ -24,7 +24,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
         if (_[1] === null) return null
         return { operationType: _[0], objectType: _[1] }
       }).filter(_ => _ !== null)
-    const kindMap: GraphqlKit.Schema.KindMap['list'] = getKindMap(config)
+    const kindMap: GraphqlKit.Schema.Kind.KindMap['list'] = getKindMap(config)
     const kinds = Obj.entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
@@ -200,7 +200,7 @@ const InterfaceType = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.InterfaceType; referenceAssignments: ReferenceAssignments }
 >(
   ({ code, type, config }) => {
-    const implementorTypes = GraphqlKit.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
+    const implementorTypes = GraphqlKit.Schema.Kind.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     code(Str.Code.TS.constDeclTyped(
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,

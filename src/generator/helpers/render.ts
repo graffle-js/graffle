@@ -25,7 +25,7 @@ export const maybeList = (type: string) => {
 }
 
 export const typeTitle2 = (category: string) => (type: GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes) => {
-  const typeKind = GraphqlKit.getTypeAndKind(type)
+  const typeKind = GraphqlKit.Schema.Kind.getTypeAndKind(type)
   const nameOrKind = typeKind.kindName === `ScalarCustom` || typeKind.kindName === `ScalarStandard`
     ? typeKind.typeName
     : typeKind.kindName
@@ -50,7 +50,7 @@ export const typeTitle2 = (category: string) => (type: GraphqlKit.Schema.Runtime
 const defaultDescription = (node: GraphqlKit.Schema.Runtime.NodeGroups.DescribableTypes) => {
   const entity = GraphqlKit.Schema.Runtime.NodeGroups.isField(node)
     ? `Field`
-    : GraphqlKit.getTypeAndKind(node).kindName
+    : GraphqlKit.Schema.Kind.getTypeAndKind(node).kindName
   return `There is no documentation for this ${entity}.`
 }
 

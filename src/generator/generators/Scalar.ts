@@ -16,7 +16,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
   `scalar`,
   ({ config, code }) => {
     // todo test case for when this is true
-    const isNeedCustomScalarDefaults = GraphqlKit.Schema.KindMap.hasCustomScalars(config.schema.kindMap)
+    const isNeedCustomScalarDefaults = GraphqlKit.Schema.Kind.KindMap.hasCustomScalars(config.schema.kindMap)
       && !config.options.customScalars
 
     // TODO: to get this information we would need to parse the exports of the module with tsc.
@@ -28,7 +28,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
     code(importUtilities(config))
 
-    if (GraphqlKit.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
+    if (GraphqlKit.Schema.Kind.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
       code`
         import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'
       `

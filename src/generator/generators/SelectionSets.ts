@@ -146,7 +146,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   }
 }
 
-const generateNamedTypesModule = (config: Config, kindMap: GraphqlKit.Schema.KindMap['list']): GeneratedModule => {
+const generateNamedTypesModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   const allTypes = [
@@ -188,7 +188,7 @@ const generateNamedTypesModule = (config: Config, kindMap: GraphqlKit.Schema.Kin
 
 // ===== Scalars Generator =====
 
-const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.KindMap['list']): GeneratedModule[] => {
+const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.KindMap['list']): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
   // Collect all scalar types (standard + custom)
@@ -587,7 +587,7 @@ const generateFieldedTypeModule = (
   // For interfaces, add inline fragments
   let onTypesRendered = ''
   if (isInterface) {
-    const implementorTypes = GraphqlKit.Schema.KindMap.getInterfaceImplementors(
+    const implementorTypes = GraphqlKit.Schema.Kind.KindMap.getInterfaceImplementors(
       config.schema.kindMap,
       type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
     )
@@ -771,7 +771,7 @@ const renderFieldPropertyArguments = (
 
 // ===== Barrel Files =====
 
-const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.KindMap['list']): GeneratedModule => {
+const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   // Export namespaces
@@ -851,7 +851,7 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.KindMap
   }
 }
 
-const generateNamespaceModule = (config: Config, kindMap: GraphqlKit.Schema.KindMap['list']): GeneratedModule => {
+const generateNamespaceModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
   // Main entry point re-exports everything directly from $$.ts

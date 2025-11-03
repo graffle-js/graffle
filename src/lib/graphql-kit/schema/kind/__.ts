@@ -1,8 +1,11 @@
+export * from './enum.js'
+export * from './KindMap/_.js'
+
 import { Lang } from '@wollybeard/kit'
 import type { GraphQLNamedType } from 'graphql'
 import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
-import type { KindMap } from './schema/schema.js'
-import { isScalarTypeCustom } from './schema/schema.js'
+import { Scalars } from '../scalars/_.js'
+import type { KindMap } from './__.js'
 
 export const getTypeAndKind = (
   node: GraphQLNamedType,
@@ -15,7 +18,7 @@ export const getTypeAndKind = (
   let kindName: KindMap.KindName
 
   if (isScalarType(node)) {
-    kindName = isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
+    kindName = Scalars.isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
   } else if (isUnionType(node)) {
     kindName = `Union`
   } else if (isInterfaceType(node)) {
