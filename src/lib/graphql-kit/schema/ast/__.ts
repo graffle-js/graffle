@@ -1,7 +1,8 @@
 import { type ASTNode, type ListTypeNode, type NamedTypeNode, type NonNullTypeNode, type TypeNode } from 'graphql'
+import { print as toString } from 'graphql'
 import * as Kind from '../../document/ast/kind.js'
 
-import { printSchema as toString } from 'graphql'
+export { print as toString } from 'graphql'
 
 /**
  * Print a GraphQL AST node to SDL string without any descriptions.
