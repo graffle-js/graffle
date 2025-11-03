@@ -483,8 +483,7 @@ type ParseFieldWithNestedSelection<
  * Handles UnknownScalar for schema-less mode.
  */
 type ResolveNamedType<$Type, $Schema extends Schema | undefined> = $Type extends UnknownScalar ? unknown
-  : [Schema.ResolveLeafType<$Type>] extends [never]
-    ? $Type extends Schema.OutputObject ? $Type // Objects need nested selection
+  : [Schema.ResolveLeafType<$Type>] extends [never] ? $Type extends Schema.OutputObject ? $Type // Objects need nested selection
     : $Type extends { kind: 'Interface' } ? $Type
     : $Type extends { kind: 'Union' } ? $Type
     : unknown

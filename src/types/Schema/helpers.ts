@@ -38,8 +38,7 @@ export type GetNamedType<$Type> =
  *
  * @see {@link GetNamedType} - Unwraps List/Nullable wrappers to get the named type
  */
-export type ResolveLeafType<$Type> =
-  $Type extends Schema.Scalar ? Schema.Scalar.GetDecoded<$Type>
+export type ResolveLeafType<$Type> = $Type extends Schema.Scalar ? Schema.Scalar.GetDecoded<$Type>
   : $Type extends Schema.Enum ? $Type['membersUnion']
   : never
 
