@@ -1,7 +1,4 @@
-/**
- * Runtime operation type values and type utilities
- */
-
+import type { Ts } from '@wollybeard/kit'
 import { OperationTypeNode } from 'graphql'
 
 export const QUERY = OperationTypeNode.QUERY
@@ -20,7 +17,7 @@ export type FromString<$OperationTypeString extends string> =
     $OperationTypeString extends 'mutation'       ? MUTATION
   : $OperationTypeString extends 'subscription'   ? SUBSCRIPTION
   : $OperationTypeString extends 'query'          ? QUERY
-  : never
+  : Ts.Err.StaticError<'Unknown operation type given', { $OperationTypeString: $OperationTypeString }>
 
 export const LookupFromRootType = {
   Query: QUERY,
