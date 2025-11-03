@@ -1,5 +1,4 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import type { OperationTypeNode } from 'graphql'
 import * as $$Data from './data.js'
 import * as $$Schema from './schema/$.js'
 import * as $$SelectionSets from './selection-sets/$.js'
@@ -84,7 +83,7 @@ export namespace Select {
   export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
-    OperationTypeNode.QUERY
+    $$Utilities.GraphqlKit.Document.Ast.OperationType.QUERY
   >
   /**
    * Root mutation type for modifying Pokemon data.
@@ -92,7 +91,11 @@ export namespace Select {
    * Infer result type for Mutation operations.
    */
   export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> =
-    $$Utilities.Docpar.Object.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
+    $$Utilities.Docpar.Object.InferResult.Operation<
+      $SelectionSet,
+      $$Schema.Schema,
+      $$Utilities.GraphqlKit.Document.Ast.OperationType.MUTATION
+    >
 
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------

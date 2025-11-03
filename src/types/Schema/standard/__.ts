@@ -1,2 +1,2 @@
 export * as Directives from './directives/__.js'
-export * as Scalar from './scalars/scalars.js'
+export * as Scalars from './scalars/scalars.js'

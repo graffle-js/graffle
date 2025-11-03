@@ -56,7 +56,7 @@ const encodeInputFieldLike = (
    */
 
   if (Docpar.isCustomScalarName(sddmNode)) {
-    const scalar = Schema.Scalar.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
+    const scalar = Schema.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
     args[argName] = Schema.Scalar.applyCodec(scalar.codec.encode, argValue)
     return
   }

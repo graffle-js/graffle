@@ -210,7 +210,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.KindMa
     `  $Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`,
   )
   scalarsCode(`> = ${$.$$Utilities}.Schema.Scalar.GetDecoded<`)
-  scalarsCode(`  ${$.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToUnknown<`)
+  scalarsCode(`  ${$.$$Utilities}.Schema.LookupCustomScalarOrFallbackToUnknown<`)
   scalarsCode(`    $ScalarName,`)
   scalarsCode(`    $Context extends { scalars: infer $S } ? $S : ${$.$$Utilities}.Schema.Scalar.Registry.Empty`)
   scalarsCode(`  >`)
