@@ -1,6 +1,6 @@
 import { Obj, Ts } from '@wollybeard/kit'
+import { createCodec, type Mapper } from '../../../Codec.js'
 import type { Scalar } from './_.js'
-import { createCodec, type Mapper } from './codec.js'
 
 /**
  * Scalar representing an unknown custom scalar type without a codec definition.
@@ -11,9 +11,6 @@ import { createCodec, type Mapper } from './codec.js'
  * The decoded type is `unknown`, forcing users to either:
  * 1. Define a proper codec for the custom scalar, or
  * 2. Explicitly handle the unknown type at runtime
- *
- * This aligns with gql-tada's behavior and provides better type safety than
- * the previous fallback to `string`.
  */
 export const UnknownScalar: Scalar<string, unknown, any> = {
   kind: 'Scalar',

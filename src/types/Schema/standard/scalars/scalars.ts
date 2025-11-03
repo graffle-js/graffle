@@ -1,4 +1,4 @@
-import { createCodec } from '../../nodes/Scalar/codec.js'
+import { createCodec } from '../../../Codec.js'
 import { create } from '../../nodes/Scalar/create.js'
 
 export const JavaScriptScalarCodecs = {

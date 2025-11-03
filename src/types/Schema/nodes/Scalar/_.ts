@@ -1,5 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { Codec } from './codec.js'
+import type { Codec } from '../../../Codec.js'
 
 export * as Scalar from './__.js'
 

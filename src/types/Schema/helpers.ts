@@ -1,8 +1,6 @@
 import type { Schema } from './_.js'
-import * as Nodes from './nodes/__.js'
-import type { List } from './nodes/List.js'
-import type { Nullable } from './nodes/Nullable.js'
-import * as Standard from './standard/scalars/scalars.js'
+import { Nodes } from './nodes/_.js'
+import { Standard } from './standard/_.js'
 
 /**
  * Unwrap a type to get its named type, ditching inline types like List and Nullable.
@@ -10,8 +8,8 @@ import * as Standard from './standard/scalars/scalars.js'
 // todo extends any because of infinite depth issue in generated schema types
 // dprint-ignore
 export type GetNamedType<$Type> =
-      $Type extends List<infer $innerType>      ? GetNamedType<$innerType> :
-      $Type extends Nullable<infer $innerType>  ? GetNamedType<$innerType> :
+      $Type extends Nodes.List<infer $innerType>      ? GetNamedType<$innerType> :
+      $Type extends Nodes.Nullable<infer $innerType>  ? GetNamedType<$innerType> :
       $Type extends Nodes.__typename                  ? $Type :
       $Type
 
@@ -33,11 +31,11 @@ export type Define<$Type extends Partial<Schema>> = $Type & Schema
 // dprint-ignore
 export type LookupCustomScalarOrFallbackToUnknown<$Name extends string, $Scalars extends Nodes.Scalar.Registry> =
   $Name extends keyof $Scalars['map']  ? $Scalars['map'][$Name]
-  : $Name extends 'String'              ? typeof Standard.String
-  : $Name extends 'Int'                 ? typeof Standard.Int
-  : $Name extends 'Float'               ? typeof Standard.Float
-  : $Name extends 'Boolean'             ? typeof Standard.Boolean
-  : $Name extends 'ID'                  ? typeof Standard.ID
+  : $Name extends 'String'              ? typeof Standard.Scalars.String
+  : $Name extends 'Int'                 ? typeof Standard.Scalars.Int
+  : $Name extends 'Float'               ? typeof Standard.Scalars.Float
+  : $Name extends 'Boolean'             ? typeof Standard.Scalars.Boolean
+  : $Name extends 'ID'                  ? typeof Standard.Scalars.ID
   :                                       typeof Nodes.Scalar.UnknownScalar
 
 /**
@@ -61,15 +59,15 @@ export const lookupCustomScalarOrFallbackToUnknown = (scalars: Nodes.Scalar.Scal
   // Handle standard GraphQL scalars
   switch (name) {
     case 'String':
-      return Standard.String
+      return Standard.Scalars.String
     case 'Int':
-      return Standard.Int
+      return Standard.Scalars.Int
     case 'Float':
-      return Standard.Float
+      return Standard.Scalars.Float
     case 'Boolean':
-      return Standard.Boolean
+      return Standard.Scalars.Boolean
     case 'ID':
-      return Standard.ID
+      return Standard.Scalars.ID
     default:
       return Nodes.Scalar.UnknownScalar
   }

@@ -1,5 +1,6 @@
 import { Ts } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
+import { createCodec } from '../Codec.js'
 import { Schema } from './_.js'
 
 describe('LookupCustomScalarOrFallbackToUnknown', () => {
@@ -24,7 +25,7 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
     const DateScalar: DateScalar = {
       kind: 'Scalar',
       name: 'Date',
-      codec: Schema.Scalar.createCodec({ encode: () => '', decode: () => new Date() }),
+      codec: createCodec({ encode: () => '', decode: () => new Date() }),
     }
 
     // Custom scalar in registry should resolve
@@ -53,7 +54,7 @@ describe('lookupCustomScalarOrFallbackToUnknown (runtime)', () => {
     const DateScalar = {
       kind: 'Scalar' as const,
       name: 'Date',
-      codec: Schema.Scalar.createCodec({ encode: () => '', decode: () => new Date() }),
+      codec: createCodec({ encode: () => '', decode: () => new Date() }),
     }
     const scalars = { Date: DateScalar }
 
