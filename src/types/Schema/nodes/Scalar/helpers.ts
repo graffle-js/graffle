@@ -1,5 +1,4 @@
 import { Obj, Ts } from '@wollybeard/kit'
-import { Boolean, Float, ID, Int, String } from '../../standard/scalars/scalars.js'
 import type { Scalar } from './_.js'
 import { createCodec, type Mapper } from './codec.js'
 
@@ -81,37 +80,6 @@ export namespace Registry {
 }
 
 export type ScalarMap = Record<string, Scalar>
-
-// dprint-ignore
-export type LookupCustomScalarOrFallbackToUnknown<$Name extends string, $Scalars extends Registry> =
-  $Name extends keyof $Scalars['map']  ? $Scalars['map'][$Name]
-  : $Name extends 'String'              ? typeof String
-  : $Name extends 'Int'                 ? typeof Int
-  : $Name extends 'Float'               ? typeof Float
-  : $Name extends 'Boolean'             ? typeof Boolean
-  : $Name extends 'ID'                  ? typeof ID
-  :                                       typeof UnknownScalar
-
-export const lookupCustomScalarOrFallbackToUnknown = (scalars: ScalarMap, name: string): Scalar => {
-  const scalar = scalars[name]
-  if (scalar) return scalar
-
-  // Handle standard GraphQL scalars
-  switch (name) {
-    case 'String':
-      return String
-    case 'Int':
-      return Int
-    case 'Float':
-      return Float
-    case 'Boolean':
-      return Boolean
-    case 'ID':
-      return ID
-    default:
-      return UnknownScalar
-  }
-}
 
 /**
  * Apply a codec's mapper function (decode or encode) to a GraphQL value.

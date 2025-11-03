@@ -199,7 +199,7 @@
     "#graffle/kit": "./build/exports/kit.js",
     "#graffle/schema": "./build/exports/schema.js",
     "#graffle/utilities-for-generated": "./build/exports/utilities-for-generated.js",
-    "#graffle/generator-helpers/standard-scalar-types": "./build/types/Schema/standard/scalars/scalars.js",
+    "#graffle/generator-helpers/standard-scalar-types": "./build/types/Schema/standard/scalars/__.js",
     "#graffle/extensions/transport-http": "./build/exports/extensions/transport-http/runtime.js",
     "#graffle/extensions/document-builder": "./build/exports/extensions/document-builder/runtime.js",
     "#graffle/extension-exports": "./build/exports/extension_exports.js",

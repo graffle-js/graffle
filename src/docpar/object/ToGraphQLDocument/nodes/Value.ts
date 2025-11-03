@@ -14,7 +14,7 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
   if (SDDM.isScalarLike(sddm?.nt)) {
     const scalar = SDDM.isScalar(sddm.nt)
       ? sddm.nt
-      : Schema.Scalar.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.nt)
+      : Schema.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.nt)
     return applyScalar(context, scalar, value)
   }
 
