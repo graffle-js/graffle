@@ -17,9 +17,9 @@ export type OperationType = OperationTypeNode
 
 // dprint-ignore
 export type FromString<$OperationTypeString extends string> =
-    $OperationTypeString extends MUTATION       ? MUTATION
-  : $OperationTypeString extends SUBSCRIPTION   ? SUBSCRIPTION
-  : $OperationTypeString extends QUERY          ? QUERY
+    $OperationTypeString extends 'mutation'       ? MUTATION
+  : $OperationTypeString extends 'subscription'   ? SUBSCRIPTION
+  : $OperationTypeString extends 'query'          ? QUERY
   : never
 
 export type OperationTypeStringToNode<$OperationTypeString extends string> = $OperationTypeString extends MUTATION
