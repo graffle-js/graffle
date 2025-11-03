@@ -1,5 +1,5 @@
 export * from '../OperationType/_.js'
-export * from '../scalars.js'
+export * from '../scalars/_.js'
 export * as Args from './args/__.js'
 export * from './helpers.js'
 export * as NodeGroups from './node-groups.js'

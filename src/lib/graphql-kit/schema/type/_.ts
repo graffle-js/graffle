@@ -19,7 +19,7 @@ export interface Type<
   $Scalars extends Scalars.Registry = Scalars.Registry,
 > {
   name: GlobalRegistry.ClientNames
-  operationsAvailable: GraphqlKit.Schema2.Runtime.OperationType.OperationType[]
+  operationsAvailable: GraphqlKit.Schema.Runtime.OperationType.OperationType[]
   RootUnion: OutputObject
   Root: {
     query: null | OutputObject
