@@ -1,5 +1,4 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type { OperationTypeNode } from 'graphql'
 import * as $$Data from './data.js'
 import * as $$Schema from './schema/$.js'
 import * as $$SelectionSets from './selection-sets/$.js'
@@ -82,7 +81,7 @@ export namespace Select {
   export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
-    OperationTypeNode.QUERY
+    $$Utilities.GraphqlKit.Document.Ast.OperationType.QUERY
   >
 
   //                                            OutputObject

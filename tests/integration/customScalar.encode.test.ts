@@ -11,7 +11,7 @@ import { test } from '../_/helpers.js'
 import { RequestSpy } from '../_/SpyExtension.js'
 
 type QueryWithDate = Possible.SelectionSets.Query<{
-  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+  scalars: Schema.Scalars.Registry.AddScalar<Schema.Scalars.Registry.Empty, typeof DateScalar>
 }>
 
 type TestCase = [

@@ -1,6 +1,5 @@
 import { createStaticRootType } from '#graffle/extensions/document-builder'
-import type { GraphqlKit } from '#graffle/utilities-for-generated'
-import { OperationTypeNode } from 'graphql'
+import { GraphqlKit } from '#graffle/utilities-for-generated'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
@@ -171,4 +170,4 @@ export interface QueryBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY, { sddm }) as any
+export const query: QueryBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY, { sddm }) as any

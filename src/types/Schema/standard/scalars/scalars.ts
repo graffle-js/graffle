@@ -2,15 +2,15 @@ import { Codec } from '../../../Codec/_.js'
 import { create } from '../../nodes/Scalar/create.js'
 
 export const JavaScriptScalarCodecs = {
-  String: Codec.createCodec({
+  String: Codec.create({
     encode: (value: string) => value,
     decode: (value: string) => value,
   }),
-  Number: Codec.createCodec({
+  Number: Codec.create({
     encode: (value: number) => value,
     decode: (value: number) => value,
   }),
-  Boolean: Codec.createCodec({
+  Boolean: Codec.create({
     encode: (value: boolean) => value,
     decode: (value: boolean) => value,
   }),

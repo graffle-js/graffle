@@ -43,7 +43,7 @@ export interface Codec<$Decoded = any, $Encoded = any> {
  * @param codec - Object with encode and decode functions
  * @returns Typed Codec instance
  */
-export const createCodec = <$Decoded, $Encoded>(codec: {
+export const create = <$Decoded, $Encoded>(codec: {
   encode: (value: $Decoded) => $Encoded
   decode: (value: $Encoded) => $Decoded
 }): Codec<$Decoded, $Encoded> => codec as any

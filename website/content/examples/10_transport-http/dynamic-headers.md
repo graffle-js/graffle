@@ -57,7 +57,7 @@ await graffle.gql('{ pokemons { name } }').$send()
       'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
     ],
     [ 'content-type', 'application/json' ],
-    [ 'X-Sent-At-Time', '1762136736786' ]
+    [ 'X-Sent-At-Time', '1762136942519' ]
   ],
   method: 'post',
   url: {

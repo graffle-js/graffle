@@ -37,7 +37,7 @@ export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date>;
  *
  * This is the type used when transmitting the scalar value over the network.
  */
-export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date>;
+export type DateEncoded = $$Utilities.Codec.GetEncoded<Date['codec']>;
 
 export * from "graffle/generator-helpers/standard-scalar-types";
 
@@ -78,8 +78,8 @@ export type $Registry = $$Utilities.Schema.Scalar.Registry<
   {
     Date: Date;
   },
-  $$Utilities.Schema.Scalar.GetEncoded<Date>,
-  $$Utilities.Schema.Scalar.GetDecoded<Date>
+  $$Utilities.Codec.GetEncoded<Date['codec']>,
+  $$Utilities.Codec.GetDecoded<Date['codec']>
 >;
 "
 `;

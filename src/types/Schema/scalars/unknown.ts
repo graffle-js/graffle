@@ -17,7 +17,7 @@ import type { Scalar } from '../nodes/Scalar/_.js'
 export const UnknownScalar: Scalar<string, unknown, any> = {
   kind: 'Scalar',
   name: '__unknown__',
-  codec: Codec.createCodec({
+  codec: Codec.create({
     encode: (value: unknown) => value as any,
     decode: (value: any) => value as unknown,
   }),
