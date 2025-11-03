@@ -190,7 +190,7 @@ Type: \`"${typeName}"\`
 const getInputFieldDoc = (
   config: Config,
   field: GraphqlKit.Schema.Runtime.Nodes.InputField,
-  parentType: GraphqlKit.Schema.Runtime.Nodes.InputObject,
+  parentType: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): string | null => {
   const namedType = GraphqlKit.Schema.getNamedType(field.type)
   const typeAndKind = GraphqlKit.Schema.Kind.getTypeAndKind(namedType)
@@ -258,7 +258,7 @@ const getInputFieldDoc = (
 
 const generateInputObjectModule = (
   config: Config,
-  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObject,
+  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
@@ -324,7 +324,7 @@ const generateInputObjectModule = (
     block: {
       kind: Str.Code.TS.string(GraphqlKit.Schema.Kind.TypeKind.InputObject),
       name: Str.Code.TS.string(inputObject.name),
-      isAllFieldsNullable: Str.Code.TS.boolean(GraphqlKit.Schema.isAllInputObjectFieldsNullable(inputObject)),
+      isAllFieldsNullable: Str.Code.TS.boolean(GraphqlKit.Schema.Runtime.isAllInputObjectFieldsNullable(inputObject)),
       fields: interfaceFields,
     },
   }))
@@ -675,13 +675,13 @@ const getUnionTypeDoc = (
  */
 const getInputObjectTypeDoc = (
   config: Config,
-  type: GraphqlKit.Schema.Runtime.Nodes.InputObject,
+  type: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): string | null => {
   const schemaDescription = getTsDocContents(config, type)
   const kindDocUrl = getKindDocUrl('InputObject')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
-  const isAllFieldsNullable = GraphqlKit.Schema.isAllInputObjectFieldsNullable(type)
+  const isAllFieldsNullable = GraphqlKit.Schema.Runtime.isAllInputObjectFieldsNullable(type)
 
   // Build table
   const table = Str.Code.Md.table({

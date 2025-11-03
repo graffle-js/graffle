@@ -124,7 +124,7 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
  */
 function generateInputObjectType(
   config: Config,
-  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObject,
+  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): string {
   const fields = Object.values(inputObject.getFields())
 

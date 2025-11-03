@@ -395,7 +395,7 @@ const generateUnionModule = (
 
 const generateInputObjectModule = (
   config: Config,
-  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObject,
+  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
@@ -920,7 +920,7 @@ const analyzeTypeUsage = (type: GraphqlKit.Schema.Runtime.NodeGroups.InputTypes)
  * Analyze all fields in an input object to determine what imports are needed
  */
 const analyzeInputObjectTypeUsage = (
-  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObject,
+  inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
 ): TypeUsageAnalysis => {
   const result: TypeUsageAnalysis = {
     usesScalars: false,

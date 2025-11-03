@@ -673,13 +673,13 @@ export const getUnionTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
  * Generate enhanced JSDoc for selection set input object types.
  */
 export const getInputObjectTypeSelectionSetDoc = Str.Code.TSDoc.template.factory<
-  [type: GraphqlKit.Schema.Runtime.Nodes.InputObject]
+  [type: GraphqlKit.Schema.Runtime.Nodes.InputObjectType]
 >(
   (doc, type) => {
     const kindDocUrl = getKindDocUrl('InputObject')
     const fields = Object.values(type.getFields())
     const fieldCount = fields.length
-    const isAllFieldsNullable = GraphqlKit.Schema.isAllInputObjectFieldsNullable(type)
+    const isAllFieldsNullable = GraphqlKit.Schema.Runtime.isAllInputObjectFieldsNullable(type)
     const inputLink = Str.Code.TSDoc.template.tag.link('https://graphql.org/learn/schema/#input-types', 'InputObject')
 
     doc`Input for ${inputLink}.`

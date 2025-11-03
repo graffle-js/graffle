@@ -387,7 +387,7 @@ const renderTypeWithArgs = createCodeGenerator<
  * ```
  */
 const renderInputObjectType = createCodeGenerator<
-  { type: GraphqlKit.Schema.Runtime.Nodes.InputObject }
+  { type: GraphqlKit.Schema.Runtime.Nodes.InputObjectType }
 >(
   ({ config, code, type }) => {
     const fields = Object.values(type.getFields())

@@ -1,3 +1,4 @@
-export * from './customScalars.js'
+export * from './custom.js'
+export * as Custom from './custom.js'
+export * from './predicates.js'
 export * from './scalars.js'
-export * from './typeGuards.js'

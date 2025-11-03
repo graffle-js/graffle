@@ -66,8 +66,8 @@ export type SomeObjectData = {
 
 export type SomeFieldData =
   | null
-  | GraphqlKit.Schema.StandardScalarRuntimeTypes
-  | GraphqlKit.Schema.StandardScalarRuntimeTypes[]
+  | GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes
+  | GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes[]
   | {
     [fieldName: string]: SomeFieldData
   }

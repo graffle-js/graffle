@@ -1,6 +1,6 @@
 import { Nodes } from '../../runtime/__.js'
 import { createMap, isObjectRootType } from '../../runtime/root/map.js'
-import { isScalarTypeCustom } from '../../scalars/typeGuards.js'
+import { isScalarTypeCustom } from '../../scalars/predicates.js'
 import type { KindMap } from './_.js'
 
 export const Name = {

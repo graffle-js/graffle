@@ -117,7 +117,7 @@ const typeCondition = (config: Config) => {
       const isHasInputOrOutputCustomScalar = () => true // todo
       return isHasInputOrOutputCustomScalar
     }
-    return GraphqlKit.Schema.CustomScalars.isHasCustomScalars
+    return GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars
   }
 
   if (config.runtimeFeatures.operationVariables) {
@@ -135,7 +135,7 @@ const inputTypeCondition = (config: Config) => {
   if (config.runtimeFeatures.operationVariables) return trueFilter
 
   if (config.runtimeFeatures.customScalars) {
-    return GraphqlKit.Schema.CustomScalars.isHasCustomScalars
+    return GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars
   }
 
   return falseFilter
@@ -187,7 +187,7 @@ const UnionType = createCodeGenerator<
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
         [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
-          $spread: type.getTypes().filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
+          $spread: type.getTypes().filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
         }),
@@ -206,7 +206,7 @@ const InterfaceType = createCodeGenerator<
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
         [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
-          $spread: implementorTypes.filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
+          $spread: implementorTypes.filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
             memberType.name + `.${propertyNames.f}`
           ),
         }),
@@ -258,7 +258,7 @@ const ObjectType = createCodeGenerator<
           const argType = GraphqlKit.Schema.getNamedType(arg.type)
           // dprint-ignore
           if (
-             (config.runtimeFeatures.customScalars && GraphqlKit.Schema.isScalarTypeAndCustom(argType)) ||
+             (config.runtimeFeatures.customScalars && GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(argType)) ||
              // For variables, we need to know the variable type to write it out, so we always need the named type.
              (config.runtimeFeatures.operationVariables)
           ) {
@@ -280,7 +280,7 @@ const ObjectType = createCodeGenerator<
       })
 
       if (condition(outputFieldNamedType)) {
-        if (GraphqlKit.Schema.isScalarTypeAndCustom(outputFieldNamedType)) {
+        if (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(outputFieldNamedType)) {
           if (config.runtimeFeatures.customScalars) {
             sddmNodeOutputField.$fields[propertyNames.nt] = outputFieldNamedType.name
           }
@@ -338,7 +338,7 @@ const InputObjectType = createCodeGenerator<
     if (config.runtimeFeatures.operationVariables) {
       o[propertyNames.n] = Str.Code.TS.string(type.name)
       const customScalarFields = inputFields
-        .filter(GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs)
+        .filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
         .map(Str.Code.TS.string)
       if (customScalarFields.length) {
@@ -357,8 +357,8 @@ const InputObjectType = createCodeGenerator<
       const isPresent =
         config.runtimeFeatures.operationVariables ||
         (config.runtimeFeatures.customScalars &&
-          (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType) ||
-          (GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(inputFieldType) && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType))))
+          (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(inputFieldType) ||
+          (GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(inputFieldType) && GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs(inputFieldType))))
 
       if (!isPresent) continue
 
@@ -366,11 +366,11 @@ const InputObjectType = createCodeGenerator<
         $fields: {},
       }
 
-      if (GraphqlKit.Schema.isScalarTypeAndCustom(inputFieldType)) {
+      if (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(inputFieldType)) {
         f[inputField.name]!.$fields[propertyNames.nt] = inputFieldType.name
       } else if (
         GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(inputFieldType)
-        && GraphqlKit.Schema.CustomScalars.isHasCustomScalarInputs(inputFieldType)
+        && GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs(inputFieldType)
       ) {
         referenceAssignments.push(
           `${type.name}.${propertyNames.f}![\`${inputField.name}\`]!.${propertyNames.nt} = ${inputFieldType.name}`,
