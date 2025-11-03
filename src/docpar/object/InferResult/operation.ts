@@ -4,20 +4,20 @@ import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore
 export type OperationQuery<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, GraphqlKit.Document.Ast.OperationType.QUERY>
+  Operation<$SelectionSet, $Schema, GraphqlKit.Schema.OperationType.QUERY>
 
 // dprint-ignore
 export type OperationMutation<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, GraphqlKit.Document.Ast.OperationType.MUTATION>
+  Operation<$SelectionSet, $Schema, GraphqlKit.Schema.OperationType.MUTATION>
 
 // dprint-ignore
 export type OperationSubscription<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION>
+  Operation<$SelectionSet, $Schema, GraphqlKit.Schema.OperationType.SUBSCRIPTION>
 
 export type Operation<
   $SelectionSet extends object,
   $Schema,
-  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
+  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
 > = OutputObjectLike<
   $SelectionSet,
   $Schema,

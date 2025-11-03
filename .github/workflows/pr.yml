@@ -28,6 +28,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm check:types
+  check-generated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: pnpm build
+      - run: pnpm gen:graffle
+      - name: Check generated files are up-to-date
+        run: git diff --exit-code src/extensions/SchemaErrors/__tests__/fixture/graffle/
   types-examples:
     runs-on: ubuntu-latest
     steps:

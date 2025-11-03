@@ -23,7 +23,7 @@ export const encodeRequestVariables = ({ sddm, request, scalars }: {
     const argValue = args[argName]
     if (argValue === undefined) continue
 
-    const namedType = GraphqlKit.Document.getNamedType(parameter.type)
+    const namedType = GraphqlKit.Schema.Ast.getNamedType(parameter.type)
     const sddmNamedType = sddm.types[namedType.name.value]
     if (!sddmNamedType) continue // todo in a strict mode could be error.
 

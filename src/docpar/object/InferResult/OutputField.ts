@@ -23,17 +23,23 @@ type FieldType<
   $SelectionSet,
   $Node,
 > =
-  $Node extends GraphqlKit.Schema.Type.OutputObject                      ? $SelectionSet extends object
-                                                            ? OutputObjectLike<$SelectionSet, $Schema, $Node>
-                                                            : Ts.Err.StaticError<'When $Node extends GraphqlKit.Schema.Type.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
-  $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless            ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
-  $Node extends GraphqlKit.Schema.Type.__typename                        ? $Node['value'] :
-  [GraphqlKit.Schema.Type.ResolveLeafType<$Node>] extends [never]        ? $Node extends GraphqlKit.Schema.Type.Interface
-                                                              ? Interface<$SelectionSet, $Schema, $Node>
-                                                              : $Node extends GraphqlKit.Schema.Type.Union
-                                                                ? Union<$SelectionSet, $Schema, $Node>
-                                                                : Ts.Err.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }> :
-                                                           GraphqlKit.Schema.Type.ResolveLeafType<$Node>
+  $Node extends GraphqlKit.Schema.Type.OutputObject
+    ? (
+        $SelectionSet extends object
+          ? OutputObjectLike<$SelectionSet, $Schema, $Node>
+          : Ts.Err.StaticError<'When $Node extends GraphqlKit.Schema.Type.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } >
+      ) :
+  $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless             ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
+  $Node extends GraphqlKit.Schema.Type.__typename                         ? $Node['value'] :
+  [GraphqlKit.Schema.Type.ResolveLeafType<$Node>] extends [never]
+    ? (
+          $Node extends GraphqlKit.Schema.Type.Interface
+            ? Interface<$SelectionSet, $Schema, $Node>
+            : $Node extends GraphqlKit.Schema.Type.Union
+              ? Union<$SelectionSet, $Schema, $Node>
+              : Ts.Err.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }>
+      )
+    : GraphqlKit.Schema.Type.ResolveLeafType<$Node>
 
 // dprint-ignore
 type GetCodecForCodecless<

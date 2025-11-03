@@ -95,7 +95,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const constDoc = getStaticDocumentBuilderDoc('query')
       code(Str.Code.TSDoc.format(constDoc))
       code(
-        `export const query: QueryBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY, { sddm }) as any`,
+        `export const query: QueryBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.QUERY, { sddm }) as any`,
       )
       code``
     }
@@ -148,7 +148,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
       code(Str.Code.TSDoc.format(mutationConstDoc))
       code(
-        `export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.MUTATION, { sddm }) as any`,
+        `export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.MUTATION, { sddm }) as any`,
       )
       code``
     }
@@ -201,7 +201,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
       code(Str.Code.TSDoc.format(subscriptionConstDoc))
       code(
-        `export const subscription: SubscriptionBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION, { sddm }) as any`,
+        `export const subscription: SubscriptionBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.SUBSCRIPTION, { sddm }) as any`,
       )
       code``
     }

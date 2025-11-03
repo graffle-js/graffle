@@ -180,7 +180,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           const graphqlRequest: GraphqlKit.Http.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
-            query: GraphqlKit.Document.print(input.request.query),
+            query: GraphqlKit.Document.toString(input.request.query),
           }
 
           const operationType = Str.Type.is(input.request.operation)
@@ -189,7 +189,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           const methodMode = input.transport.methodMode
           const requestMethod = methodMode === MethodMode.post
             ? `post`
-            : GraphqlKit.Document.OperationTypeToAccessKind[operationType] === `read`
+            : GraphqlKit.Schema.OperationType.LookupToAccessKind[operationType] === `read`
             ? `get`
             : `post`
 

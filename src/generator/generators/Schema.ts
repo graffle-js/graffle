@@ -367,16 +367,18 @@ const generateSchemaNamespaceModule = (
 
   const schema: Str.Code.TS.TermObject.TermObject = {
     name: `$$Data.Name`,
-    operationsAvailable: Str.Code.TS.tuple(operationsAvailable.map(_ => Str.Code.TS.string(_))),
+    operationsAvailable: Str.Code.TS.tuple(
+      operationsAvailable.map(opType => `$.GraphqlKit.Schema.OperationType.${opType.toUpperCase()}`),
+    ),
     RootUnion: Str.Code.TS.unionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
     Root: {
-      [GraphqlKit.Document.Ast.OperationType.QUERY]: config.schema.kindMap.index.Root.query?.name
+      [GraphqlKit.Schema.OperationType.QUERY]: config.schema.kindMap.index.Root.query?.name
         ? `$Types.${config.schema.kindMap.index.Root.query.name}`
         : null,
-      [GraphqlKit.Document.Ast.OperationType.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
+      [GraphqlKit.Schema.OperationType.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
         ? `$Types.${config.schema.kindMap.index.Root.mutation.name}`
         : null,
-      [GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
+      [GraphqlKit.Schema.OperationType.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
         ? `$Types.${config.schema.kindMap.index.Root.subscription.name}`
         : null,
     },

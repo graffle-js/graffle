@@ -360,7 +360,7 @@ export interface QueryBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const query: QueryBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY, { sddm }) as any
+export const query: QueryBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.QUERY, { sddm }) as any
 
 /**
  * Static mutation builder for compile-time GraphQL document generation.
@@ -508,6 +508,4 @@ export interface MutationBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Document.Ast.OperationType.MUTATION, {
-  sddm,
-}) as any
+export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.MUTATION, { sddm }) as any

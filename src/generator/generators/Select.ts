@@ -72,7 +72,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Operation<$SelectionSet, ${iSchema}, ${$.$$Utilities}.GraphqlKit.Document.Ast.OperationType.${
+        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Operation<$SelectionSet, ${iSchema}, ${$.$$Utilities}.GraphqlKit.Schema.OperationType.${
           enumMemberName[operationType]
         }>`,
       )

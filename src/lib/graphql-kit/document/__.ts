@@ -1,6 +1,4 @@
-export { OperationType } from '../schema/OperationType/_.js'
 export * from './ast/_.js'
-export * from './mappings.js'
 export * from './typed-full/_.js'
 export * from './typed/_.js'
 export * from './utilities.js'

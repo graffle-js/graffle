@@ -10,10 +10,10 @@ const $ = Var.$
 //                                   Static Root Type Builders (Runtime)
 // ==================================================================================================
 
-const query = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY) as any
-const mutation = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.MUTATION) as any
+const query = Docpar.Object.Static.createStaticRootType(GraphqlKit.Schema.OperationType.QUERY) as any
+const mutation = Docpar.Object.Static.createStaticRootType(GraphqlKit.Schema.OperationType.MUTATION) as any
 const subscription = Docpar.Object.Static.createStaticRootType(
-  GraphqlKit.Document.Ast.OperationType.SUBSCRIPTION,
+  GraphqlKit.Schema.OperationType.SUBSCRIPTION,
 ) as any
 
 // dprint-ignore
@@ -79,7 +79,7 @@ test('static document builder > hoistArguments: false - inline args NOT hoisted,
 
 test('static document builder > manual createStaticRootType usage - runtime works without types', () => {
   // Manual usage without generated types - factory returns untyped documents
-  const manualQuery = Docpar.Object.Static.createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY) as any
+  const manualQuery = Docpar.Object.Static.createStaticRootType(GraphqlKit.Schema.OperationType.QUERY) as any
   const doc = manualQuery.someField({ id: true })
 
   // Runtime behavior is identical to generated usage

@@ -19,7 +19,7 @@ export const injectTypenameOnRootResultFields = (
 const injectTypenameOnRootResultFields_ = (
   { selectionSet, sddm, operationType }: {
     sddm: SchemaDrivenDataMap
-    operationType: GraphqlKit.Document.Ast.OperationType.OperationType
+    operationType: GraphqlKit.Schema.OperationType.OperationType
     selectionSet: GraphqlKit.Document.Ast.SelectionSetNode
   },
 ): void => {

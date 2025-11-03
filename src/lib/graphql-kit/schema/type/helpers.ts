@@ -40,9 +40,11 @@ export type GetNamedType<$Type> =
  *
  * @see {@link GetNamedType} - Unwraps List/Nullable wrappers to get the named type
  */
-export type ResolveLeafType<$Type> = $Type extends Type.Scalar ? Codec.GetDecoded<$Type['codec']>
-  : $Type extends Type.Enum ? $Type['membersUnion']
-  : never
+// dprint-ignore
+export type ResolveLeafType<$Type> =
+  $Type extends Type.Scalar   ? Codec.GetDecoded<$Type['codec']> :
+  $Type extends Type.Enum     ? $Type['membersUnion'] :
+                              never
 
 /**
  * Define a schema type

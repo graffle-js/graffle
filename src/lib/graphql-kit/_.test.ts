@@ -8,12 +8,12 @@ const docMultipleQueryOperations = `query ${operationNameOne} { x }\nquery ${ope
 const docMultipleMixedOperations = `mutation ${operationNameOne} { x }\nquery ${operationNameTwo} { x }`
 const docOverloadedTerms = `query { queryX }`
 
-const ot = GraphqlKit.Document.Ast.OperationType
+const ot = GraphqlKit.Schema.OperationType
 
 type CaseParameters = [
   description: string,
   request: GraphqlKit.Request.RequestInput,
-  result: null | GraphqlKit.Document.Ast.OperationType.OperationType,
+  result: null | GraphqlKit.Schema.OperationType.OperationType,
 ]
 
 describe(`getOperationType`, () => {

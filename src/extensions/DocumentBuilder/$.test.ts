@@ -78,5 +78,5 @@ Test
   .test(({ input, matrix }) => {
     const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(input)
     const { document } = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, matrix)
-    return GraphqlKit.Document.print(document)
+    return GraphqlKit.Document.toString(document)
   })

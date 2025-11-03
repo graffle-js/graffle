@@ -79,12 +79,12 @@ export type Config = {
  *   sddmEnabled: true
  * }
  *
- * type MyQueryBuilder = StaticDocumentBuilder<MyConfig, GraphqlKit.Document.Ast.OperationType.QUERY>
+ * type MyQueryBuilder = StaticDocumentBuilder<MyConfig, GraphqlKit.Schema.OperationType.QUERY>
  * ```
  */
 export type StaticDocumentBuilder<
   $Config extends Config,
-  $OperationType extends GraphqlKit.Document.Ast.OperationType.OperationType,
+  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
 > = {
   // Note: The actual field mapping and type inference is done by the generator.
   // This type serves as the canonical signature that generated code must conform to.
@@ -118,7 +118,7 @@ export type StaticDocumentBuilder<
  * import { createStaticRootType } from 'graffle'
  * import { GraphqlKit } from 'graffle'
  *
- * const query = createStaticRootType(GraphqlKit.Document.Ast.OperationType.QUERY)
+ * const query = createStaticRootType(GraphqlKit.Schema.OperationType.QUERY)
  *
  * // Generate a typed document string
  * const userQuery = query.user({
@@ -135,7 +135,7 @@ export type StaticDocumentBuilder<
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const createStaticRootType = (
-  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   options?: Options,
 ) => {
   return new Proxy({}, {
@@ -167,7 +167,7 @@ export const createStaticRootType = (
 }
 
 export const createStaticRootField = (
-  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   fieldName: string,
   factoryLevelDefaults?: Options,
 ) => {

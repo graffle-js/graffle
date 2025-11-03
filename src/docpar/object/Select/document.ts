@@ -36,8 +36,8 @@ export type GetOperationNames<$Document extends SomeDocument> = Obj.values<
 
 // dprint-ignore
 export type GetOperationType<$Document extends SomeDocument, $Name extends string> =
-  $Name extends keyof $Document[GraphqlKit.Document.Ast.OperationType.MUTATION] ? GraphqlKit.Document.Ast.OperationType.MUTATION :
-  $Name extends keyof $Document[GraphqlKit.Document.Ast.OperationType.QUERY]    ? GraphqlKit.Document.Ast.OperationType.QUERY    :
+  $Name extends keyof $Document[GraphqlKit.Schema.OperationType.MUTATION] ? GraphqlKit.Schema.OperationType.MUTATION :
+  $Name extends keyof $Document[GraphqlKit.Schema.OperationType.QUERY]    ? GraphqlKit.Schema.OperationType.QUERY    :
                                                                                    never
 
 // dprint-ignore
@@ -45,15 +45,15 @@ export type GetOperation<$Document extends SomeDocument, $Name extends string> =
   Ts.AssertExtendsObject<
     Arr.FirstNonUnknownNever<[
       // @ts-expect-error could be unknown
-      $Document[GraphqlKit.Document.Ast.OperationType.MUTATION][$Name],
+      $Document[GraphqlKit.Schema.OperationType.MUTATION][$Name],
       // @ts-expect-error could be unknown
-      $Document[GraphqlKit.Document.Ast.OperationType.QUERY][$Name]
+      $Document[GraphqlKit.Schema.OperationType.QUERY][$Name]
     ]>
   >
 
 export interface OperationNormalized {
   name: string | null
-  type: GraphqlKit.Document.Ast.OperationType.OperationType
+  type: GraphqlKit.Schema.OperationType.OperationType
   selectionSet: Select.SelectionSet.AnySelectionSet
 }
 
@@ -69,13 +69,13 @@ export const createDocumentNormalizedFromQuerySelection = <$SelectionSet extends
   operationName?: string,
 ): DocumentNormalized =>
   createDocumentNormalizedFromRootTypeSelection(
-    GraphqlKit.Document.Ast.OperationType.QUERY,
+    GraphqlKit.Schema.OperationType.QUERY,
     selectionSet as Select.SelectionSet.AnySelectionSet<DefaultContext, keyof $SelectionSet & string>,
     operationName,
   )
 
 export const createDocumentNormalizedFromRootTypeSelection = (
-  operationType: GraphqlKit.Document.Ast.OperationType.OperationType,
+  operationType: GraphqlKit.Schema.OperationType.OperationType,
   selectionSet: Select.SelectionSet.AnySelectionSet,
   operationName?: string,
 ): DocumentNormalized =>
@@ -97,14 +97,14 @@ export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized =
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: GraphqlKit.Document.Ast.OperationType.QUERY,
+    type: GraphqlKit.Schema.OperationType.QUERY,
     selectionSet,
   }])
   const mutationOperations = Object.entries(document.mutation ?? {}).map((
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: GraphqlKit.Document.Ast.OperationType.MUTATION,
+    type: GraphqlKit.Schema.OperationType.MUTATION,
     selectionSet,
   }])
   const operations = [

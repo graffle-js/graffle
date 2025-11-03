@@ -320,11 +320,11 @@ export const getOutputFieldSelectionSetDoc = Str.Code.TSDoc.template.factory<[
 
   // Add SDL signature
   if (field.astNode) {
-    const fieldSignature = GraphqlKit.Document.printWithoutDescriptions(field.astNode)
+    const fieldSignature = GraphqlKit.Schema.Ast.toStringWithoutDescriptions(field.astNode)
     let sdlContent = fieldSignature
 
     if (namedType.astNode) {
-      const typeDefinition = GraphqlKit.Document.printWithoutDescriptions(namedType.astNode)
+      const typeDefinition = GraphqlKit.Schema.Ast.toStringWithoutDescriptions(namedType.astNode)
       if (typeDefinition.trim()) {
         sdlContent += `\n\n${typeDefinition}`
       }
@@ -364,11 +364,11 @@ export const getOutputFieldMethodDoc = Str.Code.TSDoc.template.factory<[
   // Build SDL signature
   let sdlContent: string | null = null
   if (field.astNode) {
-    const fieldSignature = GraphqlKit.Document.printWithoutDescriptions(field.astNode)
+    const fieldSignature = GraphqlKit.Schema.Ast.toStringWithoutDescriptions(field.astNode)
     sdlContent = fieldSignature
 
     if (namedType.astNode) {
-      const typeDefinition = GraphqlKit.Document.printWithoutDescriptions(namedType.astNode)
+      const typeDefinition = GraphqlKit.Schema.Ast.toStringWithoutDescriptions(namedType.astNode)
       if (typeDefinition.trim()) {
         sdlContent += `\n\n${typeDefinition}`
       }
@@ -511,11 +511,11 @@ export const getStaticDocumentFieldDoc = Str.Code.TSDoc.template.factory<[
 
   // Add GraphQL SDL signature
   if (field.astNode) {
-    const fieldSignature = GraphqlKit.Document.printWithoutDescriptions(field.astNode)
+    const fieldSignature = GraphqlKit.Schema.Ast.toStringWithoutDescriptions(field.astNode)
     let sdlContent = fieldSignature
 
     if (namedType.astNode) {
-      const typeDefinition = GraphqlKit.Document.printWithoutDescriptions(namedType.astNode)
+      const typeDefinition = GraphqlKit.Schema.Ast.toStringWithoutDescriptions(namedType.astNode)
       if (typeDefinition.trim()) {
         sdlContent += `\n\n${typeDefinition}`
       }

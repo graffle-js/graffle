@@ -83,7 +83,7 @@ export namespace Select {
   export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
-    $$Utilities.GraphqlKit.Document.Ast.OperationType.QUERY
+    $$Utilities.GraphqlKit.Schema.OperationType.QUERY
   >
   /**
    * Root mutation type for modifying Pokemon data.
@@ -94,7 +94,7 @@ export namespace Select {
     $$Utilities.Docpar.Object.InferResult.Operation<
       $SelectionSet,
       $$Schema.Schema,
-      $$Utilities.GraphqlKit.Document.Ast.OperationType.MUTATION
+      $$Utilities.GraphqlKit.Schema.OperationType.MUTATION
     >
 
   //                                            OutputObject
