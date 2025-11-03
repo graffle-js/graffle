@@ -62,7 +62,7 @@ export type Document<$Operations extends Operation> = string & {
 // ================================
 
 /**
- * Union of all TypedFullDocument variants.
+ * Union of all GraphqlKit.Document.TypedFull variants.
  *
  * Plain GraphQL strings (no type info) are also accepted downstream and handled via
  * conditional checks for `operations` property.

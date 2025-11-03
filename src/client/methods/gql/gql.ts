@@ -2,7 +2,6 @@ import type { Context } from '#src/context/_.js'
 import type { Configuration } from '#src/context/fragments/configuration/_.js'
 import type { Docpar } from '#src/docpar/_.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { TypedFullDocument } from '#src/lib/graphql-kit/typed-full-document/_.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
@@ -113,18 +112,18 @@ type DocumentObjectConstraint<$Context> =
 export interface GqlMethod<$Context extends Context.Context> {
   // Overload
   // dprint-ignore
-  <const $doc extends GraphqlKit.Document.Typed.String | string | DocumentNode | TypedFullDocument.TypedFullDocument>(
+  <const $doc extends GraphqlKit.Document.Typed.String | string | DocumentNode | GraphqlKit.Document.TypedFull.TypedFullDocument>(
     document: ValidateSDDMRequirement<$doc, $Context>
   ):
   string extends $doc                                   ?
     $doc extends GraphqlKit.Document.Typed.String            ? DocumentSender<$doc, $Context> :
                                                             UntypedSender<$Context> :
-  $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
+  $doc extends GraphqlKit.Document.TypedFull.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
                                                             ? ParseGraphQLString<$Context, $doc> extends infer $Parsed
                                                               ? $Parsed extends { __typename: 'ParserError' }
                                                                 ? $Parsed
-                                                                : $Parsed extends TypedFullDocument.TypedFullDocument
+                                                                : $Parsed extends GraphqlKit.Document.TypedFull.TypedFullDocument
                                                                   ? DocumentSender<$Parsed, $Context>
                                                                   : never
                                                               : never
@@ -138,7 +137,7 @@ export interface GqlMethod<$Context extends Context.Context> {
   ): ParseGraphQLObject<$Context, $Document> extends infer $Parsed
     ? $Parsed extends { __typename: 'ParserError' }
       ? $Parsed
-      : $Parsed extends TypedFullDocument.TypedFullDocument
+      : $Parsed extends GraphqlKit.Document.TypedFull.TypedFullDocument
         ? DocumentSender<$Parsed, $Context>
         : never
     : never

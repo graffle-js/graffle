@@ -12,7 +12,7 @@ import type * as $$SelectionSets from './selection-sets/$.js'
  * @example GraphQL string syntax
  * ```ts
  * const doc = gql(`query { user { id } }`)
- * // Returns: TypedFullDocument.SingleOperation<{ user: { id: string } }, {}>
+ * // Returns: GraphqlKit.Document.TypedFull.SingleOperation<{ user: { id: string } }, {}>
  * ```
  *
  * @example Document object syntax
@@ -22,7 +22,7 @@ import type * as $$SelectionSets from './selection-sets/$.js'
  *     getUser: { user: { id: true, name: true } }
  *   }
  * })
- * // Returns: TypedFullDocument.SingleOperation with operation metadata
+ * // Returns: GraphqlKit.Document.TypedFull.SingleOperation with operation metadata
  * ```
  */
 export const gql = createGql<

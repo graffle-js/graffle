@@ -1,5 +1,5 @@
 export { type Client, create } from '#src/client/client.js'
-export { type Operation, type TypedFullDocument } from '#src/lib/graphql-kit/typed-full-document/typed-full-document.js'
+export { type Operation } from '#src/lib/graphql-kit/document/typed-full/__.js'
 export { create as createSelect, select } from '#src/select/select.js'
 export { Var } from '../docpar/object/var/$.js'
 // TODO remove this hacky export
