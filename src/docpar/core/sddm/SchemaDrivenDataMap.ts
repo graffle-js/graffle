@@ -1,7 +1,6 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+// TODO: Invert this dependency - GraphqlKit.Schema.Type.Scalar should implement Core.SDDM.Scalar
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Str } from '@wollybeard/kit'
-// TODO: Invert this dependency - Schema.Scalar should implement Core.SDDM.Scalar
-import { Schema } from '#src/types/Schema/_.js'
 import type { InlineType } from './InlineType.js'
 
 export * from './InlineType.js'
@@ -188,7 +187,7 @@ export type Enum = GraffleGlobal.SchemaDrivenDataMap.Enum
 
 export type ArgumentsOrInputObjectFields = GraffleGlobal.SchemaDrivenDataMap.ArgumentsOrInputObjectFields
 
-export type Scalar = Schema.Scalar
+export type Scalar = GraphqlKit.Schema.Type.Scalar
 
 export type CustomScalarName = string
 
@@ -258,10 +257,10 @@ export const isEnum = (
 
 export const isCustomScalarName = (value: unknown): value is CustomScalarName => Str.Type.is(value)
 
-export const isScalar = Schema.Scalars.isScalar
+export const isScalar = GraphqlKit.Schema.Type.Scalars.isScalar
 
 export const isScalarLike = (value: unknown): value is ScalarLikeNodes =>
-  Schema.Scalars.isScalar(value) || isCustomScalarName(value)
+  GraphqlKit.Schema.Type.Scalars.isScalar(value) || isCustomScalarName(value)
 
 export const isOutputObject = (
   node?: Node,

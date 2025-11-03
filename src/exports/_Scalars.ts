@@ -1,1 +1,1 @@
-export { create } from '../types/Schema/nodes/Scalar/__.js'
+export { create } from '../lib/graphql-kit/schema/type/nodes/Scalar/__.js'

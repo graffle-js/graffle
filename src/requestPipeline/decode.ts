@@ -1,6 +1,5 @@
-import { Schema } from '#graffle/schema'
 import { Docpar } from '#src/docpar/_.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Kind } from 'graphql'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
@@ -24,7 +23,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Registered custom scalars.
    */
-  scalars: Schema.Scalars.ScalarMap
+  scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap
 }) => {
   const sddmOutputObject = sddm.operations[request.operation.operation]
   if (!sddmOutputObject) return
@@ -55,7 +54,7 @@ const decodeResultValue = (input: {
   value: GraphqlKit.Request.SomeFieldData
   sddmNode: Docpar.OutputNodes
   documentPart: null | GraphqlKit.Document.Ast.SelectionSetNode
-  scalars: Schema.Scalars.ScalarMap
+  scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap
 }): void => {
   const { parentContext, value, sddmNode, documentPart, scalars } = input
 
@@ -103,15 +102,15 @@ const decodeResultValue = (input: {
       return
     }
     if (Docpar.isScalar(sddmNode)) {
-      const decodedValue = Schema.Scalars.applyCodec(sddmNode.codec.decode, value)
+      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(sddmNode.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {
         parentContext.object[parentContext.index] = decodedValue
       }
     } else if (Docpar.isCustomScalarName(sddmNode)) {
-      const scalar = Schema.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
-      const decodedValue = Schema.Scalars.applyCodec(scalar.codec.decode, value)
+      const scalar = GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
+      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {

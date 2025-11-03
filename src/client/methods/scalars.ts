@@ -1,7 +1,7 @@
 import type { Context } from '#src/context/context.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { Scalars } from '../../context/fragments/scalars/_.js'
-import { Schema } from '../../types/Schema/_.js'
 import type { Client } from '../client.js'
 
 export interface ScalarMethod<
@@ -31,26 +31,29 @@ export interface ScalarMethod<
       decode: (value: string) => $Decoded
       encode: (value: $Decoded) => string
     },
-  ): Client<Scalars.Add<$Context, Schema.Scalar<$Name, $Decoded, string>>>
+  ): Client<Scalars.Add<$Context, GraphqlKit.Schema.Type.Scalar<$Name, $Decoded, string>>>
   /**
    * Register a pre-configured scalar object.
    *
-   * Pass a {@link Schema.Scalar} object that was created with `Schema.Scalar.create()`.
+   * Pass a {@link GraphqlKit.Schema.Type.Scalar} object that was created with `Schema.Scalar.create()`.
    *
    * **Immutability**: Returns a new client instance. The original client is not modified.
    * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @param scalar - A pre-configured scalar object
    */
-  <$Scalar extends Schema.Scalar<_Schema['scalarNamesUnion']>>(
+  <$Scalar extends GraphqlKit.Schema.Type.Scalar<_Schema['scalarNamesUnion']>>(
     scalar: $Scalar,
   ): Client<Scalars.Add<$Context, $Scalar>>
 }
 
 export namespace ScalarMethod {
-  export type Arguments = [Schema.Scalar] | [string, { decode: (value: string) => any; encode: (value: any) => string }]
-  export const normalizeArguments = (args: Arguments): Schema.Scalar => {
-    if (typeof args[0] === `string`) return Schema.Scalar.create(args[0], args[1]!)
+  export type Arguments = [GraphqlKit.Schema.Type.Scalar] | [
+    string,
+    { decode: (value: string) => any; encode: (value: any) => string },
+  ]
+  export const normalizeArguments = (args: Arguments): GraphqlKit.Schema.Type.Scalar => {
+    if (typeof args[0] === `string`) return GraphqlKit.Schema.Type.Scalar.create(args[0], args[1]!)
     return args[0]
   }
 

@@ -4,7 +4,7 @@
  * Supports both schema-driven and schema-less parsing modes through conditional types.
  */
 
-import type { Schema } from '#src/types/Schema/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 /**
  * Unified parser context that supports both schema-driven and schema-less modes.
@@ -30,10 +30,10 @@ import type { Schema } from '#src/types/Schema/_.js'
  * ```
  */
 export type ParserContext<
-  $Schema = Schema,
+  $Schema = GraphqlKit.Schema.Type,
   $SDDM = any,
   $TypeHooks = never,
-> = $Schema extends Schema ? ParserContext.WithSchema<$Schema, $SDDM, $TypeHooks>
+> = $Schema extends GraphqlKit.Schema.Type ? ParserContext.WithSchema<$Schema, $SDDM, $TypeHooks>
   : ParserContext.SchemaLess
 
 export namespace ParserContext {
@@ -41,7 +41,7 @@ export namespace ParserContext {
    * Context when schema is provided - full type information available.
    */
   export interface WithSchema<
-    $Schema extends Schema,
+    $Schema extends GraphqlKit.Schema.Type,
     $SDDM,
     $TypeHooks,
   > {

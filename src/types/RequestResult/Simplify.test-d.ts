@@ -2,12 +2,12 @@
 import type { ContextEmpty } from '#src/context/ContextEmpty.js'
 import type { Add } from '#src/context/fragments/scalars/fragment.js'
 import { Ts } from '@wollybeard/kit'
-import type { Schema } from '../Schema/_.js'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 const A = Ts.Assert
 
-type DateScalar = Schema.Scalar<'Date', Date, string>
+type DateScalar = GraphqlKit.Schema.Type.Scalar<'Date', Date, string>
 type CEmpty = ContextEmpty
 // type CExt = Extension.AddExtensionTypeHooks<CEmpty, {
 // 	onRequestDocumentRootType: [],

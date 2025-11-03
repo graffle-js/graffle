@@ -1,5 +1,5 @@
 import type { Select } from '#src/docpar/object/Select/_.js'
-import type { Schema } from '#src/types/Schema/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Alias } from './Alias.js'
@@ -39,7 +39,7 @@ export type OutputObjectLike<
 type OutputObjectLike_<
   $SelectionSet extends SelectionSet,
   $Schema,
-  $Node extends Schema.NodeGroups.OutputObjectLike
+  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike
 > =
     Select.SelectScalarsWildcard.IsSelectScalarsWildcard<$SelectionSet> extends true
       // todo this needs to be an extension and/or only available when sddm is present
@@ -53,7 +53,7 @@ type OutputObjectLike_<
 type OtherKeys<
   $SelectionSet,
   $Schema,
-  $Node extends Schema.NodeGroups.OutputObjectLike,
+  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
 > =
   {
     [
@@ -114,7 +114,7 @@ type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
 type InlineFragmentKeys<
   $SelectionSet extends object,
   $Schema,
-  $Node extends Schema.NodeGroups.OutputObjectLike,
+  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
 > =
   InlineFragmentKey_<
     Ts.AssertExtendsObject<
@@ -128,7 +128,7 @@ type InlineFragmentKeys<
 type InlineFragmentKey_<
   $SelectionSet extends object,
   $Schema,
-  $Node extends Schema.NodeGroups.OutputObjectLike,
+  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
 > =
   IsNever<$SelectionSet> extends true
     ? {}
@@ -143,7 +143,7 @@ type InlineFragmentKey_<
 export namespace Errors {
   export type UnknownKey<
     $Key extends PropertyKey,
-    $Object extends Schema.NodeGroups.OutputObjectLike,
+    $Object extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
   > = Ts.Err.StaticError<
     `field "${Obj.PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
     { location: 'Object' }

@@ -105,10 +105,10 @@ export interface ClientBase<$Context extends Context> {
    *
    * @example
    * ```ts
-   * // Using Schema.Scalar helper
+   * // Using GraphqlKit.Schema.Type.Scalar helper
    * import { Schema } from 'graffle'
    *
-   * const DateScalar = Schema.Scalar.create('Date', {
+   * const DateScalar = GraphqlKit.Schema.Type.Scalar.create('Date', {
    *   encode: (value: Date) => value.toISOString(),
    *   decode: (value: string) => new Date(value)
    * })

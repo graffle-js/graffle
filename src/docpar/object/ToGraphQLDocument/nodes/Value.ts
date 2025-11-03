@@ -1,6 +1,5 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Schema } from '#src/types/Schema/_.js'
 import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
 import type { OperationContext } from '../context.js'
@@ -14,7 +13,7 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
   if (SDDM.isScalarLike(sddm?.nt)) {
     const scalar = SDDM.isScalar(sddm.nt)
       ? sddm.nt
-      : Schema.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.nt)
+      : GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.nt)
     return applyScalar(context, scalar, value)
   }
 
@@ -97,7 +96,7 @@ interface AdditionalContext {
 
 const applyScalar = (
   context: OperationContext & AdditionalContext,
-  scalar: Schema.Scalar,
+  scalar: GraphqlKit.Schema.Type.Scalar,
   value: unknown,
 ): GraphqlKit.Document.Ast.ValueNode => {
   if (value === null) return GraphqlKit.Document.Ast.NullValue()

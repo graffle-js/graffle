@@ -1,5 +1,5 @@
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Codec } from '#src/types/Codec/_.js'
-import type { Schema } from '#src/types/Schema/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../core/sddm/InlineType.js'
 import type { Interface } from './Interface.js'
@@ -9,7 +9,7 @@ import type { Union } from './Union.js'
 // dprint-ignore
 export type OutputField<
   $SelectionSet,
-  $Field extends Schema.OutputField,
+  $Field extends GraphqlKit.Schema.Type.OutputField,
   $Schema,
 > =
   InlineType.Infer<
@@ -23,25 +23,25 @@ type FieldType<
   $SelectionSet,
   $Node,
 > =
-  $Node extends Schema.OutputObject                      ? $SelectionSet extends object
+  $Node extends GraphqlKit.Schema.Type.OutputObject                      ? $SelectionSet extends object
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>
-                                                            : Ts.Err.StaticError<'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
-  $Node extends Schema.Scalar.ScalarCodecless            ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
-  $Node extends Schema.__typename                        ? $Node['value'] :
-  [Schema.ResolveLeafType<$Node>] extends [never]        ? $Node extends Schema.Interface
+                                                            : Ts.Err.StaticError<'When $Node extends GraphqlKit.Schema.Type.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
+  $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless            ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
+  $Node extends GraphqlKit.Schema.Type.__typename                        ? $Node['value'] :
+  [GraphqlKit.Schema.Type.ResolveLeafType<$Node>] extends [never]        ? $Node extends GraphqlKit.Schema.Type.Interface
                                                               ? Interface<$SelectionSet, $Schema, $Node>
-                                                              : $Node extends Schema.Union
+                                                              : $Node extends GraphqlKit.Schema.Type.Union
                                                                 ? Union<$SelectionSet, $Schema, $Node>
                                                                 : Ts.Err.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }> :
-                                                           Schema.ResolveLeafType<$Node>
+                                                           GraphqlKit.Schema.Type.ResolveLeafType<$Node>
 
 // dprint-ignore
 type GetCodecForCodecless<
   $Schema,
-  $Node extends Schema.Scalar.ScalarCodecless
+  $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless
 > =
   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   $Node['name'] extends keyof $Schema['scalarRegistry']['map']
     // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
     ? $Schema['scalarRegistry']['map'][$Node['name']]['codec']
-    : Schema.Standard.Scalars.String['codec']
+    : GraphqlKit.Schema.Type.Standard.Scalars.String['codec']

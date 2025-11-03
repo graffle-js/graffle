@@ -1,9 +1,9 @@
-import { Schema } from '#src/types/Schema/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Definition } from './$types.js'
 
 export const Skip: Definition = {
   name: `skip`,
-  type: Schema.Standard.Directives.skip,
+  type: GraphqlKit.Schema.Type.Standard.Directives.skip,
   normalizeArguments: (args: ArgsInput): Args => {
     return {
       if: typeof args === `boolean` ? args : args.if === undefined ? true : args.if,

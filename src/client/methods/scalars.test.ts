@@ -1,11 +1,11 @@
 import { type GlobalRegistry } from '#graffle/utilities-for-generated'
 import { contextEmpty } from '#src/context/ContextEmpty.js'
 import type { Docpar } from '#src/docpar/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
 import { expect } from 'vitest'
-import type { Schema } from '../../types/Schema/_.js'
 
 type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
 import type { ScalarMethod } from './scalars.js'
@@ -14,10 +14,10 @@ declare global {
   namespace GraffleGlobal {
     interface Clients {
       TestAddScalar: GlobalRegistry.Client.Define<{
-        schema: Schema.Define<{
+        schema: GraphqlKit.Schema.Type.Define<{
           scalarNamesUnion: 'A'
           scalars: {
-            A: Schema.Scalar<'A', bigint, string>
+            A: GraphqlKit.Schema.Type.Scalar<'A', bigint, string>
           }
         }>
       }>
