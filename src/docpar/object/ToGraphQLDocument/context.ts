@@ -1,6 +1,5 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { Schema } from '#src/types/Schema/_.js'
 import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
 import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
 import type { Options } from './nodes/1_Document.js'
@@ -95,7 +94,7 @@ export interface CaptureVariableInput {
 
 export interface OperationContext {
   sddm?: SchemaDrivenDataMap | undefined
-  scalars: Schema.Scalars.ScalarMap
+  scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap
   variables: {
     /**
      * Should variables be used for arguments?

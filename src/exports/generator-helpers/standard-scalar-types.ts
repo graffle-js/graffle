@@ -1,1 +1,1 @@
-export * from '#src/types/Schema/standard/scalars/scalars.js'
+export * from '#src/lib/graphql-kit/schema/type/standard/scalars/scalars.js'

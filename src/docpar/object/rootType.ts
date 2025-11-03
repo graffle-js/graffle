@@ -1,6 +1,5 @@
 import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { Schema } from '#src/types/Schema/_.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'
 import type { Options } from './ToGraphQLDocument/nodes/1_Document.js'
@@ -31,7 +30,7 @@ export type Config = {
   /**
    * The GraphQL schema type definition
    */
-  schema: Schema
+  schema: GraphqlKit.Schema.Type
 
   /**
    * Whether SDDM (Schema-Driven Data Map) is enabled.
@@ -59,7 +58,7 @@ export type Config = {
    */
   sddmEnabled: boolean
   // Future extensibility:
-  // customScalars?: Schema.Scalars.Registry
+  // customScalars?:GraphqlKit.Schema.Type.Scalars.Registry
   // namingConvention?: 'camelCase' | 'snake_case'
   // fragmentsEnabled?: boolean
 }

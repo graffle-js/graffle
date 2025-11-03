@@ -1,6 +1,6 @@
 import { Docpar } from '#src/docpar/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
-import type { Schema } from '#src/types/Schema/_.js'
 import { print } from '@0no-co/graphql.web'
 import type { Ts } from '@wollybeard/kit'
 
@@ -23,7 +23,7 @@ import type { Ts } from '@wollybeard/kit'
  * This interface unifies static and instance-level typings using Graffle's own type system.
  */
 export interface gql<
-  $Schema extends Schema | undefined,
+  $Schema extends GraphqlKit.Schema.Type | undefined,
   $DocumentObjectConstraint,
   $ArgumentsMap,
 > {
@@ -87,7 +87,7 @@ export const defaults: Partial<Docpar.Object.ToGraphQLDocument.Options> = {
 }
 
 export const createGql = <
-  $Schema extends Schema | undefined,
+  $Schema extends GraphqlKit.Schema.Type | undefined,
   $DocumentObjectConstraint,
   $ArgumentsMap,
 >(config: {

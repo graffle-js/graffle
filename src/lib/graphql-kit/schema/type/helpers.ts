@@ -1,5 +1,5 @@
-import { Codec } from '../Codec/_.js'
-import type { Schema } from './_.js'
+import { Codec } from '#src/types/Codec/_.js'
+import type { Type } from './_.js'
 import { Nodes } from './nodes/_.js'
 import { Scalars } from './scalars/_.js'
 import { Standard } from './standard/_.js'
@@ -40,14 +40,14 @@ export type GetNamedType<$Type> =
  *
  * @see {@link GetNamedType} - Unwraps List/Nullable wrappers to get the named type
  */
-export type ResolveLeafType<$Type> = $Type extends Schema.Scalar ? Codec.GetDecoded<$Type['codec']>
-  : $Type extends Schema.Enum ? $Type['membersUnion']
+export type ResolveLeafType<$Type> = $Type extends Type.Scalar ? Codec.GetDecoded<$Type['codec']>
+  : $Type extends Type.Enum ? $Type['membersUnion']
   : never
 
 /**
  * Define a schema type
  */
-export type Define<$Type extends Partial<Schema>> = $Type & Schema
+export type Define<$Type extends Partial<Type>> = $Type & Type
 
 /**
  * Type-level lookup of a scalar by name from registry, with fallback to standard scalars or unknown.

@@ -1,1 +1,1 @@
-export * from '../types/Schema/_.js'
+export * from '../lib/graphql-kit/schema/type/_.js'

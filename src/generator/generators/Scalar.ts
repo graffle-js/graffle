@@ -90,8 +90,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
-        // code(`export type ${scalar.name}Decoded = Schema.Scalar.Codec.GetDecoded<${scalar.name}>`)
-        // code(`export type ${scalar.name}Encoded = Schema.Scalar.Codec.GetEncoded<${scalar.name}>`)
+        // code(`export type ${scalar.name}Decoded = GraphqlKit.Schema.Type.Scalar.Codec.GetDecoded<${scalar.name}>`)
+        // code(`export type ${scalar.name}Encoded = GraphqlKit.Schema.Type.Scalar.Codec.GetEncoded<${scalar.name}>`)
         // code()
       }
     }

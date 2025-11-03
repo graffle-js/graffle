@@ -1,4 +1,4 @@
-import type { Schema } from '#src/types/Schema/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { Doc } from '../__.js'
 import type { ParseDocument } from './parser.js'
@@ -48,7 +48,8 @@ export type getDocumentOperations<
   $Definitions,
   $Schema,
 > = $Definitions extends string
-  ? $Schema extends Schema ? ParseDocument<$Definitions, import('../core/Context.js').ParserContext<$Schema>>
+  ? $Schema extends GraphqlKit.Schema.Type
+    ? ParseDocument<$Definitions, import('../core/Context.js').ParserContext<$Schema>>
   : ParseDocument<$Definitions, import('../core/Context.js').ParserContext<undefined>>
   : never
 

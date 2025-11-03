@@ -1,6 +1,5 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { RequestResult } from '#src/types/RequestResult/_.js'
-import type { Schema } from '#src/types/Schema/_.js'
 import type { Core, ParserContext } from '../core/_.js'
 import type { SchemaDrivenDataMap } from '../core/sddm/SchemaDrivenDataMap.js'
 import type { InferResult } from './InferResult/_.js'
@@ -46,7 +45,7 @@ export type Parse<
  */
 export type InferOperationsInDocument<
   $Document extends object,
-  $Schema extends Schema,
+  $Schema extends GraphqlKit.Schema.Type,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context extends object,
 > = Parse<
@@ -63,7 +62,7 @@ export type InferOperationsInDocument<
  */
 export type InferOperations<
   $Document,
-  $Schema extends Schema,
+  $Schema extends GraphqlKit.Schema.Type,
   $ArgumentsMap extends SchemaDrivenDataMap,
   $Context,
 > = $Document extends object ? $Context extends object ? Parse<

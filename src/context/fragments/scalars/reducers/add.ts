@@ -1,11 +1,11 @@
-import type { Schema } from '#src/types/Schema/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { ContextFragment } from '../fragment.js'
 
 export type UnionIgnoreAnyOrUnknown<T> = unknown extends T ? never : T
 
 export type Add<
   $Context extends ContextFragment,
-  $Scalar extends Schema.Scalar,
+  $Scalar extends GraphqlKit.Schema.Type.Scalar,
   // todo: an "empty" representation of scalars like "null" allowing typesEncoded/Decoded to always be prsent
   // OR stop having those pre-computed properties and rely on TS caching...
   __scalars = {
@@ -20,7 +20,7 @@ export type Add<
   __ = { readonly [_ in keyof $Context]: _ extends 'scalars' ? __scalars : $Context[_] },
 > = __
 
-export const contextAdd = <context extends ContextFragment, scalar extends Schema.Scalar>(
+export const contextAdd = <context extends ContextFragment, scalar extends GraphqlKit.Schema.Type.Scalar>(
   context: context,
   scalar: scalar,
 ): Add<context, scalar> => {

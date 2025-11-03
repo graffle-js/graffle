@@ -1,5 +1,5 @@
+import { Codec } from '#src/types/Codec/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
-import { Codec } from '../../Codec/_.js'
 import type { Scalar } from '../nodes/Scalar/_.js'
 
 export type ScalarMap = Record<string, Scalar>

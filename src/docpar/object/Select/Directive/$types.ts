@@ -1,9 +1,9 @@
-import type { Schema } from '#src/types/Schema/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Include, Skip } from './__.js'
 
 export interface Definition {
   name: string
-  type: Schema.Directive
+  type: GraphqlKit.Schema.Type.Directive
   normalizeArguments: (args: any) => Record<string, any>
 }
 

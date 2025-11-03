@@ -1,7 +1,6 @@
 import { Docpar } from '#src/docpar/_.js'
 import { GraffleBasic } from '#src/exports/presets/basic.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { Schema } from '#src/types/Schema/_.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
@@ -11,7 +10,10 @@ import { test } from '../_/helpers.js'
 import { RequestSpy } from '../_/SpyExtension.js'
 
 type QueryWithDate = Possible.SelectionSets.Query<{
-  scalars: Schema.Scalars.Registry.AddScalar<Schema.Scalars.Registry.Empty, typeof DateScalar>
+  scalars: GraphqlKit.Schema.Type.Scalars.Registry.AddScalar<
+    GraphqlKit.Schema.Type.Scalars.Registry.Empty,
+    typeof DateScalar
+  >
 }>
 
 type TestCase = [

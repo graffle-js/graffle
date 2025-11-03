@@ -6,7 +6,7 @@
  * - Future extensibility for other context-dependent features
  */
 
-import type { Schema } from '#src/types/Schema/_.js'
+import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 /**
  * Generic context type - widest context that accepts any scalar registry.
@@ -16,7 +16,7 @@ export interface Context {
   /**
    * Registry of custom scalars for this schema
    */
-  scalars: Schema.Scalars.Registry
+  scalars: GraphqlKit.Schema.Type.Scalars.Registry
 }
 
 /**
@@ -29,7 +29,7 @@ export type SelectionContext = Context
  * No custom scalars are registered.
  */
 export interface ContextEmpty extends Context {
-  scalars: Schema.Scalars.Registry.Empty
+  scalars: GraphqlKit.Schema.Type.Scalars.Registry.Empty
 }
 
 /**
@@ -42,19 +42,19 @@ export type DefaultContext = ContextEmpty
  * No custom scalars are registered.
  */
 export interface StaticBuilderContext extends Context {
-  scalars: Schema.Scalars.Registry.Empty
+  scalars: GraphqlKit.Schema.Type.Scalars.Registry.Empty
 }
 
 /**
  * Helper to create a context with custom scalars
  */
-export type WithScalars<$Scalars extends Schema.Scalars.Registry> = {
+export type WithScalars<$Scalars extends GraphqlKit.Schema.Type.Scalars.Registry> = {
   scalars: $Scalars
 }
 
 /**
  * Helper to create a static builder context with custom scalars
  */
-export type StaticBuilderContextWithScalars<$Scalars extends Schema.Scalars.Registry> = {
+export type StaticBuilderContextWithScalars<$Scalars extends GraphqlKit.Schema.Type.Scalars.Registry> = {
   scalars: $Scalars
 }

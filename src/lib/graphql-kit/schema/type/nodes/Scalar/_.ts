@@ -1,4 +1,4 @@
-import { Codec } from '../../../Codec/_.js'
+import { Codec } from '#src/types/Codec/_.js'
 
 export * as Scalar from './__.js'
 
