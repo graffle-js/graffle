@@ -25,19 +25,22 @@
  *
  * @remarks
  *
- * ArgumentsMap follows the Schema-Driven Data Map (SDDM) pattern used throughout Graffle's generated code. This pattern uses specific property names with precise meanings:
+ * ArgumentsMap follows the Schema-Driven Data Map (SDDM) pattern used throughout Graffle's generated code. This pattern uses descriptive property names with precise meanings:
  *
  * - `operations`: Root types (query, mutation, subscription) that can be directly queried
  * - `directives`: Directive definitions with their arguments
- * - `types`: All types in the schema that have fields with arguments
- * - `f`: Fields map - contains all fields for a given type
- * - `a`: Arguments - direct arguments on a specific field
- * - `ad`: Arguments descendant - reference to a type that has fields with arguments
- * - `nt`: Named type - the GraphQL type name as a string literal
- * - `it`: Inline type - tuple encoding nullability: `[0]` for nullable, `[1]` for required, `[0, [1]]` for list types
- * - `$t`: TypeScript type - the fully resolved TypeScript type for the argument
+ * - `inputTypes`: All input types in the schema (InputObjects, Scalars, Enums)
+ * - `outputTypes`: All output types in the schema that have fields with arguments
+ * - `_tag`: Type discriminator (e.g., 'outputObject', 'outputField', 'argumentOrInputField')
+ * - `fields`: Fields map - contains all fields for a given type
+ * - `arguments`: Direct arguments on a specific field
+ * - `argumentsDescendant`: Reference to a type that has fields with arguments
+ * - `namedType`: The GraphQL type name as a string literal
+ * - `inlineType`: Tuple encoding nullability: `[0]` for nullable, `[1]` for required, `[0, [1]]` for list types
+ * - `$type`: The fully resolved TypeScript type for the argument
+ * - `extensions`: Extension-specific properties (augmentable via global namespace)
  *
- * The `ad` property is particularly important: it enables type traversal through fields that don't have direct arguments but return types that do have fields with arguments. This allows the type system to properly track argument requirements across nested selections.
+ * The `argumentsDescendant` property is particularly important: it enables type traversal through fields that don't have direct arguments but return types that do have fields with arguments. This allows the type system to properly track argument requirements across nested selections.
  *
  * @example Basic Field Arguments
  *
@@ -45,13 +48,16 @@
  *
  * ```typescript
  * export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
- *   readonly f: {
+ *   readonly _tag: 'outputObject'
+ *   readonly fields: {
  *     readonly userById: {
- *       readonly a: {
+ *       readonly _tag: 'outputField'
+ *       readonly arguments: {
  *         readonly id: {
- *           readonly nt: 'ID'
- *           readonly it: readonly [0]
- *           readonly $t: string | undefined
+ *           readonly _tag: 'argumentOrInputField'
+ *           readonly namedType: 'ID'
+ *           readonly inlineType: readonly [0]
+ *           readonly $type: string | undefined
  *         }
  *       }
  *     }
@@ -65,11 +71,13 @@
  *
  * ```typescript
  * readonly stringWithRequiredArg: {
- *   readonly a: {
+ *   readonly _tag: 'outputField'
+ *   readonly arguments: {
  *     readonly string: {
- *       readonly nt: 'String'
- *       readonly it: readonly [1]
- *       readonly $t: string
+ *       readonly _tag: 'argumentOrInputField'
+ *       readonly namedType: 'String'
+ *       readonly inlineType: readonly [1]
+ *       readonly $type: string
  *     }
  *   }
  * }
@@ -81,11 +89,13 @@
  *
  * ```typescript
  * readonly stringWithListArgRequired: {
- *   readonly a: {
+ *   readonly _tag: 'outputField'
+ *   readonly arguments: {
  *     readonly ints: {
- *       readonly nt: 'Int'
- *       readonly it: readonly [1, [1]]
- *       readonly $t: readonly number[]
+ *       readonly _tag: 'argumentOrInputField'
+ *       readonly namedType: 'Int'
+ *       readonly inlineType: readonly [1, [1]]
+ *       readonly $type: readonly number[]
  *     }
  *   }
  * }
@@ -97,7 +107,8 @@
  *
  * ```typescript
  * readonly objectNestedWithArgs: {
- *   readonly ad: ObjectNestedWithArgs
+ *   readonly _tag: 'outputField'
+ *   readonly argumentsDescendant: ObjectNestedWithArgs
  * }
  * ```
  *
@@ -107,13 +118,16 @@
  * export interface ObjectNestedWithArgs
  *   extends $$Utilities.SchemaDrivenDataMap.OutputObject
  * {
- *   readonly f: {
+ *   readonly _tag: 'outputObject'
+ *   readonly fields: {
  *     readonly object: {
- *       readonly a: {
+ *       readonly _tag: 'outputField'
+ *       readonly arguments: {
  *         readonly int: {
- *           readonly nt: 'Int'
- *           readonly it: readonly [0]
- *           readonly $t: number | undefined
+ *           readonly _tag: 'argumentOrInputField'
+ *           readonly namedType: 'Int'
+ *           readonly inlineType: readonly [0]
+ *           readonly $type: number | undefined
  *         }
  *       }
  *     }
@@ -127,11 +141,13 @@
  *
  * ```typescript
  * readonly stringWithArgInputObjectRequired: {
- *   readonly a: {
+ *   readonly _tag: 'outputField'
+ *   readonly arguments: {
  *     readonly input: {
- *       readonly nt: 'InputObject'
- *       readonly it: readonly [1]
- *       readonly $t: TypeInputsIndex.InputObject
+ *       readonly _tag: 'argumentOrInputField'
+ *       readonly namedType: 'InputObject'
+ *       readonly inlineType: readonly [1]
+ *       readonly $type: TypeInputsIndex.InputObject
  *     }
  *   }
  * }
