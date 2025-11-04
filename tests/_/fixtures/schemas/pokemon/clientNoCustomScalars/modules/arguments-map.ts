@@ -161,54 +161,64 @@ import type * as TypeInputsIndex from './type-inputs-index.js'
 //
 
 export interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'DateFilter'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'DateFilter'
+  readonly fields: {
     readonly gte: {
-      readonly nt: 'Date'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'Date'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.Date | null | undefined
     }
     readonly lte: {
-      readonly nt: 'Date'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'Date'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.Date | null | undefined
     }
   }
 }
 
 export interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'PokemonFilter'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'PokemonFilter'
+  readonly fields: {
     readonly birthday: {
-      readonly nt: 'DateFilter'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.DateFilter | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'DateFilter'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.DateFilter | null | undefined
     }
     readonly name: {
-      readonly nt: 'StringFilter'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.StringFilter | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'StringFilter'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.StringFilter | null | undefined
     }
     readonly type: {
-      readonly nt: 'PokemonType'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.PokemonType | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'PokemonType'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.PokemonType | null | undefined
     }
   }
 }
 
 export interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'StringFilter'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'StringFilter'
+  readonly fields: {
     readonly contains: {
-      readonly nt: 'String'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.String | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'String'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.String | null | undefined
     }
     readonly in: {
-      readonly nt: 'String'
-      readonly it: readonly [0, [1]]
-      readonly $t: readonly TypeInputsIndex.String[] | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'String'
+      readonly inlineType: readonly [0, [1]]
+      readonly $type: readonly TypeInputsIndex.String[] | null | undefined
     }
   }
 }
@@ -284,33 +294,40 @@ export interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObjec
 //
 
 export interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
-  readonly f: {
+  readonly _tag: 'outputObject'
+  readonly fields: {
     readonly addPokemon: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly attack: {
-          readonly nt: 'Int'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Int | null | undefined
         }
         readonly defense: {
-          readonly nt: 'Int'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Int | null | undefined
         }
         readonly hp: {
-          readonly nt: 'Int'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Int | null | undefined
         }
         readonly name: {
-          readonly nt: 'String'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.String
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.String
         }
         readonly type: {
-          readonly nt: 'PokemonType'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.PokemonType
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'PokemonType'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.PokemonType
         }
       }
     }
@@ -318,31 +335,38 @@ export interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
 }
 
 export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
-  readonly f: {
+  readonly _tag: 'outputObject'
+  readonly fields: {
     readonly pokemonByName: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly name: {
-          readonly nt: 'String'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.String
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.String
         }
       }
     }
     readonly pokemons: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly filter: {
-          readonly nt: 'PokemonFilter'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.PokemonFilter | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'PokemonFilter'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.PokemonFilter | null | undefined
         }
       }
     }
     readonly trainerByName: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly name: {
-          readonly nt: 'String'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.String
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.String
         }
       }
     }
@@ -371,11 +395,13 @@ export interface ArgumentsMap {
     mutation: Mutation
   }
   directives: {}
-  types: {
-    Mutation: Mutation
-    Query: Query
+  inputTypes: {
     DateFilter: DateFilter
     PokemonFilter: PokemonFilter
     StringFilter: StringFilter
+  }
+  outputTypes: {
+    Mutation: Mutation
+    Query: Query
   }
 }

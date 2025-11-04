@@ -9,7 +9,7 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { UnionToIntersection } from 'type-fest'
-import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
+import type { SchemaDrivenDataMap } from '../../core/sddm/_.js'
 import type { Select } from '../Select/_.js'
 import type { ExtractFromOperation } from './extract.js'
 
@@ -18,7 +18,7 @@ import type { ExtractFromOperation } from './extract.js'
  */
 export type InferFromQuery<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery,
+  $ArgsMap extends SchemaDrivenDataMap.WithQuery,
 > = InferFromOperation<$SS, $ArgsMap, GraphqlKit.Schema.OperationType.QUERY>
 
 /**
@@ -26,7 +26,7 @@ export type InferFromQuery<
  */
 export type InferFromMutation<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
+  $ArgsMap extends SchemaDrivenDataMap.WithMutation,
 > = InferFromOperation<$SS, $ArgsMap, GraphqlKit.Schema.OperationType.MUTATION>
 
 /**
@@ -34,7 +34,7 @@ export type InferFromMutation<
  */
 export type InferFromSubscription<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription,
+  $ArgsMap extends SchemaDrivenDataMap.WithSubscription,
 > = InferFromOperation<$SS, $ArgsMap, GraphqlKit.Schema.OperationType.SUBSCRIPTION>
 
 /**
@@ -43,7 +43,7 @@ export type InferFromSubscription<
 // dprint-ignore
 export type InferFromOperation<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMap,
+  $ArgsMap extends SchemaDrivenDataMap,
   $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
   ___$OperationMap = $ArgsMap['operations'][$OperationType],
 > =
@@ -74,7 +74,7 @@ export type InferVariables<
 export type InferFromOperationSchemaLess<
   $SS extends object,
   ___$ExtractedPropSigs =
-     ExtractFromOperation<$SS, { f: {} }, { argsMap: { operations: {}, types: {}, directives: {} } }>,
+  ExtractFromOperation<$SS, { _tag: 'outputObject', fields: {} }, { argsMap: { operations: {}, inputTypes: {}, outputTypes: {}, directives: {} } }>,
   ___$ExtractedProps =
     ___$ExtractedPropSigs extends Obj.PropertySignature
       ? Obj.PropertySignature.ToProperty<___$ExtractedPropSigs>

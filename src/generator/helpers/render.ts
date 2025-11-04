@@ -10,8 +10,8 @@ export const renderInlineType = (type: GraphqlKit.Schema.Runtime.NodeGroups.Type
     : [type, false]
 
   const nullFlag = nonNull
-    ? Docpar.nullabilityFlags.nonNull
-    : Docpar.nullabilityFlags.nullable
+    ? Docpar.SchemaDrivenDataMap.nullabilityFlags.nonNull
+    : Docpar.SchemaDrivenDataMap.nullabilityFlags.nullable
 
   const rest = GraphqlKit.Schema.Runtime.Nodes.isListType(ofType)
     ? renderInlineType(ofType.ofType)
