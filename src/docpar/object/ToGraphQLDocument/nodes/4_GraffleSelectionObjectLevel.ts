@@ -1,7 +1,7 @@
 import type { ParsedSelectionObjectLevel } from '#src/docpar/object/Select/$parseSelection.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Lang, Null } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
+import type { SchemaDrivenDataMap } from '../../../core/sddm/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLField } from './5_Field.js'
 import { toGraphQLInlineFragments } from './5_InlineFragments.js'
@@ -29,7 +29,7 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
       return toGraphQLInlineFragments(context, sddm, selection)
     }
     case `Alias`: {
-      const sddmOutputField = sddm?.f[selection.name]
+      const sddmOutputField = sddm?.fields[selection.name]
       return selection.aliases.map(alias => {
         return toGraphQLField(context, sddmOutputField, {
           name: selection.name,
@@ -39,7 +39,7 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
       }).filter(Null.isNonNull)
     }
     case `SelectionSet`: {
-      const sddmOutputField = sddm?.f[selection.name]
+      const sddmOutputField = sddm?.fields[selection.name]
       const outputField = {
         alias: null,
         name: selection.name,

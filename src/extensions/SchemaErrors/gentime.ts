@@ -4,9 +4,21 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { ConfigManager } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 
-const propertyNames = {
-  r: `r`,
-  e: `e`,
+// Augment global extension interfaces
+declare global {
+  namespace GraffleGlobal {
+    namespace SchemaMapNodeExtensions {
+      interface OutputObject {
+        /** Error object flag - 1 if this is an error type */
+        e?: 1
+      }
+
+      interface OutputField {
+        /** Result union flag - 1 if this field returns a union containing error types */
+        r?: 1
+      }
+    }
+  }
 }
 
 interface Input {
@@ -39,7 +51,9 @@ export const SchemaErrors = (input?: Input) => {
         const errorObjects = getErrorObjects(config, genConfig)
 
         if (errorObjects.find(_ => _.name === graphqlType.name)) {
-          sddmNode[propertyNames.e] = 1
+          const extenssions = (sddmNode['extensions'] ?? {}) as Record<'e', number>
+          sddmNode['extensions'] ??= extenssions
+          extenssions.e = 1
         }
       },
       onOutputField: ({ config: genConfig, sddmNode, graphqlType }) => {
@@ -50,7 +64,9 @@ export const SchemaErrors = (input?: Input) => {
           : null
 
         if (memberTypes && errorObjects.find(_ => memberTypes.find(__ => __.name === _.name))) {
-          sddmNode.$fields[propertyNames.r] = 1
+          const extenssions = (sddmNode.$fields['extensions'] ?? {}) as Record<'r', number>
+          sddmNode.$fields['extensions'] ??= extenssions
+          extenssions.r = 1
         }
       },
     },

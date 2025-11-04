@@ -1,9 +1,6 @@
-import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Str } from '@wollybeard/kit'
-
-const propertyNames = Docpar.propertyNames
 import { Obj } from '@wollybeard/kit'
+import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -63,6 +60,23 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     code(Str.Code.TS.Comment.title1(`Index`))
     code``
     code`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`
+
+    // Categorize types into input and output based on directionality
+    const inputTypeNames: string[] = []
+    const outputTypeNames: string[] = []
+
+    for (const [kindName, nodes] of kinds) {
+      const names = nodes.map(_ => _.name)
+      const directionality = getDirectionality(kindName)
+
+      if (directionality === 'both' || directionality === 'in') {
+        inputTypeNames.push(...names)
+      }
+      if (directionality === 'both' || directionality === 'out') {
+        outputTypeNames.push(...names)
+      }
+    }
+
     code(Str.Code.TS.TermObject.termObject({
       operations: kindMap.Root.map(type => {
         const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
@@ -70,8 +84,11 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
         return [operationType, type.name] as const
       }),
       directives: {},
-      types: Str.Code.TS.TermObject.directiveTermObject({
-        $literal: kinds.map(([, _]) => _).flat().map((_) => _.name).join(`,\n`),
+      inputTypes: Str.Code.TS.TermObject.directiveTermObject({
+        $literal: inputTypeNames.join(`,\n`),
+      }),
+      outputTypes: Str.Code.TS.TermObject.directiveTermObject({
+        $literal: outputTypeNames.join(`,\n`),
       }),
     }))
     code``
@@ -141,6 +158,29 @@ const inputTypeCondition = (config: Config) => {
   return falseFilter
 }
 
+/**
+ * Determine whether a GraphQL kind can appear in input position, output position, or both.
+ *
+ * @remarks
+ * - Scalars and Enums can be used in both input and output positions
+ * - InputObject can only appear in input positions
+ * - OutputObject, Interface, Union, Root can only appear in output positions
+ *
+ * @returns 'in' | 'out' | 'both'
+ *
+ * @todo Upstream to GraphqlKit.Schema.Runtime - this is intrinsic GraphQL type system knowledge
+ */
+const getDirectionality = (kindName: keyof GraphqlKit.Schema.Kind.KindMap['list']): 'in' | 'out' | 'both' => {
+  if (kindName === 'ScalarStandard' || kindName === 'ScalarCustom' || kindName === 'Enum') {
+    return 'both'
+  }
+  if (kindName === 'InputObject') {
+    return 'in'
+  }
+  // OutputObject, Interface, Union, Root
+  return 'out'
+}
+
 //
 //
 //
@@ -186,9 +226,10 @@ const UnionType = createCodeGenerator<
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
-        [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
+        _tag: Str.Code.TS.string('outputObject'),
+        fields: Str.Code.TS.TermObject.directiveTermObject({
           $spread: type.getTypes().filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
-            memberType.name + `.${propertyNames.f}`
+            memberType.name + `.fields`
           ),
         }),
       }),
@@ -205,9 +246,10 @@ const InterfaceType = createCodeGenerator<
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Str.Code.TS.TermObject.termObject({
-        [propertyNames.f]: Str.Code.TS.TermObject.directiveTermObject({
+        _tag: Str.Code.TS.string('outputObject'),
+        fields: Str.Code.TS.TermObject.directiveTermObject({
           $spread: implementorTypes.filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
-            memberType.name + `.${propertyNames.f}`
+            memberType.name + `.fields`
           ),
         }),
       }),
@@ -219,7 +261,9 @@ const ObjectType = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Str.Code.TS.TermObject.TermObject = {}
+    const o: Str.Code.TS.TermObject.TermObject = {
+      _tag: Str.Code.TS.string('outputObject'),
+    }
 
     config.extensions.forEach(_ => {
       _.schemaDrivenDataMap?.onObjectType?.({
@@ -232,7 +276,7 @@ const ObjectType = createCodeGenerator<
     // Fields of this object.
     // ---------------------
     const of: Str.Code.TS.TermObject.TermObject = {}
-    o[propertyNames.f] = of
+    o['fields'] = of
 
     const condition = typeCondition(config)
 
@@ -240,7 +284,9 @@ const ObjectType = createCodeGenerator<
     for (const outputField of outputFields) {
       const outputFieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(outputField.type)
       const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
-        $fields: {},
+        $fields: {
+          _tag: Str.Code.TS.string('outputField'),
+        },
       }
       of[outputField.name] = sddmNodeOutputField
 
@@ -249,10 +295,12 @@ const ObjectType = createCodeGenerator<
       const args = outputField.args.filter(inputCondition)
       if (args.length > 0) {
         const ofItemAs: Str.Code.TS.TermObject.TermObject = {}
-        sddmNodeOutputField.$fields[propertyNames.a] = ofItemAs
+        sddmNodeOutputField.$fields['arguments'] = ofItemAs
 
         for (const arg of args) {
-          const ofItemA: Str.Code.TS.TermObject.TermObject = {}
+          const ofItemA: Str.Code.TS.TermObject.TermObject = {
+            _tag: Str.Code.TS.string('argumentOrInputField'),
+          }
           ofItemAs[arg.name] = ofItemA
 
           const argType = GraphqlKit.Schema.Runtime.getNamedType(arg.type)
@@ -262,10 +310,10 @@ const ObjectType = createCodeGenerator<
              // For variables, we need to know the variable type to write it out, so we always need the named type.
              (config.runtimeFeatures.operationVariables)
           ) {
-              ofItemA[propertyNames.nt] = argType.name
+              ofItemA['namedType'] = argType.name
               // For variables, we need to know the variable type to write it out, so we always need the inline type.
               if (config.runtimeFeatures.operationVariables) {
-                ofItemA[propertyNames.it] = renderInlineType(arg.type)
+                ofItemA['inlineType'] = renderInlineType(arg.type)
               }
             }
         }
@@ -282,16 +330,18 @@ const ObjectType = createCodeGenerator<
       if (condition(outputFieldNamedType)) {
         if (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(outputFieldNamedType)) {
           if (config.runtimeFeatures.customScalars) {
-            sddmNodeOutputField.$fields[propertyNames.nt] = outputFieldNamedType.name
+            sddmNodeOutputField.$fields['namedType'] = outputFieldNamedType.name
           }
         } else if (
           GraphqlKit.Schema.Runtime.Nodes.isUnionType(outputFieldNamedType)
           || GraphqlKit.Schema.Runtime.Nodes.isObjectType(outputFieldNamedType)
           || GraphqlKit.Schema.Runtime.Nodes.isInterfaceType(outputFieldNamedType)
         ) {
-          referenceAssignments.push(`${type.name}.f[\`${outputField.name}\`]!.nt = ${outputFieldNamedType.name}`)
+          referenceAssignments.push(
+            `${type.name}.fields[\`${outputField.name}\`]!.namedType = ${outputFieldNamedType.name}`,
+          )
           // dprint-ignore
-          sddmNodeOutputField.$literal = `// ${Str.Code.TS.TermObject.termField(propertyNames.nt, outputFieldNamedType.name)} <-- Assigned later to avoid potential circular dependency.`
+          sddmNodeOutputField.$literal = `// namedType: ${outputFieldNamedType.name} <-- Assigned later to avoid potential circular dependency.`
           // // todo make kitchen sink schema have a pattern where this code path will be traversed.
           // // We just need to have arguments on a field on a nested object.
           // // Nested objects that in turn have custom scalar arguments
@@ -320,8 +370,8 @@ const EnumType = createCodeGenerator<
       type.name,
       `${$.$$Utilities}.SchemaDrivenDataMap.Enum`,
       Str.Code.TS.TermObject.termObject({
-        [propertyNames.k]: Str.Code.TS.string(`enum`),
-        [propertyNames.n]: Str.Code.TS.string(type.name),
+        _tag: Str.Code.TS.string('enum'),
+        name: Str.Code.TS.string(type.name),
       }),
     ))
   },
@@ -331,24 +381,26 @@ const InputObjectType = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Str.Code.TS.TermObject.TermObject = {}
+    const o: Str.Code.TS.TermObject.TermObject = {
+      _tag: Str.Code.TS.string('inputObject'),
+    }
 
     const inputFields = Object.values(type.getFields())
 
     if (config.runtimeFeatures.operationVariables) {
-      o[propertyNames.n] = Str.Code.TS.string(type.name)
+      o['name'] = Str.Code.TS.string(type.name)
       const customScalarFields = inputFields
         .filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
         .map(Str.Code.TS.string)
       if (customScalarFields.length) {
-        o[propertyNames.fcs] = Str.Code.TS.TermObject.termList(customScalarFields)
+        o['fieldsContainingCustomScalars'] = Str.Code.TS.TermObject.termList(customScalarFields)
       }
     }
     const f: Str.Code.TS.TermObject.TermObjectOf<
       Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
     > = {}
-    o[propertyNames.f] = f
+    o['fields'] = f
 
     for (const inputField of inputFields) {
       const inputFieldType = GraphqlKit.Schema.Runtime.getNamedType(inputField.type)
@@ -363,21 +415,22 @@ const InputObjectType = createCodeGenerator<
       if (!isPresent) continue
 
       f[inputField.name] = {
-        $fields: {},
+        $fields: {
+          _tag: Str.Code.TS.string('argumentOrInputField'),
+        },
       }
 
       if (GraphqlKit.Schema.Scalars.isScalarTypeAndCustom(inputFieldType)) {
-        f[inputField.name]!.$fields[propertyNames.nt] = inputFieldType.name
+        f[inputField.name]!.$fields['namedType'] = inputFieldType.name
       } else if (
         GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(inputFieldType)
         && GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs(inputFieldType)
       ) {
         referenceAssignments.push(
-          `${type.name}.${propertyNames.f}![\`${inputField.name}\`]!.${propertyNames.nt} = ${inputFieldType.name}`,
+          `${type.name}.fields![\`${inputField.name}\`]!.namedType = ${inputFieldType.name}`,
         )
-        f[inputField.name]!.$literal = `// ${
-          Str.Code.TS.TermObject.termField(propertyNames.nt, inputFieldType.name)
-        } <-- Assigned later to avoid potential circular dependency.`
+        f[inputField.name]!.$literal =
+          `// namedType: ${inputFieldType.name} <-- Assigned later to avoid potential circular dependency.`
       }
     }
 

@@ -52,7 +52,7 @@ const decodeResultValue = (input: {
       index: number
     }
   value: GraphqlKit.Request.SomeFieldData
-  sddmNode: Docpar.OutputNodes
+  sddmNode: Docpar.SchemaDrivenDataMap.OutputNodes
   documentPart: null | GraphqlKit.Document.Ast.SelectionSetNode
   scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap
 }): void => {
@@ -74,7 +74,7 @@ const decodeResultValue = (input: {
       })
     })
   } else if (typeof value === `object`) {
-    if (!Docpar.isOutputObject(sddmNode)) {
+    if (!Docpar.SchemaDrivenDataMap.isOutputObject(sddmNode)) {
       return
       // something went wrong
       // todo in strict mode throw error that sddmNode is inconsistent with data shape.
@@ -86,12 +86,12 @@ const decodeResultValue = (input: {
       // key space of schema vs key space of data
       const documentField = findDocumentField(documentPart, fieldName)
       const kSchema = documentField?.name.value ?? fieldName
-      const sddmOutputField = sddmNode.f[kSchema]
-      if (!sddmOutputField?.nt) continue
+      const sddmOutputField = sddmNode.fields[kSchema]
+      if (!sddmOutputField?.namedType) continue
       decodeResultValue({
         parentContext: { type: `object`, object, fieldName },
         value,
-        sddmNode: sddmOutputField.nt,
+        sddmNode: sddmOutputField.namedType,
         documentPart: documentField?.selectionSet ?? null,
         scalars,
       })
@@ -101,14 +101,14 @@ const decodeResultValue = (input: {
       // Should be impossible. Strict mode could error here.
       return
     }
-    if (Docpar.isScalar(sddmNode)) {
+    if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
       const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(sddmNode.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {
         parentContext.object[parentContext.index] = decodedValue
       }
-    } else if (Docpar.isCustomScalarName(sddmNode)) {
+    } else if (Docpar.SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
       const scalar = GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
       const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {

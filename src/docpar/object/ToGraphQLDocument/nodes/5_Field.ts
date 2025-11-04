@@ -1,8 +1,7 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { Var } from '#src/docpar/object/var/$.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
-import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
+import { SchemaDrivenDataMap } from '../../../core/sddm/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toGraphQLArgument } from './Argument.js'
@@ -38,7 +37,6 @@ export const toGraphQLField: GraphQLPostOperationMapper<
     const keyParsed = Select.parseSelection(key, fieldSelection.selectionSet[key])
     switch (keyParsed.type) {
       case `Arguments`: {
-        const sddmArguments = sddm?.a
         for (const argName in keyParsed.arguments) {
           const argNameSchema = argName
           const argValue = keyParsed.arguments[argName]
@@ -48,7 +46,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
 
           // Strip enum prefix for schema argument name
           const argNameSchemaStripped = argNameSchema.replace(Select.Arguments.enumKeyPrefixPattern, ``)
-          const sddmArgument = sddmArguments?.[argNameSchemaStripped]
+          const sddmArgument = sddm?.arguments?.[argNameSchemaStripped]
 
           // Check if this is a $var marker
           const isVarMarker = Var.isVariableMarker(argValue)
@@ -91,8 +89,8 @@ export const toGraphQLField: GraphQLPostOperationMapper<
       }
       default: {
         // dprint-ignore
-        if (SDDM.isScalarLike(sddm?.nt) || SDDM.isOutputField(sddm?.nt) || SDDM.isEnum(sddm?.nt)) throw new Error(`schema map scalar on non-scalar graffle selection.`)
-        collectForInlineFragmentLike(context, sddm?.nt, keyParsed, {
+        if (SchemaDrivenDataMap.isScalarLike(sddm?.namedType) || SchemaDrivenDataMap.isOutputField(sddm?.namedType) || SchemaDrivenDataMap.isEnum(sddm?.namedType)) throw new Error(`schema map scalar on non-scalar graffle selection.`)
+        collectForInlineFragmentLike(context, sddm?.namedType, keyParsed, {
           directives,
           selections,
         })

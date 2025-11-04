@@ -152,8 +152,11 @@ const String = $$Scalar.String
 //
 
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id1: {},
+  _tag: 'outputObject',
+  fields: {
+    id1: {
+      _tag: 'outputField',
+    },
   },
 }
 
@@ -197,7 +200,14 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     query: Query,
   },
   directives: {},
-  types: {
+  inputTypes: {
+    Boolean,
+    Float,
+    ID,
+    Int,
+    String,
+  },
+  outputTypes: {
     Boolean,
     Float,
     ID,

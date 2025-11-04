@@ -2,7 +2,7 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
-import type { Docpar } from '../../_.js'
+import type { SchemaDrivenDataMap } from './_.js'
 import { mapVariablesByTypeNames } from './mapVariables.js'
 
 const createRequest = (
@@ -18,20 +18,23 @@ const createRequest = (
   }
 }
 
-const sddmUpload: Docpar.SchemaDrivenDataMap = {
-  types: { Upload: `Upload` },
+const sddmUpload: SchemaDrivenDataMap = {
+  inputTypes: { Upload: `Upload` },
+  outputTypes: { Upload: `Upload` },
   operations: {},
   directives: {},
 }
 
-const sddmNested: Docpar.SchemaDrivenDataMap = {
-  types: {
+const sddmNested: SchemaDrivenDataMap = {
+  inputTypes: {
     UserInput: {
-      f: { avatar: { nt: `Upload` } },
-      fcs: ['avatar'],
+      _tag: 'inputObject',
+      fields: { avatar: { _tag: 'argumentOrInputField', namedType: `Upload` } },
+      fieldsContainingCustomScalars: ['avatar'],
     },
     Upload: `Upload`,
   },
+  outputTypes: { Upload: `Upload` },
   operations: {},
   directives: {},
 }

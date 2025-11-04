@@ -64,33 +64,33 @@ const bigint = $$Scalar.bigint
 //
 
 const ABCEnum: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'ABCEnum',
+  _tag: 'enum',
+  name: 'ABCEnum',
 }
 
 const Case: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'Case',
+  _tag: 'enum',
+  name: 'Case',
 }
 
 const ChildAInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'ChildAInterfaceHierarchyMember',
+  _tag: 'enum',
+  name: 'ChildAInterfaceHierarchyMember',
 }
 
 const ChildBInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'ChildBInterfaceHierarchyMember',
+  _tag: 'enum',
+  name: 'ChildBInterfaceHierarchyMember',
 }
 
 const GrandparentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'GrandparentInterfaceHierarchyMember',
+  _tag: 'enum',
+  name: 'GrandparentInterfaceHierarchyMember',
 }
 
 const ParentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'ParentInterfaceHierarchyMember',
+  _tag: 'enum',
+  name: 'ParentInterfaceHierarchyMember',
 }
 
 //
@@ -110,57 +110,76 @@ const ParentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
 //
 
 const InputObject: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'InputObject',
-  fcs: ['date', 'dateRequired'],
-  f: {
-    abcEnum: {},
+  _tag: 'inputObject',
+  name: 'InputObject',
+  fieldsContainingCustomScalars: ['date', 'dateRequired'],
+  fields: {
+    abcEnum: {
+      _tag: 'argumentOrInputField',
+    },
     date: {
-      nt: Date,
+      _tag: 'argumentOrInputField',
+      namedType: Date,
     },
     dateRequired: {
-      nt: Date,
+      _tag: 'argumentOrInputField',
+      namedType: Date,
     },
-    id: {},
-    idRequired: {},
+    id: {
+      _tag: 'argumentOrInputField',
+    },
+    idRequired: {
+      _tag: 'argumentOrInputField',
+    },
   },
 }
 
 const InputObjectCircular: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'InputObjectCircular',
-  fcs: ['circular', 'date'],
-  f: {
+  _tag: 'inputObject',
+  name: 'InputObjectCircular',
+  fieldsContainingCustomScalars: ['circular', 'date'],
+  fields: {
     circular: {
-      // nt: InputObjectCircular, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'argumentOrInputField',
+      // namedType: InputObjectCircular <-- Assigned later to avoid potential circular dependency.
     },
     date: {
-      nt: Date,
+      _tag: 'argumentOrInputField',
+      namedType: Date,
     },
   },
 }
 
 const InputObjectEnum: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'InputObjectEnum',
-  f: {
-    abcEnum: {},
+  _tag: 'inputObject',
+  name: 'InputObjectEnum',
+  fields: {
+    abcEnum: {
+      _tag: 'argumentOrInputField',
+    },
   },
 }
 
 const InputObjectNested: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'InputObjectNested',
-  fcs: ['InputObject'],
-  f: {
+  _tag: 'inputObject',
+  name: 'InputObjectNested',
+  fieldsContainingCustomScalars: ['InputObject'],
+  fields: {
     InputObject: {
-      // nt: InputObject, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'argumentOrInputField',
+      // namedType: InputObject <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const InputObjectNestedNonNull: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'InputObjectNestedNonNull',
-  fcs: ['InputObject'],
-  f: {
+  _tag: 'inputObject',
+  name: 'InputObjectNestedNonNull',
+  fieldsContainingCustomScalars: ['InputObject'],
+  fields: {
     InputObject: {
-      // nt: InputObject, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'argumentOrInputField',
+      // namedType: InputObject <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
@@ -182,165 +201,258 @@ const InputObjectNestedNonNull: $$Utilities.SchemaDrivenDataMap.InputObject = {
 //
 
 const Bar: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    int: {},
+  _tag: 'outputObject',
+  fields: {
+    int: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const DateObject1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     date1: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
   },
 }
 
 const DateObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     date2: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
   },
 }
 
 const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    infoId: {},
-    message: {},
+  _tag: 'outputObject',
+  fields: {
+    infoId: {
+      _tag: 'outputField',
+    },
+    message: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const ErrorTwo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    infoInt: {},
-    message: {},
+  _tag: 'outputObject',
+  fields: {
+    infoInt: {
+      _tag: 'outputField',
+    },
+    message: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const Foo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const Object1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    ABCEnum: {},
-    boolean: {},
-    float: {},
-    id: {},
-    int: {},
-    string: {},
+  _tag: 'outputObject',
+  fields: {
+    ABCEnum: {
+      _tag: 'outputField',
+    },
+    boolean: {
+      _tag: 'outputField',
+    },
+    float: {
+      _tag: 'outputField',
+    },
+    id: {
+      _tag: 'outputField',
+    },
+    int: {
+      _tag: 'outputField',
+    },
+    string: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const Object1ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
-    int: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
+    int: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const Object2ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    boolean: {},
-    id: {},
+  _tag: 'outputObject',
+  fields: {
+    boolean: {
+      _tag: 'outputField',
+    },
+    id: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const ObjectChildA: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    a: {},
-    b: {},
-    c1: {},
-    me: {},
+  _tag: 'outputObject',
+  fields: {
+    a: {
+      _tag: 'outputField',
+    },
+    b: {
+      _tag: 'outputField',
+    },
+    c1: {
+      _tag: 'outputField',
+    },
+    me: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const ObjectChildB: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    a: {},
-    b: {},
-    c2: {},
-    me: {},
+  _tag: 'outputObject',
+  fields: {
+    a: {
+      _tag: 'outputField',
+    },
+    b: {
+      _tag: 'outputField',
+    },
+    c2: {
+      _tag: 'outputField',
+    },
+    me: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const ObjectGrandparent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    a: {},
-    me: {},
+  _tag: 'outputObject',
+  fields: {
+    a: {
+      _tag: 'outputField',
+    },
+    me: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const ObjectNested: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
     object: {
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const ObjectNestedWithArgs: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     id: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         filter: {
-          nt: ID,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ID,
+          inlineType: [0],
         },
       },
     },
     object: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         boolean: {
-          nt: Boolean,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Boolean,
+          inlineType: [0],
         },
         float: {
-          nt: Float,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Float,
+          inlineType: [0],
         },
         int: {
-          nt: Int,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0],
         },
         string: {
-          nt: String,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [0],
         },
       },
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const ObjectParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    a: {},
-    b: {},
-    me: {},
+  _tag: 'outputObject',
+  fields: {
+    a: {
+      _tag: 'outputField',
+    },
+    b: {
+      _tag: 'outputField',
+    },
+    me: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const ObjectUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     fooBarUnion: {
-      // nt: FooBarUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: FooBarUnion <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const lowerCaseObject: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const lowerCaseObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    int: {},
+  _tag: 'outputObject',
+  fields: {
+    int: {
+      _tag: 'outputField',
+    },
   },
 }
 
@@ -361,33 +473,40 @@ const lowerCaseObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const DateInterface1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    ...DateObject1.f,
+  _tag: 'outputObject',
+  fields: {
+    ...DateObject1.fields,
   },
 }
 
 const Error: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const Interface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const InterfaceChildA: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const InterfaceChildB: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const InterfaceGrandparent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const InterfaceParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 //
@@ -407,22 +526,26 @@ const InterfaceParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const DateUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    ...DateObject1.f,
-    ...DateObject2.f,
+  _tag: 'outputObject',
+  fields: {
+    ...DateObject1.fields,
+    ...DateObject2.fields,
   },
 }
 
 const FooBarUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const Result: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 const lowerCaseUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  _tag: 'outputObject',
+  fields: {},
 }
 
 //
@@ -442,354 +565,461 @@ const lowerCaseUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     InputObjectNested: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObjectNested,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: InputObjectNested,
+          inlineType: [0],
         },
       },
     },
     InputObjectNestedNonNull: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObjectNestedNonNull,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: InputObjectNestedNonNull,
+          inlineType: [1],
         },
       },
     },
-    abcEnum: {},
+    abcEnum: {
+      _tag: 'outputField',
+    },
     argInputObjectCircular: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObjectCircular,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: InputObjectCircular,
+          inlineType: [0],
         },
       },
     },
     bigintField: {
-      nt: bigint,
+      _tag: 'outputField',
+      namedType: bigint,
     },
     bigintFieldNonNull: {
-      nt: bigint,
+      _tag: 'outputField',
+      namedType: bigint,
     },
     date: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
     dateArg: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         date: {
-          nt: Date,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Date,
+          inlineType: [0],
         },
       },
-      nt: Date,
+      namedType: Date,
     },
     dateArgInputObject: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObject,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: InputObject,
+          inlineType: [0],
         },
       },
-      nt: Date,
+      namedType: Date,
     },
     dateArgList: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         date: {
-          nt: Date,
-          it: [0, [1]],
+          _tag: 'argumentOrInputField',
+          namedType: Date,
+          inlineType: [0, [1]],
         },
       },
-      nt: Date,
+      namedType: Date,
     },
     dateArgNonNull: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         date: {
-          nt: Date,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: Date,
+          inlineType: [1],
         },
       },
-      nt: Date,
+      namedType: Date,
     },
     dateArgNonNullList: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         date: {
-          nt: Date,
-          it: [1, [0]],
+          _tag: 'argumentOrInputField',
+          namedType: Date,
+          inlineType: [1, [0]],
         },
       },
-      nt: Date,
+      namedType: Date,
     },
     dateArgNonNullListNonNull: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         date: {
-          nt: Date,
-          it: [1, [1]],
+          _tag: 'argumentOrInputField',
+          namedType: Date,
+          inlineType: [1, [1]],
         },
       },
-      nt: Date,
+      namedType: Date,
     },
     dateInterface1: {
-      // nt: DateInterface1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: DateInterface1 <-- Assigned later to avoid potential circular dependency.
     },
     dateList: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
     dateListList: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
     dateListNonNull: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
     dateNonNull: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
     dateObject1: {
-      // nt: DateObject1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: DateObject1 <-- Assigned later to avoid potential circular dependency.
     },
     dateUnion: {
-      // nt: DateUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: DateUnion <-- Assigned later to avoid potential circular dependency.
     },
     error: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         case: {
-          nt: String,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [0],
         },
       },
     },
-    id: {},
-    idNonNull: {},
+    id: {
+      _tag: 'outputField',
+    },
+    idNonNull: {
+      _tag: 'outputField',
+    },
     interface: {
-      // nt: Interface, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Interface <-- Assigned later to avoid potential circular dependency.
     },
     interfaceHierarchyChildA: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         type: {
-          nt: ChildAInterfaceHierarchyMember,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ChildAInterfaceHierarchyMember,
+          inlineType: [0],
         },
       },
-      // nt: InterfaceChildA, <-- Assigned later to avoid potential circular dependency.
+      // namedType: InterfaceChildA <-- Assigned later to avoid potential circular dependency.
     },
     interfaceHierarchyChildB: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         type: {
-          nt: ChildBInterfaceHierarchyMember,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ChildBInterfaceHierarchyMember,
+          inlineType: [0],
         },
       },
-      // nt: InterfaceChildB, <-- Assigned later to avoid potential circular dependency.
+      // namedType: InterfaceChildB <-- Assigned later to avoid potential circular dependency.
     },
     interfaceHierarchyGrandparents: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         type: {
-          nt: GrandparentInterfaceHierarchyMember,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: GrandparentInterfaceHierarchyMember,
+          inlineType: [0],
         },
       },
-      // nt: InterfaceGrandparent, <-- Assigned later to avoid potential circular dependency.
+      // namedType: InterfaceGrandparent <-- Assigned later to avoid potential circular dependency.
     },
     interfaceHierarchyParents: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         type: {
-          nt: ParentInterfaceHierarchyMember,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ParentInterfaceHierarchyMember,
+          inlineType: [0],
         },
       },
-      // nt: InterfaceParent, <-- Assigned later to avoid potential circular dependency.
+      // namedType: InterfaceParent <-- Assigned later to avoid potential circular dependency.
     },
     interfaceNonNull: {
-      // nt: Interface, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Interface <-- Assigned later to avoid potential circular dependency.
     },
     interfaceWithArgs: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         id: {
-          nt: ID,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: ID,
+          inlineType: [1],
         },
       },
-      // nt: Interface, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Interface <-- Assigned later to avoid potential circular dependency.
     },
-    listInt: {},
-    listIntNonNull: {},
-    listListInt: {},
-    listListIntNonNull: {},
+    listInt: {
+      _tag: 'outputField',
+    },
+    listIntNonNull: {
+      _tag: 'outputField',
+    },
+    listListInt: {
+      _tag: 'outputField',
+    },
+    listListIntNonNull: {
+      _tag: 'outputField',
+    },
     lowerCaseUnion: {
-      // nt: lowerCaseUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: lowerCaseUnion <-- Assigned later to avoid potential circular dependency.
     },
     object: {
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
     objectList: {
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
     objectListNonNull: {
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
     objectNested: {
-      // nt: ObjectNested, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: ObjectNested <-- Assigned later to avoid potential circular dependency.
     },
     objectNestedWithArgs: {
-      // nt: ObjectNestedWithArgs, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: ObjectNestedWithArgs <-- Assigned later to avoid potential circular dependency.
     },
     objectNonNull: {
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
     objectWithArgs: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         boolean: {
-          nt: Boolean,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Boolean,
+          inlineType: [0],
         },
         float: {
-          nt: Float,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Float,
+          inlineType: [0],
         },
         id: {
-          nt: ID,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ID,
+          inlineType: [0],
         },
         int: {
-          nt: Int,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0],
         },
         string: {
-          nt: String,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [0],
         },
       },
-      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Object1 <-- Assigned later to avoid potential circular dependency.
     },
     result: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         case: {
-          nt: Case,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: Case,
+          inlineType: [1],
         },
       },
-      // nt: Result, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Result <-- Assigned later to avoid potential circular dependency.
     },
     resultNonNull: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         case: {
-          nt: Case,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Case,
+          inlineType: [0],
         },
       },
-      // nt: Result, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Result <-- Assigned later to avoid potential circular dependency.
     },
-    string: {},
+    string: {
+      _tag: 'outputField',
+    },
     stringWithArgEnum: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         ABCEnum: {
-          nt: ABCEnum,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ABCEnum,
+          inlineType: [0],
         },
       },
     },
     stringWithArgInputObject: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObject,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: InputObject,
+          inlineType: [0],
         },
       },
     },
     stringWithArgInputObjectEnum: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObjectEnum,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: InputObjectEnum,
+          inlineType: [1],
         },
       },
     },
     stringWithArgInputObjectRequired: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         input: {
-          nt: InputObject,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: InputObject,
+          inlineType: [1],
         },
       },
     },
     stringWithArgs: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         boolean: {
-          nt: Boolean,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Boolean,
+          inlineType: [0],
         },
         float: {
-          nt: Float,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Float,
+          inlineType: [0],
         },
         id: {
-          nt: ID,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ID,
+          inlineType: [0],
         },
         int: {
-          nt: Int,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0],
         },
         string: {
-          nt: String,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [0],
         },
       },
     },
     stringWithListArg: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         ints: {
-          nt: Int,
-          it: [0, [0]],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0, [0]],
         },
       },
     },
     stringWithListArgRequired: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         ints: {
-          nt: Int,
-          it: [1, [1]],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [1, [1]],
         },
       },
     },
     stringWithRequiredArg: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         string: {
-          nt: String,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [1],
         },
       },
     },
     unionFooBar: {
-      // nt: FooBarUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: FooBarUnion <-- Assigned later to avoid potential circular dependency.
     },
     unionFooBarNonNull: {
-      // nt: FooBarUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: FooBarUnion <-- Assigned later to avoid potential circular dependency.
     },
     unionFooBarWithArgs: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         id: {
-          nt: ID,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: ID,
+          inlineType: [0],
         },
       },
-      // nt: FooBarUnion, <-- Assigned later to avoid potential circular dependency.
+      // namedType: FooBarUnion <-- Assigned later to avoid potential circular dependency.
     },
     unionObject: {
-      // nt: ObjectUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: ObjectUnion <-- Assigned later to avoid potential circular dependency.
     },
     unionObjectNonNull: {
-      // nt: ObjectUnion, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: ObjectUnion <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
-    idNonNull: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
+    idNonNull: {
+      _tag: 'outputField',
+    },
   },
 }
 
@@ -813,67 +1043,67 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 // TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.
 // These assignments are needed to avoid circular references during module initialization.
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-InputObjectCircular.f![`circular`]!.nt = InputObjectCircular
+InputObjectCircular.fields![`circular`]!.namedType = InputObjectCircular
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-InputObjectNested.f![`InputObject`]!.nt = InputObject
+InputObjectNested.fields![`InputObject`]!.namedType = InputObject
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-InputObjectNestedNonNull.f![`InputObject`]!.nt = InputObject
+InputObjectNestedNonNull.fields![`InputObject`]!.namedType = InputObject
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-ObjectNested.f[`object`]!.nt = Object1
+ObjectNested.fields[`object`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-ObjectNestedWithArgs.f[`object`]!.nt = Object1
+ObjectNestedWithArgs.fields[`object`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-ObjectUnion.f[`fooBarUnion`]!.nt = FooBarUnion
+ObjectUnion.fields[`fooBarUnion`]!.namedType = FooBarUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`dateInterface1`]!.nt = DateInterface1
+Query.fields[`dateInterface1`]!.namedType = DateInterface1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`dateObject1`]!.nt = DateObject1
+Query.fields[`dateObject1`]!.namedType = DateObject1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`dateUnion`]!.nt = DateUnion
+Query.fields[`dateUnion`]!.namedType = DateUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interface`]!.nt = Interface
+Query.fields[`interface`]!.namedType = Interface
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interfaceHierarchyChildA`]!.nt = InterfaceChildA
+Query.fields[`interfaceHierarchyChildA`]!.namedType = InterfaceChildA
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interfaceHierarchyChildB`]!.nt = InterfaceChildB
+Query.fields[`interfaceHierarchyChildB`]!.namedType = InterfaceChildB
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interfaceHierarchyGrandparents`]!.nt = InterfaceGrandparent
+Query.fields[`interfaceHierarchyGrandparents`]!.namedType = InterfaceGrandparent
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interfaceHierarchyParents`]!.nt = InterfaceParent
+Query.fields[`interfaceHierarchyParents`]!.namedType = InterfaceParent
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interfaceNonNull`]!.nt = Interface
+Query.fields[`interfaceNonNull`]!.namedType = Interface
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`interfaceWithArgs`]!.nt = Interface
+Query.fields[`interfaceWithArgs`]!.namedType = Interface
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`lowerCaseUnion`]!.nt = lowerCaseUnion
+Query.fields[`lowerCaseUnion`]!.namedType = lowerCaseUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`object`]!.nt = Object1
+Query.fields[`object`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`objectList`]!.nt = Object1
+Query.fields[`objectList`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`objectListNonNull`]!.nt = Object1
+Query.fields[`objectListNonNull`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`objectNested`]!.nt = ObjectNested
+Query.fields[`objectNested`]!.namedType = ObjectNested
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`objectNestedWithArgs`]!.nt = ObjectNestedWithArgs
+Query.fields[`objectNestedWithArgs`]!.namedType = ObjectNestedWithArgs
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`objectNonNull`]!.nt = Object1
+Query.fields[`objectNonNull`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`objectWithArgs`]!.nt = Object1
+Query.fields[`objectWithArgs`]!.namedType = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`result`]!.nt = Result
+Query.fields[`result`]!.namedType = Result
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`resultNonNull`]!.nt = Result
+Query.fields[`resultNonNull`]!.namedType = Result
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`unionFooBar`]!.nt = FooBarUnion
+Query.fields[`unionFooBar`]!.namedType = FooBarUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`unionFooBarNonNull`]!.nt = FooBarUnion
+Query.fields[`unionFooBarNonNull`]!.namedType = FooBarUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`unionFooBarWithArgs`]!.nt = FooBarUnion
+Query.fields[`unionFooBarWithArgs`]!.namedType = FooBarUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`unionObject`]!.nt = ObjectUnion
+Query.fields[`unionObject`]!.namedType = ObjectUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`unionObjectNonNull`]!.nt = ObjectUnion
+Query.fields[`unionObjectNonNull`]!.namedType = ObjectUnion
 
 //
 //
@@ -897,7 +1127,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     mutation: Mutation,
   },
   directives: {},
-  types: {
+  inputTypes: {
     Boolean,
     Float,
     ID,
@@ -916,6 +1146,21 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     InputObjectEnum,
     InputObjectNested,
     InputObjectNestedNonNull,
+  },
+  outputTypes: {
+    Boolean,
+    Float,
+    ID,
+    Int,
+    String,
+    Date,
+    bigint,
+    ABCEnum,
+    Case,
+    ChildAInterfaceHierarchyMember,
+    ChildBInterfaceHierarchyMember,
+    GrandparentInterfaceHierarchyMember,
+    ParentInterfaceHierarchyMember,
     Bar,
     DateObject1,
     DateObject2,

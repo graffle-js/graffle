@@ -152,9 +152,14 @@ const String = $$Scalar.String
 //
 
 const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
-    idNonNull: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
+    idNonNull: {
+      _tag: 'outputField',
+    },
   },
 }
 
@@ -198,7 +203,14 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     mutation: Mutation,
   },
   directives: {},
-  types: {
+  inputTypes: {
+    Boolean,
+    Float,
+    ID,
+    Int,
+    String,
+  },
+  outputTypes: {
     Boolean,
     Float,
     ID,

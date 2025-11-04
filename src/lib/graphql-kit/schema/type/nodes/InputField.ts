@@ -1,6 +1,6 @@
 import type { Docpar } from '#src/docpar/_.js'
 
-type InlineType = Docpar.InlineType
+type InlineType = Docpar.SchemaDrivenDataMap.InlineType
 import type { NamedInput } from '../node-groups.js'
 
 export interface InputField<

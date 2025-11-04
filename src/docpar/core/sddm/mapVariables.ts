@@ -1,7 +1,7 @@
-import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { SchemaDrivenDataMap } from './_.js'
 
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+// type SchemaDrivenDataMap = ocpar.SchemaDrivenDataMap
 
 export interface MapVariablesByTypeNamesInput {
   /**
@@ -71,7 +71,7 @@ export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Gr
     if (varValue === undefined) continue
 
     const namedType = GraphqlKit.Schema.Ast.getNamedType(parameter.type)
-    const sddmNamedType = sddm.types[namedType.name.value]
+    const sddmNamedType = sddm.inputTypes[namedType.name.value]
     if (!sddmNamedType) continue
 
     mapValue({
@@ -92,7 +92,7 @@ const mapValue = (input: {
   container: any
   key: string | number
   value: unknown
-  sddmNode: Docpar.InputNodes
+  sddmNode: SchemaDrivenDataMap.InputNodes
   typeNameSet: Set<string>
   visitor: (value: unknown, path: string, typeName: string) => unknown
   path: string
@@ -120,14 +120,14 @@ const mapValue = (input: {
   }
 
   // Check if this is a type we're looking for
-  if (Docpar.isCustomScalarName(sddmNode)) {
+  if (SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
     if (typeNameSet.has(sddmNode)) {
       container[key] = visitor(value, path, sddmNode)
     }
     return
   }
 
-  if (Docpar.isScalar(sddmNode)) {
+  if (SchemaDrivenDataMap.isScalar(sddmNode)) {
     if (typeNameSet.has(sddmNode.name)) {
       container[key] = visitor(value, path, sddmNode.name)
     }
@@ -135,23 +135,23 @@ const mapValue = (input: {
   }
 
   // Handle input objects
-  if (Docpar.isInputObject(sddmNode)) {
+  if (SchemaDrivenDataMap.isInputObject(sddmNode)) {
     // Only iterate fields that contain (or are) types we're interested in
     // This uses SDDM's optimization: fcs = fields containing scalars
-    for (const fieldName of sddmNode.fcs ?? []) {
+    for (const fieldName of sddmNode.fieldsContainingCustomScalars ?? []) {
       if (!(typeof value === `object` && value !== null)) continue
 
       const fieldValue = (value as any)[fieldName]
       if (fieldValue === undefined) continue
 
-      const sddmField = sddmNode.f?.[fieldName]
-      if (!sddmField?.nt) continue
+      const sddmField = sddmNode.fields?.[fieldName]
+      if (!sddmField?.namedType) continue
 
       mapValue({
         container: value,
         key: fieldName,
         value: fieldValue,
-        sddmNode: sddmField.nt,
+        sddmNode: sddmField.namedType,
         typeNameSet,
         visitor,
         path: `${path}.${fieldName}`,

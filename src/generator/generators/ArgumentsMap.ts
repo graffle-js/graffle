@@ -1,10 +1,8 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-import { Docpar } from '#src/docpar/_.js'
-import { Str } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
+import { Str } from '@wollybeard/kit'
 
-const propertyNames = Docpar.propertyNames
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
@@ -153,7 +151,8 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
       code(Str.Code.TS.Comment.title1(`Root`))
       code``
       code`export interface Query extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
-      code`  readonly ${propertyNames.f}: {}`
+      code`  readonly _tag: 'outputObject'`
+      code`  readonly fields: {}`
       code`}`
       code``
     }
@@ -163,7 +162,8 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
         code``
       }
       code`export interface Mutation extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
-      code`  readonly ${propertyNames.f}: {}`
+      code`  readonly _tag: 'outputObject'`
+      code`  readonly fields: {}`
       code`}`
       code``
     }
@@ -173,7 +173,8 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
         code``
       }
       code`export interface Subscription extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
-      code`  readonly ${propertyNames.f}: {}`
+      code`  readonly _tag: 'outputObject'`
+      code`  readonly fields: {}`
       code`}`
       code``
     }
@@ -188,21 +189,24 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     if (mutationType) operationsEntries.push(['mutation', 'Mutation'])
     if (subscriptionType) operationsEntries.push(['subscription', 'Subscription'])
 
-    // Build types object entries (all types from argsIndex + all root types + input objects)
-    const typesEntries: Array<[string, string]> = [
-      ...Object.keys(argsIndex).map(typeName => [typeName, typeName] as [string, string]),
+    // Build inputTypes and outputTypes entries
+    const inputTypeEntries: Array<[string, string]> = [
       ...inputObjectTypes.map(inputType => [inputType.name, inputType.name] as [string, string]),
+    ]
+
+    const outputTypeEntries: Array<[string, string]> = [
+      ...Object.keys(argsIndex).map(typeName => [typeName, typeName] as [string, string]),
     ]
 
     // Add root types that aren't already in argsIndex
     if (queryType && !rootTypes['query']) {
-      typesEntries.push(['Query', 'Query'])
+      outputTypeEntries.push(['Query', 'Query'])
     }
     if (mutationType && !rootTypes['mutation']) {
-      typesEntries.push(['Mutation', 'Mutation'])
+      outputTypeEntries.push(['Mutation', 'Mutation'])
     }
     if (subscriptionType && !rootTypes['subscription']) {
-      typesEntries.push(['Subscription', 'Subscription'])
+      outputTypeEntries.push(['Subscription', 'Subscription'])
     }
 
     code`export interface ArgumentsMap`
@@ -213,9 +217,14 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
           : {},
       }),
       directives: Str.Code.TS.TermObject.directiveTermObject({}),
-      types: Str.Code.TS.TermObject.directiveTermObject({
-        $fields: typesEntries.length > 0
-          ? Object.fromEntries(typesEntries)
+      inputTypes: Str.Code.TS.TermObject.directiveTermObject({
+        $fields: inputTypeEntries.length > 0
+          ? Object.fromEntries(inputTypeEntries)
+          : {},
+      }),
+      outputTypes: Str.Code.TS.TermObject.directiveTermObject({
+        $fields: outputTypeEntries.length > 0
+          ? Object.fromEntries(outputTypeEntries)
           : {},
       }),
     }))
@@ -321,15 +330,17 @@ const renderTypeWithArgs = createCodeGenerator<
     const allFields = typeInfo.reference.getFields()
 
     code`export interface ${typeName} extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`
-    code`  readonly ${propertyNames.f}: {`
+    code`  readonly _tag: 'outputObject'`
+    code`  readonly fields: {`
 
     // Include all fields in the index (they all have arguments somewhere)
     for (const [fieldName, fieldInfo] of Obj.entries(typeInfo.fields)) {
       code`    readonly ${fieldName}: {`
+      code`      readonly _tag: 'outputField'`
 
       // Add arguments section if field has direct arguments
       if (fieldInfo.args && fieldInfo.args.length > 0) {
-        code`      readonly ${propertyNames.a}: {`
+        code`      readonly arguments: {`
 
         for (const arg of fieldInfo.args) {
           const argType = GraphqlKit.Schema.Runtime.getNamedType(arg.type)
@@ -337,10 +348,11 @@ const renderTypeWithArgs = createCodeGenerator<
           const resolvedType = renderResolvedType(arg.type, 'TypeInputsIndex')
 
           code`        readonly ${arg.name}: {`
-          code`          readonly ${propertyNames.nt}: '${argType.name}'`
-          code`          readonly ${propertyNames.it}: readonly ${inlineType}`
+          code`          readonly _tag: 'argumentOrInputField'`
+          code`          readonly namedType: '${argType.name}'`
+          code`          readonly inlineType: readonly ${inlineType}`
           if (resolvedType) {
-            code`          readonly $t: ${resolvedType}`
+            code`          readonly $type: ${resolvedType}`
           }
           code`        }`
         }
@@ -351,7 +363,7 @@ const renderTypeWithArgs = createCodeGenerator<
       // Add descendant type reference if field has descendant arguments
       if (fieldInfo.type) {
         const descendantTypeName = fieldInfo.type.reference.name
-        code`      readonly ${propertyNames.ad}: ${descendantTypeName}`
+        code`      readonly argumentsDescendant: ${descendantTypeName}`
       }
 
       code`    }`
@@ -393,8 +405,9 @@ const renderInputObjectType = createCodeGenerator<
     const fields = Object.values(type.getFields())
 
     code`export interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.InputObject {`
-    code`  readonly ${propertyNames.n}: '${type.name}'`
-    code`  readonly ${propertyNames.f}: {`
+    code`  readonly _tag: 'inputObject'`
+    code`  readonly name: '${type.name}'`
+    code`  readonly fields: {`
 
     for (const field of fields) {
       const fieldType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
@@ -402,10 +415,11 @@ const renderInputObjectType = createCodeGenerator<
       const resolvedType = renderResolvedType(field.type, 'TypeInputsIndex')
 
       code`    readonly ${field.name}: {`
-      code`      readonly ${propertyNames.nt}: '${fieldType.name}'`
-      code`      readonly ${propertyNames.it}: readonly ${inlineType}`
+      code`      readonly _tag: 'argumentOrInputField'`
+      code`      readonly namedType: '${fieldType.name}'`
+      code`      readonly inlineType: readonly ${inlineType}`
       if (resolvedType) {
-        code`      readonly $t: ${resolvedType}`
+        code`      readonly $type: ${resolvedType}`
       }
       code`    }`
     }

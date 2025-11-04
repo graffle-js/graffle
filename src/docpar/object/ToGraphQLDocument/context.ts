@@ -1,7 +1,6 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
-import * as SDDM from '../../core/sddm/SchemaDrivenDataMap.js'
+import { SchemaDrivenDataMap } from '../../core/sddm/_.js'
 import type { Options } from './nodes/1_Document.js'
 
 /**
@@ -142,7 +141,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
         context.variables.data.push({
           name: potentialVariableName,
           type: input.sddmArgument
-            ? SDDM.argumentTypeToSyntax(input.sddmArgument)
+            ? SchemaDrivenDataMap.argumentTypeToSyntax(input.sddmArgument)
             : GraphqlKit.Request.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
           value: processedValue,
           defaultValue: processedDefaultValue,

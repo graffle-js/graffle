@@ -1,6 +1,6 @@
 // TODO: Restore @wollybeard/kit import once it becomes a production dependency
 // import type { Obj, Ts } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../core/sddm/SchemaDrivenDataMap.js'
+import type { SchemaDrivenDataMap } from '../../core/sddm/_.js'
 import type { IsArgumentsOrDirectiveKey } from '../InferResult/directive.js'
 import type { Select } from '../Select/_.js'
 import type { Builder as VarBuilder, BuilderSentinel, BuilderState, BuilderTyped } from './var.js'
@@ -55,7 +55,7 @@ export type ExtractFromObjectType<
   $ArgsMapOutputObject extends SchemaDrivenDataMap.OutputObject,
   $Ctx extends Context,
 > =
-  keyof $ArgsMapOutputObject['f'] extends never
+  [keyof $ArgsMapOutputObject['fields']] extends [never]
     ? // Schema-less mode: process all fields except $ and directive keys
       ValuesOr<{
         [k in keyof $SS as IsArgumentsOrDirectiveKey<k> extends true ? never : k]:
@@ -65,10 +65,10 @@ export type ExtractFromObjectType<
       }, {}>
     : // Schema-ful mode: only process fields in ArgumentsMap
       ValuesOr<{
-        [k in keyof $SS & keyof $ArgsMapOutputObject['f']]:
+        [k in keyof $SS & keyof $ArgsMapOutputObject['fields']]:
           ExtractFromOutputFieldWithAliasSupport<
             $SS[k],
-            $ArgsMapOutputObject['f'][k],
+            $ArgsMapOutputObject['fields'][k],
             $Ctx
           >
       }, {}>
@@ -96,7 +96,7 @@ type ExtractFromOutputFieldSchemaLess<
         : unknown
       : unknown)
   // Recursively process nested selection sets
-  & ExtractFromObjectType<$SS, { f: {} }, $Ctx>
+  & ExtractFromObjectType<$SS, { _tag: 'outputObject'; fields: {} }, $Ctx>
 
 /**
  * Extract variables from arguments (schema-less mode).
@@ -155,15 +155,15 @@ type ExtractFromOutputField_<
   // Process direct arguments
   & ($SS extends { readonly $: infer __ssArgs__ }
       ? __ssArgs__ extends object
-        ? ExtractFromArgsOrInputObject<__ssArgs__, $ArgsMapField['a'], $Ctx>
+        ? ExtractFromArgsOrInputObject<__ssArgs__, $ArgsMapField['arguments'], $Ctx>
         : unknown
       : unknown
     )
   // Process descendant arguments, if any according to the map
   & ($SS extends object ?
-      'ad' extends keyof $ArgsMapField ?
+      'argumentsDescendant' extends keyof $ArgsMapField ?
         // { _: [$SS, $ArgsMapField]; __10: ExtractFromObjectType<$SS, $ArgsMapField['ad'], $Ctx> }
-        ExtractFromObjectType<$SS, $ArgsMapField['ad'], $Ctx>
+        ExtractFromObjectType<$SS, $ArgsMapField['argumentsDescendant'], $Ctx>
       : unknown
     : unknown
     )
@@ -186,7 +186,7 @@ export type ExtractFromArgsOrInputObject<
           ? VarBuilderToTypeFromGraphQLType<$GQLType, $Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
             ? $k extends keyof $ArgsMapArgs
-              ? $ArgsMapArgs[$k] extends { $t: infer $Type }
+              ? $ArgsMapArgs[$k] extends { readonly $type: infer $Type }
                 ? VarBuilderToType<$Type, $Builder>
                 : never
               : never
@@ -195,7 +195,7 @@ export type ExtractFromArgsOrInputObject<
           ? IsOptionalVarFromGraphQLType<$Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
             ? $k extends keyof $ArgsMapArgs
-              ? $ArgsMapArgs[$k] extends { $t: infer $Type }
+              ? $ArgsMapArgs[$k] extends { readonly $type: infer $Type }
                 ? IsOptionalVar<$Type, $Builder>
                 : false
               : false
@@ -205,9 +205,9 @@ export type ExtractFromArgsOrInputObject<
     // Traverse into nested input object
     $SSArgs[k] extends object ?
       k extends keyof $ArgsMapArgs
-        ? $ArgsMapArgs[k] extends { nt: infer __typeName__ extends string }
-          ? __typeName__ extends keyof $Ctx['argsMap']['types']
-            ? $Ctx['argsMap']['types'][__typeName__] extends { f: infer __fields__ }
+        ? $ArgsMapArgs[k] extends { readonly namedType: infer __typeName__ extends string }
+          ? __typeName__ extends keyof $Ctx['argsMap']['inputTypes']
+            ? $Ctx['argsMap']['inputTypes'][__typeName__] extends { readonly fields: infer __fields__ }
               ? ExtractFromArgsOrInputObject<$SSArgs[k], __fields__, $Ctx>
               : never
             : never

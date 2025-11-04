@@ -232,7 +232,8 @@ import type * as $$Utilities from '#graffle/utilities-for-generated'
 //
 
 export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
-  readonly f: {}
+  readonly _tag: 'outputObject'
+  readonly fields: {}
 }
 
 //
@@ -256,7 +257,8 @@ export interface ArgumentsMap {
     query: Query
   }
   directives: {}
-  types: {
+  inputTypes: {}
+  outputTypes: {
     Query: Query
   }
 }

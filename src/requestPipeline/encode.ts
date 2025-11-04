@@ -24,7 +24,7 @@ export const encodeRequestVariables = ({ sddm, request, scalars }: {
     if (argValue === undefined) continue
 
     const namedType = GraphqlKit.Schema.Ast.getNamedType(parameter.type)
-    const sddmNamedType = sddm.types[namedType.name.value]
+    const sddmNamedType = sddm.inputTypes[namedType.name.value]
     if (!sddmNamedType) continue // todo in a strict mode could be error.
 
     encodeInputFieldLike(args, argName, argValue, sddmNamedType, scalars)
@@ -35,7 +35,7 @@ const encodeInputFieldLike = (
   args: Record<string, any>,
   argName: any,
   argValue: any,
-  sddmNode: Docpar.InputNodes,
+  sddmNode: Docpar.SchemaDrivenDataMap.InputNodes,
   scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap,
 ) => {
   /**
@@ -54,33 +54,39 @@ const encodeInputFieldLike = (
    * repeating use of the same custom scalar.
    */
 
-  if (Docpar.isCustomScalarName(sddmNode)) {
+  if (Docpar.SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
     const scalar = GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
     args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.encode, argValue)
     return
   }
 
-  if (Docpar.isScalar(sddmNode)) {
+  if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
     args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(sddmNode.codec.encode, argValue)
     return
   }
 
-  if (Docpar.isInputObject(sddmNode)) {
+  if (Docpar.SchemaDrivenDataMap.isInputObject(sddmNode)) {
     // We could iterate here by two strategies:
     // 1. The number of fields in the variables object given to execute against the document operation.
     // 2. The number of custom scalar fields (direct or transient) on this schema object.
     // The optimal choice is about which is smaller.
     // TODO let users supply an algorithm choice.
-    for (const nameOfFieldIsOrContainingCustomScalar of sddmNode.fcs ?? []) {
+    for (const nameOfFieldIsOrContainingCustomScalar of sddmNode.fieldsContainingCustomScalars ?? []) {
       if (!(typeof argValue === `object` && argValue !== null)) continue
 
       const variableValue2 = argValue[nameOfFieldIsOrContainingCustomScalar]
       if (variableValue2 === undefined) continue
 
-      const sddmNode2 = sddmNode.f?.[nameOfFieldIsOrContainingCustomScalar]
-      if (!sddmNode2?.nt) continue
+      const sddmNode2 = sddmNode.fields?.[nameOfFieldIsOrContainingCustomScalar]
+      if (!sddmNode2?.namedType) continue
 
-      encodeInputFieldLike(argValue, nameOfFieldIsOrContainingCustomScalar, variableValue2, sddmNode2.nt, scalars)
+      encodeInputFieldLike(
+        argValue,
+        nameOfFieldIsOrContainingCustomScalar,
+        variableValue2,
+        sddmNode2.namedType,
+        scalars,
+      )
     }
   }
 }

@@ -161,81 +161,96 @@ import type * as TypeInputsIndex from './type-inputs-index.js'
 //
 
 export interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'InputObject'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'InputObject'
+  readonly fields: {
     readonly abcEnum: {
-      readonly nt: 'ABCEnum'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.ABCEnum | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'ABCEnum'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.ABCEnum | null | undefined
     }
     readonly date: {
-      readonly nt: 'Date'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'Date'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.Date | null | undefined
     }
     readonly dateRequired: {
-      readonly nt: 'Date'
-      readonly it: readonly [1]
-      readonly $t: TypeInputsIndex.Date
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'Date'
+      readonly inlineType: readonly [1]
+      readonly $type: TypeInputsIndex.Date
     }
     readonly id: {
-      readonly nt: 'ID'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.ID | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'ID'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.ID | null | undefined
     }
     readonly idRequired: {
-      readonly nt: 'ID'
-      readonly it: readonly [1]
-      readonly $t: TypeInputsIndex.ID
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'ID'
+      readonly inlineType: readonly [1]
+      readonly $type: TypeInputsIndex.ID
     }
   }
 }
 
 export interface InputObjectCircular extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'InputObjectCircular'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'InputObjectCircular'
+  readonly fields: {
     readonly circular: {
-      readonly nt: 'InputObjectCircular'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.InputObjectCircular | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'InputObjectCircular'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.InputObjectCircular | null | undefined
     }
     readonly date: {
-      readonly nt: 'Date'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'Date'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.Date | null | undefined
     }
   }
 }
 
 export interface InputObjectEnum extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'InputObjectEnum'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'InputObjectEnum'
+  readonly fields: {
     readonly abcEnum: {
-      readonly nt: 'ABCEnum'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.ABCEnum | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'ABCEnum'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.ABCEnum | null | undefined
     }
   }
 }
 
 export interface InputObjectNested extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'InputObjectNested'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'InputObjectNested'
+  readonly fields: {
     readonly InputObject: {
-      readonly nt: 'InputObject'
-      readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.InputObject | null | undefined
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'InputObject'
+      readonly inlineType: readonly [0]
+      readonly $type: TypeInputsIndex.InputObject | null | undefined
     }
   }
 }
 
 export interface InputObjectNestedNonNull extends $$Utilities.SchemaDrivenDataMap.InputObject {
-  readonly n: 'InputObjectNestedNonNull'
-  readonly f: {
+  readonly _tag: 'inputObject'
+  readonly name: 'InputObjectNestedNonNull'
+  readonly fields: {
     readonly InputObject: {
-      readonly nt: 'InputObject'
-      readonly it: readonly [1]
-      readonly $t: TypeInputsIndex.InputObject
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: 'InputObject'
+      readonly inlineType: readonly [1]
+      readonly $type: TypeInputsIndex.InputObject
     }
   }
 }
@@ -257,37 +272,45 @@ export interface InputObjectNestedNonNull extends $$Utilities.SchemaDrivenDataMa
 //
 
 export interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.OutputObject {
-  readonly f: {
+  readonly _tag: 'outputObject'
+  readonly fields: {
     readonly id: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly filter: {
-          readonly nt: 'ID'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ID'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ID | null | undefined
         }
       }
     }
     readonly object: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly boolean: {
-          readonly nt: 'Boolean'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Boolean | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Boolean'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Boolean | null | undefined
         }
         readonly float: {
-          readonly nt: 'Float'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Float | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Float'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Float | null | undefined
         }
         readonly int: {
-          readonly nt: 'Int'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Int | null | undefined
         }
         readonly string: {
-          readonly nt: 'String'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.String | null | undefined
         }
       }
     }
@@ -347,290 +370,354 @@ export interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.Ou
 //
 
 export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
-  readonly f: {
+  readonly _tag: 'outputObject'
+  readonly fields: {
     readonly InputObjectNested: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObjectNested'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObjectNested | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObjectNested'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.InputObjectNested | null | undefined
         }
       }
     }
     readonly InputObjectNestedNonNull: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObjectNestedNonNull'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.InputObjectNestedNonNull
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObjectNestedNonNull'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.InputObjectNestedNonNull
         }
       }
     }
     readonly argInputObjectCircular: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObjectCircular'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObjectCircular | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObjectCircular'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.InputObjectCircular | null | undefined
         }
       }
     }
     readonly dateArg: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly date: {
-          readonly nt: 'Date'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Date | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Date'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Date | null | undefined
         }
       }
     }
     readonly dateArgInputObject: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObject'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObject | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObject'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.InputObject | null | undefined
         }
       }
     }
     readonly dateArgList: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly date: {
-          readonly nt: 'Date'
-          readonly it: readonly [0, [1]]
-          readonly $t: readonly TypeInputsIndex.Date[] | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Date'
+          readonly inlineType: readonly [0, [1]]
+          readonly $type: readonly TypeInputsIndex.Date[] | null | undefined
         }
       }
     }
     readonly dateArgNonNull: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly date: {
-          readonly nt: 'Date'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.Date
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Date'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.Date
         }
       }
     }
     readonly dateArgNonNullList: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly date: {
-          readonly nt: 'Date'
-          readonly it: readonly [1, [0]]
-          readonly $t: readonly TypeInputsIndex.Date[]
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Date'
+          readonly inlineType: readonly [1, [0]]
+          readonly $type: readonly TypeInputsIndex.Date[]
         }
       }
     }
     readonly dateArgNonNullListNonNull: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly date: {
-          readonly nt: 'Date'
-          readonly it: readonly [1, [1]]
-          readonly $t: readonly TypeInputsIndex.Date[]
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Date'
+          readonly inlineType: readonly [1, [1]]
+          readonly $type: readonly TypeInputsIndex.Date[]
         }
       }
     }
     readonly error: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly case: {
-          readonly nt: 'String'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.String | null | undefined
         }
       }
     }
     readonly interfaceHierarchyChildA: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly type: {
-          readonly nt: 'ChildAInterfaceHierarchyMember'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ChildAInterfaceHierarchyMember | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ChildAInterfaceHierarchyMember'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ChildAInterfaceHierarchyMember | null | undefined
         }
       }
     }
     readonly interfaceHierarchyChildB: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly type: {
-          readonly nt: 'ChildBInterfaceHierarchyMember'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ChildBInterfaceHierarchyMember | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ChildBInterfaceHierarchyMember'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ChildBInterfaceHierarchyMember | null | undefined
         }
       }
     }
     readonly interfaceHierarchyGrandparents: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly type: {
-          readonly nt: 'GrandparentInterfaceHierarchyMember'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.GrandparentInterfaceHierarchyMember | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'GrandparentInterfaceHierarchyMember'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.GrandparentInterfaceHierarchyMember | null | undefined
         }
       }
     }
     readonly interfaceHierarchyParents: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly type: {
-          readonly nt: 'ParentInterfaceHierarchyMember'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ParentInterfaceHierarchyMember | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ParentInterfaceHierarchyMember'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ParentInterfaceHierarchyMember | null | undefined
         }
       }
     }
     readonly interfaceWithArgs: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly id: {
-          readonly nt: 'ID'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.ID
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ID'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.ID
         }
       }
     }
     readonly objectNestedWithArgs: {
-      readonly ad: ObjectNestedWithArgs
+      readonly _tag: 'outputField'
+      readonly argumentsDescendant: ObjectNestedWithArgs
     }
     readonly objectWithArgs: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly boolean: {
-          readonly nt: 'Boolean'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Boolean | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Boolean'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Boolean | null | undefined
         }
         readonly float: {
-          readonly nt: 'Float'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Float | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Float'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Float | null | undefined
         }
         readonly id: {
-          readonly nt: 'ID'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ID'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ID | null | undefined
         }
         readonly int: {
-          readonly nt: 'Int'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Int | null | undefined
         }
         readonly string: {
-          readonly nt: 'String'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.String | null | undefined
         }
       }
     }
     readonly result: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly case: {
-          readonly nt: 'Case'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.Case
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Case'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.Case
         }
       }
     }
     readonly resultNonNull: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly case: {
-          readonly nt: 'Case'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Case | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Case'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Case | null | undefined
         }
       }
     }
     readonly stringWithArgEnum: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly ABCEnum: {
-          readonly nt: 'ABCEnum'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ABCEnum | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ABCEnum'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ABCEnum | null | undefined
         }
       }
     }
     readonly stringWithArgInputObject: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObject'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObject | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObject'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.InputObject | null | undefined
         }
       }
     }
     readonly stringWithArgInputObjectEnum: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObjectEnum'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.InputObjectEnum
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObjectEnum'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.InputObjectEnum
         }
       }
     }
     readonly stringWithArgInputObjectRequired: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly input: {
-          readonly nt: 'InputObject'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.InputObject
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'InputObject'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.InputObject
         }
       }
     }
     readonly stringWithArgs: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly boolean: {
-          readonly nt: 'Boolean'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Boolean | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Boolean'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Boolean | null | undefined
         }
         readonly float: {
-          readonly nt: 'Float'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Float | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Float'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Float | null | undefined
         }
         readonly id: {
-          readonly nt: 'ID'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ID'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ID | null | undefined
         }
         readonly int: {
-          readonly nt: 'Int'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.Int | null | undefined
         }
         readonly string: {
-          readonly nt: 'String'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.String | null | undefined
         }
       }
     }
     readonly stringWithListArg: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly ints: {
-          readonly nt: 'Int'
-          readonly it: readonly [0, [0]]
-          readonly $t: readonly TypeInputsIndex.Int[] | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [0, [0]]
+          readonly $type: readonly TypeInputsIndex.Int[] | null | undefined
         }
       }
     }
     readonly stringWithListArgRequired: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly ints: {
-          readonly nt: 'Int'
-          readonly it: readonly [1, [1]]
-          readonly $t: readonly TypeInputsIndex.Int[]
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'Int'
+          readonly inlineType: readonly [1, [1]]
+          readonly $type: readonly TypeInputsIndex.Int[]
         }
       }
     }
     readonly stringWithRequiredArg: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly string: {
-          readonly nt: 'String'
-          readonly it: readonly [1]
-          readonly $t: TypeInputsIndex.String
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'String'
+          readonly inlineType: readonly [1]
+          readonly $type: TypeInputsIndex.String
         }
       }
     }
     readonly unionFooBarWithArgs: {
-      readonly a: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
         readonly id: {
-          readonly nt: 'ID'
-          readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | null | undefined
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: 'ID'
+          readonly inlineType: readonly [0]
+          readonly $type: TypeInputsIndex.ID | null | undefined
         }
       }
     }
@@ -654,7 +741,8 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
 //
 
 export interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
-  readonly f: {}
+  readonly _tag: 'outputObject'
+  readonly fields: {}
 }
 
 //
@@ -679,14 +767,16 @@ export interface ArgumentsMap {
     mutation: Mutation
   }
   directives: {}
-  types: {
-    ObjectNestedWithArgs: ObjectNestedWithArgs
-    Query: Query
+  inputTypes: {
     InputObject: InputObject
     InputObjectCircular: InputObjectCircular
     InputObjectEnum: InputObjectEnum
     InputObjectNested: InputObjectNested
     InputObjectNestedNonNull: InputObjectNestedNonNull
+  }
+  outputTypes: {
+    ObjectNestedWithArgs: ObjectNestedWithArgs
+    Query: Query
     Mutation: Mutation
   }
 }

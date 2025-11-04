@@ -1,7 +1,6 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { SchemaDrivenDataMap } from '../../../core/sddm/SchemaDrivenDataMap.js'
-import * as SDDM from '../../../core/sddm/SchemaDrivenDataMap.js'
+import { SchemaDrivenDataMap } from '../../../core/sddm/_.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 
@@ -10,14 +9,14 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
   // const hookResult = context.hooks?.value?.(context, index, value)
   // if (hookResult) return hookResult
 
-  if (SDDM.isScalarLike(sddm?.nt)) {
-    const scalar = SDDM.isScalar(sddm.nt)
-      ? sddm.nt
-      : GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.nt)
+  if (SchemaDrivenDataMap.isScalarLike(sddm?.namedType)) {
+    const scalar = SchemaDrivenDataMap.isScalar(sddm.namedType)
+      ? sddm.namedType
+      : GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.namedType)
     return applyScalar(context, scalar, value)
   }
 
-  if (SDDM.isEnum(sddm?.nt)) {
+  if (SchemaDrivenDataMap.isEnum(sddm?.namedType)) {
     return GraphqlKit.Document.Ast.EnumValue({ value: String(value) })
   }
 
@@ -38,7 +37,7 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
   }
 
   if (typeof value === `object`) {
-    const sddmInputObject = sddm?.nt
+    const sddmInputObject = sddm?.namedType
     return GraphqlKit.Document.Ast.ObjectValue({
       fields: Object.entries(value).map(([fieldName, fieldValue]) => {
         // When processing input object fields, check for the enum prefix ($) that was
@@ -50,7 +49,7 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
         const actualFieldName = isEnumField ? Select.Arguments.enumKeyPrefixStrip(fieldName) : fieldName
 
         // Get the field's schema info using the actual field name (without $)
-        const fieldSddm = sddmInputObject?.f?.[actualFieldName]
+        const fieldSddm = sddmInputObject?.fields?.[actualFieldName]
 
         // Pass enum context down so string values are rendered as enum values
         const fieldContext = isEnumField ? { ...context, value: { isEnum: true } } : context

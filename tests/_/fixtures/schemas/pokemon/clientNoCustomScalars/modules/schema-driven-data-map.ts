@@ -62,18 +62,18 @@ const Date = 'Date'
 //
 
 const BattleWildResult: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'BattleWildResult',
+  _tag: 'enum',
+  name: 'BattleWildResult',
 }
 
 const PokemonType: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'PokemonType',
+  _tag: 'enum',
+  name: 'PokemonType',
 }
 
 const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'TrainerClass',
+  _tag: 'enum',
+  name: 'TrainerClass',
 }
 
 //
@@ -93,35 +93,49 @@ const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
 //
 
 const DateFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'DateFilter',
-  fcs: ['gte', 'lte'],
-  f: {
+  _tag: 'inputObject',
+  name: 'DateFilter',
+  fieldsContainingCustomScalars: ['gte', 'lte'],
+  fields: {
     gte: {
-      nt: Date,
+      _tag: 'argumentOrInputField',
+      namedType: Date,
     },
     lte: {
-      nt: Date,
+      _tag: 'argumentOrInputField',
+      namedType: Date,
     },
   },
 }
 
 const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'PokemonFilter',
-  fcs: ['birthday'],
-  f: {
+  _tag: 'inputObject',
+  name: 'PokemonFilter',
+  fieldsContainingCustomScalars: ['birthday'],
+  fields: {
     birthday: {
-      // nt: DateFilter, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'argumentOrInputField',
+      // namedType: DateFilter <-- Assigned later to avoid potential circular dependency.
     },
-    name: {},
-    type: {},
+    name: {
+      _tag: 'argumentOrInputField',
+    },
+    type: {
+      _tag: 'argumentOrInputField',
+    },
   },
 }
 
 const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'StringFilter',
-  f: {
-    contains: {},
-    in: {},
+  _tag: 'inputObject',
+  name: 'StringFilter',
+  fields: {
+    contains: {
+      _tag: 'argumentOrInputField',
+    },
+    in: {
+      _tag: 'argumentOrInputField',
+    },
   },
 }
 
@@ -142,108 +156,170 @@ const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
 //
 
 const BattleRoyale: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     combatants: {
-      // nt: CombatantMultiPokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: CombatantMultiPokemon <-- Assigned later to avoid potential circular dependency.
     },
-    date: {},
-    id: {},
+    date: {
+      _tag: 'outputField',
+    },
+    id: {
+      _tag: 'outputField',
+    },
     winner: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     combatant1: {
-      // nt: CombatantSinglePokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: CombatantSinglePokemon <-- Assigned later to avoid potential circular dependency.
     },
     combatant2: {
-      // nt: CombatantSinglePokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: CombatantSinglePokemon <-- Assigned later to avoid potential circular dependency.
     },
-    date: {},
-    id: {},
+    date: {
+      _tag: 'outputField',
+    },
+    id: {
+      _tag: 'outputField',
+    },
     winner: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    date: {},
-    id: {},
-    pokemon: {
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+  _tag: 'outputObject',
+  fields: {
+    date: {
+      _tag: 'outputField',
     },
-    result: {},
+    id: {
+      _tag: 'outputField',
+    },
+    pokemon: {
+      _tag: 'outputField',
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+    },
+    result: {
+      _tag: 'outputField',
+    },
     trainer: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
     wildPokemons: {
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const CombatantMultiPokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     pokemons: {
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
     trainer: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const CombatantSinglePokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     pokemon: {
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
     trainer: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
-    money: {},
-    name: {},
+  _tag: 'outputObject',
+  fields: {
+    id: {
+      _tag: 'outputField',
+    },
+    money: {
+      _tag: 'outputField',
+    },
+    name: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    attack: {},
+  _tag: 'outputObject',
+  fields: {
+    attack: {
+      _tag: 'outputField',
+    },
     birthday: {
-      nt: Date,
+      _tag: 'outputField',
+      namedType: Date,
     },
-    defense: {},
-    hp: {},
-    id: {},
-    name: {},
+    defense: {
+      _tag: 'outputField',
+    },
+    hp: {
+      _tag: 'outputField',
+    },
+    id: {
+      _tag: 'outputField',
+    },
+    name: {
+      _tag: 'outputField',
+    },
     trainer: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
-    type: {},
+    type: {
+      _tag: 'outputField',
+    },
   },
 }
 
 const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    class: {},
-    fans: {
-      // nt: Patron, <-- Assigned later to avoid potential circular dependency.
+  _tag: 'outputObject',
+  fields: {
+    class: {
+      _tag: 'outputField',
     },
-    id: {},
-    name: {},
+    fans: {
+      _tag: 'outputField',
+      // namedType: Patron <-- Assigned later to avoid potential circular dependency.
+    },
+    id: {
+      _tag: 'outputField',
+    },
+    name: {
+      _tag: 'outputField',
+    },
     pokemon: {
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
@@ -265,9 +341,10 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    ...Pokemon.f,
-    ...Trainer.f,
+  _tag: 'outputObject',
+  fields: {
+    ...Pokemon.fields,
+    ...Trainer.fields,
   },
 }
 
@@ -288,10 +365,11 @@ const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    ...BattleRoyale.f,
-    ...BattleTrainer.f,
-    ...BattleWild.f,
+  _tag: 'outputObject',
+  fields: {
+    ...BattleRoyale.fields,
+    ...BattleTrainer.fields,
+    ...BattleWild.fields,
   },
 }
 
@@ -312,74 +390,93 @@ const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     battles: {
-      // nt: Battle, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Battle <-- Assigned later to avoid potential circular dependency.
     },
     beings: {
-      // nt: Being, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Being <-- Assigned later to avoid potential circular dependency.
     },
     pokemonByName: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         name: {
-          nt: String,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [1],
         },
       },
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
     pokemons: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         filter: {
-          nt: PokemonFilter,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: PokemonFilter,
+          inlineType: [0],
         },
       },
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
     trainerByName: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         name: {
-          nt: String,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [1],
         },
       },
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
     trainers: {
-      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+      _tag: 'outputField',
+      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
     },
   },
 }
 
 const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
+  _tag: 'outputObject',
+  fields: {
     addPokemon: {
-      a: {
+      _tag: 'outputField',
+      arguments: {
         attack: {
-          nt: Int,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0],
         },
         defense: {
-          nt: Int,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0],
         },
         hp: {
-          nt: Int,
-          it: [0],
+          _tag: 'argumentOrInputField',
+          namedType: Int,
+          inlineType: [0],
         },
         name: {
-          nt: String,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: String,
+          inlineType: [1],
         },
         type: {
-          nt: PokemonType,
-          it: [1],
+          _tag: 'argumentOrInputField',
+          namedType: PokemonType,
+          inlineType: [1],
         },
       },
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
     },
-    resetData: {},
+    resetData: {
+      _tag: 'outputField',
+    },
   },
 }
 
@@ -403,51 +500,51 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 // TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.
 // These assignments are needed to avoid circular references during module initialization.
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-PokemonFilter.f![`birthday`]!.nt = DateFilter
+PokemonFilter.fields![`birthday`]!.namedType = DateFilter
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleRoyale.f[`combatants`]!.nt = CombatantMultiPokemon
+BattleRoyale.fields[`combatants`]!.namedType = CombatantMultiPokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleRoyale.f[`winner`]!.nt = Trainer
+BattleRoyale.fields[`winner`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleTrainer.f[`combatant1`]!.nt = CombatantSinglePokemon
+BattleTrainer.fields[`combatant1`]!.namedType = CombatantSinglePokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleTrainer.f[`combatant2`]!.nt = CombatantSinglePokemon
+BattleTrainer.fields[`combatant2`]!.namedType = CombatantSinglePokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleTrainer.f[`winner`]!.nt = Trainer
+BattleTrainer.fields[`winner`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleWild.f[`pokemon`]!.nt = Pokemon
+BattleWild.fields[`pokemon`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleWild.f[`trainer`]!.nt = Trainer
+BattleWild.fields[`trainer`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-BattleWild.f[`wildPokemons`]!.nt = Pokemon
+BattleWild.fields[`wildPokemons`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-CombatantMultiPokemon.f[`pokemons`]!.nt = Pokemon
+CombatantMultiPokemon.fields[`pokemons`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-CombatantMultiPokemon.f[`trainer`]!.nt = Trainer
+CombatantMultiPokemon.fields[`trainer`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-CombatantSinglePokemon.f[`pokemon`]!.nt = Pokemon
+CombatantSinglePokemon.fields[`pokemon`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-CombatantSinglePokemon.f[`trainer`]!.nt = Trainer
+CombatantSinglePokemon.fields[`trainer`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Pokemon.f[`trainer`]!.nt = Trainer
+Pokemon.fields[`trainer`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Trainer.f[`fans`]!.nt = Patron
+Trainer.fields[`fans`]!.namedType = Patron
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Trainer.f[`pokemon`]!.nt = Pokemon
+Trainer.fields[`pokemon`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`battles`]!.nt = Battle
+Query.fields[`battles`]!.namedType = Battle
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`beings`]!.nt = Being
+Query.fields[`beings`]!.namedType = Being
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`pokemonByName`]!.nt = Pokemon
+Query.fields[`pokemonByName`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`pokemons`]!.nt = Pokemon
+Query.fields[`pokemons`]!.namedType = Pokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`trainerByName`]!.nt = Trainer
+Query.fields[`trainerByName`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Query.f[`trainers`]!.nt = Trainer
+Query.fields[`trainers`]!.namedType = Trainer
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
-Mutation.f[`addPokemon`]!.nt = Pokemon
+Mutation.fields[`addPokemon`]!.namedType = Pokemon
 
 //
 //
@@ -471,7 +568,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     mutation: Mutation,
   },
   directives: {},
-  types: {
+  inputTypes: {
     Boolean,
     Float,
     ID,
@@ -484,6 +581,17 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     DateFilter,
     PokemonFilter,
     StringFilter,
+  },
+  outputTypes: {
+    Boolean,
+    Float,
+    ID,
+    Int,
+    String,
+    Date,
+    BattleWildResult,
+    PokemonType,
+    TrainerClass,
     BattleRoyale,
     BattleTrainer,
     BattleWild,
