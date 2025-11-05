@@ -1,6 +1,6 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { RequestResult } from '#src/types/RequestResult/_.js'
-import type { Core, ParserContext } from '../core/_.js'
+import type { Core } from '../core/_.js'
 import type { SchemaDrivenDataMap } from '../core/sddm/_.js'
 import type { InferResult } from './InferResult/_.js'
 import type { Var } from './var/$.js'
@@ -39,42 +39,6 @@ export type Parse<
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
   }[keyof $Document] // Extract union from operation types
-
-/**
- * @deprecated Use `Parse` instead. This alias exists for backwards compatibility.
- */
-export type InferOperationsInDocument<
-  $Document extends object,
-  $Schema extends GraphqlKit.Schema.Type,
-  $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context extends object,
-> = Parse<
-  $Document,
-  ParserContext<
-    $Schema,
-    $ArgumentsMap,
-    $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
-  > & ParserContext
->
-
-/**
- * @deprecated Use `Parse` instead. This alias exists for backwards compatibility.
- */
-export type InferOperations<
-  $Document,
-  $Schema extends GraphqlKit.Schema.Type,
-  $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context,
-> = $Document extends object ? $Context extends object ? Parse<
-      $Document,
-      ParserContext<
-        $Schema,
-        $ArgumentsMap,
-        $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never
-      > & ParserContext
-    >
-  : never
-  : never
 
 /**
  * Infer a single operation with the given operation type.

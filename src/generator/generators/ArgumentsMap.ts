@@ -190,13 +190,13 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     if (subscriptionType) operationsEntries.push(['subscription', 'Subscription'])
 
     // Build inputTypes and outputTypes entries
-    const inputTypeEntries: Array<[string, string]> = [
-      ...inputObjectTypes.map(inputType => [inputType.name, inputType.name] as [string, string]),
-    ]
+    const inputTypeEntries: Array<[string, string]> = inputObjectTypes.map(inputType =>
+      [inputType.name, inputType.name] as [string, string]
+    )
 
-    const outputTypeEntries: Array<[string, string]> = [
-      ...Object.keys(argsIndex).map(typeName => [typeName, typeName] as [string, string]),
-    ]
+    const outputTypeEntries: Array<[string, string]> = Object.keys(argsIndex).map(typeName =>
+      [typeName, typeName] as [string, string]
+    )
 
     // Add root types that aren't already in argsIndex
     if (queryType && !rootTypes['query']) {

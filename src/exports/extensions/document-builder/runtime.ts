@@ -1,4 +1,4 @@
-export type { InferOperationsInDocument as InferOperations } from '#src/docpar/object/Parse.js'
+export type { Parse } from '#src/docpar/object/Parse.js'
 export { Var } from '#src/docpar/object/var/$.js'
 export { $ } from '#src/docpar/object/var/var.js'
 
