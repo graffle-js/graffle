@@ -21,7 +21,6 @@ export interface abcEnum extends $.Schema.InputField {
   namedType: $Schema.ABCEnum
   type: $Schema.ABCEnum['members'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObject}.
  *
@@ -42,7 +41,6 @@ export interface date extends $.Schema.InputField {
   namedType: $Schema.Date
   type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObject}.
  *
@@ -63,7 +61,6 @@ export interface dateRequired extends $.Schema.InputField {
   namedType: $Schema.Date
   type: $Schema.Date['codec']['_typeDecoded']
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObject}.
  *
@@ -84,7 +81,6 @@ export interface id extends $.Schema.InputField {
   namedType: $Schema.ID
   type: $Schema.ID['codec']['_typeDecoded'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObject}.
  *

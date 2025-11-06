@@ -21,7 +21,6 @@ export interface circular extends $.Schema.InputField {
   namedType: $Schema.InputObjectCircular
   type: $Schema.InputObjectCircular['type'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObjectCircular}.
  *

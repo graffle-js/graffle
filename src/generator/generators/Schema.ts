@@ -131,7 +131,7 @@ export const ModuleGeneratorSchema = {
 // Individual module generators
 
 const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema.Runtime.Nodes.ScalarType): GeneratedModule => {
-  const code = Str.Builder()
+  const code = Str.Code.TS.builder()
   const renderedName = renderName(scalar)
   const originalName = scalar.name
   const isCustom = config.schema.kindMap.list.ScalarCustom.includes(scalar)
@@ -153,17 +153,17 @@ const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema.Runtime.
   return {
     name: `schema/scalars/${scalar.name}`,
     filePath: `schema/scalars/${renderedName}.ts`,
-    content: code.toString(),
+    content: code.build(),
   }
 }
 
 const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.Nodes.EnumType): GeneratedModule => {
-  const code = Str.Builder()
+  const code = Str.Code.TS.builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/enums/${enumType.name}.ts`)
     code(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
-    code()
+    code``
   }
 
   // Generate namespace with member types
@@ -172,60 +172,55 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
   const membersUnionType = Str.Code.TS.unionItems(memberTypes)
 
   // Generate interface
-  code(
-    Str.Code.TS.interfaceDecl({
-      tsDoc: getEnumTypeDoc(config, enumType),
-      export: true,
-      name: enumType.name,
-      extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
-      block: {
-        kind: Str.Code.TS.string(GraphqlKit.Schema.Kind.TypeKind.Enum),
-        name: Str.Code.TS.string(enumType.name),
-        members: membersUnionType,
-      },
-    }),
-  )
+  code.interface({
+    tsDoc: getEnumTypeDoc(config, enumType),
+    export: true,
+    name: enumType.name,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
+    block: {
+      kind: Str.Code.TS.string(GraphqlKit.Schema.Kind.TypeKind.Enum),
+      name: Str.Code.TS.string(enumType.name),
+      members: membersUnionType,
+    },
+  })
 
-  code()
+  code``
 
   // Generate namespace with member types
-  code(`export namespace ${enumType.name} {`)
-  for (const value of enumValues) {
-    // Build JSDoc for this member
-    const generalDescription = Str.Code.TSDoc.escape(value.description)
-      ?? (config.options.TSDoc.noDocPolicy === 'message'
-        ? `Missing description for enum member "${value.name}".`
-        : null)
+  code.namespace(enumType.name, (ns) => {
+    for (const value of enumValues) {
+      // Build JSDoc for this member
+      const generalDescription = Str.Code.TSDoc.escape(value.description)
+        ?? (config.options.TSDoc.noDocPolicy === 'message'
+          ? `Missing description for enum member "${value.name}".`
+          : null)
 
-    const deprecationDescription = value.deprecationReason
-      ? `@deprecated ${Str.Code.TSDoc.escape(value.deprecationReason)}`
-      : null
+      const deprecationDescription = value.deprecationReason
+        ? `@deprecated ${Str.Code.TSDoc.escape(value.deprecationReason)}`
+        : null
 
-    const jsdocParts: string[] = []
-    if (generalDescription) jsdocParts.push(generalDescription)
-    if (deprecationDescription) {
-      jsdocParts.push('')
-      jsdocParts.push(deprecationDescription)
-    }
-
-    if (jsdocParts.length > 0) {
-      code(`  /**`)
-      for (const part of jsdocParts) {
-        for (const line of part.split('\n')) {
-          code(`   * ${line}`)
-        }
+      const jsdocParts: string[] = []
+      if (generalDescription) jsdocParts.push(generalDescription)
+      if (deprecationDescription) {
+        jsdocParts.push('')
+        jsdocParts.push(deprecationDescription)
       }
-      code(`   */`)
-    }
 
-    code(`  export type ${value.name} = ${Str.Code.TS.string(value.name)}`)
-  }
-  code(`}`)
+      const tsDoc = jsdocParts.length > 0 ? jsdocParts.join('\n') : null
+
+      ns.type({
+        name: value.name,
+        type: Str.Code.TS.string(value.name),
+        tsDoc,
+        export: true,
+      })
+    }
+  }, { export: true })
 
   return {
     name: `schema/enums/${enumType.name}`,
     filePath: `schema/enums/${enumType.name}.ts`,
-    content: code.toString(),
+    content: code.build(),
   }
 }
 
@@ -233,7 +228,7 @@ const generateUnionModule = (
   config: Config,
   unionType: GraphqlKit.Schema.Runtime.Nodes.UnionType,
 ): GeneratedModule => {
-  const code = Str.Builder()
+  const code = Str.Code.TS.builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/unions/${unionType.name}.ts`)
@@ -250,9 +245,8 @@ const generateUnionModule = (
     const dir = isRoot ? 'roots' : 'objects'
     code(codeImportNamed(config, { names: member.name, from: `../${dir}/${member.name}/$`, type: true }))
   }
-  code()
-
-  code(Str.Code.TS.interfaceDecl({
+  code``
+  code.interface({
     tsDoc: getUnionTypeDoc(config, unionType),
     export: true,
     name: unionType.name,
@@ -264,12 +258,12 @@ const generateUnionModule = (
       membersUnion: Str.Code.TS.unionItems(memberNames),
       membersIndex: Object.fromEntries(memberNames.map(n => [n, n])),
     },
-  }))
+  })
 
   return {
     name: `schema/unions/${unionType.name}`,
     filePath: `schema/unions/${unionType.name}.ts`,
-    content: code.toString(),
+    content: code.build(),
   }
 }
 
@@ -430,20 +424,20 @@ const generateInputObjectModule = (
   const modules: GeneratedModule[] = []
 
   // Generate fields.ts
-  const fieldsCode = Str.Builder()
+  const fieldsCode = Str.Code.TS.builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/fields.ts`)
     fieldsCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
-  fieldsCode()
+  fieldsCode``
 
   // Generate field interfaces
   for (const field of Obj.values(inputObject.getFields())) {
     const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
     const resolvedType = renderResolvedInputFieldType(field.type, namedType)
 
-    fieldsCode(Str.Code.TS.interfaceDecl({
+    fieldsCode.interface({
       tsDoc: getInputFieldDoc(config, field, inputObject),
       export: true,
       name: field.name,
@@ -455,26 +449,25 @@ const generateInputObjectModule = (
         namedType: namedTypesTypeReference(namedType),
         type: resolvedType,
       },
-    }))
-    fieldsCode()
+    })
   }
 
   modules.push({
     name: `schema/input-objects/${inputObject.name}/fields`,
     filePath: `schema/input-objects/${inputObject.name}/fields.ts`,
-    content: fieldsCode.toString(),
+    content: fieldsCode.build(),
   })
 
   // Generate $.ts (namespace export + interface)
-  const namespaceCode = Str.Builder()
+  const namespaceCode = Str.Code.TS.builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/$.ts`)
     namespaceCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
-  namespaceCode()
+  namespaceCode``
   namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields' }))
-  namespaceCode()
+  namespaceCode``
 
   const interfaceFields = Object.fromEntries(
     Obj.values(inputObject.getFields()).map((field) => {
@@ -495,7 +488,7 @@ const generateInputObjectModule = (
     }),
   )
 
-  namespaceCode(Str.Code.TS.interfaceDecl({
+  namespaceCode.interface({
     tsDoc: getInputObjectTypeDoc(config, inputObject),
     export: true,
     name: inputObject.name,
@@ -507,12 +500,12 @@ const generateInputObjectModule = (
       fields: interfaceFields,
       type: typeFields,
     },
-  }))
+  })
 
   modules.push({
     name: `schema/input-objects/${inputObject.name}/$`,
     filePath: `schema/input-objects/${inputObject.name}/$.ts`,
-    content: namespaceCode.toString(),
+    content: namespaceCode.build(),
   })
 
   return modules
@@ -522,16 +515,16 @@ const generateSchemaNamespaceModule = (
   config: Config,
   kindMap: GraphqlKit.Schema.Kind.KindMap['list'],
 ): GeneratedModule => {
-  const code = Str.Builder()
+  const code = Str.Code.TS.builder()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
 
   code(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   code(Str.Code.TS.importAll({ from: buildImportPath(config, '..', 'data'), as: '$$Data' }))
   code(Str.Code.TS.importAll({ from: buildImportPath(config, '..', 'scalar'), as: '$$Scalar' }))
   code(Str.Code.TS.importAll({ from: buildImportPath(config, '.', '$$'), as: '$Types' }))
-  code()
+  code``
   code(codeReexportNamespace(config, { as: 'Schema', from: './$$' }))
-  code()
+  code``
 
   // Generate Schema interface here to avoid name conflict
   const root = kindMap.Root.map(_ => [_.name, `$Types.${_.name}`] as const)
@@ -586,18 +579,18 @@ const generateSchemaNamespaceModule = (
     schema[`extensions`] = extensions
   }
 
-  code(Str.Code.TS.interfaceDecl({
+  code.interface({
     export: true,
     name: `Schema`,
     parameters: `<$Scalars extends $.Schema.Scalars.Registry = $$Scalar.$Registry>`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema` : null,
     block: schema,
-  }))
+  })
 
   return {
     name: `schema/$`,
     filePath: `schema/$.ts`,
-    content: code.toString(),
+    content: code.build(),
   }
 }
 
@@ -605,7 +598,7 @@ const generateSchemaBarrelModule = (
   config: Config,
   kindMap: GraphqlKit.Schema.Kind.KindMap['list'],
 ): GeneratedModule => {
-  const code = Str.Builder()
+  const code = Str.Code.TS.builder()
 
   // Re-export roots
   for (const type of kindMap.Root) {
@@ -646,12 +639,12 @@ const generateSchemaBarrelModule = (
   for (const type of kindMap.InputObject) {
     code(codeReexportAll(config, { from: `./input-objects/${type.name}/$`, type: true }))
   }
-  code()
+  code``
 
   return {
     name: `schema/$$`,
     filePath: `schema/$$.ts`,
-    content: code.toString(),
+    content: code.build(),
   }
 }
 
@@ -828,13 +821,6 @@ const getUnionTypeDoc = (
   const kindDocUrl = getKindDocUrl('Union')
   const members = type.getTypes()
 
-  // Build table
-  const table = Str.Code.Md.table({
-    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Union ↗').content,
-    'Members': `${members.length}`,
-    'Types': members.map(m => Str.Code.TSDoc.template.tag.link(`$Schema.${m.name}`).content).join(', '),
-  })
-
   // Combine parts
   const parts: string[] = []
   parts.push(`GraphQL {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.`)
@@ -847,7 +833,11 @@ const getUnionTypeDoc = (
   parts.push('')
   parts.push('# Info')
   parts.push('')
-  parts.push(table)
+  parts.push(Str.Code.Md.table({
+    'Kind': Str.Code.TSDoc.template.tag.link(kindDocUrl, 'Union ↗').content,
+    'Members': `${members.length}`,
+    'Types': members.map(m => Str.Code.TSDoc.template.tag.link(`$Schema.${m.name}`).content).join(', '),
+  }))
 
   return parts.join('\n')
 }
@@ -958,16 +948,16 @@ const generateTypeModule = (
   const modules: GeneratedModule[] = []
 
   // Generate fields.ts
-  const fieldsCode = Str.Builder()
+  const fieldsCode = Str.Code.TS.builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/fields.ts`)
     fieldsCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
-  fieldsCode()
+  fieldsCode``
 
   // __typename field
-  fieldsCode(Str.Code.TS.interfaceDecl({
+  fieldsCode.interface({
     tsDoc: getTypeNameFieldDoc(type.name),
     export: true,
     name: `__typename`,
@@ -982,14 +972,14 @@ const generateTypeModule = (
         value: Str.Code.TS.string(type.name),
       },
     },
-  }))
-  fieldsCode()
+  })
+  fieldsCode``
 
   // Regular fields
   for (const field of Obj.values(type.getFields())) {
     const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
 
-    fieldsCode(Str.Code.TS.interfaceDecl({
+    fieldsCode.interface({
       tsDoc: getOutputFieldDoc(config, field, type),
       export: true,
       name: field.name,
@@ -1014,18 +1004,18 @@ const generateTypeModule = (
         inlineType: renderInlineType(field.type),
         namedType: namedTypesTypeReference(namedType),
       },
-    }))
-    fieldsCode()
+    })
+    fieldsCode``
   }
 
   modules.push({
     name: `schema/${kind}/${type.name}/fields`,
     filePath: `schema/${kind}/${type.name}/fields.ts`,
-    content: fieldsCode.toString(),
+    content: fieldsCode.build(),
   })
 
   // Generate $.ts (namespace export + interface)
-  const namespaceCode = Str.Builder()
+  const namespaceCode = Str.Code.TS.builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/$.ts`)
     namespaceCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
@@ -1045,9 +1035,9 @@ const generateTypeModule = (
     }
   }
 
-  namespaceCode()
+  namespaceCode``
   namespaceCode(codeReexportNamespace(config, { as: type.name, from: './fields' }))
-  namespaceCode()
+  namespaceCode``
 
   const interfaceFields = Object.fromEntries(
     [[`__typename`, `$Fields.__typename`]].concat(
@@ -1060,7 +1050,7 @@ const generateTypeModule = (
     ),
   )
 
-  namespaceCode(Str.Code.TS.interfaceDecl({
+  namespaceCode.interface({
     tsDoc: isInterface
       ? getInterfaceTypeDoc(config, type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType, config.schema.kindMap)
       : getObjectTypeDoc(config, type as GraphqlKit.Schema.Runtime.Nodes.ObjectType, kind === 'roots'),
@@ -1106,12 +1096,12 @@ const generateTypeModule = (
         }
         : {}),
     },
-  }))
+  })
 
   modules.push({
     name: `schema/${kind}/${type.name}/$`,
     filePath: `schema/${kind}/${type.name}/$.ts`,
-    content: namespaceCode.toString(),
+    content: namespaceCode.build(),
   })
 
   return modules

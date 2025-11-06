@@ -22,7 +22,6 @@ export interface contains {
   namedType: $Schema.String
   type: $Schema.String['codec']['_typeDecoded'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.StringFilter}.
  *

@@ -15,7 +15,8 @@
     "no-undef": "off",
     "no-redeclare": "off",
     "no-empty-pattern": "off",
-    "no-unused-expressions": "off" // Disabled because it incorrectly flags template literal expressions like: code`const $schemaDrivenDataMap: SchemaDrivenDataMap =`
+    "eslint/no-unused-expressions": "off",
+    "no-unused-expressions": "off"
   },
   "ignorePatterns": [
     "build/**/*",

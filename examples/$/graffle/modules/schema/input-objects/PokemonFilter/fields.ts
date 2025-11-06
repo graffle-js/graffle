@@ -22,7 +22,6 @@ export interface birthday {
   namedType: $Schema.DateFilter
   type: $Schema.DateFilter['type'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.PokemonFilter}.
  *
@@ -45,7 +44,6 @@ export interface name {
   namedType: $Schema.StringFilter
   type: $Schema.StringFilter['type'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.PokemonFilter}.
  *
