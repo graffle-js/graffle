@@ -193,7 +193,9 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
   for (const value of enumValues) {
     // Build JSDoc for this member
     const generalDescription = Str.Code.TSDoc.escape(value.description)
-      ?? (config.options.TSDoc.noDocPolicy === 'message' ? `Missing description for enum member "${value.name}".` : null)
+      ?? (config.options.TSDoc.noDocPolicy === 'message'
+        ? `Missing description for enum member "${value.name}".`
+        : null)
 
     const deprecationDescription = value.deprecationReason
       ? `@deprecated ${Str.Code.TSDoc.escape(value.deprecationReason)}`
