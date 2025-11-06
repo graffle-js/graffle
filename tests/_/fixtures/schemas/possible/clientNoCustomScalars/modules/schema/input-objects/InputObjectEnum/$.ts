@@ -20,4 +20,7 @@ export interface InputObjectEnum {
   fields: {
     abcEnum: $Fields.abcEnum
   }
+  type: {
+    abcEnum?: $Fields.abcEnum['type']
+  }
 }

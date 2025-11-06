@@ -20,4 +20,7 @@ export interface InputObjectNestedNonNull {
   fields: {
     InputObject: $Fields.InputObject
   }
+  type: {
+    InputObject: $Fields.InputObject['type']
+  }
 }

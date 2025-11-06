@@ -21,4 +21,7 @@ export interface InputObjectNested extends $.Schema.InputObject {
   fields: {
     InputObject: $Fields.InputObject
   }
+  type: {
+    InputObject?: $Fields.InputObject['type']
+  }
 }

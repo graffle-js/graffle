@@ -18,6 +18,7 @@ export interface birthday {
   name: 'birthday'
   inlineType: [0]
   namedType: $Schema.DateFilter
+  type: $Schema.DateFilter['type'] | null | undefined
 }
 
 /**
@@ -38,6 +39,7 @@ export interface name {
   name: 'name'
   inlineType: [0]
   namedType: $Schema.StringFilter
+  type: $Schema.StringFilter['type'] | null | undefined
 }
 
 /**
@@ -58,4 +60,5 @@ export interface type {
   name: 'type'
   inlineType: [0]
   namedType: $Schema.PokemonType
+  type: $Schema.PokemonType['members'] | null | undefined
 }

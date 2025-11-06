@@ -1,5 +1,6 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import * as $$Scalar from './scalar.js'
+import { Schema as $$Schema } from './schema/$.js'
 
 //
 //
@@ -20,37 +21,37 @@ import * as $$Scalar from './scalar.js'
 interface ABCEnum extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ABCEnum'
-  readonly $type: 'A' | 'B' | 'C'
+  readonly type: $$Schema.ABCEnum['members']
 }
 
 interface Case extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'Case'
-  readonly $type: 'ErrorOne' | 'ErrorTwo' | 'Object1'
+  readonly type: $$Schema.Case['members']
 }
 
 interface ChildAInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ChildAInterfaceHierarchyMember'
-  readonly $type: 'InterfaceChildA'
+  readonly type: $$Schema.ChildAInterfaceHierarchyMember['members']
 }
 
 interface ChildBInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ChildBInterfaceHierarchyMember'
-  readonly $type: 'InterfaceChildB'
+  readonly type: $$Schema.ChildBInterfaceHierarchyMember['members']
 }
 
 interface GrandparentInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'GrandparentInterfaceHierarchyMember'
-  readonly $type: 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceGrandparent' | 'InterfaceParent'
+  readonly type: $$Schema.GrandparentInterfaceHierarchyMember['members']
 }
 
 interface ParentInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ParentInterfaceHierarchyMember'
-  readonly $type: 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent'
+  readonly type: $$Schema.ParentInterfaceHierarchyMember['members']
 }
 
 interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -84,13 +85,7 @@ interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly inlineType: [1]
     }
   }
-  readonly $type: {
-    abcEnum?: ABCEnum['$type'] | null | undefined
-    date?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
-    dateRequired: $$Scalar.Date['codec']['_typeDecoded']
-    id?: $$Scalar.ID['codec']['_typeDecoded'] | null | undefined
-    idRequired: $$Scalar.ID['codec']['_typeDecoded']
-  }
+  readonly type: $$Schema.InputObject['type']
 }
 
 interface InputObjectCircular extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -109,10 +104,7 @@ interface InputObjectCircular extends $$Utilities.SchemaDrivenDataMap.InputObjec
       readonly inlineType: [0]
     }
   }
-  readonly $type: {
-    circular?: SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined
-    date?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
-  }
+  readonly type: $$Schema.InputObjectCircular['type']
 }
 
 interface InputObjectEnum extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -125,9 +117,7 @@ interface InputObjectEnum extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly inlineType: [0]
     }
   }
-  readonly $type: {
-    abcEnum?: ABCEnum['$type'] | null | undefined
-  }
+  readonly type: $$Schema.InputObjectEnum['type']
 }
 
 interface InputObjectNested extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -141,9 +131,7 @@ interface InputObjectNested extends $$Utilities.SchemaDrivenDataMap.InputObject 
       readonly inlineType: [0]
     }
   }
-  readonly $type: {
-    InputObject?: SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined
-  }
+  readonly type: $$Schema.InputObjectNested['type']
 }
 
 interface InputObjectNestedNonNull extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -157,9 +145,7 @@ interface InputObjectNestedNonNull extends $$Utilities.SchemaDrivenDataMap.Input
       readonly inlineType: [1]
     }
   }
-  readonly $type: {
-    InputObject: SchemaDrivenDataMap['inputTypes']['InputObject']['$type']
-  }
+  readonly type: $$Schema.InputObjectNestedNonNull['type']
 }
 
 interface Bar extends $$Utilities.SchemaDrivenDataMap.OutputObject {
@@ -497,7 +483,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input?: SchemaDrivenDataMap['inputTypes']['InputObjectNested']['$type'] | null | undefined
+        input?: SchemaDrivenDataMap['inputTypes']['InputObjectNested']['type'] | null | undefined
       }
     }
     readonly InputObjectNestedNonNull: {
@@ -510,7 +496,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input: SchemaDrivenDataMap['inputTypes']['InputObjectNestedNonNull']['$type']
+        input: SchemaDrivenDataMap['inputTypes']['InputObjectNestedNonNull']['type']
       }
     }
     readonly abcEnum: {
@@ -526,7 +512,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input?: SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined
+        input?: SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['type'] | null | undefined
       }
     }
     readonly bigintField: {
@@ -565,7 +551,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input?: SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined
+        input?: SchemaDrivenDataMap['inputTypes']['InputObject']['type'] | null | undefined
       }
       readonly namedType: $$Scalar.Date
     }
@@ -686,7 +672,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        type?: ChildAInterfaceHierarchyMember['$type'] | null | undefined
+        type?: ChildAInterfaceHierarchyMember['type'] | null | undefined
       }
       readonly namedType: InterfaceChildA
     }
@@ -700,7 +686,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        type?: ChildBInterfaceHierarchyMember['$type'] | null | undefined
+        type?: ChildBInterfaceHierarchyMember['type'] | null | undefined
       }
       readonly namedType: InterfaceChildB
     }
@@ -714,7 +700,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        type?: GrandparentInterfaceHierarchyMember['$type'] | null | undefined
+        type?: GrandparentInterfaceHierarchyMember['type'] | null | undefined
       }
       readonly namedType: InterfaceGrandparent
     }
@@ -728,7 +714,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        type?: ParentInterfaceHierarchyMember['$type'] | null | undefined
+        type?: ParentInterfaceHierarchyMember['type'] | null | undefined
       }
       readonly namedType: InterfaceParent
     }
@@ -839,7 +825,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        case: Case['$type']
+        case: Case['type']
       }
       readonly namedType: Result
       readonly extensions: { 'r': 1 }
@@ -854,7 +840,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        case?: Case['$type'] | null | undefined
+        case?: Case['type'] | null | undefined
       }
       readonly namedType: Result
       readonly extensions: { 'r': 1 }
@@ -872,7 +858,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        ABCEnum?: ABCEnum['$type'] | null | undefined
+        ABCEnum?: ABCEnum['type'] | null | undefined
       }
     }
     readonly stringWithArgInputObject: {
@@ -885,7 +871,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input?: SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined
+        input?: SchemaDrivenDataMap['inputTypes']['InputObject']['type'] | null | undefined
       }
     }
     readonly stringWithArgInputObjectEnum: {
@@ -898,7 +884,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input: SchemaDrivenDataMap['inputTypes']['InputObjectEnum']['$type']
+        input: SchemaDrivenDataMap['inputTypes']['InputObjectEnum']['type']
       }
     }
     readonly stringWithArgInputObjectRequired: {
@@ -911,7 +897,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        input: SchemaDrivenDataMap['inputTypes']['InputObject']['$type']
+        input: SchemaDrivenDataMap['inputTypes']['InputObject']['type']
       }
     }
     readonly stringWithArgs: {
@@ -1086,37 +1072,37 @@ interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
 const ABCEnum: ABCEnum = {
   _tag: 'enum',
   name: 'ABCEnum',
-  $type: null as any as 'A' | 'B' | 'C',
+  type: null as any as 'A' | 'B' | 'C',
 }
 
 const Case: Case = {
   _tag: 'enum',
   name: 'Case',
-  $type: null as any as 'ErrorOne' | 'ErrorTwo' | 'Object1',
+  type: null as any as 'ErrorOne' | 'ErrorTwo' | 'Object1',
 }
 
 const ChildAInterfaceHierarchyMember: ChildAInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ChildAInterfaceHierarchyMember',
-  $type: null as any as 'InterfaceChildA',
+  type: null as any as 'InterfaceChildA',
 }
 
 const ChildBInterfaceHierarchyMember: ChildBInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ChildBInterfaceHierarchyMember',
-  $type: null as any as 'InterfaceChildB',
+  type: null as any as 'InterfaceChildB',
 }
 
 const GrandparentInterfaceHierarchyMember: GrandparentInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'GrandparentInterfaceHierarchyMember',
-  $type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceGrandparent' | 'InterfaceParent',
+  type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceGrandparent' | 'InterfaceParent',
 }
 
 const ParentInterfaceHierarchyMember: ParentInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ParentInterfaceHierarchyMember',
-  $type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent',
+  type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent',
 }
 
 //
@@ -1166,8 +1152,8 @@ const InputObject: InputObject = {
       inlineType: [1],
     },
   },
-  $type: {
-    abcEnum: null as any as ABCEnum['$type'] | null | undefined,
+  type: {
+    abcEnum: null as any as ABCEnum['type'] | null | undefined,
     date: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
     dateRequired: null as any as $$Scalar.Date['codec']['_typeDecoded'],
     id: null as any as $$Scalar.ID['codec']['_typeDecoded'] | null | undefined,
@@ -1191,8 +1177,8 @@ const InputObjectCircular: InputObjectCircular = {
       inlineType: [0],
     },
   },
-  $type: {
-    circular: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined,
+  type: {
+    circular: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['type'] | null | undefined,
     date: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
   },
 }
@@ -1207,8 +1193,8 @@ const InputObjectEnum: InputObjectEnum = {
       inlineType: [0],
     },
   },
-  $type: {
-    abcEnum: null as any as ABCEnum['$type'] | null | undefined,
+  type: {
+    abcEnum: null as any as ABCEnum['type'] | null | undefined,
   },
 }
 
@@ -1223,8 +1209,8 @@ const InputObjectNested: InputObjectNested = {
       inlineType: [0],
     },
   },
-  $type: {
-    InputObject: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined,
+  type: {
+    InputObject: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['type'] | null | undefined,
   },
 }
 
@@ -1239,8 +1225,8 @@ const InputObjectNestedNonNull: InputObjectNestedNonNull = {
       inlineType: [1],
     },
   },
-  $type: {
-    InputObject: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'],
+  type: {
+    InputObject: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['type'],
   },
 }
 
@@ -1652,7 +1638,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectNested']['$type'] | null | undefined,
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectNested']['type'] | null | undefined,
       },
     },
     InputObjectNestedNonNull: {
@@ -1665,7 +1651,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectNestedNonNull']['$type'],
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectNestedNonNull']['type'],
       },
     },
     abcEnum: {
@@ -1681,7 +1667,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined,
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['type'] | null | undefined,
       },
     },
     bigintField: {
@@ -1720,7 +1706,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined,
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['type'] | null | undefined,
       },
       namedType: $$Scalar.Date,
     },
@@ -1841,7 +1827,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        type: null as any as ChildAInterfaceHierarchyMember['$type'] | null | undefined,
+        type: null as any as ChildAInterfaceHierarchyMember['type'] | null | undefined,
       },
       namedType: null as any as InterfaceChildA,
     },
@@ -1855,7 +1841,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        type: null as any as ChildBInterfaceHierarchyMember['$type'] | null | undefined,
+        type: null as any as ChildBInterfaceHierarchyMember['type'] | null | undefined,
       },
       namedType: null as any as InterfaceChildB,
     },
@@ -1869,7 +1855,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        type: null as any as GrandparentInterfaceHierarchyMember['$type'] | null | undefined,
+        type: null as any as GrandparentInterfaceHierarchyMember['type'] | null | undefined,
       },
       namedType: null as any as InterfaceGrandparent,
     },
@@ -1883,7 +1869,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        type: null as any as ParentInterfaceHierarchyMember['$type'] | null | undefined,
+        type: null as any as ParentInterfaceHierarchyMember['type'] | null | undefined,
       },
       namedType: null as any as InterfaceParent,
     },
@@ -1994,7 +1980,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        case: null as any as Case['$type'],
+        case: null as any as Case['type'],
       },
       extensions: {
         r: 1,
@@ -2011,7 +1997,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        case: null as any as Case['$type'] | null | undefined,
+        case: null as any as Case['type'] | null | undefined,
       },
       extensions: {
         r: 1,
@@ -2031,7 +2017,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        ABCEnum: null as any as ABCEnum['$type'] | null | undefined,
+        ABCEnum: null as any as ABCEnum['type'] | null | undefined,
       },
     },
     stringWithArgInputObject: {
@@ -2044,7 +2030,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined,
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['type'] | null | undefined,
       },
     },
     stringWithArgInputObjectEnum: {
@@ -2057,7 +2043,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectEnum']['$type'],
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectEnum']['type'],
       },
     },
     stringWithArgInputObjectRequired: {
@@ -2070,7 +2056,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'],
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['type'],
       },
     },
     stringWithArgs: {

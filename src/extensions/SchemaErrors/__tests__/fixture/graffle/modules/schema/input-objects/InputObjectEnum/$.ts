@@ -21,4 +21,7 @@ export interface InputObjectEnum extends $.Schema.InputObject {
   fields: {
     abcEnum: $Fields.abcEnum
   }
+  type: {
+    abcEnum?: $Fields.abcEnum['type']
+  }
 }

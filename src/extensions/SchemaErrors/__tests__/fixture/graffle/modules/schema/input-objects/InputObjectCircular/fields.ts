@@ -19,6 +19,7 @@ export interface circular extends $.Schema.InputField {
   name: 'circular'
   inlineType: [0]
   namedType: $Schema.InputObjectCircular
+  type: $Schema.InputObjectCircular['type'] | null | undefined
 }
 
 /**
@@ -39,4 +40,5 @@ export interface date extends $.Schema.InputField {
   name: 'date'
   inlineType: [0]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }

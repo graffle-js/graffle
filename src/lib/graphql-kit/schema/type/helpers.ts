@@ -43,7 +43,7 @@ export type GetNamedType<$Type> =
  */
 // dprint-ignore
 export type ResolveLeafType<$Schema, $Type> =
-  $Type extends Type.Enum     ? $Type['membersUnion'] :
+  $Type extends Type.Enum     ? $Type['members'] :
   $Type extends Type.Scalar   ? Codec.GetDecoded<GetCodecForScalar<$Schema, $Type>> :
                                 never
 

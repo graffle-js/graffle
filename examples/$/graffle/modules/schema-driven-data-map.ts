@@ -1,5 +1,6 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $$Scalar from './scalar.js'
+import { Schema as $$Schema } from './schema/$.js'
 
 //
 //
@@ -20,32 +21,19 @@ import * as $$Scalar from './scalar.js'
 interface BattleWildResult extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'BattleWildResult'
-  readonly $type: 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated'
+  readonly type: $$Schema.BattleWildResult['members']
 }
 
 interface PokemonType extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'PokemonType'
-  readonly $type: 'bug' | 'electric' | 'fire' | 'grass' | 'water'
+  readonly type: $$Schema.PokemonType['members']
 }
 
 interface TrainerClass extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'TrainerClass'
-  readonly $type:
-    | 'bugCatcher'
-    | 'camper'
-    | 'picnicker'
-    | 'psychic'
-    | 'psychicMedium'
-    | 'psychicYoungster'
-    | 'sailor'
-    | 'superNerd'
-    | 'tamer'
-    | 'teamRocketGrunt'
-    | 'triathlete'
-    | 'youngster'
-    | 'youth'
+  readonly type: $$Schema.TrainerClass['members']
 }
 
 interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -64,10 +52,7 @@ interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly inlineType: [0]
     }
   }
-  readonly $type: {
-    gte?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
-    lte?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
-  }
+  readonly type: $$Schema.DateFilter['type']
 }
 
 interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -91,11 +76,7 @@ interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly inlineType: [0]
     }
   }
-  readonly $type: {
-    birthday?: SchemaDrivenDataMap['inputTypes']['DateFilter']['$type'] | null | undefined
-    name?: SchemaDrivenDataMap['inputTypes']['StringFilter']['$type'] | null | undefined
-    type?: PokemonType['$type'] | null | undefined
-  }
+  readonly type: $$Schema.PokemonFilter['type']
 }
 
 interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -113,10 +94,7 @@ interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly inlineType: [0, [1]]
     }
   }
-  readonly $type: {
-    contains?: $$Scalar.String['codec']['_typeDecoded'] | null | undefined
-    in?: readonly ($$Scalar.String['codec']['_typeDecoded'])[] | null | undefined
-  }
+  readonly type: $$Schema.StringFilter['type']
 }
 
 interface BattleRoyale extends $$Utilities.SchemaDrivenDataMap.OutputObject {
@@ -333,7 +311,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         }
       }
       readonly $argumentsType: {
-        filter?: SchemaDrivenDataMap['inputTypes']['PokemonFilter']['$type'] | null | undefined
+        filter?: SchemaDrivenDataMap['inputTypes']['PokemonFilter']['type'] | null | undefined
       }
       readonly namedType: Pokemon
     }
@@ -395,7 +373,7 @@ interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         defense?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
         hp?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
         name: $$Scalar.String['codec']['_typeDecoded']
-        type: PokemonType['$type']
+        type: PokemonType['type']
       }
       readonly namedType: Pokemon
     }
@@ -453,19 +431,19 @@ interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
 const BattleWildResult: BattleWildResult = {
   _tag: 'enum',
   name: 'BattleWildResult',
-  $type: null as any as 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated',
+  type: null as any as 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated',
 }
 
 const PokemonType: PokemonType = {
   _tag: 'enum',
   name: 'PokemonType',
-  $type: null as any as 'bug' | 'electric' | 'fire' | 'grass' | 'water',
+  type: null as any as 'bug' | 'electric' | 'fire' | 'grass' | 'water',
 }
 
 const TrainerClass: TrainerClass = {
   _tag: 'enum',
   name: 'TrainerClass',
-  $type: null as any as
+  type: null as any as
     | 'bugCatcher'
     | 'camper'
     | 'picnicker'
@@ -513,7 +491,7 @@ const DateFilter: DateFilter = {
       inlineType: [0],
     },
   },
-  $type: {
+  type: {
     gte: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
     lte: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
   },
@@ -540,10 +518,10 @@ const PokemonFilter: PokemonFilter = {
       inlineType: [0],
     },
   },
-  $type: {
-    birthday: null as any as SchemaDrivenDataMap['inputTypes']['DateFilter']['$type'] | null | undefined,
-    name: null as any as SchemaDrivenDataMap['inputTypes']['StringFilter']['$type'] | null | undefined,
-    type: null as any as PokemonType['$type'] | null | undefined,
+  type: {
+    birthday: null as any as SchemaDrivenDataMap['inputTypes']['DateFilter']['type'] | null | undefined,
+    name: null as any as SchemaDrivenDataMap['inputTypes']['StringFilter']['type'] | null | undefined,
+    type: null as any as PokemonType['type'] | null | undefined,
   },
 }
 
@@ -562,7 +540,7 @@ const StringFilter: StringFilter = {
       inlineType: [0, [1]],
     },
   },
-  $type: {
+  type: {
     contains: null as any as $$Scalar.String['codec']['_typeDecoded'] | null | undefined,
     in: null as any as readonly ($$Scalar.String['codec']['_typeDecoded'])[] | null | undefined,
   },
@@ -853,7 +831,7 @@ const Query: Query = {
         },
       },
       $argumentsType: {
-        filter: null as any as SchemaDrivenDataMap['inputTypes']['PokemonFilter']['$type'] | null | undefined,
+        filter: null as any as SchemaDrivenDataMap['inputTypes']['PokemonFilter']['type'] | null | undefined,
       },
       namedType: null as any as Pokemon,
     },
@@ -915,7 +893,7 @@ const Mutation: Mutation = {
         defense: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
         hp: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
         name: null as any as $$Scalar.String['codec']['_typeDecoded'],
-        type: null as any as PokemonType['$type'],
+        type: null as any as PokemonType['type'],
       },
       namedType: null as any as Pokemon,
     },

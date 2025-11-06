@@ -1,12 +1,9 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
-import { $ } from '../helpers/identifiers.js'
 import { extractFieldTypeInfo, getKindDocUrl } from '../helpers/jsdoc.js'
-import { type GeneratedModule, importModuleGenerator } from '../helpers/moduleGenerator.js'
-import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { type GeneratedModule } from '../helpers/moduleGenerator.js'
 import {
-  applyImportExtension,
   buildImportPath,
   codeImportAll,
   codeImportNamed,
@@ -15,9 +12,71 @@ import {
   getUtilitiesPath,
 } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderInlineType, renderName } from '../helpers/render.js'
-import { ModuleGeneratorData } from './Data.js'
-import { ModuleGeneratorScalar } from './Scalar.js'
 
+// /**
+//  * Render the fully resolved TypeScript type for an argument or input field.
+//  *
+//  * Pre-computes the complete TypeScript type including:
+//  * - Scalar decoded types via codec
+//  * - List wrappers (arrays)
+//  * - Nullability (null | undefined unions)
+//  * - Proper nesting of lists and nullability
+//  *
+//  * The resulting type is used in the `$type` property for O(1) type lookup during variable inference.
+//  *
+//  * @param type - The GraphQL type to resolve
+//  * @param config - Generator configuration
+//  * @returns The fully resolved TypeScript type string (e.g., "string | null | undefined", "Date[]")
+//  */
+// const renderResolvedType = (type: GraphqlKit.Schema.Runtime.NodeGroups.Types, config: Config): string => {
+//   const namedType = GraphqlKit.Schema.Runtime.getNamedType(type)
+
+//   // Determine base type reference
+//   let baseType: string
+//   if (GraphqlKit.Schema.Runtime.Nodes.isScalarType(namedType)) {
+//     baseType = `${$.$$Scalar}.${namedType.name}['codec']['_typeDecoded']`
+//   } else if (GraphqlKit.Schema.Runtime.Nodes.isEnumType(namedType)) {
+//     // Enum - reference the pre-computed enum type (enums are in module scope)
+//     baseType = `${namedType.name}['$type']`
+//   } else {
+//     // InputObject - reference the TypeScript input type from SDDM
+//     baseType = `SchemaDrivenDataMap['inputTypes']['${namedType.name}']['$type']`
+//   }
+
+//   // Check if it's wrapped in a list
+//   let currentType = type
+//   let listDepth = 0
+
+//   // Unwrap NonNull if present at the top level
+//   if (GraphqlKit.Schema.Runtime.Nodes.isNonNullType(currentType)) {
+//     currentType = currentType.ofType
+//   }
+
+//   // Count list depth and build array wrappers
+//   while (GraphqlKit.Schema.Runtime.Nodes.isListType(currentType)) {
+//     listDepth++
+//     currentType = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(currentType.ofType)
+//       ? currentType.ofType.ofType
+//       : currentType.ofType
+//   }
+
+//   // Apply list wrappers (readonly for GraphQL input immutability)
+//   let resultType = baseType
+//   for (let i = 0; i < listDepth; i++) {
+//     resultType = `readonly (${resultType})[]`
+//   }
+
+//   // Add nullability
+//   // According to GraphQL spec, nullable arguments can be:
+//   // - undefined (omitted)
+//   // - null (explicitly null)
+//   // - the actual value
+//   if (GraphqlKit.Schema.Runtime.Nodes.isNullableType(type)) {
+//     resultType = `${resultType} | null | undefined`
+//   }
+
+//   return resultType
+// }
 export const ModuleGeneratorSchema = {
   name: `schema/$`,
   generate: (config: Config): GeneratedModule[] => {
@@ -103,10 +162,16 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
 
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/enums/${enumType.name}.ts`)
-    code(`import type * as $ from '${utilitiesPath}'`)
+    code(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
     code()
   }
 
+  // Generate namespace with member types
+  const enumValues = enumType.getValues()
+  const memberTypes = enumValues.map((_) => `${enumType.name}.${_.name}`)
+  const membersUnionType = Str.Code.TS.unionItems(memberTypes)
+
+  // Generate interface
   code(
     Str.Code.TS.interfaceDecl({
       tsDoc: getEnumTypeDoc(config, enumType),
@@ -116,11 +181,45 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
       block: {
         kind: Str.Code.TS.string(GraphqlKit.Schema.Kind.TypeKind.Enum),
         name: Str.Code.TS.string(enumType.name),
-        members: Str.Code.TS.tuple(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
-        membersUnion: Str.Code.TS.unionItems(enumType.getValues().map((_) => Str.Code.TS.string(_.name))),
+        members: membersUnionType,
       },
     }),
   )
+
+  code()
+
+  // Generate namespace with member types
+  code(`export namespace ${enumType.name} {`)
+  for (const value of enumValues) {
+    // Build JSDoc for this member
+    const jsdocParts: string[] = []
+
+    const description = value.description
+    if (description) {
+      jsdocParts.push(Str.Code.TSDoc.escape(description))
+    } else if (config.options.TSDoc.noDocPolicy === 'message') {
+      jsdocParts.push(`Missing description for enum member "${value.name}".`)
+    }
+
+    const deprecationReason = value.deprecationReason
+    if (deprecationReason) {
+      jsdocParts.push('')
+      jsdocParts.push(`@deprecated ${Str.Code.TSDoc.escape(deprecationReason)}`)
+    }
+
+    if (jsdocParts.length > 0) {
+      code(`  /**`)
+      for (const part of jsdocParts) {
+        for (const line of part.split('\n')) {
+          code(`   * ${line}`)
+        }
+      }
+      code(`   */`)
+    }
+
+    code(`  export type ${value.name} = ${Str.Code.TS.string(value.name)}`)
+  }
+  code(`}`)
 
   return {
     name: `schema/enums/${enumType.name}`,
@@ -137,7 +236,7 @@ const generateUnionModule = (
 
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/unions/${unionType.name}.ts`)
-    code(`import type * as $ from '${utilitiesPath}'`)
+    code(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
 
   const members = unionType.getTypes()
@@ -256,6 +355,73 @@ const getInputFieldDoc = (
   return parts.join('\n')
 }
 
+/**
+ * Render the fully resolved TypeScript type for an input field.
+ *
+ * Pre-computes the complete TypeScript type including:
+ * - Scalar decoded types via codec
+ * - Enum members
+ * - InputObject type
+ * - List wrappers (arrays)
+ * - Nullability (null | undefined unions)
+ * - Proper nesting of lists and nullability
+ *
+ * The resulting type is stored in the `type` property for Schema-driven type references.
+ *
+ * @param type - The GraphQL type to resolve
+ * @param namedType - The unwrapped named type
+ * @returns The fully resolved TypeScript type string (e.g., "$Schema.Date['codec']['_typeDecoded'] | null | undefined")
+ */
+const renderResolvedInputFieldType = (
+  type: GraphqlKit.Schema.Runtime.NodeGroups.Types,
+  namedType: GraphqlKit.Schema.Runtime.NodeGroups.NamedTypes,
+): string => {
+  // Determine base type reference
+  let baseType: string
+  if (GraphqlKit.Schema.Runtime.Nodes.isScalarType(namedType)) {
+    baseType = `$Schema.${namedType.name}['codec']['_typeDecoded']`
+  } else if (GraphqlKit.Schema.Runtime.Nodes.isEnumType(namedType)) {
+    baseType = `$Schema.${namedType.name}['members']`
+  } else {
+    // InputObject - reference another InputObject's type
+    baseType = `$Schema.${namedType.name}['type']`
+  }
+
+  // Handle list wrappers
+  let currentType = type
+  let listDepth = 0
+
+  // Unwrap NonNull if present at the top level
+  if (GraphqlKit.Schema.Runtime.Nodes.isNonNullType(currentType)) {
+    currentType = currentType.ofType
+  }
+
+  // Count list depth and build array wrappers
+  while (GraphqlKit.Schema.Runtime.Nodes.isListType(currentType)) {
+    listDepth++
+    currentType = GraphqlKit.Schema.Runtime.Nodes.isNonNullType(currentType.ofType)
+      ? currentType.ofType.ofType
+      : currentType.ofType
+  }
+
+  // Apply list wrappers (readonly for GraphQL input immutability)
+  let resultType = baseType
+  for (let i = 0; i < listDepth; i++) {
+    resultType = `readonly (${resultType})[]`
+  }
+
+  // Add nullability
+  // According to GraphQL spec, nullable arguments can be:
+  // - undefined (omitted)
+  // - null (explicitly null)
+  // - the actual value
+  if (GraphqlKit.Schema.Runtime.Nodes.isNullableType(type)) {
+    resultType = `${resultType} | null | undefined`
+  }
+
+  return resultType
+}
+
 const generateInputObjectModule = (
   config: Config,
   inputObject: GraphqlKit.Schema.Runtime.Nodes.InputObjectType,
@@ -266,7 +432,7 @@ const generateInputObjectModule = (
   const fieldsCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/fields.ts`)
-    fieldsCode(`import type * as $ from '${utilitiesPath}'`)
+    fieldsCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
   fieldsCode()
@@ -274,6 +440,7 @@ const generateInputObjectModule = (
   // Generate field interfaces
   for (const field of Obj.values(inputObject.getFields())) {
     const namedType = GraphqlKit.Schema.Runtime.getNamedType(field.type)
+    const resolvedType = renderResolvedInputFieldType(field.type, namedType)
 
     fieldsCode(Str.Code.TS.interfaceDecl({
       tsDoc: getInputFieldDoc(config, field, inputObject),
@@ -285,6 +452,7 @@ const generateInputObjectModule = (
         name: Str.Code.TS.string(field.name),
         inlineType: renderInlineType(field.type),
         namedType: namedTypesTypeReference(namedType),
+        type: resolvedType,
       },
     }))
     fieldsCode()
@@ -300,7 +468,7 @@ const generateInputObjectModule = (
   const namespaceCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/$.ts`)
-    namespaceCode(`import type * as $ from '${utilitiesPath}'`)
+    namespaceCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
   namespaceCode()
@@ -316,6 +484,16 @@ const generateInputObjectModule = (
     }),
   )
 
+  // Build type object from field types
+  const typeFields = Object.fromEntries(
+    Obj.values(inputObject.getFields()).map((field) => {
+      const name = field.name
+      const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(field.type)
+      const optionalMarker = isNullable ? '?' : ''
+      return [name + optionalMarker, `$Fields.${name}['type']`]
+    }),
+  )
+
   namespaceCode(Str.Code.TS.interfaceDecl({
     tsDoc: getInputObjectTypeDoc(config, inputObject),
     export: true,
@@ -326,6 +504,7 @@ const generateInputObjectModule = (
       name: Str.Code.TS.string(inputObject.name),
       isAllFieldsNullable: Str.Code.TS.boolean(GraphqlKit.Schema.Runtime.isAllInputObjectFieldsNullable(inputObject)),
       fields: interfaceFields,
+      type: typeFields,
     },
   }))
 
@@ -345,10 +524,10 @@ const generateSchemaNamespaceModule = (
   const code = Str.Builder()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
 
-  code(`import type * as $ from '${utilitiesPath}'`)
-  code(`import * as $$Data from '${buildImportPath(config, '..', 'data')}'`)
-  code(`import * as $$Scalar from '${buildImportPath(config, '..', 'scalar')}'`)
-  code(`import * as $Types from '${buildImportPath(config, '.', '$$')}'`)
+  code(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
+  code(Str.Code.TS.importAll({ from: buildImportPath(config, '..', 'data'), as: '$$Data' }))
+  code(Str.Code.TS.importAll({ from: buildImportPath(config, '..', 'scalar'), as: '$$Scalar' }))
+  code(Str.Code.TS.importAll({ from: buildImportPath(config, '.', '$$'), as: '$Types' }))
   code()
   code(codeReexportNamespace(config, { as: 'Schema', from: './$$' }))
   code()
@@ -781,7 +960,7 @@ const generateTypeModule = (
   const fieldsCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/fields.ts`)
-    fieldsCode(`import type * as $ from '${utilitiesPath}'`)
+    fieldsCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
   fieldsCode()
@@ -848,7 +1027,7 @@ const generateTypeModule = (
   const namespaceCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/$.ts`)
-    namespaceCode(`import type * as $ from '${utilitiesPath}'`)
+    namespaceCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
 

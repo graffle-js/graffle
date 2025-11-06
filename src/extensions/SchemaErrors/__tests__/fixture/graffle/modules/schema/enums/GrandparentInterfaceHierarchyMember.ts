@@ -19,10 +19,16 @@ import type * as $ from '#graffle/utilities-for-generated'
 export interface GrandparentInterfaceHierarchyMember extends $.Schema.Enum {
   kind: 'Enum'
   name: 'GrandparentInterfaceHierarchyMember'
-  members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceGrandparent', 'InterfaceParent']
-  membersUnion:
-    | 'InterfaceChildA'
-    | 'InterfaceChildB'
-    | 'InterfaceGrandparent'
-    | 'InterfaceParent'
+  members:
+    | GrandparentInterfaceHierarchyMember.InterfaceChildA
+    | GrandparentInterfaceHierarchyMember.InterfaceChildB
+    | GrandparentInterfaceHierarchyMember.InterfaceGrandparent
+    | GrandparentInterfaceHierarchyMember.InterfaceParent
+}
+
+export namespace GrandparentInterfaceHierarchyMember {
+  export type InterfaceChildA = 'InterfaceChildA'
+  export type InterfaceChildB = 'InterfaceChildB'
+  export type InterfaceGrandparent = 'InterfaceGrandparent'
+  export type InterfaceParent = 'InterfaceParent'
 }

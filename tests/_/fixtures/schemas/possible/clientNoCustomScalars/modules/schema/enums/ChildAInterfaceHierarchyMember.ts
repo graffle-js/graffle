@@ -14,6 +14,9 @@
 export interface ChildAInterfaceHierarchyMember {
   kind: 'Enum'
   name: 'ChildAInterfaceHierarchyMember'
-  members: ['InterfaceChildA']
-  membersUnion: 'InterfaceChildA'
+  members: ChildAInterfaceHierarchyMember.InterfaceChildA
+}
+
+export namespace ChildAInterfaceHierarchyMember {
+  export type InterfaceChildA = 'InterfaceChildA'
 }

@@ -20,9 +20,23 @@ import type * as $ from '#graffle/utilities-for-generated'
 export interface ABCEnum extends $.Schema.Enum {
   kind: 'Enum'
   name: 'ABCEnum'
-  members: ['A', 'B', 'C']
-  membersUnion:
-    | 'A'
-    | 'B'
-    | 'C'
+  members:
+    | ABCEnum.A
+    | ABCEnum.B
+    | ABCEnum.C
+}
+
+export namespace ABCEnum {
+  /**
+   * @deprecated Enum value A is deprecated.
+   */
+  export type A = 'A'
+  /**
+   * Enum B member documentation.
+   */
+  export type B = 'B'
+  /**
+   * @deprecated Enum value C is deprecated.
+   */
+  export type C = 'C'
 }

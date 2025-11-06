@@ -21,4 +21,8 @@ export interface DateFilter {
     gte: $Fields.gte
     lte: $Fields.lte
   }
+  type: {
+    gte?: $Fields.gte['type']
+    lte?: $Fields.lte['type']
+  }
 }

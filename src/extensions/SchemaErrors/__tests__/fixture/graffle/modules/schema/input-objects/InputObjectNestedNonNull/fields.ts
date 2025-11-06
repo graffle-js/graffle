@@ -19,4 +19,5 @@ export interface InputObject extends $.Schema.InputField {
   name: 'InputObject'
   inlineType: [1]
   namedType: $Schema.InputObject
+  type: $Schema.InputObject['type']
 }

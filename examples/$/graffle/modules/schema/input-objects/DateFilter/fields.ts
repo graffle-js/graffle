@@ -20,6 +20,7 @@ export interface gte {
   name: 'gte'
   inlineType: [0]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }
 
 /**
@@ -42,4 +43,5 @@ export interface lte {
   name: 'lte'
   inlineType: [0]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }

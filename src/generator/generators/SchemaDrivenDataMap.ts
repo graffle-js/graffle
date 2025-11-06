@@ -3,12 +3,13 @@ import { Obj } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
-import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { createModuleGenerator, getImportName, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { codeImportNamed, importUtilities } from '../helpers/pathHelpers.js'
 import { renderInlineType } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
+import { ModuleGeneratorSchema } from './Schema.js'
 
 type ReferenceAssignments = string[]
 
@@ -28,6 +29,10 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const argsIndex = GraphqlKit.Schema.Runtime.Args.Index.getArgsIndex(config.schema.instance)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
+    code(codeImportNamed(config, {
+      names: { Schema: $.$$Schema },
+      from: `./${getImportName(config, ModuleGeneratorSchema)}`,
+    }))
     code(importUtilities(config))
 
     const referenceAssignments: ReferenceAssignments = []
@@ -466,10 +471,10 @@ const EnumType = createCodeGenerator<
       name: Str.Code.TS.string(type.name),
     }
 
-    // Generate $type property for O(1) type lookup (runtime value)
+    // Generate type property for O(1) type lookup (runtime value)
     if (config.runtimeFeatures.operationVariables) {
       const enumValues = type.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
-      o['$type'] = `null as any as ${enumValues}`
+      o['type'] = `null as any as ${enumValues}`
     }
 
     code(Str.Code.TS.constDeclTyped(
@@ -542,13 +547,13 @@ const InputObjectType = createCodeGenerator<
       }
     }
 
-    // Generate top-level $type property for O(1) type lookup (runtime value)
+    // Generate top-level type property for O(1) type lookup (runtime value)
     if (config.runtimeFeatures.operationVariables) {
       const typeObject: Str.Code.TS.TermObject.TermObject = {}
       for (const inputField of inputFields) {
         typeObject[inputField.name] = `null as any as ${renderResolvedType(inputField.type, config)}`
       }
-      o['$type'] = typeObject
+      o['type'] = typeObject
     }
 
     code(
@@ -599,10 +604,9 @@ const EnumTypeInterface = createCodeGenerator<
     code(`  readonly _tag: ${Str.Code.TS.string('enum')}`)
     code(`  readonly name: ${Str.Code.TS.string(type.name)}`)
 
-    // Generate $type property for O(1) type lookup
+    // Generate type property - reference Schema's pre-computed members
     if (config.runtimeFeatures.operationVariables) {
-      const enumValues = type.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
-      code(`  readonly $type: ${enumValues}`)
+      code(`  readonly type: ${$.$$Schema}.${type.name}['members']`)
     }
 
     code(`}`)
@@ -663,15 +667,9 @@ const InputObjectTypeInterface = createCodeGenerator<
 
     code(`  }`)
 
-    // Generate top-level $type property for O(1) type lookup
+    // Generate top-level type property - directly reference Schema's pre-computed type
     if (config.runtimeFeatures.operationVariables) {
-      code(`  readonly $type: {`)
-      for (const inputField of inputFields) {
-        const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(inputField.type)
-        const optionalMarker = isNullable ? '?' : ''
-        code(`    ${inputField.name}${optionalMarker}: ${renderResolvedType(inputField.type, config)}`)
-      }
-      code(`  }`)
+      code(`  readonly type: ${$.$$Schema}.${type.name}['type']`)
     }
 
     code(`}`)
@@ -859,7 +857,7 @@ const InterfaceTypeInterface = createCodeGenerator<
  * - Nullability (null | undefined unions)
  * - Proper nesting of lists and nullability
  *
- * The resulting type is used in the `$type` property for O(1) type lookup during variable inference.
+ * The resulting type is used in the `type` property for O(1) type lookup during variable inference.
  *
  * @param type - The GraphQL type to resolve
  * @param config - Generator configuration
@@ -874,10 +872,10 @@ const renderResolvedType = (type: GraphqlKit.Schema.Runtime.NodeGroups.Types, co
     baseType = `${$.$$Scalar}.${namedType.name}['codec']['_typeDecoded']`
   } else if (GraphqlKit.Schema.Runtime.Nodes.isEnumType(namedType)) {
     // Enum - reference the pre-computed enum type (enums are in module scope)
-    baseType = `${namedType.name}['$type']`
+    baseType = `${namedType.name}['type']`
   } else {
     // InputObject - reference the TypeScript input type from SDDM
-    baseType = `SchemaDrivenDataMap['inputTypes']['${namedType.name}']['$type']`
+    baseType = `SchemaDrivenDataMap['inputTypes']['${namedType.name}']['type']`
   }
 
   // Check if it's wrapped in a list

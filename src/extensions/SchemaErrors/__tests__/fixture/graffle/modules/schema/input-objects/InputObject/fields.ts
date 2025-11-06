@@ -19,6 +19,7 @@ export interface abcEnum extends $.Schema.InputField {
   name: 'abcEnum'
   inlineType: [0]
   namedType: $Schema.ABCEnum
+  type: $Schema.ABCEnum['members'] | null | undefined
 }
 
 /**
@@ -39,6 +40,7 @@ export interface date extends $.Schema.InputField {
   name: 'date'
   inlineType: [0]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }
 
 /**
@@ -59,6 +61,7 @@ export interface dateRequired extends $.Schema.InputField {
   name: 'dateRequired'
   inlineType: [1]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded']
 }
 
 /**
@@ -79,6 +82,7 @@ export interface id extends $.Schema.InputField {
   name: 'id'
   inlineType: [0]
   namedType: $Schema.ID
+  type: $Schema.ID['codec']['_typeDecoded'] | null | undefined
 }
 
 /**
@@ -99,4 +103,5 @@ export interface idRequired extends $.Schema.InputField {
   name: 'idRequired'
   inlineType: [1]
   namedType: $Schema.ID
+  type: $Schema.ID['codec']['_typeDecoded']
 }

@@ -25,4 +25,11 @@ export interface InputObject extends $.Schema.InputObject {
     id: $Fields.id
     idRequired: $Fields.idRequired
   }
+  type: {
+    abcEnum?: $Fields.abcEnum['type']
+    date?: $Fields.date['type']
+    dateRequired: $Fields.dateRequired['type']
+    id?: $Fields.id['type']
+    idRequired: $Fields.idRequired['type']
+  }
 }
