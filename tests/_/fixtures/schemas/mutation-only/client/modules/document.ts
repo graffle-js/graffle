@@ -1,8 +1,8 @@
 import { createStaticRootType } from '#graffle/extensions/document-builder'
 import { GraphqlKit } from '#graffle/utilities-for-generated'
-import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
+import type * as SchemaMap from './schema-driven-data-map.js'
 import type * as SelectionSets from './selection-sets/$.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
@@ -53,7 +53,7 @@ export interface MutationBuilder {
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>
+      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -85,7 +85,7 @@ export interface MutationBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         { id: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -122,7 +122,7 @@ export interface MutationBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         { idNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true

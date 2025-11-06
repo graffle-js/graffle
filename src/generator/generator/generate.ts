@@ -3,7 +3,6 @@ import type { ConfigInit } from '../config/configInit.js'
 import { ModuleGenerator$$ } from '../generators/$$.js'
 import { ModuleGenerator$ } from '../generators/$.js'
 import { ModuleGenerator_internals } from '../generators/_internals.js'
-import { ModuleGeneratorArgumentsMap } from '../generators/ArgumentsMap.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
 import { ModuleGeneratorDocument } from '../generators/Document.js'
@@ -36,7 +35,6 @@ const moduleGenerators = [
   // Schema Stuff
   ModuleGeneratorSchema,
   ModuleGeneratorSchemaDrivenDataMap,
-  ModuleGeneratorArgumentsMap,
   ModuleGeneratorTypeInputsIndex,
   // Interface Stuff
   ModuleGeneratorSelectionSets,

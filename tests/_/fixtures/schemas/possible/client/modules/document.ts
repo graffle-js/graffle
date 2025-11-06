@@ -1,8 +1,8 @@
 import { createStaticRootType } from '#graffle/extensions/document-builder'
 import { GraphqlKit } from '#graffle/utilities-for-generated'
-import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
+import type * as SchemaMap from './schema-driven-data-map.js'
 import type * as SelectionSets from './selection-sets/$.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
@@ -64,7 +64,7 @@ export interface QueryBuilder {
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>
+      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -101,7 +101,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNested: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -139,7 +139,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNestedNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -176,7 +176,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { abcEnum: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -214,7 +214,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { argInputObjectCircular: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -251,7 +251,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { bigintField: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -288,7 +288,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { bigintFieldNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -323,7 +323,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { date: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -359,7 +359,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArg: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -397,7 +397,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgInputObject: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -435,7 +435,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgList: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -473,7 +473,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -511,7 +511,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullList: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -552,7 +552,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullListNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -594,7 +594,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateInterface1: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -630,7 +630,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateList: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -668,7 +668,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateListList: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -706,7 +706,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateListNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -743,7 +743,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -782,7 +782,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateObject1: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -822,7 +822,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateUnion: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -858,7 +858,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { error: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -889,7 +889,10 @@ export interface QueryBuilder {
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { id: Exclude<$SelectionSet, undefined> },
+        SchemaMap.SchemaDrivenDataMap
+      >
     >,
     true
   >
@@ -923,7 +926,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { idNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -963,7 +966,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interface: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1007,7 +1010,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildA: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1051,7 +1054,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildB: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1098,7 +1101,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyGrandparents: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1145,7 +1148,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyParents: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1187,7 +1190,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1230,7 +1233,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceWithArgs: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1266,7 +1269,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listInt: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1304,7 +1307,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listIntNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1342,7 +1345,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listListInt: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1380,7 +1383,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { listListIntNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1422,7 +1425,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { lowerCaseUnion: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1462,7 +1465,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { object: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1505,7 +1508,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectList: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1548,7 +1551,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectListNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1588,7 +1591,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNested: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1628,7 +1631,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNestedWithArgs: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1670,7 +1673,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1714,7 +1717,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectWithArgs: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1755,7 +1758,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { result: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1798,7 +1801,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { resultNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1833,7 +1836,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { string: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1871,7 +1874,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgEnum: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1909,7 +1912,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObject: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1950,7 +1953,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -1991,7 +1994,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectRequired: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2031,7 +2034,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgs: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2069,7 +2072,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArg: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2110,7 +2113,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArgRequired: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2148,7 +2151,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithRequiredArg: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2190,7 +2193,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionFooBar: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2232,7 +2235,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionFooBarNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2275,7 +2278,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionFooBarWithArgs: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2314,7 +2317,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionObject: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2353,7 +2356,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { unionObjectNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2432,7 +2435,7 @@ export interface MutationBuilder {
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>
+      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -2464,7 +2467,7 @@ export interface MutationBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         { id: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true
@@ -2501,7 +2504,7 @@ export interface MutationBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         { idNonNull: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true

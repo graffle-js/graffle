@@ -8,7 +8,7 @@ import * as $$Scalar from './scalar.js'
 //
 //
 // ==================================================================================================
-//                                           ScalarStandard
+//                                               Types
 // ==================================================================================================
 //
 //
@@ -17,15 +17,30 @@ import * as $$Scalar from './scalar.js'
 //
 //
 
-const Boolean = $$Scalar.Boolean
+interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly id1: {
+      readonly _tag: 'outputField'
+    }
+  }
+}
 
-const Float = $$Scalar.Float
-
-const ID = $$Scalar.ID
-
-const Int = $$Scalar.Int
-
-const String = $$Scalar.String
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                           ScalarStandard
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
 
 //
 //
@@ -151,7 +166,7 @@ const String = $$Scalar.String
 //
 //
 
-const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Query: Query = {
   _tag: 'outputObject',
   fields: {
     id1: {
@@ -195,26 +210,49 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
+interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
+  readonly operations: {
+    readonly query: Query
+  }
+  readonly directives: {}
+  readonly inputTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+  }
+  readonly outputTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+    readonly Query: Query
+  }
+}
+
+const $schemaDrivenDataMap: SchemaDrivenDataMap = {
   operations: {
     query: Query,
   },
   directives: {},
   inputTypes: {
-    Boolean,
-    Float,
-    ID,
-    Int,
-    String,
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
   },
   outputTypes: {
-    Boolean,
-    Float,
-    ID,
-    Int,
-    String,
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
     Query,
   },
 }
 
 export { $schemaDrivenDataMap as schemaDrivenDataMap }
+export type { SchemaDrivenDataMap }

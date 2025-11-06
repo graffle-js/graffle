@@ -30,8 +30,9 @@ type GraphQLTypeToTS<$GraphQLType extends string> =
 /**
  * Context threaded through type-level traversal to enable resolution of input object types.
  */
-interface Context {
-  argsMap: SchemaDrivenDataMap
+interface Context<$Schema = any, $SDDM = any> {
+  schema?: $Schema
+  argsMap: $SDDM
 }
 
 /**
@@ -162,8 +163,9 @@ type ExtractFromOutputField_<
   // Process descendant arguments, if any according to the map
   & ($SS extends object ?
       'argumentsDescendant' extends keyof $ArgsMapField ?
-        // { _: [$SS, $ArgsMapField]; __10: ExtractFromObjectType<$SS, $ArgsMapField['ad'], $Ctx> }
-        ExtractFromObjectType<$SS, $ArgsMapField['argumentsDescendant'], $Ctx>
+        $ArgsMapField['argumentsDescendant'] extends SchemaDrivenDataMap.OutputObject ?
+          ExtractFromObjectType<$SS, $ArgsMapField['argumentsDescendant'], $Ctx>
+        : unknown
       : unknown
     : unknown
     )
@@ -171,10 +173,9 @@ type ExtractFromOutputField_<
 // dprint-ignore
 export type ExtractFromArgsOrInputObject<
   $SSArgs extends object,
-  $ArgsMapArgs, //extends SchemaDrivenDataMap.ArgumentsOrInputObjectFields | undefined,
+  $ArgumentsOrInputObjectFields extends SchemaDrivenDataMap.ArgumentsOrInputObjectFields | undefined,
   $Ctx extends Context,
 > =
-// $ArgumentsMap
 {
   [k in keyof $SSArgs]:
     // Hit! Process variable marker
@@ -185,8 +186,8 @@ export type ExtractFromArgsOrInputObject<
         type: $Builder extends BuilderTyped<infer $GQLType>
           ? VarBuilderToTypeFromGraphQLType<$GQLType, $Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
-            ? $k extends keyof $ArgsMapArgs
-              ? $ArgsMapArgs[$k] extends { readonly $type: infer $Type }
+            ? $k extends keyof $ArgumentsOrInputObjectFields
+              ? $ArgumentsOrInputObjectFields[$k] extends { readonly $type: infer $Type }
                 ? VarBuilderToType<$Type, $Builder>
                 : never
               : never
@@ -194,8 +195,8 @@ export type ExtractFromArgsOrInputObject<
         optional: $Builder extends BuilderTyped<any>
           ? IsOptionalVarFromGraphQLType<$Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
-            ? $k extends keyof $ArgsMapArgs
-              ? $ArgsMapArgs[$k] extends { readonly $type: infer $Type }
+            ? $k extends keyof $ArgumentsOrInputObjectFields
+              ? $ArgumentsOrInputObjectFields[$k] extends { readonly $type: infer $Type }
                 ? IsOptionalVar<$Type, $Builder>
                 : false
               : false
@@ -204,14 +205,16 @@ export type ExtractFromArgsOrInputObject<
       } : never :
     // Traverse into nested input object
     $SSArgs[k] extends object ?
-      k extends keyof $ArgsMapArgs
-        ? $ArgsMapArgs[k] extends { readonly namedType: infer __typeName__ extends string }
-          ? __typeName__ extends keyof $Ctx['argsMap']['inputTypes']
-            ? $Ctx['argsMap']['inputTypes'][__typeName__] extends { readonly fields: infer __fields__ }
-              ? ExtractFromArgsOrInputObject<$SSArgs[k], __fields__, $Ctx>
-              : never
-            : never
-          : never
+      k extends keyof $ArgumentsOrInputObjectFields
+        // @ts-expect-error
+        ? $ArgumentsOrInputObjectFields[k]['namedType'] extends SchemaDrivenDataMap.InputObject
+          ? ExtractFromArgsOrInputObject<
+              $SSArgs[k],
+              // @ts-expect-error
+              $ArgumentsOrInputObjectFields[k]['namedType']['fields'],
+              $Ctx
+            >
+          : never // todo: static error that args gave object here but schema does not hae input object here
         : never :
     // inline argument given, no variable, skip
       never

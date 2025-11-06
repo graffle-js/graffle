@@ -31,7 +31,7 @@ type FieldType<
       ) :
   $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless             ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
   $Node extends GraphqlKit.Schema.Type.__typename                         ? $Node['value'] :
-  [GraphqlKit.Schema.Type.ResolveLeafType<$Node>] extends [never]
+  [GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Node>] extends [never]
     ? (
           $Node extends GraphqlKit.Schema.Type.Interface
             ? Interface<$SelectionSet, $Schema, $Node>
@@ -39,7 +39,7 @@ type FieldType<
               ? Union<$SelectionSet, $Schema, $Node>
               : Ts.Err.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }>
       )
-    : GraphqlKit.Schema.Type.ResolveLeafType<$Node>
+    : GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Node>
 
 // dprint-ignore
 type GetCodecForCodecless<

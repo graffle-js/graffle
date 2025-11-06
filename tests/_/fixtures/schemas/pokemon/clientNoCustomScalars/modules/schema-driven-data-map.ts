@@ -1,5 +1,380 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import * as $$Scalar from './scalar.js'
+import type { TypeInputsIndex } from './type-inputs-index.js'
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                               Types
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+interface BattleWildResult extends $$Utilities.SchemaDrivenDataMap.Enum {
+  readonly _tag: 'enum'
+  readonly name: 'BattleWildResult'
+}
+
+interface PokemonType extends $$Utilities.SchemaDrivenDataMap.Enum {
+  readonly _tag: 'enum'
+  readonly name: 'PokemonType'
+}
+
+interface TrainerClass extends $$Utilities.SchemaDrivenDataMap.Enum {
+  readonly _tag: 'enum'
+  readonly name: 'TrainerClass'
+}
+
+interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
+  readonly _tag: 'inputObject'
+  readonly name: 'DateFilter'
+  readonly fieldsContainingCustomScalars: ['gte', 'lte']
+  readonly fields: {
+    readonly gte: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: $$Scalar.Date
+      readonly inlineType: [0]
+      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
+    }
+    readonly lte: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: $$Scalar.Date
+      readonly inlineType: [0]
+      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
+    }
+  }
+}
+
+interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
+  readonly _tag: 'inputObject'
+  readonly name: 'PokemonFilter'
+  readonly fieldsContainingCustomScalars: ['birthday']
+  readonly fields: {
+    readonly birthday: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: DateFilter
+      readonly inlineType: [0]
+      readonly $type: TypeInputsIndex['DateFilter'] | null | undefined
+    }
+    readonly name: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: StringFilter
+      readonly inlineType: [0]
+      readonly $type: TypeInputsIndex['StringFilter'] | null | undefined
+    }
+    readonly type: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: PokemonType
+      readonly inlineType: [0]
+      readonly $type: 'bug' | 'electric' | 'fire' | 'grass' | 'water' | null | undefined
+    }
+  }
+}
+
+interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
+  readonly _tag: 'inputObject'
+  readonly name: 'StringFilter'
+  readonly fields: {
+    readonly contains: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: $$Scalar.String
+      readonly inlineType: [0]
+      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']> | null | undefined
+    }
+    readonly in: {
+      readonly _tag: 'argumentOrInputField'
+      readonly namedType: $$Scalar.String
+      readonly inlineType: [0, [1]]
+      readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>)[] | null | undefined
+    }
+  }
+}
+
+interface BattleRoyale extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly combatants: {
+      readonly _tag: 'outputField'
+      readonly namedType: CombatantMultiPokemon
+    }
+    readonly date: {
+      readonly _tag: 'outputField'
+    }
+    readonly id: {
+      readonly _tag: 'outputField'
+    }
+    readonly winner: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+  }
+}
+
+interface BattleTrainer extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly combatant1: {
+      readonly _tag: 'outputField'
+      readonly namedType: CombatantSinglePokemon
+    }
+    readonly combatant2: {
+      readonly _tag: 'outputField'
+      readonly namedType: CombatantSinglePokemon
+    }
+    readonly date: {
+      readonly _tag: 'outputField'
+    }
+    readonly id: {
+      readonly _tag: 'outputField'
+    }
+    readonly winner: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+  }
+}
+
+interface BattleWild extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly date: {
+      readonly _tag: 'outputField'
+    }
+    readonly id: {
+      readonly _tag: 'outputField'
+    }
+    readonly pokemon: {
+      readonly _tag: 'outputField'
+      readonly namedType: Pokemon
+    }
+    readonly result: {
+      readonly _tag: 'outputField'
+    }
+    readonly trainer: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+    readonly wildPokemons: {
+      readonly _tag: 'outputField'
+      readonly namedType: Pokemon
+    }
+  }
+}
+
+interface CombatantMultiPokemon extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly pokemons: {
+      readonly _tag: 'outputField'
+      readonly namedType: Pokemon
+    }
+    readonly trainer: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+  }
+}
+
+interface CombatantSinglePokemon extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly pokemon: {
+      readonly _tag: 'outputField'
+      readonly namedType: Pokemon
+    }
+    readonly trainer: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+  }
+}
+
+interface Patron extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly id: {
+      readonly _tag: 'outputField'
+    }
+    readonly money: {
+      readonly _tag: 'outputField'
+    }
+    readonly name: {
+      readonly _tag: 'outputField'
+    }
+  }
+}
+
+interface Pokemon extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly attack: {
+      readonly _tag: 'outputField'
+    }
+    readonly birthday: {
+      readonly _tag: 'outputField'
+      readonly namedType: $$Scalar.Date
+    }
+    readonly defense: {
+      readonly _tag: 'outputField'
+    }
+    readonly hp: {
+      readonly _tag: 'outputField'
+    }
+    readonly id: {
+      readonly _tag: 'outputField'
+    }
+    readonly name: {
+      readonly _tag: 'outputField'
+    }
+    readonly trainer: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+    readonly type: {
+      readonly _tag: 'outputField'
+    }
+  }
+}
+
+interface Trainer extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly class: {
+      readonly _tag: 'outputField'
+    }
+    readonly fans: {
+      readonly _tag: 'outputField'
+      readonly namedType: Patron
+    }
+    readonly id: {
+      readonly _tag: 'outputField'
+    }
+    readonly name: {
+      readonly _tag: 'outputField'
+    }
+    readonly pokemon: {
+      readonly _tag: 'outputField'
+      readonly namedType: Pokemon
+    }
+  }
+}
+
+interface Being extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: $$Utilities.SchemaDrivenDataMap.OutputObject['fields']
+}
+
+interface Battle extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: $$Utilities.SchemaDrivenDataMap.OutputObject['fields']
+}
+
+interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly battles: {
+      readonly _tag: 'outputField'
+      readonly namedType: Battle
+    }
+    readonly beings: {
+      readonly _tag: 'outputField'
+      readonly namedType: Being
+    }
+    readonly pokemonByName: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
+        readonly name: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: $$Scalar.String
+          readonly inlineType: [1]
+          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
+        }
+      }
+      readonly namedType: Pokemon
+    }
+    readonly pokemons: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
+        readonly filter: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: PokemonFilter
+          readonly inlineType: [0]
+          readonly $type: TypeInputsIndex['PokemonFilter'] | null | undefined
+        }
+      }
+      readonly namedType: Pokemon
+    }
+    readonly trainerByName: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
+        readonly name: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: $$Scalar.String
+          readonly inlineType: [1]
+          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
+        }
+      }
+      readonly namedType: Trainer
+    }
+    readonly trainers: {
+      readonly _tag: 'outputField'
+      readonly namedType: Trainer
+    }
+  }
+}
+
+interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly _tag: 'outputObject'
+  readonly fields: {
+    readonly addPokemon: {
+      readonly _tag: 'outputField'
+      readonly arguments: {
+        readonly attack: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: $$Scalar.Int
+          readonly inlineType: [0]
+          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
+        }
+        readonly defense: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: $$Scalar.Int
+          readonly inlineType: [0]
+          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
+        }
+        readonly hp: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: $$Scalar.Int
+          readonly inlineType: [0]
+          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
+        }
+        readonly name: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: $$Scalar.String
+          readonly inlineType: [1]
+          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
+        }
+        readonly type: {
+          readonly _tag: 'argumentOrInputField'
+          readonly namedType: PokemonType
+          readonly inlineType: [1]
+          readonly $type: 'bug' | 'electric' | 'fire' | 'grass' | 'water'
+        }
+      }
+      readonly namedType: Pokemon
+    }
+    readonly resetData: {
+      readonly _tag: 'outputField'
+    }
+  }
+}
 
 //
 //
@@ -17,16 +392,6 @@ import * as $$Scalar from './scalar.js'
 //
 //
 
-const Boolean = $$Scalar.Boolean
-
-const Float = $$Scalar.Float
-
-const ID = $$Scalar.ID
-
-const Int = $$Scalar.Int
-
-const String = $$Scalar.String
-
 //
 //
 //
@@ -42,8 +407,6 @@ const String = $$Scalar.String
 //
 //
 //
-
-const Date = 'Date'
 
 //
 //
@@ -61,17 +424,17 @@ const Date = 'Date'
 //
 //
 
-const BattleWildResult: $$Utilities.SchemaDrivenDataMap.Enum = {
+const BattleWildResult: BattleWildResult = {
   _tag: 'enum',
   name: 'BattleWildResult',
 }
 
-const PokemonType: $$Utilities.SchemaDrivenDataMap.Enum = {
+const PokemonType: PokemonType = {
   _tag: 'enum',
   name: 'PokemonType',
 }
 
-const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
+const TrainerClass: TrainerClass = {
   _tag: 'enum',
   name: 'TrainerClass',
 }
@@ -92,49 +455,67 @@ const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 
-const DateFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
+const DateFilter: DateFilter = {
   _tag: 'inputObject',
   name: 'DateFilter',
   fieldsContainingCustomScalars: ['gte', 'lte'],
   fields: {
     gte: {
       _tag: 'argumentOrInputField',
-      namedType: Date,
+      namedType: $$Scalar.Date,
+      inlineType: [0],
+      $type: null as any,
     },
     lte: {
       _tag: 'argumentOrInputField',
-      namedType: Date,
+      namedType: $$Scalar.Date,
+      inlineType: [0],
+      $type: null as any,
     },
   },
 }
 
-const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
+const PokemonFilter: PokemonFilter = {
   _tag: 'inputObject',
   name: 'PokemonFilter',
   fieldsContainingCustomScalars: ['birthday'],
   fields: {
     birthday: {
       _tag: 'argumentOrInputField',
-      // namedType: DateFilter <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as DateFilter,
+      inlineType: [0],
+      $type: null as any,
     },
     name: {
       _tag: 'argumentOrInputField',
+      namedType: null as any as StringFilter,
+      inlineType: [0],
+      $type: null as any,
     },
     type: {
       _tag: 'argumentOrInputField',
+      namedType: PokemonType,
+      inlineType: [0],
+      $type: null as any,
     },
   },
 }
 
-const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
+const StringFilter: StringFilter = {
   _tag: 'inputObject',
   name: 'StringFilter',
   fields: {
     contains: {
       _tag: 'argumentOrInputField',
+      namedType: $$Scalar.String,
+      inlineType: [0],
+      $type: null as any,
     },
     in: {
       _tag: 'argumentOrInputField',
+      namedType: $$Scalar.String,
+      inlineType: [0, [1]],
+      $type: null as any,
     },
   },
 }
@@ -155,12 +536,12 @@ const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 
-const BattleRoyale: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleRoyale: BattleRoyale = {
   _tag: 'outputObject',
   fields: {
     combatants: {
       _tag: 'outputField',
-      // namedType: CombatantMultiPokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as CombatantMultiPokemon,
     },
     date: {
       _tag: 'outputField',
@@ -170,21 +551,21 @@ const BattleRoyale: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     winner: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
   },
 }
 
-const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleTrainer: BattleTrainer = {
   _tag: 'outputObject',
   fields: {
     combatant1: {
       _tag: 'outputField',
-      // namedType: CombatantSinglePokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as CombatantSinglePokemon,
     },
     combatant2: {
       _tag: 'outputField',
-      // namedType: CombatantSinglePokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as CombatantSinglePokemon,
     },
     date: {
       _tag: 'outputField',
@@ -194,12 +575,12 @@ const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     winner: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
   },
 }
 
-const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleWild: BattleWild = {
   _tag: 'outputObject',
   fields: {
     date: {
@@ -210,51 +591,51 @@ const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     pokemon: {
       _tag: 'outputField',
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
     result: {
       _tag: 'outputField',
     },
     trainer: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
     wildPokemons: {
       _tag: 'outputField',
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
   },
 }
 
-const CombatantMultiPokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const CombatantMultiPokemon: CombatantMultiPokemon = {
   _tag: 'outputObject',
   fields: {
     pokemons: {
       _tag: 'outputField',
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
     trainer: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
   },
 }
 
-const CombatantSinglePokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const CombatantSinglePokemon: CombatantSinglePokemon = {
   _tag: 'outputObject',
   fields: {
     pokemon: {
       _tag: 'outputField',
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
     trainer: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
   },
 }
 
-const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Patron: Patron = {
   _tag: 'outputObject',
   fields: {
     id: {
@@ -269,7 +650,7 @@ const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Pokemon: Pokemon = {
   _tag: 'outputObject',
   fields: {
     attack: {
@@ -277,7 +658,7 @@ const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     birthday: {
       _tag: 'outputField',
-      namedType: Date,
+      namedType: $$Scalar.Date,
     },
     defense: {
       _tag: 'outputField',
@@ -293,7 +674,7 @@ const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     trainer: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
     type: {
       _tag: 'outputField',
@@ -301,7 +682,7 @@ const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Trainer: Trainer = {
   _tag: 'outputObject',
   fields: {
     class: {
@@ -309,7 +690,7 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     fans: {
       _tag: 'outputField',
-      // namedType: Patron <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Patron,
     },
     id: {
       _tag: 'outputField',
@@ -319,7 +700,7 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     pokemon: {
       _tag: 'outputField',
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
   },
 }
@@ -340,7 +721,7 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Being: Being = {
   _tag: 'outputObject',
   fields: {
     ...Pokemon.fields,
@@ -364,7 +745,7 @@ const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Battle: Battle = {
   _tag: 'outputObject',
   fields: {
     ...BattleRoyale.fields,
@@ -389,27 +770,28 @@ const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Query: Query = {
   _tag: 'outputObject',
   fields: {
     battles: {
       _tag: 'outputField',
-      // namedType: Battle <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Battle,
     },
     beings: {
       _tag: 'outputField',
-      // namedType: Being <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Being,
     },
     pokemonByName: {
       _tag: 'outputField',
       arguments: {
         name: {
           _tag: 'argumentOrInputField',
-          namedType: String,
+          namedType: $$Scalar.String,
           inlineType: [1],
+          $type: null as any,
         },
       },
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
     pokemons: {
       _tag: 'outputField',
@@ -418,29 +800,31 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
           _tag: 'argumentOrInputField',
           namedType: PokemonFilter,
           inlineType: [0],
+          $type: null as any,
         },
       },
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
     trainerByName: {
       _tag: 'outputField',
       arguments: {
         name: {
           _tag: 'argumentOrInputField',
-          namedType: String,
+          namedType: $$Scalar.String,
           inlineType: [1],
+          $type: null as any,
         },
       },
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
     trainers: {
       _tag: 'outputField',
-      // namedType: Trainer <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Trainer,
     },
   },
 }
 
-const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Mutation: Mutation = {
   _tag: 'outputObject',
   fields: {
     addPokemon: {
@@ -448,31 +832,36 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       arguments: {
         attack: {
           _tag: 'argumentOrInputField',
-          namedType: Int,
+          namedType: $$Scalar.Int,
           inlineType: [0],
+          $type: null as any,
         },
         defense: {
           _tag: 'argumentOrInputField',
-          namedType: Int,
+          namedType: $$Scalar.Int,
           inlineType: [0],
+          $type: null as any,
         },
         hp: {
           _tag: 'argumentOrInputField',
-          namedType: Int,
+          namedType: $$Scalar.Int,
           inlineType: [0],
+          $type: null as any,
         },
         name: {
           _tag: 'argumentOrInputField',
-          namedType: String,
+          namedType: $$Scalar.String,
           inlineType: [1],
+          $type: null as any,
         },
         type: {
           _tag: 'argumentOrInputField',
           namedType: PokemonType,
           inlineType: [1],
+          $type: null as any,
         },
       },
-      // namedType: Pokemon <-- Assigned later to avoid potential circular dependency.
+      namedType: null as any as Pokemon,
     },
     resetData: {
       _tag: 'outputField',
@@ -501,6 +890,8 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 // These assignments are needed to avoid circular references during module initialization.
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PokemonFilter.fields![`birthday`]!.namedType = DateFilter
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
+PokemonFilter.fields![`name`]!.namedType = StringFilter
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleRoyale.fields[`combatants`]!.namedType = CombatantMultiPokemon
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
@@ -562,19 +953,64 @@ Mutation.fields[`addPokemon`]!.namedType = Pokemon
 //
 //
 
-const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
+interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
+  readonly operations: {
+    readonly query: Query
+    readonly mutation: Mutation
+  }
+  readonly directives: {}
+  readonly inputTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+    readonly Date: $$Scalar.Date
+    readonly BattleWildResult: BattleWildResult
+    readonly PokemonType: PokemonType
+    readonly TrainerClass: TrainerClass
+    readonly DateFilter: DateFilter
+    readonly PokemonFilter: PokemonFilter
+    readonly StringFilter: StringFilter
+  }
+  readonly outputTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+    readonly Date: $$Scalar.Date
+    readonly BattleWildResult: BattleWildResult
+    readonly PokemonType: PokemonType
+    readonly TrainerClass: TrainerClass
+    readonly BattleRoyale: BattleRoyale
+    readonly BattleTrainer: BattleTrainer
+    readonly BattleWild: BattleWild
+    readonly CombatantMultiPokemon: CombatantMultiPokemon
+    readonly CombatantSinglePokemon: CombatantSinglePokemon
+    readonly Patron: Patron
+    readonly Pokemon: Pokemon
+    readonly Trainer: Trainer
+    readonly Being: Being
+    readonly Battle: Battle
+    readonly Query: Query
+    readonly Mutation: Mutation
+  }
+}
+
+const $schemaDrivenDataMap: SchemaDrivenDataMap = {
   operations: {
     query: Query,
     mutation: Mutation,
   },
   directives: {},
   inputTypes: {
-    Boolean,
-    Float,
-    ID,
-    Int,
-    String,
-    Date,
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
+    Date: $$Scalar.Date,
     BattleWildResult,
     PokemonType,
     TrainerClass,
@@ -583,12 +1019,12 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     StringFilter,
   },
   outputTypes: {
-    Boolean,
-    Float,
-    ID,
-    Int,
-    String,
-    Date,
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
+    Date: $$Scalar.Date,
     BattleWildResult,
     PokemonType,
     TrainerClass,
@@ -608,3 +1044,4 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
 }
 
 export { $schemaDrivenDataMap as schemaDrivenDataMap }
+export type { SchemaDrivenDataMap }

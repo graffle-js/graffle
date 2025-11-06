@@ -26,7 +26,15 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     //   inImplementationButMissingInSchema:
     // }
 
-    code(importUtilities(config))
+    // Need runtime import if we have codecless scalars (for Codec.create())
+    const needRuntimeImport = isNeedCustomScalarDefaults
+    code(
+      Str.Code.TS.importAll({
+        as: $.$$Utilities,
+        from: config.paths.imports.grafflePackage.utilitiesForGenerated,
+        type: !needRuntimeImport,
+      }),
+    )
 
     if (GraphqlKit.Schema.Kind.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
       code`
@@ -82,17 +90,25 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        code(Str.Code.TS.typeAlias$({
+
+        // Create a scalar with identity codec (no-op encode/decode)
+        const scalarType = `${$.$$Utilities}.GraphqlKit.Schema.Type.Scalar<'${scalar.name}', string, string>`
+        const identityCodecValue =
+          `{ kind: 'Scalar', name: '${scalar.name}', codec: ${$.$$Utilities}.Codec.create({ encode: (value: any) => String(value), decode: (value: any) => String(value) }) } as ${scalarType}`
+
+        const dualExportResult = Str.Code.TS.Reserved.dualExport({
           name: scalar.name,
-          type: `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`,
-          export: true,
-        }))
-        // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
-        // code()
-        // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
-        // code(`export type ${scalar.name}Decoded = GraphqlKit.Schema.Type.Scalar.Codec.GetDecoded<${scalar.name}>`)
-        // code(`export type ${scalar.name}Encoded = GraphqlKit.Schema.Type.Scalar.Codec.GetEncoded<${scalar.name}>`)
-        // code()
+          const: {
+            // TODO: Use typeAnnotation option once implemented - https://github.com/jasonkuhrt/kit/issues/78
+            // typeAnnotation: true,
+            value: identityCodecValue,
+          },
+          type: {
+            type: scalarType,
+          },
+        })
+
+        code(dualExportResult.code)
       }
     }
     code``

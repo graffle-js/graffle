@@ -29,6 +29,7 @@ const sddmNested: SchemaDrivenDataMap = {
   inputTypes: {
     UserInput: {
       _tag: 'inputObject',
+      name: 'UserInput',
       fields: { avatar: { _tag: 'argumentOrInputField', namedType: `Upload` } },
       fieldsContainingCustomScalars: ['avatar'],
     },

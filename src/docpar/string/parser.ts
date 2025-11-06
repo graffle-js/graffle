@@ -485,12 +485,12 @@ type ParseFieldWithNestedSelection<
  * Handles UnknownScalar for schema-less mode.
  */
 type ResolveNamedType<$Type, $Schema extends GraphqlKit.Schema.Type | undefined> = $Type extends UnknownScalar ? unknown
-  : [GraphqlKit.Schema.Type.ResolveLeafType<$Type>] extends [never]
+  : [GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Type>] extends [never]
     ? $Type extends GraphqlKit.Schema.Type.OutputObject ? $Type // Objects need nested selection
     : $Type extends { kind: 'Interface' } ? $Type
     : $Type extends { kind: 'Union' } ? $Type
     : unknown
-  : GraphqlKit.Schema.Type.ResolveLeafType<$Type>
+  : GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Type>
 
 // ============================================================================
 // Character-by-character utilities

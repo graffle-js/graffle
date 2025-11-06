@@ -1,8 +1,6 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { SchemaDrivenDataMap } from './_.js'
 
-// type SchemaDrivenDataMap = ocpar.SchemaDrivenDataMap
-
 export interface MapVariablesByTypeNamesInput {
   /**
    * Schema-driven data map containing type information
