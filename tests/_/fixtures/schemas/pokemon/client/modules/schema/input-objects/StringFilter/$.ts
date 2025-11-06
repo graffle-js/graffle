@@ -21,4 +21,8 @@ export interface StringFilter {
     contains: $Fields.contains
     in: $Fields.in
   }
+  type: {
+    contains?: $Fields.contains['type']
+    in?: $Fields.in['type']
+  }
 }

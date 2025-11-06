@@ -3,7 +3,6 @@ import type { ConfigInit } from '../config/configInit.js'
 import { ModuleGenerator$$ } from '../generators/$$.js'
 import { ModuleGenerator$ } from '../generators/$.js'
 import { ModuleGenerator_internals } from '../generators/_internals.js'
-import { ModuleGeneratorArgumentsMap } from '../generators/ArgumentsMap.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
 import { ModuleGeneratorDocument } from '../generators/Document.js'
@@ -18,7 +17,6 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
-import { ModuleGeneratorTypeInputsIndex } from '../generators/TypeInputsIndex.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
 
@@ -36,8 +34,6 @@ const moduleGenerators = [
   // Schema Stuff
   ModuleGeneratorSchema,
   ModuleGeneratorSchemaDrivenDataMap,
-  ModuleGeneratorArgumentsMap,
-  ModuleGeneratorTypeInputsIndex,
   // Interface Stuff
   ModuleGeneratorSelectionSets,
   ModuleGeneratorSelect,

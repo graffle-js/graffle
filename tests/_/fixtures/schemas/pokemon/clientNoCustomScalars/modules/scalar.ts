@@ -1,4 +1,4 @@
-import type * as $$Utilities from '#graffle/utilities-for-generated'
+import * as $$Utilities from '#graffle/utilities-for-generated'
 export * from '#graffle/generator-helpers/standard-scalar-types'
 
 //
@@ -13,7 +13,12 @@ export * from '#graffle/generator-helpers/standard-scalar-types'
 //
 //
 
-export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
+export const Date = {
+  kind: 'Scalar',
+  name: 'Date',
+  codec: $$Utilities.Codec.create({ encode: (value: any) => String(value), decode: (value: any) => String(value) }),
+} as $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, string>
+export type Date = $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, string>
 
 //
 //

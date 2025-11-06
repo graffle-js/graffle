@@ -20,8 +20,8 @@ export interface contains {
   name: 'contains'
   inlineType: [0]
   namedType: $Schema.String
+  type: $Schema.String['codec']['_typeDecoded'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.StringFilter}.
  *
@@ -43,5 +43,6 @@ interface $in {
   name: 'in'
   inlineType: [0, [1]]
   namedType: $Schema.String
+  type: readonly ($Schema.String['codec']['_typeDecoded'])[] | null | undefined
 }
 export { type $in as in }

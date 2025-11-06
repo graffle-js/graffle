@@ -18,4 +18,5 @@ export interface InputObject {
   name: 'InputObject'
   inlineType: [1]
   namedType: $Schema.InputObject
+  type: $Schema.InputObject['type']
 }

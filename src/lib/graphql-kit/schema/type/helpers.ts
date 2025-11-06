@@ -1,3 +1,4 @@
+import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 import { Codec } from '#src/types/Codec/_.js'
 import type { Type } from './_.js'
 import { Nodes } from './nodes/_.js'
@@ -41,10 +42,22 @@ export type GetNamedType<$Type> =
  * @see {@link GetNamedType} - Unwraps List/Nullable wrappers to get the named type
  */
 // dprint-ignore
-export type ResolveLeafType<$Type> =
-  $Type extends Type.Scalar   ? Codec.GetDecoded<$Type['codec']> :
-  $Type extends Type.Enum     ? $Type['membersUnion'] :
-                              never
+export type ResolveLeafType<$Schema, $Type> =
+  $Type extends Type.Enum     ? $Type['members'] :
+  $Type extends Type.Scalar   ? Codec.GetDecoded<GetCodecForScalar<$Schema, $Type>> :
+                                never
+
+// dprint-ignore
+type GetCodecForScalar<
+  $Schema,
+  $Node extends GraphqlKit.Schema.Type.Scalar
+> =
+  // Check scalarRegistry first - runtime-added scalars override static schema scalars
+  // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
+  $Node['name'] extends keyof $Schema['scalarRegistry']['map']
+    // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
+    ? $Schema['scalarRegistry']['map'][$Node['name']]['codec']
+    : $Node['codec'] // Fall back to scalar's own codec
 
 /**
  * Define a schema type

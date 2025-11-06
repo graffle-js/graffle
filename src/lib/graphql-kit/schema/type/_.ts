@@ -4,7 +4,6 @@ import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'
 import type { OutputObject } from './nodes/OutputObject.js'
 import type { Scalar } from './nodes/Scalar/_.js'
-import type { ScalarCodecless } from './nodes/ScalarCodecless.js'
 import type { Union } from './nodes/Union.js'
 import type * as Scalars from './scalars/__.js'
 
@@ -36,7 +35,7 @@ export interface Type<
   objects: Record<string, OutputObject>
   unions: Record<string, Union>
   interfaces: Record<string, Interface>
-  scalars: Record<string, Scalar | ScalarCodecless>
+  scalars: Record<string, Scalar>
   scalarNamesUnion: string
   /**
    * A registry of scalar definitions. Useful for custom scalars.

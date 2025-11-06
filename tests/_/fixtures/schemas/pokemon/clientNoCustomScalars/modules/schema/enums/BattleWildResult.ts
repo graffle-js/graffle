@@ -16,9 +16,14 @@
 export interface BattleWildResult {
   kind: 'Enum'
   name: 'BattleWildResult'
-  members: ['pokemonsCaptured', 'pokemonsDefeated', 'trainerDefeated']
-  membersUnion:
-    | 'pokemonsCaptured'
-    | 'pokemonsDefeated'
-    | 'trainerDefeated'
+  members:
+    | BattleWildResult.pokemonsCaptured
+    | BattleWildResult.pokemonsDefeated
+    | BattleWildResult.trainerDefeated
+}
+
+export namespace BattleWildResult {
+  export type pokemonsCaptured = 'pokemonsCaptured'
+  export type pokemonsDefeated = 'pokemonsDefeated'
+  export type trainerDefeated = 'trainerDefeated'
 }

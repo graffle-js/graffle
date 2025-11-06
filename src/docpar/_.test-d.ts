@@ -10,14 +10,14 @@ const A = Ts.Assert
 
 type $ = typeof $
 
-type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.ArgumentsMap, never>
+type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.SchemaDrivenDataMap, never>
 type ContextLoose = Docpar.ParserContext<undefined>
 
 type Strict<$Input> = Docpar.Parse<$Input, ContextStrict>
 type Loose<$Input> = Docpar.Parse<$Input, ContextLoose>
 
 // Local gql functions for testing
-const gqlYe = createGql<Possible.$.Schema, any, Possible.$.ArgumentsMap>({
+const gqlYe = createGql<Possible.$.Schema, any, Possible.$.SchemaDrivenDataMap>({
   sddm: Possible.schemaMap as any
 })
 

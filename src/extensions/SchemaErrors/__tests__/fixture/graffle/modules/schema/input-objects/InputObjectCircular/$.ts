@@ -22,4 +22,8 @@ export interface InputObjectCircular extends $.Schema.InputObject {
     circular: $Fields.circular
     date: $Fields.date
   }
+  type: {
+    circular?: $Fields.circular['type']
+    date?: $Fields.date['type']
+  }
 }

@@ -18,8 +18,8 @@ export interface gte {
   name: 'gte'
   inlineType: [0]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.DateFilter}.
  *
@@ -38,4 +38,5 @@ export interface lte {
   name: 'lte'
   inlineType: [0]
   namedType: $Schema.Date
+  type: $Schema.Date['codec']['_typeDecoded'] | null | undefined
 }

@@ -39,29 +39,29 @@ const encodeInputFieldLike = (
   scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap,
 ) => {
   /**
-   * The SDDM for custom scalars can take two forms:
+   * Scalar encoding strategy:
    *
-   * 1. It can have references to runtime custom scalar codecs if the user has supplied such references at gentime.
+   * 1. SDDM always contains Scalar objects (both standard and custom) with codecs.
    *
-   * 2. If the user has not done said gentime configuration, then the SDDM will only carry the names of custom scalars.
+   * 2. At client initialization, all SDDM scalars are merged into the registry.
+   *    - Custom scalars with user-provided codecs use those codecs.
+   *    - Custom scalars without user codecs get identity codecs (pass-through).
+   *    - Standard scalars (String, Int, etc.) use their standard codecs.
    *
-   * In case (2), the runtime scalars can have been supplied by the user in the runtime configuration (e.g. `graffle.scalar(...)`).
-   * If they have not, then the String scalar will be used.
+   * 3. Runtime `.scalar()` calls override registry entries, allowing users to add or replace codecs dynamically.
    *
-   * Case (1) has the disadvantage of more verbose configuration for the user (because it forces the gentime configuration),
-   * but the assumed benefit of better performing type generation because they types are simpler, making no use of
-   * type-functions. Also, it reduces the runtime configuration needed, which could be DRY if the user has multiple schemas
-   * repeating use of the same custom scalar.
+   * The registry is the single source of truth for scalar encoding/decoding.
    */
 
-  if (Docpar.SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
-    const scalar = GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
-    args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.encode, argValue)
-    return
-  }
-
   if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
-    args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(sddmNode.codec.encode, argValue)
+    // Registry is populated from SDDM at client init, with overrides from .scalar()
+    const scalar = scalars[sddmNode.name]
+    if (!scalar) {
+      throw new Error(
+        `Scalar "${sddmNode.name}" not found in registry. This should not happen if the client was properly initialized.`,
+      )
+    }
+    args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.encode, argValue)
     return
   }
 

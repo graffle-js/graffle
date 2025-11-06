@@ -19,4 +19,5 @@ export interface abcEnum extends $.Schema.InputField {
   name: 'abcEnum'
   inlineType: [0]
   namedType: $Schema.ABCEnum
+  type: $Schema.ABCEnum['members'] | null | undefined
 }

@@ -24,4 +24,9 @@ export interface PokemonFilter {
     name: $Fields.name
     type: $Fields.type
   }
+  type: {
+    birthday?: $Fields.birthday['type']
+    name?: $Fields.name['type']
+    type?: $Fields.type['type']
+  }
 }

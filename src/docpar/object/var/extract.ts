@@ -30,8 +30,9 @@ type GraphQLTypeToTS<$GraphQLType extends string> =
 /**
  * Context threaded through type-level traversal to enable resolution of input object types.
  */
-interface Context {
-  argsMap: SchemaDrivenDataMap
+interface Context<$Schema = any, $SDDM = any> {
+  schema?: $Schema
+  argsMap: $SDDM
 }
 
 /**
@@ -155,15 +156,16 @@ type ExtractFromOutputField_<
   // Process direct arguments
   & ($SS extends { readonly $: infer __ssArgs__ }
       ? __ssArgs__ extends object
-        ? ExtractFromArgsOrInputObject<__ssArgs__, $ArgsMapField['arguments'], $Ctx>
+        ? ExtractFromArgsOrInputObject<__ssArgs__, $ArgsMapField, $Ctx>
         : unknown
       : unknown
     )
   // Process descendant arguments, if any according to the map
   & ($SS extends object ?
       'argumentsDescendant' extends keyof $ArgsMapField ?
-        // { _: [$SS, $ArgsMapField]; __10: ExtractFromObjectType<$SS, $ArgsMapField['ad'], $Ctx> }
-        ExtractFromObjectType<$SS, $ArgsMapField['argumentsDescendant'], $Ctx>
+        $ArgsMapField['argumentsDescendant'] extends SchemaDrivenDataMap.OutputObject ?
+          ExtractFromObjectType<$SS, $ArgsMapField['argumentsDescendant'], $Ctx>
+        : unknown
       : unknown
     : unknown
     )
@@ -171,10 +173,9 @@ type ExtractFromOutputField_<
 // dprint-ignore
 export type ExtractFromArgsOrInputObject<
   $SSArgs extends object,
-  $ArgsMapArgs, //extends SchemaDrivenDataMap.ArgumentsOrInputObjectFields | undefined,
+  $Parent extends SchemaDrivenDataMap.OutputField | SchemaDrivenDataMap.InputObject | undefined,
   $Ctx extends Context,
 > =
-// $ArgumentsMap
 {
   [k in keyof $SSArgs]:
     // Hit! Process variable marker
@@ -185,33 +186,78 @@ export type ExtractFromArgsOrInputObject<
         type: $Builder extends BuilderTyped<infer $GQLType>
           ? VarBuilderToTypeFromGraphQLType<$GQLType, $Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
-            ? $k extends keyof $ArgsMapArgs
-              ? $ArgsMapArgs[$k] extends { readonly $type: infer $Type }
-                ? VarBuilderToType<$Type, $Builder>
-                : never
+            ? $k extends string
+              // Use parent's type map: OutputField.$argumentsType or InputObject.$type
+              ? $Parent extends SchemaDrivenDataMap.OutputField
+                ? '$argumentsType' extends keyof $Parent
+                  ? $k extends keyof $Parent['$argumentsType']
+                    ? VarBuilderToType<$Parent['$argumentsType'][$k], $Builder>
+                    : never
+                  : never
+                : $Parent extends SchemaDrivenDataMap.InputObject
+                  ? '$type' extends keyof $Parent
+                    ? $k extends keyof $Parent['$type']
+                      ? VarBuilderToType<$Parent['$type'][$k], $Builder>
+                      : never
+                    : never
+                  : never
               : never
             : never
         optional: $Builder extends BuilderTyped<any>
           ? IsOptionalVarFromGraphQLType<$Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
-            ? $k extends keyof $ArgsMapArgs
-              ? $ArgsMapArgs[$k] extends { readonly $type: infer $Type }
-                ? IsOptionalVar<$Type, $Builder>
-                : false
+            ? $k extends string
+              // Use parent's type map for optionality check
+              ? $Parent extends SchemaDrivenDataMap.OutputField
+                ? '$argumentsType' extends keyof $Parent
+                  ? $k extends keyof $Parent['$argumentsType']
+                    ? IsOptionalVar<$Parent['$argumentsType'][$k], $Builder>
+                    : false
+                  : false
+                : $Parent extends SchemaDrivenDataMap.InputObject
+                  ? '$type' extends keyof $Parent
+                    ? $k extends keyof $Parent['$type']
+                      ? IsOptionalVar<$Parent['$type'][$k], $Builder>
+                      : false
+                    : false
+                  : false
               : false
             : false
         optionalUndefined: true
       } : never :
     // Traverse into nested input object
     $SSArgs[k] extends object ?
-      k extends keyof $ArgsMapArgs
-        ? $ArgsMapArgs[k] extends { readonly namedType: infer __typeName__ extends string }
-          ? __typeName__ extends keyof $Ctx['argsMap']['inputTypes']
-            ? $Ctx['argsMap']['inputTypes'][__typeName__] extends { readonly fields: infer __fields__ }
-              ? ExtractFromArgsOrInputObject<$SSArgs[k], __fields__, $Ctx>
+      k extends string
+        // Access fields and get nested InputObject
+        ? $Parent extends SchemaDrivenDataMap.OutputField
+          ? 'arguments' extends keyof $Parent
+            ? k extends keyof $Parent['arguments']
+              // @ts-expect-error
+              ? $Parent['arguments'][k]['namedType'] extends SchemaDrivenDataMap.InputObject
+                ? ExtractFromArgsOrInputObject<
+                    $SSArgs[k],
+                    // @ts-expect-error - Pass whole InputObject as parent
+                    $Parent['arguments'][k]['namedType'],
+                    $Ctx
+                  >
+                : never
               : never
             : never
-          : never
+          : $Parent extends SchemaDrivenDataMap.InputObject
+            ? 'fields' extends keyof $Parent
+              ? k extends keyof $Parent['fields']
+                // @ts-expect-error
+                ? $Parent['fields'][k]['namedType'] extends SchemaDrivenDataMap.InputObject
+                  ? ExtractFromArgsOrInputObject<
+                      $SSArgs[k],
+                      // @ts-expect-error - Pass whole InputObject as parent
+                      $Parent['fields'][k]['namedType'],
+                      $Ctx
+                    >
+                  : never // todo: static error that args gave object here but schema does not have input object here
+                : never
+              : never
+            : never
         : never :
     // inline argument given, no variable, skip
       never

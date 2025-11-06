@@ -16,6 +16,9 @@ import type * as $ from '#graffle/utilities-for-generated'
 export interface ChildAInterfaceHierarchyMember extends $.Schema.Enum {
   kind: 'Enum'
   name: 'ChildAInterfaceHierarchyMember'
-  members: ['InterfaceChildA']
-  membersUnion: 'InterfaceChildA'
+  members: ChildAInterfaceHierarchyMember.InterfaceChildA
+}
+
+export namespace ChildAInterfaceHierarchyMember {
+  export type InterfaceChildA = 'InterfaceChildA'
 }

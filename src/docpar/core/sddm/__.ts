@@ -29,6 +29,21 @@ declare global {
 export interface Enum {
   readonly _tag: 'enum'
   readonly name: string
+  /**
+   * Pre-computed TypeScript union type for this enum's values.
+   *
+   * Only present when operationVariables is enabled.
+   *
+   * This is the complete TypeScript union type (e.g., 'FIRE' | 'WATER' | 'GRASS')
+   * representing all possible values of this enum. Pre-computing this at generation time
+   * enables O(1) type lookup and eliminates redundant inline unions throughout the codebase.
+   *
+   * @example
+   * ```typescript
+   * $type: 'FIRE' | 'WATER' | 'GRASS' | 'ELECTRIC'
+   * ```
+   */
+  readonly $type?: any
   readonly extensions?: GraffleGlobal.SchemaMapNodeExtensions.Enum
 }
 
@@ -57,7 +72,7 @@ export interface OutputField {
    * ```typescript
    * arguments: {
    *   id: {
-   *     namedType: 'ID',
+   *     namedType: ID,  // Scalar object reference
    *     inlineType: [1],  // [1] means required
    *   }
    * }
@@ -65,18 +80,36 @@ export interface OutputField {
    */
   readonly arguments?: ArgumentsOrInputObjectFields
   /**
+   * Pre-computed TypeScript type map for this field's arguments.
+   *
+   * Only present when operationVariables is enabled and field has arguments.
+   *
+   * Maps argument names to their complete TypeScript types (with inline type modifiers applied).
+   * Pre-computing this at generation time enables O(1) type lookup for variable inference.
+   *
+   * @example
+   * ```typescript
+   * $argumentsType: {
+   *   id?: string | null | undefined      // Optional ID argument
+   *   limit: number                        // Required Int! argument
+   *   filter?: InputFilter | null          // Optional input object
+   * }
+   * ```
+   */
+  readonly $argumentsType?: any
+  /**
    * Reference to the type containing descendant fields with arguments.
    *
    * Present when the field's return type has any fields (at any depth) that have arguments.
-   * This enables traversal through fields that don't have direct arguments but lead to fields that do.
+   * This enables type-level traversal through fields that don't have direct arguments but lead to fields that do.
    *
-   * The value is a reference to another type in the ArgumentsMap that contains the nested fields.
+   * The value is a reference to an OutputObject type that contains the nested fields with arguments.
    *
    * @example
    * For a field like `posts: [Post!]!` where Post has fields with arguments:
    * ```typescript
    * posts: {
-   *   argumentsDescendant: Post  // Reference to Post type in ArgumentsMap
+   *   argumentsDescendant: Post  // Reference to Post OutputObject
    * }
    * ```
    *
@@ -84,18 +117,35 @@ export interface OutputField {
    * A field can have both direct args and descendant args:
    * ```typescript
    * userPosts: {
-   *   arguments: { limit: { namedType: 'Int', ... } },  // Direct argument
+   *   arguments: { limit: { namedType: Int, ... } },  // Direct argument
    *   argumentsDescendant: Post  // Post type has fields with arguments
    * }
    * ```
    */
-  readonly argumentsDescendant?: any
+  readonly argumentsDescendant?: OutputObject
   /**
-   * The field's output type for custom scalar resolution.
+   * The field's output type reference.
+   *
+   * A reference to the actual type node (Scalar, OutputObject, Enum, or CustomScalarName).
+   * This serves both runtime and type-level purposes:
+   * - Runtime: Direct access to codec objects for encoding/decoding
+   * - Type-level: Type navigation via typeof or .name property
    *
    * Present when/as one of:
-   * - `CustomScalarName` when customScalars enabled and this field's named type is a custom scalar.
-   * - `OutputObject` when customScalars enabled and this field's type contains custom scalars.
+   * - `Scalar` when field returns a standard scalar (String, Int, etc.)
+   * - `CustomScalarName` (string) when customScalars enabled and field returns a custom scalar
+   * - `OutputObject` when field returns an object type
+   * - `Enum` when field returns an enum type
+   *
+   * @example
+   * ```typescript
+   * birthday: {
+   *   namedType: Date,  // Custom scalar object with codec
+   * }
+   * trainer: {
+   *   namedType: Trainer,  // OutputObject reference
+   * }
+   * ```
    */
   readonly namedType?: OutputNodes
   readonly extensions?: GraffleGlobal.SchemaMapNodeExtensions.OutputField
@@ -104,6 +154,12 @@ export interface OutputField {
 export interface InputObject {
   readonly _tag: 'inputObject'
   /**
+   * Name of the input object.
+   *
+   * Used for type-level navigation and runtime identification.
+   */
+  readonly name: string
+  /**
    * Field names within this input object that are or transitively contain custom scalars.
    *
    * This is only present when operationVariables is enabled, because that feature requires
@@ -111,13 +167,24 @@ export interface InputObject {
    */
   readonly fieldsContainingCustomScalars?: readonly string[]
   /**
-   * Name of the input object. Only present when "variables" is enabled.
-   */
-  readonly name?: string
-  /**
    * Fields of the input object.
    */
   readonly fields?: ArgumentsOrInputObjectFields
+  /**
+   * Pre-computed TypeScript input type for this input object.
+   *
+   * Only present when operationVariables is enabled.
+   *
+   * This is the complete TypeScript type representing this input object's structure,
+   * with all field types already computed. Pre-computing this at generation time enables
+   * O(1) type lookup for variable inference without needing a separate TypeInputsIndex module.
+   *
+   * @example
+   * ```typescript
+   * $type: { date?: Date, id?: string, count: number }
+   * ```
+   */
+  readonly $type?: any
   readonly extensions?: GraffleGlobal.SchemaMapNodeExtensions.InputObject
 }
 
@@ -133,21 +200,77 @@ export interface ArgumentsOrInputObjectFields {
  * For an argument like `limit: Int!`:
  * ```typescript
  * {
- *   namedType: 'Int',        // Named type
- *   inlineType: [1],          // Inline type: [1] = required
+ *   namedType: Int,        // Scalar object reference
+ *   inlineType: [1],       // Inline type: [1] = required
+ *   $type: number          // Pre-computed TypeScript type
  * }
  * ```
  */
 export interface ArgumentOrInputField {
   readonly _tag: 'argumentOrInputField'
   /**
-   * Inline types (nullable/non-nullable, list) of this argument or input field. Only present when operationVariables is enabled.
+   * Inline types (nullable/non-nullable, list) of this argument or input field.
+   *
+   * Only present when operationVariables is enabled.
+   *
+   * The format is `[nullabilityFlag]` or `[nullabilityFlag, nestedInlineType]` for lists.
+   * - `0` = nullable
+   * - `1` = non-null
+   *
+   * @example
+   * ```typescript
+   * inlineType: [1]           // Required (non-null)
+   * inlineType: [0]           // Optional (nullable)
+   * inlineType: [1, [0]]      // Non-null list of nullable items: [T]!
+   * inlineType: [0, [1]]      // Nullable list of non-null items: [T!]
+   * ```
    */
   readonly inlineType?: InlineType
   /**
-   * Named type of this argument or input field. Only present when customScalars is enabled.
+   * Named type reference for this argument or input field.
+   *
+   * A reference to the actual type node (Scalar, InputObject, Enum, or CustomScalarName).
+   * This serves both runtime and type-level purposes:
+   * - Runtime: Direct access to codec objects for encoding/decoding
+   * - Type-level: Type navigation via typeof or .name property
+   *
+   * Present when/as one of:
+   * - `Scalar` when argument is a standard scalar (String, Int, etc.)
+   * - `CustomScalarName` (string) when customScalars enabled and argument is a custom scalar
+   * - `InputObject` when argument is an input object type
+   * - `Enum` when argument is an enum type
+   *
+   * @example
+   * ```typescript
+   * filter: {
+   *   namedType: PokemonFilter,  // InputObject reference
+   * }
+   * date: {
+   *   namedType: Date,  // Custom scalar with codec
+   * }
+   * type: {
+   *   namedType: PokemonType,  // Enum reference
+   * }
+   * ```
    */
   readonly namedType?: InputNodes
+  /**
+   * Pre-computed TypeScript input type for this argument or input field.
+   *
+   * Only present when operationVariables is enabled.
+   *
+   * This is the final TypeScript type after applying all inline type modifiers (nullability, lists).
+   * Pre-computing this at generation time enables O(1) type lookup for variable inference.
+   *
+   * @example
+   * ```typescript
+   * $type: string | null | undefined           // Optional String
+   * $type: number                              // Required Int!
+   * $type: Date[]                              // Required [Date!]!
+   * $type: (string | null)[] | null            // Optional [String]
+   * ```
+   */
+  readonly $type?: any
   readonly extensions?: GraffleGlobal.SchemaMapNodeExtensions.ArgumentOrInputField
 }
 

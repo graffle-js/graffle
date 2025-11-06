@@ -18,8 +18,8 @@ export interface birthday {
   name: 'birthday'
   inlineType: [0]
   namedType: $Schema.DateFilter
+  type: $Schema.DateFilter['type'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.PokemonFilter}.
  *
@@ -38,8 +38,8 @@ export interface name {
   name: 'name'
   inlineType: [0]
   namedType: $Schema.StringFilter
+  type: $Schema.StringFilter['type'] | null | undefined
 }
-
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.PokemonFilter}.
  *
@@ -58,4 +58,5 @@ export interface type {
   name: 'type'
   inlineType: [0]
   namedType: $Schema.PokemonType
+  type: $Schema.PokemonType['members'] | null | undefined
 }

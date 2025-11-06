@@ -18,9 +18,14 @@ import type * as $ from '#graffle/utilities-for-generated'
 export interface Case extends $.Schema.Enum {
   kind: 'Enum'
   name: 'Case'
-  members: ['ErrorOne', 'ErrorTwo', 'Object1']
-  membersUnion:
-    | 'ErrorOne'
-    | 'ErrorTwo'
-    | 'Object1'
+  members:
+    | Case.ErrorOne
+    | Case.ErrorTwo
+    | Case.Object1
+}
+
+export namespace Case {
+  export type ErrorOne = 'ErrorOne'
+  export type ErrorTwo = 'ErrorTwo'
+  export type Object1 = 'Object1'
 }

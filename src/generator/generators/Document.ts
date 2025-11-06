@@ -47,7 +47,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
-    code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
+    code(codeImportAll(config, { as: 'SchemaMap', from: './schema-driven-data-map', type: true }))
     code``
 
     // Generate typed interfaces for each root type builder
@@ -71,7 +71,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>>,
             true
           >
 
@@ -83,7 +83,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection?: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationQuery<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, SchemaMap.SchemaDrivenDataMap>>,
             true
           >`
         }).join('\n\n          ')
@@ -124,7 +124,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>>,
             true
           >
 
@@ -136,7 +136,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection?: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationMutation<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, SchemaMap.SchemaDrivenDataMap>>,
             true
           >`
         }).join('\n\n          ')
@@ -177,7 +177,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationSubscription<$SelectionSet, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<$SelectionSet, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<$SelectionSet, SchemaMap.SchemaDrivenDataMap>>,
             true
           >
 
@@ -189,7 +189,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection?: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.InferResult.OperationSubscription<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.Docpar.Object.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, SchemaMap.SchemaDrivenDataMap>>,
             true
           >`
         }).join('\n\n          ')

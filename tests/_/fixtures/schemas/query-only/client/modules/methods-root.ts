@@ -1,5 +1,5 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $$ArgumentsMap from './arguments-map.js'
+import type * as $$SchemaMap from './schema-driven-data-map.js'
 import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
@@ -23,7 +23,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -36,7 +36,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
@@ -84,7 +84,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -95,7 +95,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'id'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -129,7 +129,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -140,7 +140,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'idNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,

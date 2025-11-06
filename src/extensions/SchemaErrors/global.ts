@@ -7,7 +7,7 @@ declare global {
     //     objectNames: string
     //   }
     // }
-    namespace SchemaDrivenDataMap {
+    namespace SchemaMapNodeExtensions {
       interface OutputObject {
         /**
          * Is this output object an error object?

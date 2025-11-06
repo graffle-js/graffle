@@ -18,11 +18,18 @@
 export interface PokemonType {
   kind: 'Enum'
   name: 'PokemonType'
-  members: ['bug', 'electric', 'fire', 'grass', 'water']
-  membersUnion:
-    | 'bug'
-    | 'electric'
-    | 'fire'
-    | 'grass'
-    | 'water'
+  members:
+    | PokemonType.bug
+    | PokemonType.electric
+    | PokemonType.fire
+    | PokemonType.grass
+    | PokemonType.water
+}
+
+export namespace PokemonType {
+  export type bug = 'bug'
+  export type electric = 'electric'
+  export type fire = 'fire'
+  export type grass = 'grass'
+  export type water = 'water'
 }

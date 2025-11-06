@@ -2,18 +2,18 @@ import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportAll } from '../helpers/pathHelpers.js'
-import { ModuleGeneratorArgumentsMap } from './ArgumentsMap.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsDocument } from './MethodsDocument.js'
 import { ModuleGeneratorMethodsRoot } from './MethodsRoot.js'
 import { ModuleGeneratorMethodsSelect } from './MethodsSelect.js'
 import { ModuleGeneratorSchema } from './Schema.js'
+import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
 export const ModuleGeneratorGlobal = createModuleGenerator(
   `global`,
   ({ config, code }) => {
-    code(importModuleGenerator(config, ModuleGeneratorArgumentsMap))
+    code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorMethodsSelect))
     code(importModuleGenerator(config, ModuleGeneratorMethodsDocument))
@@ -38,7 +38,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
         selectionSets: {
           $Document: `${$.$$SelectionSets}.$Document`,
         },
-        argumentsMap: `${$.$$ArgumentsMap}.ArgumentsMap`,
+        argumentsMap: `${$.$$SchemaDrivenDataMap}.SchemaDrivenDataMap`,
         defaultSchemaUrl: {
           $TS_DOC: defaultSchemaUrlTsDoc,
           $VALUE: config.options.defaultSchemaUrl ? `string` : `null`,

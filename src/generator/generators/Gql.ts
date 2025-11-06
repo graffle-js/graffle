@@ -31,7 +31,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
     code(codeImportNamed(config, { names: 'Schema', from: './schema/$', type: true }))
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets/$', type: true }))
-    code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
+    code(codeImportAll(config, { as: '$$SchemaMap', from: './schema-driven-data-map', type: true }))
     code`
 
       /**
@@ -58,11 +58,9 @@ export const ModuleGeneratorGql = createModuleGenerator(
       export const gql = createGql<
         Schema,
         $$SelectionSets.$Document,
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >({
-        // TODO: sddm runtime value should be a subtype of ArgumentsMap type
-        // Currently need 'as any' cast, but types should align properly
-        sddm: sddm as any
+        sddm: sddm
       })
     `
   },

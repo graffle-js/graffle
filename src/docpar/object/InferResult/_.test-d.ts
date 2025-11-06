@@ -10,11 +10,11 @@ import type { InferResult } from './_.js'
 
 const A = Ts.Assert
 
-type $<$SelectionSet extends Possible.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
+type $<$SelectionSet extends Possible.SelectionSets.Query<any>> = RequestResult.SimplifyWithEmptyContext<
   InferResult.OperationQuery<$SelectionSet, Possible.$.Schema>
 >
 
-type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Query> =
+type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Query<any>> =
   RequestResult.SimplifyWithEmptyContext<
     InferResult.OperationQuery<$SelectionSet, PossibleNoCustomScalars.$.Schema>
   >

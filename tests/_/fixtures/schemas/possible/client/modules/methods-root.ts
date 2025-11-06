@@ -1,5 +1,5 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $$ArgumentsMap from './arguments-map.js'
+import type * as $$SchemaMap from './schema-driven-data-map.js'
 import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
@@ -23,7 +23,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -36,7 +36,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
@@ -88,7 +88,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { InputObjectNested: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -99,7 +102,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'InputObjectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { InputObjectNested: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -136,7 +142,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNestedNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -150,7 +156,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { InputObjectNestedNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -187,7 +193,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -198,7 +204,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'abcEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -235,7 +241,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { argInputObjectCircular: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -249,7 +255,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { argInputObjectCircular: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -284,7 +290,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -295,7 +301,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'bigintField'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -329,7 +335,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintFieldNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { bigintFieldNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -342,7 +351,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { bigintFieldNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -374,7 +383,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -385,7 +394,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'date'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -420,7 +429,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -431,7 +440,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -466,7 +475,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgInputObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgInputObject: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -479,7 +491,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -515,7 +527,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -526,7 +538,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateArgList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -561,7 +573,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -572,7 +584,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateArgNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateArgNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -607,7 +622,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNullList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgNonNullList: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -620,7 +638,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullList: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -658,7 +676,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullListNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -672,7 +690,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -707,7 +725,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -718,7 +736,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateInterface1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateInterface1: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -753,7 +774,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -764,7 +785,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -799,7 +820,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -810,7 +831,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateListList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -845,7 +866,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -856,7 +877,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -890,7 +914,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -901,7 +925,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -935,7 +959,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -946,7 +970,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateObject1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -980,7 +1004,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -991,7 +1015,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'dateUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1023,7 +1047,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1034,7 +1058,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'error'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1065,7 +1089,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1076,7 +1100,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'id'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1110,7 +1134,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1121,7 +1145,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'idNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1155,7 +1179,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1166,7 +1190,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'interface'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1204,7 +1228,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildA: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1218,7 +1242,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildA: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1257,7 +1281,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildB: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1271,7 +1295,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildB: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1310,7 +1334,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyGrandparents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1324,7 +1348,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1363,7 +1387,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyParents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1377,7 +1401,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyParents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1412,7 +1436,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { interfaceNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1423,7 +1450,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'interfaceNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { interfaceNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1458,7 +1488,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { interfaceWithArgs: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1469,7 +1502,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'interfaceWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { interfaceWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1504,7 +1540,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1515,7 +1551,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'listInt'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1550,7 +1586,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1561,7 +1597,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'listIntNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { listIntNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1596,7 +1635,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1607,7 +1646,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'listListInt'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1642,7 +1681,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { listListIntNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1655,7 +1697,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { listListIntNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1690,7 +1732,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1701,7 +1743,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'lowerCaseUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { lowerCaseUnion: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1732,7 +1777,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1743,7 +1788,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'object'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1778,7 +1823,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1789,7 +1834,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'objectList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1824,7 +1869,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { objectListNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1835,7 +1883,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'objectListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1869,7 +1920,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1880,7 +1931,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'objectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -1916,7 +1967,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNestedWithArgs: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1930,7 +1981,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { objectNestedWithArgs: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1965,7 +2016,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -1976,7 +2027,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'objectNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2011,7 +2062,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2022,7 +2073,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'objectWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2054,7 +2108,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2065,7 +2119,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'result'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2100,7 +2154,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2111,7 +2165,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'resultNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2145,7 +2199,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2156,7 +2210,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'string'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2191,7 +2245,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithArgEnum: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2202,7 +2259,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'stringWithArgEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgEnum: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2239,7 +2299,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObject: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2253,7 +2313,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2291,7 +2351,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2305,7 +2365,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2343,7 +2403,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2357,7 +2417,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2395,7 +2455,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2406,7 +2466,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'stringWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2441,7 +2504,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithListArg: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2452,7 +2518,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'stringWithListArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithListArg: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2489,7 +2558,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArgRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2503,7 +2572,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithListArgRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2541,7 +2610,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithRequiredArg: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2555,7 +2624,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithRequiredArg: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2590,7 +2659,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2601,7 +2670,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'unionFooBar'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2635,7 +2704,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionFooBarNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2648,7 +2720,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionFooBarNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2684,7 +2756,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionFooBarWithArgs: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2697,7 +2772,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionFooBarWithArgs: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2732,7 +2807,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2743,7 +2818,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'unionObject'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2777,7 +2852,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObjectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionObjectNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2790,7 +2868,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionObjectNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2826,7 +2904,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -2839,7 +2917,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
@@ -2887,7 +2965,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2898,7 +2976,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         'id'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromMutation<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2932,7 +3010,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromMutation<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2943,7 +3021,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         'idNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromMutation<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -2980,7 +3058,10 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { InputObjectNested: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -2991,7 +3072,10 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
         'InputObjectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { InputObjectNested: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -3028,7 +3112,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNestedNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3042,7 +3126,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { InputObjectNestedNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3078,7 +3162,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3089,7 +3173,10 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
         'dateArgNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateArgNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -3124,7 +3211,10 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNullList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgNonNullList: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3137,7 +3227,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullList: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3175,7 +3265,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullListNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3189,7 +3279,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3228,7 +3318,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildA: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3242,7 +3332,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildA: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3281,7 +3371,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildB: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3295,7 +3385,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildB: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3334,7 +3424,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyGrandparents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3348,7 +3438,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3387,7 +3477,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyParents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3401,7 +3491,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyParents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3434,7 +3524,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3445,7 +3535,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
         'result'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -3482,7 +3572,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3496,7 +3586,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3534,7 +3624,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3548,7 +3638,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3586,7 +3676,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArgRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3600,7 +3690,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithListArgRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3638,7 +3728,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithRequiredArg: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3652,7 +3742,7 @@ export interface ArgsYeReqYeMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithRequiredArg: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3690,7 +3780,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { InputObjectNested: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3701,7 +3794,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'InputObjectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { InputObjectNested: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -3738,7 +3834,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNestedNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3752,7 +3848,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { InputObjectNestedNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3789,7 +3885,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3800,7 +3896,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'abcEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -3837,7 +3933,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { argInputObjectCircular: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3851,7 +3947,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { argInputObjectCircular: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3886,7 +3982,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3897,7 +3993,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'bigintField'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -3931,7 +4027,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintFieldNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { bigintFieldNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3944,7 +4043,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { bigintFieldNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3980,7 +4079,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -3991,7 +4090,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'dateArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4026,7 +4125,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgInputObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgInputObject: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4039,7 +4141,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4075,7 +4177,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4086,7 +4188,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'dateArgList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4121,7 +4223,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4132,7 +4234,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'dateArgNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateArgNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4167,7 +4272,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNullList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgNonNullList: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4180,7 +4288,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullList: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4218,7 +4326,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullListNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4232,7 +4340,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4265,7 +4373,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4276,7 +4384,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'error'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4307,7 +4415,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4318,7 +4426,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'id'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4352,7 +4460,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4363,7 +4471,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'idNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4397,7 +4505,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4408,7 +4516,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'string'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4443,7 +4551,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithArgEnum: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4454,7 +4565,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'stringWithArgEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgEnum: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4491,7 +4605,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObject: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4505,7 +4619,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4543,7 +4657,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4557,7 +4671,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4595,7 +4709,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4609,7 +4723,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4647,7 +4761,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4658,7 +4772,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'stringWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4693,7 +4810,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithListArg: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4704,7 +4824,10 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
         'stringWithListArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithListArg: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4741,7 +4864,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithListArgRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4755,7 +4878,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithListArgRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4793,7 +4916,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithRequiredArg: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4807,7 +4930,7 @@ export interface TypeScalarMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithRequiredArg: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4845,7 +4968,10 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { InputObjectNested: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -4856,7 +4982,10 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
         'InputObjectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ InputObjectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { InputObjectNested: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -4893,7 +5022,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { InputObjectNestedNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4907,7 +5036,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { InputObjectNestedNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4945,7 +5074,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { argInputObjectCircular: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4959,7 +5088,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { argInputObjectCircular: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4995,7 +5124,10 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgInputObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgInputObject: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5008,7 +5140,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5046,7 +5178,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObject: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5060,7 +5192,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5098,7 +5230,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5112,7 +5244,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5150,7 +5282,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectRequired: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5164,7 +5296,7 @@ export interface FeatInputMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5203,7 +5335,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5214,7 +5346,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'abcEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5248,7 +5380,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5259,7 +5391,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'bigintField'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintField: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5293,7 +5425,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ bigintFieldNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { bigintFieldNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5306,7 +5441,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { bigintFieldNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5338,7 +5473,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5349,7 +5484,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'date'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5383,7 +5518,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5394,7 +5529,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateInterface1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateInterface1: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5429,7 +5567,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5440,7 +5578,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5475,7 +5613,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5486,7 +5624,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateListList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5521,7 +5659,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5532,7 +5670,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5566,7 +5707,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5577,7 +5718,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5611,7 +5752,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5622,7 +5763,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateObject1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5656,7 +5797,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5667,7 +5808,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'dateUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5698,7 +5839,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5709,7 +5850,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'id'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5743,7 +5884,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5754,7 +5895,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'idNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ idNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5788,7 +5929,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5799,7 +5940,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'interface'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5833,7 +5974,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { interfaceNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5844,7 +5988,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'interfaceNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { interfaceNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5879,7 +6026,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5890,7 +6037,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'listInt'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5925,7 +6072,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5936,7 +6083,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'listIntNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { listIntNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -5971,7 +6121,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -5982,7 +6132,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'listListInt'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6017,7 +6167,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { listListIntNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6030,7 +6183,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { listListIntNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6065,7 +6218,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6076,7 +6229,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'lowerCaseUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { lowerCaseUnion: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6107,7 +6263,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6118,7 +6274,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'object'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6153,7 +6309,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6164,7 +6320,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'objectList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6199,7 +6355,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { objectListNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6210,7 +6369,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'objectListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6244,7 +6406,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6255,7 +6417,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'objectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6291,7 +6453,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNestedWithArgs: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6305,7 +6467,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { objectNestedWithArgs: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6340,7 +6502,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6351,7 +6513,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'objectNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6385,7 +6547,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6396,7 +6558,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'string'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ string: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6430,7 +6592,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6441,7 +6603,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'unionFooBar'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6475,7 +6637,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionFooBarNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6488,7 +6653,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionFooBarNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6523,7 +6688,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6534,7 +6699,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         'unionObject'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6568,7 +6733,10 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObjectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionObjectNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6581,7 +6749,7 @@ export interface ArgsNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionObjectNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6620,7 +6788,7 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6631,7 +6799,7 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
         'abcEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ abcEnum: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6666,7 +6834,10 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithArgEnum: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6677,7 +6848,10 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
         'stringWithArgEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgEnum: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6714,7 +6888,7 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObjectEnum: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6728,7 +6902,7 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6768,7 +6942,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { argInputObjectCircular: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6782,7 +6956,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { argInputObjectCircular: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6818,7 +6992,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6829,7 +7003,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'dateArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6864,7 +7038,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgInputObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgInputObject: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6877,7 +7054,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -6913,7 +7090,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6924,7 +7101,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'dateArgList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -6956,7 +7133,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -6967,7 +7144,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'error'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7002,7 +7179,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { interfaceWithArgs: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7013,7 +7193,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'interfaceWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { interfaceWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7048,7 +7231,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7059,7 +7242,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'objectWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7094,7 +7280,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7105,7 +7291,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'resultNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7140,7 +7326,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithArgEnum: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7151,7 +7340,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'stringWithArgEnum'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgEnum: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgEnum: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7188,7 +7380,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { stringWithArgInputObject: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7202,7 +7394,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { stringWithArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7240,7 +7432,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7251,7 +7443,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'stringWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7286,7 +7481,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { stringWithListArg: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7297,7 +7495,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         'stringWithListArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ stringWithListArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { stringWithListArg: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7332,7 +7533,10 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionFooBarWithArgs: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7345,7 +7549,7 @@ export interface ArgsYeReqNoMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionFooBarWithArgs: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7379,7 +7583,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7390,7 +7594,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'date'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ date: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7425,7 +7629,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7436,7 +7640,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateArg'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArg: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7471,7 +7675,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgInputObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgInputObject: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7484,7 +7691,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgInputObject: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7520,7 +7727,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7531,7 +7738,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateArgList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7566,7 +7773,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7577,7 +7784,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateArgNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateArgNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7612,7 +7822,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateArgNonNullList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { dateArgNonNullList: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7625,7 +7838,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullList: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7663,7 +7876,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { dateArgNonNullListNonNull: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7677,7 +7890,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -7712,7 +7925,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7723,7 +7936,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateInterface1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateInterface1: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7758,7 +7974,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7769,7 +7985,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7804,7 +8020,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7815,7 +8031,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateListList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7850,7 +8066,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7861,7 +8077,10 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7895,7 +8114,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7906,7 +8125,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7940,7 +8159,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7951,7 +8170,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateObject1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateObject1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -7985,7 +8204,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -7996,7 +8215,7 @@ export interface FeatDateMethods<$Context extends $$Utilities.Context> {
         'dateUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8032,7 +8251,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8043,7 +8262,10 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         'dateInterface1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateInterface1: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateInterface1: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8077,7 +8299,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8088,7 +8310,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         'interface'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interface: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8126,7 +8348,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildA: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8140,7 +8362,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildA: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8179,7 +8401,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildB: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8193,7 +8415,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildB: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8232,7 +8454,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyGrandparents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8246,7 +8468,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8285,7 +8507,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyParents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8299,7 +8521,7 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyParents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8334,7 +8556,10 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { interfaceNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8345,7 +8570,10 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         'interfaceNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { interfaceNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8380,7 +8608,10 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { interfaceWithArgs: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8391,7 +8622,10 @@ export interface TypeInterfaceMethods<$Context extends $$Utilities.Context> {
         'interfaceWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ interfaceWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { interfaceWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8428,7 +8662,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8439,7 +8673,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         'dateList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8474,7 +8708,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8485,7 +8719,10 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         'dateListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { dateListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8520,7 +8757,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8531,7 +8768,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         'listInt'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8566,7 +8803,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8577,7 +8814,10 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         'listIntNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { listIntNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8612,7 +8852,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8623,7 +8863,7 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         'objectList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8658,7 +8898,10 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { objectListNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8669,7 +8912,10 @@ export interface TypeListMethods<$Context extends $$Utilities.Context> {
         'objectListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8706,7 +8952,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8717,7 +8963,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
         'dateListList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateListList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8752,7 +8998,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8763,7 +9009,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
         'listListInt'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListInt: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8798,7 +9044,10 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ listListIntNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { listListIntNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8811,7 +9060,7 @@ export interface TypeListNestedMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { listListIntNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -8848,7 +9097,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8859,7 +9108,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         'dateUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ dateUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8893,7 +9142,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8904,7 +9153,10 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         'lowerCaseUnion'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ lowerCaseUnion: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { lowerCaseUnion: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8936,7 +9188,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8947,7 +9199,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         'result'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -8982,7 +9234,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -8993,7 +9245,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         'resultNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9027,7 +9279,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9038,7 +9290,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         'unionFooBar'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBar: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9072,7 +9324,10 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionFooBarNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9085,7 +9340,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionFooBarNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9121,7 +9376,10 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionFooBarWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionFooBarWithArgs: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9134,7 +9392,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionFooBarWithArgs: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9169,7 +9427,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9180,7 +9438,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         'unionObject'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObject: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9214,7 +9472,10 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ unionObjectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { unionObjectNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9227,7 +9488,7 @@ export interface TypeUnionMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { unionObjectNonNull: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9262,7 +9523,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9273,7 +9534,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
         'error'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ error: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9305,7 +9566,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9316,7 +9577,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
         'result'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ result: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9351,7 +9612,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9362,7 +9623,7 @@ export interface FeatErrorMethods<$Context extends $$Utilities.Context> {
         'resultNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ resultNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9402,7 +9663,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildA: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9416,7 +9677,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildA: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9455,7 +9716,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyChildB: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9469,7 +9730,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyChildB: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9508,7 +9769,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyGrandparents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9522,7 +9783,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9561,7 +9822,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { interfaceHierarchyParents: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9575,7 +9836,7 @@ export interface FeatHierarchyMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { interfaceHierarchyParents: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9609,7 +9870,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9620,7 +9881,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         'object'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ object: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9655,7 +9916,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9666,7 +9927,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         'objectList'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectList: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9701,7 +9962,10 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<
+        { objectListNonNull: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9712,7 +9976,10 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         'objectListNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectListNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectListNonNull: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9746,7 +10013,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9757,7 +10024,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         'objectNested'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNested: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9793,7 +10060,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { objectNestedWithArgs: $SelectionSet },
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9807,7 +10074,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           { objectNestedWithArgs: $SelectionSet },
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -9842,7 +10109,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9853,7 +10120,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         'objectNonNull'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectNonNull: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -9888,7 +10155,7 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -9899,7 +10166,10 @@ export interface TypeObjectMethods<$Context extends $$Utilities.Context> {
         'objectWithArgs'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ objectWithArgs: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<
+          { objectWithArgs: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,

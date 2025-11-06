@@ -4,11 +4,13 @@ export const DateScalar = Graffle.Scalars.create(`Date`, {
   encode: (value: globalThis.Date) => value.toISOString(),
   decode: (value: string) => new globalThis.Date(value),
 })
+export type DateScalar = typeof DateScalar
 
 export const FooScalar = Graffle.Scalars.create(`Foo`, {
   encode: (value) => String(value),
   decode: (value) => value,
 })
+export type FooScalar = typeof FooScalar
 
 export const AScalar = Graffle.Scalars.create(`A`, {
   decode: (value: string) => BigInt(value),

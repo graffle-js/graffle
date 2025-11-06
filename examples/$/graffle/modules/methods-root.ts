@@ -1,5 +1,5 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import type * as $$ArgumentsMap from './arguments-map.js'
+import type * as $$SchemaMap from './schema-driven-data-map.js'
 import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
@@ -25,7 +25,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -38,7 +38,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
@@ -98,7 +98,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -109,7 +109,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'battles'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -152,7 +152,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -163,7 +163,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'beings'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -216,7 +216,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -227,7 +227,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'pokemonByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -280,7 +280,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -291,7 +291,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'pokemons'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -340,7 +340,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -351,7 +351,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'trainerByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -400,7 +400,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -411,7 +411,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         'trainers'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -448,7 +448,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
       $$Utilities.Docpar.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
-        $$ArgumentsMap.ArgumentsMap
+        $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -461,7 +461,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       $$Utilities.DocumentRunnerDeferred<
         $$Utilities.Docpar.Object.Var.InferFromMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
-          $$ArgumentsMap.ArgumentsMap
+          $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
@@ -530,7 +530,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -541,7 +541,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         'addPokemon'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -586,7 +586,7 @@ export interface BattleMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -597,7 +597,7 @@ export interface BattleMethods<$Context extends $$Utilities.Context> {
         'battles'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -642,7 +642,7 @@ export interface BeingMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -653,7 +653,7 @@ export interface BeingMethods<$Context extends $$Utilities.Context> {
         'beings'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -708,7 +708,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -719,7 +719,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         'pokemonByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -772,7 +772,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -783,7 +783,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         'pokemons'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -835,7 +835,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -846,7 +846,7 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         'addPokemon'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -897,7 +897,7 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -908,7 +908,7 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
         'trainerByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
@@ -957,7 +957,7 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
         $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>
       >,
     ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
@@ -968,7 +968,7 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
         'trainers'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$ArgumentsMap.ArgumentsMap>,
+        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,

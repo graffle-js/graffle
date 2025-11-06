@@ -1,8 +1,8 @@
 import { createStaticRootType } from '#graffle/extensions/document-builder'
 import { GraphqlKit } from '#graffle/utilities-for-generated'
-import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
+import type * as SchemaMap from './schema-driven-data-map.js'
 import type * as SelectionSets from './selection-sets/$.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
@@ -64,7 +64,7 @@ export interface QueryBuilder {
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, ArgumentsMap.ArgumentsMap>
+      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -96,7 +96,7 @@ export interface QueryBuilder {
       StaticDocumentContext,
       $$Utilities.Docpar.Object.Var.InferFromQuery<
         { id1: Exclude<$SelectionSet, undefined> },
-        ArgumentsMap.ArgumentsMap
+        SchemaMap.SchemaDrivenDataMap
       >
     >,
     true

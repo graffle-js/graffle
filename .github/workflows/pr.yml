@@ -37,6 +37,9 @@ jobs:
       - run: pnpm gen:graffle
       - name: Check generated files are up-to-date
         run: git diff --exit-code src/extensions/SchemaErrors/__tests__/fixture/graffle/
+      - run: pnpm examples:gen:graffle
+      - name: Check examples generated files are up-to-date
+        run: git diff --exit-code examples/
   types-examples:
     runs-on: ubuntu-latest
     steps:

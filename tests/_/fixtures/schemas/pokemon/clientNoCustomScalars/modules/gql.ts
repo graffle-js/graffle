@@ -1,6 +1,6 @@
 import { createGql } from '#graffle/extensions/document-builder'
-import type * as $$ArgumentsMap from './arguments-map.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
+import type * as $$SchemaMap from './schema-driven-data-map.js'
 import type { Schema } from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
@@ -28,9 +28,7 @@ import type * as $$SelectionSets from './selection-sets/$.js'
 export const gql = createGql<
   Schema,
   $$SelectionSets.$Document,
-  $$ArgumentsMap.ArgumentsMap
+  $$SchemaMap.SchemaDrivenDataMap
 >({
-  // TODO: sddm runtime value should be a subtype of ArgumentsMap type
-  // Currently need 'as any' cast, but types should align properly
-  sddm: sddm as any,
+  sddm: sddm,
 })
