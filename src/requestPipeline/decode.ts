@@ -102,15 +102,10 @@ const decodeResultValue = (input: {
       return
     }
     if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
-      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(sddmNode.codec.decode, value)
-      if (parentContext.type === `object`) {
-        parentContext.object[parentContext.fieldName] = decodedValue
-      } else {
-        parentContext.object[parentContext.index] = decodedValue
-      }
-    } else if (Docpar.SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
-      const scalar = GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
-      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.decode, value)
+      // Check registry first (runtime-added via .scalar()), fall back to sddmNode's codec
+      const registeredScalar = scalars[sddmNode.name]
+      const codec = registeredScalar ? registeredScalar.codec : sddmNode.codec
+      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {

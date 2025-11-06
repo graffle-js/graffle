@@ -30,14 +30,13 @@ export type NamedOutput =
   | OutputObject
   | Union<string, [OutputObject, ...OutputObject[]]>
   | Scalar
-  | Scalar.ScalarCodecless
   | __typename
 
 export type Input =
   | Inline
   | NamedInput
 
-export type NamedInput = Enum | Scalar | InputObject | Scalar.ScalarCodecless
+export type NamedInput = Enum | Scalar | InputObject
 
 export type Inline =
   | List
@@ -46,5 +45,4 @@ export type Inline =
 export type ScalarLike =
   | Scalar
   | Enum
-  | Scalar.ScalarCodecless
   | __typename

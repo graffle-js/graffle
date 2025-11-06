@@ -94,9 +94,9 @@ describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
     expect(scalar).toContain('export const DateTime = CustomScalars.DateTime')
     expect(scalar).toContain('export type DateTime = typeof CustomScalars.DateTime')
 
-    // SDDM should be able to reference scalars as values
-    expect(sddm).toContain('const BigInt = $$Scalar.BigInt')
-    expect(sddm).toContain('const DateTime = $$Scalar.DateTime')
+    // SDDM should reference scalars in field type definitions
+    expect(sddm).toContain('namedType: $$Scalar.BigInt')
+    expect(sddm).toContain('namedType: $$Scalar.DateTime')
   })
 })
 
@@ -145,18 +145,21 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { scalar } = readGeneratedFiles()
 
-    // Codecless reserved keywords use escaped names with export aliases
+    // Codecless scalars generate runtime objects with identity codecs
+    expect(scalar).toContain('const $bigint =')
     expect(scalar).toContain('type $bigint =')
-    expect(scalar).toContain('export { type $bigint as bigint }')
-    expect(scalar).toContain(`ScalarCodecless<"bigint">`)
+    expect(scalar).toContain('export { $bigint as bigint }')
+    expect(scalar).toContain(`Scalar<"bigint", string, string>`)
 
+    expect(scalar).toContain('const $boolean =')
     expect(scalar).toContain('type $boolean =')
-    expect(scalar).toContain('export { type $boolean as boolean }')
-    expect(scalar).toContain(`ScalarCodecless<"boolean">`)
+    expect(scalar).toContain('export { $boolean as boolean }')
+    expect(scalar).toContain(`Scalar<"boolean", string, string>`)
 
+    expect(scalar).toContain('const $interface =')
     expect(scalar).toContain('type $interface =')
-    expect(scalar).toContain('export { type $interface as interface }')
-    expect(scalar).toContain(`ScalarCodecless<"interface">`)
+    expect(scalar).toContain('export { $interface as interface }')
+    expect(scalar).toContain(`Scalar<"interface", string, string>`)
   })
 
   test('escapes reserved keywords with custom scalar codecs', async () => {
@@ -181,9 +184,9 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { schema, sddm } = readGeneratedFiles()
 
-    // SDDM uses string literals for codecless scalars
-    expect(sddm).toContain('const bigint = "bigint"')
-    expect(sddm).toContain('const interface = "interface"')
+    // Codecless scalars use same pattern as custom scalars in new SDDM
+    expect(sddm).toContain('namedType: $$Scalar.bigint')
+    expect(sddm).toContain('namedType: $$Scalar.interface')
 
     // Schema interface scalars object uses types from barrel
     expect(schema).toContain('bigint: $Types.bigint')
@@ -203,9 +206,9 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     expect(scalar).toContain('type $boolean = typeof CustomScalars.boolean')
     expect(scalar).toContain('export { $boolean as boolean }')
 
-    // SDDM references with custom scalars
-    expect(sddm).toContain('const bigint = $$Scalar.bigint')
-    expect(sddm).toContain('const boolean = $$Scalar.boolean')
+    // Custom scalars referenced in field definitions
+    expect(sddm).toContain('namedType: $$Scalar.bigint')
+    expect(sddm).toContain('namedType: $$Scalar.boolean')
 
     // Schema interface scalars object uses types from barrel
     expect(schema).toContain('bigint: $Types.bigint')

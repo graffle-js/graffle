@@ -1,5 +1,4 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Codec } from '#src/types/Codec/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../core/sddm/InlineType.js'
 import type { Interface } from './Interface.js'
@@ -29,7 +28,7 @@ type FieldType<
           ? OutputObjectLike<$SelectionSet, $Schema, $Node>
           : Ts.Err.StaticError<'When $Node extends GraphqlKit.Schema.Type.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } >
       ) :
-  $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless             ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
+  // $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless             ? Codec.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
   $Node extends GraphqlKit.Schema.Type.__typename                         ? $Node['value'] :
   [GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Node>] extends [never]
     ? (
@@ -41,13 +40,13 @@ type FieldType<
       )
     : GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Node>
 
-// dprint-ignore
-type GetCodecForCodecless<
-  $Schema,
-  $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless
-> =
-  // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
-  $Node['name'] extends keyof $Schema['scalarRegistry']['map']
-    // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
-    ? $Schema['scalarRegistry']['map'][$Node['name']]['codec']
-    : GraphqlKit.Schema.Type.Standard.Scalars.String['codec']
+// // dprint-ignore
+// type GetCodecForCodecless<
+//   $Schema,
+//   $Node extends GraphqlKit.Schema.Type.Scalar.ScalarCodecless
+// > =
+//   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
+//   $Node['name'] extends keyof $Schema['scalarRegistry']['map']
+//     // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
+//     ? $Schema['scalarRegistry']['map'][$Node['name']]['codec']
+//     : GraphqlKit.Schema.Type.Standard.Scalars.String['codec']

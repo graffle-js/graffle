@@ -54,14 +54,11 @@ const encodeInputFieldLike = (
    * repeating use of the same custom scalar.
    */
 
-  if (Docpar.SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
-    const scalar = GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(scalars, sddmNode)
-    args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.encode, argValue)
-    return
-  }
-
   if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
-    args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(sddmNode.codec.encode, argValue)
+    // Check registry first (runtime-added via .scalar()), fall back to sddmNode's codec
+    const registeredScalar = scalars[sddmNode.name]
+    const codec = registeredScalar ? registeredScalar.codec : sddmNode.codec
+    args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(codec.encode, argValue)
     return
   }
 

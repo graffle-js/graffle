@@ -14,11 +14,11 @@ export * from '#graffle/generator-helpers/standard-scalar-types'
 //
 
 export const Date = {
-  kind: 'Scalar' as const,
+  kind: 'Scalar',
   name: 'Date',
   codec: $$Utilities.Codec.create({ encode: (value: any) => value, decode: (value: any) => value }),
-} as $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date'>
-export type Date = $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date'>
+} as $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, string>
+export type Date = $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, string>
 
 //
 //
