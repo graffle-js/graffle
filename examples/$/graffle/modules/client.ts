@@ -17,7 +17,15 @@ const context = $$Utilities.pipe(
         map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
       },
     }),
-  ctx => $$Utilities.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
+  ctx =>
+    $$Utilities.Scalars.set(ctx, {
+      scalars: {
+        map: {
+          ...$$SchemaDrivenDataMap.scalars,
+          ...$$Scalar.$registry.map,
+        },
+      },
+    }),
 )
 
 /**

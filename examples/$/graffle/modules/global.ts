@@ -1,8 +1,8 @@
-import * as $$ArgumentsMap from './arguments-map.js'
 import * as $$Data from './data.js'
 import * as $$MethodsDocument from './methods-document.js'
 import * as $$MethodsRoot from './methods-root.js'
 import * as $$MethodsSelect from './methods-select.js'
+import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
@@ -20,7 +20,7 @@ declare global {
         selectionSets: {
           $Document: $$SelectionSets.$Document
         }
-        argumentsMap: $$ArgumentsMap.ArgumentsMap
+        argumentsMap: $$SchemaDrivenDataMap.SchemaDrivenDataMap
         /**
          * http://localhost:3000/graphql
          */
