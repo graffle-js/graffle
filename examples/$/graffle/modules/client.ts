@@ -20,8 +20,10 @@ const context = $$Utilities.pipe(
   ctx =>
     $$Utilities.Scalars.set(ctx, {
       scalars: {
+        typesEncoded: null as any,
+        typesDecoded: null as any,
         map: {
-          ...$$SchemaDrivenDataMap.scalars,
+          ...$$SchemaDrivenDataMap.schemaDrivenDataMap.scalarTypes,
           ...$$Scalar.$registry.map,
         },
       },

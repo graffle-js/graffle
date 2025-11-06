@@ -14,7 +14,8 @@
     "no-irregular-whitespace": "warn",
     "no-undef": "off",
     "no-redeclare": "off",
-    "no-empty-pattern": "off"
+    "no-empty-pattern": "off",
+    "no-unused-expressions": "off" // Disabled because it incorrectly flags template literal expressions like: code`const $schemaDrivenDataMap: SchemaDrivenDataMap =`
   },
   "ignorePatterns": [
     "build/**/*",

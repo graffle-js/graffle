@@ -121,23 +121,23 @@ A.sub.ofAs<{ ints?: readonly number[] | null | undefined }>()
 // ====================================================================
 
 // Optional input object
-A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObject'] | null | undefined }>()
+A.sub.ofAs<{ input?: Possible.$.SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined }>()
      .onAs<InferFromQuery<{ dateArgInputObject: { $: { input: $ } } }, Possible.$.SchemaDrivenDataMap>>()
 
 // Required input object
-A.sub.ofAs<{ input: Possible.$.TypeInputsIndex['InputObject'] }>()
+A.sub.ofAs<{ input: Possible.$.SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] }>()
      .onAs<InferFromQuery<{ stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.SchemaDrivenDataMap>>()
 
 // Multiple input objects with same variable name (required wins)
-A.sub.ofAs<{ input: Possible.$.TypeInputsIndex['InputObject'] }>()
+A.sub.ofAs<{ input: Possible.$.SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] }>()
      .onAs<InferFromQuery<{ dateArgInputObject: { $: { input: $ } }, stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.SchemaDrivenDataMap>>()
 
 // Nested input object
-A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObjectNested'] | null | undefined }>()
+A.sub.ofAs<{ input?: Possible.$.SchemaDrivenDataMap['inputTypes']['InputObjectNested']['$type'] | null | undefined }>()
      .onAs<InferFromQuery<{ InputObjectNested: { $: { input: $ } } }, Possible.$.SchemaDrivenDataMap>>()
 
 // Circular input object (self-referential)
-A.sub.ofAs<{ input?: Possible.$.TypeInputsIndex['InputObjectCircular'] | null | undefined }>()
+A.sub.ofAs<{ input?: Possible.$.SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined }>()
      .onAs<InferFromQuery<{ argInputObjectCircular: { $: { input: $ } } }, Possible.$.SchemaDrivenDataMap>>()
 
 // ====================================================================

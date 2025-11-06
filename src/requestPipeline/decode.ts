@@ -102,10 +102,12 @@ const decodeResultValue = (input: {
       return
     }
     if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
-      // Check registry first (runtime-added via .scalar()), fall back to sddmNode's codec
-      const registeredScalar = scalars[sddmNode.name]
-      const codec = registeredScalar ? registeredScalar.codec : sddmNode.codec
-      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(codec.decode, value)
+      // Registry is populated from SDDM at client init, with overrides from .scalar()
+      const scalar = scalars[sddmNode.name]
+      if (!scalar) {
+        throw new Error(`Scalar "${sddmNode.name}" not found in registry. This should not happen if the client was properly initialized.`)
+      }
+      const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {
         parentContext.object[parentContext.fieldName] = decodedValue
       } else {

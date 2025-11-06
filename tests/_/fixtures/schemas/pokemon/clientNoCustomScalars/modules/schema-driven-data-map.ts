@@ -1,6 +1,5 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import * as $$Scalar from './scalar.js'
-import type { TypeInputsIndex } from './type-inputs-index.js'
 
 //
 //
@@ -21,16 +20,32 @@ import type { TypeInputsIndex } from './type-inputs-index.js'
 interface BattleWildResult extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'BattleWildResult'
+  readonly $type: 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated'
 }
 
 interface PokemonType extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'PokemonType'
+  readonly $type: 'bug' | 'electric' | 'fire' | 'grass' | 'water'
 }
 
 interface TrainerClass extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'TrainerClass'
+  readonly $type:
+    | 'bugCatcher'
+    | 'camper'
+    | 'picnicker'
+    | 'psychic'
+    | 'psychicMedium'
+    | 'psychicYoungster'
+    | 'sailor'
+    | 'superNerd'
+    | 'tamer'
+    | 'teamRocketGrunt'
+    | 'triathlete'
+    | 'youngster'
+    | 'youth'
 }
 
 interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -42,14 +57,16 @@ interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.Date
       readonly inlineType: [0]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
     }
     readonly lte: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.Date
       readonly inlineType: [0]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
     }
+  }
+  readonly $type: {
+    gte?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
+    lte?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
   }
 }
 
@@ -62,20 +79,22 @@ interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: DateFilter
       readonly inlineType: [0]
-      readonly $type: TypeInputsIndex['DateFilter'] | null | undefined
     }
     readonly name: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: StringFilter
       readonly inlineType: [0]
-      readonly $type: TypeInputsIndex['StringFilter'] | null | undefined
     }
     readonly type: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: PokemonType
       readonly inlineType: [0]
-      readonly $type: 'bug' | 'electric' | 'fire' | 'grass' | 'water' | null | undefined
     }
+  }
+  readonly $type: {
+    birthday?: SchemaDrivenDataMap['inputTypes']['DateFilter']['$type'] | null | undefined
+    name?: SchemaDrivenDataMap['inputTypes']['StringFilter']['$type'] | null | undefined
+    type?: PokemonType['$type'] | null | undefined
   }
 }
 
@@ -87,14 +106,16 @@ interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.String
       readonly inlineType: [0]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']> | null | undefined
     }
     readonly in: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.String
       readonly inlineType: [0, [1]]
-      readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>)[] | null | undefined
     }
+  }
+  readonly $type: {
+    contains?: $$Scalar.String['codec']['_typeDecoded'] | null | undefined
+    in?: readonly ($$Scalar.String['codec']['_typeDecoded'])[] | null | undefined
   }
 }
 
@@ -295,8 +316,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [1]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
         }
+      }
+      readonly $argumentsType: {
+        name: $$Scalar.String['codec']['_typeDecoded']
       }
       readonly namedType: Pokemon
     }
@@ -307,8 +330,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: PokemonFilter
           readonly inlineType: [0]
-          readonly $type: TypeInputsIndex['PokemonFilter'] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        filter?: SchemaDrivenDataMap['inputTypes']['PokemonFilter']['$type'] | null | undefined
       }
       readonly namedType: Pokemon
     }
@@ -319,8 +344,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [1]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
         }
+      }
+      readonly $argumentsType: {
+        name: $$Scalar.String['codec']['_typeDecoded']
       }
       readonly namedType: Trainer
     }
@@ -341,32 +368,34 @@ interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
         }
         readonly defense: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
         }
         readonly hp: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
         }
         readonly name: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [1]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
         }
         readonly type: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: PokemonType
           readonly inlineType: [1]
-          readonly $type: 'bug' | 'electric' | 'fire' | 'grass' | 'water'
         }
+      }
+      readonly $argumentsType: {
+        attack?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
+        defense?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
+        hp?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
+        name: $$Scalar.String['codec']['_typeDecoded']
+        type: PokemonType['$type']
       }
       readonly namedType: Pokemon
     }
@@ -427,16 +456,32 @@ interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
 const BattleWildResult: BattleWildResult = {
   _tag: 'enum',
   name: 'BattleWildResult',
+  $type: null as any as 'pokemonsCaptured' | 'pokemonsDefeated' | 'trainerDefeated',
 }
 
 const PokemonType: PokemonType = {
   _tag: 'enum',
   name: 'PokemonType',
+  $type: null as any as 'bug' | 'electric' | 'fire' | 'grass' | 'water',
 }
 
 const TrainerClass: TrainerClass = {
   _tag: 'enum',
   name: 'TrainerClass',
+  $type: null as any as
+    | 'bugCatcher'
+    | 'camper'
+    | 'picnicker'
+    | 'psychic'
+    | 'psychicMedium'
+    | 'psychicYoungster'
+    | 'sailor'
+    | 'superNerd'
+    | 'tamer'
+    | 'teamRocketGrunt'
+    | 'triathlete'
+    | 'youngster'
+    | 'youth',
 }
 
 //
@@ -464,14 +509,16 @@ const DateFilter: DateFilter = {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.Date,
       inlineType: [0],
-      $type: null as any,
     },
     lte: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.Date,
       inlineType: [0],
-      $type: null as any,
     },
+  },
+  $type: {
+    gte: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
+    lte: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
   },
 }
 
@@ -484,20 +531,22 @@ const PokemonFilter: PokemonFilter = {
       _tag: 'argumentOrInputField',
       namedType: null as any as DateFilter,
       inlineType: [0],
-      $type: null as any,
     },
     name: {
       _tag: 'argumentOrInputField',
       namedType: null as any as StringFilter,
       inlineType: [0],
-      $type: null as any,
     },
     type: {
       _tag: 'argumentOrInputField',
       namedType: PokemonType,
       inlineType: [0],
-      $type: null as any,
     },
+  },
+  $type: {
+    birthday: null as any as SchemaDrivenDataMap['inputTypes']['DateFilter']['$type'] | null | undefined,
+    name: null as any as SchemaDrivenDataMap['inputTypes']['StringFilter']['$type'] | null | undefined,
+    type: null as any as PokemonType['$type'] | null | undefined,
   },
 }
 
@@ -509,14 +558,16 @@ const StringFilter: StringFilter = {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.String,
       inlineType: [0],
-      $type: null as any,
     },
     in: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.String,
       inlineType: [0, [1]],
-      $type: null as any,
     },
+  },
+  $type: {
+    contains: null as any as $$Scalar.String['codec']['_typeDecoded'] | null | undefined,
+    in: null as any as readonly ($$Scalar.String['codec']['_typeDecoded'])[] | null | undefined,
   },
 }
 
@@ -788,8 +839,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        name: null as any as $$Scalar.String['codec']['_typeDecoded'],
       },
       namedType: null as any as Pokemon,
     },
@@ -800,8 +853,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: PokemonFilter,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        filter: null as any as SchemaDrivenDataMap['inputTypes']['PokemonFilter']['$type'] | null | undefined,
       },
       namedType: null as any as Pokemon,
     },
@@ -812,8 +867,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        name: null as any as $$Scalar.String['codec']['_typeDecoded'],
       },
       namedType: null as any as Trainer,
     },
@@ -834,32 +891,34 @@ const Mutation: Mutation = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0],
-          $type: null as any,
         },
         defense: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0],
-          $type: null as any,
         },
         hp: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0],
-          $type: null as any,
         },
         name: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [1],
-          $type: null as any,
         },
         type: {
           _tag: 'argumentOrInputField',
           namedType: PokemonType,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        attack: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
+        defense: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
+        hp: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
+        name: null as any as $$Scalar.String['codec']['_typeDecoded'],
+        type: null as any as PokemonType['$type'],
       },
       namedType: null as any as Pokemon,
     },
@@ -996,6 +1055,14 @@ interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
     readonly Query: Query
     readonly Mutation: Mutation
   }
+  readonly scalarTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+    readonly Date: $$Scalar.Date
+  }
 }
 
 const $schemaDrivenDataMap: SchemaDrivenDataMap = {
@@ -1040,6 +1107,14 @@ const $schemaDrivenDataMap: SchemaDrivenDataMap = {
     Battle,
     Query,
     Mutation,
+  },
+  scalarTypes: {
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
+    Date: $$Scalar.Date,
   },
 }
 

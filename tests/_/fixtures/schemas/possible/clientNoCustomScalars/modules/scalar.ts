@@ -13,13 +13,12 @@ export * from '#graffle/generator-helpers/standard-scalar-types'
 //
 //
 
-export const Date: Date = {
+export const Date = {
   kind: 'Scalar',
   name: 'Date',
   codec: $$Utilities.Codec.create({ encode: (value: any) => String(value), decode: (value: any) => String(value) }),
 } as $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, string>
 export type Date = $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, string>
-
 //
 //
 //
@@ -35,7 +34,7 @@ export type Date = $$Utilities.GraphqlKit.Schema.Type.Scalar<'Date', string, str
 const $bigint = {
   kind: 'Scalar',
   name: 'bigint',
-  codec: $$Utilities.Codec.create({ encode: (value: any) => value, decode: (value: any) => value }),
+  codec: $$Utilities.Codec.create({ encode: (value: any) => String(value), decode: (value: any) => String(value) }),
 } as $$Utilities.GraphqlKit.Schema.Type.Scalar<'bigint', string, string>
 type $bigint = $$Utilities.GraphqlKit.Schema.Type.Scalar<'bigint', string, string>
 export { $bigint as bigint }

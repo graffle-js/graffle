@@ -236,6 +236,13 @@ interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
     readonly String: $$Scalar.String
     readonly Query: Query
   }
+  readonly scalarTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+  }
 }
 
 const $schemaDrivenDataMap: SchemaDrivenDataMap = {
@@ -257,6 +264,13 @@ const $schemaDrivenDataMap: SchemaDrivenDataMap = {
     Int: $$Scalar.Int,
     String: $$Scalar.String,
     Query,
+  },
+  scalarTypes: {
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
   },
 }
 

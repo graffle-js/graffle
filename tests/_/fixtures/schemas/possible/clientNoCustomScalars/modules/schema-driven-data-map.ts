@@ -1,6 +1,5 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import * as $$Scalar from './scalar.js'
-import type { TypeInputsIndex } from './type-inputs-index.js'
 
 //
 //
@@ -21,31 +20,37 @@ import type { TypeInputsIndex } from './type-inputs-index.js'
 interface ABCEnum extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ABCEnum'
+  readonly $type: 'A' | 'B' | 'C'
 }
 
 interface Case extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'Case'
+  readonly $type: 'ErrorOne' | 'ErrorTwo' | 'Object1'
 }
 
 interface ChildAInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ChildAInterfaceHierarchyMember'
+  readonly $type: 'InterfaceChildA'
 }
 
 interface ChildBInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ChildBInterfaceHierarchyMember'
+  readonly $type: 'InterfaceChildB'
 }
 
 interface GrandparentInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'GrandparentInterfaceHierarchyMember'
+  readonly $type: 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceGrandparent' | 'InterfaceParent'
 }
 
 interface ParentInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap.Enum {
   readonly _tag: 'enum'
   readonly name: 'ParentInterfaceHierarchyMember'
+  readonly $type: 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent'
 }
 
 interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject {
@@ -57,32 +62,34 @@ interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: ABCEnum
       readonly inlineType: [0]
-      readonly $type: 'A' | 'B' | 'C' | null | undefined
     }
     readonly date: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.Date
       readonly inlineType: [0]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
     }
     readonly dateRequired: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.Date
       readonly inlineType: [1]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']>
     }
     readonly id: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.ID
       readonly inlineType: [0]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']> | null | undefined
     }
     readonly idRequired: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.ID
       readonly inlineType: [1]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']>
     }
+  }
+  readonly $type: {
+    abcEnum?: ABCEnum['$type'] | null | undefined
+    date?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
+    dateRequired: $$Scalar.Date['codec']['_typeDecoded']
+    id?: $$Scalar.ID['codec']['_typeDecoded'] | null | undefined
+    idRequired: $$Scalar.ID['codec']['_typeDecoded']
   }
 }
 
@@ -95,14 +102,16 @@ interface InputObjectCircular extends $$Utilities.SchemaDrivenDataMap.InputObjec
       readonly _tag: 'argumentOrInputField'
       readonly namedType: InputObjectCircular
       readonly inlineType: [0]
-      readonly $type: TypeInputsIndex['InputObjectCircular'] | null | undefined
     }
     readonly date: {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: $$Scalar.Date
       readonly inlineType: [0]
-      readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
     }
+  }
+  readonly $type: {
+    circular?: SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined
+    date?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
   }
 }
 
@@ -114,8 +123,10 @@ interface InputObjectEnum extends $$Utilities.SchemaDrivenDataMap.InputObject {
       readonly _tag: 'argumentOrInputField'
       readonly namedType: ABCEnum
       readonly inlineType: [0]
-      readonly $type: 'A' | 'B' | 'C' | null | undefined
     }
+  }
+  readonly $type: {
+    abcEnum?: ABCEnum['$type'] | null | undefined
   }
 }
 
@@ -128,8 +139,10 @@ interface InputObjectNested extends $$Utilities.SchemaDrivenDataMap.InputObject 
       readonly _tag: 'argumentOrInputField'
       readonly namedType: InputObject
       readonly inlineType: [0]
-      readonly $type: TypeInputsIndex['InputObject'] | null | undefined
     }
+  }
+  readonly $type: {
+    InputObject?: SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined
   }
 }
 
@@ -142,8 +155,10 @@ interface InputObjectNestedNonNull extends $$Utilities.SchemaDrivenDataMap.Input
       readonly _tag: 'argumentOrInputField'
       readonly namedType: InputObject
       readonly inlineType: [1]
-      readonly $type: TypeInputsIndex['InputObject']
     }
+  }
+  readonly $type: {
+    InputObject: SchemaDrivenDataMap['inputTypes']['InputObject']['$type']
   }
 }
 
@@ -328,8 +343,10 @@ interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.OutputObj
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.ID
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        filter?: $$Scalar.ID['codec']['_typeDecoded'] | null | undefined
       }
     }
     readonly object: {
@@ -339,26 +356,28 @@ interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.OutputObj
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Boolean
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Boolean['codec']> | null | undefined
         }
         readonly float: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Float
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Float['codec']> | null | undefined
         }
         readonly int: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
         }
         readonly string: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        boolean?: $$Scalar.Boolean['codec']['_typeDecoded'] | null | undefined
+        float?: $$Scalar.Float['codec']['_typeDecoded'] | null | undefined
+        int?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
+        string?: $$Scalar.String['codec']['_typeDecoded'] | null | undefined
       }
       readonly namedType: Object1
     }
@@ -473,8 +492,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObjectNested
           readonly inlineType: [0]
-          readonly $type: TypeInputsIndex['InputObjectNested'] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        input?: SchemaDrivenDataMap['inputTypes']['InputObjectNested']['$type'] | null | undefined
       }
     }
     readonly InputObjectNestedNonNull: {
@@ -484,8 +505,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObjectNestedNonNull
           readonly inlineType: [1]
-          readonly $type: TypeInputsIndex['InputObjectNestedNonNull']
         }
+      }
+      readonly $argumentsType: {
+        input: SchemaDrivenDataMap['inputTypes']['InputObjectNestedNonNull']['$type']
       }
     }
     readonly abcEnum: {
@@ -498,8 +521,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObjectCircular
           readonly inlineType: [0]
-          readonly $type: TypeInputsIndex['InputObjectCircular'] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        input?: SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined
       }
     }
     readonly bigintField: {
@@ -521,8 +546,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Date
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        date?: $$Scalar.Date['codec']['_typeDecoded'] | null | undefined
       }
       readonly namedType: $$Scalar.Date
     }
@@ -533,8 +560,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObject
           readonly inlineType: [0]
-          readonly $type: TypeInputsIndex['InputObject'] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        input?: SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined
       }
       readonly namedType: $$Scalar.Date
     }
@@ -545,8 +574,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Date
           readonly inlineType: [0, [1]]
-          readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']>)[] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        date?: readonly ($$Scalar.Date['codec']['_typeDecoded'])[] | null | undefined
       }
       readonly namedType: $$Scalar.Date
     }
@@ -557,8 +588,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Date
           readonly inlineType: [1]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']>
         }
+      }
+      readonly $argumentsType: {
+        date: $$Scalar.Date['codec']['_typeDecoded']
       }
       readonly namedType: $$Scalar.Date
     }
@@ -569,8 +602,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Date
           readonly inlineType: [1, [0]]
-          readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']>)[]
         }
+      }
+      readonly $argumentsType: {
+        date: readonly ($$Scalar.Date['codec']['_typeDecoded'])[]
       }
       readonly namedType: $$Scalar.Date
     }
@@ -581,8 +616,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Date
           readonly inlineType: [1, [1]]
-          readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.Date['codec']>)[]
         }
+      }
+      readonly $argumentsType: {
+        date: readonly ($$Scalar.Date['codec']['_typeDecoded'])[]
       }
       readonly namedType: $$Scalar.Date
     }
@@ -621,8 +658,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        case?: $$Scalar.String['codec']['_typeDecoded'] | null | undefined
       }
     }
     readonly id: {
@@ -642,8 +681,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: ChildAInterfaceHierarchyMember
           readonly inlineType: [0]
-          readonly $type: 'InterfaceChildA' | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        type?: ChildAInterfaceHierarchyMember['$type'] | null | undefined
       }
       readonly namedType: InterfaceChildA
     }
@@ -654,8 +695,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: ChildBInterfaceHierarchyMember
           readonly inlineType: [0]
-          readonly $type: 'InterfaceChildB' | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        type?: ChildBInterfaceHierarchyMember['$type'] | null | undefined
       }
       readonly namedType: InterfaceChildB
     }
@@ -666,14 +709,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: GrandparentInterfaceHierarchyMember
           readonly inlineType: [0]
-          readonly $type:
-            | 'InterfaceChildA'
-            | 'InterfaceChildB'
-            | 'InterfaceGrandparent'
-            | 'InterfaceParent'
-            | null
-            | undefined
         }
+      }
+      readonly $argumentsType: {
+        type?: GrandparentInterfaceHierarchyMember['$type'] | null | undefined
       }
       readonly namedType: InterfaceGrandparent
     }
@@ -684,8 +723,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: ParentInterfaceHierarchyMember
           readonly inlineType: [0]
-          readonly $type: 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent' | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        type?: ParentInterfaceHierarchyMember['$type'] | null | undefined
       }
       readonly namedType: InterfaceParent
     }
@@ -700,8 +741,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.ID
           readonly inlineType: [1]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']>
         }
+      }
+      readonly $argumentsType: {
+        id: $$Scalar.ID['codec']['_typeDecoded']
       }
       readonly namedType: Interface
     }
@@ -753,32 +796,34 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Boolean
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Boolean['codec']> | null | undefined
         }
         readonly float: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Float
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Float['codec']> | null | undefined
         }
         readonly id: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.ID
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']> | null | undefined
         }
         readonly int: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
         }
         readonly string: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        boolean?: $$Scalar.Boolean['codec']['_typeDecoded'] | null | undefined
+        float?: $$Scalar.Float['codec']['_typeDecoded'] | null | undefined
+        id?: $$Scalar.ID['codec']['_typeDecoded'] | null | undefined
+        int?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
+        string?: $$Scalar.String['codec']['_typeDecoded'] | null | undefined
       }
       readonly namedType: Object1
     }
@@ -789,8 +834,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: Case
           readonly inlineType: [1]
-          readonly $type: 'ErrorOne' | 'ErrorTwo' | 'Object1'
         }
+      }
+      readonly $argumentsType: {
+        case: Case['$type']
       }
       readonly namedType: Result
     }
@@ -801,8 +848,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: Case
           readonly inlineType: [0]
-          readonly $type: 'ErrorOne' | 'ErrorTwo' | 'Object1' | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        case?: Case['$type'] | null | undefined
       }
       readonly namedType: Result
     }
@@ -816,8 +865,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: ABCEnum
           readonly inlineType: [0]
-          readonly $type: 'A' | 'B' | 'C' | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        ABCEnum?: ABCEnum['$type'] | null | undefined
       }
     }
     readonly stringWithArgInputObject: {
@@ -827,8 +878,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObject
           readonly inlineType: [0]
-          readonly $type: TypeInputsIndex['InputObject'] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        input?: SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined
       }
     }
     readonly stringWithArgInputObjectEnum: {
@@ -838,8 +891,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObjectEnum
           readonly inlineType: [1]
-          readonly $type: TypeInputsIndex['InputObjectEnum']
         }
+      }
+      readonly $argumentsType: {
+        input: SchemaDrivenDataMap['inputTypes']['InputObjectEnum']['$type']
       }
     }
     readonly stringWithArgInputObjectRequired: {
@@ -849,8 +904,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: InputObject
           readonly inlineType: [1]
-          readonly $type: TypeInputsIndex['InputObject']
         }
+      }
+      readonly $argumentsType: {
+        input: SchemaDrivenDataMap['inputTypes']['InputObject']['$type']
       }
     }
     readonly stringWithArgs: {
@@ -860,32 +917,34 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Boolean
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Boolean['codec']> | null | undefined
         }
         readonly float: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Float
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Float['codec']> | null | undefined
         }
         readonly id: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.ID
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']> | null | undefined
         }
         readonly int: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']> | null | undefined
         }
         readonly string: {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        boolean?: $$Scalar.Boolean['codec']['_typeDecoded'] | null | undefined
+        float?: $$Scalar.Float['codec']['_typeDecoded'] | null | undefined
+        id?: $$Scalar.ID['codec']['_typeDecoded'] | null | undefined
+        int?: $$Scalar.Int['codec']['_typeDecoded'] | null | undefined
+        string?: $$Scalar.String['codec']['_typeDecoded'] | null | undefined
       }
     }
     readonly stringWithListArg: {
@@ -895,8 +954,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [0, [0]]
-          readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']>)[] | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        ints?: readonly ($$Scalar.Int['codec']['_typeDecoded'])[] | null | undefined
       }
     }
     readonly stringWithListArgRequired: {
@@ -906,8 +967,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.Int
           readonly inlineType: [1, [1]]
-          readonly $type: readonly ($$Utilities.Codec.GetDecoded<$$Scalar.Int['codec']>)[]
         }
+      }
+      readonly $argumentsType: {
+        ints: readonly ($$Scalar.Int['codec']['_typeDecoded'])[]
       }
     }
     readonly stringWithRequiredArg: {
@@ -917,8 +980,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.String
           readonly inlineType: [1]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.String['codec']>
         }
+      }
+      readonly $argumentsType: {
+        string: $$Scalar.String['codec']['_typeDecoded']
       }
     }
     readonly unionFooBar: {
@@ -936,8 +1001,10 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
           readonly _tag: 'argumentOrInputField'
           readonly namedType: $$Scalar.ID
           readonly inlineType: [0]
-          readonly $type: $$Utilities.Codec.GetDecoded<$$Scalar.ID['codec']> | null | undefined
         }
+      }
+      readonly $argumentsType: {
+        id?: $$Scalar.ID['codec']['_typeDecoded'] | null | undefined
       }
       readonly namedType: FooBarUnion
     }
@@ -1015,31 +1082,37 @@ interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
 const ABCEnum: ABCEnum = {
   _tag: 'enum',
   name: 'ABCEnum',
+  $type: null as any as 'A' | 'B' | 'C',
 }
 
 const Case: Case = {
   _tag: 'enum',
   name: 'Case',
+  $type: null as any as 'ErrorOne' | 'ErrorTwo' | 'Object1',
 }
 
 const ChildAInterfaceHierarchyMember: ChildAInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ChildAInterfaceHierarchyMember',
+  $type: null as any as 'InterfaceChildA',
 }
 
 const ChildBInterfaceHierarchyMember: ChildBInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ChildBInterfaceHierarchyMember',
+  $type: null as any as 'InterfaceChildB',
 }
 
 const GrandparentInterfaceHierarchyMember: GrandparentInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'GrandparentInterfaceHierarchyMember',
+  $type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceGrandparent' | 'InterfaceParent',
 }
 
 const ParentInterfaceHierarchyMember: ParentInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ParentInterfaceHierarchyMember',
+  $type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent',
 }
 
 //
@@ -1067,32 +1140,34 @@ const InputObject: InputObject = {
       _tag: 'argumentOrInputField',
       namedType: ABCEnum,
       inlineType: [0],
-      $type: null as any,
     },
     date: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.Date,
       inlineType: [0],
-      $type: null as any,
     },
     dateRequired: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.Date,
       inlineType: [1],
-      $type: null as any,
     },
     id: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.ID,
       inlineType: [0],
-      $type: null as any,
     },
     idRequired: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.ID,
       inlineType: [1],
-      $type: null as any,
     },
+  },
+  $type: {
+    abcEnum: null as any as ABCEnum['$type'] | null | undefined,
+    date: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
+    dateRequired: null as any as $$Scalar.Date['codec']['_typeDecoded'],
+    id: null as any as $$Scalar.ID['codec']['_typeDecoded'] | null | undefined,
+    idRequired: null as any as $$Scalar.ID['codec']['_typeDecoded'],
   },
 }
 
@@ -1105,14 +1180,16 @@ const InputObjectCircular: InputObjectCircular = {
       _tag: 'argumentOrInputField',
       namedType: null as any as InputObjectCircular,
       inlineType: [0],
-      $type: null as any,
     },
     date: {
       _tag: 'argumentOrInputField',
       namedType: $$Scalar.Date,
       inlineType: [0],
-      $type: null as any,
     },
+  },
+  $type: {
+    circular: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined,
+    date: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
   },
 }
 
@@ -1124,8 +1201,10 @@ const InputObjectEnum: InputObjectEnum = {
       _tag: 'argumentOrInputField',
       namedType: ABCEnum,
       inlineType: [0],
-      $type: null as any,
     },
+  },
+  $type: {
+    abcEnum: null as any as ABCEnum['$type'] | null | undefined,
   },
 }
 
@@ -1138,8 +1217,10 @@ const InputObjectNested: InputObjectNested = {
       _tag: 'argumentOrInputField',
       namedType: null as any as InputObject,
       inlineType: [0],
-      $type: null as any,
     },
+  },
+  $type: {
+    InputObject: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined,
   },
 }
 
@@ -1152,8 +1233,10 @@ const InputObjectNestedNonNull: InputObjectNestedNonNull = {
       _tag: 'argumentOrInputField',
       namedType: null as any as InputObject,
       inlineType: [1],
-      $type: null as any,
     },
+  },
+  $type: {
+    InputObject: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'],
   },
 }
 
@@ -1354,8 +1437,10 @@ const ObjectNestedWithArgs: ObjectNestedWithArgs = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.ID,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        filter: null as any as $$Scalar.ID['codec']['_typeDecoded'] | null | undefined,
       },
     },
     object: {
@@ -1365,26 +1450,28 @@ const ObjectNestedWithArgs: ObjectNestedWithArgs = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Boolean,
           inlineType: [0],
-          $type: null as any,
         },
         float: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Float,
           inlineType: [0],
-          $type: null as any,
         },
         int: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0],
-          $type: null as any,
         },
         string: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        boolean: null as any as $$Scalar.Boolean['codec']['_typeDecoded'] | null | undefined,
+        float: null as any as $$Scalar.Float['codec']['_typeDecoded'] | null | undefined,
+        int: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
+        string: null as any as $$Scalar.String['codec']['_typeDecoded'] | null | undefined,
       },
       namedType: null as any as Object1,
     },
@@ -1552,8 +1639,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObjectNested,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectNested']['$type'] | null | undefined,
       },
     },
     InputObjectNestedNonNull: {
@@ -1563,8 +1652,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObjectNestedNonNull,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectNestedNonNull']['$type'],
       },
     },
     abcEnum: {
@@ -1577,8 +1668,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObjectCircular,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectCircular']['$type'] | null | undefined,
       },
     },
     bigintField: {
@@ -1600,8 +1693,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Date,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        date: null as any as $$Scalar.Date['codec']['_typeDecoded'] | null | undefined,
       },
       namedType: $$Scalar.Date,
     },
@@ -1612,8 +1707,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObject,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined,
       },
       namedType: $$Scalar.Date,
     },
@@ -1624,8 +1721,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Date,
           inlineType: [0, [1]],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        date: null as any as readonly ($$Scalar.Date['codec']['_typeDecoded'])[] | null | undefined,
       },
       namedType: $$Scalar.Date,
     },
@@ -1636,8 +1735,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Date,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        date: null as any as $$Scalar.Date['codec']['_typeDecoded'],
       },
       namedType: $$Scalar.Date,
     },
@@ -1648,8 +1749,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Date,
           inlineType: [1, [0]],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        date: null as any as readonly ($$Scalar.Date['codec']['_typeDecoded'])[],
       },
       namedType: $$Scalar.Date,
     },
@@ -1660,8 +1763,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Date,
           inlineType: [1, [1]],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        date: null as any as readonly ($$Scalar.Date['codec']['_typeDecoded'])[],
       },
       namedType: $$Scalar.Date,
     },
@@ -1700,8 +1805,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        case: null as any as $$Scalar.String['codec']['_typeDecoded'] | null | undefined,
       },
     },
     id: {
@@ -1721,8 +1828,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: ChildAInterfaceHierarchyMember,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        type: null as any as ChildAInterfaceHierarchyMember['$type'] | null | undefined,
       },
       namedType: null as any as InterfaceChildA,
     },
@@ -1733,8 +1842,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: ChildBInterfaceHierarchyMember,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        type: null as any as ChildBInterfaceHierarchyMember['$type'] | null | undefined,
       },
       namedType: null as any as InterfaceChildB,
     },
@@ -1745,8 +1856,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: GrandparentInterfaceHierarchyMember,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        type: null as any as GrandparentInterfaceHierarchyMember['$type'] | null | undefined,
       },
       namedType: null as any as InterfaceGrandparent,
     },
@@ -1757,8 +1870,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: ParentInterfaceHierarchyMember,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        type: null as any as ParentInterfaceHierarchyMember['$type'] | null | undefined,
       },
       namedType: null as any as InterfaceParent,
     },
@@ -1773,8 +1888,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.ID,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        id: null as any as $$Scalar.ID['codec']['_typeDecoded'],
       },
       namedType: null as any as Interface,
     },
@@ -1826,32 +1943,34 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Boolean,
           inlineType: [0],
-          $type: null as any,
         },
         float: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Float,
           inlineType: [0],
-          $type: null as any,
         },
         id: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.ID,
           inlineType: [0],
-          $type: null as any,
         },
         int: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0],
-          $type: null as any,
         },
         string: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        boolean: null as any as $$Scalar.Boolean['codec']['_typeDecoded'] | null | undefined,
+        float: null as any as $$Scalar.Float['codec']['_typeDecoded'] | null | undefined,
+        id: null as any as $$Scalar.ID['codec']['_typeDecoded'] | null | undefined,
+        int: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
+        string: null as any as $$Scalar.String['codec']['_typeDecoded'] | null | undefined,
       },
       namedType: null as any as Object1,
     },
@@ -1862,8 +1981,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: Case,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        case: null as any as Case['$type'],
       },
       namedType: null as any as Result,
     },
@@ -1874,8 +1995,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: Case,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        case: null as any as Case['$type'] | null | undefined,
       },
       namedType: null as any as Result,
     },
@@ -1889,8 +2012,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: ABCEnum,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        ABCEnum: null as any as ABCEnum['$type'] | null | undefined,
       },
     },
     stringWithArgInputObject: {
@@ -1900,8 +2025,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObject,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'] | null | undefined,
       },
     },
     stringWithArgInputObjectEnum: {
@@ -1911,8 +2038,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObjectEnum,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObjectEnum']['$type'],
       },
     },
     stringWithArgInputObjectRequired: {
@@ -1922,8 +2051,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: InputObject,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        input: null as any as SchemaDrivenDataMap['inputTypes']['InputObject']['$type'],
       },
     },
     stringWithArgs: {
@@ -1933,32 +2064,34 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Boolean,
           inlineType: [0],
-          $type: null as any,
         },
         float: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Float,
           inlineType: [0],
-          $type: null as any,
         },
         id: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.ID,
           inlineType: [0],
-          $type: null as any,
         },
         int: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0],
-          $type: null as any,
         },
         string: {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        boolean: null as any as $$Scalar.Boolean['codec']['_typeDecoded'] | null | undefined,
+        float: null as any as $$Scalar.Float['codec']['_typeDecoded'] | null | undefined,
+        id: null as any as $$Scalar.ID['codec']['_typeDecoded'] | null | undefined,
+        int: null as any as $$Scalar.Int['codec']['_typeDecoded'] | null | undefined,
+        string: null as any as $$Scalar.String['codec']['_typeDecoded'] | null | undefined,
       },
     },
     stringWithListArg: {
@@ -1968,8 +2101,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [0, [0]],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        ints: null as any as readonly ($$Scalar.Int['codec']['_typeDecoded'])[] | null | undefined,
       },
     },
     stringWithListArgRequired: {
@@ -1979,8 +2114,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.Int,
           inlineType: [1, [1]],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        ints: null as any as readonly ($$Scalar.Int['codec']['_typeDecoded'])[],
       },
     },
     stringWithRequiredArg: {
@@ -1990,8 +2127,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.String,
           inlineType: [1],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        string: null as any as $$Scalar.String['codec']['_typeDecoded'],
       },
     },
     unionFooBar: {
@@ -2009,8 +2148,10 @@ const Query: Query = {
           _tag: 'argumentOrInputField',
           namedType: $$Scalar.ID,
           inlineType: [0],
-          $type: null as any,
         },
+      },
+      $argumentsType: {
+        id: null as any as $$Scalar.ID['codec']['_typeDecoded'] | null | undefined,
       },
       namedType: null as any as FooBarUnion,
     },
@@ -2209,6 +2350,15 @@ interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
     readonly Query: Query
     readonly Mutation: Mutation
   }
+  readonly scalarTypes: {
+    readonly Boolean: $$Scalar.Boolean
+    readonly Float: $$Scalar.Float
+    readonly ID: $$Scalar.ID
+    readonly Int: $$Scalar.Int
+    readonly String: $$Scalar.String
+    readonly Date: $$Scalar.Date
+    readonly bigint: $$Scalar.bigint
+  }
 }
 
 const $schemaDrivenDataMap: SchemaDrivenDataMap = {
@@ -2282,6 +2432,15 @@ const $schemaDrivenDataMap: SchemaDrivenDataMap = {
     lowerCaseUnion,
     Query,
     Mutation,
+  },
+  scalarTypes: {
+    Boolean: $$Scalar.Boolean,
+    Float: $$Scalar.Float,
+    ID: $$Scalar.ID,
+    Int: $$Scalar.Int,
+    String: $$Scalar.String,
+    Date: $$Scalar.Date,
+    bigint: $$Scalar.bigint,
   },
 }
 

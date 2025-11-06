@@ -156,7 +156,7 @@ type ExtractFromOutputField_<
   // Process direct arguments
   & ($SS extends { readonly $: infer __ssArgs__ }
       ? __ssArgs__ extends object
-        ? ExtractFromArgsOrInputObject<__ssArgs__, $ArgsMapField['arguments'], $Ctx>
+        ? ExtractFromArgsOrInputObject<__ssArgs__, $ArgsMapField, $Ctx>
         : unknown
       : unknown
     )
@@ -173,7 +173,7 @@ type ExtractFromOutputField_<
 // dprint-ignore
 export type ExtractFromArgsOrInputObject<
   $SSArgs extends object,
-  $ArgumentsOrInputObjectFields extends SchemaDrivenDataMap.ArgumentsOrInputObjectFields | undefined,
+  $Parent extends SchemaDrivenDataMap.OutputField | SchemaDrivenDataMap.InputObject | undefined,
   $Ctx extends Context,
 > =
 {
@@ -186,35 +186,78 @@ export type ExtractFromArgsOrInputObject<
         type: $Builder extends BuilderTyped<infer $GQLType>
           ? VarBuilderToTypeFromGraphQLType<$GQLType, $Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
-            ? $k extends keyof $ArgumentsOrInputObjectFields
-              ? $ArgumentsOrInputObjectFields[$k] extends { readonly $type: infer $Type }
-                ? VarBuilderToType<$Type, $Builder>
-                : never
+            ? $k extends string
+              // Use parent's type map: OutputField.$argumentsType or InputObject.$type
+              ? $Parent extends SchemaDrivenDataMap.OutputField
+                ? '$argumentsType' extends keyof $Parent
+                  ? $k extends keyof $Parent['$argumentsType']
+                    ? VarBuilderToType<$Parent['$argumentsType'][$k], $Builder>
+                    : never
+                  : never
+                : $Parent extends SchemaDrivenDataMap.InputObject
+                  ? '$type' extends keyof $Parent
+                    ? $k extends keyof $Parent['$type']
+                      ? VarBuilderToType<$Parent['$type'][$k], $Builder>
+                      : never
+                    : never
+                  : never
               : never
             : never
         optional: $Builder extends BuilderTyped<any>
           ? IsOptionalVarFromGraphQLType<$Builder>
           : Select.Arguments.EnumKeyPrefixStrip<k> extends infer $k
-            ? $k extends keyof $ArgumentsOrInputObjectFields
-              ? $ArgumentsOrInputObjectFields[$k] extends { readonly $type: infer $Type }
-                ? IsOptionalVar<$Type, $Builder>
-                : false
+            ? $k extends string
+              // Use parent's type map for optionality check
+              ? $Parent extends SchemaDrivenDataMap.OutputField
+                ? '$argumentsType' extends keyof $Parent
+                  ? $k extends keyof $Parent['$argumentsType']
+                    ? IsOptionalVar<$Parent['$argumentsType'][$k], $Builder>
+                    : false
+                  : false
+                : $Parent extends SchemaDrivenDataMap.InputObject
+                  ? '$type' extends keyof $Parent
+                    ? $k extends keyof $Parent['$type']
+                      ? IsOptionalVar<$Parent['$type'][$k], $Builder>
+                      : false
+                    : false
+                  : false
               : false
             : false
         optionalUndefined: true
       } : never :
     // Traverse into nested input object
     $SSArgs[k] extends object ?
-      k extends keyof $ArgumentsOrInputObjectFields
-        // @ts-expect-error
-        ? $ArgumentsOrInputObjectFields[k]['namedType'] extends SchemaDrivenDataMap.InputObject
-          ? ExtractFromArgsOrInputObject<
-              $SSArgs[k],
+      k extends string
+        // Access fields and get nested InputObject
+        ? $Parent extends SchemaDrivenDataMap.OutputField
+          ? 'arguments' extends keyof $Parent
+            ? k extends keyof $Parent['arguments']
               // @ts-expect-error
-              $ArgumentsOrInputObjectFields[k]['namedType']['fields'],
-              $Ctx
-            >
-          : never // todo: static error that args gave object here but schema does not hae input object here
+              ? $Parent['arguments'][k]['namedType'] extends SchemaDrivenDataMap.InputObject
+                ? ExtractFromArgsOrInputObject<
+                    $SSArgs[k],
+                    // @ts-expect-error - Pass whole InputObject as parent
+                    $Parent['arguments'][k]['namedType'],
+                    $Ctx
+                  >
+                : never
+              : never
+            : never
+          : $Parent extends SchemaDrivenDataMap.InputObject
+            ? 'fields' extends keyof $Parent
+              ? k extends keyof $Parent['fields']
+                // @ts-expect-error
+                ? $Parent['fields'][k]['namedType'] extends SchemaDrivenDataMap.InputObject
+                  ? ExtractFromArgsOrInputObject<
+                      $SSArgs[k],
+                      // @ts-expect-error - Pass whole InputObject as parent
+                      $Parent['fields'][k]['namedType'],
+                      $Ctx
+                    >
+                  : never // todo: static error that args gave object here but schema does not have input object here
+                : never
+              : never
+            : never
         : never :
     // inline argument given, no variable, skip
       never

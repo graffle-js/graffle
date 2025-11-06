@@ -30,12 +30,6 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorScalar))
     code(importUtilities(config))
 
-    // Only import TypeInputsIndex if there are input objects (used in $type for InputObject references)
-    const hasInputObjects = (kindMap.InputObject?.length ?? 0) > 0
-    if (config.runtimeFeatures.operationVariables && hasInputObjects) {
-      code(codeImportNamed(config, { names: ['TypeInputsIndex'], from: './type-inputs-index', type: true }))
-    }
-
     const referenceAssignments: ReferenceAssignments = []
 
     // Create standard scalar names set early so it can be used in type generation
@@ -129,6 +123,16 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       code(`    readonly ${name}: ${typeRef}`)
     }
     code(`  }`)
+    code(`  readonly scalarTypes: {`)
+    // Export all scalars (standard + custom) for registry population
+    const allScalarNames = [
+      ...(kindMap.ScalarStandard?.map(_ => _.name) ?? []),
+      ...(kindMap.ScalarCustom?.map(_ => _.name) ?? []),
+    ]
+    for (const name of allScalarNames) {
+      code(`    readonly ${name}: ${$.$$Scalar}.${name}`)
+    }
+    code(`  }`)
     code(`}`)
     code``
 
@@ -152,6 +156,9 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
           const isScalar = standardScalarNames.has(name) || kindMap.ScalarCustom?.some(_ => _.name === name)
           return isScalar ? `${name}: ${$.$$Scalar}.${name}` : name
         }).join(`,\n`),
+      }),
+      scalarTypes: Str.Code.TS.TermObject.directiveTermObject({
+        $literal: allScalarNames.map(name => `${name}: ${$.$$Scalar}.${name}`).join(`,\n`),
       }),
     }))
     code``
@@ -380,9 +387,17 @@ const ObjectType = createCodeGenerator<
               // For variables, we need to know the variable type to write it out, so we always need the inline type.
               if (config.runtimeFeatures.operationVariables) {
                 ofItemA['inlineType'] = renderInlineType(arg.type)
-                ofItemA['$type'] = `null as any`
               }
             }
+        }
+
+        // Generate top-level $argumentsType map for O(1) type lookup (runtime value)
+        if (config.runtimeFeatures.operationVariables) {
+          const argumentsTypeObject: Str.Code.TS.TermObject.TermObject = {}
+          for (const arg of args) {
+            argumentsTypeObject[arg.name] = `null as any as ${renderResolvedType(arg.type, config)}`
+          }
+          sddmNodeOutputField.$fields['$argumentsType'] = argumentsTypeObject
         }
       }
 
@@ -445,14 +460,22 @@ const ObjectType = createCodeGenerator<
 const EnumType = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.EnumType; referenceAssignments: ReferenceAssignments }
 >(
-  ({ code, type }) => {
+  ({ config, code, type }) => {
+    const o: Str.Code.TS.TermObject.TermObject = {
+      _tag: Str.Code.TS.string('enum'),
+      name: Str.Code.TS.string(type.name),
+    }
+
+    // Generate $type property for O(1) type lookup (runtime value)
+    if (config.runtimeFeatures.operationVariables) {
+      const enumValues = type.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
+      o['$type'] = `null as any as ${enumValues}`
+    }
+
     code(Str.Code.TS.constDeclTyped(
       type.name,
       type.name,
-      Str.Code.TS.TermObject.termObject({
-        _tag: Str.Code.TS.string('enum'),
-        name: Str.Code.TS.string(type.name),
-      }),
+      Str.Code.TS.TermObject.termObject(o),
     ))
   },
 )
@@ -516,8 +539,16 @@ const InputObjectType = createCodeGenerator<
 
       if (config.runtimeFeatures.operationVariables) {
         f[inputField.name]!.$fields['inlineType'] = renderInlineType(inputField.type)
-        f[inputField.name]!.$fields['$type'] = `null as any`
       }
+    }
+
+    // Generate top-level $type property for O(1) type lookup (runtime value)
+    if (config.runtimeFeatures.operationVariables) {
+      const typeObject: Str.Code.TS.TermObject.TermObject = {}
+      for (const inputField of inputFields) {
+        typeObject[inputField.name] = `null as any as ${renderResolvedType(inputField.type, config)}`
+      }
+      o['$type'] = typeObject
     }
 
     code(
@@ -563,10 +594,17 @@ const ScalarTypeInterface = createCodeGenerator<
 const EnumTypeInterface = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.EnumType }
 >(
-  ({ code, type }) => {
+  ({ config, code, type }) => {
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.Enum {`)
     code(`  readonly _tag: ${Str.Code.TS.string('enum')}`)
     code(`  readonly name: ${Str.Code.TS.string(type.name)}`)
+
+    // Generate $type property for O(1) type lookup
+    if (config.runtimeFeatures.operationVariables) {
+      const enumValues = type.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
+      code(`  readonly $type: ${enumValues}`)
+    }
+
     code(`}`)
   },
 )
@@ -618,13 +656,24 @@ const InputObjectTypeInterface = createCodeGenerator<
 
       if (config.runtimeFeatures.operationVariables) {
         code(`      readonly inlineType: ${renderInlineType(inputField.type)}`)
-        code(`      readonly $type: ${renderResolvedType(inputField.type, config)}`)
       }
 
       code(`    }`)
     }
 
     code(`  }`)
+
+    // Generate top-level $type property for O(1) type lookup
+    if (config.runtimeFeatures.operationVariables) {
+      code(`  readonly $type: {`)
+      for (const inputField of inputFields) {
+        const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(inputField.type)
+        const optionalMarker = isNullable ? '?' : ''
+        code(`    ${inputField.name}${optionalMarker}: ${renderResolvedType(inputField.type, config)}`)
+      }
+      code(`  }`)
+    }
+
     code(`}`)
   },
 )
@@ -705,13 +754,23 @@ const ObjectTypeInterface = createCodeGenerator<
             code(`          readonly namedType: ${argTypeRef}`)
             if (config.runtimeFeatures.operationVariables) {
               code(`          readonly inlineType: ${renderInlineType(arg.type)}`)
-              code(`          readonly $type: ${renderResolvedType(arg.type, config)}`)
             }
             code(`        }`)
           }
         }
 
         code(`      }`)
+
+        // Generate top-level $argumentsType map for O(1) type lookup
+        if (config.runtimeFeatures.operationVariables) {
+          code(`      readonly $argumentsType: {`)
+          for (const arg of args) {
+            const isNullable = GraphqlKit.Schema.Runtime.Nodes.isNullableType(arg.type)
+            const optionalMarker = isNullable ? '?' : ''
+            code(`        ${arg.name}${optionalMarker}: ${renderResolvedType(arg.type, config)}`)
+          }
+          code(`      }`)
+        }
       }
 
       // Add argumentsDescendant if field's return type has fields with arguments
@@ -812,15 +871,13 @@ const renderResolvedType = (type: GraphqlKit.Schema.Runtime.NodeGroups.Types, co
   // Determine base type reference
   let baseType: string
   if (GraphqlKit.Schema.Runtime.Nodes.isScalarType(namedType)) {
-    // Use Codec.GetDecoded to extract the decoded TypeScript type
-    baseType = `${$.$$Utilities}.Codec.GetDecoded<${$.$$Scalar}.${namedType.name}['codec']>`
+    baseType = `${$.$$Scalar}.${namedType.name}['codec']['_typeDecoded']`
   } else if (GraphqlKit.Schema.Runtime.Nodes.isEnumType(namedType)) {
-    // Enum - generate literal union of enum values
-    const enumValues = namedType.getValues().map(v => Str.Code.TS.string(v.name))
-    baseType = enumValues.join(' | ')
+    // Enum - reference the pre-computed enum type (enums are in module scope)
+    baseType = `${namedType.name}['$type']`
   } else {
-    // InputObject - reference the TypeScript input type from TypeInputsIndex
-    baseType = `TypeInputsIndex['${namedType.name}']`
+    // InputObject - reference the TypeScript input type from SDDM
+    baseType = `SchemaDrivenDataMap['inputTypes']['${namedType.name}']['$type']`
   }
 
   // Check if it's wrapped in a list

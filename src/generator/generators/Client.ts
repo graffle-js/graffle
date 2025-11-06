@@ -45,7 +45,16 @@ export const ModuleGeneratorClient = createModuleGenerator(
              map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
            },
          }),
-        ctx => ${$.$$Utilities}.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
+        ctx => ${$.$$Utilities}.Scalars.set(ctx, {
+          scalars: {
+            typesEncoded: null as any,
+            typesDecoded: null as any,
+            map: {
+              ...$$SchemaDrivenDataMap.schemaDrivenDataMap.scalarTypes,
+              ...$$Scalar.$registry.map
+            }
+          }
+        }),
       )
 
       /**

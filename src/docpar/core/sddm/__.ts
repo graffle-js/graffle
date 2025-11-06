@@ -29,6 +29,21 @@ declare global {
 export interface Enum {
   readonly _tag: 'enum'
   readonly name: string
+  /**
+   * Pre-computed TypeScript union type for this enum's values.
+   *
+   * Only present when operationVariables is enabled.
+   *
+   * This is the complete TypeScript union type (e.g., 'FIRE' | 'WATER' | 'GRASS')
+   * representing all possible values of this enum. Pre-computing this at generation time
+   * enables O(1) type lookup and eliminates redundant inline unions throughout the codebase.
+   *
+   * @example
+   * ```typescript
+   * $type: 'FIRE' | 'WATER' | 'GRASS' | 'ELECTRIC'
+   * ```
+   */
+  readonly $type?: any
   readonly extensions?: GraffleGlobal.SchemaMapNodeExtensions.Enum
 }
 
@@ -64,6 +79,24 @@ export interface OutputField {
    * ```
    */
   readonly arguments?: ArgumentsOrInputObjectFields
+  /**
+   * Pre-computed TypeScript type map for this field's arguments.
+   *
+   * Only present when operationVariables is enabled and field has arguments.
+   *
+   * Maps argument names to their complete TypeScript types (with inline type modifiers applied).
+   * Pre-computing this at generation time enables O(1) type lookup for variable inference.
+   *
+   * @example
+   * ```typescript
+   * $argumentsType: {
+   *   id?: string | null | undefined      // Optional ID argument
+   *   limit: number                        // Required Int! argument
+   *   filter?: InputFilter | null          // Optional input object
+   * }
+   * ```
+   */
+  readonly $argumentsType?: any
   /**
    * Reference to the type containing descendant fields with arguments.
    *
@@ -137,6 +170,21 @@ export interface InputObject {
    * Fields of the input object.
    */
   readonly fields?: ArgumentsOrInputObjectFields
+  /**
+   * Pre-computed TypeScript input type for this input object.
+   *
+   * Only present when operationVariables is enabled.
+   *
+   * This is the complete TypeScript type representing this input object's structure,
+   * with all field types already computed. Pre-computing this at generation time enables
+   * O(1) type lookup for variable inference without needing a separate TypeInputsIndex module.
+   *
+   * @example
+   * ```typescript
+   * $type: { date?: Date, id?: string, count: number }
+   * ```
+   */
+  readonly $type?: any
   readonly extensions?: GraffleGlobal.SchemaMapNodeExtensions.InputObject
 }
 
