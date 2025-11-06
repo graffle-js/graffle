@@ -15,7 +15,6 @@
     "no-undef": "off",
     "no-redeclare": "off",
     "no-empty-pattern": "off",
-    "eslint/no-unused-expressions": "off",
     "no-unused-expressions": "off"
   },
   "ignorePatterns": [
