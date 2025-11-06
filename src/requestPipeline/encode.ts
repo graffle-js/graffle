@@ -57,7 +57,9 @@ const encodeInputFieldLike = (
     // Registry is populated from SDDM at client init, with overrides from .scalar()
     const scalar = scalars[sddmNode.name]
     if (!scalar) {
-      throw new Error(`Scalar "${sddmNode.name}" not found in registry. This should not happen if the client was properly initialized.`)
+      throw new Error(
+        `Scalar "${sddmNode.name}" not found in registry. This should not happen if the client was properly initialized.`,
+      )
     }
     args[argName] = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.encode, argValue)
     return

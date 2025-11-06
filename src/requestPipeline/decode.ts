@@ -105,7 +105,9 @@ const decodeResultValue = (input: {
       // Registry is populated from SDDM at client init, with overrides from .scalar()
       const scalar = scalars[sddmNode.name]
       if (!scalar) {
-        throw new Error(`Scalar "${sddmNode.name}" not found in registry. This should not happen if the client was properly initialized.`)
+        throw new Error(
+          `Scalar "${sddmNode.name}" not found in registry. This should not happen if the client was properly initialized.`,
+        )
       }
       const decodedValue = GraphqlKit.Schema.Type.Scalars.applyCodec(scalar.codec.decode, value)
       if (parentContext.type === `object`) {
