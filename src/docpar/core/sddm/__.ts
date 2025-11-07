@@ -388,16 +388,16 @@ export const nullabilityFlags = {
  * argumentTypeToSyntax(requiredStringArg) // => "String!"
  * argumentTypeToSyntax(listArg) // => "[String!]"
  */
-export const argumentTypeToSyntax = (
-  sddmArgLike: ArgumentOrInputField,
-): string => {
-  if (sddmArgLike.inlineType) {
-    const isRequiredIndicator = sddmArgLike.inlineType[0] === 1 ? `!` : ``
-    const namedType = argumentNamedTypeToSyntax(sddmArgLike)
-    return inlineTypeToSyntax(sddmArgLike.inlineType[1], namedType) + isRequiredIndicator
-  }
-  return argumentNamedTypeToSyntax(sddmArgLike)
-}
+// export const argumentTypeToSyntax = (
+//   sddmArgLike: ArgumentOrInputField,
+// ): string => {
+//   if (sddmArgLike.inlineType) {
+//     const isRequiredIndicator = sddmArgLike.inlineType[0] === 1 ? `!` : ``
+//     const namedType = argumentNamedTypeToSyntax(sddmArgLike)
+//     return inlineTypeToSyntax(sddmArgLike.inlineType[1], namedType) + isRequiredIndicator
+//   }
+//   return argumentNamedTypeToSyntax(sddmArgLike)
+// }
 
 /**
  * Extract the named type (base type name) from argument metadata.
@@ -406,20 +406,20 @@ export const argumentTypeToSyntax = (
  * argumentNamedTypeToSyntax(stringArg) // => "String"
  * argumentNamedTypeToSyntax(customScalarArg) // => "DateTime"
  */
-const argumentNamedTypeToSyntax = (sddmNode: ArgumentOrInputField): string => {
-  if (isScalar(sddmNode.namedType)) {
-    return sddmNode.namedType.name
-  }
-  if (isCustomScalarName(sddmNode.namedType)) {
-    return sddmNode.namedType
-  }
+// const argumentNamedTypeToSyntax = (sddmNode: ArgumentOrInputField): string => {
+//   if (isScalar(sddmNode.namedType)) {
+//     return sddmNode.namedType.name
+//   }
+//   if (isCustomScalarName(sddmNode.namedType)) {
+//     return sddmNode.namedType
+//   }
 
-  if (sddmNode.namedType?.name) {
-    return sddmNode.namedType.name
-  }
+//   if (sddmNode.namedType?.name) {
+//     return sddmNode.namedType.name
+//   }
 
-  throw new Error(`Unknown sddm node: ${String(sddmNode)}`)
-}
+//   throw new Error(`Unknown sddm node: ${String(sddmNode)}`)
+// }
 
 /**
  * Convert SDDM inline type metadata into GraphQL type syntax string.
@@ -434,8 +434,8 @@ const argumentNamedTypeToSyntax = (sddmNode: ArgumentOrInputField): string => {
  * inlineTypeToSyntax([1, undefined], 'String') // => '[String!]'
  * inlineTypeToSyntax([0, [1, undefined]], 'Int') // => '[[Int!]]'
  */
-const inlineTypeToSyntax = (sddmInlineType: undefined | InlineType, typeName: string): string => {
-  if (!sddmInlineType) return typeName
-  const isRequiredIndicator = sddmInlineType[0] === 1 ? `!` : ``
-  return `[${inlineTypeToSyntax(sddmInlineType[1], typeName)}${isRequiredIndicator}]`
-}
+// const inlineTypeToSyntax = (sddmInlineType: undefined | InlineType, typeName: string): string => {
+//   if (!sddmInlineType) return typeName
+//   const isRequiredIndicator = sddmInlineType[0] === 1 ? `!` : ``
+//   return `[${inlineTypeToSyntax(sddmInlineType[1], typeName)}${isRequiredIndicator}]`
+// }
