@@ -1,6 +1,6 @@
 // TODO: Restore @wollybeard/kit import once it becomes a production dependency
 // import type { Obj, Ts } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../core/sddm/_.js'
+import type { SchemaDrivenDataMap } from '../../../lib/graphql-kit/schema/sddm/_.js'
 import type { IsArgumentsOrDirectiveKey } from '../InferResult/directive.js'
 import type { Select } from '../Select/_.js'
 import type { Builder as VarBuilder, BuilderSentinel, BuilderState, BuilderTyped } from './var.js'

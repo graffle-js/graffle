@@ -1,7 +1,7 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { RequestResult } from '#src/types/RequestResult/_.js'
+import type { SchemaDrivenDataMap } from '../../lib/graphql-kit/schema/sddm/_.js'
 import type { Core } from '../core/_.js'
-import type { SchemaDrivenDataMap } from '../core/sddm/_.js'
 import type { InferResult } from './InferResult/_.js'
 import type { Var } from './var/$.js'
 

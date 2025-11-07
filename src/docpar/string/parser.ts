@@ -1,8 +1,8 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Codec } from '#src/types/Codec/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
+import type { InlineType } from '../../lib/graphql-kit/schema/sddm/InlineType.js'
 import type { Core, ParserContext } from '../core/_.js'
-import type { InlineType } from '../core/sddm/InlineType.js'
 
 // ============================================================================
 // Schema-less Mode Support

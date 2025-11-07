@@ -1,7 +1,7 @@
 import type { Schema } from '#graffle/utilities-for-generated'
 import type { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { SchemaDrivenDataMap } from '../../../core/sddm/_.js'
+import type { SchemaDrivenDataMap } from '../../../../lib/graphql-kit/schema/sddm/_.js'
 import { toGraphQLOperationDefinition } from './2_OperationDefinition.js'
 
 const defaultOperationName = `$default`

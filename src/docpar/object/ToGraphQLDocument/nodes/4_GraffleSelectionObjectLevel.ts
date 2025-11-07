@@ -1,7 +1,7 @@
 import type { ParsedSelectionObjectLevel } from '#src/docpar/object/Select/$parseSelection.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Lang, Null } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../../core/sddm/_.js'
+import type { SchemaDrivenDataMap } from '../../../../lib/graphql-kit/schema/sddm/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLField } from './5_Field.js'
 import { toGraphQLInlineFragments } from './5_InlineFragments.js'

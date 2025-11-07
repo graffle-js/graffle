@@ -1,6 +1,6 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { SchemaDrivenDataMap } from '../../../core/sddm/_.js'
+import { SchemaDrivenDataMap } from '../../../../lib/graphql-kit/schema/sddm/_.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 

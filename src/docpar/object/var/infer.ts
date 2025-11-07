@@ -9,7 +9,7 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { UnionToIntersection } from 'type-fest'
-import type { SchemaDrivenDataMap } from '../../core/sddm/_.js'
+import type { SchemaDrivenDataMap } from '../../../lib/graphql-kit/schema/sddm/_.js'
 import type { Select } from '../Select/_.js'
 import type { ExtractFromOperation } from './extract.js'
 
