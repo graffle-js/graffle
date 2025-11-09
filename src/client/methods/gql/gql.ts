@@ -34,24 +34,6 @@ type ValidateSDDMRequirement<$Document extends GraphqlKit.Document.Typed.TypedDo
 export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 
 /**
- * Extract GraphQLStringAPI type from context for LSP detection.
- *
- * This type provides the `scalar`, `persisted`, and `__name` properties that GraphQLSP LSP
- * looks for to identify gql functions and determine which schema to use in multi-schema mode.
- *
- * Returns `any` when no GlobalRegistry is available (dynamic clients).
- */
-// dprint-ignore
-type StringAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
-  ? any
-  : GraphqlKit.LSP.GraphQLStringAPI<
-      {
-        scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
-      },
-      { isMaskingDisabled: false }
-    >
-
-/**
  * Check if GlobalRegistry is configured for this context.
  */
 // dprint-ignore
@@ -84,6 +66,10 @@ type DocumentObjectConstraint<$Context> =
  * The builder provides operation methods (one per operation in the document) that can be called
  * directly, or you can use the `.$send()` method to execute an operation by name.
  *
+ * Extends {@link GraphqlKit.LSP.GraphQLStringDocumentFnProperties} to provide LSP detection
+ * properties (`__name`, `scalar`, `persisted`) that GraphQLSP uses to identify gql functions
+ * and determine which schema to use for validation and autocomplete.
+ *
  * @example
  * ```ts
  * // GraphQL document string (with type inference)
@@ -105,9 +91,16 @@ type DocumentObjectConstraint<$Context> =
  * - Create SelectionSets TypeFunction that accepts context parameter
  * - Use TypeFunction.Call to apply runtime context to SelectionSets
  * - Extract $Document from result with applied context
+ *
+ * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L100-L124
  */
 // dprint-ignore
-export interface GqlMethod<$Context extends Context.Context> {
+export interface GqlMethod<$Context extends Context.Context>
+  extends GraphqlKit.LSP.GraphQLStringDocumentFnProperties<
+    Configuration.Schema.Name<$Context>,
+    any,
+    any
+  > {
   // Overload
   // dprint-ignore
   <const $doc extends GraphqlKit.Document.Typed.String | string | DocumentNode | GraphqlKit.Document.TypedFull.TypedFullDocument>(
@@ -139,37 +132,6 @@ export interface GqlMethod<$Context extends Context.Context> {
         ? DocumentSender<$Parsed, $Context>
         : never
     : never
-
-  /**
-   * LSP detection property - identifies the schema name for multi-schema support.
-   *
-   * This property is used by GraphQLSP LSP in multi-schema mode to determine which
-   * schema to use for validation and autocomplete. When multiple schemas are configured
-   * in tsconfig.json, the LSP extracts this value to look up the appropriate schema.
-   *
-   * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L100-L124
-   */
-  readonly __name: Configuration.Schema.Name<$Context>
-
-  /**
-   * LSP detection property - validates scalar/enum values against schema types.
-   *
-   * This property is required by GraphQLSP LSP to identify this as a gql function.
-   * The LSP checks for the existence of both `scalar` and `persisted` properties.
-   *
-   * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L19-L32
-   */
-  scalar: StringAPIFromContext<$Context>['scalar']
-
-  /**
-   * LSP detection property - creates persisted document nodes.
-   *
-   * This property is required by GraphQLSP LSP to identify this as a gql function.
-   * The LSP checks for the existence of both `scalar` and `persisted` properties.
-   *
-   * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L19-L32
-   */
-  persisted: StringAPIFromContext<$Context>['persisted']
 }
 
 export namespace GqlMethod {
