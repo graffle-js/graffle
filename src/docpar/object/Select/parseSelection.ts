@@ -1,4 +1,4 @@
-import { Select } from './../Select/_.js'
+import { Select } from './_.js'
 import type { SelectionSet } from './__.js'
 import { Arguments, Directive, Indicator, InlineFragment, SelectAlias, SelectScalarsWildcard } from './__.js'
 
