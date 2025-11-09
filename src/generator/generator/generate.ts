@@ -1,4 +1,4 @@
-import { type Config, createConfig } from '../config/config.js'
+import * as Config from '../config/config.js'
 import type { ConfigInit } from '../config/configInit.js'
 import { ModuleGenerator$$ } from '../generators/$$.js'
 import { ModuleGenerator$ } from '../generators/$.js'
@@ -50,7 +50,7 @@ const moduleGenerators = [
  * @returns Generated modules with their content and metadata
  */
 export const generateModules = async (init: ConfigInit) => {
-  const config = await createConfig(init)
+  const config = await Config.createConfig(init)
 
   const generatedModules = await Promise.all(
     moduleGenerators
@@ -86,7 +86,7 @@ export const generateModules = async (init: ConfigInit) => {
  *
  * @returns The configuration used for generation
  */
-export const generate = async (init: ConfigInit): Promise<Config> => {
+export const generate = async (init: ConfigInit): Promise<Config.Config> => {
   const { config, modules: generatedModules } = await generateModules(init)
 
   // todo clear directory before generating so that removed or renamed files are cleaned up.
@@ -94,8 +94,15 @@ export const generate = async (init: ConfigInit): Promise<Config> => {
   await config.fs.mkdir(config.paths.project.outputs.modules, { recursive: true })
 
   // todo: add a test that if dir doesn't exist yet, it is created beforehand.
-  if (config.paths.project.outputs.sdl && config.schema.via !== `sdl`) {
-    await config.fs.writeFile(config.paths.project.outputs.sdl, config.schema.sdl)
+  const shouldWriteSDL = config.paths.project.outputs.sdl.emitMode === Config.EmitMode.always
+    || (config.paths.project.outputs.sdl.emitMode === Config.EmitMode.infer
+      && (config.schema.via === 'url' || config.schema.via === 'instance'))
+
+  if (shouldWriteSDL) {
+    await config.fs.writeFile(
+      config.paths.project.outputs.sdl.path,
+      config.schema.sdl,
+    )
   }
 
   await Promise.all(

@@ -38,7 +38,7 @@
         "schemas": [
           {
             "name": "pokemon",
-            "schema": "./$/graffle/schema.graphql"
+            "schema": "../tests/_/fixtures/schemas/pokemon/schema.graphql"
           }
         ]
       }

@@ -92,6 +92,15 @@ const args = Command.create()
         `How should import identifiers be generated? For example "tsExtension" would yield modules that import like "import ... from './foo.ts'".`,
       ),
   )
+  .parameter(
+    `outputSdl`,
+    z
+      .boolean()
+      .optional()
+      .describe(
+        `Output the GraphQL schema SDL to a file. When explicitly set, always applies regardless of schema source.`,
+      ),
+  )
   .settings({
     parameters: {
       environment: false,
@@ -168,6 +177,7 @@ if (args.output !== undefined) {
 }
 if (args.outputCase !== undefined) input.outputCase = args.outputCase
 if (args.importFormat !== undefined) input.importFormat = args.importFormat
+if (args.outputSdl !== undefined) input.outputSDL = args.outputSdl
 
 // --- Generate ---
 

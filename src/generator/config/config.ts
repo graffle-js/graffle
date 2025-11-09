@@ -2,8 +2,7 @@ import { Graffle } from '#graffle'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
-import { ConfigManager } from '@wollybeard/kit'
-import { Obj, Str } from '@wollybeard/kit'
+import { ConfigManager, Obj, Str } from '@wollybeard/kit'
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
@@ -18,6 +17,14 @@ import {
   libraryPathKeys,
 } from './configInit.js'
 import { defaults } from './defaults.js'
+
+export const EmitMode = {
+  never: 'never',
+  always: 'always',
+  infer: 'infer',
+} as const
+
+export type EmitMode = typeof EmitMode[keyof typeof EmitMode]
 
 export interface Config {
   fs: Fs
@@ -57,7 +64,10 @@ export interface Config {
         scalars: string
       }
       outputs: {
-        sdl: null | string
+        sdl: {
+          path: string
+          emitMode: EmitMode
+        }
         root: string
         modules: string
       }
@@ -218,13 +228,18 @@ To suppress this warning disable formatting in one of the following ways:
 
   // --- Output SDL ---
 
+  // Normalize outputSDL to structured config
   // dprint-ignore
-  const outputSDLPath =
-    configInit.outputSDL
-      ? Str.Type.is(configInit.outputSDL)
-        ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
-        : Path.join(outputDirPathRoot, `schema.graphql`)
-      : null
+  const outputSdlEmitMode: EmitMode =
+    configInit.outputSDL === undefined ? EmitMode.infer :
+    configInit.outputSDL === false     ? EmitMode.never :
+                                         EmitMode.always
+
+  // dprint-ignore
+  const outputSdlPath =
+    Str.Type.is(configInit.outputSDL)
+      ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
+      : Path.join(outputDirPathRoot, `schema.graphql`)
 
   // --- name ---
 
@@ -280,7 +295,10 @@ To suppress this warning disable formatting in one of the following ways:
       project: {
         outputs: {
           root: outputDirPathRoot,
-          sdl: outputSDLPath,
+          sdl: {
+            path: outputSdlPath,
+            emitMode: outputSdlEmitMode,
+          },
           modules: outputDirPathModules,
         },
         inputs: {

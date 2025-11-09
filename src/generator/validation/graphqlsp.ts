@@ -1,5 +1,5 @@
 import * as Path from 'node:path'
-import type { Config } from '../config/config.js'
+import { Config } from '../config/_.js'
 
 /**
  * Validates GraphQLSP configuration and provides helpful warnings/suggestions.
@@ -11,7 +11,7 @@ import type { Config } from '../config/config.js'
  *
  * @see https://github.com/graffle-js/graffle/issues/1389 for auto-configuration feature
  */
-export const validateGraphQLSPConfiguration = async (config: Config): Promise<void> => {
+export const validateGraphQLSPConfiguration = async (config: Config.Config): Promise<void> => {
   // Skip if validation is disabled
   if (config.lint.missingGraphqlSP === false) {
     return
@@ -26,13 +26,13 @@ export const validateGraphQLSPConfiguration = async (config: Config): Promise<vo
     tsconfigExists = true
   } catch {
     // tsconfig.json doesn't exist - provide basic suggestion
-    const hasSdlOutput = config.paths.project.outputs.sdl !== null
+    const hasSdlOutput = config.paths.project.outputs.sdl.emitMode !== Config.EmitMode.never
 
     let schemasConfig: string
     let sdlSetupStep: string
 
     if (hasSdlOutput) {
-      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl!)
+      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl.path)
       schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
       sdlSetupStep = ``
     } else {
@@ -105,13 +105,13 @@ To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
 
   if (!hasGraphQLSP) {
     // GraphQLSP is not configured - provide setup instructions
-    const hasSdlOutput = config.paths.project.outputs.sdl !== null
+    const hasSdlOutput = config.paths.project.outputs.sdl.emitMode !== Config.EmitMode.never
 
     let schemasConfig: string
     let sdlSetupStep: string
 
     if (hasSdlOutput) {
-      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl!)
+      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl.path)
       schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
       sdlSetupStep = ``
     } else {
@@ -158,13 +158,13 @@ To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
   }
 
   // GraphQLSP is configured - check if SDL file exists
-  if (config.paths.project.outputs.sdl) {
+  if (config.paths.project.outputs.sdl.emitMode !== Config.EmitMode.never) {
     try {
-      await config.fs.stat(config.paths.project.outputs.sdl)
+      await config.fs.stat(config.paths.project.outputs.sdl.path)
       // SDL file exists - all good!
       console.log(`GraphQLSP is configured and SDL schema file exists`)
     } catch {
-      console.warn(`GraphQLSP is configured but SDL schema file not found at: ${config.paths.project.outputs.sdl}`)
+      console.warn(`GraphQLSP is configured but SDL schema file not found at: ${config.paths.project.outputs.sdl.path}`)
       console.warn(`The SDL file will be generated during this generation run.`)
     }
   } else {
