@@ -147,7 +147,18 @@ A.exact.ofAs<{ id?: string | null; listIntNonNull?: number[] }>().onAs<$<{ ___: 
 A.exact.ofAs<{ id?: string | null; listIntNonNull?: number[] }>().onAs<$<{ ___: { $include: boolean; id: true; listIntNonNull: true } }>>()
 A.exact.ofAs<{ id: string | null }>().onAs<$<{ ___: { $include: true; id: true } }>>()
 A.exact.ofAs<{ id: string | null }>().onAs<$<{ ___: { $skip: false; id: true } }>>()
-A.exact.ofAs<{ id2: InferResult.Errors.UnknownKey<'id2', Possible.$.Schema.Query> }>().onAs<Result>()
+// Error when field doesn't exist - now returns Core.Errors.ErrorFieldNotFound
+type ExpectedError = Ts.Err.StaticError<
+  ['ParseError', 'FieldNotFound'],
+  {
+    message: 'No such field on type'
+    fieldName: 'id2'
+    parentName: 'Query'
+    availableFields: keyof Possible.$.Schema.Query['fields'] & string
+    path: 'todo'
+  }
+>
+A.exact.ofAs<{ id2: ExpectedError }>().onAs<Result>()
 A.equiv.ofAs<{ interfaceHierarchyGrandparents: { a: string }[] }>().onAs<$<{ interfaceHierarchyGrandparents: { a: true } }>>()
 // Can use inline fragment of an implementor interface
 A.exact.ofAs<{ interfaceHierarchyGrandparents: ({} | { a: string })[] }>().onAs<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { a: true } } }>>()

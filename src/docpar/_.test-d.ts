@@ -435,21 +435,15 @@ A.exact.ofAs<d10YeSchema>().on(gqlYe({ query: { q: { stringWithArgEnum: { $: { $
 //                                           Error cases
 // ==================================================================================================
 
-type DocError = {
-  __typename: 'ParserError'
-  error: 'FieldNotFound'
-  message: "Field 'bad' does not exist on type 'Query'"
+type E = Docpar.Errors.ErrorFieldNotFound<{
   fieldName: 'bad'
-  parentName: 'Query'
-  availableFields: 'string' | 'object' | '__typename' | 'InputObjectNested' | 'abcEnum' | 'date' | 'id' | 'InputObjectNestedNonNull' | 'argInputObjectCircular' | 'bigintField' | 'bigintFieldNonNull' | 'dateArg' | 'dateArgInputObject' | 'dateArgList' | 'dateArgNonNull' | 'dateArgNonNullList' | 'dateArgNonNullListNonNull' | 'dateInterface1' | 'dateList' | 'dateListList' | 'dateListNonNull' | 'dateNonNull' | 'dateObject1' | 'dateUnion' | 'error' | 'idNonNull' | 'interface' | 'interfaceHierarchyChildA' | 'interfaceHierarchyChildB' | 'interfaceHierarchyGrandparents' | 'interfaceHierarchyParents' | 'interfaceNonNull' | 'interfaceWithArgs' | 'listInt' | 'listIntNonNull' | 'listListInt' | 'listListIntNonNull' | 'lowerCaseUnion' | 'objectList' | 'objectListNonNull' | 'objectNested' | 'objectNestedWithArgs' | 'objectNonNull' | 'objectWithArgs' | 'result' | 'resultNonNull' | 'stringWithArgEnum' | 'stringWithArgInputObject' | 'stringWithArgInputObjectEnum' | 'stringWithArgInputObjectRequired' | 'stringWithArgs' | 'stringWithListArg' | 'stringWithListArgRequired' | 'stringWithRequiredArg' | 'unionFooBar' | 'unionFooBarNonNull' | 'unionFooBarWithArgs' | 'unionObject' | 'unionObjectNonNull'
-}
+  parentName: 'Object1'
+  availableFields: "string" | "boolean" | "__typename" | "ABCEnum" | "id" | "int" | "float"
+  path: 'todo'
+}>
 
-A.exact.ofAs<DocError>().onAs<Strict<'{ bad }'>>()
-// TODO: Object parser produces different error format than string parser
-// A.exact.ofAs<DocError>().onAs<Strict<{ query: { default: { bad: true } } }>>()
-
-
-// TODO: Object parser produces different error format - needs unification with string parser error format
-// Possible.gql({ query: { default: { bad: true } } })
-// TODO: Runtime string parser errors need to be surfaced at compile-time in gql function
-// Possible.gql('{ bad }')
+// String parser short-circuits and returns error directly
+A.exact.ofAs<E>().onAs<Strict<'{ object { bad } }'>>()
+// todo
+// Object parser preserves structure with error as field value (embedded in result)
+// A.exact.of({} as E).onAs<Strict<{ query: { default: { object: { bad: true } } } }>>()

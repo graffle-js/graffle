@@ -15,7 +15,6 @@ interface ZeroClient extends Client {
     $Document: any
   }
   argumentsMap: any
-  stringIntrospection: any
   defaultSchemaUrl: null
 }
 
@@ -45,7 +44,6 @@ export interface Client<$Extensions extends Extensions = Extensions> {
     $Document: any
   }
   argumentsMap: any
-  stringIntrospection: any
   /**
    * If the code was generated with introspection, the URL used is taken as the default schema URL.
    */

@@ -1,7 +1,7 @@
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
 declare global {
-  namespace GraffleGlobal {
+  namespace LIBRARY_GRAPHQL_KIT {
     // interface Schema {
     //   SchemaErrors: {
     //     objectNames: string

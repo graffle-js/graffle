@@ -7,7 +7,7 @@ import { Str } from '@wollybeard/kit'
 // Augment global extension interfaces
 declare global {
   namespace GraffleGlobal {
-    namespace SchemaMapNodeExtensions {
+    namespace LIBRARY_GRAPHQL_KIT {
       interface OutputObject {
         /** Error object flag - 1 if this is an error type */
         e?: 1

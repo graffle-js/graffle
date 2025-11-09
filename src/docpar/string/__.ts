@@ -1,9 +1,9 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { Doc } from '../__.js'
+import { Core } from '../core/_.js'
 import type { ParseDocument } from './parser.js'
 export type { ParseDocument } from './parser.js'
-export type { AbstractSetupSchema, SchemaOfSetup } from './schema.js'
 
 /**
  * Parse GraphQL string into operations (raw, unwrapped).
@@ -20,12 +20,12 @@ export type { AbstractSetupSchema, SchemaOfSetup } from './schema.js'
  * // Returns: Operation<'default', { id: string }, {}> (raw operation, no Document wrapper)
  * ```
  */
-export type Parse<$Input extends string, $Schema> = Ts.Simplify.Top<
-  getDocumentOperations<
-    parseDocument<$Input>['definitions'],
-    $Schema
-  >
-> extends infer $OperationsRecord ? $OperationsRecord extends { __typename: 'ParserError' } ? $OperationsRecord
+export type Parse<
+  $Input extends string,
+  $Schema,
+> = Ts.Simplify.Top<
+  getDocumentOperations<parseDocument<$Input>['definitions'], $Schema>
+> extends infer $OperationsRecord ? $OperationsRecord extends Ts.Err.StaticError ? $OperationsRecord
   : [$OperationsRecord] extends [Record<string, any>]
     ? [$OperationsRecord[keyof $OperationsRecord]] extends [infer $Op] ? [$Op] extends [Doc.Operation] ? $Op
       : string
@@ -48,32 +48,6 @@ export type getDocumentOperations<
   $Definitions,
   $Schema,
 > = $Definitions extends string
-  ? $Schema extends GraphqlKit.Schema.Type
-    ? ParseDocument<$Definitions, import('../core/Context.js').ParserContext<$Schema>>
-  : ParseDocument<$Definitions, import('../core/Context.js').ParserContext<undefined>>
+  ? $Schema extends GraphqlKit.Schema.Type ? ParseDocument<$Definitions, Core.ParserContext<$Schema>>
+  : ParseDocument<$Definitions, Core.ParserContext<undefined>>
   : never
-
-/**
- * schemaOfSetup - transform setup config into schema.
- * For Graffle, this is mostly a passthrough.
- */
-export type schemaOfSetup<$Setup extends import('./schema.js').AbstractSetupSchema> =
-  import('./schema.js').SchemaOfSetup<$Setup>
-
-/**
- * GraphQLStringAPI - type for the gql function.
- * Minimal stub for LSP compatibility.
- */
-export interface GraphQLStringAPI<$Schema, $Config> {
-  readonly __name: string
-  scalar: any
-  persisted: any
-}
-
-/**
- * Abstract setup cache - not used in string2
- */
-export interface AbstractSetupCache {
-  readonly __cacheDisabled: unknown
-  [key: string]: unknown
-}

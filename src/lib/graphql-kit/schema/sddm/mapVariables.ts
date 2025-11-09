@@ -1,5 +1,7 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { SchemaDrivenDataMap } from './_.js'
+import type { Request } from '../../request/_.js'
+import { Ast } from '../ast/_.js'
+import type { SchemaDrivenDataMap } from './_.js'
+import * as Nodes from './nodes.js'
 
 export interface MapVariablesByTypeNamesInput {
   /**
@@ -9,7 +11,7 @@ export interface MapVariablesByTypeNamesInput {
   /**
    * GraphQL request with operation and variables
    */
-  request: GraphqlKit.Request.RequestAnalyzedDocumentNodeInput
+  request: Request.RequestAnalyzedDocumentNodeInput
   /**
    * GraphQL type names to match (e.g., ['Upload', 'File'])
    */
@@ -48,7 +50,7 @@ export interface MapVariablesByTypeNamesInput {
  * })
  * ```
  */
-export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): GraphqlKit.Request.Variables => {
+export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Request.Variables => {
   const { sddm, request, typeNames, visitor, immutable = false } = input
 
   const variableDefinitions = request.operation.variableDefinitions
@@ -68,7 +70,7 @@ export const mapVariablesByTypeNames = (input: MapVariablesByTypeNamesInput): Gr
     const varValue = variables[varName]
     if (varValue === undefined) continue
 
-    const namedType = GraphqlKit.Schema.Ast.getNamedType(parameter.type)
+    const namedType = Ast.getNamedType(parameter.type)
     const sddmNamedType = sddm.inputTypes[namedType.name.value]
     if (!sddmNamedType) continue
 
@@ -90,7 +92,7 @@ const mapValue = (input: {
   container: any
   key: string | number
   value: unknown
-  sddmNode: SchemaDrivenDataMap.InputNodes
+  sddmNode: Nodes.InputNodes
   typeNameSet: Set<string>
   visitor: (value: unknown, path: string, typeName: string) => unknown
   path: string
@@ -118,14 +120,14 @@ const mapValue = (input: {
   }
 
   // Check if this is a type we're looking for
-  if (SchemaDrivenDataMap.isCustomScalarName(sddmNode)) {
+  if (Nodes.isCustomScalarName(sddmNode)) {
     if (typeNameSet.has(sddmNode)) {
       container[key] = visitor(value, path, sddmNode)
     }
     return
   }
 
-  if (SchemaDrivenDataMap.isScalar(sddmNode)) {
+  if (Nodes.isScalar(sddmNode)) {
     if (typeNameSet.has(sddmNode.name)) {
       container[key] = visitor(value, path, sddmNode.name)
     }
@@ -133,7 +135,7 @@ const mapValue = (input: {
   }
 
   // Handle input objects
-  if (SchemaDrivenDataMap.isInputObject(sddmNode)) {
+  if (Nodes.isInputObject(sddmNode)) {
     // Only iterate fields that contain (or are) types we're interested in
     // This uses SDDM's optimization: fcs = fields containing scalars
     for (const fieldName of sddmNode.fieldsContainingCustomScalars ?? []) {

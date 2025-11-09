@@ -1,3 +1,4 @@
+import type { Ts } from '@wollybeard/kit'
 import type { Core } from './core/_.js'
 import type { Object } from './object/_.js'
 import type { String } from './string/_.js'
@@ -31,13 +32,21 @@ import type { String } from './string/_.js'
 export type Parse<
   $Input,
   $Context,
+  ___$Result = Parse_<$Input, $Context>,
 > =
-  $Input extends string         ? $Context extends { schema: infer $Schema }
-                                    ? String.Parse<$Input, $Schema> extends Core.ParserError      ? String.Parse<$Input, $Schema>
-                                      : String.Parse<$Input, $Schema> extends Core.Doc.Operation   ? Core.Doc.Document<String.Parse<$Input, $Schema>>
-                                      :                                                               never
-                                    : never
-  : $Input extends object        ? $Context extends { schema: any; sddm: any; scalars: any; typeHookRequestResultDataTypes: any }
-                                    ? Core.Doc.Document<Object.Parse<$Input, $Context>>
-                                    : never
-  :                                                                                               never
+  [___$Result] extends [Ts.Err.StaticError]   ? ___$Result :
+  [___$Result] extends [Core.Doc.Operation]   ? Core.Doc.Document<___$Result> :
+                                                Ts.Err.StaticError<'Parse', { result: ___$Result }>
+
+// dprint-ignore
+type Parse_<
+    $Input,
+    $Context,
+  > =
+    $Input extends string         ? $Context extends { schema: infer $Schema }
+                                      ? String.Parse<$Input, $Schema>
+                                      : never
+    : $Input extends object        ? $Context extends { schema: any; sddm: any; scalars: any; typeHookRequestResultDataTypes: any }
+                                      ? Object.Parse<$Input, $Context>
+                                      : never
+    :                                                                                               never

@@ -1,3 +1,4 @@
+import type { Core } from '#src/docpar/core/_.js'
 import type { Select } from '#src/docpar/object/Select/_.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
@@ -68,14 +69,28 @@ type OtherKeys<
     ]?:
       $Field extends keyof $Node['fields']
         ? OutputField<$SelectionSet[$Field], $Node['fields'][$Field], $Schema>
-        : Errors.UnknownKey<$Field, $Node>
+        : $Schema extends undefined
+          ? unknown
+          : Core.Errors.ErrorFieldNotFound<{
+              path: 'todo'
+              fieldName: Obj.PropertyKeyToString<$Field>
+              parentName: $Node['name']
+              availableFields: keyof $Node['fields'] & string
+            }>
   }
   &
   {
     [$Field in PickApplicableFieldKeys<$SelectionSet>]:
       $Field extends keyof $Node['fields']
         ? OutputField<$SelectionSet[$Field], $Node['fields'][$Field], $Schema>
-        : Errors.UnknownKey<$Field, $Node>
+        : $Schema extends undefined
+          ? unknown
+          : Core.Errors.ErrorFieldNotFound<{
+              path: 'todo'
+              fieldName: $Field
+              parentName: $Node['name']
+              availableFields: keyof $Node['fields'] & string
+            }>
   }
 
 // dprint-ignore
@@ -139,16 +154,6 @@ type InlineFragmentKey_<
             OutputObjectLike_<OmitDirectiveAndArgumentKeys<$SelectionSet>, $Schema, $Node>
           >
         : OutputObjectLike_<OmitDirectiveAndArgumentKeys<$SelectionSet>, $Schema, $Node>
-
-export namespace Errors {
-  export type UnknownKey<
-    $Key extends PropertyKey,
-    $Object extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
-  > = Ts.Err.StaticError<
-    `field "${Obj.PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
-    { location: 'Object' }
-  >
-}
 
 export namespace OutputObjectLike {
   /**

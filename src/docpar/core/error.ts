@@ -1,23 +1,7 @@
-/**
- * Core error types for document parsing.
- *
- * Both string and object parsers can produce these error types.
- */
+import { Ts } from '@wollybeard/kit'
 
-/**
- * Base error type with common fields.
- */
-export interface ParserError {
-  __typename: 'ParserError'
-  error: string
-  message: string
-  context?: any
-}
-
-/**
- * Helper to create error objects.
- */
-export type MakeError<$ErrorType extends string, $Context = {}> = {
-  __typename: 'ParserError'
-  error: $ErrorType
-} & $Context
+export interface ParserError<
+  $Message extends string,
+  $Context extends object = {},
+  $Class extends readonly string[] = [],
+> extends Ts.Err.StaticError<['ParseError', ...$Class], $Context & { message: $Message }> {}

@@ -1,5 +1,6 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { RequestResult } from '#src/types/RequestResult/_.js'
+import type { Ts } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../lib/graphql-kit/schema/sddm/_.js'
 import type { Core } from '../core/_.js'
 import type { InferResult } from './InferResult/_.js'
@@ -69,22 +70,24 @@ export type InferOperation<
           Var.InferFromOperationSchemaLess<$DocOp>
         >
       : $Context extends { schema: infer $Schema; sddm: infer $SDDM extends SchemaDrivenDataMap }
-        ? Core.Operation<
-            $OperationName & string,
-            RequestResult.Simplify<$Context,
-              [InferResult.Operation<
-                $DocOp,
-                $Schema,
-                $OperationType
-              >][0]
-            >,
-            RequestResult.Simplify<$Context,
-              [Var.InferFromOperation<
-                $DocOp,
-                $SDDM,
-                $OperationType
-              >][0]
+        ? InferResult.Operation<$DocOp, $Schema, $OperationType> extends Ts.Err.StaticError<any, any>
+          ? InferResult.Operation<$DocOp, $Schema, $OperationType>
+          : Core.Operation<
+              $OperationName & string,
+              RequestResult.Simplify<$Context,
+                [InferResult.Operation<
+                  $DocOp,
+                  $Schema,
+                  $OperationType
+                >][0]
+              >,
+              RequestResult.Simplify<$Context,
+                [Var.InferFromOperation<
+                  $DocOp,
+                  $SDDM,
+                  $OperationType
+                >][0]
+              >
             >
-          >
         : never
     : never

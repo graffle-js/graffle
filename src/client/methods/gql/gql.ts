@@ -1,6 +1,5 @@
 import type { Context } from '#src/context/_.js'
 import type { Configuration } from '#src/context/fragments/configuration/_.js'
-import type { Docpar } from '#src/docpar/_.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
@@ -45,11 +44,10 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 // dprint-ignore
 type StringAPIFromContext<$Context> = GlobalRegistry.ForContext<$Context> extends never
   ? any
-  : Docpar.String.GraphQLStringAPI<
-      Docpar.String.schemaOfSetup<{
-        introspection: GlobalRegistry.ForContext<$Context>['stringIntrospection']
+  : GraphqlKit.LSP.GraphQLStringAPI<
+      {
         scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
-      }>,
+      },
       { isMaskingDisabled: false }
     >
 

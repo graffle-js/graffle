@@ -31,7 +31,18 @@
     "paths": {
       "#test/schema/*": ["../tests/_/fixtures/schemas/*.ts"],
       "#test/*": ["../tests/_/*.ts"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schemas": [
+          {
+            "name": "pokemon",
+            "schema": "./$/graffle/schema.graphql"
+          }
+        ]
+      }
+    ]
   },
   "include": ["."]
 }

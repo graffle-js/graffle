@@ -2,7 +2,7 @@ import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Codec } from '#src/types/Codec/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../lib/graphql-kit/schema/sddm/InlineType.js'
-import type { Core, ParserContext } from '../core/_.js'
+import type { Core } from '../core/_.js'
 
 // ============================================================================
 // Schema-less Mode Support
@@ -45,7 +45,7 @@ type UniversalObject = GraphqlKit.Schema.Type.OutputObject & {
  */
 export type ParseDocument<
   $Input extends string,
-  $Context extends ParserContext<any>,
+  $Context extends Core.ParserContext<any>,
 > = ParseOperations<SkipIgnored<$Input>, $Context['schema'], {}>
 
 /**
@@ -85,7 +85,7 @@ type ParseSingleOperationWithSchema<
   $Input extends `{${infer _}`
     ? $Schema['Root']['query'] extends GraphqlKit.Schema.Type.OutputObject
       ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema, {}>
-    : Core.MakeError<'OperationNotAvailable', { message: 'Query operation not available in schema' }>
+    : Core.Errors.ErrorOperationNotAvailable<{ operation: 'query' }>
     // query keyword
     : $Input extends `query${infer $Rest}`
       ? IsWordBoundary<$Rest> extends true
@@ -101,10 +101,7 @@ type ParseSingleOperationWithSchema<
       ? IsWordBoundary<$Rest> extends true
         ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, $Schema['Root']['subscription'], $Schema, 'subscription'>
       : never
-    : Core.MakeError<'InvalidOperation', {
-      message: 'Expected operation keyword or selection set'
-      input: $Input
-    }>
+    : Core.Errors.ErrorInvalidOperation<{ input: $Input }>
 
 /**
  * Parse a single operation in schema-less mode.
@@ -131,8 +128,7 @@ type ParseSingleOperationSchemaLess<
       ? IsWordBoundary<$Rest> extends true
         ? ParseOperationAfterKeyword<SkipIgnored<$Rest>, UniversalObject, $Schema, 'subscription'>
       : never
-    : Core.MakeError<'InvalidOperation', {
-      message: 'Expected operation keyword or selection set'
+    : Core.Errors.ErrorInvalidOperation<{
       input: $Input
     }>
 
@@ -166,13 +162,8 @@ type ParseOperationAfterKeyword<
       ? ParseSelectionSetForOperation<'default', SkipIgnored<$Rest & string>, $RootType, $Schema, $Variables>
     : ParseVariables<$VarsContent, $Schema> // Error
   : $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, $RootType, $Schema, {}>
-  : Core.MakeError<'ExpectedSelectionSet', {
-    message: 'Expected selection set after operation keyword'
-    input: $Input
-  }>
-  : Core.MakeError<'OperationNotAvailable', {
-    message: `${Capitalize<$OperationType>} operation not available in schema`
-  }>
+  : Core.Errors.ErrorExpectedSelectionSet<{ input: $Input }>
+  : Core.Errors.ErrorOperationNotAvailable<{ operation: $OperationType }>
 
 /**
  * Parse after operation name: optional variables, then selection set
@@ -242,9 +233,10 @@ type ParseVariablesRec<
     : $Input extends `$${infer $VarNameRest}`
       ? TakeName<$VarNameRest> extends { name: infer $VarName; rest: infer $Rest }
         ? ParseVariableAfterName<$VarName & string, SkipIgnored<$Rest & string>, $Schema, $Result>
-      : Core.MakeError<'ExpectedVariableName', { message: 'Expected variable name after $' }>
-    : $Input extends '' ? Core.MakeError<'UnmatchedParen', { message: 'Unexpected end of input in variables' }>
-    : Core.MakeError<'UnexpectedInput', { message: 'Expected $ or )'; input: $Input }>
+      : Core.Errors.ErrorUnexpectedToken<{ expected: 'VariableName'; hint: 'Expected variable name after $' }>
+    : $Input extends ''
+      ? Core.Errors.ErrorUnexpectedToken<{ expected: 'Paren'; hint: 'Unexpected end of input in variables' }>
+    : Core.Errors.ErrorUnexpectedToken<{ expected: 'Expected $ or )'; actual: $Input }>
 
 /**
  * Parse after variable name: expect colon, then type
@@ -255,7 +247,7 @@ type ParseVariableAfterName<
   $Schema extends GraphqlKit.Schema.Type | undefined,
   $Result extends Record<string, any>,
 > = $Input extends `:${infer $Rest}` ? ParseVariableType<SkipIgnored<$Rest>, $VarName, $Schema, $Result>
-  : Core.MakeError<'ExpectedColon', { message: 'Expected : after variable name' }>
+  : Core.Errors.ErrorUnexpectedToken<{ expected: 'Colon'; hint: 'Expected : after variable name' }>
 
 /**
  * Parse variable type: Type or Type!
@@ -280,7 +272,7 @@ type ParseVariableType<
     $Schema,
     $Result & { [K in $VarName]?: MapGraphQLType<$TypeName & string, $Schema> | null | undefined }
   >
-  : Core.MakeError<'ExpectedTypeName', { message: 'Expected type name after :' }>
+  : Core.Errors.ErrorUnexpectedToken<{ expected: 'TypeName'; hint: 'Expected type name after :' }>
 
 /**
  * Map GraphQL scalar types to TypeScript types.
@@ -311,9 +303,10 @@ type ParseSelectionSet<
   $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
   $Schema extends GraphqlKit.Schema.Type | undefined,
 > = $Input extends `{${infer $Rest}` ? ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, {}, 1>
-  : Core.MakeError<'ExpectedSelectionSet', {
-    message: 'Expected opening brace for selection set'
-    input: $Input
+  : Core.Errors.ErrorUnexpectedToken<{
+    expected: 'SelectionSet'
+    hint: 'Expected opening brace for selection set'
+    actual: $Input
   }>
 
 /**
@@ -339,8 +332,9 @@ type ParseFieldsInSelectionSet<
         $Result,
         $Depth
       >
-    : $Input extends '' ? Core.MakeError<'UnmatchedBrace', { message: 'Unexpected end of input in selection set' }>
-    : Core.MakeError<'UnexpectedInput', { message: 'Expected field name'; input: $Input }>
+    : $Input extends ''
+      ? Core.Errors.ErrorUnexpectedToken<{ expected: 'Brace'; hint: 'Unexpected end of input in selection set' }>
+    : Core.Errors.ErrorUnexpectedToken<{ expected: 'FieldName'; hint: 'Expected field name'; actual: $Input }>
 
 /**
  * Parse a field by its name.
@@ -369,11 +363,12 @@ type ParseFieldByName<
   // Schema-less mode: field not found → use UnknownField
     ? ParseFieldAfterName<$FieldName, $Input, UnknownField, $ParentType, $Schema, $Result, $Depth>
   // Strict mode: field not found → error
-  : Core.MakeError<'FieldNotFound', {
-    message: `Field '${$FieldName}' does not exist on type '${$ParentType['name']}'`
+  : Core.Errors.ErrorFieldNotFound<{
+    path: 'todo'
+    // message: `Field '${$FieldName}' does not exist on type '${$ParentType['name']}'`
     fieldName: $FieldName
     parentName: $ParentType['name']
-    availableFields: keyof $ParentType['fields']
+    availableFields: keyof $ParentType['fields'] & string
   }>
 
 /**
@@ -399,7 +394,9 @@ type ParseFieldAfterName<
         $Result,
         $Depth
       >
-    : Core.MakeError<'UnmatchedParen', { message: `Unmatched parenthesis in field '${$FieldName}' arguments` }>
+    : Core.Errors.ErrorUnexpectedToken<
+      { expected: 'Paren'; hint: `Unmatched parenthesis in field '${$FieldName}' arguments` }
+    >
     // Check for nested selection
     : $Input extends `{${infer _}`
       ? ParseFieldWithNestedSelection<$FieldName, $Input, $Field, $ParentType, $Schema, $Result, $Depth>
@@ -470,9 +467,9 @@ type ParseFieldWithNestedSelection<
         $Depth
       >
     : ParseSelectionSet<$Input, UniversalObject, $Schema> // Error
-  : Core.MakeError<'InvalidFieldType', {
-    message: `Field '${$FieldName}' is not an object type and cannot have nested selection`
+  : Core.Errors.ErrorFieldTypeInvalid<{
     fieldName: $FieldName
+    hint: `Field '${$FieldName}' is not an object type and cannot have nested selection`
   }>
 
 /**

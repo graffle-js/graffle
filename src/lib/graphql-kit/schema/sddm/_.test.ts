@@ -2,8 +2,7 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
-import type { SchemaDrivenDataMap } from './_.js'
-import { mapVariablesByTypeNames } from './mapVariables.js'
+import { SchemaDrivenDataMap } from './_.js'
 
 const createRequest = (
   query: string,
@@ -42,7 +41,7 @@ const sddmNested: SchemaDrivenDataMap = {
 
 const visitBlobToNull = (value: unknown) => value instanceof Blob ? null : value
 
-Test.on(mapVariablesByTypeNames)
+Test.on(SchemaDrivenDataMap.mapVariablesByTypeNames)
   .cases(
     // Scalar
     [{
@@ -85,7 +84,7 @@ Test.describe('immutable mode')
     const original = input
     const request = createRequest(`mutation($file: Upload!) { upload(file: $file) }`, input)
 
-    const result = mapVariablesByTypeNames({
+    const result = SchemaDrivenDataMap.mapVariablesByTypeNames({
       sddm: sddmUpload,
       request,
       typeNames: ['Upload'],
@@ -107,7 +106,7 @@ Test.describe('mutable mode')
   .test(({ input, output }) => {
     const request = createRequest(`mutation($file: Upload!) { upload(file: $file) }`, input)
 
-    const result = mapVariablesByTypeNames({
+    const result = SchemaDrivenDataMap.mapVariablesByTypeNames({
       sddm: sddmUpload,
       request,
       typeNames: ['Upload'],
@@ -131,7 +130,7 @@ Test.describe('path tracking')
       user: { avatar: new Blob([`test`]) },
     })
 
-    mapVariablesByTypeNames({
+    SchemaDrivenDataMap.mapVariablesByTypeNames({
       sddm: sddmNested,
       request,
       typeNames: ['Upload'],

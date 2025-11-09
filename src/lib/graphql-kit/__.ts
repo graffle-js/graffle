@@ -1,5 +1,6 @@
 export * from './document/_.js'
 export * from './execute/_.js'
 export * from './http/_.js'
+export * as LSP from './lsp.js'
 export * from './request/_.js'
 export * from './schema/_.js'
