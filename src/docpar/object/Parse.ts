@@ -3,6 +3,7 @@ import type { RequestResult } from '#src/types/RequestResult/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../lib/graphql-kit/schema/sddm/_.js'
 import type { Core } from '../core/_.js'
+import type { ObjectParserContext } from './Context.js'
 import type { InferResult } from './InferResult/_.js'
 import type { Var } from './var/$.js'
 
@@ -27,7 +28,7 @@ import type { Var } from './var/$.js'
 // dprint-ignore
 export type Parse<
   $Document extends object,
-  $Context
+  $Context extends ObjectParserContext.Cheap
 > =
   {
     [operationType in keyof $Document]: {

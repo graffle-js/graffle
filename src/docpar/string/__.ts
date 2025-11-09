@@ -12,19 +12,19 @@ export type { ParseDocument } from './parser.js'
  * For the wrapped version, use the unified Parse in docpar/parse.ts.
  *
  * @param $Input - The GraphQL document string to parse
- * @param $Schema - Optional schema for type-safe parsing (undefined for schema-less mode)
+ * @param $Context - Parser context containing schema and configuration
  *
  * @example
  * ```ts
- * type Ops = Parse<'{ id }', MySchema>
+ * type Ops = Parse<'{ id }', ParserContext<MySchema>>
  * // Returns: Operation<'default', { id: string }, {}> (raw operation, no Document wrapper)
  * ```
  */
 export type Parse<
   $Input extends string,
-  $Schema,
+  $Context extends Core.ParserContext.Cheap,
 > = Ts.Simplify.Top<
-  getDocumentOperations<parseDocument<$Input>['definitions'], $Schema>
+  getDocumentOperations<parseDocument<$Input>['definitions'], $Context>
 > extends infer $OperationsRecord ? $OperationsRecord extends Ts.Err.StaticError ? $OperationsRecord
   : [$OperationsRecord] extends [Record<string, any>]
     ? [$OperationsRecord[keyof $OperationsRecord]] extends [infer $Op] ? [$Op] extends [Doc.Operation] ? $Op
@@ -41,13 +41,11 @@ export type parseDocument<$Input extends string> = {
 }
 
 /**
- * getDocumentOperations - performs single-pass parsing with the schema.
+ * getDocumentOperations - performs single-pass parsing with the context.
  * Supports both schema-driven and schema-less modes.
  */
 export type getDocumentOperations<
   $Definitions,
-  $Schema,
-> = $Definitions extends string
-  ? $Schema extends GraphqlKit.Schema.Type ? ParseDocument<$Definitions, Core.ParserContext<$Schema>>
-  : ParseDocument<$Definitions, Core.ParserContext<undefined>>
+  $Context extends { schema: any },
+> = $Definitions extends string ? ParseDocument<$Definitions, $Context>
   : never

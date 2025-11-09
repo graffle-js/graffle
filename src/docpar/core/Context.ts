@@ -38,6 +38,23 @@ export type ParserContext<
 
 export namespace ParserContext {
   /**
+   * Cheap constraint for parser context.
+   * Avoids expensive type comparisons during constraint checks on large schemas.
+   *
+   * Use this in type parameter constraints to keep type-checking fast.
+   *
+   * @example
+   * ```typescript
+   * // ❌ Slow - forces expensive type comparison on every constraint check
+   * export type Parse<$Input, $Context extends ParserContext<any, any, any>>
+   *
+   * // ✅ Fast - resolves conditional type once
+   * export type Parse<$Input, $Context extends ParserContext.Cheap>
+   * ```
+   */
+  export type Cheap = ParserContext<any, any, any>
+
+  /**
    * Context when schema is provided - full type information available.
    */
   export interface WithSchema<

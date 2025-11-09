@@ -35,7 +35,7 @@ export interface gql<
   // Document object overload
   <const $Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
-    options?: Docpar.Object.ToGraphQLDocument.Options,
+    options?: Docpar.Object.ParserContext,
   ): $Document extends object ? Docpar.Parse<
       $Document,
       Docpar.ParserContext<$Schema, $ArgumentsMap, never>
@@ -59,7 +59,7 @@ export namespace Gql {
    */
   export type Arguments =
     | [graphqlDocument: string]
-    | [objectDocument: Docpar.Object.Select.Document.DocumentObject, options?: Docpar.Object.ToGraphQLDocument.Options]
+    | [objectDocument: Docpar.Object.Select.Document.DocumentObject, options?: Docpar.Object.ParserContext]
 
   export const normalizeArguments = (args: Arguments) => {
     const [first, second] = args
@@ -82,7 +82,7 @@ export namespace Gql {
   }
 }
 
-export const defaults: Partial<Docpar.Object.ToGraphQLDocument.Options> = {
+export const defaults: Partial<Docpar.Object.ParserContext> = {
   hoistArguments: true,
 }
 
@@ -246,7 +246,7 @@ export type ParseGraphQLString<
 // dprint-ignore
 export type ParseGraphQLObject<
   $Context,
-  $Document,
+  $Document extends object,
 > = Docpar.Parse<
   $Document,
   Docpar.ParserContext<

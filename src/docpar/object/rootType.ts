@@ -2,10 +2,10 @@ import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'
-import type { Options } from './ToGraphQLDocument/nodes/1_Document.js'
+import type { ObjectParserContext } from './Context.js'
 import { toGraphQLDocument } from './ToGraphQLDocument/nodes/1_Document.js'
 
-export const defaults: Partial<Options> = {
+export const defaults: Partial<ObjectParserContext> = {
   hoistArguments: true,
 }
 
@@ -136,7 +136,7 @@ export type StaticDocumentBuilder<
  */
 export const createStaticRootType = (
   operationType: GraphqlKit.Schema.OperationType.OperationType,
-  options?: Options,
+  options?: ObjectParserContext,
 ) => {
   return new Proxy({}, {
     get: (_, fieldName: string) => {
@@ -144,7 +144,7 @@ export const createStaticRootType = (
 
       // Special $batch method for multi-field selection
       if (fieldName === '$batch') {
-        return (selection: Docpar.Object.Select.SelectionSet.AnySelectionSet, opts?: Partial<Options>) => {
+        return (selection: Docpar.Object.Select.SelectionSet.AnySelectionSet, opts?: Partial<ObjectParserContext>) => {
           // Selection already contains multiple fields, no wrapping needed
           const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
             operationType,
@@ -169,9 +169,9 @@ export const createStaticRootType = (
 export const createStaticRootField = (
   operationType: GraphqlKit.Schema.OperationType.OperationType,
   fieldName: string,
-  factoryLevelDefaults?: Options,
+  factoryLevelDefaults?: ObjectParserContext,
 ) => {
-  return (selection?: Docpar.Object.Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
+  return (selection?: Docpar.Object.Select.SelectionSet.AnySelectionSet, options?: Partial<ObjectParserContext>) => {
     // Create root type selection set with the field
     const rootTypeSelectionSet = {
       [fieldName]: selection ?? true,

@@ -1,7 +1,7 @@
 import { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { SchemaDrivenDataMap } from '../../../lib/graphql-kit/schema/sddm/_.js'
-import type { Options } from './nodes/1_Document.js'
+import type { ObjectParserContext } from '../Context.js'
 
 /**
  * Provenance of a hoisted variable, indicating how it was extracted.
@@ -118,7 +118,7 @@ export interface Captures {
   variables: CapturedVariable[]
 }
 
-export const createOperationContext = (options?: Options): OperationContext => {
+export const createOperationContext = (options?: ObjectParserContext): OperationContext => {
   const context: OperationContext = {
     sddm: options?.sddm ?? undefined,
     scalars: options?.scalars ?? {},

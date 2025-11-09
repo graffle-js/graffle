@@ -1,19 +1,18 @@
 import type { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { parseType } from 'graphql'
-import type { SchemaDrivenDataMap } from '../../../../lib/graphql-kit/schema/sddm/_.js'
+import type { ObjectParserContext } from '../../Context.js'
 import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'
-import type { Options } from './1_Document.js'
 import { toGraphQLSelectionSetRoot } from './3_GraffleSelectionSetRoot.js'
 import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
-  SchemaDrivenDataMap.OutputObject,
+  GraphqlKit.Schema.SchemaDrivenDataMap.OutputObject,
   { operation: GraphqlKit.Document.Ast.OperationDefinitionNode; variables: GraphqlKit.Request.Variables },
   [
     operation: Select.Document.OperationNormalized,
-    options?: Options,
+    options?: ObjectParserContext,
   ]
 > = (
   sddmNode,

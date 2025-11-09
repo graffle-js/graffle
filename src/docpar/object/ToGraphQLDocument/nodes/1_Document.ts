@@ -1,20 +1,19 @@
-import type { Schema } from '#graffle/utilities-for-generated'
 import type { Select } from '#src/docpar/object/Select/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import type { SchemaDrivenDataMap } from '../../../../lib/graphql-kit/schema/sddm/_.js'
+import type { ObjectParserContext } from '../../Context.js'
 import { toGraphQLOperationDefinition } from './2_OperationDefinition.js'
 
 const defaultOperationName = `$default`
 
 export const toGraphQLDocument = (
   graffleDocument: Select.Document.DocumentNormalized,
-  options?: Options,
+  context?: ObjectParserContext,
 ): Encoded => {
   const operationsAndVariables = Object
     .values(graffleDocument.operations)
     .map(graffleOperation => {
-      const sddm = options?.sddm?.operations[graffleOperation.type]
-      return toGraphQLOperationDefinition(sddm, graffleOperation, options)
+      const sddm = context?.sddm?.operations[graffleOperation.type]
+      return toGraphQLOperationDefinition(sddm, graffleOperation, context)
     })
 
   const graphqlDocument = GraphqlKit.Document.Ast.Document({
@@ -30,12 +29,6 @@ export const toGraphQLDocument = (
     document: graphqlDocument,
     operationsVariables,
   }
-}
-
-export interface Options {
-  sddm?: SchemaDrivenDataMap | null | undefined
-  scalars?: GraphqlKit.Schema.Type.Scalars.ScalarMap | undefined
-  hoistArguments?: boolean | undefined
 }
 
 export interface Encoded {

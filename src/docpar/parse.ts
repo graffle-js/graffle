@@ -30,23 +30,21 @@ import type { String } from './string/_.js'
  */
 // dprint-ignore
 export type Parse<
-  $Input,
-  $Context,
+  $Input extends Input,
+  $Context extends Core.ParserContext.Cheap,
   ___$Result = Parse_<$Input, $Context>,
 > =
   [___$Result] extends [Ts.Err.StaticError]   ? ___$Result :
   [___$Result] extends [Core.Doc.Operation]   ? Core.Doc.Document<___$Result> :
-                                                Ts.Err.StaticError<'Parse', { result: ___$Result }>
+                                                Ts.Err.StaticError<['Parse', 'Unknown'], { result: ___$Result }>
 
 // dprint-ignore
 type Parse_<
-    $Input,
-    $Context,
+    $Input extends Input,
+    $Context extends Core.ParserContext.Cheap,
   > =
-    $Input extends string         ? $Context extends { schema: infer $Schema }
-                                      ? String.Parse<$Input, $Schema>
-                                      : never
-    : $Input extends object        ? $Context extends { schema: any; sddm: any; scalars: any; typeHookRequestResultDataTypes: any }
-                                      ? Object.Parse<$Input, $Context>
-                                      : never
-    :                                                                                               never
+    $Input extends string       ? String.Parse<$Input, $Context> :
+    $Input extends object       ? Object.Parse<$Input, $Context> :
+                                  never
+
+export type Input = string | object

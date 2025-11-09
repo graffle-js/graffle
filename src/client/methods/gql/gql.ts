@@ -125,7 +125,11 @@ export interface GqlMethod<$Context extends Context.Context>
   // Overload: Inline document builder object (must be last as it's least specific)
   <$Document extends DocumentObjectConstraint<$Context>>(
     document: $Document
-  ): ParseGraphQLObject<$Context, $Document> extends infer $Parsed
+  ): ParseGraphQLObject<
+      $Context,
+      // @ts-expect-error
+      $Document
+    > extends infer $Parsed
     ? $Parsed extends { __typename: 'ParserError' }
       ? $Parsed
       : $Parsed extends GraphqlKit.Document.TypedFull.TypedFullDocument

@@ -45,9 +45,8 @@ type UniversalObject = GraphqlKit.Schema.Type.OutputObject & {
  */
 export type ParseDocument<
   $Input extends string,
-  $Context extends Core.ParserContext<any>,
+  $Context extends { schema: any },
 > = ParseOperations<SkipIgnored<$Input>, $Context['schema'], {}>
-
 /**
  * Parse multiple operations and accumulate them
  */

@@ -13,8 +13,8 @@ type $ = typeof $
 type ContextStrict = Docpar.ParserContext<Possible.$.Schema, Possible.$.SchemaDrivenDataMap, never>
 type ContextLoose = Docpar.ParserContext<undefined>
 
-type Strict<$Input> = Docpar.Parse<$Input, ContextStrict>
-type Loose<$Input> = Docpar.Parse<$Input, ContextLoose>
+type Strict<$Input extends Docpar.Input> = Docpar.Parse<$Input, ContextStrict>
+type Loose<$Input extends Docpar.Input> = Docpar.Parse<$Input, ContextLoose>
 
 // Local gql functions for testing
 const gqlYe = createGql<Possible.$.Schema, any, Possible.$.SchemaDrivenDataMap>({

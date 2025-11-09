@@ -1,3 +1,4 @@
+export type { ObjectParserContext as ParserContext } from './Context.js'
 export { InferResult } from './InferResult/_.js'
 export type { InferOperation, Parse } from './Parse.js'
 export * as Static from './rootType.js'
