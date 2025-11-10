@@ -1,6 +1,6 @@
-import type { BattleRoyale } from '../objects/BattleRoyale/$.js'
-import type { BattleTrainer } from '../objects/BattleTrainer/$.js'
-import type { BattleWild } from '../objects/BattleWild/$.js'
+import type { BattleRoyale } from '../objects/BattleRoyale/_.js'
+import type { BattleTrainer } from '../objects/BattleTrainer/_.js'
+import type { BattleWild } from '../objects/BattleWild/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.

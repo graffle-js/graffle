@@ -1,7 +1,8 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import * as $$Data from './data.js'
-import * as $$Schema from './schema/$.js'
-import * as $$SelectionSets from './selection-sets/$.js'
+import * as $$Schema from './schema/_.js'
+import * as $$SelectionSets from './selection-sets/_.js'
 
 //
 //
@@ -78,7 +79,7 @@ export namespace Select {
   /**
    * Infer result type for Query operations.
    */
-  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.Docpar.Object.InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = GraphqlKit.Document.Object.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
     $$Utilities.GraphqlKit.Schema.OperationType.QUERY

@@ -1,7 +1,8 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
-import type { Mutation } from './$.js'
+import type { Mutation } from './_.js'
 
 export interface $FragmentInline<
-  _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-> extends Mutation<_$Context>, $$Utilities.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext,
+> extends Mutation<_$Context>, GraphqlKit.Document.Object.Select.Directive.$Groups.InlineFragment.Fields {}

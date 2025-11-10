@@ -1,6 +1,6 @@
 import type * as $ from '#graffle/utilities-for-generated'
-import type { lowerCaseObject } from '../objects/lowerCaseObject/$.js'
-import type { lowerCaseObject2 } from '../objects/lowerCaseObject2/$.js'
+import type { lowerCaseObject } from '../objects/lowerCaseObject/_.js'
+import type { lowerCaseObject2 } from '../objects/lowerCaseObject2/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.

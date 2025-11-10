@@ -2,7 +2,7 @@
  * This example shows the default output behavior.
  */
 
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 import { show } from '../$/helpers.js'
 
 const pokemon = Graffle.create()

@@ -1,16 +1,17 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 
-export type id1<_$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> =
-  | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
-  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
-  | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
+export type id1<_$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> =
+  | GraphqlKit.Document.Object.Select.Indicator.NoArgsIndicator
+  | GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasShort
+  | GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasString
   | id1.$SelectionSet<_$Context>
 
 export namespace id1 {
   export interface $SelectionSet<
-    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
-  > extends $$Utilities.Docpar.Object.Select.Bases.Base {
+    _$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext,
+  > extends GraphqlKit.Document.Object.Select.Bases.Base {
   }
 
   /**
@@ -19,11 +20,11 @@ export namespace id1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $Expanded<
-    _$Context extends $$Utilities.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext,
+    _$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
-    | $$Utilities.Docpar.Object.Select.Indicator.NoArgsIndicator
-    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasShort
-    | $$Utilities.Docpar.Object.Select.SelectAlias.SelectAliasString
+    | GraphqlKit.Document.Object.Select.Indicator.NoArgsIndicator
+    | GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasShort
+    | GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasString
     | $SelectionSet<_$Context>
   >
 }

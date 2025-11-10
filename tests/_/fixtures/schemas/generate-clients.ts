@@ -1,5 +1,5 @@
-import { Generator } from '#src/generator/$.js'
-import { TestSchemas } from '#test/schema/$.js'
+import { Generator } from '#src/generator/_.js'
+import { TestSchemas } from '#test/schema/_.js'
 import { Obj, Str } from '@wollybeard/kit'
 import { rmSync } from 'node:fs'
 import { join } from 'node:path'

@@ -76,7 +76,7 @@ Graffle detects variables at **both runtime and compile-time**:
 **Without Variables** - Auto-executes and returns `Promise<Result>`:
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const graffle = Graffle.create().use(DocumentBuilder())
 
@@ -91,7 +91,7 @@ const trainers = await graffle.query.trainers({
 **With Variables** - Returns `DocumentRunner<Variables, Result>`:
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 import { $ } from './graffle/modules/Scalar.js'
 
 const graffle = Graffle.create().use(DocumentBuilder())

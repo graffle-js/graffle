@@ -14,7 +14,7 @@ This example shows how to configure output to embed errors into the envelope.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const pokemon = Graffle
   .create({

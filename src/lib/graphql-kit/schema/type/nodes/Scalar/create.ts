@@ -1,10 +1,10 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Scalars } from '../../../scalars/_.js'
 import type { Scalar } from './_.js'
 
 export const create = <
   $Name extends string,
   $Decoded,
-  $Encoded extends GraphqlKit.Schema.Scalars.StandardScalarRuntimeTypes,
+  $Encoded extends Scalars.StandardScalarRuntimeTypes,
 >(
   name: $Name,
   codec: {

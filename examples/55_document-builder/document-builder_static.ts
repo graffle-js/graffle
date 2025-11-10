@@ -8,7 +8,7 @@
 import { $, Graffle as PlainGraffle } from 'graffle'
 //                                ^
 // Variable marker with flexible API
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 import { show } from '../$/show.js'
 
 /*

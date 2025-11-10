@@ -1,6 +1,6 @@
-import type { Docpar } from '#src/docpar/_.js'
+import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 
-type InlineType = Docpar.SchemaDrivenDataMap.InlineType
+type InlineType = GraphqlKit.Schema.SchemaDrivenDataMap.InlineType
 import type { NamedInput } from '../node-groups.js'
 
 export interface InputField<

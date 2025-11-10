@@ -66,7 +66,7 @@ await sender.getPokemons()
 == pre-built
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const doc = Graffle.query.pokemons({ name: true, hp: true })
 

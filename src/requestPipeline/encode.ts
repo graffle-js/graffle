@@ -1,7 +1,6 @@
-import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+type SchemaDrivenDataMap = GraphqlKit.Schema.SchemaDrivenDataMap
 
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
   sddm: SchemaDrivenDataMap
@@ -35,7 +34,7 @@ const encodeInputFieldLike = (
   args: Record<string, any>,
   argName: any,
   argValue: any,
-  sddmNode: Docpar.SchemaDrivenDataMap.InputNodes,
+  sddmNode: GraphqlKit.Schema.SchemaDrivenDataMap.InputNodes,
   scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap,
 ) => {
   /**
@@ -53,7 +52,7 @@ const encodeInputFieldLike = (
    * The registry is the single source of truth for scalar encoding/decoding.
    */
 
-  if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
+  if (GraphqlKit.Schema.SchemaDrivenDataMap.isScalar(sddmNode)) {
     // Registry is populated from SDDM at client init, with overrides from .scalar()
     const scalar = scalars[sddmNode.name]
     if (!scalar) {
@@ -65,7 +64,7 @@ const encodeInputFieldLike = (
     return
   }
 
-  if (Docpar.SchemaDrivenDataMap.isInputObject(sddmNode)) {
+  if (GraphqlKit.Schema.SchemaDrivenDataMap.isInputObject(sddmNode)) {
     // We could iterate here by two strategies:
     // 1. The number of fields in the variables object given to execute against the document operation.
     // 2. The number of custom scalar fields (direct or transient) on this schema object.

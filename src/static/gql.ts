@@ -1,8 +1,6 @@
-import { Docpar } from '#src/docpar/_.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import { print } from '@0no-co/graphql.web'
-import type { Ts } from '@wollybeard/kit'
 
 //
 //
@@ -30,15 +28,15 @@ export interface gql<
   // String GraphQL document overload
   <const $Input extends string>(
     graphqlDocument: $Input,
-  ): Docpar.Parse<$Input, Docpar.ParserContext<$Schema>>
+  ): GraphqlKit.Document.Parse<$Input, GraphqlKit.Document.ParserContext<$Schema>>
 
   // Document object overload
   <const $Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
-    options?: Docpar.Object.ParserContext,
-  ): $Document extends object ? Docpar.Parse<
+    options?: GraphqlKit.Document.Object.ParserContext,
+  ): $Document extends object ? GraphqlKit.Document.Parse<
       $Document,
-      Docpar.ParserContext<$Schema, $ArgumentsMap, never>
+      GraphqlKit.Document.ParserContext<$Schema, $ArgumentsMap, never>
     >
     : never
 }
@@ -59,7 +57,10 @@ export namespace Gql {
    */
   export type Arguments =
     | [graphqlDocument: string]
-    | [objectDocument: Docpar.Object.Select.Document.DocumentObject, options?: Docpar.Object.ParserContext]
+    | [
+      objectDocument: GraphqlKit.Document.Object.Select.Document.DocumentObject,
+      options?: GraphqlKit.Document.Object.ParserContext,
+    ]
 
   export const normalizeArguments = (args: Arguments) => {
     const [first, second] = args
@@ -76,13 +77,13 @@ export namespace Gql {
     // Document builder object
     return {
       type: 'object' as const,
-      document: first as Docpar.Object.Select.Document.DocumentObject,
+      document: first as GraphqlKit.Document.Object.Select.Document.DocumentObject,
       options: second,
     }
   }
 }
 
-export const defaults: Partial<Docpar.Object.ParserContext> = {
+export const defaults: Partial<GraphqlKit.Document.Object.ParserContext> = {
   hoistArguments: true,
 }
 
@@ -103,16 +104,16 @@ export const createGql = <
     }
 
     // Normalize the document object into internal representation
-    const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(normalized.document)
+    const documentNormalized = GraphqlKit.Document.Object.Select.Document.normalizeOrThrow(normalized.document)
 
     // Convert to GraphQL document
-    const result = Docpar.Object.ToGraphQLDocument.toGraphQLDocument(documentNormalized, {
+    const result = GraphqlKit.Document.Object.ToAst.toAst(documentNormalized, {
       ...defaults,
       ...normalized.options,
       sddm: config.sddm as any,
     })
 
-    // Print and return as GraphqlKit.Document.TypedFull
+    // Print and return as GraphqlKit.Document
     return print(result.document) as any
   }) as any
 }
@@ -226,8 +227,8 @@ export type ParseGraphQLString<
   $Context,
   $Input extends string,
 > = GlobalRegistry.ForContext<$Context> extends never
-  ? Docpar.Parse<$Input, Docpar.ParserContext<undefined>>
-  : Docpar.Parse<$Input, Docpar.ParserContext<GlobalRegistry.ForContext<$Context>['schema']>>
+  ? GraphqlKit.Document.Parse<$Input, GraphqlKit.Document.ParserContext<undefined>>
+  : GraphqlKit.Document.Parse<$Input, GraphqlKit.Document.ParserContext<GlobalRegistry.ForContext<$Context>['schema']>>
 
 /**
  * Type-level utility that parses a document builder object and returns the typed document.
@@ -247,9 +248,9 @@ export type ParseGraphQLString<
 export type ParseGraphQLObject<
   $Context,
   $Document extends object,
-> = Docpar.Parse<
+> = GraphqlKit.Document.Parse<
   $Document,
-  Docpar.ParserContext<
+  GraphqlKit.Document.ParserContext<
     GlobalRegistry.ForContext<$Context>['schema'],
     GlobalRegistry.ForContext<$Context>['argumentsMap'],
     $Context extends { typeHookRequestResultDataTypes: infer $TypeHooks } ? $TypeHooks : never

@@ -1,11 +1,11 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Kind } from '../../kind/_.js'
 import type { OutputObject } from './OutputObject.js'
 
 export type Union<
   $Name extends string = string,
   $Members extends [OutputObject, ...OutputObject[]] = [OutputObject, ...OutputObject[]],
 > = {
-  kind: GraphqlKit.Schema.Kind.TypeKind.Union
+  kind: Kind.TypeKind.Union
   name: $Name
   members: $Members
   membersUnion: $Members[number]

@@ -1,5 +1,4 @@
 import type { Configuration } from '#src/context/fragments/configuration/_.js'
-import type { Docpar } from '#src/docpar/_.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/graphql-kit/document/typed/__.js'
 import type { Ts } from '@wollybeard/kit'
@@ -7,7 +6,7 @@ import type { HandleOutput } from '../../handle.js'
 
 export type DocumentInput =
   | GraphqlKit.Document.Typed.TypedDocumentLike
-  | GraphqlKit.Document.TypedFull.TypedFullDocument
+  | GraphqlKit.Document.TypedFullDocument
 
 // ================================================================================================
 // STATIC EXECUTORS - Function signatures for $send method
@@ -18,9 +17,9 @@ export type DocumentInput =
  * Uses tuple wrapping to prevent distribution over unions.
  */
 type OperationToStaticExecutor<
-  $Op extends GraphqlKit.Document.TypedFull.Operation,
+  $Op extends GraphqlKit.Document.Operation,
   $Context,
-> = [$Op] extends [infer $O extends GraphqlKit.Document.TypedFull.Operation]
+> = [$Op] extends [infer $O extends GraphqlKit.Document.Operation]
   // @ts-expect-error - todo: loosen constraint on vars
   ? GetVariablesInputKind<$O['variables']> extends infer ___$VarKind
     ? ___$VarKind extends 'none' ? SingleOpNoVarsStaticExecutor<$O, $Context>
@@ -34,7 +33,7 @@ type OperationToStaticExecutor<
  * Static executor for single operation with no variables.
  * Supports calling without operation name or with operation name.
  */
-export interface SingleOpNoVarsStaticExecutor<$Op extends GraphqlKit.Document.TypedFull.Operation, $Context> {
+export interface SingleOpNoVarsStaticExecutor<$Op extends GraphqlKit.Document.Operation, $Context> {
   (operationName?: $Op['name']): Promise<Ts.Simplify.Top<HandleOutput<$Context, $Op['result']>>>
 }
 
@@ -43,7 +42,7 @@ export interface SingleOpNoVarsStaticExecutor<$Op extends GraphqlKit.Document.Ty
  * Supports multiple call patterns.
  */
 export interface SingleOpOptionalVarsStaticExecutor<
-  $Op extends GraphqlKit.Document.TypedFull.Operation,
+  $Op extends GraphqlKit.Document.Operation,
   $Context,
   ___$Return = Promise<Ts.Simplify.Top<HandleOutput<$Context, $Op['result']>>>,
 > {
@@ -56,7 +55,7 @@ export interface SingleOpOptionalVarsStaticExecutor<
  * Static executor for single operation with required variables.
  */
 export interface SingleOpRequiredVarsStaticExecutor<
-  $Op extends GraphqlKit.Document.TypedFull.Operation,
+  $Op extends GraphqlKit.Document.Operation,
   $Context,
   ___$Return = Promise<Ts.Simplify.Top<HandleOutput<$Context, $Op['result']>>>,
 > {
@@ -82,7 +81,7 @@ export interface UntypedStaticExecutor {
  * This approach allows proper discrimination based on operation name.
  * Works with union of operations using Extract pattern.
  */
-export interface MultiOpStaticExecutor<$Operations extends GraphqlKit.Document.TypedFull.Operation, $Context> {
+export interface MultiOpStaticExecutor<$Operations extends GraphqlKit.Document.Operation, $Context> {
   <$OpName extends $Operations['name']>(
     operationName: $OpName,
     // @ts-expect-error - todo: loosen constraint on vars
@@ -103,7 +102,7 @@ export interface MultiOpStaticExecutor<$Operations extends GraphqlKit.Document.T
  * Named executors don't take operation name as parameter.
  */
 type OperationToNamedExecutor<
-  $Op extends GraphqlKit.Document.TypedFull.Operation,
+  $Op extends GraphqlKit.Document.Operation,
   $Context,
   // @ts-expect-error - todo: loosen constraint on vars
   ___$VarKind = GetVariablesInputKind<$Op['variables']>,
@@ -167,7 +166,7 @@ export interface RequiredVarsNamedExecutor<
  */
 // dprint-ignore
 export type DocumentSender<$Doc extends DocumentInput, $Context> =
-$Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument
+$Doc extends GraphqlKit.Document.TypedFullDocument
   ? Sender<$Doc, $Context>
   : $Doc extends string
     ? UntypedSender<$Context>
@@ -176,27 +175,25 @@ $Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument
       : UntypedSender<$Context>
 
 type Sender<
-  $Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument,
+  $Doc extends GraphqlKit.Document.TypedFullDocument,
   $Context,
 > =
   & SenderStatic<$Doc, $Context>
   & SenderNamed<$Doc, $Context>
 
 type SenderStatic<
-  $Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument,
+  $Doc extends GraphqlKit.Document.TypedFullDocument,
   $Context,
-> = $Doc extends
-  GraphqlKit.Document.TypedFull.Document<infer $Operations extends GraphqlKit.Document.TypedFull.Operation>
-  ? Docpar.Doc.IsSingleOperation<$Doc> extends true
+> = $Doc extends GraphqlKit.Document.Document<infer $Operations extends GraphqlKit.Document.Operation>
+  ? GraphqlKit.Document.Doc.IsSingleOperation<$Doc> extends true
     ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Operations, $Context>> }
   : { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
   : never
 
 type SenderNamed<
-  $Doc extends GraphqlKit.Document.TypedFull.TypedFullDocument,
+  $Doc extends GraphqlKit.Document.TypedFullDocument,
   $Context,
-> = $Doc extends
-  GraphqlKit.Document.TypedFull.Document<infer $Operations extends GraphqlKit.Document.TypedFull.Operation> ? {
+> = $Doc extends GraphqlKit.Document.Document<infer $Operations extends GraphqlKit.Document.Operation> ? {
     [k in $Operations['name'] & string]: Configuration.Check.Preflight<
       $Context,
       OperationToNamedExecutor<Extract<$Operations, { name: k }>, $Context>

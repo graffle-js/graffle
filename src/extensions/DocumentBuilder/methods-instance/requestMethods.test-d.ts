@@ -1,5 +1,5 @@
 import { DateScalar } from '#test/fixtures/scalars'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Possible } from '#test/schema/possible/client/_.js'
 import { Ts } from '@wollybeard/kit'
 
 const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)

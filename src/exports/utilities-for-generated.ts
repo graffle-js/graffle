@@ -1,5 +1,3 @@
-import type { Ts } from '@wollybeard/kit'
-
 export { createConstructorWithContext } from '#src/client/client.js'
 export {
   type ConfigGetOutputError,
@@ -10,7 +8,6 @@ export { type Context } from '#src/context/context.js'
 export * from '#src/context/context.js'
 export { contextEmpty } from '#src/context/ContextEmpty.js'
 export { addAndApplyMany } from '#src/context/fragments/extensions/fragment.js'
-export { Docpar } from '#src/docpar/_.js'
 export { type DocumentRunner } from '#src/extensions/DocumentBuilder/methods-instance/document.js'
 export { type DocumentRunner as DocumentRunnerDeferred } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
 export { GraphqlKit } from '#src/lib/graphql-kit/_.js'

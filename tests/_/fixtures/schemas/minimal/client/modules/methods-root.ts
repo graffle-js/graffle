@@ -1,7 +1,8 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import type * as $$SchemaMap from './schema-driven-data-map.js'
-import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets/$.js'
+import type * as $$Schema from './schema/_.js'
+import type * as $$SelectionSets from './selection-sets/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
@@ -20,28 +21,28 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
         $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<
+        GraphqlKit.Document.Object.Var.InferFromQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             $$Utilities.AssertExtendsObject<$SelectionSet>,
             $$Schema.Schema<$Context['scalars']>
           >
@@ -83,23 +84,23 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.id1<{ scalars: $Context['scalars'] }>>,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ id1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ id1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { id1: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'id1'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ id1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ id1: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { id1: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,

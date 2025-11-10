@@ -8,7 +8,7 @@ import { ATransport, ATransportBuilder } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
-import { RequestInterceptors } from '../../context/fragments/requestInterceptors/$.js'
+import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_.js'
 
 const aExtension = Extension.create(`aExtension`).return()
 type aExtension = typeof aExtension

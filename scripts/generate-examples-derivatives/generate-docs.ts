@@ -134,7 +134,7 @@ const transformRewriteGraffleImports = (example: Example) => {
   const defaultSchema = `pokemon`
 
   let newContent = example.file.content
-    .replaceAll(/from '\.\.\/\$\/graffle\/\$.js'/g, `from './graffle/$.js'`)
+    .replaceAll(/from '\.\.\/\$\/graffle\/_.js'/g, `from './graffle/_.js'`)
     // The examples that use Pokemon schema are mapped to the default schema in the documentation.
     // This works with Twoslash because we generate a pokemon schema in the website root directory.
     .replaceAll(new RegExp(`(import.*./)${defaultSchema}`, `g`), `$1graffle`)

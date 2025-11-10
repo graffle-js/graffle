@@ -2,7 +2,7 @@
  * This example shows how to configure output to throw errors even when using the envelope.
  */
 
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 
 // dprint-ignore
 const pokemon = Graffle

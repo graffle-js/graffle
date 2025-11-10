@@ -15,7 +15,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
     // Import domains only if there are actual rules configured
     const hasDomains = config.methodsOrganization.domains && config.methodsOrganization.domains.rules?.length > 0
     if (hasDomains) {
-      code(Str.Code.TS.importAll({ as: '$$Domains', from: './domains/$$.js' }))
+      code(Str.Code.TS.importAll({ as: '$$Domains', from: './domains/__.js' }))
     }
 
     code(Str.Code.TS.importAll({ as: $.$$Utilities, from: config.paths.imports.grafflePackage.utilitiesForGenerated }))

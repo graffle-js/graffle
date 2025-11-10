@@ -1,6 +1,7 @@
 import { Extension } from '#graffle/extension'
-import type { GlobalRegistry, Kind } from '#graffle/utilities-for-generated'
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { GraffleKit } from '#graffle/kit'
+import { GraphqlKit } from '#src/exports/utilities-for-generated.js'
+import type { Kind } from '@wollybeard/kit/fn'
 import { createMethodOperationType } from './methods-instance/requestMethods.js'
 
 export type ConfigurationInput = {
@@ -60,8 +61,8 @@ type Properties_<
   // GlobalRegistry.Has<$Context['name']> extends false
 
   // @ts-ignore passes after generation
-  GlobalRegistry.Has<__Name> extends false ? {}
+  GraffleKit.GlobalRegistry.Has<__Name> extends false ? {}
     : (
       // @ts-ignore Passes after generation
-      Kind.Apply<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
+      Kind.Apply<GraffleKit.GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
     )

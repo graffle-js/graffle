@@ -1,8 +1,7 @@
-import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Kind } from 'graphql'
 
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+type SchemaDrivenDataMap = GraphqlKit.Schema.SchemaDrivenDataMap
 
 /**
  * If a document is given then aliases will be decoded as well.
@@ -52,7 +51,7 @@ const decodeResultValue = (input: {
       index: number
     }
   value: GraphqlKit.Request.SomeFieldData
-  sddmNode: Docpar.SchemaDrivenDataMap.OutputNodes
+  sddmNode: GraphqlKit.Schema.SchemaDrivenDataMap.OutputNodes
   documentPart: null | GraphqlKit.Document.Ast.SelectionSetNode
   scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap
 }): void => {
@@ -74,7 +73,7 @@ const decodeResultValue = (input: {
       })
     })
   } else if (typeof value === `object`) {
-    if (!Docpar.SchemaDrivenDataMap.isOutputObject(sddmNode)) {
+    if (!GraphqlKit.Schema.SchemaDrivenDataMap.isOutputObject(sddmNode)) {
       return
       // something went wrong
       // todo in strict mode throw error that sddmNode is inconsistent with data shape.
@@ -101,7 +100,7 @@ const decodeResultValue = (input: {
       // Should be impossible. Strict mode could error here.
       return
     }
-    if (Docpar.SchemaDrivenDataMap.isScalar(sddmNode)) {
+    if (GraphqlKit.Schema.SchemaDrivenDataMap.isScalar(sddmNode)) {
       // Registry is populated from SDDM at client init, with overrides from .scalar()
       const scalar = scalars[sddmNode.name]
       if (!scalar) {

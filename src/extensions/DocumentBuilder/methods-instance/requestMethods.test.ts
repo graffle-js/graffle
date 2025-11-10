@@ -1,7 +1,7 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { DateScalar } from '#test/fixtures/scalars'
 import { test as testBase } from '#test/helpers'
-import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
+import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/_.js'
 import { db } from '#test/schema/possible/db.js'
 import { Ts } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'

@@ -1,0 +1,3361 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', { $skip: true } ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [
+    'x',
+    {
+      $skip: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id @skip(if: true)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', { $skip: true } ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [
+    'x',
+    {
+      $skip: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id @skip(if: true)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', { $skip: true } ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [
+    'x',
+    {
+      $skip: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id @skip(if: true)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', { $skip: true } ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [
+    'x',
+    {
+      $skip: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id @skip(if: true)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', true ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ 'x', true ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', true ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ 'x', true ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', true ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ 'x', true ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ 'x', true ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ 'x', true ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ [ 'x', true ], [ 'id2', true ] ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ [ 'x', true ], [ 'id2', true ] ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+  id2: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ [ 'x', true ], [ 'id2', true ] ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ [ 'x', true ], [ 'id2', true ] ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+  id2: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ [ 'x', true ], [ 'id2', true ] ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ [ 'x', true ], [ 'id2', true ] ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+  id2: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ id: [ [ 'x', true ], [ 'id2', true ] ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: [ [ 'x', true ], [ 'id2', true ] ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: id
+  id2: id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ object: [ 'x', { $skip: true, id: true } ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: [
+    'x',
+    {
+      $skip: true,
+      id: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ object: [ 'x', { $skip: true, id: true } ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: [
+    'x',
+    {
+      $skip: true,
+      id: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ object: [ 'x', { $skip: true, id: true } ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: [
+    'x',
+    {
+      $skip: true,
+      id: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Aliases > DocumentBuilder > fn({ object: [ 'x', { $skip: true, id: true } ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: [
+    'x',
+    {
+      $skip: true,
+      id: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  x: object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ] ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  a: stringWithArgs(id: "")
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ] ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($id: ID) {
+  a: stringWithArgs(id: $id)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ] ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  a: stringWithArgs(id: "")
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ] ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($id: String!) {
+  a: stringWithArgs(id: $id)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ], [ 'b', { $: { id: '' } } ] ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ],
+    [
+      'b',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  a: stringWithArgs(id: "")
+  b: stringWithArgs(id: "")
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ], [ 'b', { $: { id: '' } } ] ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ],
+    [
+      'b',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($id: ID, $id_2: ID) {
+  a: stringWithArgs(id: $id)
+  b: stringWithArgs(id: $id_2)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ], [ 'b', { $: { id: '' } } ] ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ],
+    [
+      'b',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  a: stringWithArgs(id: "")
+  b: stringWithArgs(id: "")
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Aliases > DocumentBuilder > fn({ stringWithArgs: [ [ 'a', { $: { id: '' } } ], [ 'b', { $: { id: '' } } ] ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: [
+    [
+      'a',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ],
+    [
+      'b',
+      {
+        $: {
+          id: ''
+        }
+      }
+    ]
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($id: String!, $id_2: String!) {
+  a: stringWithArgs(id: $id)
+  b: stringWithArgs(id: $id_2)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: 'A' } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: 'A'
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgEnum(ABCEnum: A)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: 'A' } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: 'A'
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($ABCEnum: ABCEnum) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: 'A' } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: 'A'
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgEnum(ABCEnum: "A")
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: 'A' } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: 'A'
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($ABCEnum: String!) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: [Function: name(name) {
+      return self(...) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: [Function: name(name) {
+      return self({
+        ...state,
+        name
+      }, graphqlType);
+    }] { name: [Function: name], _: {
+          default: undefined,
+          name: undefined,
+          required: undefined
+        }, as: [Function: as], default: [Function: default], required: [Function: required] }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($ABCEnum: ABCEnum) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: [Function: name(name) {
+      return self(...) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: [Function: name(name) {
+      return self({
+        ...state,
+        name
+      }, graphqlType);
+    }] { name: [Function: name], _: {
+          default: undefined,
+          name: undefined,
+          required: undefined
+        }, as: [Function: as], default: [Function: default], required: [Function: required] }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($ABCEnum: ABCEnum) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: [Function: name(name) {
+      return self(...) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: [Function: name(name) {
+      return self({
+        ...state,
+        name
+      }, graphqlType);
+    }] { name: [Function: name], _: {
+          default: undefined,
+          name: undefined,
+          required: undefined
+        }, as: [Function: as], default: [Function: default], required: [Function: required] }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($ABCEnum: String!) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgEnum: { $: { $ABCEnum: [Function: name(name) {
+      return self(...) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgEnum: {
+    $: {
+      $ABCEnum: [Function: name(name) {
+      return self({
+        ...state,
+        name
+      }, graphqlType);
+    }] { name: [Function: name], _: {
+          default: undefined,
+          name: undefined,
+          required: undefined
+        }, as: [Function: as], default: [Function: default], required: [Function: required] }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($ABCEnum: String!) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'A' } } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'A'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: A})
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'A' } } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'A'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($input: InputObjectEnum!) {
+  stringWithArgInputObjectEnum(input: $input)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'A' } } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'A'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: A})
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'A' } } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'A'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($input: String!) {
+  stringWithArgInputObjectEnum(input: $input)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'B' } } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'B'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: B})
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'B' } } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'B'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($input: InputObjectEnum!) {
+  stringWithArgInputObjectEnum(input: $input)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'B' } } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'B'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: B})
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Enums > DocumentBuilder > fn({ stringWithArgInputObjectEnum: { $: { input: { $abcEnum: 'B' } } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgInputObjectEnum: {
+    $: {
+      input: {
+        $abcEnum: 'B'
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($input: String!) {
+  stringWithArgInputObjectEnum(input: $input)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: { id: '' }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {
+      id: ''
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectWithArgs(id: "") {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: { id: '' }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {
+      id: ''
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($id: ID) {
+  objectWithArgs(id: $id) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: { id: '' }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {
+      id: ''
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectWithArgs(id: "") {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: { id: '' }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {
+      id: ''
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($id: String!) {
+  objectWithArgs(id: $id) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: {}, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectWithArgs {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: {}, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectWithArgs {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: {}, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectWithArgs {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ objectWithArgs: { $: {}, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectWithArgs: {
+    $: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectWithArgs {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ result: { $: { $case: 'Object1' }, __typename: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  result: {
+    $: {
+      $case: 'Object1'
+    },
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  result(case: Object1) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ result: { $: { $case: 'Object1' }, __typename: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  result: {
+    $: {
+      $case: 'Object1'
+    },
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($case: Case!) {
+  result(case: $case) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ result: { $: { $case: 'Object1' }, __typename: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  result: {
+    $: {
+      $case: 'Object1'
+    },
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  result(case: "Object1") {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ result: { $: { $case: 'Object1' }, __typename: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  result: {
+    $: {
+      $case: 'Object1'
+    },
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($case: String!) {
+  result(case: $case) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: { boolean: true, float: 1 } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {
+      boolean: true,
+      float: 1
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgs(boolean: true, float: 1)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: { boolean: true, float: 1 } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {
+      boolean: true,
+      float: 1
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($boolean: Boolean, $float: Float) {
+  stringWithArgs(boolean: $boolean, float: $float)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: { boolean: true, float: 1 } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {
+      boolean: true,
+      float: 1
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgs(boolean: true, float: 1)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: { boolean: true, float: 1 } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {
+      boolean: true,
+      float: 1
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query ($boolean: Boolean!, $float: Int!) {
+  stringWithArgs(boolean: $boolean, float: $float)
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: {} } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {}
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgs
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: {} } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {}
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgs
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: {} } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {}
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgs
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Arguments - Scalars and Objects > DocumentBuilder > fn({ stringWithArgs: { $: {} } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  stringWithArgs: {
+    $: {}
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  stringWithArgs
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: false }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: false }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: false }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: false }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: true }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: true }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: true }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: true }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: undefined }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: undefined }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: undefined }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: { if: undefined }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: {}, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: {}, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: {}, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: {}, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: false, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: false, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: false, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: false, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: true, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: true, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: true, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: true, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @include(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: undefined, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: undefined, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: undefined, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $include > DocumentBuilder > fn({ object: { $include: undefined, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $include: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: false }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: false }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: false }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: false }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: false
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: true }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: true }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: true }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: true }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: true
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: undefined }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: undefined }, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: undefined }, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: { if: undefined }, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {
+      if: undefined
+    },
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: {}, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: {}, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: {}, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: {}, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: {},
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: false, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: false, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: false, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: false, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: false,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: false) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: true, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: true, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: true, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: true, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: true,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object @skip(if: true) {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: undefined, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: undefined, id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: undefined, id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ object: { $skip: undefined, id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    $skip: undefined,
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: { $skip: true } } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: {
+        $skip: true
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+      int @skip(if: true)
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: { $skip: true } } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: {
+        $skip: true
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+      int @skip(if: true)
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: { $skip: true } } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: {
+        $skip: true
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+      int @skip(if: true)
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Directives - $skip > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: { $skip: true } } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: {
+        $skip: true
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+      int @skip(if: true)
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: [ { __typename: true }, { abcEnum: true } ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: [
+    {
+      __typename: true
+    },
+    {
+      abcEnum: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+  ... {
+    abcEnum
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: [ { __typename: true }, { abcEnum: true } ] }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: [
+    {
+      __typename: true
+    },
+    {
+      abcEnum: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+  ... {
+    abcEnum
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: [ { __typename: true }, { abcEnum: true } ] }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: [
+    {
+      __typename: true
+    },
+    {
+      abcEnum: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+  ... {
+    abcEnum
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: [ { __typename: true }, { abcEnum: true } ] }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: [
+    {
+      __typename: true
+    },
+    {
+      abcEnum: true
+    }
+  ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+  ... {
+    abcEnum
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true, $include: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true,
+    $include: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... @include(if: true) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true, $include: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true,
+    $include: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... @include(if: true) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true, $include: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true,
+    $include: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... @include(if: true) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ ___: { __typename: true, $include: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  ___: {
+    __typename: true,
+    $include: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  ... @include(if: true) {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ interface: { ___: { __typename: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  interface: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  interface {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ interface: { ___: { __typename: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  interface: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  interface {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ interface: { ___: { __typename: true } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  interface: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  interface {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ interface: { ___: { __typename: true } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  interface: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  interface {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ unionFooBar: { ___: { __typename: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ unionFooBar: { ___: { __typename: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ unionFooBar: { ___: { __typename: true } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Inline Fragments > DocumentBuilder > fn({ unionFooBar: { ___: { __typename: true } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___: {
+      __typename: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... {
+      __typename
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ __typename: true }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  __typename: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  __typename
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ __typename: true }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  __typename: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  __typename
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ __typename: true }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  __typename: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  __typename
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ __typename: true }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  __typename: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  __typename
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: false }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: false
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: false }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: false
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: false }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: false
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: false }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: false
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: undefined }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: undefined
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: undefined }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: undefined
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: undefined }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: undefined
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ id: true, string: undefined }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  id: true,
+  string: undefined
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ object: { id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ object: { id: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ object: { id: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ object: { id: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  object: {
+    id: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  object {
+    id
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: false } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: false
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: false } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: false
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: false } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: false
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ objectNested: { object: { string: true, id: true, int: false } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  objectNested: {
+    object: {
+      string: true,
+      id: true,
+      int: false
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  objectNested {
+    object {
+      string
+      id
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ string: true }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  string: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  string
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ string: true }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  string: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  string
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ string: true }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  string: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  string
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Other > DocumentBuilder > fn({ string: true }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  string: true
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  string
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      $skip: true,
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar @skip(if: true) {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      $skip: true,
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar @skip(if: true) {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      $skip: true,
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar @skip(if: true) {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      $skip: true,
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar @skip(if: true) {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { int: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { int: true } } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { int: true } } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { ___on_Bar: { int: true } } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    ___on_Bar: {
+      int: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    ... on Bar {
+      int
+    }
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { __typename: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { __typename: true } }) [matrix: sddm={ operations: { query: { _tag: 'outputOb..., hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { __typename: true } }) [matrix: sddm=undefined, hoistArguments=false] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`Unions > DocumentBuilder > fn({ unionFooBar: { __typename: true } }) [matrix: sddm=undefined, hoistArguments=true] 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  unionFooBar: {
+    __typename: true
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+{
+  unionFooBar {
+    __typename
+  }
+}
+╚══════════════════════════════════════════════════╝"
+`;

@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Kind } from '../../kind/_.js'
 import type { InputFields } from './InputField.js'
 
 export interface InputObject<
@@ -6,7 +6,7 @@ export interface InputObject<
   $Fields extends InputFields = InputFields,
   $IsFieldsAllNullable extends boolean = boolean,
 > {
-  kind: GraphqlKit.Schema.Kind.TypeKind.InputObject
+  kind: Kind.TypeKind.InputObject
   name: $Name
   fields: $Fields
   isAllFieldsNullable: $IsFieldsAllNullable

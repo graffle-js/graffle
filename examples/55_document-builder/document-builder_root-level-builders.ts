@@ -5,7 +5,7 @@
  * Perfect for quick, focused operations! (ﾉ◕ヮ◕)ﾉ*:・゚✧
  */
 
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 import { show } from '../$/show.js'
 
 const { mutation, query } = Graffle

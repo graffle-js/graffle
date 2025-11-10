@@ -1,6 +1,6 @@
-import type { Docpar } from '#src/docpar/_.js'
-
-type InlineType = Docpar.SchemaDrivenDataMap.InlineType
+// todo: this should not be importing grpahqlkit!
+type InlineType = GraphqlKit.Schema.SchemaDrivenDataMap.InlineType
+import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 import type { __typename } from '../__.js'
 import type { NamedOutput } from '../node-groups.js'
 import type { InputFields } from './InputField.js'

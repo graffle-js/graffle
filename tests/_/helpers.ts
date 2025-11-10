@@ -17,7 +17,7 @@ import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { db } from './schemas/db.js'
 import { GraffleKit } from '#src/exports/kit.js'
 import type { IntrospectionQuery } from 'graphql'
-import { TestSchemas } from './fixtures/schemas/$.js'
+import { TestSchemas } from './fixtures/schemas/_.js'
 import { schema } from './fixtures/schemas/pokemon/schema.js'
 
 interface Project {

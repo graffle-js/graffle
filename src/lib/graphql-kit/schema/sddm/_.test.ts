@@ -1,15 +1,16 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
+import { Document } from '../../document/_.js'
+import { Request } from '../../request/_.js'
 import { SchemaDrivenDataMap } from './_.js'
 
 const createRequest = (
   query: string,
-  variables?: GraphqlKit.Request.Variables,
-): GraphqlKit.Request.RequestAnalyzedDocumentNodeInput => {
+  variables?: Request.Variables,
+): Request.RequestAnalyzedDocumentNodeInput => {
   const document = parse(query)
-  const operation = document.definitions[0] as GraphqlKit.Document.Ast.OperationDefinitionNode
+  const operation = document.definitions[0] as Document.Ast.OperationDefinitionNode
   return {
     query: document,
     operation,
@@ -75,8 +76,8 @@ Test.on(SchemaDrivenDataMap.mapVariablesByTypeNames)
   .test()
 
 Test.describe('immutable mode')
-  .inputType<GraphqlKit.Request.Variables>()
-  .outputType<GraphqlKit.Request.Variables>()
+  .inputType<Request.Variables>()
+  .outputType<Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )
@@ -98,8 +99,8 @@ Test.describe('immutable mode')
   })
 
 Test.describe('mutable mode')
-  .inputType<GraphqlKit.Request.Variables>()
-  .outputType<GraphqlKit.Request.Variables>()
+  .inputType<Request.Variables>()
+  .outputType<Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )

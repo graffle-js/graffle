@@ -107,6 +107,26 @@ export const importUtilities = (config: Config): string => {
 }
 
 /**
+ * Generates the GraphqlKit import statement for generated files that use GraphqlKit types.
+ *
+ * @param config - Generator config containing the utilities import path
+ * @returns Import statement: `import type { GraphqlKit } from 'path/to/utilities'`
+ *
+ * @example
+ * ```typescript
+ * code(importGraphqlKit(config))
+ * // Generates: import type { GraphqlKit } from 'graffle/utilities-for-generated'
+ * ```
+ */
+export const importGraphqlKit = (config: Config): string => {
+  return Str.Code.TS.importNamed({
+    names: ['GraphqlKit'],
+    from: config.paths.imports.grafflePackage.utilitiesForGenerated,
+    type: true,
+  })
+}
+
+/**
  * Apply import extension to a path based on config.importFormat setting.
  * Strips any existing .ts or .js extension before applying the configured extension.
  *
@@ -177,7 +197,7 @@ export const buildPath = (...segments: string[]): string => {
  * ```typescript
  * buildImportPath(config, '..', '..', 'scalar') // '../../scalar.js' (jsExtension)
  * buildImportPath(config, 'fields') // './fields.js' (jsExtension)
- * buildImportPath(config, 'schema', '$') // 'schema/$.js' (jsExtension)
+ * buildImportPath(config, 'schema', '$') // 'schema/_.js' (jsExtension)
  * ```
  */
 export const buildImportPath = (config: Config, ...segments: string[]): string => {

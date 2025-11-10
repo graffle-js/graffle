@@ -3,10 +3,10 @@ import { GraphqlKit } from '#graffle/utilities-for-generated'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
 import type * as SchemaMap from './schema-driven-data-map.js'
-import type * as SelectionSets from './selection-sets/$.js'
+import type * as SelectionSets from './selection-sets/_.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $$Schema from './schema/$.js'
+import type * as $$Schema from './schema/_.js'
 
 /**
  * Context for static document type inference.
@@ -44,16 +44,16 @@ interface StaticDocumentContext {
  */
 
 export interface MutationBuilder {
-  $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+  $batch: <const $SelectionSet extends SelectionSets.Mutation<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
+      GraphqlKit.Document.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -74,16 +74,18 @@ export interface MutationBuilder {
    * const doc = mutation.id()
    * ```
    */
-  id: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id']>(
+  id: <
+    const $SelectionSet extends SelectionSets.Mutation<GraphqlKit.Document.Object.Select.StaticBuilderContext>['id'],
+  >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<
+      GraphqlKit.Document.Object.Var.InferFromMutation<
         { id: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -109,18 +111,18 @@ export interface MutationBuilder {
    */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.Docpar.Object.Select.StaticBuilderContext
+      GraphqlKit.Document.Object.Select.StaticBuilderContext
     >['idNonNull'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<
+      GraphqlKit.Document.Object.Var.InferFromMutation<
         { idNonNull: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >

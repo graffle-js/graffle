@@ -2,20 +2,12 @@
 export { type Typed as TypedDocument } from '../lib/graphql-kit/document/typed/_.js'
 // todo figure this export out. Was just put there to resolve a type error about "...cannot be named..."
 export { type Client, type Create } from '#src/client/client.js'
+export { $ } from '#src/lib/graphql-kit/document/docpar/object/var/var.js'
 export type * from '#src/lib/graphql-kit/http/__.js'
 export type * from '#src/lib/graphql-kit/schema/type/scalars/__.js'
 export type * from '#src/requestPipeline/RequestPipeline.js'
 export type { Ware } from '@wollybeard/kit'
 export { type Normalized } from '../context/fragments/configuration/output/__.js'
-export type * from '../docpar/object/Select/context.js'
-export type {
-  AnyExceptAlias as SelectionSetAnyExceptAlias,
-  AnySelectionSet,
-  FieldValue as SelectionSetFieldValue,
-  RootType as SelectionSetRootType,
-  TypenameSelection,
-} from '../docpar/object/Select/selectionSet.js'
-export { $ } from '../docpar/object/var/var.js'
 export type {
   ConfigurationInput as DocumentBuilderConfigurationInput,
   Properties as DocumentBuilderProperties,

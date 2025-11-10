@@ -1,7 +1,0 @@
-export type { ObjectParserContext as ParserContext } from './Context.js'
-export { InferResult } from './InferResult/_.js'
-export type { InferOperation, Parse } from './Parse.js'
-export * as Static from './rootType.js'
-export { Select } from './Select/_.js'
-export { ToGraphQLDocument } from './ToGraphQLDocument/_.js'
-export { Var } from './var/$.js'

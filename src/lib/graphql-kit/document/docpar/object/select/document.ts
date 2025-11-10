@@ -1,0 +1,167 @@
+import { Arr, Obj, Ts } from '@wollybeard/kit'
+import { Schema } from '../../../../schema/_.js'
+import type { Select } from './_.js'
+import type { DefaultContext } from './context.js'
+
+export type OperationName = string
+
+export interface SomeDocumentOperation {
+  [k: string]: object
+}
+export type DocumentObject = {
+  query?: Record<string, Select.SelectionSet.AnySelectionSet>
+  mutation?: Record<string, Select.SelectionSet.AnySelectionSet>
+  // query?: { [_ in string]: Select.SelectionSet.AnySelectionSet }
+  // mutation?: { [_ in string]: Select.SelectionSet.AnySelectionSet }
+}
+
+export interface SomeDocument {
+  mutation?: SomeDocumentOperation
+  query?: SomeDocumentOperation
+}
+
+// // dprint-ignore
+// type IsHasMultipleOperations<$Document extends SomeDocument> =
+//   All<[
+//     IsHasMultipleKeys<$Document[OperationType.Query]>,
+//     IsHasMultipleKeys<$Document[OperationType.Mutation]>,
+//   ]>
+
+// dprint-ignore
+export type GetOperationNames<$Document extends SomeDocument> = Obj.values<
+  {
+    [$OperationType in keyof $Document]: keyof $Document[$OperationType] & string
+  }
+>[number]
+
+// dprint-ignore
+export type GetOperationType<$Document extends SomeDocument, $Name extends string> =
+  $Name extends keyof $Document[Schema.OperationType.MUTATION] ? Schema.OperationType.MUTATION :
+  $Name extends keyof $Document[Schema.OperationType.QUERY]    ? Schema.OperationType.QUERY    :
+                                                                                   never
+
+// dprint-ignore
+export type GetOperation<$Document extends SomeDocument, $Name extends string> =
+  Ts.AssertExtendsObject<
+    Arr.FirstNonUnknownNever<[
+      // @ts-expect-error could be unknown
+      $Document[Schema.OperationType.MUTATION][$Name],
+      // @ts-expect-error could be unknown
+      $Document[Schema.OperationType.QUERY][$Name]
+    ]>
+  >
+
+export interface OperationNormalized {
+  name: string | null
+  type: Schema.OperationType.OperationType
+  selectionSet: Select.SelectionSet.AnySelectionSet
+}
+
+export interface DocumentNormalized {
+  operations: Record<string, OperationNormalized>
+  facts: {
+    hasMultipleOperations: boolean
+  }
+}
+
+export const createDocumentNormalizedFromQuerySelection = <$SelectionSet extends object>(
+  selectionSet: $SelectionSet,
+  operationName?: string,
+): DocumentNormalized =>
+  createDocumentNormalizedFromRootTypeSelection(
+    Schema.OperationType.QUERY,
+    selectionSet as Select.SelectionSet.AnySelectionSet<DefaultContext, keyof $SelectionSet & string>,
+    operationName,
+  )
+
+export const createDocumentNormalizedFromRootTypeSelection = (
+  operationType: Schema.OperationType.OperationType,
+  selectionSet: Select.SelectionSet.AnySelectionSet,
+  operationName?: string,
+): DocumentNormalized =>
+  createDocumentNormalized({
+    operations: {
+      [operationName ?? defaultOperationName]: {
+        name: operationName ?? null,
+        type: operationType,
+        selectionSet,
+      },
+    },
+    facts: {
+      hasMultipleOperations: false,
+    },
+  })
+
+export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized => {
+  const queryOperations = Object.entries(document.query ?? {}).map((
+    [name, selectionSet],
+  ): [name: string, OperationNormalized] => [name, {
+    name,
+    type: Schema.OperationType.QUERY,
+    selectionSet,
+  }])
+  const mutationOperations = Object.entries(document.mutation ?? {}).map((
+    [name, selectionSet],
+  ): [name: string, OperationNormalized] => [name, {
+    name,
+    type: Schema.OperationType.MUTATION,
+    selectionSet,
+  }])
+  const operations = [
+    ...queryOperations,
+    ...mutationOperations,
+  ]
+
+  // todo test case for this
+  const conflictingOperationNames = queryOperations.filter(([_, queryOp]) =>
+    mutationOperations.some(([_, mutationOp]) => mutationOp.name === queryOp.name)
+  )
+
+  if (conflictingOperationNames.length > 0) {
+    throw {
+      errors: [
+        new Error(`Document has multiple uses of operation name(s): ${conflictingOperationNames.join(`, `)}.`),
+      ],
+    }
+  }
+
+  const hasMultipleOperations = operations.length > 1
+
+  const hasNoOperations = operations.length === 0
+
+  if (hasNoOperations) {
+    throw {
+      errors: [new Error(`Document has no operations.`)],
+    }
+  }
+
+  return createDocumentNormalized({
+    operations: Object.fromEntries(operations),
+    facts: {
+      hasMultipleOperations,
+    },
+  })
+}
+
+const defaultOperationName = `__default__`
+
+export const getOperationOrThrow = (
+  document: DocumentNormalized,
+  operationName?: OperationName,
+): OperationNormalized => {
+  if (!operationName) {
+    if (document.facts.hasMultipleOperations) {
+      throw new Error(`Must provide operation name if query contains multiple operations.`)
+    }
+    // The default operation may be named or not so instead of looking it up by name we rely on the fact that
+    // there is guaranteed to be exactly one operation in the document based on checks up to this point.
+    return Object.values(document.operations)[0]!
+  }
+
+  if (!(operationName in document.operations)) {
+    throw new Error(`Unknown operation named "${operationName}".`)
+  }
+  return document.operations[operationName]!
+}
+
+const createDocumentNormalized = (document: DocumentNormalized) => document

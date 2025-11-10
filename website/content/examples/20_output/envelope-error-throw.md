@@ -14,7 +14,7 @@ This example shows how to configure output to throw errors even when using the e
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const pokemon = Graffle
   .create({

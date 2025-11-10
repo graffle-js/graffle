@@ -1,5 +1,5 @@
-import type { Possible } from '#test/schema/possible/client/$.js'
-import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
+import type { Possible } from '#test/schema/possible/client/_.js'
+import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/_.js'
 import { db } from '#test/schema/possible/db.js'
 import { Ts } from '@wollybeard/kit'
 import { test } from 'vitest'

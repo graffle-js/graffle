@@ -1,7 +1,6 @@
 import type { Context } from '#src/context/context.js'
 import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
-import { Docpar } from '#src/docpar/_.js'
 import { graffleMappedResultToRequest } from '#src/extensions/DocumentBuilder/methods-instance/requestMethods.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
@@ -16,7 +15,7 @@ import { Configuration } from '../context/fragments/configuration/_.js'
 import { Extensions } from '../context/fragments/extensions/_.js'
 import type { Extension } from '../context/fragments/extensions/dataType/_.js'
 import { Properties } from '../context/fragments/properties/_.js'
-import { RequestInterceptors } from '../context/fragments/requestInterceptors/$.js'
+import { RequestInterceptors } from '../context/fragments/requestInterceptors/_.js'
 import { Scalars } from '../context/fragments/scalars/_.js'
 import { Transports } from '../context/fragments/transports/_.js'
 import { createDocumentSender } from './methods/gql/DocumentSender.js'
@@ -489,8 +488,8 @@ export const createWithContext = <$Context extends Context>(
         let request
         if (normalized.type === 'object') {
           // For document objects: use the full ToGraphQLDocument flow
-          const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(normalized.document)
-          const encoded = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, {
+          const documentNormalized = GraphqlKit.Document.Object.Select.Document.normalizeOrThrow(normalized.document)
+          const encoded = GraphqlKit.Document.Object.ToAst.toAst(documentNormalized, {
             sddm: context.configuration.schema.current.map,
             scalars: context.scalars.map,
           })

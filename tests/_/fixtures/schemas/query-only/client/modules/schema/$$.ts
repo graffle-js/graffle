@@ -1,6 +1,0 @@
-export type * from './roots/Query/$.js'
-export type * from './scalars/Boolean.js'
-export type * from './scalars/Float.js'
-export type * from './scalars/ID.js'
-export type * from './scalars/Int.js'
-export type * from './scalars/String.js'
