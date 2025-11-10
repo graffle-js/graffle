@@ -2,7 +2,6 @@ import { Str } from '@wollybeard/kit'
 import type { OperationType } from '../operation-type/_.js'
 import { Type } from '../type/_.js'
 import type { SchemaDrivenDataMap } from './_.js'
-import type { InlineType } from './InlineType.js'
 
 // Node Type Definitions
 // ---------------------
@@ -375,7 +374,7 @@ export const argumentTypeToSyntax = (
   if (sddmArgLike.inlineType) {
     const isRequiredIndicator = sddmArgLike.inlineType[0] === 1 ? `!` : ``
     const namedType = argumentNamedTypeToSyntax(sddmArgLike)
-    return inlineTypeToSyntax(sddmArgLike.inlineType[1], namedType) + isRequiredIndicator
+    return InlineType.toString(sddmArgLike.inlineType[1], namedType) + isRequiredIndicator
   }
   return argumentNamedTypeToSyntax(sddmArgLike)
 }
@@ -403,20 +402,86 @@ const argumentNamedTypeToSyntax = (sddmNode: ArgumentOrInputField): string => {
 }
 
 /**
- * Convert SDDM inline type metadata into GraphQL type syntax string.
+ * Inline types for a field-like (directive argument, field argument, input/output field) type.
  *
- * In GraphQL, "inline types" refer to the wrapping type modifiers applied to named types:
- * - `String` - named type
- * - `String!` - non-null modifier
- * - `[String]` - list modifier
- * - `[String!]!` - nested modifiers
+ * Recursive tuple. Each nesting represents a list. First tuple member represents nullability of the list.
  *
- * @example
- * inlineTypeToSyntax([1, undefined], 'String') // => '[String!]'
- * inlineTypeToSyntax([0, [1, undefined]], 'Int') // => '[[Int!]]'
+ * The outer most tuple DOES NOT represent a list, but the nullability of the named type itself. E.g. `[0]` would indicate
+ * that a scalar field is nullable while `[1]` would indicate that it is non-nullable.
  */
-const inlineTypeToSyntax = (sddmInlineType: undefined | InlineType, typeName: string): string => {
-  if (!sddmInlineType) return typeName
-  const isRequiredIndicator = sddmInlineType[0] === 1 ? `!` : ``
-  return `[${inlineTypeToSyntax(sddmInlineType[1], typeName)}${isRequiredIndicator}]`
+export type InlineType = readonly [InlineType.Nullable | InlineType.NonNull, (InlineType | undefined)?]
+
+export namespace InlineType {
+  /**
+   * Convert SDDM inline type metadata into GraphQL type syntax string.
+   *
+   * In GraphQL, "inline types" refer to the wrapping type modifiers applied to named types:
+   * - `String` - named type
+   * - `String!` - non-null modifier
+   * - `[String]` - list modifier
+   * - `[String!]!` - nested modifiers
+   *
+   * @example
+   * inlineTypeToSyntax([1, undefined], 'String') // => '[String!]'
+   * inlineTypeToSyntax([0, [1, undefined]], 'Int') // => '[[Int!]]'
+   */
+  export const toString = (sddmInlineType: undefined | InlineType, typeName: string): string => {
+    if (!sddmInlineType) return typeName
+    const isRequiredIndicator = sddmInlineType[0] === 1 ? `!` : ``
+    return `[${toString(sddmInlineType[1], typeName)}${isRequiredIndicator}]`
+  }
+
+  export type Nullable = 0
+
+  export type NonNull = 1
+
+  export type NullabilityFlagTypes = {
+    0: null
+    1: never
+  }
+
+  /**
+   * Infer the TypeScript type from an InlineType encoding and a named type.
+   *
+   * This is the **canonical implementation** for decoding SDDM inline type encodings
+   * into TypeScript types. Both the string parser and object parser use this utility
+   * to ensure consistent type resolution.
+   *
+   * @param $InlineType - The inline type encoding (e.g., `[1, [1]]` for `[T!]!`)
+   * @param $NamedType - The already-resolved base type (e.g., `number`, `Date`, `{ id: string }`)
+   *
+   * @example
+   * ```ts
+   * type T1 = Infer<[0], number>              // number | null (nullable scalar)
+   * type T2 = Infer<[1], number>              // number (non-null scalar)
+   * type T3 = Infer<[1, [1]], number>         // number[] (non-null list of non-null items)
+   * type T4 = Infer<[0, [1]], number>         // number[] | null (nullable list of non-null items)
+   * type T5 = Infer<[0, [0]], number>         // (number | null)[] | null (nullable list of nullable items)
+   * type T6 = Infer<[1, [1, [1]]], number>    // number[][] (non-null list of non-null lists)
+   * ```
+   *
+   * @remarks
+   * **How it works:**
+   * 1. First element (`$InlineType[0]`) determines nullability of the result:
+   *    - `0` (Nullable) → union with `null`
+   *    - `1` (NonNull) → union with `never` (no effect)
+   * 2. Second element (`$InlineType[1]`) determines if this is a list:
+   *    - If it's another `InlineType` tuple → wrap in `Array<...>` and recurse
+   *    - Otherwise → use `$NamedType` directly (terminal case)
+   *
+   * **Why this is canonical:**
+   * - Uses direct tuple indexing (`$InlineType[0]`, `$InlineType[1]`) for clarity
+   * - Type-level check (`extends InlineType`) correctly detects nested tuples
+   * - Properly adds `Array<...>` wrapping for each list level
+   * - Previously, the string parser had duplicate implementations that failed to
+   *   add array wrapping correctly (fixed in #1440)
+   */
+  // dprint-ignore
+  export type Infer<$InlineType extends InlineType, $NamedType> =
+    | NullabilityFlagTypes[$InlineType[0]]
+    | (
+      $InlineType[1] extends InlineType
+        ? Array<Infer<$InlineType[1], $NamedType>>
+        : $NamedType
+    )
 }

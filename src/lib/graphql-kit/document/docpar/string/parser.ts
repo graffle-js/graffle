@@ -1,7 +1,6 @@
 import { Codec } from '#src/types/Codec/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
-import type { InlineType } from '../../../schema/sddm/InlineType.js'
-import type { Type } from '../../../schema/type/_.js'
+import type { Schema } from '../../../schema/_.js'
 import type { Core } from '../core/_.js'
 
 // ============================================================================
@@ -13,14 +12,14 @@ import type { Core } from '../core/_.js'
  * Returns unknown to allow parsing to continue without type information.
  *
  * Note: Defined as OutputField to satisfy type constraints properly.
- * InlineType is [0] where 0 = Nullable (InlineType.Nullable = 0)
+ * Schema.SchemaDrivenDataMap.InlineType is [0] where 0 = Nullable (InlineType.Nullable = 0)
  */
-type UnknownField = Type.OutputField<string, null, readonly [0], UnknownScalar>
+type UnknownField = Schema.Type.OutputField<string, null, readonly [0], UnknownScalar>
 
 /**
  * Fallback scalar type for unknown fields.
  */
-type UnknownScalar = Type.Scalar & {
+type UnknownScalar = Schema.Type.Scalar & {
   name: 'Unknown'
   decoded: unknown
 }
@@ -29,7 +28,7 @@ type UnknownScalar = Type.Scalar & {
  * Universal object type for schema-less mode.
  * Accepts any field name and returns UnknownField.
  */
-type UniversalObject = Type.OutputObject & {
+type UniversalObject = Schema.Type.OutputObject & {
   name: 'Universal'
   fields: {
     [fieldName: string]: UnknownField
@@ -52,7 +51,7 @@ export type ParseDocument<
  */
 type ParseOperations<
   $Input extends string,
-  $Schema extends Type | undefined,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
 > = $Input extends '' ? Ts.Simplify.Top<$Result>
   : ParseSingleOperation<$Input, $Schema> extends infer $OpResult
@@ -66,8 +65,8 @@ type ParseOperations<
  */
 type ParseSingleOperation<
   $Input extends string,
-  $Schema extends Type | undefined,
-> = $Schema extends Type
+  $Schema extends Schema.Type | undefined,
+> = $Schema extends Schema.Type
   // Schema provided - use strict mode
   ? ParseSingleOperationWithSchema<$Input, $Schema>
   // Schema-less mode - use UniversalObject as root
@@ -78,11 +77,11 @@ type ParseSingleOperation<
  */
 type ParseSingleOperationWithSchema<
   $Input extends string,
-  $Schema extends Type,
+  $Schema extends Schema.Type,
 > =
   // Shorthand: { ... } (anonymous query) - check this FIRST before keywords
   $Input extends `{${infer _}`
-    ? $Schema['Root']['query'] extends Type.OutputObject
+    ? $Schema['Root']['query'] extends Schema.Type.OutputObject
       ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema, {}>
     : Core.Errors.ErrorOperationNotAvailable<{ operation: 'query' }>
     // query keyword
@@ -108,7 +107,7 @@ type ParseSingleOperationWithSchema<
  */
 type ParseSingleOperationSchemaLess<
   $Input extends string,
-  $Schema extends Type | undefined,
+  $Schema extends Schema.Type | undefined,
 > =
   // Shorthand: { ... } (anonymous query)
   $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, UniversalObject, $Schema, {}>
@@ -147,10 +146,10 @@ type IsWordBoundary<$Input extends string> = $Input extends ` ${string}` ? true
  */
 type ParseOperationAfterKeyword<
   $Input extends string,
-  $RootType extends Type.OutputObject | null,
-  $Schema extends Type | undefined,
+  $RootType extends Schema.Type.OutputObject | null,
+  $Schema extends Schema.Type | undefined,
   $OperationType extends string,
-> = $RootType extends Type.OutputObject
+> = $RootType extends Schema.Type.OutputObject
   // Try to extract operation name
   ? TakeName<$Input> extends { name: infer $Name; rest: infer $Rest }
     // Has name
@@ -170,8 +169,8 @@ type ParseOperationAfterKeyword<
 type ParseAfterOperationName<
   $Name extends string,
   $Input extends string,
-  $RootType extends Type.OutputObject,
-  $Schema extends Type | undefined,
+  $RootType extends Schema.Type.OutputObject,
+  $Schema extends Schema.Type | undefined,
 > =
   // Check for variables
   $Input extends `(${infer $VarsContent}`
@@ -187,8 +186,8 @@ type ParseAfterOperationName<
 type ParseSelectionSetForOperation<
   $Name extends string,
   $Input extends string,
-  $RootType extends Type.OutputObject,
-  $Schema extends Type | undefined,
+  $RootType extends Schema.Type.OutputObject,
+  $Schema extends Schema.Type | undefined,
   $Variables,
 > = ParseSelectionSet<$Input, $RootType, $Schema> extends { result: infer $Result; rest: infer $Rest } ? {
     operation: WrapOperationResult<$Name, $Result, $Variables>
@@ -209,10 +208,10 @@ type WrapOperationResult<$Name extends string, $Result, $Variables> = $Name exte
 // ============================================================================
 
 /**
- * Parse variable definitions: ($varName: Type, $var2: Type!)
+ * Parse variable definitions: ($varName: Schema.Type, $var2: Schema.Type!)
  * Returns: { variables: {...}, rest: string }
  */
-type ParseVariables<$Input extends string, $Schema extends Type | undefined> = ParseVariablesRec<
+type ParseVariables<$Input extends string, $Schema extends Schema.Type | undefined> = ParseVariablesRec<
   SkipIgnored<$Input>,
   $Schema,
   {}
@@ -223,7 +222,7 @@ type ParseVariables<$Input extends string, $Schema extends Type | undefined> = P
  */
 type ParseVariablesRec<
   $Input extends string,
-  $Schema extends Type | undefined,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
 > =
   // Check for closing paren
@@ -243,18 +242,18 @@ type ParseVariablesRec<
 type ParseVariableAfterName<
   $VarName extends string,
   $Input extends string,
-  $Schema extends Type | undefined,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
 > = $Input extends `:${infer $Rest}` ? ParseVariableType<SkipIgnored<$Rest>, $VarName, $Schema, $Result>
   : Core.Errors.ErrorUnexpectedToken<{ expected: 'Colon'; hint: 'Expected : after variable name' }>
 
 /**
- * Parse variable type: Type or Type!
+ * Parse variable type: Schema.Type or Schema.Type!
  */
 type ParseVariableType<
   $Input extends string,
   $VarName extends string,
-  $Schema extends Type | undefined,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
 > = TakeName<$Input> extends { name: infer $TypeName; rest: infer $Rest }
   // Check for ! (non-null)
@@ -274,10 +273,10 @@ type ParseVariableType<
   : Core.Errors.ErrorUnexpectedToken<{ expected: 'TypeName'; hint: 'Expected type name after :' }>
 
 /**
- * Map GraphQL scalar types to TypeScript types.
+ * Map GraphQL scalar types to Schema.TypeScript types.
  * Handles built-in scalars and looks up custom scalars from schema.
  */
-type MapGraphQLType<$TypeName extends string, $Schema extends Type | undefined> =
+type MapGraphQLType<$TypeName extends string, $Schema extends Schema.Type | undefined> =
   // Built-in GraphQL scalars
   $TypeName extends 'String' ? string
     : $TypeName extends 'Int' ? number
@@ -285,9 +284,10 @@ type MapGraphQLType<$TypeName extends string, $Schema extends Type | undefined> 
     : $TypeName extends 'Boolean' ? boolean
     : $TypeName extends 'ID' ? string
     // Look up custom scalars from schema
-    : $Schema extends Type
+    : $Schema extends Schema.Type
       ? $TypeName extends keyof $Schema['scalars']
-        ? $Schema['scalars'][$TypeName] extends Type.Scalar ? Codec.GetDecoded<$Schema['scalars'][$TypeName]['codec']>
+        ? $Schema['scalars'][$TypeName] extends Schema.Type.Scalar
+          ? Codec.GetDecoded<$Schema['scalars'][$TypeName]['codec']>
         : unknown
       : unknown // Input types or unknown scalars
     : unknown // Schema-less mode - no custom scalar mapping
@@ -298,8 +298,8 @@ type MapGraphQLType<$TypeName extends string, $Schema extends Type | undefined> 
  */
 type ParseSelectionSet<
   $Input extends string,
-  $ParentType extends Type.OutputObject | Type.Interface,
-  $Schema extends Type | undefined,
+  $ParentType extends Schema.Type.OutputObject | Schema.Type.Interface,
+  $Schema extends Schema.Type | undefined,
 > = $Input extends `{${infer $Rest}` ? ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, {}, 1>
   : Core.Errors.ErrorUnexpectedToken<{
     expected: 'SelectionSet'
@@ -313,8 +313,8 @@ type ParseSelectionSet<
  */
 type ParseFieldsInSelectionSet<
   $Input extends string,
-  $ParentType extends Type.OutputObject | Type.Interface,
-  $Schema extends Type | undefined,
+  $ParentType extends Schema.Type.OutputObject | Schema.Type.Interface,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > =
@@ -343,8 +343,8 @@ type ParseFieldsInSelectionSet<
 type ParseFieldByName<
   $FieldName extends string,
   $Input extends string,
-  $ParentType extends Type.OutputObject | Type.Interface,
-  $Schema extends Type | undefined,
+  $ParentType extends Schema.Type.OutputObject | Schema.Type.Interface,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > = $FieldName extends keyof $ParentType['fields'] ? ParseFieldAfterName<
@@ -375,9 +375,9 @@ type ParseFieldByName<
 type ParseFieldAfterName<
   $FieldName extends string,
   $Input extends string,
-  $Field extends Type.OutputField,
-  $ParentType extends Type.OutputObject | Type.Interface,
-  $Schema extends Type | undefined,
+  $Field extends Schema.Type.OutputField,
+  $ParentType extends Schema.Type.OutputObject | Schema.Type.Interface,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > =
@@ -404,7 +404,13 @@ type ParseFieldAfterName<
       $ParentType,
       $Schema,
       & $Result
-      & Record<$FieldName, InlineType.Infer<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
+      & Record<
+        $FieldName,
+        Schema.SchemaDrivenDataMap.InlineType.Infer<
+          $Field['inlineType'],
+          ResolveNamedType<$Field['namedType'], $Schema>
+        >
+      >,
       $Depth
     >
 
@@ -414,9 +420,9 @@ type ParseFieldAfterName<
 type ParseFieldAfterArguments<
   $FieldName extends string,
   $Input extends string,
-  $Field extends Type.OutputField,
-  $ParentType extends Type.OutputObject | Type.Interface,
-  $Schema extends Type | undefined,
+  $Field extends Schema.Type.OutputField,
+  $ParentType extends Schema.Type.OutputObject | Schema.Type.Interface,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > =
@@ -429,7 +435,13 @@ type ParseFieldAfterArguments<
       $ParentType,
       $Schema,
       & $Result
-      & Record<$FieldName, InlineType.Infer<$Field['inlineType'], ResolveNamedType<$Field['namedType'], $Schema>>>,
+      & Record<
+        $FieldName,
+        Schema.SchemaDrivenDataMap.InlineType.Infer<
+          $Field['inlineType'],
+          ResolveNamedType<$Field['namedType'], $Schema>
+        >
+      >,
       $Depth
     >
 
@@ -439,18 +451,18 @@ type ParseFieldAfterArguments<
 type ParseFieldWithNestedSelection<
   $FieldName extends string,
   $Input extends string,
-  $Field extends Type.OutputField,
-  $ParentType extends Type.OutputObject | Type.Interface,
-  $Schema extends Type | undefined,
+  $Field extends Schema.Type.OutputField,
+  $ParentType extends Schema.Type.OutputObject | Schema.Type.Interface,
+  $Schema extends Schema.Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
-> = $Field['namedType'] extends Type.OutputObject | Type.Interface
+> = $Field['namedType'] extends Schema.Type.OutputObject | Schema.Type.Interface
   ? ParseSelectionSet<$Input, $Field['namedType'], $Schema> extends { result: infer $NestedResult; rest: infer $Rest }
     ? ParseFieldsInSelectionSet<
       SkipIgnored<$Rest & string>,
       $ParentType,
       $Schema,
-      $Result & Record<$FieldName, InlineType.Infer<$Field['inlineType'], $NestedResult>>,
+      $Result & Record<$FieldName, Schema.SchemaDrivenDataMap.InlineType.Infer<$Field['inlineType'], $NestedResult>>,
       $Depth
     >
   : ParseSelectionSet<$Input, $Field['namedType'], $Schema> // Error
@@ -461,7 +473,7 @@ type ParseFieldWithNestedSelection<
         SkipIgnored<$Rest & string>,
         $ParentType,
         $Schema,
-        $Result & Record<$FieldName, InlineType.Infer<$Field['inlineType'], $NestedResult>>,
+        $Result & Record<$FieldName, Schema.SchemaDrivenDataMap.InlineType.Infer<$Field['inlineType'], $NestedResult>>,
         $Depth
       >
     : ParseSelectionSet<$Input, UniversalObject, $Schema> // Error
@@ -471,20 +483,20 @@ type ParseFieldWithNestedSelection<
   }>
 
 /**
- * Resolve a named type to its TypeScript type.
+ * Resolve a named type to its Schema.TypeScript type.
  *
- * Uses {@link Type.ResolveLeafType} for leaf types (Scalar/Enum),
+ * Uses {@link Schema.Type.ResolveLeafType} for leaf types (Scalar/Enum),
  * and passes through non-leaf types (OutputObject/Interface/Union) for
  * the caller to handle with selection set traversal.
  *
  * Handles UnknownScalar for schema-less mode.
  */
-type ResolveNamedType<$Type, $Schema extends Type | undefined> = $Type extends UnknownScalar ? unknown
-  : [Type.ResolveLeafType<$Schema, $Type>] extends [never] ? $Type extends Type.OutputObject ? $Type // Objects need nested selection
+type ResolveNamedType<$Type, $Schema extends Schema.Type | undefined> = $Type extends UnknownScalar ? unknown
+  : [Schema.Type.ResolveLeafType<$Schema, $Type>] extends [never] ? $Type extends Schema.Type.OutputObject ? $Type // Objects need nested selection
     : $Type extends { kind: 'Interface' } ? $Type
     : $Type extends { kind: 'Union' } ? $Type
     : unknown
-  : Type.ResolveLeafType<$Schema, $Type>
+  : Schema.Type.ResolveLeafType<$Schema, $Type>
 
 // ============================================================================
 // Character-by-character utilities
