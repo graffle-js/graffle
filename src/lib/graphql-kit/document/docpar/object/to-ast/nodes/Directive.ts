@@ -1,12 +1,12 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import type { SchemaDrivenDataMap } from '../../../../../schema/sddm/_.js'
+import { Ast } from '../../../../ast/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toAstValue } from './Value.js'
 
 export const toAstDirective: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.ArgumentsOrInputObjectFields,
-  GraphqlKit.Document.Ast.DirectiveNode | null,
+  Ast.DirectiveNode | null,
   [graffleExpressions: Select.ParsedSelectionDirective]
 > = (
   context,
@@ -15,13 +15,13 @@ export const toAstDirective: GraphQLPostOperationMapper<
 ) => {
   if (directive.arguments === null) return null
 
-  const arguments_: GraphqlKit.Document.Ast.ArgumentNode[] = []
+  const arguments_: Ast.ArgumentNode[] = []
 
   for (const argumentName in directive.arguments.parsed) {
     const argumentValue = directive.arguments.parsed[argumentName]
 
     const sddmArgument = sddmArguments?.[argumentName]
-    let argument: GraphqlKit.Document.Ast.ArgumentNode
+    let argument: Ast.ArgumentNode
 
     if (context.variables.enabled && sddmArgument) {
       // Automatic hoisting for directive arguments
@@ -33,20 +33,20 @@ export const toAstDirective: GraphQLPostOperationMapper<
         provenance: `automatic`,
       })
     } else {
-      const name = GraphqlKit.Document.Ast.Name({ value: argumentName })
+      const name = Ast.Name({ value: argumentName })
       const value = toAstValue(
         { ...context, value: { isEnum: false } },
         sddmArgument,
         argumentValue,
       )
-      argument = GraphqlKit.Document.Ast.Argument({ name, value })
+      argument = Ast.Argument({ name, value })
     }
 
     arguments_.push(argument)
   }
 
-  return GraphqlKit.Document.Ast.Directive({
-    name: GraphqlKit.Document.Ast.Name({ value: directive.name }),
+  return Ast.Directive({
+    name: Ast.Name({ value: directive.name }),
     arguments: arguments_,
   })
 }

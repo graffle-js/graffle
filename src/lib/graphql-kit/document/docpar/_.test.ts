@@ -1,6 +1,7 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { expect, test } from 'vitest'
+import { Document } from '../_.js'
+import { Schema } from '../../schema/_.js'
 import { Var } from './object/var/_.js'
 
 const $ = Var.$
@@ -9,10 +10,10 @@ const $ = Var.$
 //                                   Static Root Type Builders (Runtime)
 // ==================================================================================================
 
-const query = GraphqlKit.Document.Object.Static.createStaticRootType(GraphqlKit.Schema.OperationType.QUERY) as any
-const mutation = GraphqlKit.Document.Object.Static.createStaticRootType(GraphqlKit.Schema.OperationType.MUTATION) as any
-const subscription = GraphqlKit.Document.Object.Static.createStaticRootType(
-  GraphqlKit.Schema.OperationType.SUBSCRIPTION,
+const query = Document.Object.Static.createStaticRootType(Schema.OperationType.QUERY) as any
+const mutation = Document.Object.Static.createStaticRootType(Schema.OperationType.MUTATION) as any
+const subscription = Document.Object.Static.createStaticRootType(
+  Schema.OperationType.SUBSCRIPTION,
 ) as any
 
 // dprint-ignore
@@ -78,8 +79,8 @@ test('static document builder > hoistArguments: false - inline args NOT hoisted,
 
 test('static document builder > manual createStaticRootType usage - runtime works without types', () => {
   // Manual usage without generated types - factory returns untyped documents
-  const manualQuery = GraphqlKit.Document.Object.Static.createStaticRootType(
-    GraphqlKit.Schema.OperationType.QUERY,
+  const manualQuery = Document.Object.Static.createStaticRootType(
+    Schema.OperationType.QUERY,
   ) as any
   const doc = manualQuery.someField({ id: true })
 

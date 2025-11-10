@@ -1,10 +1,10 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Schema } from '../../../../../schema/_.js'
 import { Obj } from '@wollybeard/kit'
 import type { Definition } from './$types.js'
 
 export const Include: Definition = {
   name: `include`,
-  type: GraphqlKit.Schema.Type.Standard.Directives.include,
+  type: Schema.Type.Standard.Directives.include,
   normalizeArguments: (input: ArgsInput): Args => {
     return typeof input === `boolean`
       ? expandShortHand(input)

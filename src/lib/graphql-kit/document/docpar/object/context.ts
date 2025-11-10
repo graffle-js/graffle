@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Schema } from '../../../schema/_.js'
 
 /**
  * Runtime configuration for object-to-GraphQL document conversion.
@@ -39,7 +39,7 @@ export type ObjectParserContext<
 > = {
   schema?: $Schema
   sddm?: $SDDM
-  scalars?: GraphqlKit.Schema.Type.Scalars.ScalarMap
+  scalars?: Schema.Type.Scalars.ScalarMap
   typeHookRequestResultDataTypes?: $TypeHooks
   hoistArguments?: boolean | undefined
 }

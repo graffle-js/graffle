@@ -1,7 +1,9 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { print } from '@0no-co/graphql.web'
 import { Lang } from '@wollybeard/kit'
+import { Schema } from '../../../schema/_.js'
+import type { Typed as DocumentTyped } from '../../typed/_.js'
 import type { ObjectParserContext } from './context.js'
+import { Select } from './select/_.js'
 import { toAst } from './to-ast/nodes/1_Document.js'
 
 export const defaults: Partial<ObjectParserContext> = {
@@ -29,7 +31,7 @@ export type Config = {
   /**
    * The GraphQL schema type definition
    */
-  schema: GraphqlKit.Schema.Type
+  schema: Schema.Type
 
   /**
    * Whether SDDM (Schema-Driven Data Map) is enabled.
@@ -78,17 +80,17 @@ export type Config = {
  *   sddmEnabled: true
  * }
  *
- * type MyQueryBuilder = StaticDocumentBuilder<MyConfig, GraphqlKit.Schema.OperationType.QUERY>
+ * type MyQueryBuilder = StaticDocumentBuilder<MyConfig, Schema.OperationType.QUERY>
  * ```
  */
 export type StaticDocumentBuilder<
   $Config extends Config,
-  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
+  $OperationType extends Schema.OperationType.OperationType,
 > = {
   // Note: The actual field mapping and type inference is done by the generator.
   // This type serves as the canonical signature that generated code must conform to.
   // The generator creates explicit field signatures for better IDE performance and JSDoc.
-  [field: string]: (selection?: any) => GraphqlKit.Document.Typed.String<any, any, $Config['sddmEnabled']>
+  [field: string]: (selection?: any) => DocumentTyped.String<any, any, $Config['sddmEnabled']>
 }
 
 //
@@ -117,7 +119,7 @@ export type StaticDocumentBuilder<
  * import { createStaticRootType } from 'graffle'
  * import { GraphqlKit } from 'graffle'
  *
- * const query = createStaticRootType(GraphqlKit.Schema.OperationType.QUERY)
+ * const query = createStaticRootType(Schema.OperationType.QUERY)
  *
  * // Generate a typed document string
  * const userQuery = query.user({
@@ -134,7 +136,7 @@ export type StaticDocumentBuilder<
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const createStaticRootType = (
-  operationType: GraphqlKit.Schema.OperationType.OperationType,
+  operationType: Schema.OperationType.OperationType,
   options?: ObjectParserContext,
 ) => {
   return new Proxy({}, {
@@ -144,11 +146,11 @@ export const createStaticRootType = (
       // Special $batch method for multi-field selection
       if (fieldName === '$batch') {
         return (
-          selection: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet,
+          selection: Select.SelectionSet.AnySelectionSet,
           opts?: Partial<ObjectParserContext>,
         ) => {
           // Selection already contains multiple fields, no wrapping needed
-          const documentNormalized = GraphqlKit.Document.Object.Select.Document
+          const documentNormalized = Select.Document
             .createDocumentNormalizedFromRootTypeSelection(
               operationType,
               selection,
@@ -170,12 +172,12 @@ export const createStaticRootType = (
 }
 
 export const createStaticRootField = (
-  operationType: GraphqlKit.Schema.OperationType.OperationType,
+  operationType: Schema.OperationType.OperationType,
   fieldName: string,
   factoryLevelDefaults?: ObjectParserContext,
 ) => {
   return (
-    selection?: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet,
+    selection?: Select.SelectionSet.AnySelectionSet,
     options?: Partial<ObjectParserContext>,
   ) => {
     // Create root type selection set with the field
@@ -184,7 +186,7 @@ export const createStaticRootField = (
     }
 
     // Create normalized document from root type selection
-    const documentNormalized = GraphqlKit.Document.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
+    const documentNormalized = Select.Document.createDocumentNormalizedFromRootTypeSelection(
       operationType,
       rootTypeSelectionSet,
     )

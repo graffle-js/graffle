@@ -1,6 +1,6 @@
 import { Extension } from '#graffle/extension'
-import type { Context } from '#graffle/utilities-for-generated'
 import type { HandleOutput } from '#src/client/handle.js'
+import type { GraffleKit } from '#src/exports/kit.js'
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { Configuration } from '../../context/fragments/configuration/_.js'
@@ -106,7 +106,7 @@ interface Properties extends Properties.PropertiesComputer$Func {
   // @ts-expect-error: untyped this
   return: Properties_<this['parameters']['context']>
 }
-interface Properties_<$Context extends Context> {
+interface Properties_<$Context extends GraffleKit.Context> {
   introspect: Configuration.Check.Preflight<
     $Context,
     () => Promise<(null | {}) & HandleOutput<$Context, IntrospectionQuery>>

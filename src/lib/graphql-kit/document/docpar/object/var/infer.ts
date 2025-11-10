@@ -6,10 +6,9 @@
  * using the ArgumentsMap literal types to determine proper types for each variable.
  */
 
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { UnionToIntersection } from 'type-fest'
-import type { SchemaDrivenDataMap } from '../../../../schema/sddm/_.js'
+import type { Schema } from '../../../../schema/_.js'
 import type { Select } from '../select/_.js'
 import type { ExtractFromOperation } from './extract.js'
 
@@ -18,24 +17,24 @@ import type { ExtractFromOperation } from './extract.js'
  */
 export type InferFromQuery<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.WithQuery,
-> = InferFromOperation<$SS, $ArgsMap, GraphqlKit.Schema.OperationType.QUERY>
+  $ArgsMap extends Schema.SchemaDrivenDataMap.WithQuery,
+> = InferFromOperation<$SS, $ArgsMap, Schema.OperationType.QUERY>
 
 /**
  * Infer variables from a mutation operation selection set.
  */
 export type InferFromMutation<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.WithMutation,
-> = InferFromOperation<$SS, $ArgsMap, GraphqlKit.Schema.OperationType.MUTATION>
+  $ArgsMap extends Schema.SchemaDrivenDataMap.WithMutation,
+> = InferFromOperation<$SS, $ArgsMap, Schema.OperationType.MUTATION>
 
 /**
  * Infer variables from a subscription operation selection set.
  */
 export type InferFromSubscription<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap.WithSubscription,
-> = InferFromOperation<$SS, $ArgsMap, GraphqlKit.Schema.OperationType.SUBSCRIPTION>
+  $ArgsMap extends Schema.SchemaDrivenDataMap.WithSubscription,
+> = InferFromOperation<$SS, $ArgsMap, Schema.OperationType.SUBSCRIPTION>
 
 /**
  * Infer variables from a subscription operation selection set.
@@ -43,11 +42,11 @@ export type InferFromSubscription<
 // dprint-ignore
 export type InferFromOperation<
   $SS extends object,
-  $ArgsMap extends SchemaDrivenDataMap,
-  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
+  $ArgsMap extends Schema.SchemaDrivenDataMap,
+  $OperationType extends Schema.OperationType.OperationType,
   ___$OperationMap = $ArgsMap['operations'][$OperationType],
 > =
-  ___$OperationMap extends SchemaDrivenDataMap.OutputObject
+  ___$OperationMap extends Schema.SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
     : {}
 
@@ -57,11 +56,11 @@ export type InferFromOperation<
 // dprint-ignore
 export type InferVariables<
   $SS extends Select.SelectionSet.RootType<Select.StaticBuilderContext>,
-  $ArgsMap extends SchemaDrivenDataMap,
+  $ArgsMap extends Schema.SchemaDrivenDataMap,
   $Operation extends keyof $ArgsMap['operations'],
   ___$OperationMap = $ArgsMap['operations'][$Operation],
 > =
-  ___$OperationMap extends SchemaDrivenDataMap.OutputObject
+  ___$OperationMap extends Schema.SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
     : {}
 
@@ -89,8 +88,8 @@ Ts.Simplify.Top<UnionToIntersection<___$ExtractedProps>>
 // dprint-ignore
 export type InferFromOperationMap<
   $SS extends Select.SelectionSet.RootType<Select.StaticBuilderContext> | {},
-  $ArgsMapLocationOperation extends SchemaDrivenDataMap.OutputObject,
-  $ArgsMap extends SchemaDrivenDataMap,
+  $ArgsMapLocationOperation extends Schema.SchemaDrivenDataMap.OutputObject,
+  $ArgsMap extends Schema.SchemaDrivenDataMap,
   ___$ExtractedPropSigs =
      ExtractFromOperation<$SS, $ArgsMapLocationOperation, { argsMap: $ArgsMap }>,
   ___$ExtractedProps =

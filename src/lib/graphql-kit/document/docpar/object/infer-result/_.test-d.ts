@@ -1,6 +1,6 @@
 // dprint-ignore-file
 import type { RequestResult } from '#src/types/RequestResult/_.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Type } from '../../../../schema/type/_.js'
 import type { DateScalar } from '#test/fixtures/scalars'
 import type { Possible } from '#test/schema/possible/client/_.js'
 import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/_.js'
@@ -19,7 +19,7 @@ type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Quer
     InferResult.OperationQuery<$SelectionSet, PossibleNoCustomScalars.$.Schema>
   >
 
-type $Registry =GraphqlKit.Schema.Type.Scalars.Registry.AddScalar<GraphqlKit.Schema.Type.Scalars.Registry.Empty, typeof DateScalar>
+type $Registry = Type.Scalars.Registry.AddScalar<Type.Scalars.Registry.Empty, typeof DateScalar>
 type $Context = { scalars: $Registry; variablesEnabled: false }
 
 type $WithDate<$SelectionSet extends Possible.SelectionSets.Query<$Context>> = InferResult.OperationQuery<

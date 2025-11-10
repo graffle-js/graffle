@@ -1,14 +1,14 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { ParsedSelectionObjectLevel } from '#src/lib/graphql-kit/document/docpar/object/select/parseSelection.js'
 import { Lang, Null } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../../../../schema/sddm/_.js'
+import type { Schema } from '../../../../../schema/_.js'
+import { Ast } from '../../../../ast/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toAstField } from './5_Field.js'
 import { toAstInlineFragments } from './5_InlineFragments.js'
 
 export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
-  SchemaDrivenDataMap.OutputObject,
-  GraphqlKit.Document.Ast.SelectionNode[],
+  Schema.SchemaDrivenDataMap.OutputObject,
+  Ast.SelectionNode[],
   [
     keyParsed: ParsedSelectionObjectLevel,
   ]
@@ -21,8 +21,8 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
     case `Indicator`: {
       if (!selection.select) return []
 
-      return [GraphqlKit.Document.Ast.Field({
-        name: GraphqlKit.Document.Ast.Name({ value: selection.name }),
+      return [Ast.Field({
+        name: Ast.Name({ value: selection.name }),
       })]
     }
     case `InlineFragment`: {

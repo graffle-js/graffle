@@ -1,4 +1,3 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { Doc } from '../__.js'
 import { Core } from '../core/_.js'

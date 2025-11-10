@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Type } from '../../../../schema/type/_.js'
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
@@ -40,7 +40,7 @@ export type OutputObjectLike<
 type OutputObjectLike_<
   $SelectionSet extends SelectionSet,
   $Schema,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike
+  $Node extends Type.NodeGroups.OutputObjectLike
 > =
     Select.SelectScalarsWildcard.IsSelectScalarsWildcard<$SelectionSet> extends true
       // todo this needs to be an extension and/or only available when sddm is present
@@ -54,7 +54,7 @@ type OutputObjectLike_<
 type OtherKeys<
   $SelectionSet,
   $Schema,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > =
   {
     [
@@ -129,7 +129,7 @@ type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
 type InlineFragmentKeys<
   $SelectionSet extends object,
   $Schema,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > =
   InlineFragmentKey_<
     Ts.AssertExtendsObject<
@@ -143,7 +143,7 @@ type InlineFragmentKeys<
 type InlineFragmentKey_<
   $SelectionSet extends object,
   $Schema,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > =
   IsNever<$SelectionSet> extends true
     ? {}

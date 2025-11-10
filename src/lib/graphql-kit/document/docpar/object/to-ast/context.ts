@@ -1,6 +1,7 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
-import { SchemaDrivenDataMap } from '../../../../schema/sddm/_.js'
+import { Select } from '../select/_.js'
+import { Schema } from '../../../../schema/_.js'
+import { Request } from '../../../../request/_.js'
+import { Ast } from '../../../ast/_.js'
 import type { ObjectParserContext } from '../context.js'
 
 /**
@@ -81,7 +82,7 @@ export interface CaptureVariableInput {
    * When undefined, type inference falls back to heuristics based on the runtime value.
    * When present, enables precise GraphQL type generation (including nullability, list types, etc.).
    */
-  sddmArgument?: SchemaDrivenDataMap.ArgumentOrInputField | undefined
+  sddmArgument?: Schema.SchemaDrivenDataMap.ArgumentOrInputField | undefined
   /**
    * Provenance of this variable, indicating how it was hoisted.
    *
@@ -92,14 +93,14 @@ export interface CaptureVariableInput {
 }
 
 export interface OperationContext {
-  sddm?: SchemaDrivenDataMap | undefined
-  scalars: GraphqlKit.Schema.Type.Scalars.ScalarMap
+  sddm?: Schema.SchemaDrivenDataMap | undefined
+  scalars: Schema.Type.Scalars.ScalarMap
   variables: {
     /**
      * Should variables be used for arguments?
      */
     enabled: boolean
-    capture: (input: CaptureVariableInput) => GraphqlKit.Document.Ast.ArgumentNode
+    capture: (input: CaptureVariableInput) => Ast.ArgumentNode
     data: CapturedVariable[]
   }
 }
@@ -110,7 +111,7 @@ export interface CapturedVariable {
   value: unknown
   defaultValue?: unknown
   isEnum: boolean
-  sddmArgument: SchemaDrivenDataMap.ArgumentOrInputField | undefined
+  sddmArgument: Schema.SchemaDrivenDataMap.ArgumentOrInputField | undefined
   provenance: VariableProvenance
 }
 
@@ -141,8 +142,8 @@ export const createOperationContext = (options?: ObjectParserContext): Operation
         context.variables.data.push({
           name: potentialVariableName,
           type: input.sddmArgument
-            ? GraphqlKit.Schema.SchemaDrivenDataMap.argumentTypeToSyntax(input.sddmArgument)
-            : GraphqlKit.Request.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
+            ? Schema.SchemaDrivenDataMap.argumentTypeToSyntax(input.sddmArgument)
+            : Request.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
           value: processedValue,
           defaultValue: processedDefaultValue,
           isEnum: input.isEnum,
@@ -150,10 +151,10 @@ export const createOperationContext = (options?: ObjectParserContext): Operation
           provenance: input.provenance,
         })
 
-        return GraphqlKit.Document.Ast.Argument({
-          name: GraphqlKit.Document.Ast.Name({ value: input.argName ?? input.name }),
-          value: GraphqlKit.Document.Ast.Variable({
-            name: GraphqlKit.Document.Ast.Name({ value: potentialVariableName }),
+        return Ast.Argument({
+          name: Ast.Name({ value: input.argName ?? input.name }),
+          value: Ast.Variable({
+            name: Ast.Name({ value: potentialVariableName }),
           }),
         })
       },

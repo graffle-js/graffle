@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Type } from '../../../schema/type/_.js'
 import { Codec } from '#src/types/Codec/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../../schema/sddm/InlineType.js'
@@ -15,12 +15,12 @@ import type { Core } from '../core/_.js'
  * Note: Defined as OutputField to satisfy type constraints properly.
  * InlineType is [0] where 0 = Nullable (InlineType.Nullable = 0)
  */
-type UnknownField = GraphqlKit.Schema.Type.OutputField<string, null, readonly [0], UnknownScalar>
+type UnknownField = Type.OutputField<string, null, readonly [0], UnknownScalar>
 
 /**
  * Fallback scalar type for unknown fields.
  */
-type UnknownScalar = GraphqlKit.Schema.Type.Scalar & {
+type UnknownScalar = Type.Scalar & {
   name: 'Unknown'
   decoded: unknown
 }
@@ -29,7 +29,7 @@ type UnknownScalar = GraphqlKit.Schema.Type.Scalar & {
  * Universal object type for schema-less mode.
  * Accepts any field name and returns UnknownField.
  */
-type UniversalObject = GraphqlKit.Schema.Type.OutputObject & {
+type UniversalObject = Type.OutputObject & {
   name: 'Universal'
   fields: {
     [fieldName: string]: UnknownField
@@ -52,7 +52,7 @@ export type ParseDocument<
  */
 type ParseOperations<
   $Input extends string,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
 > = $Input extends '' ? Ts.Simplify.Top<$Result>
   : ParseSingleOperation<$Input, $Schema> extends infer $OpResult
@@ -66,8 +66,8 @@ type ParseOperations<
  */
 type ParseSingleOperation<
   $Input extends string,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
-> = $Schema extends GraphqlKit.Schema.Type
+  $Schema extends Type | undefined,
+> = $Schema extends Type
   // Schema provided - use strict mode
   ? ParseSingleOperationWithSchema<$Input, $Schema>
   // Schema-less mode - use UniversalObject as root
@@ -78,11 +78,11 @@ type ParseSingleOperation<
  */
 type ParseSingleOperationWithSchema<
   $Input extends string,
-  $Schema extends GraphqlKit.Schema.Type,
+  $Schema extends Type,
 > =
   // Shorthand: { ... } (anonymous query) - check this FIRST before keywords
   $Input extends `{${infer _}`
-    ? $Schema['Root']['query'] extends GraphqlKit.Schema.Type.OutputObject
+    ? $Schema['Root']['query'] extends Type.OutputObject
       ? ParseSelectionSetForOperation<'default', $Input, $Schema['Root']['query'], $Schema, {}>
     : Core.Errors.ErrorOperationNotAvailable<{ operation: 'query' }>
     // query keyword
@@ -108,7 +108,7 @@ type ParseSingleOperationWithSchema<
  */
 type ParseSingleOperationSchemaLess<
   $Input extends string,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Schema extends Type | undefined,
 > =
   // Shorthand: { ... } (anonymous query)
   $Input extends `{${infer _}` ? ParseSelectionSetForOperation<'default', $Input, UniversalObject, $Schema, {}>
@@ -147,10 +147,10 @@ type IsWordBoundary<$Input extends string> = $Input extends ` ${string}` ? true
  */
 type ParseOperationAfterKeyword<
   $Input extends string,
-  $RootType extends GraphqlKit.Schema.Type.OutputObject | null,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $RootType extends Type.OutputObject | null,
+  $Schema extends Type | undefined,
   $OperationType extends string,
-> = $RootType extends GraphqlKit.Schema.Type.OutputObject
+> = $RootType extends Type.OutputObject
   // Try to extract operation name
   ? TakeName<$Input> extends { name: infer $Name; rest: infer $Rest }
     // Has name
@@ -170,8 +170,8 @@ type ParseOperationAfterKeyword<
 type ParseAfterOperationName<
   $Name extends string,
   $Input extends string,
-  $RootType extends GraphqlKit.Schema.Type.OutputObject,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $RootType extends Type.OutputObject,
+  $Schema extends Type | undefined,
 > =
   // Check for variables
   $Input extends `(${infer $VarsContent}`
@@ -187,8 +187,8 @@ type ParseAfterOperationName<
 type ParseSelectionSetForOperation<
   $Name extends string,
   $Input extends string,
-  $RootType extends GraphqlKit.Schema.Type.OutputObject,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $RootType extends Type.OutputObject,
+  $Schema extends Type | undefined,
   $Variables,
 > = ParseSelectionSet<$Input, $RootType, $Schema> extends { result: infer $Result; rest: infer $Rest } ? {
     operation: WrapOperationResult<$Name, $Result, $Variables>
@@ -212,7 +212,7 @@ type WrapOperationResult<$Name extends string, $Result, $Variables> = $Name exte
  * Parse variable definitions: ($varName: Type, $var2: Type!)
  * Returns: { variables: {...}, rest: string }
  */
-type ParseVariables<$Input extends string, $Schema extends GraphqlKit.Schema.Type | undefined> = ParseVariablesRec<
+type ParseVariables<$Input extends string, $Schema extends Type | undefined> = ParseVariablesRec<
   SkipIgnored<$Input>,
   $Schema,
   {}
@@ -223,7 +223,7 @@ type ParseVariables<$Input extends string, $Schema extends GraphqlKit.Schema.Typ
  */
 type ParseVariablesRec<
   $Input extends string,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
 > =
   // Check for closing paren
@@ -243,7 +243,7 @@ type ParseVariablesRec<
 type ParseVariableAfterName<
   $VarName extends string,
   $Input extends string,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
 > = $Input extends `:${infer $Rest}` ? ParseVariableType<SkipIgnored<$Rest>, $VarName, $Schema, $Result>
   : Core.Errors.ErrorUnexpectedToken<{ expected: 'Colon'; hint: 'Expected : after variable name' }>
@@ -254,7 +254,7 @@ type ParseVariableAfterName<
 type ParseVariableType<
   $Input extends string,
   $VarName extends string,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
 > = TakeName<$Input> extends { name: infer $TypeName; rest: infer $Rest }
   // Check for ! (non-null)
@@ -277,7 +277,7 @@ type ParseVariableType<
  * Map GraphQL scalar types to TypeScript types.
  * Handles built-in scalars and looks up custom scalars from schema.
  */
-type MapGraphQLType<$TypeName extends string, $Schema extends GraphqlKit.Schema.Type | undefined> =
+type MapGraphQLType<$TypeName extends string, $Schema extends Type | undefined> =
   // Built-in GraphQL scalars
   $TypeName extends 'String' ? string
     : $TypeName extends 'Int' ? number
@@ -285,9 +285,9 @@ type MapGraphQLType<$TypeName extends string, $Schema extends GraphqlKit.Schema.
     : $TypeName extends 'Boolean' ? boolean
     : $TypeName extends 'ID' ? string
     // Look up custom scalars from schema
-    : $Schema extends GraphqlKit.Schema.Type
+    : $Schema extends Type
       ? $TypeName extends keyof $Schema['scalars']
-        ? $Schema['scalars'][$TypeName] extends GraphqlKit.Schema.Type.Scalar
+        ? $Schema['scalars'][$TypeName] extends Type.Scalar
           ? Codec.GetDecoded<$Schema['scalars'][$TypeName]['codec']>
         : unknown
       : unknown // Input types or unknown scalars
@@ -299,8 +299,8 @@ type MapGraphQLType<$TypeName extends string, $Schema extends GraphqlKit.Schema.
  */
 type ParseSelectionSet<
   $Input extends string,
-  $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $ParentType extends Type.OutputObject | Type.Interface,
+  $Schema extends Type | undefined,
 > = $Input extends `{${infer $Rest}` ? ParseFieldsInSelectionSet<SkipIgnored<$Rest>, $ParentType, $Schema, {}, 1>
   : Core.Errors.ErrorUnexpectedToken<{
     expected: 'SelectionSet'
@@ -314,8 +314,8 @@ type ParseSelectionSet<
  */
 type ParseFieldsInSelectionSet<
   $Input extends string,
-  $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $ParentType extends Type.OutputObject | Type.Interface,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > =
@@ -344,8 +344,8 @@ type ParseFieldsInSelectionSet<
 type ParseFieldByName<
   $FieldName extends string,
   $Input extends string,
-  $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $ParentType extends Type.OutputObject | Type.Interface,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > = $FieldName extends keyof $ParentType['fields'] ? ParseFieldAfterName<
@@ -376,9 +376,9 @@ type ParseFieldByName<
 type ParseFieldAfterName<
   $FieldName extends string,
   $Input extends string,
-  $Field extends GraphqlKit.Schema.Type.OutputField,
-  $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Field extends Type.OutputField,
+  $ParentType extends Type.OutputObject | Type.Interface,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > =
@@ -415,9 +415,9 @@ type ParseFieldAfterName<
 type ParseFieldAfterArguments<
   $FieldName extends string,
   $Input extends string,
-  $Field extends GraphqlKit.Schema.Type.OutputField,
-  $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Field extends Type.OutputField,
+  $ParentType extends Type.OutputObject | Type.Interface,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
 > =
@@ -440,12 +440,12 @@ type ParseFieldAfterArguments<
 type ParseFieldWithNestedSelection<
   $FieldName extends string,
   $Input extends string,
-  $Field extends GraphqlKit.Schema.Type.OutputField,
-  $ParentType extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface,
-  $Schema extends GraphqlKit.Schema.Type | undefined,
+  $Field extends Type.OutputField,
+  $ParentType extends Type.OutputObject | Type.Interface,
+  $Schema extends Type | undefined,
   $Result extends Record<string, any>,
   $Depth extends Num.Literal,
-> = $Field['namedType'] extends GraphqlKit.Schema.Type.OutputObject | GraphqlKit.Schema.Type.Interface
+> = $Field['namedType'] extends Type.OutputObject | Type.Interface
   ? ParseSelectionSet<$Input, $Field['namedType'], $Schema> extends { result: infer $NestedResult; rest: infer $Rest }
     ? ParseFieldsInSelectionSet<
       SkipIgnored<$Rest & string>,
@@ -474,19 +474,19 @@ type ParseFieldWithNestedSelection<
 /**
  * Resolve a named type to its TypeScript type.
  *
- * Uses {@link GraphqlKit.Schema.Type.ResolveLeafType} for leaf types (Scalar/Enum),
+ * Uses {@link Type.ResolveLeafType} for leaf types (Scalar/Enum),
  * and passes through non-leaf types (OutputObject/Interface/Union) for
  * the caller to handle with selection set traversal.
  *
  * Handles UnknownScalar for schema-less mode.
  */
-type ResolveNamedType<$Type, $Schema extends GraphqlKit.Schema.Type | undefined> = $Type extends UnknownScalar ? unknown
-  : [GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Type>] extends [never]
-    ? $Type extends GraphqlKit.Schema.Type.OutputObject ? $Type // Objects need nested selection
+type ResolveNamedType<$Type, $Schema extends Type | undefined> = $Type extends UnknownScalar ? unknown
+  : [Type.ResolveLeafType<$Schema, $Type>] extends [never]
+    ? $Type extends Type.OutputObject ? $Type // Objects need nested selection
     : $Type extends { kind: 'Interface' } ? $Type
     : $Type extends { kind: 'Union' } ? $Type
     : unknown
-  : GraphqlKit.Schema.Type.ResolveLeafType<$Schema, $Type>
+  : Type.ResolveLeafType<$Schema, $Type>
 
 // ============================================================================
 // Character-by-character utilities

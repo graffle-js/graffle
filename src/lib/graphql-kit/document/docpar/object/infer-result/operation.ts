@@ -1,23 +1,23 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Null } from '@wollybeard/kit'
+import type { Schema } from '../../../../schema/_.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore
 export type OperationQuery<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, GraphqlKit.Schema.OperationType.QUERY>
+  Operation<$SelectionSet, $Schema, Schema.OperationType.QUERY>
 
 // dprint-ignore
 export type OperationMutation<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, GraphqlKit.Schema.OperationType.MUTATION>
+  Operation<$SelectionSet, $Schema, Schema.OperationType.MUTATION>
 
 // dprint-ignore
 export type OperationSubscription<$SelectionSet extends object, $Schema> =
-  Operation<$SelectionSet, $Schema, GraphqlKit.Schema.OperationType.SUBSCRIPTION>
+  Operation<$SelectionSet, $Schema, Schema.OperationType.SUBSCRIPTION>
 
 export type Operation<
   $SelectionSet extends object,
   $Schema,
-  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
+  $OperationType extends Schema.OperationType.OperationType,
 > = OutputObjectLike<
   $SelectionSet,
   $Schema,

@@ -1,6 +1,6 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import type { SchemaDrivenDataMap } from '../../../../../schema/sddm/_.js'
+import type { Ast } from '../../../../ast/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { fromGraffleSelectionObjectLevel } from './4_GraffleSelectionObjectLevel.js'
 import { toAstDirective } from './Directive.js'
@@ -11,8 +11,8 @@ export const collectForInlineFragmentLike: GraphQLPostOperationMapper<
   [
     keyParsed: Select.ParsedInlineFragmentLevelSelection,
     basket: {
-      directives: GraphqlKit.Document.Ast.DirectiveNode[]
-      selections: GraphqlKit.Document.Ast.SelectionNode[]
+      directives: Ast.DirectiveNode[]
+      selections: Ast.SelectionNode[]
     },
   ]
 > = (

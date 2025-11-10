@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Type } from '../../../../schema/type/_.js'
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import { Obj, Tup } from '@wollybeard/kit'
 import type { OutputField } from './OutputField.js'
@@ -6,7 +6,7 @@ import type { OutputField } from './OutputField.js'
 // dprint-ignore
 export type Alias<
 	$Schema,
-	$Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+	$Node extends Type.NodeGroups.OutputObjectLike,
 	$SelectionSet,
 > =
  Obj.Union.Merge<
@@ -33,8 +33,8 @@ export type Alias<
 type InferSelectAlias<
   $SelectAlias extends Select.SelectAlias.SelectAlias | Select.SelectAlias.SelectAliasShort | Select.SelectAlias.SelectAliasString,
   $FieldName extends string,
-  $Schema extends GraphqlKit.Schema.Type,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Schema extends Type,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > =
   $SelectAlias extends Select.SelectAlias.SelectAliasOne<any>      ?  InferSelectAliasOne<$SelectAlias, $FieldName, $Schema, $Node> :
   $SelectAlias extends Select.SelectAlias.SelectAliasMultiple<any> ?  InferSelectAliasMultiple<$SelectAlias, $FieldName, $Schema, $Node> :
@@ -45,8 +45,8 @@ type InferSelectAlias<
 type InferSelectAliasMultiple<
   $SelectAliasMultiple extends Select.SelectAlias.SelectAliasMultiple,
   $FieldName extends string,
-  $Schema extends GraphqlKit.Schema.Type,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Schema extends Type,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > = Tup.IntersectItems<
   {
     [_ in keyof $SelectAliasMultiple]: InferSelectAliasOne<$SelectAliasMultiple[_], $FieldName, $Schema, $Node>
@@ -56,8 +56,8 @@ type InferSelectAliasMultiple<
 type InferSelectAliasOne<
   $SelectAliasOne extends Select.SelectAlias.SelectAliasOne,
   $FieldName extends string,
-  $Schema extends GraphqlKit.Schema.Type,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Schema extends Type,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > = {
   [_ in $SelectAliasOne[0]]: OutputField<$SelectAliasOne[1], $Node['fields'][$FieldName], $Schema>
 }
@@ -65,8 +65,8 @@ type InferSelectAliasOne<
 type InferSelectAliasShort<
   $SelectAliasShort extends Select.SelectAlias.SelectAliasShort,
   $FieldName extends string,
-  $Schema extends GraphqlKit.Schema.Type,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Schema extends Type,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > = {
   [_ in $SelectAliasShort[0]]: OutputField<true, $Node['fields'][$FieldName], $Schema>
 }
@@ -74,8 +74,8 @@ type InferSelectAliasShort<
 type InferSelectAliasString<
   $SelectAliasString extends Select.SelectAlias.SelectAliasString,
   $FieldName extends string,
-  $Schema extends GraphqlKit.Schema.Type,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.OutputObjectLike,
+  $Schema extends Type,
+  $Node extends Type.NodeGroups.OutputObjectLike,
 > = {
   [_ in $SelectAliasString]: OutputField<true, $Node['fields'][$FieldName], $Schema>
 }

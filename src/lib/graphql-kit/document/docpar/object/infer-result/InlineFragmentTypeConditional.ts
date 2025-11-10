@@ -1,12 +1,12 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import type { Obj } from '@wollybeard/kit'
+import type { Schema } from '../../../../schema/_.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore
 export type InlineFragmentTypeConditional<
   $SelectionSet,
-  $Node extends GraphqlKit.Schema.Type.NodeGroups.InlineFragmentTypeCondition,
+  $Node extends Schema.Type.NodeGroups.InlineFragmentTypeCondition,
   $Schema,
 > =
   $Node extends any // force distribution

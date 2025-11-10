@@ -1,12 +1,12 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import type { SchemaDrivenDataMap } from '../../../../../schema/sddm/_.js'
+import { Ast } from '../../../../ast/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 
 export const toAstInlineFragments: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  GraphqlKit.Document.Ast.InlineFragmentNode[],
+  Ast.InlineFragmentNode[],
   [inlineFragments: Select.ParsedSelectionInlineFragments]
 > = (
   context,
@@ -23,7 +23,7 @@ export const toAstInlineFragments: GraphQLPostOperationMapper<
 
 const toAstInlineFragment: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputObject,
-  GraphqlKit.Document.Ast.InlineFragmentNode,
+  Ast.InlineFragmentNode,
   [inlineFragment: InlineFragment]
 > = (
   context,
@@ -31,15 +31,15 @@ const toAstInlineFragment: GraphQLPostOperationMapper<
   inlineFragment,
 ) => {
   const typeCondition = inlineFragment.typeCondition
-    ? GraphqlKit.Document.Ast.NamedType({
-      name: GraphqlKit.Document.Ast.Name({
+    ? Ast.NamedType({
+      name: Ast.Name({
         value: inlineFragment.typeCondition,
       }),
     })
     : undefined
 
-  const directives: GraphqlKit.Document.Ast.DirectiveNode[] = []
-  const selections: GraphqlKit.Document.Ast.SelectionNode[] = []
+  const directives: Ast.DirectiveNode[] = []
+  const selections: Ast.SelectionNode[] = []
 
   for (const key in inlineFragment.selectionSet) {
     const keyParsed = Select.parseSelectionInlineFragment(key, inlineFragment.selectionSet[key])
@@ -49,10 +49,10 @@ const toAstInlineFragment: GraphQLPostOperationMapper<
     })
   }
 
-  return GraphqlKit.Document.Ast.InlineFragment({
+  return Ast.InlineFragment({
     ...(typeCondition !== undefined && { typeCondition }),
     directives,
-    selectionSet: GraphqlKit.Document.Ast.SelectionSet({
+    selectionSet: Ast.SelectionSet({
       selections,
     }),
   })

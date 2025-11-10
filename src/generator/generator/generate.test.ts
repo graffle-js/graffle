@@ -18,7 +18,7 @@ const schema: ConfigInitSchemaSdl = {
 describe(`importFormat`, () => {
   test(`default is jsExtension`, async () => {
     const { modules } = await generateModules({ schema })
-    const schemaModule = modules.find(m => m.name === `schema/$`)!
+    const schemaModule = modules.find(m => m.name === `schema/_`)!
     expect(schemaModule.content).toMatch(/import.*'\.\.\/data\.js'/)
     expect(schemaModule.content).toMatch(/import.*'\.\.\/scalar\.js'/)
   })
@@ -30,10 +30,10 @@ describe(`importFormat`, () => {
     })
 
     // Check schema module
-    const schemaModule = modules.find(m => m.name === `schema/$`)!
+    const schemaModule = modules.find(m => m.name === `schema/_`)!
     expect(schemaModule.content).toMatch(/import.*'\.\.\/data'/)
     expect(schemaModule.content).toMatch(/import.*'\.\.\/scalar'/)
-    expect(schemaModule.content).toMatch(/import.*'\.\/\$\$'/)
+    expect(schemaModule.content).toMatch(/import.*'\.\/__'/)
     expect(schemaModule.content).not.toContain(`.js'`)
 
     // Check schema barrel

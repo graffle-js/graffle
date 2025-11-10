@@ -1,14 +1,14 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import { Var } from '#src/lib/graphql-kit/document/docpar/object/var/_.js'
 import { SchemaDrivenDataMap } from '../../../../../schema/sddm/_.js'
+import { Ast } from '../../../../ast/_.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toAstArgument } from './Argument.js'
 
 export const toAstField: GraphQLPostOperationMapper<
   SchemaDrivenDataMap.OutputField,
-  GraphqlKit.Document.Ast.FieldNode | null,
+  Ast.FieldNode | null,
   [field: Field]
 > = (
   context,
@@ -18,20 +18,20 @@ export const toAstField: GraphQLPostOperationMapper<
   const fieldSelection = Select.parseSelectionField(field.name, field.value)
 
   const alias = field.alias
-    ? GraphqlKit.Document.Ast.Name({ value: field.alias })
+    ? Ast.Name({ value: field.alias })
     : undefined
 
   if (fieldSelection.type === `Indicator`) {
     if (!fieldSelection.select) return null
-    return GraphqlKit.Document.Ast.Field({
-      name: GraphqlKit.Document.Ast.Name({ value: field.name }),
+    return Ast.Field({
+      name: Ast.Name({ value: field.name }),
       ...(alias !== undefined && { alias }),
     })
   }
 
-  const arguments_: GraphqlKit.Document.Ast.ArgumentNode[] = []
-  const directives: GraphqlKit.Document.Ast.DirectiveNode[] = []
-  const selections: GraphqlKit.Document.Ast.SelectionNode[] = []
+  const arguments_: Ast.ArgumentNode[] = []
+  const directives: Ast.DirectiveNode[] = []
+  const selections: Ast.SelectionNode[] = []
 
   for (const key in fieldSelection.selectionSet) {
     const keyParsed = Select.parseSelection(key, fieldSelection.selectionSet[key])
@@ -102,12 +102,12 @@ export const toAstField: GraphQLPostOperationMapper<
   // @see https://github.com/0no-co/graphql.web/issues/45
   const selectionSet = selections.length === 0
     ? undefined
-    : GraphqlKit.Document.Ast.SelectionSet({
+    : Ast.SelectionSet({
       selections,
     })
 
-  return GraphqlKit.Document.Ast.Field({
-    name: GraphqlKit.Document.Ast.Name({
+  return Ast.Field({
+    name: Ast.Name({
       value: field.name,
     }),
     ...(alias !== undefined && { alias }),

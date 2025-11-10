@@ -1,18 +1,18 @@
-import { type GlobalRegistry } from '#graffle/utilities-for-generated'
+import type { GraffleKit } from '#graffle/kit'
 import { contextEmpty } from '#src/context/ContextEmpty.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
 import { expect } from 'vitest'
+import type { ScalarMethod } from './scalars.js'
 
 type SchemaDrivenDataMap = GraphqlKit.Schema.SchemaDrivenDataMap
-import type { ScalarMethod } from './scalars.js'
 
 declare global {
   namespace GraffleGlobal {
     interface Clients {
-      TestAddScalar: GlobalRegistry.Client.Define<{
+      TestAddScalar: GraffleKit.GlobalRegistry.Client.Define<{
         schema: GraphqlKit.Schema.Type.Define<{
           scalarNamesUnion: 'A'
           scalars: {

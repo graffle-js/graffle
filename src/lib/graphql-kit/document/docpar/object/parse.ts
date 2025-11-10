@@ -1,5 +1,5 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import type { RequestResult } from '#src/types/RequestResult/_.js'
+import type { Schema } from '../../../schema/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../../schema/sddm/_.js'
 import type { Core } from '../core/_.js'
@@ -36,7 +36,7 @@ export type Parse<
         InferOperation<
           $Document[operationType][operationName],
           $Context,
-          GraphqlKit.Schema.OperationType.FromString<operationType & string>,
+          Schema.OperationType.FromString<operationType & string>,
           operationName
         >
     }[keyof $Document[operationType] & string]  // Extract union from operation names
@@ -60,7 +60,7 @@ export type Parse<
 export type InferOperation<
   $DocOp,
   $Context,
-  $OperationType extends GraphqlKit.Schema.OperationType.OperationType,
+  $OperationType extends Schema.OperationType.OperationType,
   $OperationName,
 > =
   $DocOp extends object

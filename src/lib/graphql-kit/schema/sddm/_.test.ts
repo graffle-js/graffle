@@ -1,15 +1,16 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse } from 'graphql'
 import { expect } from 'vitest'
+import { Document } from '../../document/_.js'
+import { Request } from '../../request/_.js'
 import { SchemaDrivenDataMap } from './_.js'
 
 const createRequest = (
   query: string,
-  variables?: GraphqlKit.Request.Variables,
-): GraphqlKit.Request.RequestAnalyzedDocumentNodeInput => {
+  variables?: Request.Variables,
+): Request.RequestAnalyzedDocumentNodeInput => {
   const document = parse(query)
-  const operation = document.definitions[0] as GraphqlKit.Document.Ast.OperationDefinitionNode
+  const operation = document.definitions[0] as Document.Ast.OperationDefinitionNode
   return {
     query: document,
     operation,

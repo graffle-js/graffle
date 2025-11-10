@@ -1,4 +1,4 @@
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Kind } from '../../kind/_.js'
 import type { OutputFields } from './OutputField.js'
 import type { OutputObject } from './OutputObject.js'
 
@@ -6,7 +6,7 @@ export type Interface<
   $Name extends string = string,
   $Fields extends OutputFields = OutputFields,
 > = {
-  kind: GraphqlKit.Schema.Kind.TypeKind.Interface
+  kind: Kind.TypeKind.Interface
   name: $Name
   fields: $Fields
   implementors: (OutputObject | Interface)[]

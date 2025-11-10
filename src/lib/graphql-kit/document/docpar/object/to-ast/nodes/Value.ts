@@ -1,6 +1,7 @@
-import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import { SchemaDrivenDataMap } from '../../../../../schema/sddm/_.js'
+import { Type } from '../../../../../schema/type/_.js'
+import { Ast } from '../../../../ast/_.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 
@@ -12,20 +13,20 @@ export const toAstValue: ValueMapper = (context, sddm, value) => {
   if (SchemaDrivenDataMap.isScalarLike(sddm?.namedType)) {
     const scalar = SchemaDrivenDataMap.isScalar(sddm.namedType)
       ? sddm.namedType
-      : GraphqlKit.Schema.Type.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.namedType)
+      : Type.lookupCustomScalarOrFallbackToUnknown(context.scalars, sddm.namedType)
     return applyScalar(context, scalar, value)
   }
 
   if (SchemaDrivenDataMap.isEnum(sddm?.namedType)) {
-    return GraphqlKit.Document.Ast.EnumValue({ value: String(value) })
+    return Ast.EnumValue({ value: String(value) })
   }
 
   if (value === null) {
-    return GraphqlKit.Document.Ast.NullValue()
+    return Ast.NullValue()
   }
 
   if (Array.isArray(value)) {
-    return GraphqlKit.Document.Ast.ListValue({
+    return Ast.ListValue({
       values: value.map(oneValue =>
         toAstValue(
           context,
@@ -38,7 +39,7 @@ export const toAstValue: ValueMapper = (context, sddm, value) => {
 
   if (typeof value === `object`) {
     const sddmInputObject = sddm?.namedType
-    return GraphqlKit.Document.Ast.ObjectValue({
+    return Ast.ObjectValue({
       fields: Object.entries(value).map(([fieldName, fieldValue]) => {
         // When processing input object fields, check for the enum prefix ($) that was
         // preserved by parseSelection. This $ prefix is our signal that this field's
@@ -54,8 +55,8 @@ export const toAstValue: ValueMapper = (context, sddm, value) => {
         // Pass enum context down so string values are rendered as enum values
         const fieldContext = isEnumField ? { ...context, value: { isEnum: true } } : context
 
-        return GraphqlKit.Document.Ast.ObjectField({
-          name: GraphqlKit.Document.Ast.Name({ value: actualFieldName }),
+        return Ast.ObjectField({
+          name: Ast.Name({ value: actualFieldName }),
           value: toAstValue(fieldContext, fieldSddm, fieldValue),
         })
       }),
@@ -64,17 +65,17 @@ export const toAstValue: ValueMapper = (context, sddm, value) => {
 
   if (typeof value === `string`) {
     if (context.value.isEnum) {
-      return GraphqlKit.Document.Ast.EnumValue({ value: String(value) })
+      return Ast.EnumValue({ value: String(value) })
     }
-    return GraphqlKit.Document.Ast.StringValue({ value })
+    return Ast.StringValue({ value })
   }
 
   if (typeof value === `boolean`) {
-    return GraphqlKit.Document.Ast.BooleanValue({ value })
+    return Ast.BooleanValue({ value })
   }
 
   if (typeof value === `number`) {
-    return GraphqlKit.Document.Ast.FloatValue({ value: String(value) })
+    return Ast.FloatValue({ value: String(value) })
   }
 
   throw new Error(`Unsupported value: ${String(value)}`)
@@ -82,7 +83,7 @@ export const toAstValue: ValueMapper = (context, sddm, value) => {
 
 export type ValueMapper = GraphQLPostOperationMapper<
   SchemaDrivenDataMap.ArgumentOrInputField,
-  GraphqlKit.Document.Ast.ValueNode,
+  Ast.ValueNode,
   [value: unknown],
   AdditionalContext
 >
@@ -95,13 +96,13 @@ interface AdditionalContext {
 
 const applyScalar = (
   context: OperationContext & AdditionalContext,
-  scalar: GraphqlKit.Schema.Type.Scalar,
+  scalar: Type.Scalar,
   value: unknown,
-): GraphqlKit.Document.Ast.ValueNode => {
-  if (value === null) return GraphqlKit.Document.Ast.NullValue()
+): Ast.ValueNode => {
+  if (value === null) return Ast.NullValue()
 
   if (Array.isArray(value)) {
-    return GraphqlKit.Document.Ast.ListValue({
+    return Ast.ListValue({
       values: value.map(oneValue => applyScalar(context, scalar, oneValue)),
     })
   }
