@@ -5,7 +5,7 @@ import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { Configuration } from '../../context/fragments/configuration/_.js'
 import type { Properties } from '../../context/fragments/properties/_.js'
-import type { InputIntrospectionOptions } from '../../generator/$$.js'
+import type { InputIntrospectionOptions } from '../../generator/__.js'
 
 export type ConfigurationInput = {
   /**

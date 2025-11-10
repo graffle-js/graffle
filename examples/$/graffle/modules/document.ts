@@ -3,10 +3,10 @@ import { GraphqlKit } from 'graffle/utilities-for-generated'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
 import type * as SchemaMap from './schema-driven-data-map.js'
-import type * as SelectionSets from './selection-sets/$.js'
+import type * as SelectionSets from './selection-sets/_.js'
 
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import type * as $$Schema from './schema/$.js'
+import type * as $$Schema from './schema/_.js'
 
 /**
  * Context for static document type inference.
@@ -55,16 +55,16 @@ interface StaticDocumentContext {
  */
 
 export interface QueryBuilder {
-  $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+  $batch: <const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
+      GraphqlKit.Document.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -100,17 +100,17 @@ export interface QueryBuilder {
    * ```
    */
   battles: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['battles'],
+    const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>['battles'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { battles: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -152,17 +152,17 @@ export interface QueryBuilder {
    * ```
    */
   beings: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['beings'],
+    const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>['beings'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { beings: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -213,18 +213,18 @@ export interface QueryBuilder {
    */
   pokemonByName: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.Docpar.Object.Select.StaticBuilderContext
+      GraphqlKit.Document.Object.Select.StaticBuilderContext
     >['pokemonByName'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { pokemonByName: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -274,17 +274,17 @@ export interface QueryBuilder {
    * ```
    */
   pokemons: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['pokemons'],
+    const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>['pokemons'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { pokemons: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -331,18 +331,18 @@ export interface QueryBuilder {
    */
   trainerByName: <
     const $SelectionSet extends SelectionSets.Query<
-      $$Utilities.Docpar.Object.Select.StaticBuilderContext
+      GraphqlKit.Document.Object.Select.StaticBuilderContext
     >['trainerByName'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { trainerByName: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -387,17 +387,17 @@ export interface QueryBuilder {
    * ```
    */
   trainers: <
-    const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['trainers'],
+    const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>['trainers'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { trainers: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >
@@ -469,16 +469,16 @@ export const query: QueryBuilder = createStaticRootType(GraphqlKit.Schema.Operat
  */
 
 export interface MutationBuilder {
-  $batch: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+  $batch: <const $SelectionSet extends SelectionSets.Mutation<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationMutation<$SelectionSet, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
+      GraphqlKit.Document.Object.Var.InferFromMutation<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -525,18 +525,18 @@ export interface MutationBuilder {
    */
   addPokemon: <
     const $SelectionSet extends SelectionSets.Mutation<
-      $$Utilities.Docpar.Object.Select.StaticBuilderContext
+      GraphqlKit.Document.Object.Select.StaticBuilderContext
     >['addPokemon'],
   >(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromMutation<
+      GraphqlKit.Document.Object.Var.InferFromMutation<
         { addPokemon: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >

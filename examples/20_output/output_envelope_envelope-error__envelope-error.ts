@@ -2,7 +2,7 @@
  * This example shows how to configure output to embed errors into the envelope.
  */
 
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 import { show } from '../$/helpers.js'
 
 // dprint-ignore

@@ -3,7 +3,7 @@ import type { Context } from './context.js'
 import { Configuration } from './fragments/configuration/_.js'
 import { Extensions } from './fragments/extensions/_.js'
 import { Properties } from './fragments/properties/_.js'
-import { RequestInterceptors } from './fragments/requestInterceptors/$.js'
+import { RequestInterceptors } from './fragments/requestInterceptors/_.js'
 import { Scalars } from './fragments/scalars/_.js'
 import { Transports } from './fragments/transports/_.js'
 

@@ -1,7 +1,7 @@
 import type { Configuration } from './fragments/configuration/_.js'
 import type { Extensions } from './fragments/extensions/_.js'
 import type { Properties } from './fragments/properties/_.js'
-import type { RequestInterceptors } from './fragments/requestInterceptors/$.js'
+import type { RequestInterceptors } from './fragments/requestInterceptors/_.js'
 import type { Scalars } from './fragments/scalars/_.js'
 import type { Transports } from './fragments/transports/_.js'
 // import type { ContextFragment } from './ContextFragment.js'

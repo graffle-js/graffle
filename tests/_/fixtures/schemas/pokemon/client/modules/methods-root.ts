@@ -1,7 +1,8 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
+import type { GraphqlKit } from '#graffle/utilities-for-generated'
 import type * as $$SchemaMap from './schema-driven-data-map.js'
-import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets/$.js'
+import type * as $$Schema from './schema/_.js'
+import type * as $$SelectionSets from './selection-sets/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
@@ -20,28 +21,28 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context['scalars'] }>>,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
         $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<
+        GraphqlKit.Document.Object.Var.InferFromQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             $$Utilities.AssertExtendsObject<$SelectionSet>,
             $$Schema.Schema<$Context['scalars']>
           >
@@ -87,23 +88,23 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { battles: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'battles'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { battles: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -130,23 +131,23 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { beings: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'beings'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { beings: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -177,23 +178,26 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { pokemonByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'pokemonByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<
+          { pokemonByName: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { pokemonByName: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -224,23 +228,23 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { pokemons: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'pokemons'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { pokemons: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -270,23 +274,26 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { trainerByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'trainerByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<
+          { trainerByName: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { trainerByName: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -316,23 +323,23 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { trainers: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'trainers'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { trainers: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -360,28 +367,28 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromMutation<
         $$Utilities.AssertExtendsObject<$SelectionSet>,
         $$SchemaMap.SchemaDrivenDataMap
       >,
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationMutation<
+        GraphqlKit.Document.Object.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<
+        GraphqlKit.Document.Object.Var.InferFromMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$SchemaMap.SchemaDrivenDataMap
         >,
         & (null | {})
         & $$Utilities.HandleOutput<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationMutation<
+          GraphqlKit.Document.Object.InferResult.OperationMutation<
             $$Utilities.AssertExtendsObject<$SelectionSet>,
             $$Schema.Schema<$Context['scalars']>
           >
@@ -427,23 +434,26 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationMutation<
+        GraphqlKit.Document.Object.InferResult.OperationMutation<
           { addPokemon: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'addPokemon'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromMutation<
+          { addPokemon: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationMutation<
+          GraphqlKit.Document.Object.InferResult.OperationMutation<
             { addPokemon: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -472,23 +482,23 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Mutation.resetData<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ resetData: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromMutation<{ resetData: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationMutation<
+        GraphqlKit.Document.Object.InferResult.OperationMutation<
           { resetData: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'resetData'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ resetData: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromMutation<{ resetData: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationMutation<
+          GraphqlKit.Document.Object.InferResult.OperationMutation<
             { resetData: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -520,23 +530,23 @@ export interface BattleMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { battles: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'battles'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ battles: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { battles: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -565,23 +575,23 @@ export interface BeingMethods<$Context extends $$Utilities.Context> {
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.NoExcess<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { beings: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'beings'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ beings: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { beings: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -614,23 +624,26 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { pokemonByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'pokemonByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemonByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<
+          { pokemonByName: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { pokemonByName: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -661,23 +674,23 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { pokemons: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'pokemons'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ pokemons: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { pokemons: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -707,23 +720,26 @@ export interface PokemonMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationMutation<
+        GraphqlKit.Document.Object.InferResult.OperationMutation<
           { addPokemon: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'addPokemon'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromMutation<{ addPokemon: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromMutation<
+          { addPokemon: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationMutation<
+          GraphqlKit.Document.Object.InferResult.OperationMutation<
             { addPokemon: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -755,23 +771,26 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { trainerByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'trainerByName'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainerByName: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<
+          { trainerByName: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { trainerByName: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,
@@ -801,23 +820,23 @@ export interface TrainerMethods<$Context extends $$Utilities.Context> {
         $SelectionSet,
         $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>
       >,
-    ) => $$Utilities.Docpar.Object.Var.MethodReturn<
-      $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.Docpar.Object.InferResult.OperationQuery<
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
           { trainers: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
         'trainers'
       >,
       $$Utilities.DocumentRunnerDeferred<
-        $$Utilities.Docpar.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
+        GraphqlKit.Document.Object.Var.InferFromQuery<{ trainers: $SelectionSet }, $$SchemaMap.SchemaDrivenDataMap>,
         & (null | {})
         & $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          $$Utilities.Docpar.Object.InferResult.OperationQuery<
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
             { trainers: $SelectionSet },
             $$Schema.Schema<$Context['scalars']>
           >,

@@ -17,7 +17,7 @@ Perfect for quick, focused operations! (ﾉ◕ヮ◕)ﾉ*:・゚✧
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const { mutation, query } = Graffle
 

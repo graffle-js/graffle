@@ -1,7 +1,7 @@
 import { createGraphQLResponseData, mockIntrospectionData, test } from '#test/helpers'
 import * as Memfs from 'memfs'
 import { describe, expect } from 'vitest'
-import type { ConfigInitSchemaSdl } from '../$$.js'
+import type { ConfigInitSchemaSdl } from '../__.js'
 import { defaults } from '../config/defaults.js'
 import { generate, generateModules } from './generate.js'
 
@@ -37,7 +37,7 @@ describe(`importFormat`, () => {
     expect(schemaModule.content).not.toContain(`.js'`)
 
     // Check schema barrel
-    const schemaBarrel = modules.find(m => m.name === `schema/$$`)!
+    const schemaBarrel = modules.find(m => m.name === `schema/__`)!
     expect(schemaBarrel.content).not.toContain(`.js'`)
 
     // Check scalar module
@@ -79,7 +79,7 @@ test(`root-types-mapped`, async () => {
     },
   })
 
-  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
+  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/_.ts`, `utf8`)
   expect(SchemaTs).toMatch(/operationsAvailable: \[.*QUERY\]/)
   expect(SchemaTs).includes(`RootUnion: $Types.${RootTypeCustomNameForQuery}`)
   expect(SchemaTs).toMatchSnapshot()
@@ -104,7 +104,7 @@ test(`schema with long type name`, async () => {
     },
   })
 
-  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
+  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/_.ts`, `utf8`)
   expect(SchemaTs).toMatchSnapshot()
 })
 

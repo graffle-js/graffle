@@ -3,7 +3,7 @@ import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { getSelectInferDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
-import { importUtilities } from '../helpers/pathHelpers.js'
+import { importGraphqlKit, importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorSchema } from './Schema.js'
@@ -22,6 +22,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchema))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
     code(importUtilities(config))
+    code(importGraphqlKit(config))
     code``
     code(Str.Code.TS.Comment.title1(`Runtime`))
     code`
@@ -72,7 +73,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Operation<$SelectionSet, ${iSchema}, ${$.$$Utilities}.GraphqlKit.Schema.OperationType.${
+        }> = GraphqlKit.Document.Object.InferResult.Operation<$SelectionSet, ${iSchema}, ${$.$$Utilities}.GraphqlKit.Schema.OperationType.${
           enumMemberName[operationType]
         }>`,
       )
@@ -84,7 +85,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.Docpar.Object.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
+        }> = GraphqlKit.Document.Object.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
       )
     }
     code``
@@ -94,7 +95,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
+        }> = GraphqlKit.Document.Object.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
       )
     }
     code``
@@ -104,7 +105,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       code(
         `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${$.$$Utilities}.Docpar.Object.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
+        }> = GraphqlKit.Document.Object.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`,
       )
     }
 

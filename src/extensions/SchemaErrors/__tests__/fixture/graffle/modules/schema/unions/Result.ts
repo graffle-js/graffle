@@ -1,7 +1,7 @@
 import type * as $ from '#graffle/utilities-for-generated'
-import type { ErrorOne } from '../objects/ErrorOne/$.js'
-import type { ErrorTwo } from '../objects/ErrorTwo/$.js'
-import type { Object1 } from '../objects/Object1/$.js'
+import type { ErrorOne } from '../objects/ErrorOne/_.js'
+import type { ErrorTwo } from '../objects/ErrorTwo/_.js'
+import type { Object1 } from '../objects/Object1/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.

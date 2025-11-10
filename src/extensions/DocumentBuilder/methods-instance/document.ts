@@ -1,13 +1,13 @@
 import type { HandleOutput } from '#src/client/handle.js'
-import type { Docpar } from '#src/docpar/_.js'
+import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 import { Arr, type Ts } from '@wollybeard/kit'
 
 // dprint-ignore
 export type DocumentRunner<
   $$Context,
   $$Schema,
-  $$Document extends Docpar.Object.Select.Document.SomeDocument,
-  $$Name extends Docpar.Object.Select.Document.GetOperationNames<$$Document> = Docpar.Object.Select.Document.GetOperationNames<$$Document>
+  $$Document extends GraphqlKit.Document.Object.Select.Document.SomeDocument,
+  $$Name extends GraphqlKit.Document.Object.Select.Document.GetOperationNames<$$Document> = GraphqlKit.Document.Object.Select.Document.GetOperationNames<$$Document>
 > = {
   run: <
     $Params extends (Arr.IsTupleMultiple<Ts.Union.ToTuple<$$Name>> extends true ? [name: $$Name] : []),
@@ -17,10 +17,10 @@ export type DocumentRunner<
       & ({} | null)
       & HandleOutput<
           $$Context,
-          Docpar.Object.InferResult.Operation<
-            Docpar.Object.Select.Document.GetOperation<$$Document, $Name>,
+          GraphqlKit.Document.Object.InferResult.Operation<
+            GraphqlKit.Document.Object.Select.Document.GetOperation<$$Document, $Name>,
             $$Schema,
-            Docpar.Object.Select.Document.GetOperationType<$$Document, $Name>
+            GraphqlKit.Document.Object.Select.Document.GetOperationType<$$Document, $Name>
           >
         >
     >

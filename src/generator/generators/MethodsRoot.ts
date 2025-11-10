@@ -12,7 +12,7 @@ import {
 } from '../helpers/jsdoc.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
+import { codeImportAll, importGraphqlKit, importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -23,6 +23,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importUtilities(config))
+    code(importGraphqlKit(config))
     code(codeImportAll(config, { as: '$$SchemaMap', from: './schema-driven-data-map', type: true }))
     code``
     code``
@@ -203,19 +204,19 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime.Nod
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
           <$SelectionSet>(selectionSet: ${$.$$Utilities}.NoExcess<$SelectionSet, ${$.$$SelectionSets}.${node.name}<{ scalars: $Context['scalars'] }>>) =>
-            ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
-              ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$SchemaMap.SchemaDrivenDataMap>,
+            GraphqlKit.Document.Object.Var.MethodReturn<
+              GraphqlKit.Document.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$SchemaMap.SchemaDrivenDataMap>,
               & (null | {})
               & ${$.$$Utilities}.HandleOutput<
                   $Context,
-                  ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
+                  GraphqlKit.Document.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
                 >,
               ${$.$$Utilities}.DocumentRunnerDeferred<
-                ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$SchemaMap.SchemaDrivenDataMap>,
+                GraphqlKit.Document.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, $$SchemaMap.SchemaDrivenDataMap>,
                 & (null | {})
                 & ${$.$$Utilities}.HandleOutput<
                     $Context,
-                    ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
+                    GraphqlKit.Document.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
                   >
               >
             >
@@ -267,20 +268,20 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
           <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.NoExcess<$SelectionSet, ${$.$$SelectionSets}.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>>) =>
-            ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
-              ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
+            GraphqlKit.Document.Object.Var.MethodReturn<
+              GraphqlKit.Document.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
-                  ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                  GraphqlKit.Document.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                   '${field.name}'
                 >,
               ${$.$$Utilities}.DocumentRunnerDeferred<
-                ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
+                GraphqlKit.Document.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
                 & (null | {})
                 & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                     $Context,
-                    ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                    GraphqlKit.Document.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                     '${field.name}'
                   >
               >
@@ -809,20 +810,20 @@ const renderDomainType = createCodeGenerator<{
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
           <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.NoExcess<$SelectionSet, ${$.$$SelectionSets}.${renderName(rootTypeName)}.${field.fieldName}<{ scalars: $Context['scalars'] }>>) =>
-            ${$.$$Utilities}.Docpar.Object.Var.MethodReturn<
-              ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
+            GraphqlKit.Document.Object.Var.MethodReturn<
+              GraphqlKit.Document.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
-                  ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                  GraphqlKit.Document.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                   '${field.fieldName}'
                 >,
               ${$.$$Utilities}.DocumentRunnerDeferred<
-                ${$.$$Utilities}.Docpar.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
+                GraphqlKit.Document.Object.Var.InferFrom${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, $$SchemaMap.SchemaDrivenDataMap>,
                 & (null | {})
                 & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                     $Context,
-                    ${$.$$Utilities}.Docpar.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                    GraphqlKit.Document.Object.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.fieldName}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                     '${field.fieldName}'
                   >
               >

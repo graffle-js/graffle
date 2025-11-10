@@ -28,9 +28,9 @@ export const ModuleGeneratorGql = createModuleGenerator(
   ({ config, code }) => {
     code`
       import { createGql } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`
-    code(codeImportNamed(config, { names: 'Schema', from: './schema/$', type: true }))
+    code(codeImportNamed(config, { names: 'Schema', from: './schema/_', type: true }))
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
-    code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets/$', type: true }))
+    code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets/_', type: true }))
     code(codeImportAll(config, { as: '$$SchemaMap', from: './schema-driven-data-map', type: true }))
     code`
 
@@ -42,7 +42,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
        * @example GraphQL string syntax
        * \`\`\`ts
        * const doc = gql(\`query { user { id } }\`)
-       * // Returns: GraphqlKit.Document.TypedFull.SingleOperation<{ user: { id: string } }, {}>
+       * // Returns: GraphqlKit.Document.SingleOperation<{ user: { id: string } }, {}>
        * \`\`\`
        *
        * @example Document object syntax
@@ -52,7 +52,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
        *     getUser: { user: { id: true, name: true } }
        *   }
        * })
-       * // Returns: GraphqlKit.Document.TypedFull.SingleOperation with operation metadata
+       * // Returns: GraphqlKit.Document.SingleOperation with operation metadata
        * \`\`\`
        */
       export const gql = createGql<

@@ -1,13 +1,12 @@
 import { type GlobalRegistry } from '#graffle/utilities-for-generated'
 import { contextEmpty } from '#src/context/ContextEmpty.js'
-import type { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
 import { expect } from 'vitest'
 
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+type SchemaDrivenDataMap = GraphqlKit.Schema.SchemaDrivenDataMap
 import type { ScalarMethod } from './scalars.js'
 
 declare global {

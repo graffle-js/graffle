@@ -11,7 +11,7 @@
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const graffle = Graffle
   .create()

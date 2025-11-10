@@ -1,8 +1,8 @@
-import type { Docpar } from '#src/docpar/_.js'
+import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import { Configurator } from '@wollybeard/kit'
 
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+type SchemaDrivenDataMap = GraphqlKit.Schema.SchemaDrivenDataMap
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.

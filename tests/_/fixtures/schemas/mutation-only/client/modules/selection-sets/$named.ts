@@ -1,4 +1,4 @@
-export type { Mutation } from './roots/Mutation/$.js'
+export type { Mutation } from './roots/Mutation/_.js'
 
 // Scalar types
-export * from './scalars/$$.js'
+export * from './scalars/__.js'

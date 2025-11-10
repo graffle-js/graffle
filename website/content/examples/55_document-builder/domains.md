@@ -16,7 +16,7 @@ methods are grouped by resource/domain.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const client = Graffle.create()
 

@@ -42,7 +42,7 @@ test('generates domains directory structure', async () => {
   })
 
   // Should have generated domains modules
-  const domainsRoot = modules.find(m => m.filePath === 'domains/$$.ts')
+  const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
   expect(domainsRoot).toBeDefined()
   expect(domainsRoot!.content).toContain('export * as pokemon')
   expect(domainsRoot!.content).toContain('export * as trainer')
@@ -55,7 +55,7 @@ test('generates domains directory structure', async () => {
   // Should use simplified syntax with imported helper
   expect(pokemonMethods!.content).toContain("export const getOne = $$query('pokemonByName')")
 
-  const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/$$.ts')
+  const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
   expect(pokemonIndex).toBeDefined()
   expect(pokemonIndex!.content).toContain("export * from './methods.js'")
 
@@ -90,12 +90,12 @@ test('generates method aliases using Cartesian product', async () => {
   })
 
   // Should generate both namespace aliases
-  const domainsRoot = modules.find(m => m.filePath === 'domains/$$.ts')
+  const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
   expect(domainsRoot!.content).toContain('export * as pokemon')
   expect(domainsRoot!.content).toContain('export * as poke')
 
   // Both should point to the same path
-  const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/$$.ts')
+  const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
   expect(pokemonIndex).toBeDefined()
 
   // Should have method aliases
@@ -200,7 +200,7 @@ test('allows same method name in different nested namespaces', async () => {
   })
 
   // Should generate nested structure without conflicts
-  const domainsRoot = modules.find(m => m.filePath === 'domains/$$.ts')
+  const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
   expect(domainsRoot).toBeDefined()
   expect(domainsRoot!.content).toContain('export * as pokemon')
 
@@ -891,7 +891,7 @@ describe('aliases', () => {
       },
     })
 
-    const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/$$.ts')
+    const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
     expect(pokemonIndex).toBeDefined()
     // Should have all three method aliases
     expect(pokemonIndex!.content).toContain('getOne as get')

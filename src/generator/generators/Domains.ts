@@ -1,10 +1,8 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/runtime/root/details.js'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
-import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderName } from '../helpers/render.js'
 import { type DomainField, groupFieldsByDomain } from './MethodsRoot.js'
 
@@ -56,19 +54,19 @@ export const ModuleGeneratorDomains = {
         filePath: `domains/${dirPath}/methods.ts`,
       })
 
-      // Generate $$.ts for this namespace with export aliases
+      // Generate __.ts for this namespace with export aliases
       modules.push({
-        name: `domains/${dirPath}/$$`,
+        name: `domains/${dirPath}/__`,
         content: generateNamespaceIndexFile(fields, namespaceGroups[namespaceKey]!),
-        filePath: `domains/${dirPath}/$$.ts`,
+        filePath: `domains/${dirPath}/__.ts`,
       })
     }
 
-    // Generate root domains/$$.ts with namespace exports
+    // Generate root domains/__.ts with namespace exports
     modules.push({
-      name: `domains/$$`,
+      name: `domains/__`,
       content: generateRootIndexFile(namespaceStructure, namespaceGroups),
-      filePath: `domains/$$.ts`,
+      filePath: `domains/__.ts`,
     })
 
     return modules
@@ -132,7 +130,7 @@ const generateMethodsFile = (
 }
 
 /**
- * Generate the $$.ts file for a namespace.
+ * Generate the __.ts file for a namespace.
  * Re-exports methods with aliases using ESM export syntax.
  */
 const generateNamespaceIndexFile = (
@@ -173,7 +171,7 @@ const generateNamespaceIndexFile = (
 }
 
 /**
- * Generate the root domains/$$.ts file.
+ * Generate the root domains/__.ts file.
  * Exports all namespaces with aliases.
  */
 const generateRootIndexFile = (
@@ -209,7 +207,7 @@ const generateRootIndexFile = (
     // e.g., ['args', 'no'] → 'argsNo', ['pokemon-species'] → 'pokemonSpecies'
     const exportName = Str.Case.camel(fullPath)
 
-    lines.push(`export * as ${exportName} from './${fullPath}/$$.js'`)
+    lines.push(`export * as ${exportName} from './${fullPath}/__.js'`)
   }
 
   return lines.join('\n')

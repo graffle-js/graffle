@@ -1,12 +1,11 @@
 // dprint-ignore-file
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Possible } from '#test/schema/possible/client/_.js'
 import { Ts } from '@wollybeard/kit'
-import { $ } from '#src/docpar/object/var/var.js'
-import type { Core } from '#src/docpar/core/_.js'
+import { $ } from '#src/lib/graphql-kit/document/docpar/object/var/var.js'
 import { test } from 'vitest'
 
-type D<$Op extends Core.Operation> = Core.Doc.Document<$Op>
+type D<$Op extends GraphqlKit.Document.Operation> = GraphqlKit.Document.Doc.Document<$Op>
 const Q = Possible.query
 const A = Ts.Assert.exact
 

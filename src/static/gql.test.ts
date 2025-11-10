@@ -1,10 +1,10 @@
-import { Var } from '#src/docpar/object/var/$.js'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Possible } from '#test/schema/possible/client/_.js'
 import { Test } from '@wollybeard/kit/test'
 import { parse, print } from 'graphql'
 import { expect, test } from 'vitest'
 
-const $ = Var.$
+const $ = GraphqlKit.Document.Var.$
 type $ = typeof $
 
 // ==================================================================================================

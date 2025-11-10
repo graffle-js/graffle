@@ -6,7 +6,7 @@ import { Command } from '@molt/command'
 import { Err, Url } from '@wollybeard/kit'
 import * as Path from 'node:path'
 import { z } from 'zod'
-import { Generator } from '../generator/$.js'
+import { Generator } from '../generator/_.js'
 
 const args = Command.create()
   .description(`Generate a type safe GraphQL client.`)

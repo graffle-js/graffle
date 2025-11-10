@@ -1,6 +1,5 @@
 import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
-import { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { getOperationDefinition } from '#src/lib/graphql-kit/document/__.js'
 import { Lang } from '@wollybeard/kit'
@@ -31,14 +30,15 @@ export interface DocumentRunner<$Variables = GraphqlKit.Request.Variables, $Resu
   run: (variables: $Variables) => Promise<$Result>
 }
 
-export const createMethodDocument = (state: Context) => (document: Docpar.Object.Select.Document.DocumentObject) => {
-  const documentNormalized = Docpar.Object.Select.Document.normalizeOrThrow(document)
-  return {
-    run: async (maybeOperationName?: string) => {
-      return await executeDocument(state, documentNormalized, maybeOperationName)
-    },
+export const createMethodDocument =
+  (state: Context) => (document: GraphqlKit.Document.Object.Select.Document.DocumentObject) => {
+    const documentNormalized = GraphqlKit.Document.Object.Select.Document.normalizeOrThrow(document)
+    return {
+      run: async (maybeOperationName?: string) => {
+        return await executeDocument(state, documentNormalized, maybeOperationName)
+      },
+    }
   }
-}
 
 export const createMethodOperationType = (
   state: Context,
@@ -49,19 +49,19 @@ export const createMethodOperationType = (
       if (Lang.isSymbol(key)) throw new Error(`Symbols not supported.`)
 
       if (key.startsWith(`$batch`)) {
-        return (selectionSetOrIndicator: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
+        return (selectionSetOrIndicator: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet) => {
           // Check for manual hoisting (explicit $ markers) to determine execution strategy
-          if (Docpar.Object.Var.containsManualHoisting(selectionSetOrIndicator)) {
+          if (GraphqlKit.Document.Object.Var.containsManualHoisting(selectionSetOrIndicator)) {
             return buildDocumentRunner(state, operationType, selectionSetOrIndicator)
           }
           return executeOperation(state, operationType, selectionSetOrIndicator)
         }
       } else {
         const fieldName = key
-        return (selectionSetOrArgs: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
+        return (selectionSetOrArgs: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet) => {
           const rootTypeSelectionSet = { [fieldName]: selectionSetOrArgs ?? {} }
           // Check for manual hoisting (explicit $ markers) to determine execution strategy
-          if (Docpar.Object.Var.containsManualHoisting(rootTypeSelectionSet)) {
+          if (GraphqlKit.Document.Object.Var.containsManualHoisting(rootTypeSelectionSet)) {
             return buildDocumentRunnerForRootField(state, operationType, fieldName, selectionSetOrArgs)
           }
           return executeRootField(state, operationType, fieldName, selectionSetOrArgs)
@@ -75,15 +75,15 @@ const buildDocumentRunnerForRootField = (
   context: Context,
   operationType: GraphqlKit.Schema.OperationType.OperationType,
   rootFieldName: string,
-  rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
+  rootFieldSelectionSet?: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet,
 ): DocumentRunner => {
   const rootTypeSelectionSet = { [rootFieldName]: rootFieldSelectionSet ?? {} }
-  const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
+  const documentNormalized = GraphqlKit.Document.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
     operationType,
     rootTypeSelectionSet,
   )
 
-  const encoded = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, {
+  const encoded = GraphqlKit.Document.Object.ToAst.toAst(documentNormalized, {
     sddm: context.configuration.schema.current.map,
     scalars: context.scalars.map,
   })
@@ -112,14 +112,14 @@ const buildDocumentRunnerForRootField = (
 const buildDocumentRunner = (
   context: Context,
   operationType: GraphqlKit.Schema.OperationType.OperationType,
-  rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
+  rootTypeSelectionSet: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet,
 ): DocumentRunner => {
-  const documentNormalized = Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
+  const documentNormalized = GraphqlKit.Document.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
     operationType,
     rootTypeSelectionSet,
   )
 
-  const encoded = Docpar.Object.ToGraphQLDocument.toGraphQL(documentNormalized, {
+  const encoded = GraphqlKit.Document.Object.ToAst.toAst(documentNormalized, {
     sddm: context.configuration.schema.current.map,
     scalars: context.scalars.map,
   })
@@ -142,7 +142,7 @@ export const executeRootField = async (
   context: Context,
   operationType: GraphqlKit.Schema.OperationType.OperationType,
   rootFieldName: string,
-  rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet,
+  rootFieldSelectionSet?: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
   const result = await executeOperation(context, operationType, {
     [rootFieldName]: rootFieldSelectionSet ?? {},
@@ -163,7 +163,7 @@ export const executeRootField = async (
 export const createRootFieldExecutor = (operationType: GraphqlKit.Schema.OperationType.OperationType) => {
   return (rootFieldName: string) => {
     return (context: Context) => {
-      return (rootFieldSelectionSet?: Docpar.Object.Select.SelectionSet.AnySelectionSet) => {
+      return (rootFieldSelectionSet?: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet) => {
         return executeRootField(context, operationType, rootFieldName, rootFieldSelectionSet)
       }
     }
@@ -181,11 +181,11 @@ export const $$subscription = createRootFieldExecutor(GraphqlKit.Schema.Operatio
 const executeOperation = async (
   context: Context,
   operationType: GraphqlKit.Schema.OperationType.OperationType,
-  rootTypeSelectionSet: Docpar.Object.Select.SelectionSet.AnySelectionSet,
+  rootTypeSelectionSet: GraphqlKit.Document.Object.Select.SelectionSet.AnySelectionSet,
 ) => {
   return executeDocument(
     context,
-    Docpar.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
+    GraphqlKit.Document.Object.Select.Document.createDocumentNormalizedFromRootTypeSelection(
       operationType,
       rootTypeSelectionSet,
     ),
@@ -194,11 +194,11 @@ const executeOperation = async (
 
 const executeDocument = async (
   context: Context,
-  document: Docpar.Object.Select.Document.DocumentNormalized,
+  document: GraphqlKit.Document.Object.Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {
   const request = graffleMappedResultToRequest(
-    Docpar.Object.ToGraphQLDocument.toGraphQL(document, {
+    GraphqlKit.Document.Object.ToAst.toAst(document, {
       sddm: context.configuration.schema.current.map,
       // todo test that when custom scalars are used they are mapped correctly
       scalars: context.scalars.map,
@@ -210,7 +210,7 @@ const executeDocument = async (
 }
 
 export const graffleMappedResultToRequest = (
-  { document, operationsVariables }: Docpar.Object.ToGraphQLDocument.Encoded,
+  { document, operationsVariables }: GraphqlKit.Document.Object.ToAst.Encoded,
   operationName?: string,
 ): GraphqlKit.Request.RequestAnalyzedDocumentNodeInput => {
   // We get back variables for every operation in the Graffle document.

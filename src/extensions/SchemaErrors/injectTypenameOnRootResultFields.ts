@@ -1,7 +1,6 @@
-import type { Docpar } from '#src/docpar/_.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-type SchemaDrivenDataMap = Docpar.SchemaDrivenDataMap
+type SchemaDrivenDataMap = GraphqlKit.Schema.SchemaDrivenDataMap
 
 export const injectTypenameOnRootResultFields = (
   { request, sddm }: {

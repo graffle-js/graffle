@@ -43,7 +43,7 @@ const doc = Graffle.gql({
 ### After Generation
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 // Full autocomplete and type safety
 const doc = Graffle.gql({
@@ -63,7 +63,7 @@ const doc = Graffle.gql({
 Generated code adds convenient shortcuts for accessing root fields directly:
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 // Instead of Graffle.gql({ query: { op: { pokemons: { ... } } } })
 const doc = Graffle.query.pokemons({
@@ -87,7 +87,7 @@ These shortcuts:
 The generator creates proper type mappings for custom scalars:
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const doc = Graffle.query.pokemons({
   name: true,
@@ -108,7 +108,7 @@ Without generation, custom scalars remain as strings in the type system.
 The generator enables precise result type inference:
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const doc = Graffle.query.pokemonByName({
   $: { name: 'Pikachu' },
@@ -127,7 +127,7 @@ const result = await client.gql(doc).$send()
 Generated types validate variable usage:
 
 ```ts
-import { $, Graffle } from './graffle/$.js'
+import { $, Graffle } from './graffle/_.js'
 
 const doc = Graffle.query.pokemonByName({
   $: {
@@ -149,7 +149,7 @@ await client.gql(doc).$send({ pokemonName: 123 }) // ❌ Error: number not assig
 Generated enums provide autocomplete and validation:
 
 ```ts
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 const doc = Graffle.query.pokemons({
   $: {

@@ -14,7 +14,7 @@ import './graffle/modules/global.js'
 import { $, Graffle as PlainGraffle } from 'graffle'
 //                                ^
 // Variable marker with flexible API
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 /*
 

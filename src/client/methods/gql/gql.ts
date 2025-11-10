@@ -103,18 +103,18 @@ export interface GqlMethod<$Context extends Context.Context>
   > {
   // Overload
   // dprint-ignore
-  <const $doc extends GraphqlKit.Document.Typed.String | string | DocumentNode | GraphqlKit.Document.TypedFull.TypedFullDocument>(
+  <const $doc extends GraphqlKit.Document.Typed.String | string | DocumentNode | GraphqlKit.Document.TypedFullDocument>(
     document: ValidateSDDMRequirement<$doc, $Context>
   ):
   string extends $doc                                   ?
     $doc extends GraphqlKit.Document.Typed.String            ? DocumentSender<$doc, $Context> :
                                                             UntypedSender<$Context> :
-  $doc extends GraphqlKit.Document.TypedFull.TypedFullDocument      ? DocumentSender<$doc, $Context> :
+  $doc extends GraphqlKit.Document.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
                                                             ? ParseGraphQLString<$Context, $doc> extends infer $Parsed
                                                               ? $Parsed extends { __typename: 'ParserError' }
                                                                 ? $Parsed
-                                                                : $Parsed extends GraphqlKit.Document.TypedFull.TypedFullDocument
+                                                                : $Parsed extends GraphqlKit.Document.TypedFullDocument
                                                                   ? DocumentSender<$Parsed, $Context>
                                                                   : never
                                                               : never
@@ -132,7 +132,7 @@ export interface GqlMethod<$Context extends Context.Context>
     > extends infer $Parsed
     ? $Parsed extends { __typename: 'ParserError' }
       ? $Parsed
-      : $Parsed extends GraphqlKit.Document.TypedFull.TypedFullDocument
+      : $Parsed extends GraphqlKit.Document.TypedFullDocument
         ? DocumentSender<$Parsed, $Context>
         : never
     : never

@@ -1,4 +1,4 @@
-export type { Query } from './roots/Query/$.js'
+export type { Query } from './roots/Query/_.js'
 
 // Scalar types
-export * from './scalars/$$.js'
+export * from './scalars/__.js'

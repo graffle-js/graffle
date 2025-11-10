@@ -44,7 +44,7 @@ const customScalarsCode = `
 
 const readGeneratedFiles = () => ({
   scalar: MemFS.fs.readFileSync('./graffle/modules/scalar.ts', 'utf8'),
-  schema: MemFS.fs.readFileSync('./graffle/modules/schema/$.ts', 'utf8'),
+  schema: MemFS.fs.readFileSync('./graffle/modules/schema/_.ts', 'utf8'),
   sddm: MemFS.fs.readFileSync('./graffle/modules/schema-driven-data-map.ts', 'utf8'),
 })
 

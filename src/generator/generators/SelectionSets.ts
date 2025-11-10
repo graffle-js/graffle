@@ -3,8 +3,6 @@
 
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Obj, Str } from '@wollybeard/kit'
-import * as GraphQL from 'graphql'
-import { Docpar } from '../../docpar/_.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -33,6 +31,7 @@ import {
   codeImportNamed,
   codeReexportAll,
   codeReexportNamespace,
+  importGraphqlKit,
   importUtilities,
 } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderName } from '../helpers/render.js'
@@ -42,10 +41,10 @@ const i = {
   _$Context: `_$Context`,
 }
 const $ContextTypeParameter =
-  `${i._$Context} extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`
+  `${i._$Context} extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext`
 
 export const ModuleGeneratorSelectionSets = {
-  name: `selection-sets/$`,
+  name: `selection-sets/_`,
   generate: (config: Config): GeneratedModule[] => {
     const modules: GeneratedModule[] = []
     const kindMap = config.schema.kindMap.list
@@ -101,9 +100,10 @@ export const ModuleGeneratorSelectionSets = {
 const generateContextModule = (config: Config): GeneratedModule => {
   const code = Str.Builder()
   code(importUtilities(config))
+  code(importGraphqlKit(config))
   code(codeImportAll(config, { as: $.$$Scalar, from: '../scalar', type: true }))
   code()
-  code(`export interface $DefaultSelectionContext extends ${$.$$Utilities}.Docpar.Object.Select.Context {`)
+  code(`export interface $DefaultSelectionContext extends GraphqlKit.Document.Object.Select.Context {`)
   code(`  scalars: ${$.$$Scalar}.$Registry`)
   code(`}`)
 
@@ -117,14 +117,15 @@ const generateContextModule = (config: Config): GeneratedModule => {
 const generateDocumentModule = (config: Config): GeneratedModule => {
   const code = Str.Builder()
   code(importUtilities(config))
+  code(importGraphqlKit(config))
   const queryType = config.schema.kindMap.index.Root.query
   const mutationType = config.schema.kindMap.index.Root.mutation
 
   if (queryType) {
-    code(codeImportNamed(config, { names: queryType.name, from: `./roots/${queryType.name}/$`, type: true }))
+    code(codeImportNamed(config, { names: queryType.name, from: `./roots/${queryType.name}/_`, type: true }))
   }
   if (mutationType) {
-    code(codeImportNamed(config, { names: mutationType.name, from: `./roots/${mutationType.name}/$`, type: true }))
+    code(codeImportNamed(config, { names: mutationType.name, from: `./roots/${mutationType.name}/_`, type: true }))
   }
   code(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: './_context', type: true }))
   code()
@@ -163,21 +164,21 @@ const generateNamedTypesModule = (config: Config, kindMap: GraphqlKit.Schema.Kin
     const from = GraphqlKit.Schema.Runtime.Nodes.isEnumType(type)
       ? `./enums/${type.name}`
       : GraphqlKit.Schema.Runtime.Nodes.isUnionType(type)
-      ? `./unions/${type.name}/$`
+      ? `./unions/${type.name}/_`
       : GraphqlKit.Schema.Runtime.Nodes.isInputObjectType(type)
-      ? `./input-objects/${type.name}/$`
+      ? `./input-objects/${type.name}/_`
       : GraphqlKit.Schema.Runtime.Nodes.isInterfaceType(type)
-      ? `./interfaces/${type.name}/$`
+      ? `./interfaces/${type.name}/_`
       : kindMap.Root.some(r => r.name === type.name)
-      ? `./roots/${type.name}/$`
-      : `./objects/${type.name}/$`
+      ? `./roots/${type.name}/_`
+      : `./objects/${type.name}/_`
 
     code(`export type { ${type.name} } from '${buildImportPath(config, from)}'`)
   }
 
   code()
   code(`// Scalar types`)
-  code(`export * from '${buildImportPath(config, './scalars/$$')}'`)
+  code(`export * from '${buildImportPath(config, './scalars/__')}'`)
 
   return {
     name: `selection-sets/$named`,
@@ -198,6 +199,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
   // Generate scalars/scalars.ts
   const scalarsCode = Str.Builder()
   scalarsCode(importUtilities(config))
+  scalarsCode(importGraphqlKit(config))
   scalarsCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../_context', type: true }))
   scalarsCode()
 
@@ -206,7 +208,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
   scalarsCode(`export type $Scalar<`)
   scalarsCode(`  $ScalarName extends string,`)
   scalarsCode(
-    `  $Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext`,
+    `  $Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext`,
   )
   scalarsCode(`> = ${$.$$Utilities}.Codec.GetDecoded<`)
   scalarsCode(`  ${$.$$Utilities}.Schema.LookupCustomScalarOrFallbackToUnknown<`)
@@ -219,21 +221,21 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
   // Generate wrapper utilities
   scalarsCode(Str.Code.TSDoc.format(getScalarNullableDoc()))
   scalarsCode(
-    `export type Nullable<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type | null | undefined>`,
+    `export type Nullable<$Type> = GraphqlKit.Document.Object.Var.MaybeSchemaful<$Type | null | undefined>`,
   )
   scalarsCode()
 
   scalarsCode(Str.Code.TSDoc.format(getScalarNonNullDoc()))
-  scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<$Type>`)
+  scalarsCode(`export type NonNull<$Type> = GraphqlKit.Document.Object.Var.MaybeSchemaful<$Type>`)
   scalarsCode()
 
   // Generate standard scalar types (nullable + non-null variants)
   for (const scalarName of standardScalars) {
     scalarsCode(
-      `export type ${scalarName}<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalarName}', $Context>>`,
+      `export type ${scalarName}<$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalarName}', $Context>>`,
     )
     scalarsCode(
-      `export type ${scalarName}$NonNull<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalarName}', $Context>>`,
+      `export type ${scalarName}$NonNull<$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalarName}', $Context>>`,
     )
   }
 
@@ -242,17 +244,17 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
     // Skip scalars that conflict with TypeScript built-in types
     if (scalar.name === 'bigint' || scalar.name === 'symbol' || scalar.name === 'undefined' || scalar.name === 'null') {
       scalarsCode(
-        `export type $${scalar.name}<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
+        `export type $${scalar.name}<$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
       )
       scalarsCode(
-        `export type $${scalar.name}$NonNull<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
+        `export type $${scalar.name}$NonNull<$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
       )
     } else {
       scalarsCode(
-        `export type ${scalar.name}<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
+        `export type ${scalar.name}<$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> = Nullable<$Scalar<'${scalar.name}', $Context>>`,
       )
       scalarsCode(
-        `export type ${scalar.name}$NonNull<$Context extends ${$.$$Utilities}.Docpar.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
+        `export type ${scalar.name}$NonNull<$Context extends GraphqlKit.Document.Object.Select.SelectionContext = $DefaultSelectionContext> = NonNull<$Scalar<'${scalar.name}', $Context>>`,
       )
     }
   }
@@ -263,7 +265,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
     content: scalarsCode.toString(),
   })
 
-  // Generate scalars/$$.ts - comprehensive barrel for all scalar types (for $Named)
+  // Generate scalars/__.ts - comprehensive barrel for all scalar types (for $Named)
   const comprehensiveBarrelCode = Str.Builder()
   comprehensiveBarrelCode(`// Standard scalar types`)
   comprehensiveBarrelCode(
@@ -282,18 +284,18 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
   }
 
   modules.push({
-    name: `selection-sets/scalars/$$`,
-    filePath: `selection-sets/scalars/$$.ts`,
+    name: `selection-sets/scalars/__`,
+    filePath: `selection-sets/scalars/__.ts`,
     content: comprehensiveBarrelCode.toString(),
   })
 
-  // Generate scalars/$.ts - barrel for $Scalars utilities
+  // Generate scalars/_.ts - barrel for $Scalars utilities
   const barrelCode = Str.Builder()
   barrelCode(codeReexportAll(config, { from: './scalars', type: true }))
 
   modules.push({
-    name: `selection-sets/scalars/$`,
-    filePath: `selection-sets/scalars/$.ts`,
+    name: `selection-sets/scalars/_`,
+    filePath: `selection-sets/scalars/_.ts`,
     content: barrelCode.toString(),
   })
 
@@ -330,8 +332,9 @@ const generateUnionModule = (
   // Generate fragment.ts with $FragmentInline interface
   const fragmentCode = Str.Builder()
   fragmentCode(importUtilities(config))
+  fragmentCode(importGraphqlKit(config))
   fragmentCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
-  fragmentCode(codeImportNamed(config, { names: unionType.name, from: './$', type: true }))
+  fragmentCode(codeImportNamed(config, { names: unionType.name, from: './_', type: true }))
   fragmentCode()
   fragmentCode(H.fragmentInlineInterface(unionType))
 
@@ -341,30 +344,31 @@ const generateUnionModule = (
     content: fragmentCode.toString(),
   })
 
-  // Generate $$.ts barrel that exports fragment
+  // Generate __.ts barrel that exports fragment
   const barrelCode = Str.Builder()
   barrelCode(codeReexportAll(config, { from: './fragment', type: false }))
 
   modules.push({
-    name: `selection-sets/unions/${unionType.name}/$$`,
-    filePath: `selection-sets/unions/${unionType.name}/$$.ts`,
+    name: `selection-sets/unions/${unionType.name}/__`,
+    filePath: `selection-sets/unions/${unionType.name}/__.ts`,
     content: barrelCode.toString(),
   })
 
-  // Generate $.ts with main union interface
+  // Generate _.ts with main union interface
   const mainCode = Str.Builder()
   mainCode(importUtilities(config))
+  mainCode(importGraphqlKit(config))
   mainCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
   mainCode(codeImportNamed(config, { names: '$FragmentInline', from: './fragment', type: true }))
   mainCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
   mainCode()
   // Export fragments as namespace to enable potential member access patterns
-  mainCode(codeReexportNamespace(config, { as: unionType.name, from: './$$', type: true }))
+  mainCode(codeReexportNamespace(config, { as: unionType.name, from: './__', type: true }))
   mainCode()
 
   const fragmentsInlineType = unionType.getTypes().map((memberType) => {
     const doc = Str.Code.TSDoc.format(getInlineFragmentDoc(memberType, unionType, 'union'))
-    const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
+    const field = `${GraphqlKit.Document.Object.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
       H.namedTypesReference(memberType)
     }`
     return `${doc}\n${field}`
@@ -383,8 +387,8 @@ const generateUnionModule = (
   }))
 
   modules.push({
-    name: `selection-sets/unions/${unionType.name}/$`,
-    filePath: `selection-sets/unions/${unionType.name}/$.ts`,
+    name: `selection-sets/unions/${unionType.name}/_`,
+    filePath: `selection-sets/unions/${unionType.name}/_.ts`,
     content: mainCode.toString(),
   })
 
@@ -405,12 +409,13 @@ const generateInputObjectModule = (
   // Generate fields.ts
   const fieldsCode = Str.Builder()
   fieldsCode(importUtilities(config))
+  fieldsCode(importGraphqlKit(config))
   fieldsCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
   if (usage.usesNamedTypes) {
     fieldsCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
   }
   if (usage.usesScalars) {
-    fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+    fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/_', type: true }))
   }
   fieldsCode()
 
@@ -433,15 +438,16 @@ const generateInputObjectModule = (
     content: fieldsCode.toString(),
   })
 
-  // Generate $.ts
+  // Generate _.ts
   const namespaceCode = Str.Builder()
   namespaceCode(importUtilities(config))
+  namespaceCode(importGraphqlKit(config))
   namespaceCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
   if (usage.usesNamedTypes) {
     namespaceCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
   }
   if (usage.usesScalars) {
-    namespaceCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+    namespaceCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/_', type: true }))
   }
   namespaceCode()
   // Re-export fields as a type-only namespace to avoid conflicts with the interface
@@ -457,8 +463,8 @@ const generateInputObjectModule = (
   }))
 
   modules.push({
-    name: `selection-sets/input-objects/${inputObject.name}/$`,
-    filePath: `selection-sets/input-objects/${inputObject.name}/$.ts`,
+    name: `selection-sets/input-objects/${inputObject.name}/_`,
+    filePath: `selection-sets/input-objects/${inputObject.name}/_.ts`,
     content: namespaceCode.toString(),
   })
 
@@ -507,12 +513,13 @@ const generateFieldedTypeModule = (
   // Generate fields.ts
   const fieldsCode = Str.Builder()
   fieldsCode(importUtilities(config))
+  fieldsCode(importGraphqlKit(config))
   fieldsCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
   if (usage.usesNamedTypes) {
     fieldsCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
   }
   if (usage.usesScalars) {
-    fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/$', type: true }))
+    fieldsCode(codeImportAll(config, { as: `$Scalars`, from: '../../scalars/_', type: true }))
   }
   fieldsCode()
 
@@ -530,8 +537,9 @@ const generateFieldedTypeModule = (
   // Generate fragment.ts with $FragmentInline interface
   const fragmentCode = Str.Builder()
   fragmentCode(importUtilities(config))
+  fragmentCode(importGraphqlKit(config))
   fragmentCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
-  fragmentCode(codeImportNamed(config, { names: type.name, from: './$', type: true }))
+  fragmentCode(codeImportNamed(config, { names: type.name, from: './_', type: true }))
   fragmentCode()
   fragmentCode(H.fragmentInlineInterface(type))
 
@@ -541,20 +549,21 @@ const generateFieldedTypeModule = (
     content: fragmentCode.toString(),
   })
 
-  // Generate $$.ts barrel that exports fields and fragment
+  // Generate __.ts barrel that exports fields and fragment
   const barrelCode = Str.Builder()
   barrelCode(codeReexportAll(config, { from: './fields', type: false }))
   barrelCode(codeReexportAll(config, { from: './fragment', type: false }))
 
   modules.push({
-    name: `selection-sets/${kind}/${type.name}/$$`,
-    filePath: `selection-sets/${kind}/${type.name}/$$.ts`,
+    name: `selection-sets/${kind}/${type.name}/__`,
+    filePath: `selection-sets/${kind}/${type.name}/__.ts`,
     content: barrelCode.toString(),
   })
 
-  // Generate $.ts
+  // Generate _.ts
   const namespaceCode = Str.Builder()
   namespaceCode(importUtilities(config))
+  namespaceCode(importGraphqlKit(config))
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
   namespaceCode(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: '../../_context', type: true }))
   namespaceCode(codeImportNamed(config, { names: '$FragmentInline', from: './fragment', type: true }))
@@ -564,7 +573,7 @@ const generateFieldedTypeModule = (
   }
   namespaceCode()
   // Export the fields as a namespace to enable Query.pokemons.$Arguments syntax (merges with interface)
-  namespaceCode(codeReexportNamespace(config, { as: type.name, from: './$$', type: true }))
+  namespaceCode(codeReexportNamespace(config, { as: type.name, from: './__', type: true }))
   namespaceCode()
 
   const fieldKeys = fields.map(field => {
@@ -597,7 +606,7 @@ const generateFieldedTypeModule = (
       const doc = Str.Code.TSDoc.format(
         getInlineFragmentDoc(implementorType as GraphqlKit.Schema.Runtime.Nodes.ObjectType, type, 'interface'),
       )
-      const field = `${Docpar.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
+      const field = `${GraphqlKit.Document.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
         H.namedTypesReference(implementorType)
       }`
       return `${doc}\n${field}`
@@ -605,8 +614,8 @@ const generateFieldedTypeModule = (
   }
 
   const extendsClause = isRoot
-    ? `${$.$$Utilities}.Docpar.Object.Select.Bases.RootObjectLike`
-    : `${$.$$Utilities}.Docpar.Object.Select.Bases.ObjectLike`
+    ? `GraphqlKit.Document.Object.Select.Bases.RootObjectLike`
+    : `GraphqlKit.Document.Object.Select.Bases.ObjectLike`
 
   let operationType: 'query' | 'mutation' | 'subscription' | null = null
   if (isRoot) {
@@ -636,8 +645,8 @@ const generateFieldedTypeModule = (
   }))
 
   modules.push({
-    name: `selection-sets/${kind}/${type.name}/$`,
-    filePath: `selection-sets/${kind}/${type.name}/$.ts`,
+    name: `selection-sets/${kind}/${type.name}/_`,
+    filePath: `selection-sets/${kind}/${type.name}/_.ts`,
     content: namespaceCode.toString(),
   })
 
@@ -660,13 +669,13 @@ const renderOutputFieldForFields = (
     || GraphqlKit.Schema.Runtime.Nodes.isEnumType(fieldNamedType))
     && argsAnalysis.isAllNullable
   const indicator = isCanBeIndicator
-    ? `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
+    ? `GraphqlKit.Document.Object.Select.Indicator.NoArgsIndicator`
     : null
   const shortAlias = isCanBeIndicator
-    ? `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`
+    ? `GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasShort`
     : null
   const stringAlias = isCanBeIndicator
-    ? `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`
+    ? `GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasString`
     : null
 
   // Main field type - references the namespace's $SelectionSet
@@ -692,7 +701,7 @@ const renderOutputFieldForFields = (
     ? H.namedTypesReference(fieldNamedType)
     : null
 
-  const extendsClause = [`${$.$$Utilities}.Docpar.Object.Select.Bases.Base`, objectLikeTypeReference].filter(
+  const extendsClause = [`GraphqlKit.Document.Object.Select.Bases.Base`, objectLikeTypeReference].filter(
     Boolean,
   )
 
@@ -760,7 +769,7 @@ const renderFieldPropertyArguments = (
       ? `${lead} are required so you may omit this.`
       : `${lead} are required so you must include this.`
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-    return Str.Code.TS.field(Docpar.Object.Select.Arguments.key, argFieldsRendered, {
+    return Str.Code.TS.field(GraphqlKit.Document.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
       readonly: true,
       tsDoc,
@@ -776,7 +785,7 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
 
   // Export namespaces
   code(codeReexportNamespace(config, { as: '$Named', from: './$named' }))
-  code(codeReexportNamespace(config, { as: '$Scalars', from: './scalars/$' }))
+  code(codeReexportNamespace(config, { as: '$Scalars', from: './scalars/_' }))
   code()
 
   // Re-export meta files
@@ -785,21 +794,21 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
   code()
 
   // Re-export selection set interfaces AND namespaces (they are merged at the type level)
-  // E.g., exports both Query interface and Query namespace from roots/Query/$.ts
+  // E.g., exports both Query interface and Query namespace from roots/Query/_.ts
   for (const type of kindMap.Root) {
-    code(codeReexportAll(config, { from: `./roots/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./roots/${type.name}/_`, type: true }))
   }
 
   for (const type of kindMap.OutputObject) {
-    code(codeReexportAll(config, { from: `./objects/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./objects/${type.name}/_`, type: true }))
   }
 
   for (const type of kindMap.Interface) {
-    code(codeReexportAll(config, { from: `./interfaces/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./interfaces/${type.name}/_`, type: true }))
   }
 
   for (const type of kindMap.Union) {
-    code(codeReexportAll(config, { from: `./unions/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./unions/${type.name}/_`, type: true }))
   }
 
   for (const type of kindMap.Enum) {
@@ -807,21 +816,22 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
   }
 
   for (const type of kindMap.InputObject) {
-    code(codeReexportAll(config, { from: `./input-objects/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./input-objects/${type.name}/_`, type: true }))
   }
   code()
 
   // Add root type inference utilities
   if (config.schema.kindMap.index.Root.query || config.schema.kindMap.index.Root.mutation) {
     code(importUtilities(config))
-    code(codeImportAll(config, { as: $.$$Schema, from: '../schema/$', type: true }))
+    code(importGraphqlKit(config))
+    code(codeImportAll(config, { as: $.$$Schema, from: '../schema/_', type: true }))
     code()
   }
 
   if (config.schema.kindMap.index.Root.query) {
     code(Str.Code.TSDoc.format(getOperationInferDoc('Query')))
     code(
-      `export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
+      `export type Query$Infer<$SelectionSet extends object> = GraphqlKit.Document.Object.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
     code(Str.Code.TSDoc.format(getOperationVariablesDoc('Query')))
@@ -834,7 +844,7 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
   if (config.schema.kindMap.index.Root.mutation) {
     code(Str.Code.TSDoc.format(getOperationInferDoc('Mutation')))
     code(
-      `export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.Docpar.Object.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
+      `export type Mutation$Infer<$SelectionSet extends object> = GraphqlKit.Document.Object.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
     code(Str.Code.TSDoc.format(getOperationVariablesDoc('Mutation')))
@@ -845,8 +855,8 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
   }
 
   return {
-    name: `selection-sets/$$`,
-    filePath: `selection-sets/$$.ts`,
+    name: `selection-sets/__`,
+    filePath: `selection-sets/__.ts`,
     content: code.toString(),
   }
 }
@@ -854,13 +864,13 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
 const generateNamespaceModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.KindMap['list']): GeneratedModule => {
   const code = Str.Builder()
 
-  // Main entry point re-exports everything directly from $$.ts
+  // Main entry point re-exports everything directly from __.ts
   // The SelectionSets namespace is created by importers using `import * as SelectionSets`
-  code(codeReexportAll(config, { from: './$$', type: true }))
+  code(codeReexportAll(config, { from: './__', type: true }))
 
   return {
-    name: `selection-sets/$`,
-    filePath: `selection-sets/$.ts`,
+    name: `selection-sets/_`,
+    filePath: `selection-sets/_.ts`,
     content: code.toString(),
   }
 }
@@ -988,7 +998,7 @@ const getInputFieldKey = (
   inputFieldLike: GraphqlKit.Schema.Runtime.Nodes.Argument | GraphqlKit.Schema.Runtime.Nodes.InputField,
 ) => {
   return GraphqlKit.Schema.Runtime.Nodes.isEnumType(GraphqlKit.Schema.Runtime.getNamedType(inputFieldLike.type))
-    ? Docpar.Object.Select.Arguments.enumKeyPrefix + inputFieldLike.name
+    ? GraphqlKit.Document.Object.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 
@@ -1001,7 +1011,7 @@ const renderArgumentType = (type: GraphqlKit.Schema.Runtime.NodeGroups.InputType
     const innerTypeRendered = renderArgumentType(innerType)
     const arrayType = `Array<${innerTypeRendered}>`
     const fullType = isNullable ? `${arrayType} | null | undefined` : arrayType
-    return `${i.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<${fullType}>`
+    return `GraphqlKit.Document.Object.Var.MaybeSchemaful<${fullType}>`
   }
 
   if (GraphqlKit.Schema.Runtime.Nodes.isScalarType(sansNullabilityType)) {
@@ -1019,7 +1029,7 @@ const renderArgumentType = (type: GraphqlKit.Schema.Runtime.NodeGroups.InputType
   // For non-scalar types (enums, input objects), use $Named
   const baseType = H.namedTypesReference(sansNullabilityType)
   const fullType = isNullable ? `${baseType} | null | undefined` : baseType
-  return `${i.$$Utilities}.Docpar.Object.Var.MaybeSchemaful<${fullType}>`
+  return `GraphqlKit.Document.Object.Var.MaybeSchemaful<${fullType}>`
 }
 
 // ===== Helper Namespace =====
@@ -1056,7 +1066,7 @@ namespace H {
     isHasExpanded: boolean = true,
     isCanBeIndicator: boolean = false,
   ) => {
-    const isReference = type !== `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`
+    const isReference = type !== `GraphqlKit.Document.Object.Select.Indicator.NoArgsIndicator`
     // For namespace-qualified types like Query.pokemons, append .$Expanded and <_$Context> directly
     const typeReferenced = isReference
       ? (isHasExpanded ? `${type}.$Expanded<${i._$Context}>` : reference(type))
@@ -1065,11 +1075,11 @@ namespace H {
     const aliasTypes: string[] = []
     if (aliasable) {
       aliasTypes.push(
-        `${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`,
+        `GraphqlKit.Document.Object.Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>`,
       )
       if (isCanBeIndicator) {
-        aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasShort`)
-        aliasTypes.push(`${$.$$Utilities}.Docpar.Object.Select.SelectAlias.SelectAliasString`)
+        aliasTypes.push(`GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasShort`)
+        aliasTypes.push(`GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasString`)
       }
     }
     const aliasType = aliasTypes.length > 0 ? aliasTypes.map(t => `| ${t}`).join(' ') : ``
@@ -1080,7 +1090,7 @@ namespace H {
   export const __typenameField = (kind: 'union' | 'interface' | 'object') => {
     const doc = __typenameDoc(kind)
     return `${doc}\n${
-      outputFieldKey(`__typename`, `${$.$$Utilities}.Docpar.Object.Select.Indicator.NoArgsIndicator`, true, false, true)
+      outputFieldKey(`__typename`, `GraphqlKit.Document.Object.Select.Indicator.NoArgsIndicator`, true, false, true)
     }`
   }
 
@@ -1107,7 +1117,7 @@ namespace H {
       parameters: `<${$ContextTypeParameter}>`,
       extends: [
         forwardTypeParameter$Context(node),
-        `${$.$$Utilities}.Docpar.Object.Select.Directive.$Groups.InlineFragment.Fields`,
+        `GraphqlKit.Document.Object.Select.Directive.$Groups.InlineFragment.Fields`,
       ],
       block: {},
     })

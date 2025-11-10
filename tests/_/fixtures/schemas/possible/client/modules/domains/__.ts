@@ -1,0 +1,16 @@
+// Root exports for all domain namespaces
+
+export * as argsNo from './args/no/__.js'
+export * as argsYeReqNo from './args/ye/req/no/__.js'
+export * as argsYeReqYe from './args/ye/req/ye/__.js'
+export * as featDate from './feat/date/__.js'
+export * as featEnum from './feat/enum/__.js'
+export * as featError from './feat/error/__.js'
+export * as featHierarchy from './feat/hierarchy/__.js'
+export * as featInput from './feat/input/__.js'
+export * as typeInterface from './type/interface/__.js'
+export * as typeList from './type/list/__.js'
+export * as typeListNested from './type/listNested/__.js'
+export * as typeObject from './type/object/__.js'
+export * as typeScalar from './type/scalar/__.js'
+export * as typeUnion from './type/union/__.js'

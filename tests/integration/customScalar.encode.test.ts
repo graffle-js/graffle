@@ -1,7 +1,6 @@
-import { Docpar } from '#src/docpar/_.js'
 import { GraffleBasic } from '#src/exports/presets/basic.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Possible } from '#test/schema/possible/client/_.js'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
 import { expect } from 'vitest'
@@ -45,8 +44,8 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
     .use(RequestSpy)
     .scalar(DateScalar)
 
-  const { document, operationsVariables } = Docpar.Object.ToGraphQLDocument.toGraphQL(
-    Docpar.Object.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
+  const { document, operationsVariables } = GraphqlKit.Document.Object.ToAst.toAst(
+    GraphqlKit.Document.Object.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {
       sddm: Possible.schemaMap,
       scalars: { Date: DateScalar },

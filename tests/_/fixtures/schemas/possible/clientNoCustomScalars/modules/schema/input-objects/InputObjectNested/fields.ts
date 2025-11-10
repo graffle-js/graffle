@@ -1,4 +1,4 @@
-import type { Schema as $Schema } from '../../$.js'
+import type { Schema as $Schema } from '../../_.js'
 
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObjectNested}.

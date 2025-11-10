@@ -2,7 +2,7 @@
  * This example shows how to write batches of GraphQL root fields (aka. entrypoints) in the TypeScript interface.
  */
 
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 import { showJson } from '../$/helpers.js'
 
 const pokemon = Graffle.create()

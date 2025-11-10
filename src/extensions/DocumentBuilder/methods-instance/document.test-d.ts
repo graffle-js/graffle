@@ -1,6 +1,6 @@
-import { MutationOnly } from '#test/schema/mutation-only/client/$.js'
-import { Possible } from '#test/schema/possible/client/$.js'
-import { QueryOnly } from '#test/schema/query-only/client/$.js'
+import { MutationOnly } from '#test/schema/mutation-only/client/_.js'
+import { Possible } from '#test/schema/possible/client/_.js'
+import { QueryOnly } from '#test/schema/query-only/client/_.js'
 import { Ts } from '@wollybeard/kit'
 import { test } from 'vitest'
 

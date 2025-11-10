@@ -1,5 +1,5 @@
-import type { Bar } from '../objects/Bar/$.js'
-import type { Foo } from '../objects/Foo/$.js'
+import type { Bar } from '../objects/Bar/_.js'
+import type { Foo } from '../objects/Foo/_.js'
 
 /**
  * GraphQL {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.

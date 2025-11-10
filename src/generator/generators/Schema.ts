@@ -78,7 +78,7 @@ import { getTsDocContents, renderInlineType, renderName } from '../helpers/rende
 //   return resultType
 // }
 export const ModuleGeneratorSchema = {
-  name: `schema/$`,
+  name: `schema/_`,
   generate: (config: Config): GeneratedModule[] => {
     const modules: GeneratedModule[] = []
     const kindMap = config.schema.kindMap.list
@@ -118,10 +118,10 @@ export const ModuleGeneratorSchema = {
       modules.push(...generateTypeModule(config, iface, 'interfaces'))
     }
 
-    // Generate schema/$$.ts (main module with re-exports)
+    // Generate schema/__.ts (main module with re-exports)
     modules.push(generateSchemaBarrelModule(config, kindMap))
 
-    // Generate schema/$.ts (namespace export + Schema interface)
+    // Generate schema/_.ts (namespace export + Schema interface)
     modules.push(generateSchemaNamespaceModule(config, kindMap))
 
     return modules
@@ -243,7 +243,7 @@ const generateUnionModule = (
     // Determine which directory the member is in
     const isRoot = config.schema.kindMap.list.Root.some(r => r.name === member.name)
     const dir = isRoot ? 'roots' : 'objects'
-    code(codeImportNamed(config, { names: member.name, from: `../${dir}/${member.name}/$`, type: true }))
+    code(codeImportNamed(config, { names: member.name, from: `../${dir}/${member.name}/_`, type: true }))
   }
   code``
   code.interface({
@@ -429,7 +429,7 @@ const generateInputObjectModule = (
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/fields.ts`)
     fieldsCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
-  fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
+  fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../_', type: true }))
   fieldsCode``
 
   // Generate field interfaces
@@ -458,10 +458,10 @@ const generateInputObjectModule = (
     content: fieldsCode.build(),
   })
 
-  // Generate $.ts (namespace export + interface)
+  // Generate _.ts (namespace export + interface)
   const namespaceCode = Str.Code.TS.builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
-    const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/$.ts`)
+    const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/_.ts`)
     namespaceCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
@@ -503,8 +503,8 @@ const generateInputObjectModule = (
   })
 
   modules.push({
-    name: `schema/input-objects/${inputObject.name}/$`,
-    filePath: `schema/input-objects/${inputObject.name}/$.ts`,
+    name: `schema/input-objects/${inputObject.name}/_`,
+    filePath: `schema/input-objects/${inputObject.name}/_.ts`,
     content: namespaceCode.build(),
   })
 
@@ -516,14 +516,14 @@ const generateSchemaNamespaceModule = (
   kindMap: GraphqlKit.Schema.Kind.KindMap['list'],
 ): GeneratedModule => {
   const code = Str.Code.TS.builder()
-  const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
+  const utilitiesPath = getUtilitiesPath(config, `schema/_.ts`)
 
   code(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   code(Str.Code.TS.importAll({ from: buildImportPath(config, '..', 'data'), as: '$$Data' }))
   code(Str.Code.TS.importAll({ from: buildImportPath(config, '..', 'scalar'), as: '$$Scalar' }))
-  code(Str.Code.TS.importAll({ from: buildImportPath(config, '.', '$$'), as: '$Types' }))
+  code(Str.Code.TS.importAll({ from: buildImportPath(config, '.', '__'), as: '$Types' }))
   code``
-  code(codeReexportNamespace(config, { as: 'Schema', from: './$$' }))
+  code(codeReexportNamespace(config, { as: 'Schema', from: './__' }))
   code``
 
   // Generate Schema interface here to avoid name conflict
@@ -588,8 +588,8 @@ const generateSchemaNamespaceModule = (
   })
 
   return {
-    name: `schema/$`,
-    filePath: `schema/$.ts`,
+    name: `schema/_`,
+    filePath: `schema/_.ts`,
     content: code.build(),
   }
 }
@@ -602,17 +602,17 @@ const generateSchemaBarrelModule = (
 
   // Re-export roots
   for (const type of kindMap.Root) {
-    code(codeReexportAll(config, { from: `./roots/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./roots/${type.name}/_`, type: true }))
   }
 
   // Re-export objects
   for (const type of kindMap.OutputObject) {
-    code(codeReexportAll(config, { from: `./objects/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./objects/${type.name}/_`, type: true }))
   }
 
   // Re-export interfaces
   for (const type of kindMap.Interface) {
-    code(codeReexportAll(config, { from: `./interfaces/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./interfaces/${type.name}/_`, type: true }))
   }
 
   // Re-export scalars
@@ -637,13 +637,13 @@ const generateSchemaBarrelModule = (
 
   // Re-export input objects
   for (const type of kindMap.InputObject) {
-    code(codeReexportAll(config, { from: `./input-objects/${type.name}/$`, type: true }))
+    code(codeReexportAll(config, { from: `./input-objects/${type.name}/_`, type: true }))
   }
   code``
 
   return {
-    name: `schema/$$`,
-    filePath: `schema/$$.ts`,
+    name: `schema/__`,
+    filePath: `schema/__.ts`,
     content: code.build(),
   }
 }
@@ -953,7 +953,7 @@ const generateTypeModule = (
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/fields.ts`)
     fieldsCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
-  fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
+  fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../_', type: true }))
   fieldsCode``
 
   // __typename field
@@ -1014,10 +1014,10 @@ const generateTypeModule = (
     content: fieldsCode.build(),
   })
 
-  // Generate $.ts (namespace export + interface)
+  // Generate _.ts (namespace export + interface)
   const namespaceCode = Str.Code.TS.builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
-    const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/$.ts`)
+    const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/_.ts`)
     namespaceCode(Str.Code.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
   }
   namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
@@ -1031,7 +1031,7 @@ const generateTypeModule = (
     )
     if (implementors.length > 0) {
       // Import from barrel which is 2 levels up from schema/{kind}/{TypeName}/
-      namespaceCode(codeImportNamed(config, { names: implementors.map(_ => _.name), from: '../../$$', type: true }))
+      namespaceCode(codeImportNamed(config, { names: implementors.map(_ => _.name), from: '../../__', type: true }))
     }
   }
 
@@ -1099,8 +1099,8 @@ const generateTypeModule = (
   })
 
   modules.push({
-    name: `schema/${kind}/${type.name}/$`,
-    filePath: `schema/${kind}/${type.name}/$.ts`,
+    name: `schema/${kind}/${type.name}/_`,
+    filePath: `schema/${kind}/${type.name}/_.ts`,
     content: namespaceCode.build(),
   })
 

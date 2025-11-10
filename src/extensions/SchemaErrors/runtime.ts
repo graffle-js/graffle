@@ -2,8 +2,8 @@ import { Extension } from '#graffle/extension'
 import { normalizeRequestToNode } from '#src/lib/graphql-kit/request/__.js'
 import { Err, Rec, Str } from '@wollybeard/kit'
 
-import { Docpar } from '#src/docpar/_.js'
 // import type { GeneratedExtensions } from './global.js'
+import { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
 export const SchemaErrors = Extension
@@ -44,7 +44,7 @@ export const SchemaErrors = Extension
       if (!Str.Type.is(__typename)) continue
 
       const sddmNode = sddm.outputTypes[__typename]
-      const isErrorObject = Docpar.SchemaDrivenDataMap.isOutputObject(sddmNode)
+      const isErrorObject = GraphqlKit.Schema.SchemaDrivenDataMap.isOutputObject(sddmNode)
         && Boolean(sddmNode.extensions?.isErrorObject)
       if (!isErrorObject) continue
 

@@ -12,7 +12,7 @@ import './graffle/modules/global.js'
 import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
 import { OpenTelemetry } from 'graffle/extensions/opentelemetry'
-import { Graffle } from './graffle/$.js'
+import { Graffle } from './graffle/_.js'
 
 // Setup Opentelemetry
 // 1. Initialize the OpenTelemetry provider

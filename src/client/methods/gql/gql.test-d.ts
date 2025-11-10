@@ -1,9 +1,8 @@
-import { Docpar } from '#src/docpar/_.js'
 import { Graffle } from '#src/exports/index.js'
-import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-const $ = Docpar.Var.$
-import { Possible } from '#test/schema/possible/client/$.js'
+const $ = GraphqlKit.Document.Var.$
+import { Possible } from '#test/schema/possible/client/_.js'
 import { Ts } from '@wollybeard/kit'
 
 const client = Possible.create()

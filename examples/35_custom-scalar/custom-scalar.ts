@@ -3,7 +3,7 @@
  * have arguments and data automatically encoded and decoded respectively.
  */
 
-import { Graffle } from '../$/graffle/$.js'
+import { Graffle } from '../$/graffle/_.js'
 import { show } from '../$/helpers.js'
 
 const graffle = Graffle

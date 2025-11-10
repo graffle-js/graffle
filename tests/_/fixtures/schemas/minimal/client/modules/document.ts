@@ -3,10 +3,10 @@ import { GraphqlKit } from '#graffle/utilities-for-generated'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
 import type * as SchemaMap from './schema-driven-data-map.js'
-import type * as SelectionSets from './selection-sets/$.js'
+import type * as SelectionSets from './selection-sets/_.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $$Schema from './schema/$.js'
+import type * as $$Schema from './schema/_.js'
 
 /**
  * Context for static document type inference.
@@ -55,16 +55,16 @@ interface StaticDocumentContext {
  */
 
 export interface QueryBuilder {
-  $batch: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>>(
+  $batch: <const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
     selection: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<$SelectionSet, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
+      GraphqlKit.Document.Object.Var.InferFromQuery<$SelectionSet, SchemaMap.SchemaDrivenDataMap>
     >,
     true
   >
@@ -85,16 +85,16 @@ export interface QueryBuilder {
    * const doc = query.id1()
    * ```
    */
-  id1: <const $SelectionSet extends SelectionSets.Query<$$Utilities.Docpar.Object.Select.StaticBuilderContext>['id1']>(
+  id1: <const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>['id1']>(
     selection?: $SelectionSet,
   ) => GraphqlKit.Document.Typed.String<
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.InferResult.OperationQuery<{ id1: $SelectionSet }, $$Schema.Schema>
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ id1: $SelectionSet }, $$Schema.Schema>
     >,
     $$Utilities.RequestResult.Simplify<
       StaticDocumentContext,
-      $$Utilities.Docpar.Object.Var.InferFromQuery<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
         { id1: Exclude<$SelectionSet, undefined> },
         SchemaMap.SchemaDrivenDataMap
       >

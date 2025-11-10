@@ -1,6 +1,6 @@
 import { Graffle } from '#graffle'
 import { test } from '#test/helpers'
-import { Possible } from '#test/schema/possible/client/$.js'
+import { Possible } from '#test/schema/possible/client/_.js'
 import { describe, expect } from 'vitest'
 import { Throws } from '../Throws/Throws.js'
 import { DocumentBuilder } from './DocumentBuilder.js'

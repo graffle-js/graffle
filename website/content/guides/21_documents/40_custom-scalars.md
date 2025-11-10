@@ -22,7 +22,7 @@ pnpm graffle generate --schema ...
 Then you augment your Graffle instance with the SDDM, and finally register your scalars:
 
 ```ts
-import { schemaMap } from './graffle/$.js'
+import { schemaMap } from './graffle/_.js'
 
 const graffle = Graffle
   .create({ schemaMap })
@@ -63,7 +63,7 @@ You can give the Graffle generator access to your scalar definitions. This is sl
    - **Recommended**: Take advantage of the generated constructor which has some properties prefilled for you. We are able to omit registering the custom scalars as well as passing the schema map.
 
      ```ts
-     import { Graffle } from './graffle/$.js'
+     import { Graffle } from './graffle/_.js'
 
      const graffle = Graffle.create()
      ```
@@ -71,7 +71,7 @@ You can give the Graffle generator access to your scalar definitions. This is sl
    - Technically you can also keep it as it was before. Just import your scalar definitions now instead of having them inline:
 
      ```ts
-     import { schemaMap } from './graffle/$.js'
+     import { schemaMap } from './graffle/_.js'
      import { Date } from './scalars.js'
 
      const graffle = Graffle
