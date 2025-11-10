@@ -71,16 +71,9 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
   const fetcher = createFetcher(config.method)
   const fetchResponse = await fetcher(config)
 
-  if (!fetchResponse.ok) {
-    return new ClientError(
-      { status: fetchResponse.status, headers: fetchResponse.headers },
-      {
-        query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
-        variables: input.request.variables,
-      },
-    )
-  }
-
+  // Parse response body FIRST, regardless of HTTP status
+  // This allows GraphQL errors to be extracted even when HTTP status is 4xx/5xx
+  // Fixes regression from v6 to v7 where 4xx responses lost GraphQL error details
   const result = await parseResultFromResponse(
     fetchResponse,
     input.fetchOptions.jsonSerializer ?? defaultJsonSerializer,
@@ -91,6 +84,21 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
   const clientResponseBase = {
     status: fetchResponse.status,
     headers: fetchResponse.headers,
+  }
+
+  // Handle non-2xx HTTP status codes WITH parsed GraphQL response
+  if (!fetchResponse.ok) {
+    const clientResponse = result._tag === `Batch`
+      ? { ...result.executionResults, ...clientResponseBase }
+      : {
+        ...result.executionResult,
+        ...clientResponseBase,
+      }
+    // @ts-expect-error todo
+    return new ClientError(clientResponse, {
+      query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
+      variables: input.request.variables,
+    })
   }
 
   if (isRequestResultHaveErrors(result) && config.fetchOptions.errorPolicy === `none`) {
