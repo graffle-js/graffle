@@ -76,8 +76,8 @@ Test.on(SchemaDrivenDataMap.mapVariablesByTypeNames)
   .test()
 
 Test.describe('immutable mode')
-  .inputType<GraphqlKit.Request.Variables>()
-  .outputType<GraphqlKit.Request.Variables>()
+  .inputType<Request.Variables>()
+  .outputType<Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )
@@ -99,8 +99,8 @@ Test.describe('immutable mode')
   })
 
 Test.describe('mutable mode')
-  .inputType<GraphqlKit.Request.Variables>()
-  .outputType<GraphqlKit.Request.Variables>()
+  .inputType<Request.Variables>()
+  .outputType<Request.Variables>()
   .cases(
     [{ file: new Blob([`test`]) }, { file: null }],
   )
