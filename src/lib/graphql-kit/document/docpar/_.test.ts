@@ -1,7 +1,7 @@
 import { Test } from '@wollybeard/kit/test'
 import { expect, test } from 'vitest'
-import { Document } from '../_.js'
 import { Schema } from '../../schema/_.js'
+import { Document } from '../_.js'
 import { Var } from './object/var/_.js'
 
 const $ = Var.$

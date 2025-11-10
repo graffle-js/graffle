@@ -1,8 +1,8 @@
-import { Select } from '../select/_.js'
-import { Schema } from '../../../../schema/_.js'
 import { Request } from '../../../../request/_.js'
+import { Schema } from '../../../../schema/_.js'
 import { Ast } from '../../../ast/_.js'
 import type { ObjectParserContext } from '../context.js'
+import { Select } from '../select/_.js'
 
 /**
  * Provenance of a hoisted variable, indicating how it was extracted.

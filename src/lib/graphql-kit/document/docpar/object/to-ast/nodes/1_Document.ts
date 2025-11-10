@@ -1,6 +1,6 @@
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
-import { Document } from '../../../../_.js'
 import { Request } from '../../../../../request/_.js'
+import { Document } from '../../../../_.js'
 import type { ObjectParserContext } from '../../context.js'
 import { toAstOperationDefinition } from './2_OperationDefinition.js'
 

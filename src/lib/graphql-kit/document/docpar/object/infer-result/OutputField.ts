@@ -1,6 +1,6 @@
-import type { Type } from '../../../../schema/type/_.js'
 import type { Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../../../schema/sddm/InlineType.js'
+import type { Type } from '../../../../schema/type/_.js'
 import type { Interface } from './Interface.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 import type { Union } from './Union.js'

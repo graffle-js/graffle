@@ -1,7 +1,7 @@
-import type { Type } from '../../../schema/type/_.js'
 import { Codec } from '#src/types/Codec/_.js'
 import type { Num, Str, Ts } from '@wollybeard/kit'
 import type { InlineType } from '../../../schema/sddm/InlineType.js'
+import type { Type } from '../../../schema/type/_.js'
 import type { Core } from '../core/_.js'
 
 // ============================================================================
@@ -287,8 +287,7 @@ type MapGraphQLType<$TypeName extends string, $Schema extends Type | undefined> 
     // Look up custom scalars from schema
     : $Schema extends Type
       ? $TypeName extends keyof $Schema['scalars']
-        ? $Schema['scalars'][$TypeName] extends Type.Scalar
-          ? Codec.GetDecoded<$Schema['scalars'][$TypeName]['codec']>
+        ? $Schema['scalars'][$TypeName] extends Type.Scalar ? Codec.GetDecoded<$Schema['scalars'][$TypeName]['codec']>
         : unknown
       : unknown // Input types or unknown scalars
     : unknown // Schema-less mode - no custom scalar mapping
@@ -481,8 +480,7 @@ type ParseFieldWithNestedSelection<
  * Handles UnknownScalar for schema-less mode.
  */
 type ResolveNamedType<$Type, $Schema extends Type | undefined> = $Type extends UnknownScalar ? unknown
-  : [Type.ResolveLeafType<$Schema, $Type>] extends [never]
-    ? $Type extends Type.OutputObject ? $Type // Objects need nested selection
+  : [Type.ResolveLeafType<$Schema, $Type>] extends [never] ? $Type extends Type.OutputObject ? $Type // Objects need nested selection
     : $Type extends { kind: 'Interface' } ? $Type
     : $Type extends { kind: 'Union' } ? $Type
     : unknown

@@ -1,6 +1,6 @@
 import type { RequestResult } from '#src/types/RequestResult/_.js'
-import type { Schema } from '../../../schema/_.js'
 import type { Ts } from '@wollybeard/kit'
+import type { Schema } from '../../../schema/_.js'
 import type { SchemaDrivenDataMap } from '../../../schema/sddm/_.js'
 import type { Core } from '../core/_.js'
 import type { ObjectParserContext } from './context.js'

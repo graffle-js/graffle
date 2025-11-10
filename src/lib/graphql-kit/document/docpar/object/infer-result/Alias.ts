@@ -1,6 +1,6 @@
-import type { Type } from '../../../../schema/type/_.js'
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
 import { Obj, Tup } from '@wollybeard/kit'
+import type { Type } from '../../../../schema/type/_.js'
 import type { OutputField } from './OutputField.js'
 
 // dprint-ignore
