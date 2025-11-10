@@ -49,20 +49,20 @@ export const analyzeDocument = (
   /**
    * Normalize boxed String objects to primitive strings for compatibility with TypedDocumentString.
    *
-   * Problem: @graphql-codegen with `documentMode: 'string'` generates a TypedDocumentString class that
+   * Problem: \@graphql-codegen with `documentMode: 'string'` generates a TypedDocumentString class that
    * extends the built-in String class, creating "boxed String" instances:
    *
    * @see https://github.com/dotansimha/graphql-code-generator/blob/c87b779b9b400813d733fa89dcb16724b30c6d16/packages/plugins/typescript/typed-document-node/src/index.ts#L40-L57
    *
-   *   class TypedDocumentString<TResult, TVariables> extends String {
-   *     constructor(value: string) {
-   *       super(value)  // Creates a boxed String object, not a primitive string
-   *     }
-   *   }
+   * ```
+   * class TypedDocumentString<TResult, TVariables> extends String
+   *   constructor(value: string)
+   *     super(value)  // Creates a boxed String object, not a primitive string
+   * ```
    *
    * Boxed Strings are objects, not primitives:
-   *   typeof "hello" === "string"              // true  ✓
-   *   typeof new String("hello") === "string"  // false ✗ (returns "object")
+   * - `typeof "hello" === "string"` returns true
+   * - `typeof new String("hello") === "string"` returns false (returns "object")
    *
    * Without normalization, TypedDocumentString instances would fail the `typeof === 'string'` check
    * and incorrectly be passed to `print()`, which expects a DocumentNode AST, causing a crash.
@@ -70,13 +70,13 @@ export const analyzeDocument = (
    * Solution: Detect and convert boxed Strings to primitives using template literal coercion.
    * - Primitive strings pass through (typeof === "string")
    * - DocumentNode objects pass through (have .kind property)
-   * - Boxed Strings get converted to primitives (`${boxedString}` → primitive string)
+   * - Boxed Strings get converted to primitives (template literal to primitive string)
    *
    * @see https://github.com/graffle-js/graffle/issues/1453
    */
-  const normalizedDocument = typeof document === `string` || (document as DocumentNode).kind
+  const normalizedDocument = typeof document === `string` || `kind` in document
     ? document
-    : `${document}`
+    : String(document)
 
   const expression = typeof normalizedDocument === `string` ? normalizedDocument : print(normalizedDocument)
 
@@ -87,7 +87,9 @@ export const analyzeDocument = (
     return { expression, isMutation, operationName }
   }
 
-  const docNode = tryCatch(() => (typeof normalizedDocument === `string` ? parse(normalizedDocument) : normalizedDocument))
+  const docNode = tryCatch(
+    () => (typeof normalizedDocument === `string` ? parse(normalizedDocument) : normalizedDocument),
+  )
   if (docNode instanceof Error) {
     return { expression, isMutation, operationName }
   }
