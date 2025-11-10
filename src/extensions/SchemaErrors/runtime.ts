@@ -44,7 +44,8 @@ export const SchemaErrors = Extension
       if (!Str.Type.is(__typename)) continue
 
       const sddmNode = sddm.outputTypes[__typename]
-      const isErrorObject = Docpar.SchemaDrivenDataMap.isOutputObject(sddmNode) && Boolean(sddmNode.extensions?.e)
+      const isErrorObject = Docpar.SchemaDrivenDataMap.isOutputObject(sddmNode)
+        && Boolean(sddmNode.extensions?.isErrorObject)
       if (!isErrorObject) continue
 
       // todo extract message

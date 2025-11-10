@@ -10,12 +10,12 @@ declare global {
     namespace LIBRARY_GRAPHQL_KIT {
       interface OutputObject {
         /** Error object flag - 1 if this is an error type */
-        e?: 1
+        isErrorObject?: 1
       }
 
       interface OutputField {
         /** Result union flag - 1 if this field returns a union containing error types */
-        r?: 1
+        isResultField?: 1
       }
     }
   }
@@ -51,9 +51,9 @@ export const SchemaErrors = (input?: Input) => {
         const errorObjects = getErrorObjects(config, genConfig)
 
         if (errorObjects.find(_ => _.name === graphqlType.name)) {
-          const extenssions = (sddmNode['extensions'] ?? {}) as Record<'e', number>
+          const extenssions = (sddmNode['extensions'] ?? {}) as Record<'isErrorObject', number>
           sddmNode['extensions'] ??= extenssions
-          extenssions.e = 1
+          extenssions.isErrorObject = 1
         }
       },
       onOutputField: ({ config: genConfig, sddmNode, graphqlType }) => {
@@ -64,9 +64,9 @@ export const SchemaErrors = (input?: Input) => {
           : null
 
         if (memberTypes && errorObjects.find(_ => memberTypes.find(__ => __.name === _.name))) {
-          const extenssions = (sddmNode.$fields['extensions'] ?? {}) as Record<'r', number>
+          const extenssions = (sddmNode.$fields['extensions'] ?? {}) as Record<'isResultField', number>
           sddmNode.$fields['extensions'] ??= extenssions
-          extenssions.r = 1
+          extenssions.isResultField = 1
         }
       },
     },

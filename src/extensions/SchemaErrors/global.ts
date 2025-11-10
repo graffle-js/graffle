@@ -12,13 +12,13 @@ declare global {
         /**
          * Is this output object an error object?
          */
-        e?: 1
+        isErrorObject?: 1
       }
       interface OutputField {
         /**
          * Is this output field a result field?
          */
-        r?: 1
+        isResultField?: 1
       }
     }
   }

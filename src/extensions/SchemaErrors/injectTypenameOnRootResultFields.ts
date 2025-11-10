@@ -26,7 +26,9 @@ const injectTypenameOnRootResultFields_ = (
   for (const selection of selectionSet.selections) {
     switch (selection.kind) {
       case GraphqlKit.Document.Ast.Kind.FIELD: {
-        const isResultField = Boolean(sddm.operations[operationType]?.fields[selection.name.value]?.extensions?.r)
+        const isResultField = Boolean(
+          sddm.operations[operationType]?.fields[selection.name.value]?.extensions?.isResultField,
+        )
 
         if (isResultField) {
           if (selection.selectionSet === undefined) {

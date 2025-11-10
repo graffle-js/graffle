@@ -187,7 +187,7 @@ interface ErrorOne extends $$Utilities.SchemaDrivenDataMap.OutputObject {
       readonly _tag: 'outputField'
     }
   }
-  readonly extensions: { 'e': 1 }
+  readonly extensions: { 'isErrorObject': 1 }
 }
 
 interface ErrorTwo extends $$Utilities.SchemaDrivenDataMap.OutputObject {
@@ -200,7 +200,7 @@ interface ErrorTwo extends $$Utilities.SchemaDrivenDataMap.OutputObject {
       readonly _tag: 'outputField'
     }
   }
-  readonly extensions: { 'e': 1 }
+  readonly extensions: { 'isErrorObject': 1 }
 }
 
 interface Foo extends $$Utilities.SchemaDrivenDataMap.OutputObject {
@@ -828,7 +828,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         case: Case['type']
       }
       readonly namedType: Result
-      readonly extensions: { 'r': 1 }
+      readonly extensions: { 'isResultField': 1 }
     }
     readonly resultNonNull: {
       readonly _tag: 'outputField'
@@ -843,7 +843,7 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         case?: Case['type'] | null | undefined
       }
       readonly namedType: Result
-      readonly extensions: { 'r': 1 }
+      readonly extensions: { 'isResultField': 1 }
     }
     readonly string: {
       readonly _tag: 'outputField'
@@ -1278,7 +1278,7 @@ const DateObject2: DateObject2 = {
 const ErrorOne: ErrorOne = {
   _tag: 'outputObject',
   extensions: {
-    e: 1,
+    isErrorObject: 1,
   },
   fields: {
     infoId: {
@@ -1293,7 +1293,7 @@ const ErrorOne: ErrorOne = {
 const ErrorTwo: ErrorTwo = {
   _tag: 'outputObject',
   extensions: {
-    e: 1,
+    isErrorObject: 1,
   },
   fields: {
     infoInt: {
@@ -1983,7 +1983,7 @@ const Query: Query = {
         case: null as any as Case['type'],
       },
       extensions: {
-        r: 1,
+        isResultField: 1,
       },
       namedType: null as any as Result,
     },
@@ -2000,7 +2000,7 @@ const Query: Query = {
         case: null as any as Case['type'] | null | undefined,
       },
       extensions: {
-        r: 1,
+        isResultField: 1,
       },
       namedType: null as any as Result,
     },
