@@ -50,7 +50,7 @@ export type Parse<
  * type Op = InferOperation<
  *   { id: true, name: true },
  *   MyContext,
- *   GraphqlKit.Schema.OperationType.QUERY,
+ *   Schema.OperationType.QUERY,
  *   'getUser'
  * >
  * // Result: Operation<'getUser', { id: string, name: string }, {}>

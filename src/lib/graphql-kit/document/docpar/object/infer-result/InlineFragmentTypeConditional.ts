@@ -10,7 +10,7 @@ export type InlineFragmentTypeConditional<
   $Schema,
 > =
   $Node extends any // force distribution
-    // ? $Node extends GraphqlKit.Schema.Type.Interface
+    // ? $Node extends Schema.Type.Interface
     //   ? {
     //       debug: Obj.GetKeyOr<
     //         $SelectionSet,

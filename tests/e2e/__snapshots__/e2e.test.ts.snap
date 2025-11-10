@@ -37,13 +37,6 @@ To enable it:
      }
    }
 
-3. Enable SDL output in graffle.config.ts to satisfy the schema requirement:
-
-   export default {
-     schema: '...',
-     outputSDL: true
-   }
-
 Documentation:
 - https://github.com/0no-co/GraphQLSP
 
