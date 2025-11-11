@@ -146,8 +146,20 @@ const parseResultFromResponse = async (response: Response, jsonSerializer: JsonS
   if (contentType && isGraphQLContentType(contentType)) {
     return parseGraphQLExecutionResult(jsonSerializer.parse(text))
   } else {
-    // todo what is this good for...? Seems very random/undefined
-    return parseGraphQLExecutionResult(text)
+    // Some servers omit Content-Type header but still return valid JSON
+    // Try parsing as JSON anyway before failing
+    try {
+      const parsed = jsonSerializer.parse(text)
+      return parseGraphQLExecutionResult(parsed)
+    } catch {
+      // Not valid JSON - return descriptive error
+      const preview = text.length > 500 ? `${text.slice(0, 500)}...` : text
+      return new Error(
+        `Response has unsupported content-type: ${contentType || 'none'}. ` +
+        `Expected 'application/json' or 'application/graphql-response+json'. ` +
+        `Response body preview: ${preview}`
+      )
+    }
   }
 }
 
