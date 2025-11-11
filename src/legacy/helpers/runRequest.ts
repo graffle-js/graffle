@@ -155,9 +155,9 @@ const parseResultFromResponse = async (response: Response, jsonSerializer: JsonS
       // Not valid JSON - return descriptive error
       const preview = text.length > 500 ? `${text.slice(0, 500)}...` : text
       return new Error(
-        `Response has unsupported content-type: ${contentType || 'none'}. ` +
-        `Expected 'application/json' or 'application/graphql-response+json'. ` +
-        `Response body preview: ${preview}`
+        `Response has unsupported content-type: ${contentType || `none`}. `
+          + `Expected 'application/json' or 'application/graphql-response+json'. `
+          + `Response body preview: ${preview}`,
       )
     }
   }

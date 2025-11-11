@@ -159,7 +159,8 @@ describe(`HTTP 4xx/5xx status codes with GraphQL response body`, () => {
 
 describe(`HTTP 4xx/5xx status codes with non-JSON response body`, () => {
   test(`502 with HTML error page - should handle gracefully with descriptive error`, async () => {
-    const htmlResponse = `<html><head><title>502 Bad Gateway</title></head><body><h1>502 Bad Gateway</h1><p>nginx/1.18.0</p></body></html>`
+    const htmlResponse =
+      `<html><head><title>502 Bad Gateway</title></head><body><h1>502 Bad Gateway</h1><p>nginx/1.18.0</p></body></html>`
 
     // Setup mock to return 502 with HTML (typical load balancer error)
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
