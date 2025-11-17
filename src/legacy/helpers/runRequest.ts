@@ -71,27 +71,54 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
   const fetcher = createFetcher(config.method)
   const fetchResponse = await fetcher(config)
 
-  if (!fetchResponse.ok) {
-    return new ClientError(
-      { status: fetchResponse.status, headers: fetchResponse.headers },
-      {
-        query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
-        variables: input.request.variables,
-      },
+  // Parse response body FIRST, regardless of HTTP status
+  // This allows GraphQL errors to be extracted even when HTTP status is 4xx/5xx (fixes #1281)
+  let result
+  try {
+    result = await parseResultFromResponse(
+      fetchResponse,
+      input.fetchOptions.jsonSerializer ?? defaultJsonSerializer,
     )
+  } catch (error) {
+    // If parsing fails, we'll handle it below based on HTTP status
+    result = error as Error
   }
-
-  const result = await parseResultFromResponse(
-    fetchResponse,
-    input.fetchOptions.jsonSerializer ?? defaultJsonSerializer,
-  )
-
-  if (result instanceof Error) throw result // todo something better
 
   const clientResponseBase = {
     status: fetchResponse.status,
     headers: fetchResponse.headers,
   }
+
+  // Handle non-2xx HTTP status codes
+  if (!fetchResponse.ok) {
+    if (result instanceof Error) {
+      // Parse failed - return ClientError without GraphQL data
+      // Still returns ClientError (not generic Error) to allow status code access
+      return new ClientError(
+        { ...clientResponseBase },
+        {
+          query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
+          variables: input.request.variables,
+        },
+      )
+    }
+
+    // Parse succeeded - return ClientError WITH GraphQL errors/data (fixes #1281)
+    const clientResponse = result._tag === `Batch`
+      ? { ...result.executionResults, ...clientResponseBase }
+      : {
+        ...result.executionResult,
+        ...clientResponseBase,
+      }
+    // @ts-expect-error todo
+    return new ClientError(clientResponse, {
+      query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
+      variables: input.request.variables,
+    })
+  }
+
+  // For 2xx responses, parse errors should throw
+  if (result instanceof Error) throw result
 
   if (isRequestResultHaveErrors(result) && config.fetchOptions.errorPolicy === `none`) {
     // todo this client response on error is not consistent with the data type for success
