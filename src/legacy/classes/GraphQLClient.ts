@@ -6,7 +6,12 @@ import { parseRawRequestArgs } from '../functions/rawRequest.js'
 import { parseRequestArgs } from '../functions/request.js'
 import { analyzeDocument } from '../helpers/analyzeDocument.js'
 import { runRequest } from '../helpers/runRequest.js'
-import type { RequestDocument, RequestOptions, VariablesAndRequestHeadersArgs } from '../helpers/types.js'
+import type {
+  RequestDocument,
+  RequestOptions,
+  TypedDocumentString,
+  VariablesAndRequestHeadersArgs,
+} from '../helpers/types.js'
 import {
   type GraphQLClientResponse,
   type RawRequestOptions,
@@ -93,12 +98,13 @@ export class GraphQLClient {
    * Send a GraphQL document to the server.
    */
   // dprint-ignore
-  async request<T = any, V extends Variables = Variables>(document: RequestDocument | TypedDocumentNode<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T>
+  async request<T = any, V extends Variables = Variables>(document: RequestDocument | TypedDocumentNode<T, V> | TypedDocumentString<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T>
   async request<T = any, V extends Variables = Variables>(options: RequestOptions<V, T>): Promise<T>
   async request<T = any, V extends Variables = Variables>(
     documentOrOptions:
       | RequestDocument
       | TypedDocumentNode<T, V>
+      | TypedDocumentString<T, V>
       | RequestOptions<V>,
     ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>
   ): Promise<T> {
