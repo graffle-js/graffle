@@ -1,6 +1,12 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { GraphQLClient } from '../classes/GraphQLClient.js'
-import type { RequestDocument, RequestOptions, Variables, VariablesAndRequestHeadersArgs } from '../helpers/types.js'
+import type {
+  RequestDocument,
+  RequestOptions,
+  TypedDocumentString,
+  Variables,
+  VariablesAndRequestHeadersArgs,
+} from '../helpers/types.js'
 
 /**
  * Send a GraphQL Document to the GraphQL server for execution.
@@ -42,10 +48,10 @@ import type { RequestDocument, RequestOptions, Variables, VariablesAndRequestHea
 // dprint-ignore
 export async function request<T = any, V extends Variables = Variables>(options: RequestExtendedOptions<V, T>): Promise<T>
 // dprint-ignore
-export async function request<T = any, V extends Variables = Variables>(url: string, document: RequestDocument | TypedDocumentNode<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T>
+export async function request<T = any, V extends Variables = Variables>(url: string, document: RequestDocument | TypedDocumentNode<T, V> | TypedDocumentString<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T>
 // dprint-ignore
 // eslint-disable-next-line
-export async function request<T = any, V extends Variables = Variables>(urlOrOptions: string | RequestExtendedOptions<V, T>, document?: RequestDocument | TypedDocumentNode<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T> {
+export async function request<T = any, V extends Variables = Variables>(urlOrOptions: string | RequestExtendedOptions<V, T>, document?: RequestDocument | TypedDocumentNode<T, V> | TypedDocumentString<T, V>, ...variablesAndRequestHeaders: VariablesAndRequestHeadersArgs<V>): Promise<T> {
   const requestOptions = parseRequestExtendedArgs<V>(urlOrOptions, document, ...variablesAndRequestHeaders)
   const client = new GraphQLClient(requestOptions.url)
   return client.request<T, V>({

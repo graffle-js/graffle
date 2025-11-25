@@ -7,7 +7,13 @@ import {
 import type { RequestExtendedOptions } from '../legacy/functions/request.js'
 import { request } from '../legacy/functions/request.js'
 import type { GraphQLResponse, RequestMiddleware, ResponseMiddleware } from '../legacy/helpers/types.js'
-import type { RawRequestOptions, RequestDocument, RequestOptions, Variables } from '../legacy/helpers/types.js'
+import type {
+  RawRequestOptions,
+  RequestDocument,
+  RequestOptions,
+  TypedDocumentString,
+  Variables,
+} from '../legacy/helpers/types.js'
 export { GraphQLClient } from '../legacy/classes/GraphQLClient.js'
 export { batchRequests } from '../legacy/functions/batchRequests.js'
 export { gql } from '../legacy/functions/gql.js'
@@ -26,6 +32,7 @@ export {
   RequestMiddleware,
   type RequestOptions,
   ResponseMiddleware,
+  type TypedDocumentString,
   type Variables,
 }
 export default request
