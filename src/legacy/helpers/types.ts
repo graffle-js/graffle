@@ -48,6 +48,7 @@ export interface GraphQLRequestContext<V extends Variables = Variables> {
   variables?: V
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types -- String (boxed) is intentional for TypedDocumentString compatibility
 export type RequestDocument = string | String | DocumentNode
 
 /**
@@ -55,6 +56,7 @@ export type RequestDocument = string | String | DocumentNode
  * It's a boxed String with type metadata for result and variables types.
  * @see https://github.com/graffle-js/graffle/issues/1467
  */
+// eslint-disable-next-line @typescript-eslint/ban-types -- String (boxed) matches graphql-codegen's TypedDocumentString which extends String
 export type TypedDocumentString<$Result, $Variables> = String & DocumentTypeDecoration<$Result, $Variables>
 
 export interface GraphQLClientResponse<Data> {
