@@ -1,0 +1,73 @@
+From a3a7e9b8fadd35b3d656ee5482176e0bf1102f56 Mon Sep 17 00:00:00 2001
+From: GitHub Copilot <copilot@github.com>
+Date: Wed, 3 Dec 2025 22:01:24 +0000
+Subject: [PATCH] Add 'as' to reserved TypeScript keywords
+
+The 'as' keyword is used for type assertions in TypeScript and should
+be escaped when used as an identifier. This fixes issues with enum
+values like the Assamese locale 'as' that would fail to generate
+valid TypeScript code.
+
+Fixes graffle-js/graffle#1470
+---
+ src/syn/ts/reserved.test.ts | 29 +++++++++++++++++++++++++++++
+ src/syn/ts/reserved.ts      |  3 ++-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 src/syn/ts/reserved.test.ts
+
+diff --git a/src/syn/ts/reserved.test.ts b/src/syn/ts/reserved.test.ts
+new file mode 100644
+index 0000000..4d8cb02
+--- /dev/null
++++ b/src/syn/ts/reserved.test.ts
+@@ -0,0 +1,29 @@
++import { describe, expect, test } from 'vitest'
++import { escapeReserved, reservedNames } from './reserved.js'
++
++describe('Reserved Keywords', () => {
++  test('reservedNames includes TypeScript `as` keyword', () => {
++    expect(reservedNames).toContain('as')
++  })
++
++  test('escapeReserved handles `as` keyword', () => {
++    expect(escapeReserved('as')).toBe('$as')
++  })
++
++  test('escapeReserved handles other reserved keywords', () => {
++    expect(escapeReserved('interface')).toBe('$interface')
++    expect(escapeReserved('class')).toBe('$class')
++    expect(escapeReserved('of')).toBe('$of')
++  })
++
++  test('escapeReserved does not escape non-reserved names', () => {
++    expect(escapeReserved('MyType')).toBe('MyType')
++    expect(escapeReserved('en')).toBe('en')
++    expect(escapeReserved('pt')).toBe('pt')
++  })
++
++  test('escapeReserved with custom prefix', () => {
++    expect(escapeReserved('as', { prefix: '_' })).toBe('_as')
++    expect(escapeReserved('interface', { prefix: '__' })).toBe('__interface')
++  })
++})
+diff --git a/src/syn/ts/reserved.ts b/src/syn/ts/reserved.ts
+index 77dcba2..cd1c72d 100644
+--- a/src/syn/ts/reserved.ts
++++ b/src/syn/ts/reserved.ts
+@@ -85,11 +85,12 @@ export const reservedTypeScriptTypeNames = [
+ 
+ /**
+  * Combined list of reserved names for general identifier checking (type and value contexts).
+- * Includes JavaScript keywords, TypeScript type names, and special iterator keyword.
++ * Includes JavaScript keywords, TypeScript type names, and special keywords.
+  */
+ export const reservedNames = [
+   ...reservedJavaScriptKeywords,
+   ...reservedTypeScriptTypeNames,
++  `as`, // Type assertion keyword
+   `of`, // Iterator keyword
+ ] as const
+ 
+-- 
+2.52.0
+
