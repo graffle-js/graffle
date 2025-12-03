@@ -3,6 +3,10 @@
 ## Issue Summary
 The issue occurs when a GraphQL schema contains an enum value that matches a TypeScript reserved keyword, specifically the `as` keyword used for Assamese locale codes. This causes the generated TypeScript code to be invalid.
 
+![Error Screenshot](https://github.com/user-attachments/assets/9e19bf11-a9e5-412a-8710-5af0b9188236)
+
+*Screenshot showing the TypeScript compilation error when `as` is used as a type name*
+
 ## Example Schema
 ```graphql
 enum Locale {
@@ -18,9 +22,9 @@ The `as` keyword was missing from the reserved keywords list in the `@wollybeard
 
 ## Solution
 
-### 1. Fix in `@wollybeard/kit` library
+### 1. Kit Library Changes
 
-The fix has been implemented in the kit repository at `/home/runner/work/kit`:
+The fix has been implemented in the kit repository (https://github.com/jasonkuhrt/kit):
 
 **File**: `src/syn/ts/reserved.ts`
 
