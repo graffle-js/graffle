@@ -1,0 +1,24 @@
+"""
+Test schema for locale enum with reserved keyword 'as'
+This tests the fix for the issue where enum value 'as' (Assamese locale)
+fails to generate valid TypeScript code.
+"""
+
+enum Locale {
+  """English"""
+  en
+  """Portuguese"""
+  pt
+  """Japanese"""
+  ja
+  """Assamese - uses TypeScript reserved keyword 'as'"""
+  as
+}
+
+type Query {
+  """Get the current locale"""
+  currentLocale: Locale!
+  
+  """Get a greeting in the specified locale"""
+  greeting(locale: Locale!): String!
+}
