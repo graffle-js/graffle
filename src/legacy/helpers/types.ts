@@ -40,6 +40,7 @@ export interface GraphQLResponse<T = unknown> {
   errors?: GraphQLError[]
   extensions?: unknown
   status: number
+  headers: Headers
   [key: string]: unknown
 }
 
