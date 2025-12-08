@@ -100,6 +100,7 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
           query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
           variables: input.request.variables,
         },
+        fetchResponse,
       )
     }
 
@@ -114,7 +115,7 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
     return new ClientError(clientResponse, {
       query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
       variables: input.request.variables,
-    })
+    }, fetchResponse)
   }
 
   // For 2xx responses, parse errors should throw
@@ -132,7 +133,7 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
     return new ClientError(clientResponse, {
       query: input.request._tag === `Single` ? input.request.document.expression : input.request.query,
       variables: input.request.variables,
-    })
+    }, fetchResponse)
   }
   switch (result._tag) {
     case `Single`:

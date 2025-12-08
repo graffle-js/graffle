@@ -3,8 +3,9 @@ import type { GraphQLRequestContext, GraphQLResponse } from '../helpers/types.js
 export class ClientError extends Error {
   public response: GraphQLResponse
   public request: GraphQLRequestContext
+  public originalResponse: Response
 
-  constructor(response: GraphQLResponse, request: GraphQLRequestContext) {
+  constructor(response: GraphQLResponse, request: GraphQLRequestContext, originalResponse: Response) {
     const message = `${ClientError.extractMessage(response)}: ${
       JSON.stringify({
         response,
@@ -18,6 +19,7 @@ export class ClientError extends Error {
 
     this.response = response
     this.request = request
+    this.originalResponse = originalResponse
 
     // this is needed as Safari doesn't support .captureStackTrace
     if (typeof Error.captureStackTrace === `function`) {
