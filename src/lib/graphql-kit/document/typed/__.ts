@@ -97,7 +97,22 @@ export const isString = <$TypedDocument extends TypedDocumentLike>(
   document: $TypedDocument,
 ): document is Exclude<$TypedDocument, TypedDocumentNode | TypedQueryDocumentNode> => typeof document === `string`
 
-export const unType = (document: TypedDocumentLike): string | DocumentNode => document as any
+/**
+ * Unwrap a typed document to its underlying `string` or `DocumentNode`.
+ *
+ * This also normalizes boxed String objects (e.g., `TypedDocumentString` from `@graphql-codegen`)
+ * to primitive strings. Boxed Strings extend `String` class, causing `typeof` to return `"object"`
+ * instead of `"string"`, which breaks `typeof === 'string'` checks.
+ *
+ * @see https://github.com/graffle-js/graffle/issues/1455
+ */
+export const unType = (document: TypedDocumentLike): string | DocumentNode => {
+  // Primitive strings and DocumentNode objects pass through unchanged.
+  // Boxed Strings (typeof === "object" but no .kind property) get coerced to primitives.
+  return typeof document === 'string' || (document as DocumentNode).kind
+    ? document as any
+    : `${document}`
+}
 
 // dprint-ignore
 export type ResultOf<$Document extends TypedDocumentLike> =
