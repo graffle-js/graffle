@@ -109,7 +109,7 @@ export const isString = <$TypedDocument extends TypedDocumentLike>(
 export const unType = (document: TypedDocumentLike): string | DocumentNode => {
   // Primitive strings and DocumentNode objects pass through unchanged.
   // Boxed Strings (typeof === "object" but no .kind property) get coerced to primitives.
-  return typeof document === 'string' || (document as DocumentNode).kind
+  return typeof document === 'string' || ('kind' in document)
     ? document as any
     : `${document}`
 }
