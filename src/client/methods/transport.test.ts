@@ -5,7 +5,7 @@ import {
 } from '#src/context/fragments/transports/fragment.js'
 import { ATransport, ATransportBuilder, BTransport } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { create } from '../client.js'
 
@@ -14,8 +14,8 @@ const g2 = create().transport(ATransport).transport(BTransport)
 
 describe(`starting state`, () => {
   test(`no transports registered`, ({ g0 }) => {
-    Ts.Assert.equiv.ofAs<ContextFragmentTransportsEmpty['transports']>().on(g0._.transports)
-    Ts.Assert.equiv.ofAs<
+    Assert.equiv.ofAs<ContextFragmentTransportsEmpty['transports']>().on(g0._.transports)
+    Assert.equiv.ofAs<
       ContextEmpty['requestPipelineDefinition']['overloads']
     >().on(g0._.requestPipelineDefinition.overloads)
     expect(g0._.transports).toBe(contextFragmentTransportsEmpty.transports)
@@ -36,7 +36,7 @@ describe(`starting state`, () => {
 describe(`registering first transport`, () => {
   test(`by giving a transport`, ({ g0 }) => {
     const g1 = g0.transport(ATransportBuilder)
-    Ts.Assert.equiv.ofAs<{
+    Assert.equiv.ofAs<{
       current: ATransport['name']
       configurations: {
         ATransport: ATransport['configurator']['default']
@@ -54,7 +54,7 @@ describe(`registering first transport`, () => {
         ATransport: ATransport,
       },
     })
-    Ts.Assert.equiv.ofAs<
+    Assert.equiv.ofAs<
       readonly [ATransport]
     >().on(g1._.requestPipelineDefinition.overloads)
     expect(g1._.requestPipelineDefinition.overloads).toEqual([ATransport])
@@ -66,8 +66,8 @@ describe(`registering first transport`, () => {
     const g1a = g0.transport(ATransportBuilder)
     const g1b = g0.transport(ATransport)
     // TODO: Type instantiation is excessively deep - need to simplify type assertions
-    // Ts.Assert.exact.ofAs<typeof g1b._.transports>().on(g1a._.transports)
-    // Ts.Assert.exact.ofAs<typeof g1b._.requestPipelineDefinition.overloads>().on(g1a._.requestPipelineDefinition.overloads)
+    // Assert.exact.ofAs<typeof g1b._.transports>().on(g1a._.transports)
+    // Assert.exact.ofAs<typeof g1b._.requestPipelineDefinition.overloads>().on(g1a._.requestPipelineDefinition.overloads)
     expect(g1a._.transports).toEqual(g1b._.transports)
     expect(g1a._.requestPipelineDefinition.overloads).toEqual(g1b._.requestPipelineDefinition.overloads)
   })
@@ -76,7 +76,7 @@ describe(`registering first transport`, () => {
 describe(`registering second transport`, () => {
   test(`does not become current`, () => {
     const g3 = g1.transport(BTransport)
-    Ts.Assert.equiv.ofAs<{
+    Assert.equiv.ofAs<{
       current: ATransport['name']
       configurations: {
         ATransport: ATransport['configurator']['default']
@@ -122,50 +122,50 @@ describe(`selecting transport`, () => {
         const g2 = g1.transport(ATransport.name)
         expect(g2).toBe(g1)
         // TODO: Type instantiation is excessively deep - need to simplify type assertion
-        // Ts.Assert.exact.ofAs<typeof g1._>().on(g2._)
+        // Assert.exact.ofAs<typeof g1._>().on(g2._)
       })
       test(`empty configuration`, () => {
         const g2 = g1.transport(ATransport.name, {})
         expect(g2).toBe(g1)
         // TODO: Type instantiation is excessively deep - need to simplify type assertion
-        // Ts.Assert.exact.ofAs<typeof g1._>().on(g2._)
+        // Assert.exact.ofAs<typeof g1._>().on(g2._)
       })
       test(`undefined configuration`, () => {
         const g2 = g1.transport(ATransport.name, undefined)
         expect(g2).toBe(g1)
         // TODO: Type instantiation is excessively deep - need to simplify type assertion
-        // Ts.Assert.exact.ofAs<typeof g1._>().on(g2._)
+        // Assert.exact.ofAs<typeof g1._>().on(g2._)
       })
     })
     test(`with configuration configures current`, () => {
       const g2 = g1.transport(ATransport.name, { a: 1 })
       expect(g2._.transports.configurations.ATransport).toEqual({ a: 1 })
-      Ts.Assert.equiv.ofAs<{ a: 1 }>().on(g2._.transports.configurations.ATransport)
+      Assert.equiv.ofAs<{ a: 1 }>().on(g2._.transports.configurations.ATransport)
     })
   })
   describe(`given different`, () => {
     test(`without configuration -> changes current without altering its configuration`, () => {
       // Sanity check that current is not BTransport to begin with
       expect(g2._.transports.current).toBe(ATransport.name)
-      Ts.Assert.exact.ofAs<ATransport['name']>().on(g2._.transports.current)
+      Assert.exact.ofAs<ATransport['name']>().on(g2._.transports.current)
       // Current is changed to BTransport
       const g3 = g2.transport(BTransport.name)
       expect(g3._.transports.current).toBe(BTransport.name)
-      Ts.Assert.exact.ofAs<BTransport['name']>().on(g3._.transports.current)
+      Assert.exact.ofAs<BTransport['name']>().on(g3._.transports.current)
       // Configuration is unchanged
       expect(g3._.transports.configurations.ATransport).toEqual(g2._.transports.configurations.ATransport)
     })
     test(`with configuration -> changes current + alters configuration`, () => {
       // Sanity check that BTransport configuration is not set to begin with
       expect(g2._.transports.configurations.BTransport).toEqual({})
-      Ts.Assert.equiv.ofAs<{}>().on(g2._.transports.configurations.BTransport)
+      Assert.equiv.ofAs<{}>().on(g2._.transports.configurations.BTransport)
       // Current is changed to BTransport
       const g3 = g2.transport(BTransport.name, { b: `1` })
       expect(g3._.transports.current).toBe(BTransport.name)
-      Ts.Assert.exact.ofAs<BTransport['name']>().on(g3._.transports.current)
+      Assert.exact.ofAs<BTransport['name']>().on(g3._.transports.current)
       // Configuration is altered
       expect(g3._.transports.configurations.BTransport).toEqual({ b: `1` })
-      Ts.Assert.equiv.ofAs<{ b: '1' }>().on(g3._.transports.configurations.BTransport)
+      Assert.equiv.ofAs<{ b: '1' }>().on(g3._.transports.configurations.BTransport)
     })
   })
 
@@ -186,11 +186,11 @@ describe(`configuring current transport`, () => {
     const g2 = g1.transport({})
     expect(g2).toBe(g1)
     // TODO: Type instantiation is excessively deep - need to simplify type assertion
-    // Ts.Assert.exact.ofAs<typeof g1._>().on(g2._)
+    // Assert.exact.ofAs<typeof g1._>().on(g2._)
   })
   test(`given non-empty -> changes configuration`, () => {
     const g2 = g1.transport({ a: 99 })
     expect(g2._.transports.configurations.ATransport).toEqual({ a: 99 })
-    Ts.Assert.equiv.ofAs<{ a: 99 }>().on(g2._.transports.configurations.ATransport)
+    Assert.equiv.ofAs<{ a: 99 }>().on(g2._.transports.configurations.ATransport)
   })
 })

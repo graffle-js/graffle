@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: ^0.102.1
-        version: 0.102.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+        specifier: ^0.103.1
+        version: 0.103.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit:
         specifier: ^1.41.0
         version: 1.41.0
@@ -440,6 +440,9 @@ packages:
 
   '@ark/util@0.51.0':
     resolution: {integrity: sha512-OVdvu1NzEFhIRe1/nXUyfRe4hDh8CC8Ag+IYV0RngCc3Gtayny8lIvJjdw+Ef27ClEIuTGlEPEefvoKAm6mu9g==}
+
+  '@ark/util@0.55.0':
+    resolution: {integrity: sha512-aWFNK7aqSvqFtVsl1xmbTjGbg91uqtJV7Za76YGNEwIO4qLjMfyY8flmmbhooYMuqPCO2jyxu8hve943D+w3bA==}
 
   '@asamuzakjp/css-color@4.0.5':
     resolution: {integrity: sha512-lMrXidNhPGsDjytDy11Vwlb6OIGrT3CmLg3VWNFyWkLWtijKl7xjvForlh8vuj0SHGjgl4qZEQzUmYTeQA2JFQ==}
@@ -1936,48 +1939,48 @@ packages:
     resolution: {integrity: sha512-SvUHQgZJg0d7Mc1yec+5lF2DFiwbEgikCvdqXdxWAxjSdXhj7d6vNUH3MitrZCJPiUpdvOejS4DVHanLfcwI9g==}
     engines: {node: '>=22'}
 
-  '@vltpkg/dep-id@1.0.0-rc.2':
-    resolution: {integrity: sha512-l5wXNupDRoZ2B9zOMtsL4CbbPPSGxh3gQ4h8pCzNdEunnIS5UMGiJAf0IDFrCjsBUWmidLSUxphdRMTY1kwegg==}
+  '@vltpkg/dep-id@1.0.0-rc.9':
+    resolution: {integrity: sha512-oJqGX7U4LCD1B6rdCQB5RVWhFPlRtD4/obP/wnD2GYYHUEuCIwP22SscL2ONc1b8M5e3P84ZobSxNBF15BzNoQ==}
     engines: {node: '>=22'}
 
   '@vltpkg/error-cause@0.0.0-30':
     resolution: {integrity: sha512-j+rjUo0m1C81HdoW7qLgQFHGedg4YypzAYEdrUT04f4DGLZB3Qf9OS1Wd26IzICjMxB8OSAxFqKHikst3KR4wA==}
     engines: {node: '>=22'}
 
-  '@vltpkg/error-cause@1.0.0-rc.2':
-    resolution: {integrity: sha512-1nyMt9i4m3hgBs8jsKC1uECofL762TwcQv4YOMc0u2aSJ1Y1xqrjeDsdRCsQYiRabqfvi5x8ALvBsVcfltcwhQ==}
+  '@vltpkg/error-cause@1.0.0-rc.9':
+    resolution: {integrity: sha512-zyV7JCKt33RpC9NsXnJwFG1OxqpER8mn/HbpE9l1z6LYZKLdafepuGW4FrG0558Ms5V04lOShT1IufH4l5DhkA==}
     engines: {node: '>=22'}
 
   '@vltpkg/fast-split@0.0.0-30':
     resolution: {integrity: sha512-UhCch9sy30lyR5Ry8knwIi46MGCr8fMQ/Z3TG2dBxH2kkTWKkOPc0s8wa9uz8y0BkE9fqku2gVkTAnz1yCeROg==}
     engines: {node: '>=22'}
 
-  '@vltpkg/fast-split@1.0.0-rc.2':
-    resolution: {integrity: sha512-PnDwu/zP1xRB5UJOn0CnwgvTqO8IXFe9KZicAQ0ByxPC8Z+L6U2xfWMJnhRRJqYSkxDLIH6W5MenW7h9wFmCwg==}
+  '@vltpkg/fast-split@1.0.0-rc.9':
+    resolution: {integrity: sha512-7R//3m6jPTEiL7371tY4WuI1R2AAOqFVPi2+yMlXu7O9S8aPCdYtzHVsqQxm10WUpZ41dWLSYe4wmxHuccB59A==}
     engines: {node: '>=22'}
 
   '@vltpkg/semver@0.0.0-30':
     resolution: {integrity: sha512-GWqy5Rr5L9VeJDE6Yb0BscLehLWc1GWDAShxFFmfGBqr68Vy0DF5YSWb0NvVpfQ0r+uIxA5FK7b7bK0oJKThPw==}
     engines: {node: '>=22'}
 
-  '@vltpkg/semver@1.0.0-rc.2':
-    resolution: {integrity: sha512-nyFWhPDTftgAV66IDc+IoRTPohj+tcVNpz9rNc63pkAwfT1x+z82U/ixZ5FAXyQJHz4EtzXSZO7dH1643YhyUg==}
+  '@vltpkg/semver@1.0.0-rc.9':
+    resolution: {integrity: sha512-gEPgcg644nnq/kwEA1hAY5ecwLEOm3hlzUGfheasQvIeR6Ix0fmZqqIG0c0gpz6h0URobGBf5s0ydoRbOcQ46A==}
     engines: {node: '>=22'}
 
   '@vltpkg/spec@0.0.0-30':
     resolution: {integrity: sha512-0eYijND+UJBNkrEpL7+Ammc6Sjk7bAOZC33PETYXkV3JGl8npoV3o4w3rigtwfZVuedfi81RmMcr0Nb2JjNaMw==}
     engines: {node: '>=22'}
 
-  '@vltpkg/spec@1.0.0-rc.2':
-    resolution: {integrity: sha512-FBDAj9k4cORp/PAFBdwtzcWBcUTCFTvsapLMMHowH3spQlaMgnLS69eXVMiqoyoe3LnhQmg6/gV10eKA2nF3Rg==}
+  '@vltpkg/spec@1.0.0-rc.9':
+    resolution: {integrity: sha512-sS92duIYQy3Yy6DhoS8/0tJqvv1NPyAOL/x3AZkpAeRNtkr5vSZ+kroV8+Da6bfZMwsscyy4YBoCJzalmfmNeA==}
     engines: {node: '>=22'}
 
   '@vltpkg/types@0.0.0-30':
     resolution: {integrity: sha512-gUqYAZwVQjmjbM+xnyZNHnpMyXIvDN5nIzifWY9RKJ9XEmPVJg8Nql5zMXXPbr1MekMZzBvqvCgMeoDV53dX2g==}
     engines: {node: '>=22'}
 
-  '@vltpkg/types@1.0.0-rc.2':
-    resolution: {integrity: sha512-P0ZeKNdoisXL0qghjjwL4wbDjmUsjI/oXm2ZcxFCFG5zBDi0nx6A1+lxgsGZBJdZALk9wVXxD4NGf/nuZdWG0g==}
+  '@vltpkg/types@1.0.0-rc.9':
+    resolution: {integrity: sha512-YDnyotdPx2skWTGEgktBM9pC3jVHgIF8u1ydSOZLSF/qwoGC56N7xAhR0bg58lw0LbyxbOKQTRhdBYMzv9/Pjw==}
     engines: {node: '>=22'}
 
   '@volar/language-core@2.4.23':
@@ -2106,8 +2109,8 @@ packages:
     resolution: {integrity: sha512-Otmxo+0mp8az3B48pLI1I4msNOXPIoP7TLm6h5wOEQmynqHt8oP9nR6NJUeJk6iI5OtFpQtkbJFwfGkmplvc3Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.102.1':
-    resolution: {integrity: sha512-rxDvb8N1GlFK/VOGT/HW8b+toDIb5MMRXzuQ3hFTFAFmLCT0yj00gHuQW2JnSrb2UUKwgIp9CyKuI768Drv/ZA==}
+  '@wollybeard/kit@0.103.1':
+    resolution: {integrity: sha512-lkWpIFf6h2v3xgZR93i9UXTS3hARnEu8xtN4vVrLejH6qIoE6ji15f4RhUMGHxUBdjtQasyIet9l81pODKCAzw==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -2172,6 +2175,9 @@ packages:
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  arkregex@0.0.3:
+    resolution: {integrity: sha512-bU21QJOJEFJK+BPNgv+5bVXkvRxyAvgnon75D92newgHxkBJTgiFwQxusyViYyJkETsddPlHyspshDQcCzmkNg==}
 
   arktype@2.1.23:
     resolution: {integrity: sha512-tyxNWX6xJVMb2EPJJ3OjgQS1G/vIeQRrZuY4DeBNQmh8n7geS+czgbauQWB6Pr+RXiOO8ChEey44XdmxsqGmfQ==}
@@ -2780,6 +2786,10 @@ packages:
 
   fast-check@4.3.0:
     resolution: {integrity: sha512-JVw/DJSxVKl8uhCb7GrwanT9VWsCIdBkK3WpP37B/Au4pyaspriSjtrY2ApbSFwTg3ViPfniT13n75PhzE7VEQ==}
+    engines: {node: '>=12.17.0'}
+
+  fast-check@4.4.0:
+    resolution: {integrity: sha512-s87BFAp8YaWYOBXjbTxeotaOhmA4hPYAyk9gBTFxdab25P6eAlqrryUvVMA2qd9bT/0Xq+YNJGtoVhJd/BxI4g==}
     engines: {node: '>=12.17.0'}
 
   fast-deep-equal@3.1.3:
@@ -4854,6 +4864,8 @@ snapshots:
 
   '@ark/util@0.51.0': {}
 
+  '@ark/util@0.55.0': {}
+
   '@asamuzakjp/css-color@4.0.5':
     dependencies:
       '@csstools/css-calc': 2.1.4(@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4))(@csstools/css-tokenizer@3.0.4)
@@ -6347,19 +6359,19 @@ snapshots:
       '@vltpkg/spec': 0.0.0-30
       '@vltpkg/types': 0.0.0-30
 
-  '@vltpkg/dep-id@1.0.0-rc.2':
+  '@vltpkg/dep-id@1.0.0-rc.9':
     dependencies:
-      '@vltpkg/error-cause': 1.0.0-rc.2
-      '@vltpkg/spec': 1.0.0-rc.2
-      '@vltpkg/types': 1.0.0-rc.2
+      '@vltpkg/error-cause': 1.0.0-rc.9
+      '@vltpkg/spec': 1.0.0-rc.9
+      '@vltpkg/types': 1.0.0-rc.9
 
   '@vltpkg/error-cause@0.0.0-30': {}
 
-  '@vltpkg/error-cause@1.0.0-rc.2': {}
+  '@vltpkg/error-cause@1.0.0-rc.9': {}
 
   '@vltpkg/fast-split@0.0.0-30': {}
 
-  '@vltpkg/fast-split@1.0.0-rc.2': {}
+  '@vltpkg/fast-split@1.0.0-rc.9': {}
 
   '@vltpkg/semver@0.0.0-30':
     dependencies:
@@ -6367,21 +6379,21 @@ snapshots:
       '@vltpkg/fast-split': 0.0.0-30
       '@vltpkg/types': 0.0.0-30
 
-  '@vltpkg/semver@1.0.0-rc.2':
+  '@vltpkg/semver@1.0.0-rc.9':
     dependencies:
-      '@vltpkg/error-cause': 1.0.0-rc.2
-      '@vltpkg/fast-split': 1.0.0-rc.2
-      '@vltpkg/types': 1.0.0-rc.2
+      '@vltpkg/error-cause': 1.0.0-rc.9
+      '@vltpkg/fast-split': 1.0.0-rc.9
+      '@vltpkg/types': 1.0.0-rc.9
 
   '@vltpkg/spec@0.0.0-30':
     dependencies:
       '@vltpkg/error-cause': 0.0.0-30
       '@vltpkg/semver': 0.0.0-30
 
-  '@vltpkg/spec@1.0.0-rc.2':
+  '@vltpkg/spec@1.0.0-rc.9':
     dependencies:
-      '@vltpkg/error-cause': 1.0.0-rc.2
-      '@vltpkg/semver': 1.0.0-rc.2
+      '@vltpkg/error-cause': 1.0.0-rc.9
+      '@vltpkg/semver': 1.0.0-rc.9
 
   '@vltpkg/types@0.0.0-30':
     dependencies:
@@ -6390,12 +6402,12 @@ snapshots:
       '@vltpkg/semver': 0.0.0-30
       '@vltpkg/spec': 0.0.0-30
 
-  '@vltpkg/types@1.0.0-rc.2':
+  '@vltpkg/types@1.0.0-rc.9':
     dependencies:
-      '@vltpkg/dep-id': 1.0.0-rc.2
-      '@vltpkg/error-cause': 1.0.0-rc.2
-      '@vltpkg/semver': 1.0.0-rc.2
-      '@vltpkg/spec': 1.0.0-rc.2
+      '@vltpkg/dep-id': 1.0.0-rc.9
+      '@vltpkg/error-cause': 1.0.0-rc.9
+      '@vltpkg/semver': 1.0.0-rc.9
+      '@vltpkg/spec': 1.0.0-rc.9
 
   '@volar/language-core@2.4.23':
     dependencies:
@@ -6547,18 +6559,19 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.2
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.102.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.103.1(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@microsoft/tsdoc': 0.15.1
       '@types/node': 24.9.1
       '@types/object-inspect': 1.13.0
-      '@vltpkg/semver': 1.0.0-rc.2
+      '@vltpkg/semver': 1.0.0-rc.9
       ansis: 4.2.0
+      arkregex: 0.0.3
       consola: 3.4.2
       effect: 3.18.4
       es-toolkit: 1.41.0
-      fast-check: 4.3.0
+      fast-check: 4.4.0
       jsonc-parser: 3.3.1
       mdast-util-to-string: 4.0.0
       object-inspect: 1.13.4
@@ -6654,6 +6667,10 @@ snapshots:
       sprintf-js: 1.0.3
 
   argparse@2.0.1: {}
+
+  arkregex@0.0.3:
+    dependencies:
+      '@ark/util': 0.55.0
 
   arktype@2.1.23:
     dependencies:
@@ -7316,6 +7333,10 @@ snapshots:
       pure-rand: 6.1.0
 
   fast-check@4.3.0:
+    dependencies:
+      pure-rand: 7.0.1
+
+  fast-check@4.4.0:
     dependencies:
       pure-rand: 7.0.1
 

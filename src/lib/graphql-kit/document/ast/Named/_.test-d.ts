@@ -1,8 +1,8 @@
 // dprint-ignore-file
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import type { Named } from './_.js'
 
-const A = Ts.Assert
+const A = Assert
 
 A.exact.ofAs<'a'>().onAs<Named.Parse<'a'>>()
 A.exact.ofAs<'a1'>().onAs<Named.Parse<'a1'>>()

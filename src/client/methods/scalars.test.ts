@@ -3,7 +3,7 @@ import { contextEmpty } from '#src/context/ContextEmpty.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { expect } from 'vitest'
 import type { ScalarMethod } from './scalars.js'
 
@@ -33,18 +33,18 @@ test(`context scalars begin empty`, ({ g0 }) => {
 })
 
 test(`method not available when no schema map `, ({ g0 }) => {
-  Ts.Assert.exact.ofAs<ScalarMethod.TypeErrorMissingSchemaMap>().on(g0.scalar)
+  Assert.exact.ofAs<ScalarMethod.TypeErrorMissingSchemaMap>().on(g0.scalar)
 })
 
 test(`method is available when there is a schema map `, () => {
-  Ts.Assert.equiv.ofAs<ScalarMethod<typeof g1._>>().on(g1.scalar)
+  Assert.equiv.ofAs<ScalarMethod<typeof g1._>>().on(g1.scalar)
 })
 
 test(`can pass an inline scalar definition`, () => {
   const codec = AScalar.codec
   const g3 = g1.scalar(`A`, codec)
   expect(g3._.scalars.map).toEqual({ A: AScalar })
-  Ts.Assert.equiv.ofAs<{
+  Assert.equiv.ofAs<{
     map: { A: AScalar }
     typesDecoded: bigint
     typesEncoded: string
@@ -54,7 +54,7 @@ test(`can pass an inline scalar definition`, () => {
 test(`can pass a scalar definition`, () => {
   const g3 = g1.scalar(AScalar)
   expect(g3._.scalars.map).toEqual({ A: AScalar })
-  Ts.Assert.equiv.ofAs<{
+  Assert.equiv.ofAs<{
     map: { A: AScalar }
     typesDecoded: bigint
     typesEncoded: string

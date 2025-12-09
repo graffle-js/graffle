@@ -1,5 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Str } from '@wollybeard/kit'
+import { Syn } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
@@ -45,7 +45,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
        * \`\`\`
        */
     `
-    code(Str.Code.TS.interfaceDecl({
+    code(Syn.TS.interfaceDecl({
       name: `Document`,
       parameters: [`$Context ${contextExtendsClause}`],
       // dprint-ignore

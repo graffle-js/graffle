@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Str } from '@wollybeard/kit'
+import { Syn } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
   getScalarCodecDoc,
@@ -29,7 +29,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     // Need runtime import if we have codecless scalars (for Codec.create())
     const needRuntimeImport = isNeedCustomScalarDefaults
     code(
-      Str.Code.TS.importAll({
+      Syn.TS.importAll({
         as: $.$$Utilities,
         from: config.paths.imports.grafflePackage.utilitiesForGenerated,
         type: !needRuntimeImport,
@@ -45,7 +45,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
 
-        const dualExportResult = Str.Code.TS.Reserved.dualExport({
+        const dualExportResult = Syn.TS.Reserved.dualExport({
           name: scalar.name,
           const: {
             value: `${$.CustomScalars}.${scalar.name}`,
@@ -57,17 +57,17 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         })
 
         code(dualExportResult.code)
-        code(Str.Code.TSDoc.format(getScalarDecodedDoc(scalar.name)))
+        code(Syn.TSDoc.format(getScalarDecodedDoc(scalar.name)))
         code(
-          Str.Code.TS.typeAlias$({
+          Syn.TS.typeAlias$({
             name: `${scalar.name}Decoded`,
             type: `${$.$$Utilities}.Codec.GetDecoded<${dualExportResult.internalName}['codec']>`,
             export: true,
           }),
         )
-        code(Str.Code.TSDoc.format(getScalarEncodedDoc(scalar.name)))
+        code(Syn.TSDoc.format(getScalarEncodedDoc(scalar.name)))
         code(
-          Str.Code.TS.typeAlias$({
+          Syn.TS.typeAlias$({
             name: `${scalar.name}Encoded`,
             type: `${$.$$Utilities}.Codec.GetEncoded<${dualExportResult.internalName}['codec']>`,
             export: true,
@@ -77,7 +77,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       }
     }
 
-    code(Str.Code.TS.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
+    code(Syn.TS.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
     code``
 
     if (isNeedCustomScalarDefaults) {
@@ -96,7 +96,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         const identityCodecValue =
           `{ kind: 'Scalar', name: '${scalar.name}', codec: ${$.$$Utilities}.Codec.create({ encode: (value: any) => String(value), decode: (value: any) => String(value) }) } as ${scalarType}`
 
-        const dualExportResult = Str.Code.TS.Reserved.dualExport({
+        const dualExportResult = Syn.TS.Reserved.dualExport({
           name: scalar.name,
           const: {
             // TODO: Use typeAnnotation option once implemented - https://github.com/jasonkuhrt/kit/issues/78
@@ -113,7 +113,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     }
     code``
 
-    code(Str.Code.TS.Comment.title1(`Registry`))
+    code(Syn.TS.Comment.title1(`Registry`))
     code``
 
     const runtimeMap = config.options.customScalars
@@ -128,10 +128,10 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       })
       : {}
 
-    code(Str.Code.TSDoc.format(getScalarRegistryDoc()))
+    code(Syn.TSDoc.format(getScalarRegistryDoc()))
     code`
       export const $registry = {
-        map: ${Str.Code.TS.TermObject.termObject(runtimeMap)},
+        map: ${Syn.TS.TermObject.termObject(runtimeMap)},
       } as $Registry
     `
     code``
@@ -139,13 +139,13 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     const typeScalarRegistry = config.options.customScalars
       // dprint-ignore
       ? `$$Utilities.Schema.Scalars.Registry<
-          ${Str.Code.TS.TermObject.termObject(buildtimeMap)},
-          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetEncoded<${renderName(_.name)}['codec']>`))},
-          ${Str.Code.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetDecoded<${renderName(_.name)}['codec']>`))},
+          ${Syn.TS.TermObject.termObject(buildtimeMap)},
+          ${Syn.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetEncoded<${renderName(_.name)}['codec']>`))},
+          ${Syn.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetDecoded<${renderName(_.name)}['codec']>`))},
         >`
       : `$$Utilities.Schema.Scalars.Registry.Empty`
 
-    code(Str.Code.TS.typeAlias$({
+    code(Syn.TS.typeAlias$({
       name: `$Registry`,
       type: typeScalarRegistry,
       tsDoc: getScalarRegistryTypeDoc(),

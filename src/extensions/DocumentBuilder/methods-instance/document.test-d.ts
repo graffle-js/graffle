@@ -1,7 +1,7 @@
 import { MutationOnly } from '#test/schema/mutation-only/client/_.js'
 import { Possible } from '#test/schema/possible/client/_.js'
 import { QueryOnly } from '#test/schema/query-only/client/_.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { test } from 'vitest'
 
 const g = Possible.create({ check: { preflight: false } })
@@ -17,7 +17,7 @@ test(`requires input`, () => {
 test(`gql with one query`, async () => {
   const sender = g.gql({ query: { foo: { id: true } } })
   const result = await sender.$send()
-  Ts.Assert.sub.ofAs<null | { id: string | null }>().on(result)
+  Assert.sub.ofAs<null | { id: string | null }>().on(result)
 })
 
 test(`gql with two queries`, async () => {
@@ -27,9 +27,9 @@ test(`gql with two queries`, async () => {
       bar: { date: true },
     },
   })
-  Ts.Assert.parameters.sub.ofAs<['foo' | 'bar']>().on(sender.$send)
+  Assert.parameters.sub.ofAs<['foo' | 'bar']>().on(sender.$send)
   const result = await sender.$send(`foo`)
-  Ts.Assert.sub.ofAs<null | { id: string | null }>().on(result)
+  Assert.sub.ofAs<null | { id: string | null }>().on(result)
 })
 
 test(`gql with two queries of different root types`, async () => {
@@ -41,9 +41,9 @@ test(`gql with two queries of different root types`, async () => {
       bar: { idNonNull: true },
     },
   })
-  Ts.Assert.parameters.sub.ofAs<['foo' | 'bar']>().on(sender.$send)
+  Assert.parameters.sub.ofAs<['foo' | 'bar']>().on(sender.$send)
   const result = await sender.$send(`foo`)
-  Ts.Assert.sub.ofAs<null | { id: string | null }>().on(result)
+  Assert.sub.ofAs<null | { id: string | null }>().on(result)
 })
 
 test.skip(`root operation not available if it is not in schema`, () => {

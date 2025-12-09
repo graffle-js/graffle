@@ -3,7 +3,7 @@ import { DateScalar } from '#test/fixtures/scalars'
 import { test as testBase } from '#test/helpers'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/_.js'
 import { db } from '#test/schema/possible/db.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 
@@ -67,16 +67,16 @@ describe(`query root field`, () => {
     test(`result without codec`, async ({ possible, possibleData: db }) => {
       const result = await possible.query.dateArg()
       expect(result).toEqual(db.date0Encoded)
-      Ts.Assert.exact.ofAs<string | null>().on(result)
+      Assert.exact.ofAs<string | null>().on(result)
     })
     test(`result with codec`, async ({ possible, possibleData: db }) => {
       const result = await possible.scalar(DateScalar).query.dateArg()
       expect(result).toEqual(db.date0)
-      Ts.Assert.exact.ofAs<Date | null>().on(result)
+      Assert.exact.ofAs<Date | null>().on(result)
 
       const result2 = await possible.scalar(DateScalar).query.dateObject1({ date1: true })
       expect(result2).toEqual({ date1: db.date1 })
-      Ts.Assert.exact.ofAs<{ date1: Date | null } | null>().on(result2)
+      Assert.exact.ofAs<{ date1: Date | null } | null>().on(result2)
     })
     test(`argument without codec`, async ({ possible, possibleData: db }) => {
       await possible.query.dateArg({ $: { date: db.date0Encoded } })

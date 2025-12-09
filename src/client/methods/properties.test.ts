@@ -7,24 +7,24 @@ import {
   propertiesStatic1,
 } from '#src/context/fragments/properties/_tests/_fixtures.js'
 import { test } from '#test/helpers'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { type Configuration } from '../../context/fragments/configuration/_.js'
 import { type Client_justContext } from '../client.js'
 
 test(`initial context is empty`, ({ g0 }) => {
   expect(g0._.properties).toEqual(contextEmpty.properties)
-  Ts.Assert.exact.ofAs<ContextEmpty['properties']>().on(g0._.properties)
+  Assert.exact.ofAs<ContextEmpty['properties']>().on(g0._.properties)
 })
 
 test(`can add static properties`, ({ g0 }) => {
   const g1 = g0.properties(propertiesStatic1)
   // Context extended
   expect(g1._.properties.static).toEqual(propertiesStatic1)
-  Ts.Assert.equiv.ofAs<typeof propertiesStatic1>().on(g1._.properties.static)
+  Assert.equiv.ofAs<typeof propertiesStatic1>().on(g1._.properties.static)
   // Client extended
   expect(g1).toMatchObject(propertiesStatic1)
-  Ts.Assert.equiv.ofAs<typeof propertiesStatic1['foo']>().on(g1.foo)
+  Assert.equiv.ofAs<typeof propertiesStatic1['foo']>().on(g1.foo)
 })
 
 describe(`computed properties`, () => {
@@ -33,7 +33,7 @@ describe(`computed properties`, () => {
     // Context extended
     expect(g1._.properties.static).toEqual({})
     expect(g1._.properties.computed).toEqual([propertiesComputerParameters])
-    Ts.Assert.equiv.ofAs<
+    Assert.equiv.ofAs<
       {
         parameters: {
           configuration: Configuration.ContextFragment['configuration']
@@ -42,7 +42,7 @@ describe(`computed properties`, () => {
         }
       }
     >().on(g1._.properties.static)
-    Ts.Assert.exact.ofAs<readonly []>().on(g1._.properties.$computedTypeFunctions)
+    Assert.exact.ofAs<readonly []>().on(g1._.properties.$computedTypeFunctions)
     // Client extended
     expect(g1.parameters.client).toBe(g1)
     expect(g1.parameters.context).toBe(g1._)
@@ -58,11 +58,11 @@ describe(`computed properties`, () => {
   })
   test(`can be added (type level)`, ({ g0 }) => {
     const g1 = g0.properties(propertiesComputerPreflight$Func)
-    Ts.Assert.exact.ofAs<readonly [propertiesComputerPreflight$Func]>().on(g1._.properties.$computedTypeFunctions)
-    Ts.Assert.exact.ofAs<`bar`>().on(g1.foo)
+    Assert.exact.ofAs<readonly [propertiesComputerPreflight$Func]>().on(g1._.properties.$computedTypeFunctions)
+    Assert.exact.ofAs<`bar`>().on(g1.foo)
     const g2 = g1.with({ check: { preflight: false } })
-    Ts.Assert.exact.ofAs<`baz`>().on(g2.foo)
+    Assert.exact.ofAs<`baz`>().on(g2.foo)
     const g3 = g2.with({ check: { preflight: true } })
-    Ts.Assert.exact.ofAs<`bar`>().on(g3.foo)
+    Assert.exact.ofAs<`bar`>().on(g3.foo)
   })
 })

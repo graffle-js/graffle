@@ -8,7 +8,7 @@ import { Typed } from './typed/_.js'
 
 export const toString = (document: Typed.TypedDocumentLike): string => {
   const documentUntyped = Typed.unType(document)
-  return Str.Type.is(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
+  return Str.is(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
 }
 
 export const getOperationDefinition = (
@@ -38,7 +38,7 @@ export const getOperationType = (request: Request.RequestInput): OperationType.O
 
   const documentUntyped = Typed.unType(document)
 
-  if (!Str.Type.is(documentUntyped)) {
+  if (!Str.is(documentUntyped)) {
     const operationDefinition = getOperationDefinition({ query: documentUntyped, operationName })
     if (operationDefinition) return operationDefinition.operation
     throw new Error(`Could not parse operation type from document.`)
@@ -84,5 +84,5 @@ export const getOperationType = (request: Request.RequestInput): OperationType.O
 
 export const normalizeDocumentToNode = (document: Typed.TypedDocumentLike): DocumentNode => {
   const d = Typed.unType(document)
-  return Str.Type.is(d) ? parse(d) : d
+  return Str.is(d) ? parse(d) : d
 }

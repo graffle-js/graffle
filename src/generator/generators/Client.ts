@@ -1,4 +1,4 @@
-import { Str } from '@wollybeard/kit'
+import { Syn } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'
@@ -15,18 +15,18 @@ export const ModuleGeneratorClient = createModuleGenerator(
     // Import domains only if there are actual rules configured
     const hasDomains = config.methodsOrganization.domains && config.methodsOrganization.domains.rules?.length > 0
     if (hasDomains) {
-      code(Str.Code.TS.importAll({ as: '$$Domains', from: './domains/__.js' }))
+      code(Syn.TS.importAll({ as: '$$Domains', from: './domains/__.js' }))
     }
 
-    code(Str.Code.TS.importAll({ as: $.$$Utilities, from: config.paths.imports.grafflePackage.utilitiesForGenerated }))
+    code(Syn.TS.importAll({ as: $.$$Utilities, from: config.paths.imports.grafflePackage.utilitiesForGenerated }))
     code(
-      Str.Code.TS.importNamed({
+      Syn.TS.importNamed({
         names: 'TransportHttp',
         from: config.paths.imports.grafflePackage.extensionTransportHttp,
       }),
     )
     code(
-      Str.Code.TS.importNamed({
+      Syn.TS.importNamed({
         names: 'DocumentBuilder',
         from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
       }),

@@ -1,6 +1,6 @@
 import { ATransport, BTransport } from '#test/fixtures/transports'
 import { g0, test } from '#test/helpers'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { expect } from 'vitest'
 import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_.js'
 
@@ -13,13 +13,13 @@ test(`can add a request interceptor`, () => {
   const g2 = g1.anyware(i1)
   expect(g2._.requestPipelineInterceptors).toEqual([i1])
   // Does NOT affect context type.
-  Ts.Assert.exact.ofAs<typeof g1._.requestPipelineInterceptors>().on(g2._.requestPipelineInterceptors)
+  Assert.exact.ofAs<typeof g1._.requestPipelineInterceptors>().on(g2._.requestPipelineInterceptors)
 })
 
 test(`hook inputs have transportType in interceptor`, async () => {
   let transportType
   const g2 = g1.anyware(({ pack }) => {
-    Ts.Assert.exact.ofAs<ATransport['name']>().on(pack.input.transportType)
+    Assert.exact.ofAs<ATransport['name']>().on(pack.input.transportType)
     transportType = pack.input.transportType
     return pack()
   })
@@ -30,7 +30,7 @@ test(`hook inputs have transportType in interceptor`, async () => {
 test(`if two transports, then transportType could be either`, async () => {
   let value
   const g2 = g1.transport(BTransport).anyware(({ pack }) => {
-    Ts.Assert.exact.ofAs<ATransport['name'] | BTransport['name']>().on(pack.input.transportType)
+    Assert.exact.ofAs<ATransport['name'] | BTransport['name']>().on(pack.input.transportType)
     value = pack.input.transportType
     return pack()
   })

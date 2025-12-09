@@ -183,7 +183,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
             query: GraphqlKit.Document.toString(input.request.query),
           }
 
-          const operationType = Str.Type.is(input.request.operation)
+          const operationType = Str.is(input.request.operation)
             ? input.request.operation
             : input.request.operation.operation
           const methodMode = input.transport.methodMode

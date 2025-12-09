@@ -1,5 +1,5 @@
 import { Codec } from '#src/types/Codec/_.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
 import { Type } from './_.js'
 
@@ -8,13 +8,13 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
     type EmptyRegistry = Type.Scalars.Registry<{}, any, any>
 
     // Standard scalars should resolve to their types
-    Ts.Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()
+    Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'String', EmptyRegistry>>()
       .on(Type.Standard.Scalars.String)
-    Ts.Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'Int', EmptyRegistry>>()
+    Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'Int', EmptyRegistry>>()
       .on(Type.Standard.Scalars.Int)
-    Ts.Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'Float', EmptyRegistry>>()
+    Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'Float', EmptyRegistry>>()
       .on(Type.Standard.Scalars.Float)
-    Ts.Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'ID', EmptyRegistry>>()
+    Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'ID', EmptyRegistry>>()
       .on(Type.Standard.Scalars.ID)
   })
 
@@ -29,7 +29,7 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
     }
 
     // Custom scalar in registry should resolve
-    Ts.Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'Date', RegistryWithDate>>()
+    Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'Date', RegistryWithDate>>()
       .on(DateScalar)
   })
 
@@ -37,7 +37,7 @@ describe('LookupCustomScalarOrFallbackToUnknown', () => {
     type EmptyRegistry = Type.Scalars.Registry<{}, any, any>
 
     // Unknown custom scalar should default to UnknownScalar (not String)
-    Ts.Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()
+    Assert.exact.ofAs<Type.LookupCustomScalarOrFallbackToUnknown<'UnknownCustomScalar', EmptyRegistry>>()
       .on(Type.Scalars.UnknownScalar)
   })
 })

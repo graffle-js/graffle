@@ -1,4 +1,4 @@
-import { Arr, Obj, Ts } from '@wollybeard/kit'
+import { Arr, Obj, Assert, Ts } from '@wollybeard/kit'
 import { Schema } from '../../../../schema/_.js'
 import type { Select } from './_.js'
 import type { DefaultContext } from './context.js'

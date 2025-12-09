@@ -1,5 +1,4 @@
-import { Str } from '@wollybeard/kit'
-import { Obj } from '@wollybeard/kit'
+import { Obj, Syn } from '@wollybeard/kit'
 import type { GraphQLObjectType } from 'graphql'
 import {
   getStaticDocumentBuilderDoc,
@@ -55,7 +54,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(importUtilities(config))
       code(codeImportAll(config, { as: '$$Schema', from: './schema/_', type: true }))
       code``
-      code(Str.Code.TSDoc.format(getStaticDocumentContextDoc()))
+      code(Syn.TSDoc.format(getStaticDocumentContextDoc()))
       code(`interface StaticDocumentContext {`)
       code(`  typeHookRequestResultDataTypes: never`)
       code(`  scalars: $$Scalar.$Registry`)
@@ -64,7 +63,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Interface JSDoc
       const interfaceDoc = getStaticDocumentBuilderDoc('query')
-      code(Str.Code.TSDoc.format(interfaceDoc))
+      code(Syn.TSDoc.format(interfaceDoc))
       code`
         export interface QueryBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
@@ -78,7 +77,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ${
         Obj.values(queryType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, queryType, 'query')
-          const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
+          const docComment = fieldDoc ? Syn.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<GraphqlKit.Document.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
@@ -93,7 +92,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const constDoc = getStaticDocumentBuilderDoc('query')
-      code(Str.Code.TSDoc.format(constDoc))
+      code(Syn.TSDoc.format(constDoc))
       code(
         `export const query: QueryBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.QUERY, { sddm }) as any`,
       )
@@ -107,7 +106,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       }
       if (!queryType) {
         code``
-        code(Str.Code.TSDoc.format(getStaticDocumentContextDoc()))
+        code(Syn.TSDoc.format(getStaticDocumentContextDoc()))
         code(`interface StaticDocumentContext {`)
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
@@ -117,7 +116,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Interface JSDoc
       const mutationInterfaceDoc = getStaticDocumentBuilderDoc('mutation')
-      code(Str.Code.TSDoc.format(mutationInterfaceDoc))
+      code(Syn.TSDoc.format(mutationInterfaceDoc))
       code`
         export interface MutationBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Mutation<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
@@ -131,7 +130,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ${
         Obj.values(mutationType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, mutationType, 'mutation')
-          const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
+          const docComment = fieldDoc ? Syn.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<GraphqlKit.Document.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
@@ -146,7 +145,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
-      code(Str.Code.TSDoc.format(mutationConstDoc))
+      code(Syn.TSDoc.format(mutationConstDoc))
       code(
         `export const mutation: MutationBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.MUTATION, { sddm }) as any`,
       )
@@ -160,7 +159,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       }
       if (!queryType && !mutationType) {
         code``
-        code(Str.Code.TSDoc.format(getStaticDocumentContextDoc()))
+        code(Syn.TSDoc.format(getStaticDocumentContextDoc()))
         code(`interface StaticDocumentContext {`)
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
@@ -170,7 +169,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Interface JSDoc
       const subscriptionInterfaceDoc = getStaticDocumentBuilderDoc('subscription')
-      code(Str.Code.TSDoc.format(subscriptionInterfaceDoc))
+      code(Syn.TSDoc.format(subscriptionInterfaceDoc))
       code`
         export interface SubscriptionBuilder {
           $batch: <const $SelectionSet extends SelectionSets.Subscription<GraphqlKit.Document.Object.Select.StaticBuilderContext>>(
@@ -184,7 +183,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ${
         Obj.values(subscriptionType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, subscriptionType, 'subscription')
-          const docComment = fieldDoc ? Str.Code.TSDoc.format(fieldDoc) + '\n          ' : ''
+          const docComment = fieldDoc ? Syn.TSDoc.format(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<GraphqlKit.Document.Object.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => GraphqlKit.Document.Typed.String<
@@ -199,7 +198,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
-      code(Str.Code.TSDoc.format(subscriptionConstDoc))
+      code(Syn.TSDoc.format(subscriptionConstDoc))
       code(
         `export const subscription: SubscriptionBuilder = createStaticRootType(GraphqlKit.Schema.OperationType.SUBSCRIPTION, { sddm }) as any`,
       )

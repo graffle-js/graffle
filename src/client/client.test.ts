@@ -1,5 +1,5 @@
 import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { expect, test } from 'vitest'
 import { create } from './client.js'
 
@@ -9,8 +9,8 @@ test(`created WITHOUT configuration uses the default configuration`, () => {
   expect(g._.configuration.check.current.preflight).toBe(true)
   // Trying to type-test the entire context crashes the TS LSP.
   // We check just one property and assume the rest are ok too.
-  Ts.Assert.equiv.ofAs<ContextEmpty['configuration']>().on(g._.configuration)
-  Ts.Assert.exact.ofAs<true>().on(g._.configuration.check.current.preflight)
+  Assert.equiv.ofAs<ContextEmpty['configuration']>().on(g._.configuration)
+  Assert.exact.ofAs<true>().on(g._.configuration.check.current.preflight)
   // TODO: investigate why we cannot use the strict "toEqualTypeOf". According to the following it should work. Make an issue on Vitest?
   // let a = null as any as ContextEmpty['configurationIndex']
   // let b = g._.configurationIndex
@@ -21,7 +21,7 @@ test(`created WITHOUT configuration uses the default configuration`, () => {
 test(`created WITH configuration changes the configuration`, () => {
   const g = create({ check: { preflight: false } })
   expect(g._.configuration.check.current.preflight).toBe(false)
-  Ts.Assert.exact.ofAs<false>().on(g._.configuration.check.current.preflight)
+  Assert.exact.ofAs<false>().on(g._.configuration.check.current.preflight)
   // Did NOT mutate the original context
   expect(g._).not.toBe(contextEmpty)
   expect(contextEmpty.configuration.check.current.preflight).toBe(true)

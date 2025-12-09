@@ -13,6 +13,6 @@ export interface ContextFragmentEmpty extends ContextFragment {
 }
 
 export const contextFragmentEmpty: ContextFragmentEmpty = {
-  requestPipelineInterceptors: Arr.emptyArray,
-  requestPipelineInterceptorsComputed: Arr.emptyArray,
+  requestPipelineInterceptors: Arr.empty,
+  requestPipelineInterceptorsComputed: Arr.empty,
 }
