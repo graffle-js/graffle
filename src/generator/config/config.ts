@@ -237,7 +237,7 @@ To suppress this warning disable formatting in one of the following ways:
 
   // dprint-ignore
   const outputSdlPath =
-    Str.Type.is(configInit.outputSDL)
+    Str.is(configInit.outputSDL)
       ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
       : Path.join(outputDirPathRoot, `schema.graphql`)
 
@@ -249,7 +249,7 @@ To suppress this warning disable formatting in one of the following ways:
     ? configInit.name
       ? pascalCase(configInit.name)
       : `Graffle`
-    : Str.Type.is(configInit.nameNamespace)
+    : Str.is(configInit.nameNamespace)
     ? configInit.nameNamespace
     : `Graffle`
 

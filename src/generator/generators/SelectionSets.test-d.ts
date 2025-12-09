@@ -1,7 +1,7 @@
 import type { Possible } from '#test/schema/possible/client/_.js'
 import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/_.js'
 import { db } from '#test/schema/possible/db.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { test } from 'vitest'
 
 type Q = PossibleNoCustomScalars.SelectionSets.Query
@@ -10,7 +10,7 @@ type QWithDate = Possible.SelectionSets.Query
 declare const Q: Q
 declare const QWithDate: QWithDate
 
-const t = Ts.Assert.sub.of(Q).on
+const t = Assert.sub.of(Q).on
 
 test(`Query`, () => {
   t({ __typename: true })
@@ -87,7 +87,7 @@ test(`Query`, () => {
   // t({ interface: { id: true, ___on_Object2ImplementingInterface: { boolean: true } } })
   // todo:
   // // @ts-expect-error incorrect implementor name
-  // Ts.Assert.subNoExcess<Q>().on({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
+  // Assert.subNoExcess<Q>().on({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
   // directives work on fragments
   t({ interface: { id: true, ___on_Object1ImplementingInterface: { $include: true } } }) // todo should REQUIRE field selection
 
@@ -135,10 +135,10 @@ test(`Query`, () => {
   t({ string: { $skip: {} } })
   t({ string: { $skip: {} } })
   t({ object: { string: { $skip: true } } })
-  // Ts.Assert.sub<S>({ string: skip() })
+  // Assert.sub<S>({ string: skip() })
   // on object
   t({ object: { $skip: true, string: true } })
-  // Ts.Assert.sub<S>({ scalars: skip().select({ a: true }) })
+  // Assert.sub<S>({ scalars: skip().select({ a: true }) })
   // on fragment
   t({ unionFooBar: { ___on_Bar: { $skip: true, int: true } } })
   // @include
@@ -148,7 +148,7 @@ test(`Query`, () => {
   t({ string: { $include: { if: false } } })
   t({ string: { $include: {} } })
   t({ string: { $include: {} } })
-  // Ts.Assert.sub<S>({ string: include() })
+  // Assert.sub<S>({ string: include() })
 
   // @defer
   // t({ string: { $defer: true } })
@@ -172,7 +172,7 @@ test(`Query`, () => {
   // On Root (Query)
   t({ ___: { id: true } })
   t({ ___: { $skip: true, id: true } })
-  Ts.Assert.sub.noExcessAs<Q>().on({
+  Assert.sub.noExcessAs<Q>().on({
     // @ts-expect-error no directives on root type
     $skip: true,
     id: true,
@@ -196,7 +196,7 @@ test(`Query`, () => {
   })
   t({ id: true })
   // builder interface
-  // Ts.Assert.sub<S>({ foo: args({ ... }) })
+  // Assert.sub<S>({ foo: args({ ... }) })
   // all-optional on scalar
   t({ stringWithArgs: true })
   t({ stringWithArgs: {} })
@@ -231,19 +231,19 @@ test(`Query`, () => {
   t({ dateArg: { $: { date: 0 } } })
   t({ dateArg: { $: { date: null } } })
   t({ dateArg: { $: { date: db.date0Encoded } } })
-  Ts.Assert.sub.ofAs<QWithDate>().on({ dateArg: { $: { date: db.date0 } } })
+  Assert.sub.ofAs<QWithDate>().on({ dateArg: { $: { date: db.date0 } } })
 
   // input object arg
   t({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0Encoded } } } })
   t({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0Encoded } } } })
   t({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0Encoded } } } })
-  Ts.Assert.sub.ofAs<QWithDate>().on({
+  Assert.sub.ofAs<QWithDate>().on({
     stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0 } } },
   })
-  Ts.Assert.sub.ofAs<QWithDate>().on({
+  Assert.sub.ofAs<QWithDate>().on({
     stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0 } } },
   })
-  Ts.Assert.sub.ofAs<QWithDate>().on({
+  Assert.sub.ofAs<QWithDate>().on({
     stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0 } } },
   })
   // @ts-expect-error missing "idRequired" field
@@ -253,7 +253,7 @@ test(`Query`, () => {
   // all-optional + scalar + directive
   t({ stringWithArgs: { $: { boolean: true }, $skip: true } })
   // builder interface
-  // Ts.Assert.sub<S>({ foo: args({ boolean: true }).skip().select({ x: 1 }) })
+  // Assert.sub<S>({ foo: args({ boolean: true }).skip().select({ x: 1 }) })
   // 1+ required + scalar
   t({ stringWithRequiredArg: { $: { string: `` } } })
   // @ts-expect-error missing "string" arg
@@ -270,13 +270,13 @@ test(`Query`, () => {
   t({ unionFooBar: { ___on_Bar: { $scalars: true } } })
   t({ unionFooBarWithArgs: { $: { id: `abc` }, ___on_Bar: { $scalars: true } } })
 
-  // Ts.Assert.sub<S>({ scalars: select() })
+  // Assert.sub<S>({ scalars: select() })
 
   // todo empty selection set not allowed, with arguments given
   // todo empty selection set not allowed, with directive given
   // todo empty selection set not allowed
   // // @ts-expect-error empty selection set not allowed
-  // Ts.Assert.sub<S>({ scalars: {} })
+  // Assert.sub<S>({ scalars: {} })
   // todo selection set of _only_ negative indicators should not be allowed
 
   // Interface Hierarchy

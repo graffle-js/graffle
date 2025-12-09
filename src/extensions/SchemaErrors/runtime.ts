@@ -41,7 +41,7 @@ export const SchemaErrors = Extension
       // If __typename is not selected we assume that this is not a result field.
       // The extension makes sure that the __typename would have been selected if it were a result field.
       const __typename = rootFieldValue[`__typename`]
-      if (!Str.Type.is(__typename)) continue
+      if (!Str.is(__typename)) continue
 
       const sddmNode = sddm.outputTypes[__typename]
       const isErrorObject = GraphqlKit.Schema.SchemaDrivenDataMap.isOutputObject(sddmNode)

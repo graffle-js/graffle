@@ -1,10 +1,10 @@
-import { Ts } from '@wollybeard/kit'
+import { Assert, Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { describe, expect, test } from 'vitest'
 import { Var } from './_.js'
 
 const $var = Var.$
-const tsub = Ts.Assert.sub.ofAs
+const tsub = Assert.sub.ofAs
 
 describe('Builder type defaults', () => {
   test('bare type accepts any state (widest)', () => {

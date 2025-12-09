@@ -1,5 +1,5 @@
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
-import { Obj, Ts } from '@wollybeard/kit'
+import { Assert, Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Type } from '../../../../schema/type/_.js'
 import type { Core } from '../../core/_.js'
@@ -13,7 +13,7 @@ import type {
 import type { OutputField } from './OutputField.js'
 import type { ScalarsWildcard } from './ScalarsWildcard.js'
 
-const A = Ts.Assert
+const A = Assert
 
 type SelectionSet = object
 

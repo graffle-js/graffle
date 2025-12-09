@@ -1,12 +1,12 @@
 // dprint-ignore-file
 import { Possible } from '#test/schema/possible/client/_.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import type { Core } from './core/_.js'
 import { $ } from './object/var/var.js'
 import { createGql } from '#src/static/gql.js'
 import type { GraphqlKit } from '#src/exports/utilities-for-generated.js'
 
-const A = Ts.Assert
+const A = Assert
 
 type $ = typeof $
 

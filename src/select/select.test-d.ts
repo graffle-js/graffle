@@ -1,4 +1,4 @@
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { describe, expect, it, test } from 'vitest'
 import { create } from './select.js'
 
@@ -11,10 +11,10 @@ describe(`select`, () => {
   })
 
   it(`has type safe methods`, () => {
-    Ts.Assert.exact.ofAs<{ int: true }>().on(select.Bar({ int: true }))
+    Assert.exact.ofAs<{ int: true }>().on(select.Bar({ int: true }))
     // Errors
     // @ts-expect-error Excess property check.
-    Ts.Assert.exact.ofAs<{ int: true }>().on(select.Bar({ int: true, int2: true }))
+    Assert.exact.ofAs<{ int: true }>().on(select.Bar({ int: true, int2: true }))
   })
 })
 

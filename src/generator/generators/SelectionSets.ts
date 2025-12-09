@@ -2,7 +2,7 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Obj, Str } from '@wollybeard/kit'
+import { Obj, Str, Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -130,7 +130,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
   code(codeImportNamed(config, { names: `$DefaultSelectionContext`, from: './_context', type: true }))
   code()
 
-  code(Str.Code.TS.interfaceDecl({
+  code(Syn.TS.interfaceDecl({
     export: true,
     name: `$Document`,
     parameters: `<${$ContextTypeParameter}>`,
@@ -204,7 +204,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
   scalarsCode()
 
   // Generate JSDoc for $Scalar base utility
-  scalarsCode(Str.Code.TSDoc.format(getScalarBaseDoc()))
+  scalarsCode(Syn.TSDoc.format(getScalarBaseDoc()))
   scalarsCode(`export type $Scalar<`)
   scalarsCode(`  $ScalarName extends string,`)
   scalarsCode(
@@ -219,13 +219,13 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
   scalarsCode()
 
   // Generate wrapper utilities
-  scalarsCode(Str.Code.TSDoc.format(getScalarNullableDoc()))
+  scalarsCode(Syn.TSDoc.format(getScalarNullableDoc()))
   scalarsCode(
     `export type Nullable<$Type> = GraphqlKit.Document.Object.Var.MaybeSchemaful<$Type | null | undefined>`,
   )
   scalarsCode()
 
-  scalarsCode(Str.Code.TSDoc.format(getScalarNonNullDoc()))
+  scalarsCode(Syn.TSDoc.format(getScalarNonNullDoc()))
   scalarsCode(`export type NonNull<$Type> = GraphqlKit.Document.Object.Var.MaybeSchemaful<$Type>`)
   scalarsCode()
 
@@ -307,11 +307,11 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
 const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.Nodes.EnumType): GeneratedModule => {
   const code = Str.Builder()
 
-  code(Str.Code.TS.typeAlias$({
+  code(Syn.TS.typeAlias$({
     tsDoc: getEnumTypeSelectionSetDoc(enumType),
     export: true,
     name: enumType.name,
-    type: Str.Code.TS.unionItems(enumType.getValues().map((value) => Str.Code.TS.string(value.name))),
+    type: Syn.TS.unionItems(enumType.getValues().map((value) => Syn.TS.string(value.name))),
   }))
 
   return {
@@ -367,14 +367,14 @@ const generateUnionModule = (
   mainCode()
 
   const fragmentsInlineType = unionType.getTypes().map((memberType) => {
-    const doc = Str.Code.TSDoc.format(getInlineFragmentDoc(memberType, unionType, 'union'))
+    const doc = Syn.TSDoc.format(getInlineFragmentDoc(memberType, unionType, 'union'))
     const field = `${GraphqlKit.Document.Object.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
       H.namedTypesReference(memberType)
     }`
     return `${doc}\n${field}`
   }).join(`\n`)
 
-  mainCode(Str.Code.TS.interfaceDecl({
+  mainCode(Syn.TS.interfaceDecl({
     tsDoc: getUnionTypeSelectionSetDoc(unionType),
     export: true,
     name: unionType.name,
@@ -454,7 +454,7 @@ const generateInputObjectModule = (
   namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields', type: true }))
   namespaceCode()
 
-  namespaceCode(Str.Code.TS.interfaceDecl({
+  namespaceCode(Syn.TS.interfaceDecl({
     tsDoc: getInputObjectTypeSelectionSetDoc(inputObject),
     export: true,
     name: inputObject.name,
@@ -582,7 +582,7 @@ const generateFieldedTypeModule = (
     const isCanBeIndicator = (GraphqlKit.Schema.Runtime.Nodes.isScalarType(namedType)
       || GraphqlKit.Schema.Runtime.Nodes.isEnumType(namedType))
       && argsAnalysis.isAllNullable
-    const doc = Str.Code.TSDoc.format(getOutputFieldSelectionSetDoc(field, type.name, namedType))
+    const doc = Syn.TSDoc.format(getOutputFieldSelectionSetDoc(field, type.name, namedType))
     const key = H.outputFieldKey(
       field.name,
       `$Fields.${field.name}`, // Use $Fields import to avoid circular reference
@@ -603,7 +603,7 @@ const generateFieldedTypeModule = (
     onTypesRendered = implementorTypes.map(implementorType => {
       // Note: getInlineFragmentDoc expects ObjectType, but implementors can be interfaces too
       // The function only uses the type name, so we cast here
-      const doc = Str.Code.TSDoc.format(
+      const doc = Syn.TSDoc.format(
         getInlineFragmentDoc(implementorType as GraphqlKit.Schema.Runtime.Nodes.ObjectType, type, 'interface'),
       )
       const field = `${GraphqlKit.Document.Object.Select.InlineFragment.typeConditionPRefix}${implementorType.name}?: ${
@@ -630,7 +630,7 @@ const generateFieldedTypeModule = (
     ? getInterfaceTypeSelectionSetDoc(type as GraphqlKit.Schema.Runtime.Nodes.InterfaceType, config.schema.kindMap)
     : getObjectTypeSelectionSetDoc(type as GraphqlKit.Schema.Runtime.Nodes.ObjectType, isRoot)
 
-  namespaceCode(Str.Code.TS.interfaceDecl({
+  namespaceCode(Syn.TS.interfaceDecl({
     tsDoc,
     export: true,
     name: type.name,
@@ -680,7 +680,7 @@ const renderOutputFieldForFields = (
 
   // Main field type - references the namespace's $SelectionSet
   const mainTypeDecl = `${safeName}<${$ContextTypeParameter}> = ${
-    Str.Code.TS.unionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
+    Syn.TS.unionItems([indicator, shortAlias, stringAlias, `${safeName}.$SelectionSet<${i._$Context}>`])
   }`
   if (isReservedKeyword(field.name)) {
     code(`type ${mainTypeDecl}`)
@@ -719,7 +719,7 @@ const renderOutputFieldForFields = (
   if (argsAnalysis.hasAny) {
     code(`  export interface $Arguments<${$ContextTypeParameter}> {`)
     for (const arg of field.args) {
-      const doc = Str.Code.TSDoc.format(
+      const doc = Syn.TSDoc.format(
         getArgumentDoc(config, arg, field, parentType as GraphqlKit.Schema.Runtime.Nodes.ObjectType),
       )
       const key = getInputFieldKey(arg)
@@ -733,10 +733,10 @@ const renderOutputFieldForFields = (
   }
 
   // Expanded type
-  code(`  ${Str.Code.TSDoc.format(getExpandedTypeDoc(field.name))}`)
+  code(`  ${Syn.TSDoc.format(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
-      Str.Code.TS.unionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
+      Syn.TS.unionItems([indicator, shortAlias, stringAlias, `$SelectionSet<${i._$Context}>`])
     }>`,
   )
 
@@ -769,7 +769,7 @@ const renderFieldPropertyArguments = (
       ? `${lead} are required so you may omit this.`
       : `${lead} are required so you must include this.`
     const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-    return Str.Code.TS.field(GraphqlKit.Document.Object.Select.Arguments.key, argFieldsRendered, {
+    return Syn.TS.field(GraphqlKit.Document.Object.Select.Arguments.key, argFieldsRendered, {
       optional: argsAnalysis.isAllNullable,
       readonly: true,
       tsDoc,
@@ -829,12 +829,12 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
   }
 
   if (config.schema.kindMap.index.Root.query) {
-    code(Str.Code.TSDoc.format(getOperationInferDoc('Query')))
+    code(Syn.TSDoc.format(getOperationInferDoc('Query')))
     code(
       `export type Query$Infer<$SelectionSet extends object> = GraphqlKit.Document.Object.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
-    code(Str.Code.TSDoc.format(getOperationVariablesDoc('Query')))
+    code(Syn.TSDoc.format(getOperationVariablesDoc('Query')))
     code(
       `export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
@@ -842,12 +842,12 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
   }
 
   if (config.schema.kindMap.index.Root.mutation) {
-    code(Str.Code.TSDoc.format(getOperationInferDoc('Mutation')))
+    code(Syn.TSDoc.format(getOperationInferDoc('Mutation')))
     code(
       `export type Mutation$Infer<$SelectionSet extends object> = GraphqlKit.Document.Object.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
     code()
-    code(Str.Code.TSDoc.format(getOperationVariablesDoc('Mutation')))
+    code(Syn.TSDoc.format(getOperationVariablesDoc('Mutation')))
     code(
       `export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
@@ -881,7 +881,7 @@ const generateNamespaceModule = (config: Config, kindMap: GraphqlKit.Schema.Kind
  * Check if a name is a reserved keyword and needs escaping
  */
 const isReservedKeyword = (name: string): boolean => {
-  return Str.Code.TS.Reserved.reservedNames.includes(name as any)
+  return Syn.TS.Reserved.reservedNames.includes(name as any)
 }
 
 /**
@@ -986,7 +986,7 @@ const getInputFieldLike = (
 ) => {
   return [
     getInputFieldKey(inputFieldLike),
-    Str.Code.TS.objectField$({
+    Syn.TS.objectField$({
       tsDoc: getTsDocContents(config, inputFieldLike),
       optional: GraphqlKit.Schema.Runtime.Nodes.isNullableType(inputFieldLike.type),
       value: renderArgumentType(inputFieldLike.type),
@@ -1100,7 +1100,7 @@ namespace H {
       | GraphqlKit.Schema.Runtime.Nodes.UnionType
       | GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
   ) => {
-    const doc = Str.Code.TSDoc.format(getFragmentInlineFieldDoc())
+    const doc = Syn.TSDoc.format(getFragmentInlineFieldDoc())
 
     return `${doc}\n___?: $FragmentInline<${i._$Context}> | $FragmentInline<${i._$Context}>[]`
   }
@@ -1111,7 +1111,7 @@ namespace H {
       | GraphqlKit.Schema.Runtime.Nodes.UnionType
       | GraphqlKit.Schema.Runtime.Nodes.InterfaceType,
   ) => {
-    return Str.Code.TS.interfaceDecl({
+    return Syn.TS.interfaceDecl({
       export: true,
       name: `$FragmentInline`,
       parameters: `<${$ContextTypeParameter}>`,
@@ -1124,6 +1124,6 @@ namespace H {
   }
 
   const __typenameDoc = (kind: 'union' | 'interface' | 'object') => {
-    return Str.Code.TSDoc.format(getTypenameFieldDoc(kind))
+    return Syn.TSDoc.format(getTypenameFieldDoc(kind))
   }
 }

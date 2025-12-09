@@ -85,7 +85,7 @@ export const contextFragmentPropertiesTypeLevel = Ts.as<
 export const contextFragmentEmpty: ContextFragmentEmpty = Object.freeze({
   properties: Object.freeze({
     static: Obj.emptyObject,
-    computed: Arr.emptyArray,
+    computed: Arr.empty,
     ...contextFragmentPropertiesTypeLevel,
   }),
 })

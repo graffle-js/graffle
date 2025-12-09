@@ -3,7 +3,7 @@ import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { test } from '#test/helpers'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert, Ts } from '@wollybeard/kit'
 import { parse } from 'graphql'
 import { describe, expect } from 'vitest'
 import { TransportMemory } from '../../../extensions/TransportMemory/TransportMemory.js'
@@ -23,7 +23,7 @@ describe(`given typed document node`, () => {
       parse(`query GetId { id }`),
     )
     const result = await g.gql(doc).$send()
-    Ts.Assert.exact.ofAs<ResultData | null>().on(result)
+    Assert.exact.ofAs<ResultData | null>().on(result)
     expect(result).toEqual({ id: db.id1 })
   })
 

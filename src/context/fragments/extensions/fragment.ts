@@ -19,6 +19,6 @@ export interface ContextFragmentEmpty extends ContextFragment {
 }
 
 export const contextFragmentEmpty: ContextFragmentEmpty = {
-  extensions: Arr.emptyArray,
+  extensions: Arr.empty,
   extensionsIndex: Obj.emptyObject,
 }

@@ -2,7 +2,7 @@ import { GraffleBare } from '#graffle/presets/bare'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '#src/lib/graphql-kit/http/__.js'
 import { createGraphQLResponse, createGraphQLResponseData, test as testBase } from '#test/helpers'
 import { serveSchema } from '#test/lib/serveSchema'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { TransportHttp } from './TransportHttp.js'
 
@@ -50,7 +50,7 @@ test(`when envelope is used then response property is present even if relying on
   const result = await g2.gql('query { pokemons { name } }').$send()
   await service.stop()
   // @ts-expect-error fixme
-  Ts.Assert.exact.ofAs<Response>().on(result.response)
+  Assert.exact.ofAs<Response>().on(result.response)
 })
 
 describe(`methodMode`, () => {

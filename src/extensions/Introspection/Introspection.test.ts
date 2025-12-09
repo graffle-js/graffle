@@ -1,6 +1,6 @@
 import { GraffleBasic } from '#graffle/presets/basic'
 import { test } from '#test/helpers'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import type { IntrospectionQuery } from 'graphql'
 import { expect } from 'vitest'
 import { Introspection } from './Introspection.js'
@@ -10,5 +10,5 @@ test(`adds an introspection method that introspects the schema`, async ({ schema
   graffle._.typeHookRequestResultDataTypes
   const result = await graffle.introspect()
   expect(result).toMatchSnapshot()
-  Ts.Assert.sub.ofAs<IntrospectionQuery | null>().on(result)
+  Assert.sub.ofAs<IntrospectionQuery | null>().on(result)
 })

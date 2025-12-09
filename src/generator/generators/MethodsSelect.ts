@@ -1,4 +1,4 @@
-import { Str } from '@wollybeard/kit'
+import { Str, Syn } from '@wollybeard/kit'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { getMethodsSelectDoc } from '../helpers/jsdoc.js'
@@ -16,7 +16,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
     code(importUtilities(config))
     code``
-    code(Str.Code.TS.Comment.title1(`Select Methods Interface`))
+    code(Syn.TS.Comment.title1(`Select Methods Interface`))
     code``
     code`
       /**
@@ -27,7 +27,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
        * that return the selection set itself (for document building).
        */
     `
-    code(Str.Code.TS.interfaceDecl({
+    code(Syn.TS.interfaceDecl({
       name: `$MethodsSelect`,
       block: Obj.values(kindMap).flatMap(type => {
         return type.map(type => {
@@ -37,11 +37,11 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     }))
     code``
     for (const [kindName, kind] of kinds) {
-      code(Str.Code.TS.Comment.title1(kindName))
+      code(Syn.TS.Comment.title1(kindName))
       code``
       for (const type of kind) {
-        code(Str.Code.TSDoc.format(getMethodsSelectDoc(type)))
-        code(Str.Code.TS.interfaceDecl({
+        code(Syn.TSDoc.format(getMethodsSelectDoc(type)))
+        code(Syn.TS.interfaceDecl({
           name: type.name,
           block: `
             <$SelectionSet>(selectionSet: ${$.$$Utilities}.NoExcess<$SelectionSet, $$SelectionSets.${

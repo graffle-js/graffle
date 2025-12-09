@@ -1,4 +1,4 @@
-import { Str } from '@wollybeard/kit'
+import { Str, Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from './identifiers.js'
 
@@ -99,7 +99,7 @@ export const getUtilitiesPath = (config: Config, sourceFilePath: string): string
  * ```
  */
 export const importUtilities = (config: Config): string => {
-  return Str.Code.TS.importAll({
+  return Syn.TS.importAll({
     as: $.$$Utilities,
     from: config.paths.imports.grafflePackage.utilitiesForGenerated,
     type: true,
@@ -119,7 +119,7 @@ export const importUtilities = (config: Config): string => {
  * ```
  */
 export const importGraphqlKit = (config: Config): string => {
-  return Str.Code.TS.importNamed({
+  return Syn.TS.importNamed({
     names: ['GraphqlKit'],
     from: config.paths.imports.grafflePackage.utilitiesForGenerated,
     type: true,
@@ -218,7 +218,7 @@ export const codeReexportAll = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Str.Code.TS.reexportAll({
+  return Syn.TS.reexportAll({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -238,7 +238,7 @@ export const codeReexportNamespace = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Str.Code.TS.reexportNamespace({
+  return Syn.TS.reexportNamespace({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -258,7 +258,7 @@ export const codeReexportNamed = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Str.Code.TS.reexportNamed({
+  return Syn.TS.reexportNamed({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -278,7 +278,7 @@ export const codeImportAll = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Str.Code.TS.importAll({
+  return Syn.TS.importAll({
     ...input,
     from: applyImportExtension(config, input.from),
   })
@@ -298,7 +298,7 @@ export const codeImportNamed = (config: Config, input: {
   from: string
   type?: boolean
 }): string => {
-  return Str.Code.TS.importNamed({
+  return Syn.TS.importNamed({
     ...input,
     from: applyImportExtension(config, input.from),
   })

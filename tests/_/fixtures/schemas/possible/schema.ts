@@ -283,6 +283,11 @@ const ABCEnum = builder.enumType(`ABCEnum`, {
   },
 })
 
+const ReservedWordsEnum = builder.enumType(`ReservedWordsEnum`, {
+  description: `Enum with TypeScript reserved word values for testing issue #1470.`,
+  values: [`as`, `in`, `is`] as const,
+})
+
 const ObjectNested = builder.simpleObject(`ObjectNested`, {
   fields: t => ({
     id: t.field({ type: `ID` }),
@@ -624,6 +629,11 @@ builder.queryType({
     }),
     unionObject: t.field({ type: ObjectUnion, resolve: () => db.ObjectUnion }),
     unionObjectNonNull: t.field({ type: ObjectUnion, nullable: false, resolve: () => db.ObjectUnion }),
+    // Reserved Words Enum
+    reservedWordsEnum: t.field({
+      type: ReservedWordsEnum,
+      resolve: () => db.ReservedWordsEnum,
+    }),
     // Result
     result: t.field({
       args: { case: t.arg({ type: ResultCase, required: true }) },

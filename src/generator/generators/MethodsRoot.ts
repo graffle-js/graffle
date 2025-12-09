@@ -1,7 +1,7 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { createFromObjectTypeAndMapOrThrow } from '#src/lib/graphql-kit/schema/runtime/root/details.js'
-import { Str } from '@wollybeard/kit'
+import { Str, Syn } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
   getBatchMethodDoc,
@@ -156,7 +156,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     if (config.methodsOrganization.logical) {
       config.schema.kindMap.root.list.forEach(node => {
         const propertyDoc = getRootPropertyDoc(node.operationType)
-        code(Str.Code.TSDoc.format(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
+        code(Syn.TSDoc.format(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
         code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
       })
     }
@@ -188,7 +188,7 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime.Nod
     // Interface JSDoc
     const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
     if (interfaceDoc) {
-      code(Str.Code.TSDoc.format(interfaceDoc))
+      code(Syn.TSDoc.format(interfaceDoc))
     }
 
     // dprint-ignore
@@ -196,7 +196,7 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime.Nod
 
     // $batch JSDoc
     const batchDoc = getBatchMethodDoc(operationType)
-    code(Str.Code.TSDoc.format(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
+    code(Syn.TSDoc.format(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
     // dprint-ignore
     code`
@@ -225,7 +225,7 @@ const renderRootType = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime.Nod
 
     // __typename JSDoc
     const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-    code(Str.Code.TSDoc.format(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
+    code(Syn.TSDoc.format(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
 
     // dprint-ignore
     code`
@@ -253,7 +253,7 @@ const renderFieldMethods = createCodeGenerator<{ node: GraphqlKit.Schema.Runtime
     for (const field of Object.values(node.getFields())) {
       const docContent = getOutputFieldMethodDoc(config, field, node)
       if (docContent) {
-        code(Str.Code.TSDoc.format(docContent))
+        code(Syn.TSDoc.format(docContent))
       }
 
       const fieldTypeUnwrapped = GraphqlKit.Schema.Runtime.getNamedType(field.type)
@@ -797,7 +797,7 @@ const renderDomainType = createCodeGenerator<{
 
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      code(Str.Code.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
+      code(Syn.TSDoc.format(docContent).split('\n').map(line => `  ${line}`).join('\n'))
     }
 
     const fieldTypeUnwrapped = GraphqlKit.Schema.Runtime.getNamedType(fieldDef.type)

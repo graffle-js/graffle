@@ -1,10 +1,10 @@
 // dprint-ignore-file
 import type { Possible } from '#test/schema/possible/client/_.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import type { InferFromQuery } from './infer.js'
 import { $ } from './var.js'
 
-const A = Ts.Assert
+const A = Assert
 
 type $ = typeof $
 

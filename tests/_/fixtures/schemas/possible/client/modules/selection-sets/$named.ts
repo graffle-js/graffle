@@ -4,6 +4,7 @@ export type { ChildAInterfaceHierarchyMember } from './enums/ChildAInterfaceHier
 export type { ChildBInterfaceHierarchyMember } from './enums/ChildBInterfaceHierarchyMember.js'
 export type { GrandparentInterfaceHierarchyMember } from './enums/GrandparentInterfaceHierarchyMember.js'
 export type { ParentInterfaceHierarchyMember } from './enums/ParentInterfaceHierarchyMember.js'
+export type { ReservedWordsEnum } from './enums/ReservedWordsEnum.js'
 export type { InputObject } from './input-objects/InputObject/_.js'
 export type { InputObjectCircular } from './input-objects/InputObjectCircular/_.js'
 export type { InputObjectEnum } from './input-objects/InputObjectEnum/_.js'

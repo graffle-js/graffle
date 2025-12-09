@@ -32,6 +32,12 @@ const ABCEnum = {
   C: `C`,
 } as const
 
+const ReservedWordsEnum = {
+  as: `as`,
+  in: `in`,
+  is: `is`,
+} as const
+
 const Object1 = {
   string,
   int,
@@ -160,6 +166,7 @@ export const db = {
   },
   Interface: { id },
   ABCEnum: ABCEnum.A,
+  ReservedWordsEnum: ReservedWordsEnum.as,
   ErrorOne: { message: `errorOne`, infoId: id },
   ErrorTwo: { message: `errorOne`, infoInt: int },
   ErrorOneError,

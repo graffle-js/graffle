@@ -1,0 +1,5 @@
+export type bug = 'bug'
+export type electric = 'electric'
+export type fire = 'fire'
+export type grass = 'grass'
+export type water = 'water'

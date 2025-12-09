@@ -320,10 +320,10 @@ export type Node =
 export const isEnum = (
   node?: Node,
 ): node is Enum => {
-  return node ? !Str.Type.is(node) && '_tag' in node && node._tag === 'enum' : false
+  return node ? !Str.is(node) && '_tag' in node && node._tag === 'enum' : false
 }
 
-export const isCustomScalarName = (value: unknown): value is CustomScalarName => Str.Type.is(value)
+export const isCustomScalarName = (value: unknown): value is CustomScalarName => Str.is(value)
 
 export const isScalar = Type.Scalars.isScalar
 
@@ -333,19 +333,19 @@ export const isScalarLike = (value: unknown): value is ScalarLikeNodes =>
 export const isOutputObject = (
   node?: Node,
 ): node is OutputObject => {
-  return node ? !Str.Type.is(node) && '_tag' in node && node._tag === 'outputObject' : false
+  return node ? !Str.is(node) && '_tag' in node && node._tag === 'outputObject' : false
 }
 
 export const isInputObject = (
   node?: InputNodes,
 ): node is InputObject => {
-  return node ? !Str.Type.is(node) && '_tag' in node && node._tag === 'inputObject' : false
+  return node ? !Str.is(node) && '_tag' in node && node._tag === 'inputObject' : false
 }
 
 export const isOutputField = (
   node?: Node,
 ): node is OutputField => {
-  return node ? !Str.Type.is(node) && '_tag' in node && node._tag === 'outputField' : false
+  return node ? !Str.is(node) && '_tag' in node && node._tag === 'outputField' : false
 }
 
 // Constants

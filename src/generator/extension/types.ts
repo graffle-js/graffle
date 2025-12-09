@@ -1,5 +1,5 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Str } from '@wollybeard/kit'
+import { Str, type Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 
 export interface Extension {
@@ -13,17 +13,17 @@ export interface Extension {
 
 export interface SchemaHookParams {
   config: Config
-  schema: Str.Code.TS.TermObject.TermObject
+  schema: Syn.TS.TermObject.TermObject
 }
 
 export interface ObjectTypeHookParams {
   config: Config
-  sddmNode: Str.Code.TS.TermObject.TermObject
+  sddmNode: Syn.TS.TermObject.TermObject
   graphqlType: GraphqlKit.Schema.Runtime.Nodes.ObjectType
 }
 
 export interface OutputFieldHookParams {
   config: Config
-  sddmNode: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
+  sddmNode: Syn.TS.TermObject.DirectiveTermObjectLike<Syn.TS.TermObject.TermObject>
   graphqlType: GraphqlKit.Schema.Runtime.Nodes.Field<any, any>
 }

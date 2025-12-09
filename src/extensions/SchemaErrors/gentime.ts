@@ -1,8 +1,7 @@
 import { Extension } from '#graffle/extension'
 import type { Config as GeneratorConfig } from '#src/generator/config/config.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { ConfigManager } from '@wollybeard/kit'
-import { Str } from '@wollybeard/kit'
+import { ConfigManager, Syn } from '@wollybeard/kit'
 
 // Augment global extension interfaces
 declare global {
@@ -43,7 +42,7 @@ export const SchemaErrors = (input?: Input) => {
     onSchema: ({ config: genConfig, schema }) => {
       const errorObjects = getErrorObjects(config, genConfig)
       schema[`SchemaErrors`] = {
-        objectNames: errorObjects.map(type => Str.Code.TS.string(type.name)).join(` | `),
+        objectNames: errorObjects.map(type => Syn.TS.string(type.name)).join(` | `),
       }
     },
     schemaDrivenDataMap: {

@@ -1,13 +1,13 @@
 // dprint-ignore-file
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Possible } from '#test/schema/possible/client/_.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import { $ } from '#src/lib/graphql-kit/document/docpar/object/var/var.js'
 import { test } from 'vitest'
 
 type D<$Op extends GraphqlKit.Document.Operation> = GraphqlKit.Document.Doc.Document<$Op>
 const Q = Possible.query
-const A = Ts.Assert.exact
+const A = Assert.exact
 
 // ==================================================================================================
 //                                 Static Root Type Builder Type Output Inference
@@ -139,7 +139,7 @@ type SingleOpNoVars = D<{ name: 'myQuery'; result: { date: Date | null }; variab
 
 const x = Possible.gql(`query myQuery { date }`)
 A.ofAs<SingleOpNoVars>().on(Possible.gql(`query myQuery { date }`))
-Ts.Assert.equiv.ofAs<SingleOpNoVars>().on(Possible.gql({ query: { myQuery: { date: true } } }))
+Assert.equiv.ofAs<SingleOpNoVars>().on(Possible.gql({ query: { myQuery: { date: true } } }))
 
 // ==================================================================================================
 //                                 Single operation, required variables
@@ -147,9 +147,9 @@ Ts.Assert.equiv.ofAs<SingleOpNoVars>().on(Possible.gql({ query: { myQuery: { dat
 
 type SingleOpRequiredVars = D<{ name: 'getById'; result: { interfaceWithArgs: { id: string | null } | null }; variables: { id: string } }>
 
-Ts.Assert.equiv.ofAs<SingleOpRequiredVars>().on(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
+Assert.equiv.ofAs<SingleOpRequiredVars>().on(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
 // dprint-ignore
-Ts.Assert.equiv.ofAs<SingleOpRequiredVars>().on(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
+Assert.equiv.ofAs<SingleOpRequiredVars>().on(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }))
 
 // ==================================================================================================
 //                                 Single operation, optional variables
@@ -160,7 +160,7 @@ type SingleOpOptionalVars = D<{ name: 'search'; result: { stringWithArgs: string
 A.ofAs<SingleOpOptionalVars>().on(
   Possible.gql(`query search($string: String) { stringWithArgs(string: $string) }`),
 )
-Ts.Assert.equiv.ofAs<SingleOpOptionalVars>().on(
+Assert.equiv.ofAs<SingleOpOptionalVars>().on(
   Possible.gql({ query: { search: { stringWithArgs: { $: { string: $ }, __typename: true } } } }),
 )
 
@@ -175,13 +175,13 @@ type DefaultOpWithScalar = D<{ name: 'default'; result: { date: Date | null }; v
 type DefaultOpOptionalVars = D<{ name: 'default'; result: { stringWithArgs: string | null }; variables: { string?: string | null | undefined } }>
 
 A.ofAs<DefaultOpNoVars>().on(Possible.gql(`{ id }`))
-Ts.Assert.equiv.ofAs<DefaultOpNoVars>().on(Possible.gql({ query: { default: { id: true } } }))
+Assert.equiv.ofAs<DefaultOpNoVars>().on(Possible.gql({ query: { default: { id: true } } }))
 
 A.ofAs<DefaultOpWithScalar>().on(Possible.gql(`{ date }`))
-Ts.Assert.equiv.ofAs<DefaultOpWithScalar>().on(Possible.gql({ query: { default: { date: true } } }))
+Assert.equiv.ofAs<DefaultOpWithScalar>().on(Possible.gql({ query: { default: { date: true } } }))
 
 A.ofAs<DefaultOpOptionalVars>().on(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
-Ts.Assert.equiv.ofAs<DefaultOpOptionalVars>().on(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
+Assert.equiv.ofAs<DefaultOpOptionalVars>().on(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
 
 // ==================================================================================================
 //                                   Multiple operations, no variables
@@ -196,7 +196,7 @@ A.ofAs<MultiOpNoVars>().on(Possible.gql(`
   query getUser { id }
   mutation addId { id }
 `))
-Ts.Assert.equiv.ofAs<MultiOpNoVars>().on(Possible.gql({
+Assert.equiv.ofAs<MultiOpNoVars>().on(Possible.gql({
   query: { getUser: { id: true } },
   mutation: { addId: { id: true } },
 }))
@@ -210,13 +210,13 @@ type MultiOpWithVars = D<
   | { name: 'setId'; result: { idNonNull: string }; variables: {} }
 >
 
-Ts.Assert.equiv.ofAs<MultiOpWithVars>().on(
+Assert.equiv.ofAs<MultiOpWithVars>().on(
   Possible.gql(`
     query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }
     mutation setId { idNonNull }
   `),
 )
-Ts.Assert.equiv.ofAs<MultiOpWithVars>().on(
+Assert.equiv.ofAs<MultiOpWithVars>().on(
   Possible.gql({
     query: {
       getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } },

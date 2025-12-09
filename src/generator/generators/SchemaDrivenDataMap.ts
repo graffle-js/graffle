@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Obj } from '@wollybeard/kit'
+import { Obj, Syn } from '@wollybeard/kit'
 import { Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
@@ -41,7 +41,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const standardScalarNames = new Set(kindMap.ScalarStandard?.map(_ => _.name) ?? [])
 
     // Generate type interfaces
-    code(Str.Code.TS.Comment.title1(`Types`))
+    code(Syn.TS.Comment.title1(`Types`))
     code``
     for (const [kindName, nodes] of kinds) {
       // Skip all scalars - they are all referenced from $$Scalar module
@@ -55,7 +55,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
 
     // Generate runtime terms
     for (const [kindName, nodes] of kinds) {
-      code(Str.Code.TS.Comment.title1(kindName))
+      code(Syn.TS.Comment.title1(kindName))
       code``
       if (nodes.length === 0) {
         code`// None of your ${kindName}s have custom scalars.`
@@ -68,7 +68,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       code``
     }
 
-    code(Str.Code.TS.Comment.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
+    code(Syn.TS.Comment.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
     code``
     if (referenceAssignments.length === 0) {
       code`// None of your types have references to other non-scalar/enum types.`
@@ -82,7 +82,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     }
     code``
 
-    code(Str.Code.TS.Comment.title1(`Index`))
+    code(Syn.TS.Comment.title1(`Index`))
     code``
 
     // Categorize types into input and output based on directionality
@@ -143,26 +143,26 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
 
     // Generate runtime const
     code`const $schemaDrivenDataMap: SchemaDrivenDataMap =`
-    code(Str.Code.TS.TermObject.termObject({
+    code(Syn.TS.TermObject.termObject({
       operations: kindMap.Root.map(type => {
         const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
         if (!operationType) throw new Error(`Operation type not found for ${type.name}`)
         return [operationType, type.name] as const
       }),
       directives: {},
-      inputTypes: Str.Code.TS.TermObject.directiveTermObject({
+      inputTypes: Syn.TS.TermObject.directiveTermObject({
         $literal: inputTypeNames.map(name => {
           const isScalar = standardScalarNames.has(name) || kindMap.ScalarCustom?.some(_ => _.name === name)
           return isScalar ? `${name}: ${$.$$Scalar}.${name}` : name
         }).join(`,\n`),
       }),
-      outputTypes: Str.Code.TS.TermObject.directiveTermObject({
+      outputTypes: Syn.TS.TermObject.directiveTermObject({
         $literal: outputTypeNames.map(name => {
           const isScalar = standardScalarNames.has(name) || kindMap.ScalarCustom?.some(_ => _.name === name)
           return isScalar ? `${name}: ${$.$$Scalar}.${name}` : name
         }).join(`,\n`),
       }),
-      scalarTypes: Str.Code.TS.TermObject.directiveTermObject({
+      scalarTypes: Syn.TS.TermObject.directiveTermObject({
         $literal: allScalarNames.map(name => `${name}: ${$.$$Scalar}.${name}`).join(`,\n`),
       }),
     }))
@@ -294,12 +294,12 @@ const UnionType = createCodeGenerator<
     //
     // So what we do is inline all the custom scalar paths of all union members knowing
     // that they could never conflict.
-    code(Str.Code.TS.constDeclTyped(
+    code(Syn.TS.constDeclTyped(
       type.name,
       type.name,
-      Str.Code.TS.TermObject.termObject({
-        _tag: Str.Code.TS.string('outputObject'),
-        fields: Str.Code.TS.TermObject.directiveTermObject({
+      Syn.TS.TermObject.termObject({
+        _tag: Syn.TS.string('outputObject'),
+        fields: Syn.TS.TermObject.directiveTermObject({
           $spread: type.getTypes().filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
             memberType.name + `.fields`
           ),
@@ -314,12 +314,12 @@ const InterfaceType = createCodeGenerator<
 >(
   ({ code, type, config }) => {
     const implementorTypes = GraphqlKit.Schema.Kind.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-    code(Str.Code.TS.constDeclTyped(
+    code(Syn.TS.constDeclTyped(
       type.name,
       type.name,
-      Str.Code.TS.TermObject.termObject({
-        _tag: Str.Code.TS.string('outputObject'),
-        fields: Str.Code.TS.TermObject.directiveTermObject({
+      Syn.TS.TermObject.termObject({
+        _tag: Syn.TS.string('outputObject'),
+        fields: Syn.TS.TermObject.directiveTermObject({
           $spread: implementorTypes.filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalars).map(memberType =>
             memberType.name + `.fields`
           ),
@@ -338,8 +338,8 @@ const ObjectType = createCodeGenerator<
   }
 >(
   ({ config, code, type, referenceAssignments, argsIndex, standardScalarNames }) => {
-    const o: Str.Code.TS.TermObject.TermObject = {
-      _tag: Str.Code.TS.string('outputObject'),
+    const o: Syn.TS.TermObject.TermObject = {
+      _tag: Syn.TS.string('outputObject'),
     }
 
     config.extensions.forEach(_ => {
@@ -352,7 +352,7 @@ const ObjectType = createCodeGenerator<
 
     // Fields of this object.
     // ---------------------
-    const of: Str.Code.TS.TermObject.TermObject = {}
+    const of: Syn.TS.TermObject.TermObject = {}
     o['fields'] = of
 
     const condition = typeCondition(config)
@@ -360,9 +360,9 @@ const ObjectType = createCodeGenerator<
     const outputFields = Object.values(type.getFields()).filter(condition)
     for (const outputField of outputFields) {
       const outputFieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(outputField.type)
-      const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
+      const sddmNodeOutputField: Syn.TS.TermObject.DirectiveTermObjectLike<Syn.TS.TermObject.TermObject> = {
         $fields: {
-          _tag: Str.Code.TS.string('outputField'),
+          _tag: Syn.TS.string('outputField'),
         },
       }
       of[outputField.name] = sddmNodeOutputField
@@ -371,12 +371,12 @@ const ObjectType = createCodeGenerator<
       const inputCondition = inputTypeCondition(config)
       const args = outputField.args.filter(inputCondition)
       if (args.length > 0) {
-        const ofItemAs: Str.Code.TS.TermObject.TermObject = {}
+        const ofItemAs: Syn.TS.TermObject.TermObject = {}
         sddmNodeOutputField.$fields['arguments'] = ofItemAs
 
         for (const arg of args) {
-          const ofItemA: Str.Code.TS.TermObject.TermObject = {
-            _tag: Str.Code.TS.string('argumentOrInputField'),
+          const ofItemA: Syn.TS.TermObject.TermObject = {
+            _tag: Syn.TS.string('argumentOrInputField'),
           }
           ofItemAs[arg.name] = ofItemA
 
@@ -398,7 +398,7 @@ const ObjectType = createCodeGenerator<
 
         // Generate top-level $argumentsType map for O(1) type lookup (runtime value)
         if (config.runtimeFeatures.operationVariables) {
-          const argumentsTypeObject: Str.Code.TS.TermObject.TermObject = {}
+          const argumentsTypeObject: Syn.TS.TermObject.TermObject = {}
           for (const arg of args) {
             argumentsTypeObject[arg.name] = `null as any as ${renderResolvedType(arg.type, config)}`
           }
@@ -453,10 +453,10 @@ const ObjectType = createCodeGenerator<
     }
 
     code(
-      Str.Code.TS.constDeclTyped(
+      Syn.TS.constDeclTyped(
         type.name,
         type.name,
-        Str.Code.TS.TermObject.termObject(o),
+        Syn.TS.TermObject.termObject(o),
       ),
     )
   },
@@ -466,21 +466,21 @@ const EnumType = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.EnumType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type }) => {
-    const o: Str.Code.TS.TermObject.TermObject = {
-      _tag: Str.Code.TS.string('enum'),
-      name: Str.Code.TS.string(type.name),
+    const o: Syn.TS.TermObject.TermObject = {
+      _tag: Syn.TS.string('enum'),
+      name: Syn.TS.string(type.name),
     }
 
     // Generate type property for O(1) type lookup (runtime value)
     if (config.runtimeFeatures.operationVariables) {
-      const enumValues = type.getValues().map(v => Str.Code.TS.string(v.name)).join(' | ')
+      const enumValues = type.getValues().map(v => Syn.TS.string(v.name)).join(' | ')
       o['type'] = `null as any as ${enumValues}`
     }
 
-    code(Str.Code.TS.constDeclTyped(
+    code(Syn.TS.constDeclTyped(
       type.name,
       type.name,
-      Str.Code.TS.TermObject.termObject(o),
+      Syn.TS.TermObject.termObject(o),
     ))
   },
 )
@@ -489,24 +489,24 @@ const InputObjectType = createCodeGenerator<
   { type: GraphqlKit.Schema.Runtime.Nodes.ObjectType; referenceAssignments: ReferenceAssignments }
 >(
   ({ config, code, type, referenceAssignments }) => {
-    const o: Str.Code.TS.TermObject.TermObject = {
-      _tag: Str.Code.TS.string('inputObject'),
+    const o: Syn.TS.TermObject.TermObject = {
+      _tag: Syn.TS.string('inputObject'),
     }
 
     const inputFields = Object.values(type.getFields())
 
     if (config.runtimeFeatures.operationVariables) {
-      o['name'] = Str.Code.TS.string(type.name)
+      o['name'] = Syn.TS.string(type.name)
       const customScalarFields = inputFields
         .filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
-        .map(Str.Code.TS.string)
+        .map(Syn.TS.string)
       if (customScalarFields.length) {
-        o['fieldsContainingCustomScalars'] = Str.Code.TS.TermObject.termList(customScalarFields)
+        o['fieldsContainingCustomScalars'] = Syn.TS.TermObject.termList(customScalarFields)
       }
     }
-    const f: Str.Code.TS.TermObject.TermObjectOf<
-      Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
+    const f: Syn.TS.TermObject.TermObjectOf<
+      Syn.TS.TermObject.DirectiveTermObjectLike<Syn.TS.TermObject.TermObject>
     > = {}
     o['fields'] = f
 
@@ -524,7 +524,7 @@ const InputObjectType = createCodeGenerator<
 
       f[inputField.name] = {
         $fields: {
-          _tag: Str.Code.TS.string('argumentOrInputField'),
+          _tag: Syn.TS.string('argumentOrInputField'),
         },
       }
 
@@ -549,7 +549,7 @@ const InputObjectType = createCodeGenerator<
 
     // Generate top-level type property for O(1) type lookup (runtime value)
     if (config.runtimeFeatures.operationVariables) {
-      const typeObject: Str.Code.TS.TermObject.TermObject = {}
+      const typeObject: Syn.TS.TermObject.TermObject = {}
       for (const inputField of inputFields) {
         typeObject[inputField.name] = `null as any as ${renderResolvedType(inputField.type, config)}`
       }
@@ -557,10 +557,10 @@ const InputObjectType = createCodeGenerator<
     }
 
     code(
-      Str.Code.TS.constDeclTyped(
+      Syn.TS.constDeclTyped(
         type.name,
         type.name,
-        Str.Code.TS.TermObject.termObject(o),
+        Syn.TS.TermObject.termObject(o),
       ),
     )
   },
@@ -591,7 +591,7 @@ const ScalarTypeInterface = createCodeGenerator<
 >(
   ({ code, type }) => {
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.Scalar {`)
-    code(`  readonly name: ${Str.Code.TS.string(type.name)}`)
+    code(`  readonly name: ${Syn.TS.string(type.name)}`)
     code(`}`)
   },
 )
@@ -601,8 +601,8 @@ const EnumTypeInterface = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.Enum {`)
-    code(`  readonly _tag: ${Str.Code.TS.string('enum')}`)
-    code(`  readonly name: ${Str.Code.TS.string(type.name)}`)
+    code(`  readonly _tag: ${Syn.TS.string('enum')}`)
+    code(`  readonly name: ${Syn.TS.string(type.name)}`)
 
     // Generate type property - reference Schema's pre-computed members
     if (config.runtimeFeatures.operationVariables) {
@@ -623,15 +623,15 @@ const InputObjectTypeInterface = createCodeGenerator<
     const inputFields = Object.values(type.getFields())
 
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.InputObject {`)
-    code(`  readonly _tag: ${Str.Code.TS.string('inputObject')}`)
+    code(`  readonly _tag: ${Syn.TS.string('inputObject')}`)
 
     if (config.runtimeFeatures.operationVariables) {
-      code(`  readonly name: ${Str.Code.TS.string(type.name)}`)
+      code(`  readonly name: ${Syn.TS.string(type.name)}`)
       const customScalarFields = inputFields
         .filter(GraphqlKit.Schema.Scalars.Custom.isHasCustomScalarInputs)
         .map(inputField => inputField.name)
       if (customScalarFields.length) {
-        const tuple = Str.Code.TS.tuple(customScalarFields.map(Str.Code.TS.string))
+        const tuple = Syn.TS.tuple(customScalarFields.map(Syn.TS.string))
         code(`  readonly fieldsContainingCustomScalars: ${tuple}`)
       }
     }
@@ -651,7 +651,7 @@ const InputObjectTypeInterface = createCodeGenerator<
       if (!isPresent) continue
 
       code(`    readonly ${inputField.name}: {`)
-      code(`      readonly _tag: ${Str.Code.TS.string('argumentOrInputField')}`)
+      code(`      readonly _tag: ${Syn.TS.string('argumentOrInputField')}`)
 
       // All fields need namedType
       const isScalar = GraphqlKit.Schema.Runtime.Nodes.isScalarType(inputFieldType)
@@ -688,8 +688,8 @@ const ObjectTypeInterface = createCodeGenerator<
     const inputCondition = inputTypeCondition(config)
 
     // Create sddmNode and run extension hooks to determine which properties to emit
-    const sddmNodeObject: Str.Code.TS.TermObject.TermObject = {
-      _tag: Str.Code.TS.string('outputObject'),
+    const sddmNodeObject: Syn.TS.TermObject.TermObject = {
+      _tag: Syn.TS.string('outputObject'),
     }
 
     config.extensions.forEach(_ => {
@@ -702,11 +702,11 @@ const ObjectTypeInterface = createCodeGenerator<
 
     const sddmNodeOutputFields: Record<
       string,
-      Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject>
+      Syn.TS.TermObject.DirectiveTermObjectLike<Syn.TS.TermObject.TermObject>
     > = {}
 
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`)
-    code(`  readonly _tag: ${Str.Code.TS.string('outputObject')}`)
+    code(`  readonly _tag: ${Syn.TS.string('outputObject')}`)
     code(`  readonly fields: {`)
 
     const outputFields = Object.values(type.getFields()).filter(condition)
@@ -714,9 +714,9 @@ const ObjectTypeInterface = createCodeGenerator<
       const outputFieldNamedType = GraphqlKit.Schema.Runtime.getNamedType(outputField.type)
 
       // Create sddmNode for this output field and run extension hooks
-      const sddmNodeOutputField: Str.Code.TS.TermObject.DirectiveTermObjectLike<Str.Code.TS.TermObject.TermObject> = {
+      const sddmNodeOutputField: Syn.TS.TermObject.DirectiveTermObjectLike<Syn.TS.TermObject.TermObject> = {
         $fields: {
-          _tag: Str.Code.TS.string('outputField'),
+          _tag: Syn.TS.string('outputField'),
         },
       }
       sddmNodeOutputFields[outputField.name] = sddmNodeOutputField
@@ -730,7 +730,7 @@ const ObjectTypeInterface = createCodeGenerator<
       })
 
       code(`    readonly ${outputField.name}: {`)
-      code(`      readonly _tag: ${Str.Code.TS.string('outputField')}`)
+      code(`      readonly _tag: ${Syn.TS.string('outputField')}`)
 
       // Field Arguments
       const args = outputField.args.filter(inputCondition)
@@ -746,7 +746,7 @@ const ObjectTypeInterface = createCodeGenerator<
             (config.runtimeFeatures.operationVariables)
           ) {
             code(`        readonly ${arg.name}: {`)
-            code(`          readonly _tag: ${Str.Code.TS.string('argumentOrInputField')}`)
+            code(`          readonly _tag: ${Syn.TS.string('argumentOrInputField')}`)
             const isScalar = GraphqlKit.Schema.Runtime.Nodes.isScalarType(argType)
             const argTypeRef = isScalar ? `${$.$$Scalar}.${argType.name}` : argType.name
             code(`          readonly namedType: ${argTypeRef}`)
@@ -829,7 +829,7 @@ const UnionTypeInterface = createCodeGenerator<
     // For unions, the fields are spread from member types at runtime
     // At the type level, we just extend the base and let the runtime handle field merging
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`)
-    code(`  readonly _tag: ${Str.Code.TS.string('outputObject')}`)
+    code(`  readonly _tag: ${Syn.TS.string('outputObject')}`)
     code(`  readonly fields: ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject['fields']`)
     code(`}`)
   },
@@ -842,7 +842,7 @@ const InterfaceTypeInterface = createCodeGenerator<
     // For interfaces, the fields are spread from implementor types at runtime
     // At the type level, we just extend the base and let the runtime handle field merging
     code(`interface ${type.name} extends ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject {`)
-    code(`  readonly _tag: ${Str.Code.TS.string('outputObject')}`)
+    code(`  readonly _tag: ${Syn.TS.string('outputObject')}`)
     code(`  readonly fields: ${$.$$Utilities}.SchemaDrivenDataMap.OutputObject['fields']`)
     code(`}`)
   },

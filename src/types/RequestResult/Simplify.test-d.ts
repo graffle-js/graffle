@@ -1,11 +1,11 @@
 // dprint-ignore-file
 import type { ContextEmpty } from '#src/context/ContextEmpty.js'
 import type { Add } from '#src/context/fragments/scalars/fragment.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
-const A = Ts.Assert
+const A = Assert
 
 type DateScalar = GraphqlKit.Schema.Type.Scalar<'Date', Date, string>
 type CEmpty = ContextEmpty

@@ -3,7 +3,7 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 
 const $ = GraphqlKit.Document.Var.$
 import { Possible } from '#test/schema/possible/client/_.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 
 const client = Possible.create()
 
@@ -43,26 +43,26 @@ const multiRequiredVarsString = Possible.gql(
 // ==================================================================================================
 const untypedDoc = `query { id }` as string
 
-Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send())
-Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send('anyName'))
-Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send({ any: 'vars' }))
-Ts.Assert.awaited.exact.unknown(client.gql(untypedDoc).$send('anyName', { any: 'vars' }))
+Assert.awaited.exact.unknown(client.gql(untypedDoc).$send())
+Assert.awaited.exact.unknown(client.gql(untypedDoc).$send('anyName'))
+Assert.awaited.exact.unknown(client.gql(untypedDoc).$send({ any: 'vars' }))
+Assert.awaited.exact.unknown(client.gql(untypedDoc).$send('anyName', { any: 'vars' }))
 
 // ==================================================================================================
 //                            SINGLE OPERATION - NO VARIABLES
 // ==================================================================================================
 type R1 = typeof singleNoVars['operations']['result'] | null
 
-Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).$send('myQuery'))
-Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).$send())
-Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).myQuery())
-Ts.Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVarsString).$send())
+Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).$send('myQuery'))
+Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).$send())
+Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVars).myQuery())
+Assert.awaited.exact.ofAs<R1>().on(client.gql(singleNoVarsString).$send())
 // Inline string
 const y = await client.gql(`query myQuery { id }`).$send()
-Ts.Assert.exact.ofAs<R1>().on(await client.gql(`query myQuery { id }`).$send())
+Assert.exact.ofAs<R1>().on(await client.gql(`query myQuery { id }`).$send())
 
 // Inline object
-Ts.Assert.exact.ofAs<R1>().on(await client.gql({ query: { myQuery: { id: true } } }).$send())
+Assert.exact.ofAs<R1>().on(await client.gql({ query: { myQuery: { id: true } } }).$send())
 // @ts-expect-error - invalid operation name
 client.gql(singleNoVars).bad()
 // @ts-expect-error - invalid operation name
@@ -77,16 +77,16 @@ client.gql(singleNoVarsString).$send({})
 // ==================================================================================================
 type R2 = typeof singleRequiredVars['operations']['result'] | null
 
-Ts.Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
-Ts.Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVars).$send({ id: '' }))
-Ts.Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVars).getById({ id: '' }))
-Ts.Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVarsString).$send({ id: '' }))
+Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
+Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVars).$send({ id: '' }))
+Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVars).getById({ id: '' }))
+Assert.exact.ofAs<R2>().on(await client.gql(singleRequiredVarsString).$send({ id: '' }))
 // Inline string
-Ts.Assert.exact.ofAs<R2>().on(
+Assert.exact.ofAs<R2>().on(
   await client.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`).$send({ id: '' }),
 )
 // Inline object
-Ts.Assert.exact.ofAs<R2>().on(
+Assert.exact.ofAs<R2>().on(
   await client.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }).$send({
     id: '',
   }),
@@ -111,32 +111,32 @@ client.gql(singleRequiredVarsString).$send({ id: 0 })
 // ==================================================================================================
 type R3 = typeof singleOptionalVars['operations']['result'] | null
 
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send('search'))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send('search', {}))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send('search', { string: 'hello' }))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send())
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send({}))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send({ string: 'hello' }))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).search())
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).search({}))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).search({ string: 'hello' }))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVarsString).$send())
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVarsString).$send({}))
-Ts.Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send('search'))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send('search', {}))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send('search', { string: 'hello' }))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send())
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send({}))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).$send({ string: 'hello' }))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).search())
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).search({}))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVars).search({ string: 'hello' }))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVarsString).$send())
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVarsString).$send({}))
+Assert.exact.ofAs<R3>().on(await client.gql(singleOptionalVarsString).$send({ string: 'hello' }))
 // Inline string
-Ts.Assert.exact.ofAs<R3>().on(
+Assert.exact.ofAs<R3>().on(
   await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send(),
 )
-Ts.Assert.exact.ofAs<R3>().on(
+Assert.exact.ofAs<R3>().on(
   await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send({ string: 'hello' }),
 )
 // Inline object
-Ts.Assert.exact.ofAs<R3>().on(
+Assert.exact.ofAs<R3>().on(
   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send(),
 )
 // TODO: Inline object with variables has type inference limitation
 // Workaround: assign to const first, then pass to gql()
-// Ts.Assert.equiv.is<R3>().on(
+// Assert.equiv.is<R3>().on(
 //   await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
 //     string: 'hello',
 //   }),
@@ -154,19 +154,19 @@ client.gql(singleOptionalVarsString).$send({ string: 0 })
 type R4 = Extract<typeof multiNoVars['operations'], { name: 'getUser' }>['result'] | null
 type R5 = Extract<typeof multiNoVars['operations'], { name: 'addId' }>['result'] | null
 
-Ts.Assert.exact.ofAs<R4>().on(await client.gql(multiNoVars).$send('getUser'))
-Ts.Assert.exact.ofAs<R5>().on(await client.gql(multiNoVars).$send('addId'))
-Ts.Assert.exact.ofAs<R4>().on(await client.gql(multiNoVars).getUser())
-Ts.Assert.exact.ofAs<R5>().on(await client.gql(multiNoVars).addId())
+Assert.exact.ofAs<R4>().on(await client.gql(multiNoVars).$send('getUser'))
+Assert.exact.ofAs<R5>().on(await client.gql(multiNoVars).$send('addId'))
+Assert.exact.ofAs<R4>().on(await client.gql(multiNoVars).getUser())
+Assert.exact.ofAs<R5>().on(await client.gql(multiNoVars).addId())
 // Multi-op string documents require operation name
-Ts.Assert.exact.ofAs<R4>().on(await client.gql(multiNoVarsString).$send('getUser'))
+Assert.exact.ofAs<R4>().on(await client.gql(multiNoVarsString).$send('getUser'))
 // Inline string - multi-op requires operation name
-Ts.Assert.exact.ofAs<R4>().on(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
+Assert.exact.ofAs<R4>().on(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
 // Inline object
-Ts.Assert.exact.ofAs<R4>().on(
+Assert.exact.ofAs<R4>().on(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('getUser'),
 )
-Ts.Assert.exact.ofAs<R5>().on(
+Assert.exact.ofAs<R5>().on(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('addId'),
 )
 // @ts-expect-error - invalid operation name
@@ -186,14 +186,14 @@ client.gql(multiNoVarsString).$send('getUser', {})
 type R6a = Extract<typeof multiRequiredVars['operations'], { name: 'getById' }>['result'] | null
 type R6b = Extract<typeof multiRequiredVars['operations'], { name: 'setId' }>['result'] | null
 
-Ts.Assert.exact.ofAs<R6a>().on(await client.gql(multiRequiredVars).$send('getById', { id: 'user-123' }))
-Ts.Assert.exact.ofAs<R6b>().on(await client.gql(multiRequiredVars).$send('setId'))
-Ts.Assert.exact.ofAs<R6a>().on(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
-Ts.Assert.exact.ofAs<R6b>().on(await client.gql(multiRequiredVars).setId())
+Assert.exact.ofAs<R6a>().on(await client.gql(multiRequiredVars).$send('getById', { id: 'user-123' }))
+Assert.exact.ofAs<R6b>().on(await client.gql(multiRequiredVars).$send('setId'))
+Assert.exact.ofAs<R6a>().on(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
+Assert.exact.ofAs<R6b>().on(await client.gql(multiRequiredVars).setId())
 // Multi-op string documents require operation name
-Ts.Assert.exact.ofAs<R6a>().on(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
+Assert.exact.ofAs<R6a>().on(await client.gql(multiRequiredVarsString).$send('getById', { id: 'user-123' }))
 // Inline string - multi-op requires operation name
-Ts.Assert.exact.ofAs<R6a>().on(
+Assert.exact.ofAs<R6a>().on(
   await client
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
     .$send('getById', { id: 'user-123' }),
@@ -205,7 +205,7 @@ const x = await client
   })
   .$send('getById', { id: 'user-123' })
 // Inline object
-Ts.Assert.exact.ofAs<R6a>().on(
+Assert.exact.ofAs<R6a>().on(
   await client
     .gql({
       query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
@@ -213,7 +213,7 @@ Ts.Assert.exact.ofAs<R6a>().on(
     })
     .$send('getById', { id: 'user-123' }),
 )
-Ts.Assert.exact.ofAs<R6b>().on(
+Assert.exact.ofAs<R6b>().on(
   await client
     .gql({
       query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
@@ -240,15 +240,15 @@ client.gql(multiRequiredVarsString).$send('getById', { id: 0 })
 
 // TypedDocumentString
 declare const typedDocString: GraphqlKit.Document.Typed.String<{ id: string | null }, { userId: string }>
-Ts.Assert.exact.ofAs<{ id: string | null } | null>().on(await client.gql(typedDocString).$send({ userId: '123' }))
+Assert.exact.ofAs<{ id: string | null } | null>().on(await client.gql(typedDocString).$send({ userId: '123' }))
 
 // TypedDocumentNode
 declare const typedDocNode: GraphqlKit.Document.Typed.Node<{ name: string | null }, { id: string }>
-Ts.Assert.exact.ofAs<{ name: string | null } | null>().on(await client.gql(typedDocNode).$send({ id: '456' }))
+Assert.exact.ofAs<{ name: string | null } | null>().on(await client.gql(typedDocNode).$send({ id: '456' }))
 
 // TypedQueryDocumentNode
 declare const typedQueryDocNode: GraphqlKit.Document.Typed.Query<{ title: string | null }, {}>
-Ts.Assert.exact.ofAs<{ title: string | null } | null>().on(await client.gql(typedQueryDocNode).$send())
+Assert.exact.ofAs<{ title: string | null } | null>().on(await client.gql(typedQueryDocNode).$send())
 
 // ==================================================================================================
 //                                   SDDM TYPE SAFETY
@@ -259,7 +259,7 @@ declare const sddmDoc: GraphqlKit.Document.Typed.String<{ id: string | null }, {
 
 // Client with SDDM support - should work
 const clientWithSDDM = Possible.create()
-Ts.Assert.exact.ofAs<{ id: string | null } | null>().on(await clientWithSDDM.gql(sddmDoc).$send())
+Assert.exact.ofAs<{ id: string | null } | null>().on(await clientWithSDDM.gql(sddmDoc).$send())
 
 const clientWithoutSDDM = Graffle.create().transport({ url: 'https://example.com/graphql' })
 // @ts-expect-error - plain client lacks SDDM support, document requires it
@@ -277,12 +277,12 @@ const g1 = g0.transport(ATransport)
 const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)
 
 // .gql() is callable, but $send is not available if no transports registered
-Ts.Assert.exact.ofAs<Context.Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>().on(
+Assert.exact.ofAs<Context.Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>().on(
   g0.gql('query { __typename }').$send,
 )
 // dprint-ignore
 // $send not available if current transport not ready
-Ts.Assert.exact.ofAs<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>().on(g2.gql('query { __typename }').$send)
+Assert.exact.ofAs<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>().on(g2.gql('query { __typename }').$send)
 // dprint-ignore
 // ... Reflects name of currently selected transport
-Ts.Assert.exact.ofAs<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>().on(g2.transport(RequiredConfigurationTransportB.name).gql('query { __typename }').$send)
+Assert.exact.ofAs<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>().on(g2.transport(RequiredConfigurationTransportB.name).gql('query { __typename }').$send)

@@ -2102,6 +2102,57 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    *
    * | | |
    * | - | - |
+   * | **Type** | {@link $Schema.ReservedWordsEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.reservedWordsEnum` |
+   * | **Nullability** | Optional |
+   */
+
+  reservedWordsEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.reservedWordsEnum<{ scalars: $Context['scalars'] }>
+      >,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
+        { reservedWordsEnum: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
+          { reservedWordsEnum: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'reservedWordsEnum'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        GraphqlKit.Document.Object.Var.InferFromQuery<
+          { reservedWordsEnum: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
+            { reservedWordsEnum: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'reservedWordsEnum'
+        >
+      >
+    >
+  >
+
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
    * | **Type** | {@link $Schema.Result} |
    * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $Schema.Query} |
@@ -6824,6 +6875,57 @@ export interface FeatEnumMethods<$Context extends $$Utilities.Context> {
             $$Schema.Schema<$Context['scalars']>
           >,
           'abcEnum'
+        >
+      >
+    >
+  >
+
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ReservedWordsEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.reservedWordsEnum` |
+   * | **Nullability** | Optional |
+   */
+
+  reservedWordsEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.NoExcess<
+        $SelectionSet,
+        $$SelectionSets.Query.reservedWordsEnum<{ scalars: $Context['scalars'] }>
+      >,
+    ) => GraphqlKit.Document.Object.Var.MethodReturn<
+      GraphqlKit.Document.Object.Var.InferFromQuery<
+        { reservedWordsEnum: $SelectionSet },
+        $$SchemaMap.SchemaDrivenDataMap
+      >,
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        GraphqlKit.Document.Object.InferResult.OperationQuery<
+          { reservedWordsEnum: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'reservedWordsEnum'
+      >,
+      $$Utilities.DocumentRunnerDeferred<
+        GraphqlKit.Document.Object.Var.InferFromQuery<
+          { reservedWordsEnum: $SelectionSet },
+          $$SchemaMap.SchemaDrivenDataMap
+        >,
+        & (null | {})
+        & $$Utilities.HandleOutputDocumentBuilderRootField<
+          $Context,
+          GraphqlKit.Document.Object.InferResult.OperationQuery<
+            { reservedWordsEnum: $SelectionSet },
+            $$Schema.Schema<$Context['scalars']>
+          >,
+          'reservedWordsEnum'
         >
       >
     >

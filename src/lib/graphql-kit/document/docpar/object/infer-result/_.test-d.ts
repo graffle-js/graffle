@@ -5,10 +5,10 @@ import type { DateScalar } from '#test/fixtures/scalars'
 import type { Possible } from '#test/schema/possible/client/_.js'
 import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/_.js'
 import type { db } from '#test/schema/possible/db.js'
-import { Ts } from '@wollybeard/kit'
+import { Assert, Ts } from '@wollybeard/kit'
 import type { InferResult } from './_.js'
 
-const A = Ts.Assert
+const A = Assert
 
 type $<$SelectionSet extends Possible.SelectionSets.Query<any>> = RequestResult.SimplifyWithEmptyContext<
   InferResult.OperationQuery<$SelectionSet, Possible.$.Schema>

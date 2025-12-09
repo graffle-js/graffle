@@ -2,7 +2,7 @@ import { Extension } from '#graffle/extension'
 import { Configurator } from '#graffle/extension-exports'
 import { ATransport } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
-import { Fn, Ts } from '@wollybeard/kit'
+import { Assert, Fn } from '@wollybeard/kit'
 import { describe, expect } from 'vitest'
 import { contextEmpty } from '../../../ContextEmpty.js'
 import { Configuration } from '../../configuration/_.js'
@@ -18,10 +18,10 @@ const eBuilder = Extension.create(nameA)
 describe(`transport`, () => {
   test(`on empty context, if extension has transport, it is added`, () => {
     const context = addAndApplyMany(cEmpty, [eBuilder.transport(ATransport).return()])
-    Ts.Assert.equiv.ofAs<{ ATransport: typeof ATransport }>().on(context.transports.registry)
-    Ts.Assert.exact.ofAs<'ATransport'>().on(context.transports.current)
+    Assert.equiv.ofAs<{ ATransport: typeof ATransport }>().on(context.transports.registry)
+    Assert.exact.ofAs<'ATransport'>().on(context.transports.current)
     // dprint-ignore
-    Ts.Assert.exact.ofAs<typeof ATransport['configurator']['default']>().on(context.transports.configurations.ATransport)
+    Assert.exact.ofAs<typeof ATransport['configurator']['default']>().on(context.transports.configurations.ATransport)
   })
 })
 
@@ -29,7 +29,7 @@ describe(`properties`, () => {
   test(`can add static`, () => {
     const e = eBuilder.properties({ a: 1 } as const).return()
     const c = addAndApplyMany(cEmpty, [e])
-    Ts.Assert.exact.ofAs<typeof e.propertiesStatic>().on(c.properties.static)
+    Assert.exact.ofAs<typeof e.propertiesStatic>().on(c.properties.static)
     expect(c.properties.static).toEqual(e.propertiesStatic)
   })
 
@@ -39,7 +39,7 @@ describe(`properties`, () => {
     const propertiesStaticMerged = { ...a.propertiesStatic, ...b.propertiesStatic }
     //
     const c = addAndApplyMany(cEmpty, [a, b])
-    Ts.Assert.equiv.ofAs<typeof propertiesStaticMerged>().on(c.properties.static)
+    Assert.equiv.ofAs<typeof propertiesStaticMerged>().on(c.properties.static)
     expect(c.properties.static).toEqual(propertiesStaticMerged)
   })
 
@@ -47,7 +47,7 @@ describe(`properties`, () => {
     const a = Extension.create(nameA).properties(propertiesComputerPreflight$Func).return()
     const c = addAndApplyMany(cEmpty, [a])
     //
-    Ts.Assert.equiv.ofAs<readonly [propertiesComputerPreflight$Func]>().on(c.properties.$computedTypeFunctions)
+    Assert.equiv.ofAs<readonly [propertiesComputerPreflight$Func]>().on(c.properties.$computedTypeFunctions)
     expect(c.properties.$computedTypeFunctions).toEqual(undefined)
     expect(c.properties.computed).toEqual([propertiesComputerPreflight$Func])
   })
@@ -59,7 +59,7 @@ describe(`extension configuration`, () => {
     //
     const c = addAndApplyMany(cEmpty, [a])
     // TODO: Type instantiation is excessively deep - need to simplify type assertion
-    // Ts.Assert.exact.ofAs<typeof cEmpty.configuration>().on(c.configuration)
+    // Assert.exact.ofAs<typeof cEmpty.configuration>().on(c.configuration)
   })
   test(`one extension with configuration -> context configuration has namespace for extension added`, () => {
     const A = Extension.create(nameA).configurator(Configurator.create().input<{ a: number }>()).return()
@@ -67,9 +67,9 @@ describe(`extension configuration`, () => {
     //
     const c = addAndApplyMany(cEmpty, [a])
     // base configuration is not affected
-    Ts.Assert.sub.ofAs<typeof contextEmpty.configuration>().on(c.configuration)
+    Assert.sub.ofAs<typeof contextEmpty.configuration>().on(c.configuration)
     // extension configuration is added
-    Ts.Assert.exact.ofAs<
+    Assert.exact.ofAs<
       Configuration.ConfigurationNamespace<typeof A.definition.configurator>
     >().on(c.configuration[A.definition.name])
     // Configuration value is updated
@@ -86,13 +86,13 @@ describe(`extension configuration`, () => {
     //
     const c = addAndApplyMany(cEmpty, [a, b, z])
     // base configuration is not affected
-    Ts.Assert.sub.ofAs<typeof contextEmpty.configuration>().on(c.configuration)
+    Assert.sub.ofAs<typeof contextEmpty.configuration>().on(c.configuration)
     // extension A configuration is added
-    Ts.Assert.exact.ofAs<
+    Assert.exact.ofAs<
       Configuration.ConfigurationNamespace<typeof A.definition.configurator>
     >().on(c.configuration[A.definition.name])
     // extension B configuration is added
-    Ts.Assert.exact.ofAs<
+    Assert.exact.ofAs<
       Configuration.ConfigurationNamespace<typeof B.definition.configurator>
     >().on(c.configuration[B.definition.name])
     // extension Z configuration is not added

@@ -1,6 +1,6 @@
 // dprint-ignore-file
 
-import { Ts } from '@wollybeard/kit'
+import { Assert } from '@wollybeard/kit'
 import type {
   GetVariablesInputKind,
   Node,
@@ -16,7 +16,7 @@ import type {
 import type { TypedDocumentNode as Node2 } from '@graphql-typed-document-node/core'
 import { Request } from '#src/lib/graphql-kit/__.js'
 
-const A = Ts.Assert
+const A = Assert
 
 // dprint-ignore-file
 A.exact.ofAs<VariablesInputKindOptional>() .onAs<GetVariablesInputKind<Request.Variables>>()

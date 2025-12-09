@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Str } from '@wollybeard/kit'
+import { Str, Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
@@ -95,7 +95,7 @@ const generateMethodsFile = (
   // Import pre-curried helpers from core library
   const helpersToImport = Array.from(operationTypes).map(opType => `$$${opType}`)
   lines.push(
-    Str.Code.TS.importNamed({
+    Syn.TS.importNamed({
       names: helpersToImport,
       from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
     }),
@@ -117,12 +117,12 @@ const generateMethodsFile = (
     const fieldDef = rootType.getFields()[field.fieldName]!
     const docContent = getOutputFieldMethodDoc(config, fieldDef, rootType)
     if (docContent) {
-      lines.push(Str.Code.TSDoc.format(docContent))
+      lines.push(Syn.TSDoc.format(docContent))
     }
 
     // Generate method implementation using helper
     const functionDecl = `const ${renderName(methodName)} = ${helperName}('${field.fieldName}')`
-    lines.push(Str.Code.TS.Reserved.exportValueWithKeywordHandling(methodName, functionDecl))
+    lines.push(Syn.TS.Reserved.exportValueWithKeywordHandling(methodName, functionDecl))
     lines.push(``)
   }
 

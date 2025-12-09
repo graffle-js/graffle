@@ -238,6 +238,7 @@ type Query {
   objectNestedWithArgs: ObjectNestedWithArgs
   objectNonNull: Object1!
   objectWithArgs(boolean: Boolean, float: Float, id: ID, int: Int, string: String): Object1
+  reservedWordsEnum: ReservedWordsEnum
   result(case: Case!): Result
   resultNonNull(case: Case): Result!
   string: String
@@ -264,6 +265,13 @@ type Query {
   unionFooBarWithArgs(id: ID): FooBarUnion
   unionObject: ObjectUnion
   unionObjectNonNull: ObjectUnion!
+}
+
+"""Enum with TypeScript reserved word values for testing issue #1470."""
+enum ReservedWordsEnum {
+  as
+  in
+  is
 }
 
 union Result = ErrorOne | ErrorTwo | Object1
