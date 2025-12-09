@@ -676,6 +676,22 @@ export interface Query<_$Context extends GraphqlKit.Document.Object.Select.Selec
    *
    * | | |
    * | - | - |
+   * | **Type** | {@link $NamedTypes.$ReservedWordsEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.reservedWordsEnum` |
+   * | **Nullability** | Optional |
+   */
+  reservedWordsEnum?:
+    | $Fields.reservedWordsEnum.$Expanded<_$Context>
+    | GraphqlKit.Document.Object.Select.SelectAlias.SelectAlias<$Fields.reservedWordsEnum<_$Context>>
+    | GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasShort
+    | GraphqlKit.Document.Object.Select.SelectAlias.SelectAliasString
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
    * | **Type** | {@link $NamedTypes.$Result} |
    * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |

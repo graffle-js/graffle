@@ -25,6 +25,7 @@ export interface Schema<$Scalars extends $.Schema.Scalars.Registry = $$Scalar.$R
     ChildBInterfaceHierarchyMember: $Types.ChildBInterfaceHierarchyMember
     GrandparentInterfaceHierarchyMember: $Types.GrandparentInterfaceHierarchyMember
     ParentInterfaceHierarchyMember: $Types.ParentInterfaceHierarchyMember
+    ReservedWordsEnum: $Types.ReservedWordsEnum
     Bar: $Types.Bar
     DateObject1: $Types.DateObject1
     DateObject2: $Types.DateObject2

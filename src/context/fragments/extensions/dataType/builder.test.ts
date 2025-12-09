@@ -1,4 +1,4 @@
-import { Configurator, Assert } from '@wollybeard/kit'
+import { Assert, Configurator } from '@wollybeard/kit'
 import { describe, expect, test } from 'vitest'
 import type { Context } from '../../../context.js'
 import { type Chain, create } from './builder.js'

@@ -20,6 +20,19 @@ export const abcEnum = $$query('abcEnum')
  *
  * | | |
  * | - | - |
+ * | **Type** | {@link $Schema.ReservedWordsEnum} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Path** | `Query.reservedWordsEnum` |
+ * | **Nullability** | Optional |
+ */
+export const reservedWordsEnum = $$query('reservedWordsEnum')
+
+/**
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String} |
  * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Query} |

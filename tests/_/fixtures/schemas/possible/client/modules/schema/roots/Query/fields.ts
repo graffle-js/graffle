@@ -1076,6 +1076,27 @@ export interface objectWithArgs {
  *
  * | | |
  * | - | - |
+ * | **Type** | {@link $Schema.ReservedWordsEnum} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Path** | `Query.reservedWordsEnum` |
+ * | **Nullability** | Optional |
+ */
+export interface reservedWordsEnum {
+  kind: 'OutputField'
+  name: 'reservedWordsEnum'
+  arguments: {}
+  inlineType: [0]
+  namedType: $Schema.ReservedWordsEnum
+}
+
+/**
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Result} |
  * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Parent** | {@link $Schema.Query} |

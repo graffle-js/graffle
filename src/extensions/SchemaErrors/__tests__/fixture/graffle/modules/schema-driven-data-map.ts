@@ -54,6 +54,12 @@ interface ParentInterfaceHierarchyMember extends $$Utilities.SchemaDrivenDataMap
   readonly type: $$Schema.ParentInterfaceHierarchyMember['members']
 }
 
+interface ReservedWordsEnum extends $$Utilities.SchemaDrivenDataMap.Enum {
+  readonly _tag: 'enum'
+  readonly name: 'ReservedWordsEnum'
+  readonly type: $$Schema.ReservedWordsEnum['members']
+}
+
 interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject {
   readonly _tag: 'inputObject'
   readonly name: 'InputObject'
@@ -815,6 +821,9 @@ interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
       }
       readonly namedType: Object1
     }
+    readonly reservedWordsEnum: {
+      readonly _tag: 'outputField'
+    }
     readonly result: {
       readonly _tag: 'outputField'
       readonly arguments: {
@@ -1103,6 +1112,12 @@ const ParentInterfaceHierarchyMember: ParentInterfaceHierarchyMember = {
   _tag: 'enum',
   name: 'ParentInterfaceHierarchyMember',
   type: null as any as 'InterfaceChildA' | 'InterfaceChildB' | 'InterfaceParent',
+}
+
+const ReservedWordsEnum: ReservedWordsEnum = {
+  _tag: 'enum',
+  name: 'ReservedWordsEnum',
+  type: null as any as 'as' | 'in' | 'is',
 }
 
 //
@@ -1970,6 +1985,9 @@ const Query: Query = {
       },
       namedType: null as any as Object1,
     },
+    reservedWordsEnum: {
+      _tag: 'outputField',
+    },
     result: {
       _tag: 'outputField',
       arguments: {
@@ -2300,6 +2318,7 @@ interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
     readonly ChildBInterfaceHierarchyMember: ChildBInterfaceHierarchyMember
     readonly GrandparentInterfaceHierarchyMember: GrandparentInterfaceHierarchyMember
     readonly ParentInterfaceHierarchyMember: ParentInterfaceHierarchyMember
+    readonly ReservedWordsEnum: ReservedWordsEnum
     readonly InputObject: InputObject
     readonly InputObjectCircular: InputObjectCircular
     readonly InputObjectEnum: InputObjectEnum
@@ -2320,6 +2339,7 @@ interface SchemaDrivenDataMap extends $$Utilities.SchemaDrivenDataMap {
     readonly ChildBInterfaceHierarchyMember: ChildBInterfaceHierarchyMember
     readonly GrandparentInterfaceHierarchyMember: GrandparentInterfaceHierarchyMember
     readonly ParentInterfaceHierarchyMember: ParentInterfaceHierarchyMember
+    readonly ReservedWordsEnum: ReservedWordsEnum
     readonly Bar: Bar
     readonly DateObject1: DateObject1
     readonly DateObject2: DateObject2
@@ -2383,6 +2403,7 @@ const $schemaDrivenDataMap: SchemaDrivenDataMap = {
     ChildBInterfaceHierarchyMember,
     GrandparentInterfaceHierarchyMember,
     ParentInterfaceHierarchyMember,
+    ReservedWordsEnum,
     InputObject,
     InputObjectCircular,
     InputObjectEnum,
@@ -2403,6 +2424,7 @@ const $schemaDrivenDataMap: SchemaDrivenDataMap = {
     ChildBInterfaceHierarchyMember,
     GrandparentInterfaceHierarchyMember,
     ParentInterfaceHierarchyMember,
+    ReservedWordsEnum,
     Bar,
     DateObject1,
     DateObject2,

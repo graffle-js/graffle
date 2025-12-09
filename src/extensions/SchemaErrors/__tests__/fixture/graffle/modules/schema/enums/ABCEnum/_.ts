@@ -1,0 +1,30 @@
+import type * as $ from '#graffle/utilities-for-generated'
+import type * as $Members from './members.js'
+
+export * as ABCEnum from './members.js'
+
+/**
+ * GraphQL {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
+ *
+ * Enum documentation.
+ *
+ * **Members:**
+ * - `A`
+ * - `B` - Enum B member documentation.
+ * - `C`
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+ * | **Members** | 3 |
+ */
+export interface ABCEnum extends $.Schema.Enum {
+  kind: 'Enum'
+  name: 'ABCEnum'
+  members:
+    | $Members.A
+    | $Members.B
+    | $Members.C
+}

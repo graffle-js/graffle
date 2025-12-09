@@ -11,7 +11,7 @@ export * as Query from './fields.js'
  * | | |
  * | - | - |
  * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
- * | **Fields** | 58 |
+ * | **Fields** | 59 |
  */
 export interface Query extends $.Schema.OutputObject {
   kind: 'Object'
@@ -60,6 +60,7 @@ export interface Query extends $.Schema.OutputObject {
     objectNestedWithArgs: $Fields.objectNestedWithArgs
     objectNonNull: $Fields.objectNonNull
     objectWithArgs: $Fields.objectWithArgs
+    reservedWordsEnum: $Fields.reservedWordsEnum
     result: $Fields.result
     resultNonNull: $Fields.resultNonNull
     string: $Fields.string

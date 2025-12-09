@@ -88,9 +88,9 @@ export const ModuleGeneratorSchema = {
       modules.push(generateScalarModule(config, scalar))
     }
 
-    // Generate enums - one file per enum in schema/enums/
+    // Generate enums - two files per enum in schema/enums/ (main + _members)
     for (const enumType of kindMap.Enum) {
-      modules.push(generateEnumModule(config, enumType))
+      modules.push(...generateEnumModule(config, enumType))
     }
 
     // Generate unions - one file per union in schema/unions/
@@ -157,21 +157,67 @@ const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema.Runtime.
   }
 }
 
-const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.Nodes.EnumType): GeneratedModule => {
+const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.Nodes.EnumType): GeneratedModule[] => {
+  const modules: GeneratedModule[] = []
+  const enumValues = enumType.getValues()
+
+  // Generate members.ts file with member type exports
+  const membersCode = Syn.TS.builder()
+  for (const value of enumValues) {
+    // Build JSDoc for this member
+    const generalDescription = Syn.TSDoc.escape(value.description)
+      ?? (config.options.TSDoc.noDocPolicy === 'message'
+        ? `Missing description for enum member "${value.name}".`
+        : null)
+
+    const deprecationDescription = value.deprecationReason
+      ? `@deprecated ${Syn.TSDoc.escape(value.deprecationReason)}`
+      : null
+
+    const jsdocParts: string[] = []
+    if (generalDescription) jsdocParts.push(generalDescription)
+    if (deprecationDescription) {
+      jsdocParts.push('')
+      jsdocParts.push(deprecationDescription)
+    }
+
+    const tsDoc = jsdocParts.length > 0 ? Syn.TSDoc.format(jsdocParts.join('\n')) : null
+
+    // Use exportTypeWithKeywordHandling to handle reserved keywords
+    const typeDecl = `type ${Syn.TS.Reserved.escapeReserved(value.name)} = ${Syn.TS.string(value.name)}`
+    const exportCode = Syn.TS.Reserved.exportTypeWithKeywordHandling(value.name, typeDecl)
+
+    if (tsDoc) {
+      membersCode(tsDoc)
+    }
+    membersCode(exportCode)
+  }
+
+  modules.push({
+    name: `schema/enums/${enumType.name}/members`,
+    filePath: `schema/enums/${enumType.name}/members.ts`,
+    content: membersCode.build(),
+  })
+
+  // Generate _.ts file with interface + namespace re-export
   const code = Syn.TS.builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
-    const utilitiesPath = getUtilitiesPath(config, `schema/enums/${enumType.name}.ts`)
+    const utilitiesPath = getUtilitiesPath(config, `schema/enums/${enumType.name}/_.ts`)
     code(Syn.TS.importAll({ from: utilitiesPath, as: '$', type: true }))
-    code``
   }
+  // Import members for use in interface
+  code(Syn.TS.importAll({ from: './members.js', as: '$Members', type: true }))
+  code``
 
-  // Generate namespace with member types
-  const enumValues = enumType.getValues()
-  const memberTypes = enumValues.map((_) => `${enumType.name}.${_.name}`)
+  // Re-export members as namespace
+  code(`export * as ${enumType.name} from './members.js'`)
+  code``
+
+  // Generate interface - use $Members for type references
+  const memberTypes = enumValues.map((_) => `$Members.${_.name}`)
   const membersUnionType = Syn.TS.unionItems(memberTypes)
 
-  // Generate interface
   code.interface({
     tsDoc: getEnumTypeDoc(config, enumType),
     export: true,
@@ -184,44 +230,13 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
     },
   })
 
-  code``
-
-  // Generate namespace with member types
-  code.namespace(enumType.name, (ns) => {
-    for (const value of enumValues) {
-      // Build JSDoc for this member
-      const generalDescription = Syn.TSDoc.escape(value.description)
-        ?? (config.options.TSDoc.noDocPolicy === 'message'
-          ? `Missing description for enum member "${value.name}".`
-          : null)
-
-      const deprecationDescription = value.deprecationReason
-        ? `@deprecated ${Syn.TSDoc.escape(value.deprecationReason)}`
-        : null
-
-      const jsdocParts: string[] = []
-      if (generalDescription) jsdocParts.push(generalDescription)
-      if (deprecationDescription) {
-        jsdocParts.push('')
-        jsdocParts.push(deprecationDescription)
-      }
-
-      const tsDoc = jsdocParts.length > 0 ? jsdocParts.join('\n') : null
-
-      ns.type({
-        name: value.name,
-        type: Syn.TS.string(value.name),
-        tsDoc,
-        export: true,
-      })
-    }
-  }, { export: true })
-
-  return {
-    name: `schema/enums/${enumType.name}`,
-    filePath: `schema/enums/${enumType.name}.ts`,
+  modules.push({
+    name: `schema/enums/${enumType.name}/_`,
+    filePath: `schema/enums/${enumType.name}/_.ts`,
     content: code.build(),
-  }
+  })
+
+  return modules
 }
 
 const generateUnionModule = (
@@ -627,7 +642,7 @@ const generateSchemaBarrelModule = (
 
   // Re-export enums
   for (const type of kindMap.Enum) {
-    code(codeReexportAll(config, { from: `./enums/${type.name}`, type: true }))
+    code(codeReexportAll(config, { from: `./enums/${type.name}/_`, type: true }))
   }
 
   // Re-export unions

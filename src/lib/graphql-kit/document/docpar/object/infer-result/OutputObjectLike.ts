@@ -1,5 +1,5 @@
 import type { Select } from '#src/lib/graphql-kit/document/docpar/object/select/_.js'
-import { Obj, Assert, Ts } from '@wollybeard/kit'
+import { Assert, Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Type } from '../../../../schema/type/_.js'
 import type { Core } from '../../core/_.js'

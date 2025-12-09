@@ -1743,6 +1743,43 @@ export interface QueryBuilder {
    *
    * | | |
    * | - | - |
+   * | **Type** | {@link $Schema.ReservedWordsEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.reservedWordsEnum` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.reservedWordsEnum()
+   * ```
+   */
+  reservedWordsEnum: <
+    const $SelectionSet extends SelectionSets.Query<
+      GraphqlKit.Document.Object.Select.StaticBuilderContext
+    >['reservedWordsEnum'],
+  >(
+    selection?: $SelectionSet,
+  ) => GraphqlKit.Document.Typed.String<
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      GraphqlKit.Document.Object.InferResult.OperationQuery<{ reservedWordsEnum: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      GraphqlKit.Document.Object.Var.InferFromQuery<
+        { reservedWordsEnum: Exclude<$SelectionSet, undefined> },
+        SchemaMap.SchemaDrivenDataMap
+      >
+    >,
+    true
+  >
+
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
    * | **Type** | {@link $Schema.Result} |
    * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $Schema.Query} |
