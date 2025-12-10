@@ -1,5 +1,6 @@
 import type { Fs } from '#src/lib/fsp.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import { Schema } from 'effect'
 import type { IntrospectionOptions } from 'graphql'
 import type { Extension } from '../extension/types.js'
 
@@ -22,20 +23,24 @@ export interface InputLint {
   missingGraphqlSP?: boolean
 }
 
-export const OutputCase = {
-  pascal: `pascal`,
-  camel: `camel`,
-  kebab: `kebab`,
-  snake: `snake`,
-} as const
-export type InputOutputCase = keyof typeof OutputCase
+export const OutputCase = Schema.Enums(
+  {
+    pascal: `pascal`,
+    camel: `camel`,
+    kebab: `kebab`,
+    snake: `snake`,
+  } as const,
+)
+export type InputOutputCase = typeof OutputCase.Type
 
-export const ImportFormat = {
-  jsExtension: `jsExtension`,
-  tsExtension: `tsExtension`,
-  noExtension: `noExtension`,
-} as const
-export type InputImportFormat = keyof typeof ImportFormat
+export const ImportFormat = Schema.Enums(
+  {
+    jsExtension: `jsExtension`,
+    tsExtension: `tsExtension`,
+    noExtension: `noExtension`,
+  } as const,
+)
+export type InputImportFormat = typeof ImportFormat.Type
 
 export interface ConfigInitSchemaSdl {
   type: `sdl`
