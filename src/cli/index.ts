@@ -2,104 +2,105 @@
 
 import { type ConfigInit, ImportFormat, OutputCase } from '#src/generator/config/configInit.js'
 import { toAbsolutePath } from '#src/lib/fsp.js'
-import { Command } from '@molt/command'
 import { Err, Url } from '@wollybeard/kit'
+import { Command } from '@wollybeard/kit/oak'
+import { EffectSchema } from '@wollybeard/kit/oak/extensions'
+import { Schema as S } from 'effect'
 import * as Path from 'node:path'
-import { z } from 'zod'
 import { Generator } from '../generator/_.js'
 
 const args = Command.create()
+  .use(EffectSchema)
   .description(`Generate a type safe GraphQL client.`)
   .parameter(
     `name`,
-    z
-      .string()
-      .min(1)
-      .optional()
-      .describe(
-        `The name of your client. If you are not generating multiple clients you probably do not need this. Otherwise you need to differentiate the clients so that their global type registrations do not conflict. It is possible to leave one client unnamed which will become the default client at the type level (e.g. in configuration etc.)`,
-      ),
+    S.UndefinedOr(S.String.pipe(S.minLength(1))).pipe(
+      S.annotations({
+        description:
+          `The name of your client. If you are not generating multiple clients you probably do not need this. Otherwise you need to differentiate the clients so that their global type registrations do not conflict. It is possible to leave one client unnamed which will become the default client at the type level (e.g. in configuration etc.)`,
+      }),
+    ),
   )
   .parameter(
     `schema`,
-    z
-      .string()
-      .min(1)
-      .optional()
-      .describe(
-        `Path to where your GraphQL schema is. If a URL is given it will be introspected. Otherwise assumed to be a path to your GraphQL SDL file. If a directory path is given, then will look for a "schema.graphql" within that directory. Otherwise will attempt to load the exact file path given. If omitted, then your project must have a configuration file which supplies the schema source.`,
-      ),
+    S.UndefinedOr(S.String.pipe(S.minLength(1))).pipe(
+      S.annotations({
+        description:
+          `Path to where your GraphQL schema is. If a URL is given it will be introspected. Otherwise assumed to be a path to your GraphQL SDL file. If a directory path is given, then will look for a "schema.graphql" within that directory. Otherwise will attempt to load the exact file path given. If omitted, then your project must have a configuration file which supplies the schema source.`,
+      }),
+    ),
   )
   .parameter(
     `project`,
-    z
-      .string()
-      .optional()
-      .describe(
-        `Path to your configuration file. By default will look for "graffle.config.{ts,js,mjs,mts}" in the current working directory. If a directory path is given, then will look for "graffle.config.{ts,js,mjs,mts}" in that directory.`,
-      ),
+    S.UndefinedOr(S.String).pipe(
+      S.annotations({
+        description:
+          `Path to your configuration file. By default will look for "graffle.config.{ts,js,mjs,mts}" in the current working directory. If a directory path is given, then will look for "graffle.config.{ts,js,mjs,mts}" in that directory.`,
+      }),
+    ),
   )
   .parameter(
     `defaultSchemaUrl`,
-    z
-      .union([
-        z
-          .boolean()
-          .describe(
-            `If a GraphQL endpoint is given for "--schema", should it be set as the default URL in the generated client. If true then the client will default to using this URL when sending requests.`,
-          ),
-        z
-          .string()
-          .min(1)
-          .describe(
-            `A GraphQL endpoint to be used as the default URL in the generated client for requests.`,
-          ),
-      ])
-      .optional(),
+    S.UndefinedOr(
+      S.Union(
+        S.Boolean.pipe(
+          S.annotations({
+            description:
+              `If a GraphQL endpoint is given for "--schema", should it be set as the default URL in the generated client. If true then the client will default to using this URL when sending requests.`,
+          }),
+        ),
+        S.String.pipe(
+          S.minLength(1),
+          S.annotations({
+            description: `A GraphQL endpoint to be used as the default URL in the generated client for requests.`,
+          }),
+        ),
+      ),
+    ),
   )
   .parameter(
     `output`,
-    z
-      .string()
-      .min(1)
-      .optional()
-      .describe(
-        `Directory path for where to output the generated TypeScript files. By default will be './graffle' in the project root.`,
-      ),
+    S.UndefinedOr(S.String.pipe(S.minLength(1))).pipe(
+      S.annotations({
+        description:
+          `Directory path for where to output the generated TypeScript files. By default will be './graffle' in the project root.`,
+      }),
+    ),
   )
   .parameter(
     `outputCase`,
-    z
-      .nativeEnum(OutputCase)
-      .optional()
-      .describe(`The case format to use for the generated file names.`),
+    S.UndefinedOr(OutputCase).pipe(
+      S.annotations({
+        description: `The case format to use for the generated file names.`,
+      }),
+    ),
   )
   .parameter(
     `format`,
-    z
-      .boolean()
-      .describe(
-        `Try to format the generated files. At attempt to use dprint will be made. You need to have these dependencies installed in your project: @dprint/formatter, @dprint/typescript.`,
-      )
-      .optional(),
+    S.UndefinedOr(S.Boolean).pipe(
+      S.annotations({
+        description:
+          `Try to format the generated files. At attempt to use dprint will be made. You need to have these dependencies installed in your project: @dprint/formatter, @dprint/typescript.`,
+      }),
+    ),
   )
   .parameter(
     `importFormat`,
-    z
-      .nativeEnum(ImportFormat)
-      .optional()
-      .describe(
-        `How should import identifiers be generated? For example "tsExtension" would yield modules that import like "import ... from './foo.ts'".`,
-      ),
+    S.UndefinedOr(ImportFormat).pipe(
+      S.annotations({
+        description:
+          `How should import identifiers be generated? For example "tsExtension" would yield modules that import like "import ... from './foo.ts'".`,
+      }),
+    ),
   )
   .parameter(
     `outputSdl`,
-    z
-      .boolean()
-      .optional()
-      .describe(
-        `Output the GraphQL schema SDL to a file. When explicitly set, always applies regardless of schema source.`,
-      ),
+    S.UndefinedOr(S.Boolean).pipe(
+      S.annotations({
+        description:
+          `Output the GraphQL schema SDL to a file. When explicitly set, always applies regardless of schema source.`,
+      }),
+    ),
   )
   .settings({
     parameters: {
