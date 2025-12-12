@@ -41,6 +41,11 @@ export interface GraphQLResponse<T = unknown> {
   extensions?: unknown
   status: number
   headers: Headers
+  /**
+   * The response body text. Useful for debugging non-GraphQL responses
+   * (e.g., 401/403 errors that return plain JSON instead of GraphQL).
+   */
+  body: string
   [key: string]: unknown
 }
 

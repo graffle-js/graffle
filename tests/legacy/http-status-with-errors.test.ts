@@ -155,4 +155,35 @@ describe(`HTTP 4xx/5xx status codes with GraphQL response body`, () => {
       expect(clientError.response.errors).toEqual(graphqlErrors)
     }
   })
+
+  test(`non-GraphQL response - headers and rawBody should be accessible`, async () => {
+    const nonGraphQLBody = { error: `Kill switch activated`, reason: `maintenance` }
+
+    // Setup mock to return 503 with non-GraphQL response and custom header
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    ctx.server.use(`*`, function mock(req, res) {
+      res.status(503)
+        .set(`Kill-Switch`, `true`)
+        .set(`Content-Type`, `application/json`)
+        .send(JSON.stringify(nonGraphQLBody))
+    })
+
+    const client = new GraphQLClient(ctx.url)
+
+    try {
+      await client.request(`{ user { id } }`)
+      expect.fail(`Expected ClientError to be thrown`)
+    } catch (error) {
+      expect(error).toBeInstanceOf(ClientError)
+      const clientError = error as ClientError
+      expect(clientError.response.status).toBe(503)
+      // Verify headers are accessible
+      expect(clientError.response.headers).toBeInstanceOf(Headers)
+      expect(clientError.response.headers.get(`Kill-Switch`)).toBe(`true`)
+      // Verify body is accessible for non-GraphQL responses
+      expect(clientError.response.body).toBe(JSON.stringify(nonGraphQLBody))
+      // Can parse the body to get detailed error info
+      expect(JSON.parse(clientError.response.body)).toEqual(nonGraphQLBody)
+    }
+  })
 })
