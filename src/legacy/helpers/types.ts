@@ -40,6 +40,12 @@ export interface GraphQLResponse<T = unknown> {
   errors?: GraphQLError[]
   extensions?: unknown
   status: number
+  headers: Headers
+  /**
+   * The response body text. Useful for debugging non-GraphQL responses
+   * (e.g., 401/403 errors that return plain JSON instead of GraphQL).
+   */
+  body: string
   [key: string]: unknown
 }
 
@@ -62,6 +68,11 @@ export type TypedDocumentString<$Result, $Variables> = String & DocumentTypeDeco
 export interface GraphQLClientResponse<Data> {
   status: number
   headers: Headers
+  /**
+   * The response body text. Useful for debugging non-GraphQL responses
+   * (e.g., 401/403 errors that return plain JSON instead of GraphQL).
+   */
+  body: string
   data: Data
   extensions?: unknown
   errors?: GraphQLError[]

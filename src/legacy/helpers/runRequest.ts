@@ -71,12 +71,16 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
   const fetcher = createFetcher(config.method)
   const fetchResponse = await fetcher(config)
 
+  // Read response body text first (can only be read once)
+  const body = await fetchResponse.text()
+
   // Parse response body FIRST, regardless of HTTP status
   // This allows GraphQL errors to be extracted even when HTTP status is 4xx/5xx (fixes #1281)
   let result
   try {
-    result = await parseResultFromResponse(
-      fetchResponse,
+    result = parseResultFromText(
+      body,
+      fetchResponse.headers.get(CONTENT_TYPE_HEADER),
       input.fetchOptions.jsonSerializer ?? defaultJsonSerializer,
     )
   } catch (error) {
@@ -87,6 +91,7 @@ export const runRequest = async (input: Input): Promise<ClientError | GraphQLCli
   const clientResponseBase = {
     status: fetchResponse.status,
     headers: fetchResponse.headers,
+    body,
   }
 
   // Handle non-2xx HTTP status codes
@@ -159,9 +164,7 @@ const executionResultClientResponseFields = ($params: Input) => (executionResult
   }
 }
 
-const parseResultFromResponse = async (response: Response, jsonSerializer: JsonSerializer) => {
-  const contentType = response.headers.get(CONTENT_TYPE_HEADER)
-  const text = await response.text()
+const parseResultFromText = (text: string, contentType: string | null, jsonSerializer: JsonSerializer) => {
   if (contentType && isGraphQLContentType(contentType)) {
     return parseGraphQLExecutionResult(jsonSerializer.parse(text))
   } else {
