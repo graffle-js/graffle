@@ -15,12 +15,12 @@ test(`minimal query`, async () => {
 
 test(`minimal raw query`, async () => {
   const mockRes = ctx.res({ body: { data, extensions: { version: `1` } } }).spec.body!
-  const { headers: _, ...result } = await rawRequest(ctx.url, `{ me { id } }`)
+  const { headers: _, body: __, ...result } = await rawRequest(ctx.url, `{ me { id } }`)
   expect(result).toEqual({ data: mockRes.data, extensions: mockRes.extensions, status: 200 })
 })
 
 test(`minimal raw query with response headers`, async () => {
-  const { headers: reqHeaders, body } = ctx.res({
+  const { headers: reqHeaders, body: mockBody } = ctx.res({
     headers: {
       'Content-Type': `application/json`,
       'X-Custom-Header': `test-custom-header`,
@@ -31,8 +31,8 @@ test(`minimal raw query with response headers`, async () => {
     },
   }).spec
 
-  const { headers, ...result } = await rawRequest(ctx.url, `{ me { id } }`)
-  expect(result).toEqual({ ...body, status: 200 })
+  const { headers, body: _, ...result } = await rawRequest(ctx.url, `{ me { id } }`)
+  expect(result).toEqual({ ...mockBody, status: 200 })
   expect(headers.get(`X-Custom-Header`)).toEqual(reqHeaders![`X-Custom-Header`])
 })
 
@@ -41,7 +41,7 @@ test(`basic error`, async () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const res = await request(ctx.url, `x`).catch((x: unknown) => x)
   expect(res).toMatchInlineSnapshot(
-    `[Error: GraphQL Error (Code: 200): {"response":{"errors":{"message":"Syntax Error GraphQL request (1:1) Unexpected Name \\"x\\"\\n\\n1: x\\n   ^\\n","locations":[{"line":1,"column":1}]},"status":200,"headers":{}},"request":{"query":"x"}}]`,
+    `[Error: GraphQL Error (Code: 200): {"response":{"errors":{"message":"Syntax Error GraphQL request (1:1) Unexpected Name \\"x\\"\\n\\n1: x\\n   ^\\n","locations":[{"line":1,"column":1}]},"status":200,"headers":{},"body":"{\\"errors\\":{\\"message\\":\\"Syntax Error GraphQL request (1:1) Unexpected Name \\\\\\"x\\\\\\"\\\\n\\\\n1: x\\\\n   ^\\\\n\\",\\"locations\\":[{\\"line\\":1,\\"column\\":1}]}}"},"request":{"query":"x"}}]`,
   )
 })
 
@@ -49,7 +49,7 @@ test(`basic error with raw request`, async () => {
   ctx.res({ body: { errors } })
   const res: unknown = await rawRequest(ctx.url, `x`).catch((x: unknown) => x)
   expect(res).toMatchInlineSnapshot(
-    `[Error: GraphQL Error (Code: 200): {"response":{"errors":{"message":"Syntax Error GraphQL request (1:1) Unexpected Name \\"x\\"\\n\\n1: x\\n   ^\\n","locations":[{"line":1,"column":1}]},"status":200,"headers":{}},"request":{"query":"x"}}]`,
+    `[Error: GraphQL Error (Code: 200): {"response":{"errors":{"message":"Syntax Error GraphQL request (1:1) Unexpected Name \\"x\\"\\n\\n1: x\\n   ^\\n","locations":[{"line":1,"column":1}]},"status":200,"headers":{},"body":"{\\"errors\\":{\\"message\\":\\"Syntax Error GraphQL request (1:1) Unexpected Name \\\\\\"x\\\\\\"\\\\n\\\\n1: x\\\\n   ^\\\\n\\",\\"locations\\":[{\\"line\\":1,\\"column\\":1}]}}"},"request":{"query":"x"}}]`,
   )
 })
 
