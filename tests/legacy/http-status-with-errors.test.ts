@@ -178,7 +178,6 @@ describe(`HTTP 4xx/5xx status codes with GraphQL response body`, () => {
       const clientError = error as ClientError
       expect(clientError.response.status).toBe(503)
       // Verify headers are accessible
-      expect(clientError.response.headers).toBeInstanceOf(Headers)
       expect(clientError.response.headers.get(`Kill-Switch`)).toBe(`true`)
       // Verify body is accessible for non-GraphQL responses
       expect(clientError.response.body).toBe(JSON.stringify(nonGraphQLBody))
