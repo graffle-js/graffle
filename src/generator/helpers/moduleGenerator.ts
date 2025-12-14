@@ -38,9 +38,8 @@ export interface GeneratedModule<$Name extends string = string> {
   /**
    * Optional custom file path relative to modules directory.
    * If provided, overrides the default path construction.
-   * Example: "schema/types/Query/fields.ts"
    */
-  filePath?: string
+  filePath?: Fs.Path.RelFile
 }
 
 export const createModuleGenerator: FactoryModuleGenerator = (name, sourceFileUrlOrRunner, runnerImplementation) => {
@@ -112,9 +111,9 @@ export const getBaseName = (config: Config, generator: ModuleGenerator | Generat
   return caseFormatters[config.outputCase](generator.name)
 }
 
-export const getFileName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
+export const getFileName = (config: Config, generator: ModuleGenerator | GeneratedModule): Fs.Path.RelFile => {
   const name = getBaseName(config, generator)
-  return `${name}.ts`
+  return Fs.Path.RelFile.fromString(`${name}.ts`)
 }
 
 export const getImportName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {

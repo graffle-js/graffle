@@ -36,6 +36,9 @@ export const loadDefaults: Config = {
 
 const extensionCandidates = [`ts`, `js`, `mjs`, `mts`]
 
+const getFileName = (ext: string): Fs.Path.RelFile =>
+  Fs.Path.RelFile.fromString(`${loadDefaults.fileName}.${ext}`)
+
 export type LoadResult =
   | { builder: null; paths: Fs.Path.AbsFile[]; path: null }
   | { builder: Builder; path: Fs.Path.AbsFile; paths: Fs.Path.AbsFile[] }
@@ -97,7 +100,7 @@ export const load = (
 const processInput = (input?: Fs.Path.$Abs): Effect.Effect<Fs.Path.AbsFile[], never, FileSystem.FileSystem> =>
   Effect.gen(function*() {
     const configFileCandidates = (dir: Fs.Path.AbsDir) =>
-      extensionCandidates.map((ext) => Fs.Path.join(dir, Fs.Path.RelFile.fromString(`${loadDefaults.fileName}.${ext}`)))
+      extensionCandidates.map((ext) => Fs.Path.join(dir, getFileName(ext)))
 
     if (!input) {
       return configFileCandidates(Env.env.cwd)

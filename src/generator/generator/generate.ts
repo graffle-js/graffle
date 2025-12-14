@@ -26,8 +26,6 @@ import type { GeneratedModule } from '../helpers/moduleGenerator.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
 
-const modulesRelDir = Fs.Path.fromLiteral(`./modules/`)
-
 const moduleGenerators = [
   ModuleGeneratorGlobal,
   ModuleGeneratorClient,
@@ -116,17 +114,18 @@ export const generate = (
       yield* Fs.write(config.paths.project.outputs.sdl.path, config.schema.sdl)
     }
 
+    const modulesDir = Fs.Path.fromLiteral(`./modules/`)
+
     yield* Effect.all(
       generatedModules.map((generatedModule) =>
         Effect.gen(function*() {
-          // dprint-ignore
-          const filePath = generatedModule.filePath
-            ? `${config.paths.project.outputs.root}/modules/${generatedModule.filePath}`
-            : `${config.paths.project.outputs.root}/${isExportsModule(generatedModule.name) ? `` : `modules/`}${getFileName(config, generatedModule)}`
-          // Create parent directory if it doesn't exist
-          const dirPath = filePath.substring(0, filePath.lastIndexOf('/'))
-          yield* fs.makeDirectory(dirPath, { recursive: true })
-          yield* fs.writeFileString(filePath, generatedModule.content)
+          const relFile = generatedModule.filePath
+            ? Fs.Path.join(modulesDir, generatedModule.filePath)
+            : isExportsModule(generatedModule.name)
+            ? getFileName(config, generatedModule)
+            : Fs.Path.join(modulesDir, getFileName(config, generatedModule))
+          const filePath = Fs.Path.join(config.paths.project.outputs.root, relFile)
+          yield* Fs.write(filePath, generatedModule.content)
         })
       ),
       { concurrency: 'unbounded' },
