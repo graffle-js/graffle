@@ -1,7 +1,7 @@
 import { FileSystem } from '@effect/platform'
 import type { PlatformError } from '@effect/platform/Error'
+import { Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
-import * as Path from 'node:path'
 import { Config } from '../config/_.js'
 
 /**
@@ -23,11 +23,10 @@ export const validateGraphQLSPConfiguration = (
       return
     }
 
-    const fs = yield* FileSystem.FileSystem
-    const tsconfigPath = `${config.paths.project.inputs.root}/tsconfig.json`
+    const tsconfigPath = Fs.Path.join(config.paths.project.inputs.root, Fs.Path.fromLiteral(`./tsconfig.json`))
 
     // Check if tsconfig.json exists
-    const tsconfigExists = yield* fs.exists(tsconfigPath)
+    const tsconfigExists = yield* Fs.exists(tsconfigPath)
 
     if (!tsconfigExists) {
       // tsconfig.json doesn't exist - provide basic suggestion
@@ -37,7 +36,7 @@ export const validateGraphQLSPConfiguration = (
       let sdlSetupStep: string
 
       if (hasSdlOutput) {
-        const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl.path)
+        const sdlPath = Fs.Path.toString(Fs.Path.toRel(config.paths.project.outputs.sdl.path, config.paths.project.inputs.root))
         schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
         sdlSetupStep = ``
       } else {
@@ -82,7 +81,7 @@ To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
     }
 
     // Read and parse tsconfig.json
-    const tsconfigContentResult = yield* fs.readFileString(tsconfigPath).pipe(
+    const tsconfigContentResult = yield* Fs.readString(tsconfigPath).pipe(
       Effect.either,
     )
 
@@ -119,7 +118,7 @@ To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
       let sdlSetupStep: string
 
       if (hasSdlOutput) {
-        const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl.path)
+        const sdlPath = Fs.Path.toString(Fs.Path.toRel(config.paths.project.outputs.sdl.path, config.paths.project.inputs.root))
         schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
         sdlSetupStep = ``
       } else {
@@ -167,7 +166,7 @@ To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
 
     // GraphQLSP is configured - check if SDL file exists
     if (config.paths.project.outputs.sdl.emitMode !== Config.EmitMode.never) {
-      const sdlExists = yield* fs.exists(config.paths.project.outputs.sdl.path)
+      const sdlExists = yield* Fs.exists(config.paths.project.outputs.sdl.path)
       if (sdlExists) {
         // SDL file exists - all good!
         console.log(`GraphQLSP is configured and SDL schema file exists`)

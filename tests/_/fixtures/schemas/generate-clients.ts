@@ -2,9 +2,8 @@ import { Generator } from '#src/generator/_.js'
 import { TestSchemas } from '#test/schema/_.js'
 import { FileSystem } from '@effect/platform'
 import { NodeContext, NodeRuntime } from '@effect/platform-node'
-import { Obj, Str } from '@wollybeard/kit'
+import { Fs, Obj, Str } from '@wollybeard/kit'
 import { Effect } from 'effect'
-import { join } from 'node:path'
 
 // Schemas that have custom scalars and need NoCustomScalars variants
 const schemasWithCustomScalars = Obj.keysStrict(Obj.pick(TestSchemas, ['possible', 'pokemon']))
@@ -116,30 +115,33 @@ const lintConfig = {
   missingGraphqlSP: false,
 }
 
+const cwd = Fs.Path.AbsDir.fromString(import.meta.dirname)
+
 const generateClient = (params: {
   schemaName: string
   schema: (typeof TestSchemas)[keyof typeof TestSchemas]
-  outputDirPath: string
-  scalars?: string
+  outputDirPath: Fs.Path.RelDir
+  scalars?: Fs.Path.RelFile
   methodsOrganization: ReturnType<typeof getMethodsOrganization>
 }) =>
   Effect.gen(function*() {
-    const fs = yield* FileSystem.FileSystem
-    const fullOutputPath = join(import.meta.dirname, params.outputDirPath)
+    const outputDirPath = Fs.Path.join(cwd, params.outputDirPath)
 
     // Clean up existing generated directory
-    yield* fs.remove(fullOutputPath, { recursive: true }).pipe(Effect.ignore)
+    yield* Fs.remove(outputDirPath, { recursive: true }).pipe(Effect.ignore)
 
     const config = yield* Generator.generate({
       name: params.schemaName,
-      currentWorkingDirectory: import.meta.dirname,
+      currentWorkingDirectory: cwd,
       schema: {
         type: `instance`,
         instance: params.schema,
       },
       outputSDL: true,
-      outputDirPath: params.outputDirPath,
-      scalars: params.scalars,
+      outputDirPath,
+      scalars: params.scalars
+        ? Fs.Path.join(cwd, params.scalars)
+        : undefined,
       methodsOrganization: params.methodsOrganization,
       libraryPaths,
       nameNamespace: true,

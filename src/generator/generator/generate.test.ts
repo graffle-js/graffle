@@ -168,7 +168,7 @@ test(`custom scalars module results in client prefilling those custom scalars`, 
 test(`custom headers can be set on introspection request`, async ({ fetch }) => {
   fetch.mockImplementation(() => Promise.resolve(createGraphQLResponseData(mockIntrospectionData)))
 
-  await runWithNodeFs(
+  await Effect.runPromise(
     generate({
       format: false, // todo: otherwise parse error because introspection query not yielding a valid shape?
       schema: {
@@ -178,7 +178,7 @@ test(`custom headers can be set on introspection request`, async ({ fetch }) => 
           'x-custom': `test`,
         },
       },
-    }),
+    }).pipe(Effect.provide(Fs.Memory.layer({}))),
   )
 
   const init = fetch.mock.calls[0]?.[1]

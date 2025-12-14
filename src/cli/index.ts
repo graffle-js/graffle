@@ -2,11 +2,10 @@
 
 import { type ConfigInit, ImportFormat, OutputCase } from '#src/generator/config/configInit.js'
 import { NodeContext, NodeRuntime } from '@effect/platform-node'
-import { Err, Url } from '@wollybeard/kit'
+import { Env, Err, Fs, Url } from '@wollybeard/kit'
 import { Command } from '@wollybeard/kit/oak'
 import { EffectSchema } from '@wollybeard/kit/oak/extensions'
 import { Effect, Schema as S } from 'effect'
-import * as Path from 'node:path'
 import { Generator } from '../generator/_.js'
 import { ConfigFileError } from '../generator/configFile/loader.js'
 
@@ -110,10 +109,9 @@ const args = Command.create()
   })
   .parse()
 
-const toAbsolutePath = (cwd: string, maybeAbsolutePath: string) =>
-  Path.isAbsolute(maybeAbsolutePath) ? maybeAbsolutePath : Path.join(cwd, maybeAbsolutePath)
-
 const program = Effect.gen(function*() {
+  const cwd = Env.env.cwd
+  const toAbs = Fs.Path.ensureAbsoluteWith(cwd)
   // --- Resolve Config File ---
 
   const configModule = yield* Generator.Config.load({ filePath: args.project })
@@ -124,7 +122,9 @@ const program = Effect.gen(function*() {
 
   if (!configModule.builder && args.project) {
     return yield* Effect.fail(
-      new Error(`Could not find a configuration file at "${configModule.paths.join(`, `)}".`),
+      new Error(
+        `Could not find a configuration file at "${configModule.paths.map(_ => Fs.Path.toString(_)).join(`, `)}".`,
+      ),
     )
   }
 
@@ -167,9 +167,9 @@ const program = Effect.gen(function*() {
     )
   }
 
-  const currentWorkingDirectory = configModule.path
-    ? Path.dirname(configModule.path)
-    : process.cwd()
+  const currentWorkingDirectory: Fs.Path.AbsDir = configModule.path
+    ? Fs.Path.toDir(configModule.path)
+    : cwd
 
   // --- Merge Inputs ---
 

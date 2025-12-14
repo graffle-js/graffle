@@ -1,5 +1,6 @@
 import { FileSystem } from '@effect/platform'
 import type { PlatformError } from '@effect/platform/Error'
+import { Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
 import * as Config from '../config/config.js'
 import type { ConfigInit } from '../config/configInit.js'
@@ -24,6 +25,8 @@ import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
+
+const modulesRelDir = Fs.Path.fromLiteral(`./modules/`)
 
 const moduleGenerators = [
   ModuleGeneratorGlobal,
@@ -98,12 +101,11 @@ export const generate = (
   init: ConfigInit,
 ): Effect.Effect<Config.Config, PlatformError | SchemaError, FileSystem.FileSystem> =>
   Effect.gen(function*() {
-    const fs = yield* FileSystem.FileSystem
     const { config, modules: generatedModules } = yield* generateModules(init)
 
     // todo clear directory before generating so that removed or renamed files are cleaned up.
-    yield* fs.makeDirectory(config.paths.project.outputs.root, { recursive: true })
-    yield* fs.makeDirectory(config.paths.project.outputs.modules, { recursive: true })
+    yield* Fs.write(config.paths.project.outputs.root, { recursive: true })
+    yield* Fs.write(config.paths.project.outputs.modules, { recursive: true })
 
     // todo: add a test that if dir doesn't exist yet, it is created beforehand.
     const shouldWriteSDL = config.paths.project.outputs.sdl.emitMode === Config.EmitMode.always

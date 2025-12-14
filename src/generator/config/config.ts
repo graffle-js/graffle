@@ -3,10 +3,9 @@ import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
 import { FileSystem } from '@effect/platform'
 import type { PlatformError } from '@effect/platform/Error'
-import { ConfigManager, Fs, Obj, Str } from '@wollybeard/kit'
+import { ConfigManager, Env, Fs, Obj, Str } from '@wollybeard/kit'
 import { Effect } from 'effect'
 import { pascalCase } from 'es-toolkit'
-import * as NodePath from 'node:path'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import { SchemaError } from '../errors.js'
 import type { Extension } from '../extension/types.js'
@@ -61,17 +60,17 @@ export interface Config {
   paths: {
     project: {
       inputs: {
-        root: string
-        schema: null | string
-        scalars: string
+        root: Fs.Path.AbsDir
+        schema: Fs.Path.AbsFile | null
+        scalars: Fs.Path.AbsFile
       }
       outputs: {
         sdl: {
-          path: string
+          path: Fs.Path.AbsFile
           emitMode: EmitMode
         }
-        root: string
-        modules: string
+        root: Fs.Path.AbsDir
+        modules: Fs.Path.AbsDir
       }
     }
     imports: {
@@ -89,40 +88,11 @@ type ConfigInitDomainGroupingConfig = import('./configInit.js').DomainGroupingCo
 interface ConfigSchema {
   via: ConfigInit['schema']['type']
   sdl: string
-  sdlFilePath: null | string
+  sdlFilePath: Fs.Path.AbsFile | null
   instance: GraphqlKit.Schema.Runtime.Nodes.Schema
   kindMap: GraphqlKit.Schema.Kind.KindMap
 }
 
-/**
- * Convert a possibly relative path to an absolute path.
- * Uses Kit's Path utilities for type-safe path manipulation.
- */
-const toAbsolutePath = (cwd: string, maybeAbsolutePath: string): string => {
-  if (NodePath.isAbsolute(maybeAbsolutePath)) {
-    return maybeAbsolutePath
-  }
-  // Use Kit's Path.join for type-safe joining
-  const cwdDir = Fs.Path.fromString(cwd.endsWith('/') ? cwd : cwd + '/')
-  const relPath = Fs.Path.fromString(maybeAbsolutePath)
-  if (Fs.Path.$Dir.is(cwdDir) && Fs.Path.$Rel.is(relPath)) {
-    return Fs.Path.toString(Fs.Path.join(cwdDir, relPath))
-  }
-  // Fallback for edge cases
-  return NodePath.join(cwd, maybeAbsolutePath)
-}
-
-const isFileLikePath = (path: string) => {
-  return Boolean(NodePath.extname(path))
-}
-
-const toFilePath = (fileName: string, path: string) => {
-  if (isFileLikePath(path)) {
-    return path
-  } else {
-    return NodePath.join(path, fileName)
-  }
-}
 
 export const createConfig = (
   configInit: ConfigInit,
