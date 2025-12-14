@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Obj, Str, Syn } from '@wollybeard/kit'
+import { Fs, Obj, Str, Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { extractFieldTypeInfo, getKindDocUrl } from '../helpers/jsdoc.js'
 import { type GeneratedModule } from '../helpers/moduleGenerator.js'
@@ -152,7 +152,7 @@ const generateScalarModule = (config: Config, scalar: GraphqlKit.Schema.Runtime.
 
   return {
     name: `schema/scalars/${scalar.name}`,
-    filePath: `schema/scalars/${renderedName}.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/scalars/${renderedName}.ts`),
     content: code.build(),
   }
 }
@@ -195,7 +195,7 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
 
   modules.push({
     name: `schema/enums/${enumType.name}/members`,
-    filePath: `schema/enums/${enumType.name}/members.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/enums/${enumType.name}/members.ts`),
     content: membersCode.build(),
   })
 
@@ -232,7 +232,7 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
 
   modules.push({
     name: `schema/enums/${enumType.name}/_`,
-    filePath: `schema/enums/${enumType.name}/_.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/enums/${enumType.name}/_.ts`),
     content: code.build(),
   })
 
@@ -277,7 +277,7 @@ const generateUnionModule = (
 
   return {
     name: `schema/unions/${unionType.name}`,
-    filePath: `schema/unions/${unionType.name}.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/unions/${unionType.name}.ts`),
     content: code.build(),
   }
 }
@@ -469,7 +469,7 @@ const generateInputObjectModule = (
 
   modules.push({
     name: `schema/input-objects/${inputObject.name}/fields`,
-    filePath: `schema/input-objects/${inputObject.name}/fields.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/input-objects/${inputObject.name}/fields.ts`),
     content: fieldsCode.build(),
   })
 
@@ -519,7 +519,7 @@ const generateInputObjectModule = (
 
   modules.push({
     name: `schema/input-objects/${inputObject.name}/_`,
-    filePath: `schema/input-objects/${inputObject.name}/_.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/input-objects/${inputObject.name}/_.ts`),
     content: namespaceCode.build(),
   })
 
@@ -604,7 +604,7 @@ const generateSchemaNamespaceModule = (
 
   return {
     name: `schema/_`,
-    filePath: `schema/_.ts`,
+    filePath: Fs.Path.fromLiteral(`schema/_.ts`),
     content: code.build(),
   }
 }
@@ -658,7 +658,7 @@ const generateSchemaBarrelModule = (
 
   return {
     name: `schema/__`,
-    filePath: `schema/__.ts`,
+    filePath: Fs.Path.fromLiteral(`schema/__.ts`),
     content: code.build(),
   }
 }
@@ -1025,7 +1025,7 @@ const generateTypeModule = (
 
   modules.push({
     name: `schema/${kind}/${type.name}/fields`,
-    filePath: `schema/${kind}/${type.name}/fields.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/${kind}/${type.name}/fields.ts`),
     content: fieldsCode.build(),
   })
 
@@ -1115,7 +1115,7 @@ const generateTypeModule = (
 
   modules.push({
     name: `schema/${kind}/${type.name}/_`,
-    filePath: `schema/${kind}/${type.name}/_.ts`,
+    filePath: Fs.Path.RelFile.fromString(`schema/${kind}/${type.name}/_.ts`),
     content: namespaceCode.build(),
   })
 

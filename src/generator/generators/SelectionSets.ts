@@ -2,7 +2,7 @@
 // TODO: This will replace SelectionSets.ts once complete
 
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Obj, Str, Syn } from '@wollybeard/kit'
+import { Fs, Obj, Str, Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -109,7 +109,7 @@ const generateContextModule = (config: Config): GeneratedModule => {
 
   return {
     name: `selection-sets/_context`,
-    filePath: `selection-sets/_context.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/_context.ts`),
     content: code.toString(),
   }
 }
@@ -142,7 +142,7 @@ const generateDocumentModule = (config: Config): GeneratedModule => {
 
   return {
     name: `selection-sets/_document`,
-    filePath: `selection-sets/_document.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/_document.ts`),
     content: code.toString(),
   }
 }
@@ -182,7 +182,7 @@ const generateNamedTypesModule = (config: Config, kindMap: GraphqlKit.Schema.Kin
 
   return {
     name: `selection-sets/$named`,
-    filePath: `selection-sets/$named.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/$named.ts`),
     content: code.toString(),
   }
 }
@@ -261,7 +261,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
 
   modules.push({
     name: `selection-sets/scalars/scalars`,
-    filePath: `selection-sets/scalars/scalars.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/scalars/scalars.ts`),
     content: scalarsCode.toString(),
   })
 
@@ -285,7 +285,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
 
   modules.push({
     name: `selection-sets/scalars/__`,
-    filePath: `selection-sets/scalars/__.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/scalars/__.ts`),
     content: comprehensiveBarrelCode.toString(),
   })
 
@@ -295,7 +295,7 @@ const generateScalarsModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.K
 
   modules.push({
     name: `selection-sets/scalars/_`,
-    filePath: `selection-sets/scalars/_.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/scalars/_.ts`),
     content: barrelCode.toString(),
   })
 
@@ -316,7 +316,7 @@ const generateEnumModule = (config: Config, enumType: GraphqlKit.Schema.Runtime.
 
   return {
     name: `selection-sets/enums/${enumType.name}`,
-    filePath: `selection-sets/enums/${enumType.name}.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/enums/${enumType.name}.ts`),
     content: code.toString(),
   }
 }
@@ -340,7 +340,7 @@ const generateUnionModule = (
 
   modules.push({
     name: `selection-sets/unions/${unionType.name}/fragment`,
-    filePath: `selection-sets/unions/${unionType.name}/fragment.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/unions/${unionType.name}/fragment.ts`),
     content: fragmentCode.toString(),
   })
 
@@ -350,7 +350,7 @@ const generateUnionModule = (
 
   modules.push({
     name: `selection-sets/unions/${unionType.name}/__`,
-    filePath: `selection-sets/unions/${unionType.name}/__.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/unions/${unionType.name}/__.ts`),
     content: barrelCode.toString(),
   })
 
@@ -388,7 +388,7 @@ const generateUnionModule = (
 
   modules.push({
     name: `selection-sets/unions/${unionType.name}/_`,
-    filePath: `selection-sets/unions/${unionType.name}/_.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/unions/${unionType.name}/_.ts`),
     content: mainCode.toString(),
   })
 
@@ -434,7 +434,7 @@ const generateInputObjectModule = (
 
   modules.push({
     name: `selection-sets/input-objects/${inputObject.name}/fields`,
-    filePath: `selection-sets/input-objects/${inputObject.name}/fields.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/input-objects/${inputObject.name}/fields.ts`),
     content: fieldsCode.toString(),
   })
 
@@ -464,7 +464,7 @@ const generateInputObjectModule = (
 
   modules.push({
     name: `selection-sets/input-objects/${inputObject.name}/_`,
-    filePath: `selection-sets/input-objects/${inputObject.name}/_.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/input-objects/${inputObject.name}/_.ts`),
     content: namespaceCode.toString(),
   })
 
@@ -530,7 +530,7 @@ const generateFieldedTypeModule = (
 
   modules.push({
     name: `selection-sets/${kind}/${type.name}/fields`,
-    filePath: `selection-sets/${kind}/${type.name}/fields.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/${kind}/${type.name}/fields.ts`),
     content: fieldsCode.toString(),
   })
 
@@ -545,7 +545,7 @@ const generateFieldedTypeModule = (
 
   modules.push({
     name: `selection-sets/${kind}/${type.name}/fragment`,
-    filePath: `selection-sets/${kind}/${type.name}/fragment.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/${kind}/${type.name}/fragment.ts`),
     content: fragmentCode.toString(),
   })
 
@@ -556,7 +556,7 @@ const generateFieldedTypeModule = (
 
   modules.push({
     name: `selection-sets/${kind}/${type.name}/__`,
-    filePath: `selection-sets/${kind}/${type.name}/__.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/${kind}/${type.name}/__.ts`),
     content: barrelCode.toString(),
   })
 
@@ -646,7 +646,7 @@ const generateFieldedTypeModule = (
 
   modules.push({
     name: `selection-sets/${kind}/${type.name}/_`,
-    filePath: `selection-sets/${kind}/${type.name}/_.ts`,
+    filePath: Fs.Path.RelFile.fromString(`selection-sets/${kind}/${type.name}/_.ts`),
     content: namespaceCode.toString(),
   })
 
@@ -856,7 +856,7 @@ const generateBarrelModule = (config: Config, kindMap: GraphqlKit.Schema.Kind.Ki
 
   return {
     name: `selection-sets/__`,
-    filePath: `selection-sets/__.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/__.ts`),
     content: code.toString(),
   }
 }
