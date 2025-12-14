@@ -7,15 +7,14 @@ ContextualAggregateError
   errors: [
     ContextualError: [
       {
+        "origin": "string",
         "code": "too_small",
         "minimum": 1,
-        "type": "string",
         "inclusive": true,
-        "exact": false,
-        "message": "Pokemon name cannot be empty.",
         "path": [
           "name"
-        ]
+        ],
+        "message": "Pokemon name cannot be empty."
       }
     ]
         at <anonymous> (/some/path/to/handle.ts:XX:XX)
@@ -33,15 +32,14 @@ ContextualAggregateError
   _tag: 'ContextualAggregateError',
   [cause]: ContextualError: [
     {
+      "origin": "string",
       "code": "too_small",
       "minimum": 1,
-      "type": "string",
       "inclusive": true,
-      "exact": false,
-      "message": "Pokemon name cannot be empty.",
       "path": [
         "name"
-      ]
+      ],
+      "message": "Pokemon name cannot be empty."
     }
   ]
       at <anonymous> (/some/path/to/handle.ts:XX:XX)
