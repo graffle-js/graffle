@@ -330,8 +330,6 @@ const createConfigSchema = (
   input: ConfigInit,
 ): Effect.Effect<ConfigSchema, PlatformError | SchemaError, FileSystem.FileSystem> =>
   Effect.gen(function*() {
-    const fs = yield* FileSystem.FileSystem
-
     switch (input.schema.type) {
       case `instance`: {
         const sdl = GraphqlKit.Schema.Runtime.toString(input.schema.instance)

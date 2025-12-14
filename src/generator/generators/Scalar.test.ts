@@ -1,9 +1,10 @@
-import { FileSystem } from '@effect/platform'
-import { Fs } from '@wollybeard/kit'
+import { Env, Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
 import { describe, expect, test } from 'vitest'
 import { defaults } from '../config/defaults.js'
 import { generate } from '../generator/generate.js'
+
+const p = Fs.Path.fromLiteral
 
 // Suppress warnings in tests
 defaults.lint.missingCustomScalarCodec = false
@@ -42,11 +43,10 @@ const customScalarsCode = `
 `
 
 const readGeneratedFiles = Effect.gen(function*() {
-  const fs = yield* FileSystem.FileSystem
-  const base = `${process.cwd()}/graffle/modules`
-  const scalar = yield* fs.readFileString(`${base}/scalar.ts`)
-  const schema = yield* fs.readFileString(`${base}/schema/_.ts`)
-  const sddm = yield* fs.readFileString(`${base}/schema-driven-data-map.ts`)
+  const base = Fs.Path.AbsDir.fromString(`${process.cwd()}/graffle/modules/`)
+  const scalar = yield* Fs.readString(Fs.Path.join(base, p(`./scalar.ts`)))
+  const schema = yield* Fs.readString(Fs.Path.join(base, p(`./schema/_.ts`)))
+  const sddm = yield* Fs.readString(Fs.Path.join(base, p(`./schema-driven-data-map.ts`)))
   return { scalar, schema, sddm }
 })
 
@@ -76,7 +76,7 @@ describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
       }
     `
 
-    const layout = Fs.Builder.spec(`${process.cwd()}/`)
+    const layout = Fs.Builder.spec(Env.env.cwd)
       .file('scalars.ts', customScalarsBigIntDateTime)
       .toLayout()
 
@@ -130,7 +130,7 @@ describe('Issue #1367 - Import format noExtension not working', () => {
       }
     `
 
-    const layout = Fs.Builder.spec(`${process.cwd()}/`)
+    const layout = Fs.Builder.spec(Env.env.cwd)
       .file('scalars.ts', customScalarsBigIntDateTime)
       .toLayout()
 

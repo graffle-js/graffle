@@ -1,7 +1,6 @@
 import { FileSystem } from '@effect/platform'
-import { Err } from '@wollybeard/kit'
+import { Env, Fs, Mod } from '@wollybeard/kit'
 import { Data, Effect, Option } from 'effect'
-import * as Path from 'node:path'
 import { type Builder, isBuilder } from './builder.js'
 
 interface Config {
@@ -38,8 +37,8 @@ export const loadDefaults: Config = {
 const extensionCandidates = [`ts`, `js`, `mjs`, `mts`]
 
 export type LoadResult =
-  | { builder: null; paths: string[]; path: null }
-  | { builder: Builder; path: string; paths: string[] }
+  | { builder: null; paths: Fs.Path.AbsFile[]; path: null }
+  | { builder: Builder; path: Fs.Path.AbsFile; paths: Fs.Path.AbsFile[] }
 
 export class ConfigFileError extends Data.TaggedError('ConfigFileError')<{
   message: string
@@ -121,19 +120,14 @@ const processInput = (input?: string): Effect.Effect<string[], never, FileSystem
     return [absolutePath]
   })
 
-const importFirst = (
-  paths: string[],
-): Effect.Effect<
-  Option.Option<Error | { module: Record<string, unknown>; path: string }>,
+const importFirst = (paths: Fs.Path.AbsFile[]): Effect.Effect<
+  Option.Option<Mod.ImportError | { module: Record<string, unknown>; path: Fs.Path.AbsFile }>,
   never,
   never
 > =>
   Effect.gen(function*() {
     for (const path of paths) {
-      const result = yield* Effect.tryPromise({
-        try: () => import(path),
-        catch: (error) => error,
-      }).pipe(Effect.either)
+      const result = yield* Mod.dynamicImportFile(path).pipe(Effect.either)
 
       if (result._tag === 'Right') {
         return Option.some({
@@ -142,14 +136,13 @@ const importFirst = (
         })
       }
 
-      // Check if it's a module not found error - if so, try next path
-      const error = result.left
-      if (isModuleNotFoundError(error)) {
+      // Module not found - try next path
+      if (result.left._tag === 'KitModImportErrorNotFound') {
         continue
       }
 
       // For other errors, return the error
-      return Option.some(Err.ensure(error))
+      return Option.some(result.left)
     }
 
     return Option.none()

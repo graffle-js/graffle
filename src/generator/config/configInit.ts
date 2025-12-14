@@ -1,4 +1,5 @@
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Fs } from '@wollybeard/kit'
 import { Schema } from 'effect'
 import type { IntrospectionOptions } from 'graphql'
 import type { Extension } from '../extension/types.js'
@@ -54,7 +55,7 @@ export interface ConfigInitSchemaSdlFile {
   /**
    * Defaults to the source directory if set, otherwise the current working directory.
    */
-  dirOrFilePath?: string
+  dirOrFilePath?: Fs.Path.$Abs
 }
 export interface ConfigInitSchemaUrl {
   type: `url`
@@ -110,7 +111,7 @@ export interface ConfigInit {
    *
    * By default, is the process current working directory.
    */
-  currentWorkingDirectory?: string | undefined
+  currentWorkingDirectory?: Fs.Path.AbsDir | undefined
   /**
    * The schema to use for generation. Can be one of:
    *
@@ -126,7 +127,7 @@ export interface ConfigInit {
    *
    * If true, an SDL file will be written into the output directory.
    *
-   * When `string`:
+   * When `Fs.Path.$Abs`:
    *
    * The path to write the SDL file to.
    * If a directory, then a file called "schema.graphql" will be written into it.
@@ -134,13 +135,13 @@ export interface ConfigInit {
    *
    * @defaultValue `false`
    */
-  outputSDL?: boolean | string | undefined
+  outputSDL?: boolean | Fs.Path.$Abs | undefined
   /**
    * Directory path to where the generated code should be output.
    *
    * Defaults to the current working directory.
    */
-  outputDirPath?: string | undefined
+  outputDirPath?: Fs.Path.AbsDir | undefined
   /**
    * Control over the client configuration's default schema. Since an introspection URL can be used for `schema`,
    * this option allows you to have this URL propagated to the generated client configuration for your convenience.
@@ -163,13 +164,13 @@ export interface ConfigInit {
    *
    * Defaults to the current working directory.
    */
-  sourceDirPath?: string | undefined
+  sourceDirPath?: Fs.Path.AbsDir | undefined
   /**
    * File path to your scalars module.
    *
    * If not set, Graffle will look for a file called `scalars.ts` in the project directory.
    */
-  scalars?: string | undefined
+  scalars?: Fs.Path.AbsFile | undefined
   /**
    * How should import identifiers be generated? Can be one of:
    *
