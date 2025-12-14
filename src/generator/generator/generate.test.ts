@@ -1,13 +1,14 @@
 import { createGraphQLResponseData, mockIntrospectionData, test } from '#test/helpers'
-import { FileSystem } from '@effect/platform'
 import { NodeContext } from '@effect/platform-node'
-import { Fs } from '@wollybeard/kit'
+import { Env, Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
 import { describe, expect } from 'vitest'
 import type { ConfigInitSchemaSdl } from '../__.js'
 import { defaults } from '../config/defaults.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
 import { generate, generateModules } from './generate.js'
+
+const p = Fs.Path.fromLiteral
 
 // Suppress warnings in tests
 defaults.lint.missingGraphqlSP = false
@@ -138,7 +139,7 @@ test(`custom scalars module results in client prefilling those custom scalars`, 
     })
   `
 
-  const layout = Fs.Builder.spec(`${process.cwd()}/`)
+  const layout = Fs.Builder.spec(Env.env.cwd)
     .file(`scalars.ts`, customScalarsCode)
     .toLayout()
 
@@ -154,8 +155,8 @@ test(`custom scalars module results in client prefilling those custom scalars`, 
         `,
       },
     })
-    const fs = yield* FileSystem.FileSystem
-    const ScalarTs = yield* fs.readFileString(`${process.cwd()}/graffle/modules/scalar.ts`)
+    const scalarPath = Fs.Path.join(Env.env.cwd, p(`./graffle/modules/scalar.ts`))
+    const ScalarTs = yield* Fs.readString(scalarPath)
     return ScalarTs
   })
 

@@ -12,7 +12,7 @@ interface Input {
    * The path to the config file. If is a directory then will look for the configured file
    * name with one of the supported extensions in the directory.
    */
-  filePath?: string | undefined
+  filePath?: Fs.Path | undefined
   options?: {
     /**
      * Config file name.
@@ -96,18 +96,14 @@ const toAbsolutePath = (cwd: string, maybeAbsolutePath: string) =>
 
 const processInput = (input?: string): Effect.Effect<string[], never, FileSystem.FileSystem> =>
   Effect.gen(function*() {
-    const fs = yield* FileSystem.FileSystem
-
     if (!input) {
       const directoryPath = process.cwd()
       const path = Path.join(directoryPath, loadDefaults.fileName)
       return extensionCandidates.map((ext) => toAbsolutePath(process.cwd(), `${path}.${ext}`))
     }
 
-    const absolutePath = toAbsolutePath(process.cwd(), input)
-
     // Check if path is a directory
-    const statResult = yield* fs.stat(absolutePath).pipe(
+    const statResult = yield* Fs.stat(input).pipe(
       Effect.option,
     )
 
@@ -147,9 +143,3 @@ const importFirst = (paths: Fs.Path.AbsFile[]): Effect.Effect<
 
     return Option.none()
   })
-
-const isModuleNotFoundError = (value: unknown) => {
-  return (value instanceof Error && `code` in value && value.code === ERR_MODULE_NOT_FOUND)
-}
-
-const ERR_MODULE_NOT_FOUND = `ERR_MODULE_NOT_FOUND`

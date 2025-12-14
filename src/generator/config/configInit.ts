@@ -297,9 +297,21 @@ export interface InputIntrospectionOptions extends IntrospectionOptions {
 }
 
 export interface ConfigInitLibraryPaths {
-  client?: string
-  schema?: string
-  scalars?: string
+  client?: string | Fs.Path.$File
+  schema?: string | Fs.Path.$File
+  scalars?: string | Fs.Path.$File
+  utilitiesForGenerated: string | Fs.Path.$File
+  extensionTransportHttp: string | Fs.Path.$File
+  extensionDocumentBuilder: string | Fs.Path.$File
+}
+
+/**
+ * Processed library paths - all values are strings (import specifiers).
+ */
+export interface ConfigLibraryPaths {
+  client: string
+  schema: string
+  scalars: string
   utilitiesForGenerated: string
   extensionTransportHttp: string
   extensionDocumentBuilder: string

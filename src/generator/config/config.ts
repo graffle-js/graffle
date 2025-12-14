@@ -196,7 +196,13 @@ To suppress this warning disable formatting in one of the following ways:
 
     // --- Library Paths ---
 
-    const processLibraryPath = (path: string) => {
+    const processLibraryPath = (path: string | Fs.Path.$File) => {
+      // If already a Fs.Path, process directly as filesystem path
+      if (Fs.Path.$File.is(path)) {
+        const pathAbsolute = Fs.Path.ensureAbsolute(path, cwd)
+        const relPath = Fs.Path.toRel(pathAbsolute, outputDirPathModules)
+        return toImportPath(relPath)
+      }
       // Subpaths starting with # should not be rewritten
       if (path.startsWith('#')) {
         return path

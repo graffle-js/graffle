@@ -43,7 +43,7 @@ const customScalarsCode = `
 `
 
 const readGeneratedFiles = Effect.gen(function*() {
-  const base = Fs.Path.AbsDir.fromString(`${process.cwd()}/graffle/modules/`)
+  const base = Fs.Path.join(Env.env.cwd, p(`./graffle/modules/`))
   const scalar = yield* Fs.readString(Fs.Path.join(base, p(`./scalar.ts`)))
   const schema = yield* Fs.readString(Fs.Path.join(base, p(`./schema/_.ts`)))
   const sddm = yield* Fs.readString(Fs.Path.join(base, p(`./schema-driven-data-map.ts`)))
@@ -181,7 +181,7 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
   })
 
   test('escapes reserved keywords with custom scalar codecs', async () => {
-    const layout = Fs.Builder.spec(`${process.cwd()}/`)
+    const layout = Fs.Builder.spec(Env.env.cwd)
       .file('scalars.ts', customScalarsCode)
       .toLayout()
 
@@ -227,7 +227,7 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
   })
 
   test('cross-module references with custom scalar codecs', async () => {
-    const layout = Fs.Builder.spec(`${process.cwd()}/`)
+    const layout = Fs.Builder.spec(Env.env.cwd)
       .file('scalars.ts', customScalarsCode)
       .toLayout()
 
