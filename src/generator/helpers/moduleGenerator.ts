@@ -1,4 +1,4 @@
-import { Lang, Paka } from '@wollybeard/kit'
+import { Env, Fs, Lang, Paka } from '@wollybeard/kit'
 const { markdownToJsDoc } = Paka
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
 import fs from 'node:fs'
@@ -70,10 +70,10 @@ export const createModuleGenerator: FactoryModuleGenerator = (name, sourceFileUr
 
     if (fs.existsSync(docsPath)) {
       const markdown = fs.readFileSync(docsPath, 'utf-8')
-      const generatorPath = path.relative(process.cwd(), sourcePath)
+      const generatorPath = Fs.Path.toRel(Fs.Path.AbsFile.fromString(sourcePath), Env.env.cwd)
       docHeader = markdownToJsDoc(markdown, {
         moduleName: name,
-        generatorPath,
+        generatorPath: generatorPath.toString(),
       })
     }
   }

@@ -12,7 +12,7 @@ import type { Extension } from '../extension/types.js'
 import { detectDefaultImportFormat } from '../helpers/detectImportFormat.js'
 import {
   type ConfigInit,
-  type ConfigInitLibraryPaths,
+  type ConfigLibraryPaths,
   type InputImportFormat,
   type InputLint,
   type InputOutputCase,
@@ -77,7 +77,7 @@ export interface Config {
     }
     imports: {
       scalars: string
-      grafflePackage: Required<ConfigInitLibraryPaths>
+      grafflePackage: ConfigLibraryPaths
     }
   }
   code: {

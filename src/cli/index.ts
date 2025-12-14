@@ -114,7 +114,9 @@ const program = Effect.gen(function*() {
   const toAbs = Fs.Path.ensureAbsoluteWith(cwd)
   // --- Resolve Config File ---
 
-  const configModule = yield* Generator.Config.load({ filePath: args.project })
+  const configModule = yield* Generator.Config.load({
+    filePath: args.project ? Fs.Path.fromString(args.project) : undefined,
+  })
 
   if (configModule instanceof ConfigFileError) {
     return yield* Effect.fail(configModule)
