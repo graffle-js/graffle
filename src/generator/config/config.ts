@@ -132,28 +132,32 @@ export const createConfig = (
       ?? (yield* detectDefaultImportFormat(cwd))
       ?? defaults.importFormat
 
-    // Helper to get the correct extension based on importFormat
-    const getImportExtension = (path: string): string => {
+    // Helper to transform import path extension based on importFormat
+    // Returns string because Kit doesn't export FileName for extensionless file construction
+    const toImportPath = (path: Fs.Path.$File): string => {
+      const stem = Fs.Path.stem(path)
+      const dir = Fs.Path.toDir(path)
+      const dirStr = dir.toString()
+
       switch (importFormat) {
         case `jsExtension`:
-          return path.replace(/\.ts$/, `.js`)
+          return `${dirStr}${stem}.js`
         case `tsExtension`:
-          return path // Keep .ts extension
+          return path.toString()
         case `noExtension`:
-          return path.replace(/\.(ts|js)$/, ``) // Remove any extension
+          return `${dirStr}${stem}`
         default:
-          return path.replace(/\.ts$/, `.js`)
+          return `${dirStr}${stem}.js`
       }
     }
 
-    const scalarsImportPath = NodePath.relative(
-      outputDirPathModules,
-      getImportExtension(inputPathScalars),
+    const scalarsImportPath = toImportPath(
+      Fs.Path.toRel(inputPathScalars, outputDirPathModules),
     )
 
     // --- Schema ---
 
-    const schema = yield* createConfigSchema(cwd, sourceDirPath, configInit)
+    const schema = yield* createConfigSchema(sourceDirPath, configInit)
 
     // --- Default Schema URL ---
 

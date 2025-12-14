@@ -96,24 +96,25 @@ export const load = (
 
 const processInput = (input?: Fs.Path.$Abs): Effect.Effect<Fs.Path.AbsFile[], never, FileSystem.FileSystem> =>
   Effect.gen(function*() {
+    const configFileCandidates = (dir: Fs.Path.AbsDir) =>
+      extensionCandidates.map((ext) => Fs.Path.join(dir, Fs.Path.RelFile.fromString(`${loadDefaults.fileName}.${ext}`)))
+
     if (!input) {
-      const directoryPath = process.cwd()
-      const path = Path.join(directoryPath, loadDefaults.fileName)
-      return extensionCandidates.map((ext) => toAbsolutePath(process.cwd(), `${path}.${ext}`))
+      return configFileCandidates(Env.env.cwd)
     }
 
-    // Check if path is a directory
-    const statResult = yield* Fs.stat(input).pipe(
-      Effect.option,
-    )
+    // Check filesystem to determine if path is actually a directory
+    const stat = yield* Fs.stat(input).pipe(Effect.option)
+    const isDirectory = Option.isSome(stat) && stat.value.type === 'Directory'
 
-    if (Option.isSome(statResult) && statResult.value.type === 'Directory') {
-      const directoryPath = absolutePath
-      const path = Path.join(directoryPath, loadDefaults.fileName)
-      return extensionCandidates.map((ext) => `${path}.${ext}`)
+    if (isDirectory) {
+      // Convert to AbsDir based on filesystem reality, not type tag
+      const dir = Fs.Path.AbsDir.fromString(input.toString())
+      return configFileCandidates(dir)
     }
 
-    return [absolutePath]
+    // Treat as file - convert to AbsFile based on filesystem reality
+    return [Fs.Path.AbsFile.fromString(input.toString())]
   })
 
 const importFirst = (paths: Fs.Path.AbsFile[]): Effect.Effect<
