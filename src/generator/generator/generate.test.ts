@@ -118,8 +118,8 @@ test(`schema with long type name`, async () => {
         `,
       },
     })
-    const fs = yield* FileSystem.FileSystem
-    const SchemaTs = yield* fs.readFileString(`${process.cwd()}/graffle/modules/schema/_.ts`)
+    const schemaPath = Fs.Path.join(Env.env.cwd, p(`./graffle/modules/schema/_.ts`))
+    const SchemaTs = yield* Fs.readString(schemaPath)
     return SchemaTs
   })
 
