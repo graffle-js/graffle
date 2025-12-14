@@ -75,6 +75,12 @@ export const getTypeScriptFormatterDprint = (): Effect.Effect<Formatter | null, 
 
     const formatter = createFromBuffer(wasmBufferResult)
 
+    // Default formatter config (used when dprint.json not found)
+    const defaultConfig: JsonObject = {
+      quoteStyle: `preferSingle`,
+      semiColons: `asi`,
+    }
+
     // Read dprint.json config file (optional)
     const localConfig = yield* Fs.readString(Fs.Path.fromLiteral(`./dprint.json`)).pipe(
       Effect.flatMap((content) =>

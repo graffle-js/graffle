@@ -20,6 +20,8 @@ import {
 } from './configInit.js'
 import { defaults } from './defaults.js'
 
+const p = Fs.Path.fromLiteral
+
 export const EmitMode = {
   never: 'never',
   always: 'always',
@@ -103,21 +105,20 @@ export const createConfig = (
 
     // --- Paths ---
 
-    const cwd = configInit.currentWorkingDirectory ?? process.cwd()
+    const cwd = configInit.currentWorkingDirectory ?? Env.env.cwd
+    const toAbs = Fs.Path.ensureAbsoluteWith(cwd)
 
-    const sourceDirPath = configInit.sourceDirPath ? toAbsolutePath(cwd, configInit.sourceDirPath) : cwd
+    const sourceDirPath = configInit.sourceDirPath ?? cwd
 
     const outputDirPathRoot = configInit.outputDirPath
-      ? toAbsolutePath(cwd, configInit.outputDirPath)
-      : NodePath.join(cwd, `./graffle`)
+      ?? Fs.Path.join(cwd, Fs.Path.fromLiteral(`./graffle/`))
 
-    const outputDirPathModules = NodePath.join(outputDirPathRoot, `/modules`)
+    const outputDirPathModules = Fs.Path.join(outputDirPathRoot, Fs.Path.fromLiteral(`./modules/`))
 
     const inputPathScalars = configInit.scalars
-      ? toAbsolutePath(cwd, configInit.scalars)
-      : NodePath.join(sourceDirPath, `scalars` + `.ts`)
+      ?? Fs.Path.join(sourceDirPath, p(`./scalars.ts`))
 
-    const isCustomScalarsModuleExists = yield* fs.exists(inputPathScalars)
+    const isCustomScalarsModuleExists = yield* Fs.exists(inputPathScalars)
     if (!isCustomScalarsModuleExists && configInit.scalars) {
       // dprint-ignore
       throw new Error(
@@ -128,7 +129,7 @@ export const createConfig = (
     // Get import format early to use in path processing
     // Auto-detect from tsconfig.json/package.json if not explicitly configured
     const importFormat = configInit.importFormat
-      ?? (yield* Effect.promise(() => detectDefaultImportFormat(cwd)))
+      ?? (yield* detectDefaultImportFormat(cwd))
       ?? defaults.importFormat
 
     // Helper to get the correct extension based on importFormat
@@ -204,8 +205,9 @@ To suppress this warning disable formatting in one of the following ways:
       if (!path.startsWith('.') && !path.startsWith('/')) {
         return path
       }
-      const pathAbsolute = getImportExtension(toAbsolutePath(cwd, path))
-      return NodePath.relative(outputDirPathModules, pathAbsolute)
+      const pathAbsolute = toAbs(Fs.Path.fromString(path))
+      const relPath = Fs.Path.toRel(pathAbsolute, outputDirPathModules)
+      return getImportExtension(relPath.toString())
     }
 
     const libraryPaths = Object.fromEntries(

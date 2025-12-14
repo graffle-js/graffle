@@ -173,7 +173,7 @@ const program = Effect.gen(function*() {
     // Generate NoCustomScalars variant if applicable
     if (schemasWithCustomScalars.includes(schemaName as any)) {
       const noScalarsName = `${schemaName}NoCustomScalars`
-      const noScalarsOutputDir = `${schemaDirName}/clientNoCustomScalars`
+      const noScalarsOutputDir = Fs.Path.join(schemaDir, p(`./clientNoCustomScalars/`))
 
       yield* generateClient({
         schemaName: noScalarsName,

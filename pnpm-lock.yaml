@@ -15,8 +15,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.12.0)
       '@wollybeard/kit':
-        specifier: ^0.106.2
-        version: 0.106.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)
+        specifier: ^0.106.3
+        version: 0.106.3(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)
       es-toolkit:
         specifier: ^1.43.0
         version: 1.43.0
@@ -2504,8 +2504,8 @@ packages:
       zod:
         optional: true
 
-  '@wollybeard/kit@0.106.2':
-    resolution: {integrity: sha512-xlWJGZZsDKejg2pmOxJ6VoHGEQaCVIEq+mu6ppzWcuQ3q4q7Kd/0aV6hAfmkcdOCrJY97nkHaL2G5i4G61+S3g==}
+  '@wollybeard/kit@0.106.3':
+    resolution: {integrity: sha512-Y8b2wCzfxz9HTEtsWBHQk2f4mocPvJB/CP1CwdQ7S8S241sEcKbcxmJN+w48n8KUFuPects7D1Ub8o+3cNL/mg==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -7216,7 +7216,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wollybeard/kit@0.106.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)':
+  '@wollybeard/kit@0.106.3(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)':
     dependencies:
       '@effect/platform': 0.93.8(effect@3.19.12)
       '@microsoft/tsdoc': 0.16.0

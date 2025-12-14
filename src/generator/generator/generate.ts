@@ -113,10 +113,7 @@ export const generate = (
         && (config.schema.via === 'url' || config.schema.via === 'instance'))
 
     if (shouldWriteSDL) {
-      yield* fs.writeFileString(
-        config.paths.project.outputs.sdl.path,
-        config.schema.sdl,
-      )
+      yield* Fs.write(config.paths.project.outputs.sdl.path, config.schema.sdl)
     }
 
     yield* Effect.all(

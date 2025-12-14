@@ -1,5 +1,4 @@
-import { FileSystem } from '@effect/platform'
-import { Fs } from '@wollybeard/kit'
+import { Env, Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
 import { describe, expect, test } from 'vitest'
 import { generate } from '../generator/generate.js'
@@ -8,8 +7,8 @@ describe('custom root type names', () => {
   const generateAndGetDocument = async (sdl: string) => {
     const program = Effect.gen(function*() {
       yield* generate({ schema: { type: 'sdl', sdl } })
-      const fs = yield* FileSystem.FileSystem
-      const content = yield* fs.readFileString(`${process.cwd()}/graffle/modules/selection-sets/_document.ts`)
+      const filePath = Fs.Path.join(Env.env.cwd, Fs.Path.fromLiteral('./graffle/modules/selection-sets/_document.ts'))
+      const content = yield* Fs.readString(filePath)
       return content
     })
 
