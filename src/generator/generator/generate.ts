@@ -71,7 +71,7 @@ export const generateModules = (
           return Array.isArray(result) ? result : [result]
         })
         .map((code) =>
-          Effect.tryPromise(() => config.formatter.formatText(code.content)).pipe(
+          config.formatter.formatText(code.content).pipe(
             Effect.map((content) => ({ ...code, content })),
             Effect.catchAll((error) => {
               console.error(`Warning: Failed to format ${code.name}. Continuing with unformatted content.`)

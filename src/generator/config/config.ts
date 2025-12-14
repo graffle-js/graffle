@@ -206,7 +206,7 @@ export const createConfig = (
     const formattingEnabled = configInit.format ?? true
     let formatter = passthroughFormatter
     if (formattingEnabled) {
-      const formatterReal = yield* Effect.promise(() => getTypeScriptFormatter())
+      const formatterReal = yield* getTypeScriptFormatter()
       if (!formatterReal) {
         // todo use floggy
         console.log(`
