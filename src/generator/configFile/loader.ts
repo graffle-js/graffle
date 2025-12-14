@@ -1,6 +1,6 @@
-import { isPathToADirectory, toAbsolutePath } from '#src/lib/fsp.js'
-import { importFirst } from '#src/lib/import-first.js'
+import { FileSystem } from '@effect/platform'
 import { Err } from '@wollybeard/kit'
+import { Data, Effect, Option } from 'effect'
 import * as Path from 'node:path'
 import { type Builder, isBuilder } from './builder.js'
 
@@ -37,66 +37,126 @@ export const loadDefaults: Config = {
 
 const extensionCandidates = [`ts`, `js`, `mjs`, `mts`]
 
-export const load = async (
-  input?: Input,
-): Promise<
+export type LoadResult =
   | { builder: null; paths: string[]; path: null }
   | { builder: Builder; path: string; paths: string[] }
-  | Err.ContextualError
-> => {
-  const importPathCandidates = await processInput(input?.filePath)
 
-  const importedModule = await importFirst(importPathCandidates)
+export class ConfigFileError extends Data.TaggedError('ConfigFileError')<{
+  message: string
+  context?: Record<string, unknown>
+  cause?: unknown
+}> {}
 
-  if (!importedModule) {
-    return {
-      builder: null,
-      paths: importPathCandidates,
-      path: null,
+export const load = (
+  input?: Input,
+): Effect.Effect<
+  LoadResult | ConfigFileError,
+  never,
+  FileSystem.FileSystem
+> =>
+  Effect.gen(function*() {
+    const importPathCandidates = yield* processInput(input?.filePath)
+
+    const importedModule = yield* importFirst(importPathCandidates)
+
+    if (Option.isNone(importedModule)) {
+      return {
+        builder: null,
+        paths: importPathCandidates,
+        path: null,
+      }
     }
-  }
 
-  if (Err.is(importedModule)) {
-    return new Err.ContextualError({
-      message: `Failed to import project Graffle configuration file.`,
-      context: { importPathCandidates },
-      cause: importedModule,
-    })
-  }
+    if (importedModule.value instanceof Error) {
+      return new ConfigFileError({
+        message: `Failed to import project Graffle configuration file.`,
+        context: { importPathCandidates },
+        cause: importedModule.value,
+      })
+    }
 
-  if (!isBuilder(importedModule.module[`default`])) {
-    throw new Err.ContextualError({
-      message: `Invalid project Graffle configuration file. It does not have a default export of the configuration.`,
-      context: {
-        path: importedModule.path,
-        value: importedModule.module,
-      },
-    })
-  }
+    if (!isBuilder(importedModule.value.module[`default`])) {
+      return new ConfigFileError({
+        message: `Invalid project Graffle configuration file. It does not have a default export of the configuration.`,
+        context: {
+          path: importedModule.value.path,
+          value: importedModule.value.module,
+        },
+      })
+    }
 
-  return {
-    builder: importedModule.module[`default`],
-    path: importedModule.path,
-    paths: importPathCandidates,
-  }
+    return {
+      builder: importedModule.value.module[`default`],
+      path: importedModule.value.path,
+      paths: importPathCandidates,
+    }
+  })
+
+const toAbsolutePath = (cwd: string, maybeAbsolutePath: string) =>
+  Path.isAbsolute(maybeAbsolutePath) ? maybeAbsolutePath : Path.join(cwd, maybeAbsolutePath)
+
+const processInput = (input?: string): Effect.Effect<string[], never, FileSystem.FileSystem> =>
+  Effect.gen(function*() {
+    const fs = yield* FileSystem.FileSystem
+
+    if (!input) {
+      const directoryPath = process.cwd()
+      const path = Path.join(directoryPath, loadDefaults.fileName)
+      return extensionCandidates.map((ext) => toAbsolutePath(process.cwd(), `${path}.${ext}`))
+    }
+
+    const absolutePath = toAbsolutePath(process.cwd(), input)
+
+    // Check if path is a directory
+    const statResult = yield* fs.stat(absolutePath).pipe(
+      Effect.option,
+    )
+
+    if (Option.isSome(statResult) && statResult.value.type === 'Directory') {
+      const directoryPath = absolutePath
+      const path = Path.join(directoryPath, loadDefaults.fileName)
+      return extensionCandidates.map((ext) => `${path}.${ext}`)
+    }
+
+    return [absolutePath]
+  })
+
+const importFirst = (
+  paths: string[],
+): Effect.Effect<
+  Option.Option<Error | { module: Record<string, unknown>; path: string }>,
+  never,
+  never
+> =>
+  Effect.gen(function*() {
+    for (const path of paths) {
+      const result = yield* Effect.tryPromise({
+        try: () => import(path),
+        catch: (error) => error,
+      }).pipe(Effect.either)
+
+      if (result._tag === 'Right') {
+        return Option.some({
+          module: result.right as Record<string, unknown>,
+          path,
+        })
+      }
+
+      // Check if it's a module not found error - if so, try next path
+      const error = result.left
+      if (isModuleNotFoundError(error)) {
+        continue
+      }
+
+      // For other errors, return the error
+      return Option.some(Err.ensure(error))
+    }
+
+    return Option.none()
+  })
+
+const isModuleNotFoundError = (value: unknown) => {
+  return (value instanceof Error && `code` in value && value.code === ERR_MODULE_NOT_FOUND)
 }
 
-const processInput = async (input?: string) => {
-  const fs = await import(`node:fs/promises`)
-
-  if (!input) {
-    const directoryPath = process.cwd()
-    const path = Path.join(directoryPath, loadDefaults.fileName)
-    return extensionCandidates.map(ext => toAbsolutePath(process.cwd(), `${path}.${ext}`))
-  }
-
-  const absolutePath = toAbsolutePath(process.cwd(), input)
-
-  if (await isPathToADirectory(fs, absolutePath)) {
-    const directoryPath = absolutePath
-    const path = Path.join(directoryPath, loadDefaults.fileName)
-    return extensionCandidates.map(ext => `${path}.${ext}`)
-  }
-
-  return [absolutePath]
-}
+const ERR_MODULE_NOT_FOUND = `ERR_MODULE_NOT_FOUND`

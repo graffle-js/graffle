@@ -12,6 +12,7 @@ bundle-stats.html
 **/.vitepress/.temp/
 
 # Generated GraphQL clients
+/graffle/
 tests/e2e/github/graffle/
 website/graffle/
 

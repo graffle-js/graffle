@@ -1,27 +1,17 @@
 import { Generator } from '#src/generator/_.js'
 import { TestSchemas } from '#test/schema/_.js'
+import { FileSystem } from '@effect/platform'
+import { NodeContext, NodeRuntime } from '@effect/platform-node'
 import { Obj, Str } from '@wollybeard/kit'
-import { rmSync } from 'node:fs'
+import { Effect } from 'effect'
 import { join } from 'node:path'
 
 // Schemas that have custom scalars and need NoCustomScalars variants
 const schemasWithCustomScalars = Obj.keysStrict(Obj.pick(TestSchemas, ['possible', 'pokemon']))
 
-for (const schemaName of Obj.keysStrict(TestSchemas)) {
-  const schema = TestSchemas[schemaName]
-  const schemaDirName = Str.Case.kebab(schemaName)
-  const outputDirPath = `${schemaDirName}/client`
-  const fullOutputPath = join(import.meta.dirname, outputDirPath)
-
-  // Clean up existing generated directory
-  rmSync(fullOutputPath, { recursive: true, force: true })
-
-  const hasCustomScalars = schemasWithCustomScalars.includes(schemaName as any)
-
-  // Domain organization for "possible" and "pokemon" schemas to dogfood the feature
-  // With the new API, fields can match multiple rules and appear in multiple namespaces
-  const methodsOrganization = schemaName === 'possible'
-    ? {
+const getMethodsOrganization = (schemaName: string) => {
+  if (schemaName === 'possible') {
+    return {
       domains: {
         rules: [
           // By argument characteristics - no args
@@ -84,8 +74,10 @@ for (const schemaName of Obj.keysStrict(TestSchemas)) {
         ],
       },
     }
-    : schemaName === 'pokemon'
-    ? {
+  }
+
+  if (schemaName === 'pokemon') {
+    return {
       domains: {
         rules: [
           // Pokemon domain
@@ -105,70 +97,92 @@ for (const schemaName of Obj.keysStrict(TestSchemas)) {
         ],
       },
     }
-    : undefined
+  }
 
-  const config = await Generator.generate({
-    name: schemaName,
-    currentWorkingDirectory: import.meta.dirname,
-    schema: {
-      type: `instance`,
-      instance: schema,
-    },
-    outputSDL: true,
-    outputDirPath,
-    scalars: hasCustomScalars ? `./${schemaDirName}/scalars.ts` : undefined,
-    methodsOrganization,
-    libraryPaths: {
-      client: `#graffle/client`,
-      schema: `#graffle/schema`,
-      scalars: `#graffle/generator-helpers/standard-scalar-types`,
-      utilitiesForGenerated: `#graffle/utilities-for-generated`,
-      extensionTransportHttp: `#graffle/extensions/transport-http`,
-      extensionDocumentBuilder: `#graffle/extensions/document-builder`,
-    },
-    nameNamespace: true,
-    lint: {
-      missingCustomScalarCodec: false,
-      missingGraphqlSP: false,
-    },
-  })
+  return undefined
+}
 
-  console.log(`Generated client for ${schemaName} at`, config.paths.project.outputs.root)
+const libraryPaths = {
+  client: `#graffle/client`,
+  schema: `#graffle/schema`,
+  scalars: `#graffle/generator-helpers/standard-scalar-types`,
+  utilitiesForGenerated: `#graffle/utilities-for-generated`,
+  extensionTransportHttp: `#graffle/extensions/transport-http`,
+  extensionDocumentBuilder: `#graffle/extensions/document-builder`,
+}
 
-  // Generate NoCustomScalars variant if applicable
-  if (schemasWithCustomScalars.includes(schemaName as any)) {
-    const noScalarsName = `${schemaName}NoCustomScalars` as const
-    const noScalarsOutputDir = `${schemaDirName}/clientNoCustomScalars`
-    const noScalarsFullPath = join(import.meta.dirname, noScalarsOutputDir)
+const lintConfig = {
+  missingCustomScalarCodec: false,
+  missingGraphqlSP: false,
+}
+
+const generateClient = (params: {
+  schemaName: string
+  schema: (typeof TestSchemas)[keyof typeof TestSchemas]
+  outputDirPath: string
+  scalars?: string
+  methodsOrganization: ReturnType<typeof getMethodsOrganization>
+}) =>
+  Effect.gen(function*() {
+    const fs = yield* FileSystem.FileSystem
+    const fullOutputPath = join(import.meta.dirname, params.outputDirPath)
 
     // Clean up existing generated directory
-    rmSync(noScalarsFullPath, { recursive: true, force: true })
+    yield* fs.remove(fullOutputPath, { recursive: true }).pipe(Effect.ignore)
 
-    const noScalarsConfig = await Generator.generate({
-      name: noScalarsName,
+    const config = yield* Generator.generate({
+      name: params.schemaName,
       currentWorkingDirectory: import.meta.dirname,
       schema: {
         type: `instance`,
-        instance: schema,
+        instance: params.schema,
       },
       outputSDL: true,
-      outputDirPath: noScalarsOutputDir,
-      methodsOrganization,
-      libraryPaths: {
-        client: `#graffle/client`,
-        schema: `#graffle/schema`,
-        scalars: `#graffle/generator-helpers/standard-scalar-types`,
-        utilitiesForGenerated: `#graffle/utilities-for-generated`,
-        extensionTransportHttp: `#graffle/extensions/transport-http`,
-        extensionDocumentBuilder: `#graffle/extensions/document-builder`,
-      },
+      outputDirPath: params.outputDirPath,
+      scalars: params.scalars,
+      methodsOrganization: params.methodsOrganization,
+      libraryPaths,
       nameNamespace: true,
-      lint: {
-        missingCustomScalarCodec: false,
-        missingGraphqlSP: false,
-      },
+      lint: lintConfig,
     })
 
-    console.log(`Generated NoCustomScalars client for ${schemaName} at`, noScalarsConfig.paths.project.outputs.root)
+    yield* Effect.log(`Generated client for ${params.schemaName} at ${config.paths.project.outputs.root}`)
+
+    return config
+  })
+
+const program = Effect.gen(function*() {
+  for (const schemaName of Obj.keysStrict(TestSchemas)) {
+    const schema = TestSchemas[schemaName]
+    const schemaDirName = Str.Case.kebab(schemaName)
+    const outputDirPath = `${schemaDirName}/client`
+    const hasCustomScalars = schemasWithCustomScalars.includes(schemaName as any)
+    const methodsOrganization = getMethodsOrganization(schemaName)
+
+    yield* generateClient({
+      schemaName,
+      schema,
+      outputDirPath,
+      scalars: hasCustomScalars ? `./${schemaDirName}/scalars.ts` : undefined,
+      methodsOrganization,
+    })
+
+    // Generate NoCustomScalars variant if applicable
+    if (schemasWithCustomScalars.includes(schemaName as any)) {
+      const noScalarsName = `${schemaName}NoCustomScalars`
+      const noScalarsOutputDir = `${schemaDirName}/clientNoCustomScalars`
+
+      yield* generateClient({
+        schemaName: noScalarsName,
+        schema,
+        outputDirPath: noScalarsOutputDir,
+        methodsOrganization,
+      })
+    }
   }
-}
+})
+
+program.pipe(
+  Effect.provide(NodeContext.layer),
+  NodeRuntime.runMain,
+)

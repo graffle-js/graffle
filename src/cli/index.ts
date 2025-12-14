@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
 import { type ConfigInit, ImportFormat, OutputCase } from '#src/generator/config/configInit.js'
-import { toAbsolutePath } from '#src/lib/fsp.js'
+import { NodeContext, NodeRuntime } from '@effect/platform-node'
 import { Err, Url } from '@wollybeard/kit'
 import { Command } from '@wollybeard/kit/oak'
 import { EffectSchema } from '@wollybeard/kit/oak/extensions'
-import { Schema as S } from 'effect'
+import { Effect, Schema as S } from 'effect'
 import * as Path from 'node:path'
 import { Generator } from '../generator/_.js'
+import { ConfigFileError } from '../generator/configFile/loader.js'
 
 const args = Command.create()
   .use(EffectSchema)
@@ -109,77 +110,91 @@ const args = Command.create()
   })
   .parse()
 
-// --- Resolve Config File ---
+const toAbsolutePath = (cwd: string, maybeAbsolutePath: string) =>
+  Path.isAbsolute(maybeAbsolutePath) ? maybeAbsolutePath : Path.join(cwd, maybeAbsolutePath)
 
-const configModule = await Generator.Config.load({ filePath: args.project })
-if (Err.is(configModule)) throw configModule
-if (!configModule.builder && args.project) {
-  throw new Error(
-    `Could not find a configuration file at "${configModule.paths.join(`, `)}".`,
-  )
-}
+const program = Effect.gen(function*() {
+  // --- Resolve Config File ---
 
-if (configModule.builder) {
-  // todo: nice logging, levels etc.
-  console.log(`Using file config found at "${configModule.path}".`)
-}
+  const configModule = yield* Generator.Config.load({ filePath: args.project })
 
-// --- Resolve Default Schema URL ---
+  if (configModule instanceof ConfigFileError) {
+    return yield* Effect.fail(configModule)
+  }
 
-const defaultSchemaUrl = typeof args.defaultSchemaUrl === `string`
-  ? new URL(args.defaultSchemaUrl)
-  : args.defaultSchemaUrl
+  if (!configModule.builder && args.project) {
+    return yield* Effect.fail(
+      new Error(`Could not find a configuration file at "${configModule.paths.join(`, `)}".`),
+    )
+  }
 
-// --- Resolve Schema ---
+  if (configModule.builder) {
+    // todo: nice logging, levels etc.
+    console.log(`Using file config found at "${configModule.path}".`)
+  }
 
-const urlOrError = args.schema ? Url.parse(args.schema) : null
-const url = Err.is(urlOrError) ? null : urlOrError
+  // --- Resolve Default Schema URL ---
 
-const schemaViaCLI = args.schema
-  ? url
-    ? { type: `url` as const, url }
-    : {
-      type: `sdlFile` as const,
-      dirOrFilePath: Path.join(process.cwd(), args.schema),
-    }
-  : undefined
+  const defaultSchemaUrl = typeof args.defaultSchemaUrl === `string`
+    ? new URL(args.defaultSchemaUrl)
+    : args.defaultSchemaUrl
 
-if (schemaViaCLI && configModule.builder?._.input.schema) {
-  console.log(
-    `WARNING: Overriding config file schema configuration with command line input.`,
-  )
-}
+  // --- Resolve Schema ---
 
-const schema = schemaViaCLI ?? configModule.builder?._.input.schema
+  const urlOrError = args.schema ? Url.parse(args.schema) : null
+  const url = Err.is(urlOrError) ? null : urlOrError
 
-if (!schema) {
-  throw new Error(
-    `No schema source provided. Either specify a schema source in the config file or via the CLI.`,
-  )
-}
+  const schemaViaCLI = args.schema
+    ? url
+      ? { type: `url` as const, url }
+      : {
+        type: `sdlFile` as const,
+        dirOrFilePath: Path.join(process.cwd(), args.schema),
+      }
+    : undefined
 
-const currentWorkingDirectory = configModule.path
-  ? Path.dirname(configModule.path)
-  : process.cwd()
+  if (schemaViaCLI && configModule.builder?._.input.schema) {
+    console.log(
+      `WARNING: Overriding config file schema configuration with command line input.`,
+    )
+  }
 
-// --- Merge Inputs ---
+  const schema = schemaViaCLI ?? configModule.builder?._.input.schema
 
-const input: ConfigInit = {
-  ...configModule.builder?._.input,
-  currentWorkingDirectory,
-  schema,
-}
+  if (!schema) {
+    return yield* Effect.fail(
+      new Error(`No schema source provided. Either specify a schema source in the config file or via the CLI.`),
+    )
+  }
 
-if (defaultSchemaUrl !== undefined) input.defaultSchemaUrl = defaultSchemaUrl
-if (args.format !== undefined) input.format = args.format
-if (args.name !== undefined) input.name = args.name
-if (args.output !== undefined) {
-  input.outputDirPath = toAbsolutePath(process.cwd(), args.output)
-}
-if (args.outputCase !== undefined) input.outputCase = args.outputCase
-if (args.importFormat !== undefined) input.importFormat = args.importFormat
-if (args.outputSdl !== undefined) input.outputSDL = args.outputSdl
+  const currentWorkingDirectory = configModule.path
+    ? Path.dirname(configModule.path)
+    : process.cwd()
 
-// --- Generate ---
+  // --- Merge Inputs ---
 
-await Generator.generate(input)
+  const input: ConfigInit = {
+    ...configModule.builder?._.input,
+    currentWorkingDirectory,
+    schema,
+  }
+
+  if (defaultSchemaUrl !== undefined) input.defaultSchemaUrl = defaultSchemaUrl
+  if (args.format !== undefined) input.format = args.format
+  if (args.name !== undefined) input.name = args.name
+  if (args.output !== undefined) {
+    input.outputDirPath = toAbsolutePath(process.cwd(), args.output)
+  }
+  if (args.outputCase !== undefined) input.outputCase = args.outputCase
+  if (args.importFormat !== undefined) input.importFormat = args.importFormat
+  if (args.outputSdl !== undefined) input.outputSDL = args.outputSdl
+
+  // --- Generate ---
+
+  yield* Generator.generate(input)
+})
+
+program.pipe(
+  Effect.provide(NodeContext.layer),
+  NodeRuntime.runMain,
+)

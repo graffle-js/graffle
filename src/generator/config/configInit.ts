@@ -1,4 +1,3 @@
-import type { Fs } from '#src/lib/fsp.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { Schema } from 'effect'
 import type { IntrospectionOptions } from 'graphql'
@@ -74,12 +73,6 @@ export type ConfigInitSchema =
   | ConfigInitSchemaUrl
 
 export interface ConfigInit {
-  /**
-   * File system API to use.
-   *
-   * By default uses the Node.js file system API.
-   */
-  fs?: Fs | undefined
   /**
    * What naming convention to use for generated files and directories.
    *

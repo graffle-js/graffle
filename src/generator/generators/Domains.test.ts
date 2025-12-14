@@ -1,4 +1,6 @@
+import { NodeContext } from '@effect/platform-node'
 import { Test } from '@wollybeard/kit/test'
+import { Effect } from 'effect'
 import { describe, expect, test, vi } from 'vitest'
 import type { FieldGroupingRule } from '../config/configInit.js'
 import { defaults } from '../config/defaults.js'
@@ -8,12 +10,15 @@ import { checkRulePrecedence } from './MethodsRoot.js'
 // Suppress warnings in tests
 defaults.lint.missingGraphqlSP = false
 
+const runWithNodeFs = <A, E>(effect: Effect.Effect<A, E, NodeContext.NodeContext>) =>
+  Effect.runPromise(Effect.provide(effect, NodeContext.layer))
+
 // ========================================
 // Existing Integration Tests
 // ========================================
 
 test('generates domains directory structure', async () => {
-  const { modules } = await generateModules({
+  const { modules } = await runWithNodeFs(generateModules({
     schema: {
       type: 'sdl',
       sdl: `
@@ -39,7 +44,7 @@ test('generates domains directory structure', async () => {
         ],
       },
     },
-  })
+  }))
 
   // Should have generated domains modules
   const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
@@ -67,7 +72,7 @@ test('generates domains directory structure', async () => {
 })
 
 test('generates method aliases using Cartesian product', async () => {
-  const { modules } = await generateModules({
+  const { modules } = await runWithNodeFs(generateModules({
     schema: {
       type: 'sdl',
       sdl: `
@@ -87,7 +92,7 @@ test('generates method aliases using Cartesian product', async () => {
         ],
       },
     },
-  })
+  }))
 
   // Should generate both namespace aliases
   const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
@@ -103,7 +108,7 @@ test('generates method aliases using Cartesian product', async () => {
 })
 
 test('imports only operation helpers needed for namespace', async () => {
-  const { modules } = await generateModules({
+  const { modules } = await runWithNodeFs(generateModules({
     schema: {
       type: 'sdl',
       sdl: `
@@ -123,7 +128,7 @@ test('imports only operation helpers needed for namespace', async () => {
         ],
       },
     },
-  })
+  }))
 
   // Query namespace should only import $$query helper
   const queryMethods = modules.find(m => m.filePath === 'domains/user/query/methods.ts')
@@ -139,7 +144,7 @@ test('imports only operation helpers needed for namespace', async () => {
 })
 
 test('skips domain generation when domains config is false', async () => {
-  const { modules } = await generateModules({
+  const { modules } = await runWithNodeFs(generateModules({
     schema: {
       type: 'sdl',
       sdl: 'type Query { ok: Boolean }',
@@ -147,7 +152,7 @@ test('skips domain generation when domains config is false', async () => {
     methodsOrganization: {
       domains: false,
     },
-  })
+  }))
 
   // Should not have any domains modules
   const domainsModules = modules.filter(m => m.filePath?.startsWith('domains/'))
@@ -156,7 +161,7 @@ test('skips domain generation when domains config is false', async () => {
 
 test('throws error on conflicts within same namespace', async () => {
   await expect(async () => {
-    await generateModules({
+    await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -174,12 +179,12 @@ test('throws error on conflicts within same namespace', async () => {
           ],
         },
       },
-    })
+    }))
   }).rejects.toThrow(/Namespace organization conflict/)
 })
 
 test('allows same method name in different nested namespaces', async () => {
-  const { modules } = await generateModules({
+  const { modules } = await runWithNodeFs(generateModules({
     schema: {
       type: 'sdl',
       sdl: `
@@ -197,7 +202,7 @@ test('allows same method name in different nested namespaces', async () => {
         ],
       },
     },
-  })
+  }))
 
   // Should generate nested structure without conflicts
   const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
@@ -218,7 +223,7 @@ test('allows same method name in different nested namespaces', async () => {
 
 describe('pattern matching', () => {
   test('string pattern exact match', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -235,7 +240,7 @@ describe('pattern matching', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -245,7 +250,7 @@ describe('pattern matching', () => {
   })
 
   test('RegExp pattern match', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -264,7 +269,7 @@ describe('pattern matching', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -276,7 +281,7 @@ describe('pattern matching', () => {
   })
 
   test('omits fields that do not match any rule', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -293,7 +298,7 @@ describe('pattern matching', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -302,7 +307,7 @@ describe('pattern matching', () => {
   })
 
   test('uses static method name from rule', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -318,7 +323,7 @@ describe('pattern matching', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -326,7 +331,7 @@ describe('pattern matching', () => {
   })
 
   test('omits methodName when not provided in rule', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -342,7 +347,7 @@ describe('pattern matching', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -351,7 +356,7 @@ describe('pattern matching', () => {
   })
 
   test('uses dynamic method name function', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -376,7 +381,7 @@ describe('pattern matching', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -391,7 +396,7 @@ describe('pattern matching', () => {
 
 describe('capture groups', () => {
   test('named capture groups in namespace', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -408,7 +413,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -420,7 +425,7 @@ describe('capture groups', () => {
   })
 
   test('indexed capture groups in namespace', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -436,7 +441,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const trainerMethods = modules.find(m => m.filePath === 'domains/trainer/methods.ts')
     expect(trainerMethods).toBeDefined()
@@ -444,7 +449,7 @@ describe('capture groups', () => {
   })
 
   test('capture groups in methodName', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -461,7 +466,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -470,7 +475,7 @@ describe('capture groups', () => {
   })
 
   test('multiple indexed capture groups', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -486,7 +491,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -494,7 +499,7 @@ describe('capture groups', () => {
   })
 
   test('mixed named and indexed groups', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -511,7 +516,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/Pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -523,7 +528,7 @@ describe('capture groups', () => {
   })
 
   test('function methodName receives match object', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -545,7 +550,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -553,7 +558,7 @@ describe('capture groups', () => {
   })
 
   test('function methodName with named groups', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -580,7 +585,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/Pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -589,7 +594,7 @@ describe('capture groups', () => {
   })
 
   test('full integration with multiple resources', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -607,7 +612,7 @@ describe('capture groups', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(pokemonMethods).toBeDefined()
@@ -629,7 +634,7 @@ describe('capture groups', () => {
 
 describe('string transformations', () => {
   test('kebab-case transformation', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -645,7 +650,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     const methods = modules.find(m => m.filePath === 'domains/pokemon-species/methods.ts')
     expect(methods).toBeDefined()
@@ -653,7 +658,7 @@ describe('string transformations', () => {
   })
 
   test('PascalCase transformation', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -669,7 +674,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     const methods = modules.find(m => m.filePath === 'domains/Pokemon/methods.ts')
     expect(methods).toBeDefined()
@@ -677,7 +682,7 @@ describe('string transformations', () => {
   })
 
   test('snake_case transformation', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -693,7 +698,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     const methods = modules.find(m => m.filePath === 'domains/pokemon_species/methods.ts')
     expect(methods).toBeDefined()
@@ -701,7 +706,7 @@ describe('string transformations', () => {
   })
 
   test('transformations work with indexed groups', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -717,7 +722,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     const methods = modules.find(m => m.filePath === 'domains/pokemon-species/methods.ts')
     expect(methods).toBeDefined()
@@ -725,7 +730,7 @@ describe('string transformations', () => {
   })
 
   test('transformations work in methodName', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -741,7 +746,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     const methods = modules.find(m => m.filePath === 'domains/api/methods.ts')
     expect(methods).toBeDefined()
@@ -749,7 +754,7 @@ describe('string transformations', () => {
   })
 
   test('multiple transformations in one template', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -769,7 +774,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     const methods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
     expect(methods).toBeDefined()
@@ -777,7 +782,7 @@ describe('string transformations', () => {
   })
 
   test('unknown transformation leaves template unchanged', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -793,7 +798,7 @@ describe('string transformations', () => {
           ],
         },
       },
-    })
+    }))
 
     // Should generate with literal ${unknown:resource} in path
     const methods = modules.find(m => m.filePath?.includes('${unknown:resource}'))
@@ -807,7 +812,7 @@ describe('string transformations', () => {
 
 describe('rule precedence', () => {
   test('applies all matching rules (multi-match)', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -824,7 +829,7 @@ describe('rule precedence', () => {
           ],
         },
       },
-    })
+    }))
 
     // Both namespaces should be generated
     const pokeMethods = modules.find(m => m.filePath === 'domains/poke/methods.ts')
@@ -873,7 +878,7 @@ describe('rule precedence', () => {
 
 describe('aliases', () => {
   test('methodName array creates multiple method aliases', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -889,7 +894,7 @@ describe('aliases', () => {
           ],
         },
       },
-    })
+    }))
 
     const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
     expect(pokemonIndex).toBeDefined()
@@ -899,7 +904,7 @@ describe('aliases', () => {
   })
 
   test('nested namespace aliases work with dot-notation', async () => {
-    const { modules } = await generateModules({
+    const { modules } = await runWithNodeFs(generateModules({
       schema: {
         type: 'sdl',
         sdl: `
@@ -915,7 +920,7 @@ describe('aliases', () => {
           ],
         },
       },
-    })
+    }))
 
     // Both nested namespaces should exist
     const apiPokemonMethods = modules.find(m => m.filePath === 'domains/api/v2/pokemon/methods.ts')

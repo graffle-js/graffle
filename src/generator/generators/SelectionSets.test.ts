@@ -1,22 +1,22 @@
-import * as MemFS from 'memfs'
-import * as Fs from 'node:fs/promises'
-import { beforeEach, describe, expect, test } from 'vitest'
+import { FileSystem } from '@effect/platform'
+import { Fs } from '@wollybeard/kit'
+import { Effect } from 'effect'
+import { describe, expect, test } from 'vitest'
 import { generate } from '../generator/generate.js'
-
-const fs = MemFS.fs.promises as any as typeof Fs
-
-beforeEach(async () => {
-  try {
-    await fs.rmdir(process.cwd(), { recursive: true })
-  } catch {}
-  await fs.mkdir(process.cwd(), { recursive: true })
-})
 
 describe('custom root type names', () => {
   const generateAndGetDocument = async (sdl: string) => {
-    await generate({ fs, schema: { type: 'sdl', sdl } })
-    const content = MemFS.fs.readFileSync('./graffle/modules/selection-sets/_document.ts', 'utf8')
-    const match = content.toString().match(/export interface \$Document[^}]+\}/s)
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl } })
+      const fs = yield* FileSystem.FileSystem
+      const content = yield* fs.readFileString(`${process.cwd()}/graffle/modules/selection-sets/_document.ts`)
+      return content
+    })
+
+    const content = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer({}))),
+    )
+    const match = content.match(/export interface \$Document[^}]+\}/s)
     expect(match).toBeTruthy()
     return match![0]
   }

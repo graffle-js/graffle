@@ -1,5 +1,9 @@
+import { FileSystem } from '@effect/platform'
+import type { PlatformError } from '@effect/platform/Error'
+import { Effect } from 'effect'
 import * as Config from '../config/config.js'
 import type { ConfigInit } from '../config/configInit.js'
+import { SchemaError } from '../errors.js'
 import { ModuleGenerator$ } from '../generators/_.js'
 import { ModuleGenerator$$ } from '../generators/__.js'
 import { ModuleGenerator_internals } from '../generators/_internals.js'
@@ -17,6 +21,7 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
+import type { GeneratedModule } from '../helpers/moduleGenerator.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
 
@@ -49,77 +54,87 @@ const moduleGenerators = [
  *
  * @returns Generated modules with their content and metadata
  */
-export const generateModules = async (init: ConfigInit) => {
-  const config = await Config.createConfig(init)
+export const generateModules = (
+  init: ConfigInit,
+): Effect.Effect<
+  { config: Config.Config; modules: GeneratedModule[] },
+  PlatformError | SchemaError,
+  FileSystem.FileSystem
+> =>
+  Effect.gen(function*() {
+    const config = yield* Config.createConfig(init)
 
-  const generatedModules = await Promise.all(
-    moduleGenerators
-      .flatMap(generator => {
-        const result = generator.generate(config)
-        return Array.isArray(result) ? result : [result]
-      })
-      .map(async code => {
-        try {
-          return {
-            ...code,
-            content: await config.formatter.formatText(code.content),
-          }
-        } catch (error) {
-          console.error(`Warning: Failed to format ${code.name}. Continuing with unformatted content.`)
-          console.error(`Error:`, error instanceof Error ? error.message : String(error))
-          return {
-            ...code,
-            content: code.content,
-          }
-        }
-      }),
-  )
+    const generatedModules = yield* Effect.all(
+      moduleGenerators
+        .flatMap((generator) => {
+          const result = generator.generate(config)
+          return Array.isArray(result) ? result : [result]
+        })
+        .map((code) =>
+          Effect.tryPromise(() => config.formatter.formatText(code.content)).pipe(
+            Effect.map((content) => ({ ...code, content })),
+            Effect.catchAll((error) => {
+              console.error(`Warning: Failed to format ${code.name}. Continuing with unformatted content.`)
+              console.error(`Error:`, error instanceof Error ? error.message : String(error))
+              return Effect.succeed({ ...code, content: code.content })
+            }),
+          )
+        ),
+      { concurrency: 'unbounded' },
+    )
 
-  return {
-    config,
-    modules: generatedModules,
-  }
-}
+    return {
+      config,
+      modules: generatedModules,
+    }
+  })
 
 /**
  * Generate modules and write them to the filesystem.
  *
  * @returns The configuration used for generation
  */
-export const generate = async (init: ConfigInit): Promise<Config.Config> => {
-  const { config, modules: generatedModules } = await generateModules(init)
+export const generate = (
+  init: ConfigInit,
+): Effect.Effect<Config.Config, PlatformError | SchemaError, FileSystem.FileSystem> =>
+  Effect.gen(function*() {
+    const fs = yield* FileSystem.FileSystem
+    const { config, modules: generatedModules } = yield* generateModules(init)
 
-  // todo clear directory before generating so that removed or renamed files are cleaned up.
-  await config.fs.mkdir(config.paths.project.outputs.root, { recursive: true })
-  await config.fs.mkdir(config.paths.project.outputs.modules, { recursive: true })
+    // todo clear directory before generating so that removed or renamed files are cleaned up.
+    yield* fs.makeDirectory(config.paths.project.outputs.root, { recursive: true })
+    yield* fs.makeDirectory(config.paths.project.outputs.modules, { recursive: true })
 
-  // todo: add a test that if dir doesn't exist yet, it is created beforehand.
-  const shouldWriteSDL = config.paths.project.outputs.sdl.emitMode === Config.EmitMode.always
-    || (config.paths.project.outputs.sdl.emitMode === Config.EmitMode.infer
-      && (config.schema.via === 'url' || config.schema.via === 'instance'))
+    // todo: add a test that if dir doesn't exist yet, it is created beforehand.
+    const shouldWriteSDL = config.paths.project.outputs.sdl.emitMode === Config.EmitMode.always
+      || (config.paths.project.outputs.sdl.emitMode === Config.EmitMode.infer
+        && (config.schema.via === 'url' || config.schema.via === 'instance'))
 
-  if (shouldWriteSDL) {
-    await config.fs.writeFile(
-      config.paths.project.outputs.sdl.path,
-      config.schema.sdl,
+    if (shouldWriteSDL) {
+      yield* fs.writeFileString(
+        config.paths.project.outputs.sdl.path,
+        config.schema.sdl,
+      )
+    }
+
+    yield* Effect.all(
+      generatedModules.map((generatedModule) =>
+        Effect.gen(function*() {
+          // dprint-ignore
+          const filePath = generatedModule.filePath
+            ? `${config.paths.project.outputs.root}/modules/${generatedModule.filePath}`
+            : `${config.paths.project.outputs.root}/${isExportsModule(generatedModule.name) ? `` : `modules/`}${getFileName(config, generatedModule)}`
+          // Create parent directory if it doesn't exist
+          const dirPath = filePath.substring(0, filePath.lastIndexOf('/'))
+          yield* fs.makeDirectory(dirPath, { recursive: true })
+          yield* fs.writeFileString(filePath, generatedModule.content)
+        })
+      ),
+      { concurrency: 'unbounded' },
     )
-  }
 
-  await Promise.all(
-    generatedModules.map(async (generatedModule) => {
-      // dprint-ignore
-      const filePath = generatedModule.filePath
-        ? `${config.paths.project.outputs.root}/modules/${generatedModule.filePath}`
-        : `${config.paths.project.outputs.root}/${isExportsModule(generatedModule.name) ? `` : `modules/`}${getFileName(config, generatedModule)}`
-      // Create parent directory if it doesn't exist
-      const dirPath = filePath.substring(0, filePath.lastIndexOf('/'))
-      await config.fs.mkdir(dirPath, { recursive: true })
-      return config.fs.writeFile(filePath, generatedModule.content)
-    }),
-  )
+    // Validate GraphQLSP configuration and provide helpful suggestions
+    yield* validateGraphQLSPConfiguration(config)
 
-  // Validate GraphQLSP configuration and provide helpful suggestions
-  await validateGraphQLSPConfiguration(config)
-
-  return config
-}
+    return config
+  })
