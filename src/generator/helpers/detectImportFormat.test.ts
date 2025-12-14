@@ -1,4 +1,8 @@
-import { beforeEach, expect, test, vi } from 'vitest'
+import { NodeContext } from '@effect/platform-node'
+import { it } from '@effect/vitest'
+import { Fs } from '@wollybeard/kit'
+import { Effect } from 'effect'
+import { beforeEach, expect, vi } from 'vitest'
 
 vi.mock(`typescript`, () => ({
   findConfigFile: vi.fn(),
@@ -7,11 +11,8 @@ vi.mock(`typescript`, () => ({
   sys: { fileExists: vi.fn(), readFile: vi.fn() },
 }))
 
-vi.mock(`node:fs/promises`, () => ({ readFile: vi.fn() }))
-
-let detect: (cwd: string) => Promise<string | null>
+let detect: typeof import('./detectImportFormat.js').detectDefaultImportFormat
 let ts: any
-let fs: any
 
 const mockModuleResolution = (mode: string) => {
   vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
@@ -19,10 +20,11 @@ const mockModuleResolution = (mode: string) => {
   })
 }
 
+const testCwd = Fs.Path.fromLiteral(`/`)
+
 beforeEach(async () => {
   vi.clearAllMocks()
   ts = await import(`typescript`)
-  fs = await import(`node:fs/promises`)
   detect = (await import(`./detectImportFormat.js`)).detectDefaultImportFormat
 
   // Default happy path

@@ -1,5 +1,5 @@
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
-import { Str, Syn } from '@wollybeard/kit'
+import { Fs, Str, Syn } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { getOutputFieldMethodDoc } from '../helpers/jsdoc.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
@@ -45,20 +45,21 @@ export const ModuleGeneratorDomains = {
     for (const [namespaceKey, { path: namespacePath, fields }] of namespaceStructure.entries()) {
       // Strip the '$' prefix from the path for directory structure
       const pathWithoutPrefix = namespacePath[0] === '$' ? namespacePath.slice(1) : namespacePath
-      const dirPath = pathWithoutPrefix.join('/')
+      const dirPath = Fs.Path.RelDir.fromString(pathWithoutPrefix.join('/'))
+      const domainsDir = Fs.Path.fromLiteral(`domains/`)
 
       // Generate methods.ts for this namespace
       modules.push({
         name: `domains/${dirPath}/methods`,
         content: generateMethodsFile(fields, config),
-        filePath: `domains/${dirPath}/methods.ts`,
+        filePath: Fs.Path.join(Fs.Path.join(domainsDir, dirPath), Fs.Path.fromLiteral(`methods.ts`)),
       })
 
       // Generate __.ts for this namespace with export aliases
       modules.push({
         name: `domains/${dirPath}/__`,
         content: generateNamespaceIndexFile(fields, namespaceGroups[namespaceKey]!),
-        filePath: `domains/${dirPath}/__.ts`,
+        filePath: Fs.Path.join(Fs.Path.join(domainsDir, dirPath), Fs.Path.fromLiteral(`__.ts`)),
       })
     }
 
@@ -66,7 +67,7 @@ export const ModuleGeneratorDomains = {
     modules.push({
       name: `domains/__`,
       content: generateRootIndexFile(namespaceStructure, namespaceGroups),
-      filePath: `domains/__.ts`,
+      filePath: Fs.Path.fromLiteral(`domains/__.ts`),
     })
 
     return modules

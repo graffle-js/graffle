@@ -1,17 +1,24 @@
 import { NodeContext } from '@effect/platform-node'
+import { Fs } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { Effect } from 'effect'
 import { describe, expect, test, vi } from 'vitest'
 import type { FieldGroupingRule } from '../config/configInit.js'
 import { defaults } from '../config/defaults.js'
 import { generateModules } from '../generator/generate.js'
+import type { GeneratedModule } from '../helpers/moduleGenerator.js'
 import { checkRulePrecedence } from './MethodsRoot.js'
+
+const p = Fs.Path.fromLiteral
 
 // Suppress warnings in tests
 defaults.lint.missingGraphqlSP = false
 
 const runWithNodeFs = <A, E>(effect: Effect.Effect<A, E, NodeContext.NodeContext>) =>
   Effect.runPromise(Effect.provide(effect, NodeContext.layer))
+
+const findModule = (modules: GeneratedModule[], path: Fs.Path.RelFile) =>
+  modules.find(m => m.filePath?.toString() === path.toString())
 
 // ========================================
 // Existing Integration Tests
@@ -47,25 +54,25 @@ test('generates domains directory structure', async () => {
   }))
 
   // Should have generated domains modules
-  const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
+  const domainsRoot = findModule(modules, p(`domains/__.ts`))
   expect(domainsRoot).toBeDefined()
   expect(domainsRoot!.content).toContain('export * as pokemon')
   expect(domainsRoot!.content).toContain('export * as trainer')
 
   // Should have generated pokemon namespace
-  const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+  const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
   expect(pokemonMethods).toBeDefined()
   // Should import pre-curried helper from core
   expect(pokemonMethods!.content).toContain('import { $$query } from')
   // Should use simplified syntax with imported helper
   expect(pokemonMethods!.content).toContain("export const getOne = $$query('pokemonByName')")
 
-  const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
+  const pokemonIndex = findModule(modules, p(`domains/pokemon/__.ts`))
   expect(pokemonIndex).toBeDefined()
   expect(pokemonIndex!.content).toContain("export * from './methods.js'")
 
   // Should have generated trainer namespace
-  const trainerMethods = modules.find(m => m.filePath === 'domains/trainer/methods.ts')
+  const trainerMethods = findModule(modules, p(`domains/trainer/methods.ts`))
   expect(trainerMethods).toBeDefined()
   expect(trainerMethods!.content).toContain('import { $$query } from')
   expect(trainerMethods!.content).toContain("export const getOne = $$query('trainerById')")
@@ -95,12 +102,12 @@ test('generates method aliases using Cartesian product', async () => {
   }))
 
   // Should generate both namespace aliases
-  const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
+  const domainsRoot = findModule(modules, p(`domains/__.ts`))
   expect(domainsRoot!.content).toContain('export * as pokemon')
   expect(domainsRoot!.content).toContain('export * as poke')
 
   // Both should point to the same path
-  const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
+  const pokemonIndex = findModule(modules, p(`domains/pokemon/__.ts`))
   expect(pokemonIndex).toBeDefined()
 
   // Should have method aliases
@@ -131,13 +138,13 @@ test('imports only operation helpers needed for namespace', async () => {
   }))
 
   // Query namespace should only import $$query helper
-  const queryMethods = modules.find(m => m.filePath === 'domains/user/query/methods.ts')
+  const queryMethods = findModule(modules, p(`domains/user/query/methods.ts`))
   expect(queryMethods).toBeDefined()
   expect(queryMethods!.content).toContain('import { $$query } from')
   expect(queryMethods!.content).not.toContain('$$mutation')
 
   // Mutation namespace should only import $$mutation helper
-  const mutationMethods = modules.find(m => m.filePath === 'domains/user/mutation/methods.ts')
+  const mutationMethods = findModule(modules, p(`domains/user/mutation/methods.ts`))
   expect(mutationMethods).toBeDefined()
   expect(mutationMethods!.content).toContain('import { $$mutation } from')
   expect(mutationMethods!.content).not.toContain('$$query')
@@ -155,7 +162,7 @@ test('skips domain generation when domains config is false', async () => {
   }))
 
   // Should not have any domains modules
-  const domainsModules = modules.filter(m => m.filePath?.startsWith('domains/'))
+  const domainsModules = modules.filter(m => m.filePath?.toString().startsWith(`domains/`))
   expect(domainsModules).toHaveLength(0)
 })
 
@@ -205,7 +212,7 @@ test('allows same method name in different nested namespaces', async () => {
   }))
 
   // Should generate nested structure without conflicts
-  const domainsRoot = modules.find(m => m.filePath === 'domains/__.ts')
+  const domainsRoot = findModule(modules, p(`domains/__.ts`))
   expect(domainsRoot).toBeDefined()
   expect(domainsRoot!.content).toContain('export * as pokemon')
 
@@ -242,7 +249,7 @@ describe('pattern matching', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain("export const getOne = $$query('pokemonByName')")
     // pokemonById should not be included
@@ -271,7 +278,7 @@ describe('pattern matching', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     // Both pokemonByName and pokemonById should match
     expect(pokemonMethods!.content).toContain('pokemonByName')
@@ -300,7 +307,7 @@ describe('pattern matching', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('pokemonByName')
     expect(pokemonMethods!.content).not.toContain('unmatchedField')
@@ -325,7 +332,7 @@ describe('pattern matching', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const getOne')
   })
@@ -349,7 +356,7 @@ describe('pattern matching', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     // Should use field name as method name
     expect(pokemonMethods!.content).toContain('export const pokemonByName')
@@ -383,7 +390,7 @@ describe('pattern matching', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const create')
     expect(pokemonMethods!.content).toContain('export const remove')
@@ -415,11 +422,11 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const getOne')
 
-    const trainerMethods = modules.find(m => m.filePath === 'domains/trainer/methods.ts')
+    const trainerMethods = findModule(modules, p(`domains/trainer/methods.ts`))
     expect(trainerMethods).toBeDefined()
     expect(trainerMethods!.content).toContain('export const getOne')
   })
@@ -443,7 +450,7 @@ describe('capture groups', () => {
       },
     }))
 
-    const trainerMethods = modules.find(m => m.filePath === 'domains/trainer/methods.ts')
+    const trainerMethods = findModule(modules, p(`domains/trainer/methods.ts`))
     expect(trainerMethods).toBeDefined()
     expect(trainerMethods!.content).toContain('export const getOne')
   })
@@ -468,7 +475,7 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const getByName')
     expect(pokemonMethods!.content).toContain('export const getById')
@@ -493,7 +500,7 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const getByName')
   })
@@ -518,11 +525,11 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/Pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/Pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const add')
 
-    const trainerMethods = modules.find(m => m.filePath === 'domains/Trainer/methods.ts')
+    const trainerMethods = findModule(modules, p(`domains/Trainer/methods.ts`))
     expect(trainerMethods).toBeDefined()
     expect(trainerMethods!.content).toContain('export const update')
   })
@@ -552,7 +559,7 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const getByName')
   })
@@ -587,7 +594,7 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/Pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/Pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const create')
     expect(pokemonMethods!.content).toContain('export const remove')
@@ -614,15 +621,15 @@ describe('capture groups', () => {
       },
     }))
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const getByName')
 
-    const trainerMethods = modules.find(m => m.filePath === 'domains/trainer/methods.ts')
+    const trainerMethods = findModule(modules, p(`domains/trainer/methods.ts`))
     expect(trainerMethods).toBeDefined()
     expect(trainerMethods!.content).toContain('export const getByName')
 
-    const battleMethods = modules.find(m => m.filePath === 'domains/battle/methods.ts')
+    const battleMethods = findModule(modules, p(`domains/battle/methods.ts`))
     expect(battleMethods).toBeDefined()
     expect(battleMethods!.content).toContain('export const getById')
   })
@@ -652,7 +659,7 @@ describe('string transformations', () => {
       },
     }))
 
-    const methods = modules.find(m => m.filePath === 'domains/pokemon-species/methods.ts')
+    const methods = findModule(modules, p(`domains/pokemon-species/methods.ts`))
     expect(methods).toBeDefined()
     expect(methods!.content).toContain('export const getOne')
   })
@@ -676,7 +683,7 @@ describe('string transformations', () => {
       },
     }))
 
-    const methods = modules.find(m => m.filePath === 'domains/Pokemon/methods.ts')
+    const methods = findModule(modules, p(`domains/Pokemon/methods.ts`))
     expect(methods).toBeDefined()
     expect(methods!.content).toContain('export const getOne')
   })
@@ -700,7 +707,7 @@ describe('string transformations', () => {
       },
     }))
 
-    const methods = modules.find(m => m.filePath === 'domains/pokemon_species/methods.ts')
+    const methods = findModule(modules, p(`domains/pokemon_species/methods.ts`))
     expect(methods).toBeDefined()
     expect(methods!.content).toContain('export const getOne')
   })
@@ -724,7 +731,7 @@ describe('string transformations', () => {
       },
     }))
 
-    const methods = modules.find(m => m.filePath === 'domains/pokemon-species/methods.ts')
+    const methods = findModule(modules, p(`domains/pokemon-species/methods.ts`))
     expect(methods).toBeDefined()
     expect(methods!.content).toContain('export const getOne')
   })
@@ -748,7 +755,7 @@ describe('string transformations', () => {
       },
     }))
 
-    const methods = modules.find(m => m.filePath === 'domains/api/methods.ts')
+    const methods = findModule(modules, p(`domains/api/methods.ts`))
     expect(methods).toBeDefined()
     expect(methods!.content).toContain('export const getPokemon')
   })
@@ -776,7 +783,7 @@ describe('string transformations', () => {
       },
     }))
 
-    const methods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const methods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(methods).toBeDefined()
     expect(methods!.content).toContain('export const getPokemon')
   })
@@ -801,7 +808,7 @@ describe('string transformations', () => {
     }))
 
     // Should generate with literal ${unknown:resource} in path
-    const methods = modules.find(m => m.filePath?.includes('${unknown:resource}'))
+    const methods = modules.find(m => m.filePath?.toString().includes('${unknown:resource}'))
     expect(methods).toBeDefined()
   })
 })
@@ -832,11 +839,11 @@ describe('rule precedence', () => {
     }))
 
     // Both namespaces should be generated
-    const pokeMethods = modules.find(m => m.filePath === 'domains/poke/methods.ts')
+    const pokeMethods = findModule(modules, p(`domains/poke/methods.ts`))
     expect(pokeMethods).toBeDefined()
     expect(pokeMethods!.content).toContain('export const customName')
 
-    const pokemonMethods = modules.find(m => m.filePath === 'domains/pokemon/methods.ts')
+    const pokemonMethods = findModule(modules, p(`domains/pokemon/methods.ts`))
     expect(pokemonMethods).toBeDefined()
     expect(pokemonMethods!.content).toContain('export const secondMatch')
   })
@@ -896,7 +903,7 @@ describe('aliases', () => {
       },
     }))
 
-    const pokemonIndex = modules.find(m => m.filePath === 'domains/pokemon/__.ts')
+    const pokemonIndex = findModule(modules, p(`domains/pokemon/__.ts`))
     expect(pokemonIndex).toBeDefined()
     // Should have all three method aliases
     expect(pokemonIndex!.content).toContain('getOne as get')
@@ -923,11 +930,11 @@ describe('aliases', () => {
     }))
 
     // Both nested namespaces should exist
-    const apiPokemonMethods = modules.find(m => m.filePath === 'domains/api/v2/pokemon/methods.ts')
+    const apiPokemonMethods = findModule(modules, p(`domains/api/v2/pokemon/methods.ts`))
     expect(apiPokemonMethods).toBeDefined()
     expect(apiPokemonMethods!.content).toContain('export const getOne')
 
-    const v2PokeMethods = modules.find(m => m.filePath === 'domains/v2/poke/methods.ts')
+    const v2PokeMethods = findModule(modules, p(`domains/v2/poke/methods.ts`))
     expect(v2PokeMethods).toBeDefined()
     expect(v2PokeMethods!.content).toContain('export const getOne')
   })

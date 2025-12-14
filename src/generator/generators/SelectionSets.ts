@@ -870,7 +870,7 @@ const generateNamespaceModule = (config: Config, kindMap: GraphqlKit.Schema.Kind
 
   return {
     name: `selection-sets/_`,
-    filePath: `selection-sets/_.ts`,
+    filePath: Fs.Path.fromLiteral(`selection-sets/_.ts`),
     content: code.toString(),
   }
 }

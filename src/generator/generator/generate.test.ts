@@ -86,10 +86,9 @@ test(`root-types-mapped`, async () => {
         `,
       },
     })
-    const fs = yield* FileSystem.FileSystem
-    const base = `${process.cwd()}/graffle/modules`
-    const SchemaTs = yield* fs.readFileString(`${base}/schema/_.ts`)
-    const MethodsRootTs = yield* fs.readFileString(`${base}/methods-root.ts`)
+    const base = Fs.Path.join(Env.env.cwd, p(`./graffle/modules/`))
+    const SchemaTs = yield* Fs.readString(Fs.Path.join(base, p(`./schema/_.ts`)))
+    const MethodsRootTs = yield* Fs.readString(Fs.Path.join(base, p(`./methods-root.ts`)))
     return { SchemaTs, MethodsRootTs }
   })
 
