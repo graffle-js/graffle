@@ -149,7 +149,7 @@ const program = Effect.gen(function*() {
       ? { type: `url` as const, url }
       : {
         type: `sdlFile` as const,
-        dirOrFilePath: Path.join(process.cwd(), args.schema),
+        dirOrFilePath: toAbs(Fs.Path.fromString(args.schema)),
       }
     : undefined
 
@@ -183,7 +183,7 @@ const program = Effect.gen(function*() {
   if (args.format !== undefined) input.format = args.format
   if (args.name !== undefined) input.name = args.name
   if (args.output !== undefined) {
-    input.outputDirPath = toAbsolutePath(process.cwd(), args.output)
+    input.outputDirPath = toAbs(Fs.Path.RelDir.fromString(args.output)) as Fs.Path.AbsDir
   }
   if (args.outputCase !== undefined) input.outputCase = args.outputCase
   if (args.importFormat !== undefined) input.importFormat = args.importFormat
