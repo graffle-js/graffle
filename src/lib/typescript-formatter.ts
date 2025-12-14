@@ -1,4 +1,5 @@
 import { FileSystem } from '@effect/platform'
+import { Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
 import type { JsonObject } from 'type-fest'
 import { FormatterError } from '../generator/errors.js'
@@ -46,8 +47,6 @@ export const getTypeScriptFormatterPrettier = (): Effect.Effect<Formatter | null
  */
 export const getTypeScriptFormatterDprint = (): Effect.Effect<Formatter | null, never, FileSystem.FileSystem> =>
   Effect.gen(function*() {
-    const fs = yield* FileSystem.FileSystem
-
     // Try to import dprint modules
     const dprintResult = yield* Effect.all([
       Effect.tryPromise({
@@ -67,8 +66,8 @@ export const getTypeScriptFormatterDprint = (): Effect.Effect<Formatter | null, 
     const { getPath } = typescriptModule
 
     // Read the formatter WASM binary - return null if it fails (e.g., in test memory filesystem)
-    const wasmPath = getPath()
-    const wasmBufferResult = yield* fs.readFile(wasmPath).pipe(
+    const wasmPath = Fs.Path.AbsFile.fromString(getPath())
+    const wasmBufferResult = yield* Fs.read(wasmPath).pipe(
       Effect.map((buffer) => buffer as BufferSource),
       Effect.catchAll(() => Effect.succeed(null)),
     )
@@ -77,14 +76,14 @@ export const getTypeScriptFormatterDprint = (): Effect.Effect<Formatter | null, 
     const formatter = createFromBuffer(wasmBufferResult)
 
     // Read dprint.json config file (optional)
-    const localConfig = yield* fs.readFileString(`dprint.json`).pipe(
+    const localConfig = yield* Fs.readString(Fs.Path.fromLiteral(`./dprint.json`)).pipe(
       Effect.flatMap((content) =>
         Effect.try({
           try: () => JSON.parse(content) as { typescript?: JsonObject },
-          catch: () => ({}) as { typescript?: JsonObject },
+          catch: () => ({ typescript: defaultConfig }),
         })
       ),
-      Effect.catchAll(() => Effect.succeed({} as { typescript?: JsonObject })),
+      Effect.catchAll(() => Effect.succeed({ typescript: defaultConfig })),
     )
 
     return {

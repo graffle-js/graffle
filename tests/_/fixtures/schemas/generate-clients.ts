@@ -1,6 +1,5 @@
 import { Generator } from '#src/generator/_.js'
 import { TestSchemas } from '#test/schema/_.js'
-import { FileSystem } from '@effect/platform'
 import { NodeContext, NodeRuntime } from '@effect/platform-node'
 import { Fs, Obj, Str } from '@wollybeard/kit'
 import { Effect } from 'effect'
@@ -155,9 +154,11 @@ const generateClient = (params: {
 
 const program = Effect.gen(function*() {
   for (const schemaName of Obj.keysStrict(TestSchemas)) {
+    const p = Fs.Path.fromLiteral
     const schema = TestSchemas[schemaName]
     const schemaDirName = Str.Case.kebab(schemaName)
-    const outputDirPath = `${schemaDirName}/client`
+    const schemaDir = Fs.Path.RelDir.fromString(schemaDirName)
+    const outputDirPath = Fs.Path.join(schemaDir, p(`./client/`))
     const hasCustomScalars = schemasWithCustomScalars.includes(schemaName as any)
     const methodsOrganization = getMethodsOrganization(schemaName)
 
@@ -165,7 +166,7 @@ const program = Effect.gen(function*() {
       schemaName,
       schema,
       outputDirPath,
-      scalars: hasCustomScalars ? `./${schemaDirName}/scalars.ts` : undefined,
+      scalars: hasCustomScalars ? Fs.Path.join(schemaDir, p(`./scalars.ts`)) : undefined,
       methodsOrganization,
     })
 

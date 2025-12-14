@@ -93,13 +93,10 @@ interface ConfigSchema {
   kindMap: GraphqlKit.Schema.Kind.KindMap
 }
 
-
 export const createConfig = (
   configInit: ConfigInit,
 ): Effect.Effect<Config, PlatformError | SchemaError, FileSystem.FileSystem> =>
   Effect.gen(function*() {
-    const fs = yield* FileSystem.FileSystem
-
     // --- Output Case ---
 
     const outputCase = configInit.outputCase ?? defaults.outputCase

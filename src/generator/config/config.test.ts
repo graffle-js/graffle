@@ -6,6 +6,8 @@ import { describe, expect, test } from 'vitest'
 import { createConfig } from './config.js'
 import type { ConfigInitSchemaSdl } from './configInit.js'
 
+const p = Fs.Path.fromLiteral
+
 const schema: ConfigInitSchemaSdl = {
   type: `sdl`,
   sdl: `type Query { ok: Boolean }`,
@@ -27,9 +29,9 @@ describe(`import format`, () => {
 })
 
 test(`can load schema from custom path`, async () => {
-  const customPathFile = `/tests/_/fixtures/custom.graphql`
+  const customPathFile = p(`/tests/_/fixtures/custom.graphql`)
   const memoryFs = Fs.Memory.layer({
-    [customPathFile]: `type Query { customNamedSchemaFile: Boolean }`,
+    [customPathFile.toString()]: `type Query { customNamedSchemaFile: Boolean }`,
   })
 
   const config = await Effect.runPromise(
@@ -45,10 +47,10 @@ test(`can load schema from custom path`, async () => {
 })
 
 test(`can load schema from custom dir using default file name`, async () => {
-  const customPathDir = `/tests/_/fixtures`
-  const schemaFilePath = `${customPathDir}/schema.graphql`
+  const customPathDir = p(`/tests/_/fixtures`)
+  const schemaFilePath = Fs.Path.join(customPathDir, p('./schema.graphql'))
   const memoryFs = Fs.Memory.layer({
-    [schemaFilePath]: `type Query { defaultNamedSchemaFile: Boolean }`,
+    [schemaFilePath.toString()]: `type Query { defaultNamedSchemaFile: Boolean }`,
   })
 
   const config = await Effect.runPromise(
