@@ -54,7 +54,10 @@ export const load = (
   FileSystem.FileSystem
 > =>
   Effect.gen(function*() {
-    const importPathCandidates = yield* processInput(input?.filePath)
+    const absoluteInput = input?.filePath
+      ? Fs.Path.ensureAbsolute(input.filePath, Env.env.cwd)
+      : undefined
+    const importPathCandidates = yield* processInput(absoluteInput)
 
     const importedModule = yield* importFirst(importPathCandidates)
 
@@ -91,10 +94,7 @@ export const load = (
     }
   })
 
-const toAbsolutePath = (cwd: string, maybeAbsolutePath: string) =>
-  Path.isAbsolute(maybeAbsolutePath) ? maybeAbsolutePath : Path.join(cwd, maybeAbsolutePath)
-
-const processInput = (input?: string): Effect.Effect<string[], never, FileSystem.FileSystem> =>
+const processInput = (input?: Fs.Path.$Abs): Effect.Effect<Fs.Path.AbsFile[], never, FileSystem.FileSystem> =>
   Effect.gen(function*() {
     if (!input) {
       const directoryPath = process.cwd()

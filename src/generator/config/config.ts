@@ -197,7 +197,7 @@ To suppress this warning disable formatting in one of the following ways:
     // --- Library Paths ---
 
     const processLibraryPath = (path: string | Fs.Path.$File) => {
-      // If already a Fs.Path, process directly as filesystem path
+      // If Fs.Path, process as filesystem path
       if (Fs.Path.$File.is(path)) {
         const pathAbsolute = Fs.Path.ensureAbsolute(path, cwd)
         const relPath = Fs.Path.toRel(pathAbsolute, outputDirPathModules)
@@ -207,13 +207,14 @@ To suppress this warning disable formatting in one of the following ways:
       if (path.startsWith('#')) {
         return path
       }
-      // Package specifiers (not filesystem paths) should be returned as-is
-      if (!path.startsWith('.') && !path.startsWith('/')) {
-        return path
+      // Strings starting with . or / are invalid - should use Fs.Path.$File
+      if (path.startsWith('.') || path.startsWith('/')) {
+        throw new Error(
+          `Invalid library path: "${path}". Filesystem paths must use Fs.Path.$File, not strings.`,
+        )
       }
-      const pathAbsolute = toAbs(Fs.Path.fromString(path))
-      const relPath = Fs.Path.toRel(pathAbsolute, outputDirPathModules)
-      return getImportExtension(relPath.toString())
+      // Package specifiers returned as-is
+      return path
     }
 
     const libraryPaths = Object.fromEntries(
@@ -245,9 +246,11 @@ To suppress this warning disable formatting in one of the following ways:
 
     // dprint-ignore
     const outputSdlPath =
-      Str.is(configInit.outputSDL)
-        ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
-        : NodePath.join(outputDirPathRoot, `schema.graphql`)
+      typeof configInit.outputSDL === 'object'
+        ? Fs.Path.$Dir.is(configInit.outputSDL)
+          ? Fs.Path.join(configInit.outputSDL, p(`./schema.graphql`))
+          : configInit.outputSDL
+        : Fs.Path.join(outputDirPathRoot, p(`./schema.graphql`))
 
     // --- name ---
 
@@ -328,11 +331,10 @@ To suppress this warning disable formatting in one of the following ways:
     }
   })
 
-const defaultSchemaFileName = `schema.graphql`
+const defaultSchemaFileName = p(`./schema.graphql`)
 
 const createConfigSchema = (
-  cwd: string,
-  sourceDirPath: string,
+  sourceDirPath: Fs.Path.AbsDir,
   input: ConfigInit,
 ): Effect.Effect<ConfigSchema, PlatformError | SchemaError, FileSystem.FileSystem> =>
   Effect.gen(function*() {
@@ -352,15 +354,13 @@ const createConfigSchema = (
       case `sdl`:
       case `sdlFile`: {
         let sdl
-        let sdlFilePath: null | string = null
+        let sdlFilePath: Fs.Path.AbsFile | null = null
         if (input.schema.type === `sdlFile`) {
-          const fileOrDirPath = input.schema.dirOrFilePath
-            ? toAbsolutePath(cwd, input.schema.dirOrFilePath)
-            : sourceDirPath
-          const statResult = yield* fs.stat(fileOrDirPath)
-          const isDir = statResult.type === 'Directory'
-          sdlFilePath = isDir ? NodePath.join(fileOrDirPath, defaultSchemaFileName) : fileOrDirPath
-          sdl = yield* fs.readFileString(sdlFilePath)
+          const fileOrDirPath = input.schema.dirOrFilePath ?? sourceDirPath
+          sdlFilePath = Fs.Path.$Dir.is(fileOrDirPath)
+            ? Fs.Path.join(fileOrDirPath, defaultSchemaFileName)
+            : fileOrDirPath
+          sdl = yield* Fs.readString(sdlFilePath)
         } else {
           sdl = input.schema.sdl
         }

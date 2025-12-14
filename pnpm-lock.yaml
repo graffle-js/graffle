@@ -51,6 +51,9 @@ importers:
       '@effect/rpc':
         specifier: ^0.72.2
         version: 0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)
+      '@effect/vitest':
+        specifier: ^0.27.0
+        version: 0.27.0(effect@3.19.12)(vitest@4.0.15(@opentelemetry/api@1.9.0)(@types/node@25.0.2)(jsdom@27.3.0(postcss@8.5.6))(terser@5.44.0)(tsx@4.21.0))
       '@effect/workflow':
         specifier: ^0.15.2
         version: 0.15.2(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(effect@3.19.12)
@@ -680,6 +683,12 @@ packages:
       '@effect/experimental': ^0.56.0
       '@effect/platform': ^0.92.0
       effect: ^3.18.0
+
+  '@effect/vitest@0.27.0':
+    resolution: {integrity: sha512-8bM7n9xlMUYw9GqPIVgXFwFm2jf27m/R7psI64PGpwU5+26iwyxp9eAXEsfT5S6lqztYfpQQ1Ubp5o6HfNYzJQ==}
+    peerDependencies:
+      effect: ^3.19.0
+      vitest: ^3.2.0
 
   '@effect/workflow@0.15.2':
     resolution: {integrity: sha512-UAo5QWEvyyKsnf4EQ7WL3zwiuZS4Wd5fmAxdpcpZSIxNOvsABp3DOuyRCiidD8l3sQhdPwES/UsVK4QOCQ7wew==}
@@ -5568,6 +5577,11 @@ snapshots:
       '@effect/platform': 0.93.8(effect@3.19.12)
       effect: 3.19.12
       uuid: 11.1.0
+
+  '@effect/vitest@0.27.0(effect@3.19.12)(vitest@4.0.15(@opentelemetry/api@1.9.0)(@types/node@25.0.2)(jsdom@27.3.0(postcss@8.5.6))(terser@5.44.0)(tsx@4.21.0))':
+    dependencies:
+      effect: 3.19.12
+      vitest: 4.0.15(@opentelemetry/api@1.9.0)(@types/node@25.0.2)(jsdom@27.3.0(postcss@8.5.6))(terser@5.44.0)(tsx@4.21.0)
 
   '@effect/workflow@0.15.2(@effect/experimental@0.56.0(@effect/platform@0.93.7(effect@3.19.11))(effect@3.19.11))(@effect/platform@0.93.7(effect@3.19.11))(@effect/rpc@0.72.2(@effect/platform@0.93.7(effect@3.19.11))(effect@3.19.11))(effect@3.19.11)':
     dependencies:
