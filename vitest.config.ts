@@ -6,8 +6,5 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     plugins: [tsconfigPaths() as any],
-    test: {
-      testTimeout: 120000,
-    },
   }),
 )
