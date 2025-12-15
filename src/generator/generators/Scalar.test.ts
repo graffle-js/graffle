@@ -90,7 +90,7 @@ describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
     )
 
     // The scalar module should import custom scalars namespace
-    expect(scalar).toContain(`import * as CustomScalars from '../../scalars.js'`)
+    expect(scalar).toContain(`import * as CustomScalars from "../../scalars.js"`)
 
     // Should export both const and type for each custom scalar
     expect(scalar).toContain('export const BigInt = CustomScalars.BigInt')
@@ -147,8 +147,8 @@ describe('Issue #1367 - Import format noExtension not working', () => {
     )
 
     // Should NOT have .js extension when importFormat is noExtension
-    expect(scalar).toContain(`import * as CustomScalars from '../../scalars'`)
-    expect(scalar).not.toContain(`from '../../scalars.js'`)
+    expect(scalar).toContain(`import * as CustomScalars from "../../scalars"`)
+    expect(scalar).not.toContain(`from "../../scalars.js"`)
   })
 })
 
@@ -167,17 +167,17 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     expect(scalar).toContain('const $bigint =')
     expect(scalar).toContain('type $bigint =')
     expect(scalar).toContain('export { $bigint as bigint }')
-    expect(scalar).toContain(`Scalar<'bigint', string, string>`)
+    expect(scalar).toContain(`Scalar<"bigint", string, string>`)
 
     expect(scalar).toContain('const $boolean =')
     expect(scalar).toContain('type $boolean =')
     expect(scalar).toContain('export { $boolean as boolean }')
-    expect(scalar).toContain(`Scalar<'boolean', string, string>`)
+    expect(scalar).toContain(`Scalar<"boolean", string, string>`)
 
     expect(scalar).toContain('const $interface =')
     expect(scalar).toContain('type $interface =')
     expect(scalar).toContain('export { $interface as interface }')
-    expect(scalar).toContain(`Scalar<'interface', string, string>`)
+    expect(scalar).toContain(`Scalar<"interface", string, string>`)
   })
 
   test('escapes reserved keywords with custom scalar codecs', async () => {

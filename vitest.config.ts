@@ -5,6 +5,6 @@ import viteConfig from './vite.config.js'
 export default mergeConfig(
   viteConfig,
   defineConfig({
-    plugins: [tsconfigPaths() as any],
+    plugins: [tsconfigPaths()],
   }),
 )

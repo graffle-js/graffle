@@ -15,8 +15,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.12.0)
       '@wollybeard/kit':
-        specifier: ^0.106.3
-        version: 0.106.3(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)
+        specifier: ^0.107.0
+        version: 0.107.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)
       es-toolkit:
         specifier: ^1.43.0
         version: 1.43.0
@@ -163,8 +163,8 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vite-tsconfig-paths:
-        specifier: ^5.1.4
-        version: 5.1.4(typescript@5.9.3)(vite@7.2.7(@types/node@25.0.2)(terser@5.44.0)(tsx@4.21.0))
+        specifier: ^6.0.1
+        version: 6.0.1(typescript@5.9.3)(vite@7.2.7(@types/node@25.0.2)(terser@5.44.0)(tsx@4.21.0))
       vitepress:
         specifier: ^1.6.4
         version: 1.6.4(@algolia/client-search@5.46.0)(@types/node@25.0.2)(postcss@8.5.6)(search-insights@2.17.3)(terser@5.44.0)(typescript@5.9.3)
@@ -2513,8 +2513,8 @@ packages:
       zod:
         optional: true
 
-  '@wollybeard/kit@0.106.3':
-    resolution: {integrity: sha512-Y8b2wCzfxz9HTEtsWBHQk2f4mocPvJB/CP1CwdQ7S8S241sEcKbcxmJN+w48n8KUFuPects7D1Ub8o+3cNL/mg==}
+  '@wollybeard/kit@0.107.0':
+    resolution: {integrity: sha512-G0zO4qR47vhsqu3LL/g9R8Sd/mTJW1xuGSPTR48tEYQwQwf9ZgC83SfkOukgHa0JD2/aVgVt/+H5Yq1DVnsSRQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -4806,8 +4806,8 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
-  vite-tsconfig-paths@5.1.4:
-    resolution: {integrity: sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==}
+  vite-tsconfig-paths@6.0.1:
+    resolution: {integrity: sha512-OQuYkfCQhc2T+n//0N7/oogTosgiSyZQ7dydrpUlH5SbnFTtplpekdY4GMi6jDwEpiwWlqeUJMyPfC2ePM1+2A==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -7230,7 +7230,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wollybeard/kit@0.106.3(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)':
+  '@wollybeard/kit@0.107.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)(zod@4.1.13)':
     dependencies:
       '@effect/platform': 0.93.8(effect@3.19.12)
       '@microsoft/tsdoc': 0.16.0
@@ -9904,7 +9904,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@7.2.7(@types/node@25.0.2)(terser@5.44.0)(tsx@4.21.0)):
+  vite-tsconfig-paths@6.0.1(typescript@5.9.3)(vite@7.2.7(@types/node@25.0.2)(terser@5.44.0)(tsx@4.21.0)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2

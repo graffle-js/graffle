@@ -110,7 +110,7 @@
   "dependencies": {
     "@0no-co/graphql.web": "1.2.0",
     "@graphql-typed-document-node/core": "^3.2.0",
-    "@wollybeard/kit": "^0.106.3",
+    "@wollybeard/kit": "^0.107.0",
     "es-toolkit": "^1.43.0",
     "type-fest": "^5.3.1"
   },
@@ -182,7 +182,7 @@
     "ts-morph": "^27.0.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^6.0.1",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",
     "vitest": "^4.0.15",

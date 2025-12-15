@@ -100,7 +100,7 @@ test(`root-types-mapped`, async () => {
   expect(SchemaTs).includes(`RootUnion: $Types.${RootTypeCustomNameForQuery}`)
   expect(SchemaTs).toMatchSnapshot()
 
-  expect(MethodsRootTs).includes(`__typename: '${RootTypeCustomNameForQuery}'`)
+  expect(MethodsRootTs).includes(`__typename: "${RootTypeCustomNameForQuery}"`)
   expect(MethodsRootTs).includes(`InferResult.OperationQuery<`)
   expect(MethodsRootTs).toMatchSnapshot()
 })
