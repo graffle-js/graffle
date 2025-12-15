@@ -55,7 +55,7 @@ export interface ConfigInitSchemaSdlFile {
   /**
    * Defaults to the source directory if set, otherwise the current working directory.
    */
-  dirOrFilePath?: Fs.Path.$Abs
+  dirOrFilePath?: string | Fs.Path.$Abs
 }
 export interface ConfigInitSchemaUrl {
   type: `url`
@@ -111,7 +111,7 @@ export interface ConfigInit {
    *
    * By default, is the process current working directory.
    */
-  currentWorkingDirectory?: Fs.Path.AbsDir | undefined
+  currentWorkingDirectory?: string | Fs.Path.AbsDir | undefined
   /**
    * The schema to use for generation. Can be one of:
    *
@@ -135,13 +135,13 @@ export interface ConfigInit {
    *
    * @defaultValue `false`
    */
-  outputSDL?: boolean | Fs.Path.$Abs | undefined
+  outputSDL?: boolean | string | Fs.Path.$Abs | undefined
   /**
    * Directory path to where the generated code should be output.
    *
    * Defaults to the current working directory.
    */
-  outputDirPath?: Fs.Path.AbsDir | undefined
+  outputDirPath?: string | Fs.Path.AbsDir | undefined
   /**
    * Control over the client configuration's default schema. Since an introspection URL can be used for `schema`,
    * this option allows you to have this URL propagated to the generated client configuration for your convenience.
@@ -164,13 +164,13 @@ export interface ConfigInit {
    *
    * Defaults to the current working directory.
    */
-  sourceDirPath?: Fs.Path.AbsDir | undefined
+  sourceDirPath?: string | Fs.Path.AbsDir | undefined
   /**
    * File path to your scalars module.
    *
    * If not set, Graffle will look for a file called `scalars.ts` in the project directory.
    */
-  scalars?: Fs.Path.AbsFile | undefined
+  scalars?: string | Fs.Path.AbsFile | undefined
   /**
    * How should import identifiers be generated? Can be one of:
    *

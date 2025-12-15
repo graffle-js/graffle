@@ -105,18 +105,28 @@ export const createConfig = (
 
     // --- Paths ---
 
-    const cwd = configInit.currentWorkingDirectory ?? Env.env.cwd
+    // Helper to convert string | Path to Path
+    const toPath = <$path extends Fs.Path.$Abs | Fs.Path.$Rel>(input: string | $path): $path =>
+      (typeof input === 'string' ? Fs.Path.fromString(input) : input) as $path
+
+    const cwd = configInit.currentWorkingDirectory
+      ? toPath(configInit.currentWorkingDirectory)
+      : Env.env.cwd
     const toAbs = Fs.Path.ensureAbsoluteWith(cwd)
 
-    const sourceDirPath = configInit.sourceDirPath ?? cwd
+    const sourceDirPath = configInit.sourceDirPath
+      ? toAbs(toPath(configInit.sourceDirPath))
+      : cwd
 
     const outputDirPathRoot = configInit.outputDirPath
-      ?? Fs.Path.join(cwd, Fs.Path.fromLiteral(`./graffle/`))
+      ? toAbs(toPath(configInit.outputDirPath))
+      : Fs.Path.join(cwd, Fs.Path.fromLiteral(`./graffle/`))
 
     const outputDirPathModules = Fs.Path.join(outputDirPathRoot, Fs.Path.fromLiteral(`./modules/`))
 
     const inputPathScalars = configInit.scalars
-      ?? Fs.Path.join(sourceDirPath, p(`./scalars.ts`))
+      ? toAbs(toPath(configInit.scalars))
+      : Fs.Path.join(sourceDirPath, p(`./scalars.ts`))
 
     const isCustomScalarsModuleExists = yield* Fs.exists(inputPathScalars)
     if (!isCustomScalarsModuleExists && configInit.scalars) {
@@ -249,12 +259,17 @@ To suppress this warning disable formatting in one of the following ways:
                                            EmitMode.always
 
     // dprint-ignore
-    const outputSdlPath =
-      typeof configInit.outputSDL === 'object'
-        ? Fs.Path.$Dir.is(configInit.outputSDL)
-          ? Fs.Path.join(configInit.outputSDL, p(`./schema.graphql`))
-          : configInit.outputSDL
-        : Fs.Path.join(outputDirPathRoot, p(`./schema.graphql`))
+    const outputSdlPath = (() => {
+      if (typeof configInit.outputSDL === 'string' || typeof configInit.outputSDL === 'object' && configInit.outputSDL !== null) {
+        const sdlPathInput = typeof configInit.outputSDL === 'string'
+          ? toAbs(toPath(configInit.outputSDL))
+          : toAbs(configInit.outputSDL)
+        return Fs.Path.$Dir.is(sdlPathInput)
+          ? Fs.Path.join(sdlPathInput, p(`./schema.graphql`))
+          : sdlPathInput
+      }
+      return Fs.Path.join(outputDirPathRoot, p(`./schema.graphql`))
+    })()
 
     // --- name ---
 
@@ -360,7 +375,12 @@ const createConfigSchema = (
         let sdl
         let sdlFilePath: Fs.Path.AbsFile | null = null
         if (input.schema.type === `sdlFile`) {
-          const fileOrDirPath = input.schema.dirOrFilePath ?? sourceDirPath
+          const fileOrDirPathInput = input.schema.dirOrFilePath
+          const fileOrDirPath = fileOrDirPathInput
+            ? (typeof fileOrDirPathInput === 'string'
+                ? Fs.Path.ensureAbsolute(Fs.Path.fromString(fileOrDirPathInput), sourceDirPath)
+                : Fs.Path.ensureAbsolute(fileOrDirPathInput, sourceDirPath))
+            : sourceDirPath
           sdlFilePath = Fs.Path.$Dir.is(fileOrDirPath)
             ? Fs.Path.join(fileOrDirPath, defaultSchemaFileName)
             : fileOrDirPath
