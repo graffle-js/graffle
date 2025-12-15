@@ -36,8 +36,7 @@ export const loadDefaults: Config = {
 
 const extensionCandidates = [`ts`, `js`, `mjs`, `mts`]
 
-const getFileName = (ext: string): Fs.Path.RelFile =>
-  Fs.Path.RelFile.fromString(`${loadDefaults.fileName}.${ext}`)
+const getFileName = (ext: string) => Fs.Path.RelFile.fromString(`${loadDefaults.fileName}.${ext}`)
 
 export type LoadResult =
   | { builder: null; paths: Fs.Path.AbsFile[]; path: null }

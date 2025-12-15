@@ -11,6 +11,9 @@ importers:
       '@0no-co/graphql.web':
         specifier: 1.2.0
         version: 1.2.0(graphql@16.12.0)
+      '@effect/platform-node':
+        specifier: ^0.103.0
+        version: 0.103.0(@effect/cluster@0.55.0(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/sql@0.46.0(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/workflow@0.15.2(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/sql@0.46.0(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(effect@3.19.12)
       '@graphql-typed-document-node/core':
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.12.0)
@@ -45,9 +48,6 @@ importers:
       '@effect/platform':
         specifier: ^0.93.8
         version: 0.93.8(effect@3.19.12)
-      '@effect/platform-node':
-        specifier: ^0.103.0
-        version: 0.103.0(@effect/cluster@0.55.0(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/sql@0.46.0(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/workflow@0.15.2(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(@effect/rpc@0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/sql@0.46.0(@effect/experimental@0.56.0(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12))(effect@3.19.12)
       '@effect/rpc':
         specifier: ^0.72.2
         version: 0.72.2(@effect/platform@0.93.8(effect@3.19.12))(effect@3.19.12)

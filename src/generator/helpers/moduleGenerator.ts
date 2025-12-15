@@ -72,7 +72,7 @@ export const createModuleGenerator: FactoryModuleGenerator = (name, sourceFileUr
       const generatorPath = Fs.Path.toRel(Fs.Path.AbsFile.fromString(sourcePath), Env.env.cwd)
       docHeader = markdownToJsDoc(markdown, {
         moduleName: name,
-        generatorPath: generatorPath.toString(),
+        generatorPath,
       })
     }
   }
