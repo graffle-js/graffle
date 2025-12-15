@@ -38,7 +38,7 @@ export const validateGraphQLSPConfiguration = (
       if (hasSdlOutput) {
         const sdlPath = Fs.Path.toRel(config.paths.project.outputs.sdl.path, config.paths.project.inputs.root)
           .toString()
-        schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
+        schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "${sdlPath}" }]`
         sdlSetupStep = ``
       } else {
         schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./graffle/schema.graphql" }]`
@@ -121,7 +121,7 @@ To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
       if (hasSdlOutput) {
         const sdlPath = Fs.Path.toRel(config.paths.project.outputs.sdl.path, config.paths.project.inputs.root)
           .toString()
-        schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
+        schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "${sdlPath}" }]`
         sdlSetupStep = ``
       } else {
         schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./graffle/schema.graphql" }]`
