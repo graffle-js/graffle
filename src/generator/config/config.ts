@@ -378,8 +378,8 @@ const createConfigSchema = (
           const fileOrDirPathInput = input.schema.dirOrFilePath
           const fileOrDirPath = fileOrDirPathInput
             ? (typeof fileOrDirPathInput === 'string'
-                ? Fs.Path.ensureAbsolute(Fs.Path.fromString(fileOrDirPathInput), sourceDirPath)
-                : Fs.Path.ensureAbsolute(fileOrDirPathInput, sourceDirPath))
+              ? Fs.Path.ensureAbsolute(Fs.Path.fromString(fileOrDirPathInput), sourceDirPath)
+              : Fs.Path.ensureAbsolute(fileOrDirPathInput, sourceDirPath))
             : sourceDirPath
           sdlFilePath = Fs.Path.$Dir.is(fileOrDirPath)
             ? Fs.Path.join(fileOrDirPath, defaultSchemaFileName)
