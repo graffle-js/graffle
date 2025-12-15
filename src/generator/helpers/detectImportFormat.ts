@@ -1,5 +1,9 @@
-import * as Path from 'node:path'
+import { FileSystem } from '@effect/platform'
+import { Fs } from '@wollybeard/kit'
+import { Effect } from 'effect'
 import type { InputImportFormat } from '../config/configInit.js'
+
+const p = Fs.Path.fromLiteral
 
 /**
  * Detects the appropriate import format based on the user's TypeScript configuration.
@@ -20,21 +24,28 @@ import type { InputImportFormat } from '../config/configInit.js'
  * @param cwd - Current working directory to search for config files
  * @returns Detected import format, or null if detection failed/inconclusive
  */
-export const detectDefaultImportFormat = async (cwd: string): Promise<InputImportFormat | null> => {
-  try {
+export const detectDefaultImportFormat = (
+  cwd: Fs.Path.AbsDir,
+): Effect.Effect<InputImportFormat | null, never, FileSystem.FileSystem> =>
+  Effect.gen(function*() {
     // Dynamic import - graceful failure if typescript not available
-    const ts = await import(`typescript`)
+    const ts = yield* Effect.tryPromise({
+      try: () => import(`typescript`),
+      catch: () => null,
+    })
+    if (!ts) return null
 
-    const configPath = ts.findConfigFile(cwd, ts.sys.fileExists, `tsconfig.json`)
+    const configPath = ts.findConfigFile(cwd.toString(), ts.sys.fileExists, `tsconfig.json`)
     if (!configPath) return null
 
     const configFile = ts.readConfigFile(configPath, ts.sys.readFile)
     if (configFile.error) return null
 
+    const configDir = Fs.Path.toDir(Fs.Path.AbsFile.fromString(configPath))
     const parsed = ts.parseJsonConfigFileContent(
       configFile.config,
       ts.sys,
-      Path.dirname(configPath),
+      configDir.toString(),
     )
 
     const moduleResolution = parsed.options.moduleResolution?.toString().toLowerCase()
@@ -46,15 +57,12 @@ export const detectDefaultImportFormat = async (cwd: string): Promise<InputImpor
 
     // Pattern 2 & 3: Node16/NodeNext → check package.json
     if (moduleResolution === `node16` || moduleResolution === `nodenext`) {
-      const packageJson = await readPackageJson(cwd)
+      const packageJson = yield* readPackageJson(cwd)
       return packageJson?.type === `module` ? `jsExtension` : `noExtension`
     }
 
     return null // No strong opinion for other modes
-  } catch {
-    return null // TypeScript not available or read failed
-  }
-}
+  }).pipe(Effect.catchAll(() => Effect.succeed(null)))
 
 /**
  * Reads and parses package.json from the given directory.
@@ -62,12 +70,11 @@ export const detectDefaultImportFormat = async (cwd: string): Promise<InputImpor
  * @param cwd - Directory containing package.json
  * @returns Parsed package.json or null if not found/invalid
  */
-const readPackageJson = async (cwd: string): Promise<{ type?: string } | null> => {
-  try {
-    const fs = await import(`node:fs/promises`)
-    const content = await fs.readFile(Path.join(cwd, `package.json`), `utf-8`)
-    return JSON.parse(content)
-  } catch {
-    return null
-  }
-}
+const readPackageJson = (
+  cwd: Fs.Path.AbsDir,
+): Effect.Effect<{ type?: string } | null, never, FileSystem.FileSystem> =>
+  Effect.gen(function*() {
+    const packageJsonPath = Fs.Path.join(cwd, p(`./package.json`))
+    const content = yield* Fs.readString(packageJsonPath)
+    return JSON.parse(content) as { type?: string }
+  }).pipe(Effect.catchAll(() => Effect.succeed(null)))

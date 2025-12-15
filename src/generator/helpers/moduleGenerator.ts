@@ -1,4 +1,4 @@
-import { Lang, Paka } from '@wollybeard/kit'
+import { Env, Fs, Lang, Paka } from '@wollybeard/kit'
 const { markdownToJsDoc } = Paka
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
 import fs from 'node:fs'
@@ -38,9 +38,8 @@ export interface GeneratedModule<$Name extends string = string> {
   /**
    * Optional custom file path relative to modules directory.
    * If provided, overrides the default path construction.
-   * Example: "schema/types/Query/fields.ts"
    */
-  filePath?: string
+  filePath?: Fs.Path.RelFile
 }
 
 export const createModuleGenerator: FactoryModuleGenerator = (name, sourceFileUrlOrRunner, runnerImplementation) => {
@@ -70,7 +69,7 @@ export const createModuleGenerator: FactoryModuleGenerator = (name, sourceFileUr
 
     if (fs.existsSync(docsPath)) {
       const markdown = fs.readFileSync(docsPath, 'utf-8')
-      const generatorPath = path.relative(process.cwd(), sourcePath)
+      const generatorPath = Fs.Path.toRel(Fs.Path.AbsFile.fromString(sourcePath), Env.env.cwd)
       docHeader = markdownToJsDoc(markdown, {
         moduleName: name,
         generatorPath,
@@ -112,9 +111,9 @@ export const getBaseName = (config: Config, generator: ModuleGenerator | Generat
   return caseFormatters[config.outputCase](generator.name)
 }
 
-export const getFileName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
+export const getFileName = (config: Config, generator: ModuleGenerator | GeneratedModule): Fs.Path.RelFile => {
   const name = getBaseName(config, generator)
-  return `${name}.ts`
+  return Fs.Path.RelFile.fromString(`${name}.ts`)
 }
 
 export const getImportName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {

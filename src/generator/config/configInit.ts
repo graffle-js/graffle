@@ -1,5 +1,5 @@
-import type { Fs } from '#src/lib/fsp.js'
 import type { GraphqlKit } from '#src/lib/graphql-kit/_.js'
+import type { Fs } from '@wollybeard/kit'
 import { Schema } from 'effect'
 import type { IntrospectionOptions } from 'graphql'
 import type { Extension } from '../extension/types.js'
@@ -55,7 +55,7 @@ export interface ConfigInitSchemaSdlFile {
   /**
    * Defaults to the source directory if set, otherwise the current working directory.
    */
-  dirOrFilePath?: string
+  dirOrFilePath?: string | Fs.Path.$Abs
 }
 export interface ConfigInitSchemaUrl {
   type: `url`
@@ -74,12 +74,6 @@ export type ConfigInitSchema =
   | ConfigInitSchemaUrl
 
 export interface ConfigInit {
-  /**
-   * File system API to use.
-   *
-   * By default uses the Node.js file system API.
-   */
-  fs?: Fs | undefined
   /**
    * What naming convention to use for generated files and directories.
    *
@@ -117,7 +111,7 @@ export interface ConfigInit {
    *
    * By default, is the process current working directory.
    */
-  currentWorkingDirectory?: string | undefined
+  currentWorkingDirectory?: string | Fs.Path.AbsDir | undefined
   /**
    * The schema to use for generation. Can be one of:
    *
@@ -133,7 +127,7 @@ export interface ConfigInit {
    *
    * If true, an SDL file will be written into the output directory.
    *
-   * When `string`:
+   * When `Fs.Path.$Abs`:
    *
    * The path to write the SDL file to.
    * If a directory, then a file called "schema.graphql" will be written into it.
@@ -141,13 +135,13 @@ export interface ConfigInit {
    *
    * @defaultValue `false`
    */
-  outputSDL?: boolean | string | undefined
+  outputSDL?: boolean | string | Fs.Path.$Abs | undefined
   /**
    * Directory path to where the generated code should be output.
    *
    * Defaults to the current working directory.
    */
-  outputDirPath?: string | undefined
+  outputDirPath?: string | Fs.Path.AbsDir | undefined
   /**
    * Control over the client configuration's default schema. Since an introspection URL can be used for `schema`,
    * this option allows you to have this URL propagated to the generated client configuration for your convenience.
@@ -170,13 +164,13 @@ export interface ConfigInit {
    *
    * Defaults to the current working directory.
    */
-  sourceDirPath?: string | undefined
+  sourceDirPath?: string | Fs.Path.AbsDir | undefined
   /**
    * File path to your scalars module.
    *
    * If not set, Graffle will look for a file called `scalars.ts` in the project directory.
    */
-  scalars?: string | undefined
+  scalars?: string | Fs.Path.AbsFile | undefined
   /**
    * How should import identifiers be generated? Can be one of:
    *
@@ -303,9 +297,21 @@ export interface InputIntrospectionOptions extends IntrospectionOptions {
 }
 
 export interface ConfigInitLibraryPaths {
-  client?: string
-  schema?: string
-  scalars?: string
+  client?: string | Fs.Path.$File
+  schema?: string | Fs.Path.$File
+  scalars?: string | Fs.Path.$File
+  utilitiesForGenerated: string | Fs.Path.$File
+  extensionTransportHttp: string | Fs.Path.$File
+  extensionDocumentBuilder: string | Fs.Path.$File
+}
+
+/**
+ * Processed library paths - all values are strings (import specifiers).
+ */
+export interface ConfigLibraryPaths {
+  client: string
+  schema: string
+  scalars: string
   utilitiesForGenerated: string
   extensionTransportHttp: string
   extensionDocumentBuilder: string

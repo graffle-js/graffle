@@ -1,22 +1,26 @@
 import { Graffle } from '#graffle'
-import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
 import { GraphqlKit } from '#src/lib/graphql-kit/_.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
-import { ConfigManager, Obj, Str } from '@wollybeard/kit'
+import { FileSystem } from '@effect/platform'
+import type { PlatformError } from '@effect/platform/Error'
+import { ConfigManager, Env, Fs, Obj, Str } from '@wollybeard/kit'
+import { Effect } from 'effect'
 import { pascalCase } from 'es-toolkit'
-import * as Path from 'node:path'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
+import { SchemaError } from '../errors.js'
 import type { Extension } from '../extension/types.js'
 import { detectDefaultImportFormat } from '../helpers/detectImportFormat.js'
 import {
   type ConfigInit,
-  type ConfigInitLibraryPaths,
+  type ConfigLibraryPaths,
   type InputImportFormat,
   type InputLint,
   type InputOutputCase,
   libraryPathKeys,
 } from './configInit.js'
 import { defaults } from './defaults.js'
+
+const p = Fs.Path.fromLiteral
 
 export const EmitMode = {
   never: 'never',
@@ -27,7 +31,6 @@ export const EmitMode = {
 export type EmitMode = typeof EmitMode[keyof typeof EmitMode]
 
 export interface Config {
-  fs: Fs
   name: string
   nameNamespace: string
   outputCase: InputOutputCase
@@ -59,22 +62,22 @@ export interface Config {
   paths: {
     project: {
       inputs: {
-        root: string
-        schema: null | string
-        scalars: string
+        root: Fs.Path.AbsDir
+        schema: Fs.Path.AbsFile | null
+        scalars: Fs.Path.AbsFile
       }
       outputs: {
         sdl: {
-          path: string
+          path: Fs.Path.AbsFile
           emitMode: EmitMode
         }
-        root: string
-        modules: string
+        root: Fs.Path.AbsDir
+        modules: Fs.Path.AbsDir
       }
     }
     imports: {
       scalars: string
-      grafflePackage: Required<ConfigInitLibraryPaths>
+      grafflePackage: ConfigLibraryPaths
     }
   }
   code: {
@@ -87,96 +90,108 @@ type ConfigInitDomainGroupingConfig = import('./configInit.js').DomainGroupingCo
 interface ConfigSchema {
   via: ConfigInit['schema']['type']
   sdl: string
-  sdlFilePath: null | string
+  sdlFilePath: Fs.Path.AbsFile | null
   instance: GraphqlKit.Schema.Runtime.Nodes.Schema
   kindMap: GraphqlKit.Schema.Kind.KindMap
 }
 
-export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
-  // --- Fs ---
+export const createConfig = (
+  configInit: ConfigInit,
+): Effect.Effect<Config, PlatformError | SchemaError, FileSystem.FileSystem> =>
+  Effect.gen(function*() {
+    // --- Output Case ---
 
-  const fs = configInit.fs ?? await import(`node:fs/promises`)
+    const outputCase = configInit.outputCase ?? defaults.outputCase
 
-  // --- Output Case ---
+    // --- Paths ---
 
-  const outputCase = configInit.outputCase ?? defaults.outputCase
+    // Helper to convert string | Path to Path
+    const toPath = <$path extends Fs.Path.$Abs | Fs.Path.$Rel>(input: string | $path): $path =>
+      (typeof input === 'string' ? Fs.Path.fromString(input) : input) as $path
 
-  // --- Paths ---
+    const cwd = configInit.currentWorkingDirectory
+      ? toPath(configInit.currentWorkingDirectory)
+      : Env.env.cwd
+    const toAbs = Fs.Path.ensureAbsoluteWith(cwd)
 
-  const cwd = configInit.currentWorkingDirectory ?? process.cwd()
+    const sourceDirPath = configInit.sourceDirPath
+      ? toAbs(toPath(configInit.sourceDirPath))
+      : cwd
 
-  const sourceDirPath = configInit.sourceDirPath ? toAbsolutePath(cwd, configInit.sourceDirPath) : cwd
+    const outputDirPathRoot = configInit.outputDirPath
+      ? toAbs(toPath(configInit.outputDirPath))
+      : Fs.Path.join(cwd, Fs.Path.fromLiteral(`./graffle/`))
 
-  const outputDirPathRoot = configInit.outputDirPath
-    ? toAbsolutePath(cwd, configInit.outputDirPath)
-    : Path.join(cwd, `./graffle`)
+    const outputDirPathModules = Fs.Path.join(outputDirPathRoot, Fs.Path.fromLiteral(`./modules/`))
 
-  const outputDirPathModules = Path.join(outputDirPathRoot, `/modules`)
+    const inputPathScalars = configInit.scalars
+      ? toAbs(toPath(configInit.scalars))
+      : Fs.Path.join(sourceDirPath, p(`./scalars.ts`))
 
-  const inputPathScalars = configInit.scalars
-    ? toAbsolutePath(cwd, configInit.scalars)
-    : Path.join(sourceDirPath, `scalars` + `.ts`)
-
-  const isCustomScalarsModuleExists = await fileExists(fs, inputPathScalars)
-  if (!isCustomScalarsModuleExists && configInit.scalars) {
-    // dprint-ignore
-    throw new Error(
-      `Custom scalar codecs file not found. Given path: ${String(configInit.scalars)}. Resolved to and looked at: ${inputPathScalars}`,
-    )
-  }
-
-  // Get import format early to use in path processing
-  // Auto-detect from tsconfig.json/package.json if not explicitly configured
-  const importFormat = configInit.importFormat
-    ?? await detectDefaultImportFormat(cwd)
-    ?? defaults.importFormat
-
-  // Helper to get the correct extension based on importFormat
-  const getImportExtension = (path: string): string => {
-    switch (importFormat) {
-      case `jsExtension`:
-        return path.replace(/\.ts$/, `.js`)
-      case `tsExtension`:
-        return path // Keep .ts extension
-      case `noExtension`:
-        return path.replace(/\.(ts|js)$/, ``) // Remove any extension
-      default:
-        return path.replace(/\.ts$/, `.js`)
+    const isCustomScalarsModuleExists = yield* Fs.exists(inputPathScalars)
+    if (!isCustomScalarsModuleExists && configInit.scalars) {
+      // dprint-ignore
+      throw new Error(
+        `Custom scalar codecs file not found. Given path: ${String(configInit.scalars)}. Resolved to and looked at: ${inputPathScalars}`,
+      )
     }
-  }
 
-  const scalarsImportPath = Path.relative(
-    outputDirPathModules,
-    getImportExtension(inputPathScalars),
-  )
+    // Get import format early to use in path processing
+    // Auto-detect from tsconfig.json/package.json if not explicitly configured
+    const importFormat = configInit.importFormat
+      ?? (yield* detectDefaultImportFormat(cwd))
+      ?? defaults.importFormat
 
-  // --- Schema ---
+    // Helper to transform import path extension based on importFormat
+    // Returns string because Kit doesn't export FileName for extensionless file construction
+    const toImportPath = (path: Fs.Path.$File): string => {
+      const stem = Fs.Path.stem(path)
+      const dir = Fs.Path.toDir(path)
+      const dirStr = dir.toString()
 
-  const schema = await createConfigSchema(fs, cwd, sourceDirPath, configInit)
+      switch (importFormat) {
+        case `jsExtension`:
+          return `${dirStr}${stem}.js`
+        case `tsExtension`:
+          return path.toString()
+        case `noExtension`:
+          return `${dirStr}${stem}`
+        default:
+          return `${dirStr}${stem}.js`
+      }
+    }
 
-  // --- Default Schema URL ---
+    const scalarsImportPath = toImportPath(
+      Fs.Path.toRel(inputPathScalars, outputDirPathModules),
+    )
 
-  // dprint-ignore
-  const defaultSchemaUrl =
-    configInit.defaultSchemaUrl === false
-      ? null
-      : typeof configInit.defaultSchemaUrl === `boolean` || configInit.defaultSchemaUrl === undefined
-        ? configInit.schema instanceof GraphqlKit.Schema.Runtime.Nodes.Schema
-          ? null
-          : configInit.schema.type === `url`
-            ? configInit.schema.url
-            : null
-        : configInit.defaultSchemaUrl
+    // --- Schema ---
 
-  // --- Formatting ---
+    const schema = yield* createConfigSchema(sourceDirPath, configInit)
 
-  const formattingEnabled = configInit.format ?? true
-  let formatter = passthroughFormatter
-  if (formattingEnabled) {
-    const formatterReal = await getTypeScriptFormatter(fs)
-    if (!formatterReal) {
-      // todo use floggy
-      console.log(`
+    // --- Default Schema URL ---
+
+    // dprint-ignore
+    const defaultSchemaUrl =
+      configInit.defaultSchemaUrl === false
+        ? null
+        : typeof configInit.defaultSchemaUrl === `boolean` || configInit.defaultSchemaUrl === undefined
+          ? configInit.schema instanceof GraphqlKit.Schema.Runtime.Nodes.Schema
+            ? null
+            : configInit.schema.type === `url`
+              ? configInit.schema.url
+              : null
+          : configInit.defaultSchemaUrl
+
+    // --- Formatting ---
+
+    const formattingEnabled = configInit.format ?? true
+    let formatter = passthroughFormatter
+    if (formattingEnabled) {
+      const formatterReal = yield* getTypeScriptFormatter()
+      if (!formatterReal) {
+        // todo use floggy
+        console.log(`
 WARNING: No TypeScript formatter found. Generated code will remain ugly. To have code automatically formatted do one of the following things:
 
 - pnpm add --save-dev @dprint/formatter @dprint/typescript
@@ -188,207 +203,235 @@ To suppress this warning disable formatting in one of the following ways:
 - Configuration file: Generator.configuration({ format: false })
 - API: Generator.generate({ format: false })
 `.trim())
-    } else {
-      formatter = formatterReal
-    }
-  }
-
-  // --- Library Paths ---
-
-  const processLibraryPath = (path: string) => {
-    // Subpaths starting with # should not be rewritten
-    if (path.startsWith('#')) {
-      return path
-    }
-    // Package specifiers (not filesystem paths) should be returned as-is
-    if (!path.startsWith('.') && !path.startsWith('/')) {
-      return path
-    }
-    const pathAbsolute = getImportExtension(toAbsolutePath(cwd, path))
-    return Path.relative(outputDirPathModules, pathAbsolute)
-  }
-
-  const libraryPaths = Object.fromEntries(
-    Obj.keysStrict(libraryPathKeys).map(_ => {
-      return [
-        _,
-        configInit.libraryPaths?.[_]
-          ? processLibraryPath(configInit.libraryPaths[_])
-          : undefined,
-      ]
-    }),
-  )
-
-  // --- Lint ---
-
-  const lint: Config['lint'] = {
-    missingCustomScalarCodec: configInit.lint?.missingCustomScalarCodec ?? defaults.lint.missingCustomScalarCodec,
-    missingGraphqlSP: configInit.lint?.missingGraphqlSP ?? defaults.lint.missingGraphqlSP,
-  }
-
-  // --- Output SDL ---
-
-  // Normalize outputSDL to structured config
-  // dprint-ignore
-  const outputSdlEmitMode: EmitMode =
-    configInit.outputSDL === undefined ? EmitMode.infer :
-    configInit.outputSDL === false     ? EmitMode.never :
-                                         EmitMode.always
-
-  // dprint-ignore
-  const outputSdlPath =
-    Str.is(configInit.outputSDL)
-      ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
-      : Path.join(outputDirPathRoot, `schema.graphql`)
-
-  // --- name ---
-
-  const name = configInit.name ?? defaults.name
-
-  const nameNamespace = configInit.nameNamespace === true
-    ? configInit.name
-      ? pascalCase(configInit.name)
-      : `Graffle`
-    : Str.is(configInit.nameNamespace)
-    ? configInit.nameNamespace
-    : `Graffle`
-
-  // --- advanced ---
-
-  const schemaInterfaceExtendsEnabled = configInit.advanced?.schemaInterfaceExtendsEnabled ?? false
-
-  // --- methods organization ---
-
-  const methodsOrganizationLogical = configInit.methodsOrganization?.logical ?? defaults.methodsOrganization.logical
-  const methodsOrganizationDomains = configInit.methodsOrganization?.domains ?? defaults.methodsOrganization.domains
-
-  // --- Config ---
-
-  return {
-    fs,
-    name,
-    importFormat,
-    nameNamespace,
-    extensions: configInit.extensions ?? [],
-    outputCase,
-    lint,
-    formatter,
-    runtimeFeatures: {
-      customScalars: true, // todo do not assume true
-      operationVariables: true, // todo do not assume true
-    },
-    methodsOrganization: {
-      logical: methodsOrganizationLogical,
-      domains: methodsOrganizationDomains,
-    },
-    schema,
-    options: {
-      isImportsCustomScalars: isCustomScalarsModuleExists,
-      defaultSchemaUrl,
-      format: formattingEnabled,
-      customScalars: isCustomScalarsModuleExists,
-      TSDoc: {
-        noDocPolicy: configInit.TSDoc?.noDocPolicy ?? `ignore`,
-      },
-    },
-    paths: {
-      project: {
-        outputs: {
-          root: outputDirPathRoot,
-          sdl: {
-            path: outputSdlPath,
-            emitMode: outputSdlEmitMode,
-          },
-          modules: outputDirPathModules,
-        },
-        inputs: {
-          root: sourceDirPath,
-          schema: schema.sdlFilePath,
-          scalars: inputPathScalars,
-        },
-      },
-      imports: {
-        scalars: scalarsImportPath,
-        grafflePackage: ConfigManager.mergeDefaults(
-          defaults.libraryPaths,
-          libraryPaths,
-        ),
-      },
-    },
-    code: {
-      schemaInterfaceExtendsEnabled,
-    },
-  }
-}
-
-const defaultSchemaFileName = `schema.graphql`
-
-const createConfigSchema = async (
-  fs: Fs,
-  cwd: string,
-  sourceDirPath: string,
-  input: ConfigInit,
-): Promise<ConfigSchema> => {
-  switch (input.schema.type) {
-    case `instance`: {
-      const sdl = GraphqlKit.Schema.Runtime.toString(input.schema.instance)
-      const instance = input.schema.instance
-      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
-      return {
-        via: input.schema.type,
-        sdlFilePath: null,
-        sdl,
-        instance,
-        kindMap,
-      }
-    }
-    case `sdl`:
-    case `sdlFile`: {
-      let sdl
-      let sdlFilePath: null | string = null
-      if (input.schema.type === `sdlFile`) {
-        const fileOrDirPath = input.schema.dirOrFilePath
-          ? toAbsolutePath(cwd, input.schema.dirOrFilePath)
-          : sourceDirPath
-        const isDir = await isPathToADirectory(fs, fileOrDirPath)
-        sdlFilePath = isDir ? Path.join(fileOrDirPath, defaultSchemaFileName) : fileOrDirPath
-        sdl = await fs.readFile(sdlFilePath, `utf8`)
       } else {
-        sdl = input.schema.sdl
-      }
-      const instance = GraphqlKit.Schema.Runtime.fromString(sdl)
-      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
-      return {
-        via: input.schema.type,
-        sdlFilePath,
-        sdl,
-        instance,
-        kindMap,
+        formatter = formatterReal
       }
     }
-    case `url`: {
-      const introspection = Introspection({ options: input.schema.options })
-      const graffle = Graffle
-        .create()
-        .use(introspection)
-        .transport({
-          url: input.schema.url,
-          headers: input.schema.headers,
+
+    // --- Library Paths ---
+
+    const processLibraryPath = (path: string | Fs.Path.$File) => {
+      // If Fs.Path, process as filesystem path
+      if (Fs.Path.$File.is(path)) {
+        const pathAbsolute = Fs.Path.ensureAbsolute(path, cwd)
+        const relPath = Fs.Path.toRel(pathAbsolute, outputDirPathModules)
+        return toImportPath(relPath)
+      }
+      // Subpaths starting with # should not be rewritten
+      if (path.startsWith('#')) {
+        return path
+      }
+      // Strings starting with . or / are invalid - should use Fs.Path.$File
+      if (path.startsWith('.') || path.startsWith('/')) {
+        throw new Error(
+          `Invalid library path: "${path}". Filesystem paths must use Fs.Path.$File, not strings.`,
+        )
+      }
+      // Package specifiers returned as-is
+      return path
+    }
+
+    const libraryPaths = Object.fromEntries(
+      Obj.keysStrict(libraryPathKeys).map((_) => {
+        return [
+          _,
+          configInit.libraryPaths?.[_]
+            ? processLibraryPath(configInit.libraryPaths[_])
+            : undefined,
+        ]
+      }),
+    )
+
+    // --- Lint ---
+
+    const lint: Config['lint'] = {
+      missingCustomScalarCodec: configInit.lint?.missingCustomScalarCodec ?? defaults.lint.missingCustomScalarCodec,
+      missingGraphqlSP: configInit.lint?.missingGraphqlSP ?? defaults.lint.missingGraphqlSP,
+    }
+
+    // --- Output SDL ---
+
+    // Normalize outputSDL to structured config
+    // dprint-ignore
+    const outputSdlEmitMode: EmitMode =
+      configInit.outputSDL === undefined ? EmitMode.infer :
+      configInit.outputSDL === false     ? EmitMode.never :
+                                           EmitMode.always
+
+    // dprint-ignore
+    const outputSdlPath = (() => {
+      if (typeof configInit.outputSDL === 'string' || typeof configInit.outputSDL === 'object' && configInit.outputSDL !== null) {
+        const sdlPathInput = typeof configInit.outputSDL === 'string'
+          ? toAbs(toPath(configInit.outputSDL))
+          : toAbs(configInit.outputSDL)
+        return Fs.Path.$Dir.is(sdlPathInput)
+          ? Fs.Path.join(sdlPathInput, p(`./schema.graphql`))
+          : sdlPathInput
+      }
+      return Fs.Path.join(outputDirPathRoot, p(`./schema.graphql`))
+    })()
+
+    // --- name ---
+
+    const name = configInit.name ?? defaults.name
+
+    const nameNamespace = configInit.nameNamespace === true
+      ? configInit.name
+        ? pascalCase(configInit.name)
+        : `Graffle`
+      : Str.is(configInit.nameNamespace)
+      ? configInit.nameNamespace
+      : `Graffle`
+
+    // --- advanced ---
+
+    const schemaInterfaceExtendsEnabled = configInit.advanced?.schemaInterfaceExtendsEnabled ?? false
+
+    // --- methods organization ---
+
+    const methodsOrganizationLogical = configInit.methodsOrganization?.logical ?? defaults.methodsOrganization.logical
+    const methodsOrganizationDomains = configInit.methodsOrganization?.domains ?? defaults.methodsOrganization.domains
+
+    // --- Config ---
+
+    return {
+      name,
+      importFormat,
+      nameNamespace,
+      extensions: configInit.extensions ?? [],
+      outputCase,
+      lint,
+      formatter,
+      runtimeFeatures: {
+        customScalars: true, // todo do not assume true
+        operationVariables: true, // todo do not assume true
+      },
+      methodsOrganization: {
+        logical: methodsOrganizationLogical,
+        domains: methodsOrganizationDomains,
+      },
+      schema,
+      options: {
+        isImportsCustomScalars: isCustomScalarsModuleExists,
+        defaultSchemaUrl,
+        format: formattingEnabled,
+        customScalars: isCustomScalarsModuleExists,
+        TSDoc: {
+          noDocPolicy: configInit.TSDoc?.noDocPolicy ?? `ignore`,
+        },
+      },
+      paths: {
+        project: {
+          outputs: {
+            root: outputDirPathRoot,
+            sdl: {
+              path: outputSdlPath,
+              emitMode: outputSdlEmitMode,
+            },
+            modules: outputDirPathModules,
+          },
+          inputs: {
+            root: sourceDirPath,
+            schema: schema.sdlFilePath,
+            scalars: inputPathScalars,
+          },
+        },
+        imports: {
+          scalars: scalarsImportPath,
+          grafflePackage: ConfigManager.mergeDefaults(
+            defaults.libraryPaths,
+            libraryPaths,
+          ),
+        },
+      },
+      code: {
+        schemaInterfaceExtendsEnabled,
+      },
+    }
+  })
+
+const defaultSchemaFileName = p(`./schema.graphql`)
+
+const createConfigSchema = (
+  sourceDirPath: Fs.Path.AbsDir,
+  input: ConfigInit,
+): Effect.Effect<ConfigSchema, PlatformError | SchemaError, FileSystem.FileSystem> =>
+  Effect.gen(function*() {
+    switch (input.schema.type) {
+      case `instance`: {
+        const sdl = GraphqlKit.Schema.Runtime.toString(input.schema.instance)
+        const instance = input.schema.instance
+        const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
+        return {
+          via: input.schema.type,
+          sdlFilePath: null,
+          sdl,
+          instance,
+          kindMap,
+        }
+      }
+      case `sdl`:
+      case `sdlFile`: {
+        let sdl
+        let sdlFilePath: Fs.Path.AbsFile | null = null
+        if (input.schema.type === `sdlFile`) {
+          const fileOrDirPathInput = input.schema.dirOrFilePath
+          const fileOrDirPath = fileOrDirPathInput
+            ? (typeof fileOrDirPathInput === 'string'
+              ? Fs.Path.ensureAbsolute(Fs.Path.fromString(fileOrDirPathInput), sourceDirPath)
+              : Fs.Path.ensureAbsolute(fileOrDirPathInput, sourceDirPath))
+            : sourceDirPath
+          sdlFilePath = Fs.Path.$Dir.is(fileOrDirPath)
+            ? Fs.Path.join(fileOrDirPath, defaultSchemaFileName)
+            : fileOrDirPath
+          sdl = yield* Fs.readString(sdlFilePath)
+        } else {
+          sdl = input.schema.sdl
+        }
+        const instance = GraphqlKit.Schema.Runtime.fromString(sdl)
+        const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
+        return {
+          via: input.schema.type,
+          sdlFilePath,
+          sdl,
+          instance,
+          kindMap,
+        }
+      }
+      case `url`: {
+        const introspection = Introspection({ options: input.schema.options })
+        const graffle = Graffle
+          .create()
+          .use(introspection)
+          .transport({
+            url: input.schema.url,
+            headers: input.schema.headers,
+          })
+        const data = yield* Effect.tryPromise({
+          try: () => graffle.introspect(),
+          catch: (error) =>
+            new SchemaError({
+              message: `Introspection failed`,
+              via: `url`,
+              cause: error,
+            }),
         })
-      const data = await graffle.introspect()
-      if (!data) {
-        throw new Error(`No data returned for introspection query.`)
-      }
-      const instance = GraphqlKit.Schema.Runtime.fromIntrospection(data)
-      const sdl = GraphqlKit.Schema.Runtime.toString(instance)
-      const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
-      return {
-        via: `url`,
-        sdlFilePath: null,
-        sdl,
-        instance,
-        kindMap,
+        if (!data) {
+          return yield* new SchemaError({
+            message: `No data returned for introspection query.`,
+            via: `url`,
+          })
+        }
+        const instance = GraphqlKit.Schema.Runtime.fromIntrospection(data)
+        const sdl = GraphqlKit.Schema.Runtime.toString(instance)
+        const kindMap = GraphqlKit.Schema.Kind.KindMap.getKindMap(instance)
+        return {
+          via: `url`,
+          sdlFilePath: null,
+          sdl,
+          instance,
+          kindMap,
+        }
       }
     }
-  }
-}
+  })

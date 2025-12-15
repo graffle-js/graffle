@@ -50,6 +50,10 @@ export const defaultEncoder: EncoderFunction = (value: string) => {
     .replace(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
     // Mask HTTP date headers - common across HTTP examples
     .replace(/date: '[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]{2} \d{4} \d{2}:\d{2}:\d{2} GMT'/gi, `date: 'DYNAMIC_DATE'`)
+    // Normalize localhost port numbers (e.g., localhost:3002 -> localhost:3000)
+    .replace(/localhost:\d{4,5}/g, `localhost:3000`)
+    // Normalize standalone port fields in URL objects (e.g., port: '3002' -> port: '3000')
+    .replace(/port: '(\d{4,5})'/g, `port: '3000'`)
 }
 
 /**

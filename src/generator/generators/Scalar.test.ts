@@ -1,14 +1,14 @@
-import * as MemFS from 'memfs'
-import * as Fs from 'node:fs/promises'
-import { beforeEach, describe, expect, test } from 'vitest'
+import { Env, Fs } from '@wollybeard/kit'
+import { Effect } from 'effect'
+import { describe, expect, test } from 'vitest'
 import { defaults } from '../config/defaults.js'
 import { generate } from '../generator/generate.js'
+
+const p = Fs.Path.fromLiteral
 
 // Suppress warnings in tests
 defaults.lint.missingCustomScalarCodec = false
 defaults.lint.missingGraphqlSP = false
-
-const fs = MemFS.fs.promises as any as typeof Fs
 
 // Test fixtures
 const schemas = {
@@ -42,17 +42,12 @@ const customScalarsCode = `
   }
 `
 
-const readGeneratedFiles = () => ({
-  scalar: MemFS.fs.readFileSync('./graffle/modules/scalar.ts', 'utf8'),
-  schema: MemFS.fs.readFileSync('./graffle/modules/schema/_.ts', 'utf8'),
-  sddm: MemFS.fs.readFileSync('./graffle/modules/schema-driven-data-map.ts', 'utf8'),
-})
-
-beforeEach(async () => {
-  try {
-    await fs.rmdir(process.cwd(), { recursive: true })
-  } catch {}
-  await fs.mkdir(process.cwd(), { recursive: true })
+const readGeneratedFiles = Effect.gen(function*() {
+  const base = Fs.Path.join(Env.env.cwd, p(`./graffle/modules/`))
+  const scalar = yield* Fs.readString(Fs.Path.join(base, p(`./scalar.ts`)))
+  const schema = yield* Fs.readString(Fs.Path.join(base, p(`./schema/_.ts`)))
+  const sddm = yield* Fs.readString(Fs.Path.join(base, p(`./schema-driven-data-map.ts`)))
+  return { scalar, schema, sddm }
 })
 
 describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
@@ -81,12 +76,21 @@ describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
       }
     `
 
-    await fs.writeFile('./scalars.ts', customScalarsBigIntDateTime)
-    await generate({ fs, schema: { type: 'sdl', sdl: schemaWithCustomScalars } })
-    const { scalar, sddm } = readGeneratedFiles()
+    const layout = Fs.Builder.spec(Env.env.cwd)
+      .file('scalars.ts', customScalarsBigIntDateTime)
+      .toLayout()
+
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl: schemaWithCustomScalars } })
+      return yield* readGeneratedFiles
+    })
+
+    const { scalar, sddm } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer(layout))),
+    )
 
     // The scalar module should import custom scalars namespace
-    expect(scalar).toContain('import * as CustomScalars from "../../scalars.js"')
+    expect(scalar).toContain(`import * as CustomScalars from "../../scalars.js"`)
 
     // Should export both const and type for each custom scalar
     expect(scalar).toContain('export const BigInt = CustomScalars.BigInt')
@@ -126,24 +130,38 @@ describe('Issue #1367 - Import format noExtension not working', () => {
       }
     `
 
-    await fs.writeFile('./scalars.ts', customScalarsBigIntDateTime)
-    await generate({
-      fs,
-      schema: { type: 'sdl', sdl: schemaWithCustomScalars },
-      importFormat: 'noExtension',
+    const layout = Fs.Builder.spec(Env.env.cwd)
+      .file('scalars.ts', customScalarsBigIntDateTime)
+      .toLayout()
+
+    const program = Effect.gen(function*() {
+      yield* generate({
+        schema: { type: 'sdl', sdl: schemaWithCustomScalars },
+        importFormat: 'noExtension',
+      })
+      return yield* readGeneratedFiles
     })
-    const { scalar } = readGeneratedFiles()
+
+    const { scalar } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer(layout))),
+    )
 
     // Should NOT have .js extension when importFormat is noExtension
-    expect(scalar).toContain('import * as CustomScalars from "../../scalars"')
-    expect(scalar).not.toContain('from "../../scalars.js"')
+    expect(scalar).toContain(`import * as CustomScalars from "../../scalars"`)
+    expect(scalar).not.toContain(`from "../../scalars.js"`)
   })
 })
 
 describe('Issue #1354 - TypeScript reserved keywords', () => {
   test('escapes reserved keywords in codecless scalars', async () => {
-    await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
-    const { scalar } = readGeneratedFiles()
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
+      return yield* readGeneratedFiles
+    })
+
+    const { scalar } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer({}))),
+    )
 
     // Codecless scalars generate runtime objects with identity codecs
     expect(scalar).toContain('const $bigint =')
@@ -163,9 +181,18 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
   })
 
   test('escapes reserved keywords with custom scalar codecs', async () => {
-    await fs.writeFile('./scalars.ts', customScalarsCode)
-    await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
-    const { scalar } = readGeneratedFiles()
+    const layout = Fs.Builder.spec(Env.env.cwd)
+      .file('scalars.ts', customScalarsCode)
+      .toLayout()
+
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl: schemas.bigintOnly } })
+      return yield* readGeneratedFiles
+    })
+
+    const { scalar } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer(layout))),
+    )
 
     // Uses dual export pattern for reserved keyword scalar
     expect(scalar).toContain('const $bigint = CustomScalars.bigint')
@@ -181,8 +208,14 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
   })
 
   test('cross-module references use escaped names correctly', async () => {
-    await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
-    const { schema, sddm } = readGeneratedFiles()
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
+      return yield* readGeneratedFiles
+    })
+
+    const { schema, sddm } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer({}))),
+    )
 
     // Codecless scalars use same pattern as custom scalars in new SDDM
     expect(sddm).toContain('namedType: $$Scalar.bigint')
@@ -194,9 +227,18 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
   })
 
   test('cross-module references with custom scalar codecs', async () => {
-    await fs.writeFile('./scalars.ts', customScalarsCode)
-    await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
-    const { scalar, schema, sddm } = readGeneratedFiles()
+    const layout = Fs.Builder.spec(Env.env.cwd)
+      .file('scalars.ts', customScalarsCode)
+      .toLayout()
+
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
+      return yield* readGeneratedFiles
+    })
+
+    const { scalar, schema, sddm } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer(layout))),
+    )
 
     // Scalar module uses re-export syntax for reserved keywords
     expect(scalar).toContain('const $bigint = CustomScalars.bigint')
@@ -219,8 +261,14 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
   })
 
   test('schema scalars object uses escaped names for reserved keywords', async () => {
-    await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
-    const { schema } = readGeneratedFiles()
+    const program = Effect.gen(function*() {
+      yield* generate({ schema: { type: 'sdl', sdl: schemas.bigintOnly } })
+      return yield* readGeneratedFiles
+    })
+
+    const { schema } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer({}))),
+    )
 
     // The Schema interface scalars object should reference types from barrel
     expect(schema).toContain('bigint: $Types.bigint')

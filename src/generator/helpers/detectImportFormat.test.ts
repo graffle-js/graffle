@@ -1,4 +1,8 @@
-import { beforeEach, expect, test, vi } from 'vitest'
+import { NodeContext } from '@effect/platform-node'
+import { it } from '@effect/vitest'
+import { Fs } from '@wollybeard/kit'
+import { Effect } from 'effect'
+import { beforeEach, expect, vi } from 'vitest'
 
 vi.mock(`typescript`, () => ({
   findConfigFile: vi.fn(),
@@ -7,11 +11,8 @@ vi.mock(`typescript`, () => ({
   sys: { fileExists: vi.fn(), readFile: vi.fn() },
 }))
 
-vi.mock(`node:fs/promises`, () => ({ readFile: vi.fn() }))
-
-let detect: (cwd: string) => Promise<string | null>
+let detect: typeof import('./detectImportFormat.js').detectDefaultImportFormat
 let ts: any
-let fs: any
 
 const mockModuleResolution = (mode: string) => {
   vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({
@@ -19,10 +20,11 @@ const mockModuleResolution = (mode: string) => {
   })
 }
 
+const testCwd = Fs.Path.fromLiteral(`/`)
+
 beforeEach(async () => {
   vi.clearAllMocks()
   ts = await import(`typescript`)
-  fs = await import(`node:fs/promises`)
   detect = (await import(`./detectImportFormat.js`)).detectDefaultImportFormat
 
   // Default happy path
@@ -31,40 +33,61 @@ beforeEach(async () => {
   vi.mocked(ts.parseJsonConfigFileContent).mockReturnValue({ options: {} })
 })
 
-test(`bundler → noExtension`, async () => {
-  mockModuleResolution(`bundler`)
-  expect(await detect(`/`)).toBe(`noExtension`)
-})
+it.effect(`bundler → noExtension`, () =>
+  Effect.gen(function*() {
+    mockModuleResolution(`bundler`)
+    const result = yield* detect(testCwd)
+    expect(result).toBe(`noExtension`)
+  }).pipe(Effect.provide(NodeContext.layer)))
 
-test(`node16 + type:module → jsExtension`, async () => {
-  mockModuleResolution(`node16`)
-  vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({ type: `module` }))
-  expect(await detect(`/`)).toBe(`jsExtension`)
-})
+it.effect(`node16 + type:module → jsExtension`, () =>
+  Effect.gen(function*() {
+    mockModuleResolution(`node16`)
+    const result = yield* detect(testCwd)
+    expect(result).toBe(`jsExtension`)
+  }).pipe(
+    Effect.provide(Fs.Memory.layer({
+      '/package.json': JSON.stringify({ type: `module` }),
+    })),
+  ))
 
-test(`node16 + CJS → noExtension`, async () => {
-  mockModuleResolution(`node16`)
-  vi.mocked(fs.readFile).mockResolvedValue(JSON.stringify({}))
-  expect(await detect(`/`)).toBe(`noExtension`)
-})
+it.effect(`node16 + CJS → noExtension`, () =>
+  Effect.gen(function*() {
+    mockModuleResolution(`node16`)
+    const result = yield* detect(testCwd)
+    expect(result).toBe(`noExtension`)
+  }).pipe(
+    Effect.provide(Fs.Memory.layer({
+      '/package.json': JSON.stringify({}),
+    })),
+  ))
 
-test(`node16 + missing package.json → noExtension`, async () => {
-  mockModuleResolution(`node16`)
-  vi.mocked(fs.readFile).mockRejectedValue(new Error(`ENOENT`))
-  expect(await detect(`/`)).toBe(`noExtension`)
-})
+it.effect(`node16 + missing package.json → noExtension`, () =>
+  Effect.gen(function*() {
+    mockModuleResolution(`node16`)
+    const result = yield* detect(testCwd)
+    expect(result).toBe(`noExtension`)
+  }).pipe(
+    Effect.provide(Fs.Memory.layer({})),
+  ))
 
-test(`unknown moduleResolution → null`, async () => {
-  mockModuleResolution(`node`)
-  expect(await detect(`/`)).toBe(null)
-})
+it.effect(`unknown moduleResolution → null`, () =>
+  Effect.gen(function*() {
+    mockModuleResolution(`node`)
+    const result = yield* detect(testCwd)
+    expect(result).toBe(null)
+  }).pipe(Effect.provide(NodeContext.layer)))
 
-test(`missing tsconfig → null`, async () => {
-  vi.mocked(ts.findConfigFile).mockReturnValue(undefined)
-  expect(await detect(`/`)).toBe(null)
-})
+it.effect(`missing tsconfig → null`, () =>
+  Effect.gen(function*() {
+    vi.mocked(ts.findConfigFile).mockReturnValue(undefined)
+    const result = yield* detect(testCwd)
+    expect(result).toBe(null)
+  }).pipe(Effect.provide(NodeContext.layer)))
 
-test(`tsconfig parse error → null`, async () => {
-  vi.mocked(ts.readConfigFile).mockReturnValue({ error: new Error(), config: undefined })
-  expect(await detect(`/`)).toBe(null)
-})
+it.effect(`tsconfig parse error → null`, () =>
+  Effect.gen(function*() {
+    vi.mocked(ts.readConfigFile).mockReturnValue({ error: new Error(), config: undefined })
+    const result = yield* detect(testCwd)
+    expect(result).toBe(null)
+  }).pipe(Effect.provide(NodeContext.layer)))
