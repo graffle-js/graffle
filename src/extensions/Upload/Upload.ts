@@ -20,10 +20,18 @@ export const Upload = Extension
       throw new Error(`Must be using http transport to use "Upload" scalar.`)
     }
 
+    // Extract current transport configuration
+    // @ts-expect-error 1
+    const existingTransport = pack.input.transport
+    const existingHeaders = existingTransport.headers
+
     // Remove the content-type header so that fetch sets it automatically upon seeing the body is a FormData instance.
     // @see https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
     // @see https://stackoverflow.com/questions/3508338/what-is-the-boundary-in-multipart-form-data
     // @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition
+    const updatedHeaders = existingHeaders instanceof Headers ? existingHeaders : new Headers()
+    updatedHeaders.delete('content-type');
+
     return await pack({
       using: {
         // @ts-expect-error fixme
@@ -51,13 +59,8 @@ export const Upload = Extension
         ...pack.input,
         // @ts-expect-error 1
         transport: {
-          // @ts-expect-error 1
-          ...pack.input.transport,
-          headers: {
-            // @ts-expect-error 1
-            ...pack.input.transport.headers,
-            'content-type': ``,
-          },
+          ...existingTransport,
+          headers: updatedHeaders,
         },
       },
     })
