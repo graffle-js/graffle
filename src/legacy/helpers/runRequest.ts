@@ -173,6 +173,13 @@ const parseResultFromText = (text: string, contentType: string | null, jsonSeria
   }
 }
 
+// Resolve relative endpoints (e.g. `/graphql`) against the current origin when running in a browser.
+const toRequestUrl = (url: string): URL => {
+  const location = (globalThis as { location?: { href?: string } }).location
+  const base = location && typeof location.href === `string` ? location.href : undefined
+  return base ? new URL(url, base) : new URL(url)
+}
+
 const createFetcher = (method: 'GET' | 'POST') => async (params: Input) => {
   const headers = new Headers(params.headers)
   let searchParams: URLSearchParams | null = null
@@ -194,7 +201,7 @@ const createFetcher = (method: 'GET' | 'POST') => async (params: Input) => {
 
   const init: RequestInit = { method, headers, body, ...params.fetchOptions }
 
-  let url = new URL(params.url)
+  let url = toRequestUrl(params.url)
   let initResolved = init
 
   if (params.middleware) {
@@ -207,7 +214,7 @@ const createFetcher = (method: 'GET' | 'POST') => async (params: Input) => {
       }),
     )
     const { url: urlNew, ...initNew } = result
-    url = new URL(urlNew)
+    url = toRequestUrl(urlNew)
     initResolved = initNew
   }
 
