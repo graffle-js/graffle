@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest'
+import { afterEach, describe, expect, test } from 'vitest'
 import { GraphQLClient } from '../../src/entrypoints/main.js'
 import { setupMockServer } from './__helpers.js'
 
@@ -21,5 +21,25 @@ describe(`using class`, () => {
     await client.request(`{ test }`)
     expect(mock_0.requests.length).toEqual(1)
     expect(mock_1.requests.length).toEqual(2)
+  })
+})
+
+describe(`relative endpoint`, () => {
+  afterEach(() => {
+    delete (globalThis as { location?: unknown }).location
+  })
+
+  test(`is resolved against the current origin in a browser-like environment`, async () => {
+    ;(globalThis as { location?: unknown }).location = { href: `https://example.org/app/` }
+    let requestedUrl: string | undefined
+    const customFetch = (input: RequestInfo | URL): Promise<Response> => {
+      requestedUrl = String(input)
+      return Promise.resolve(new Response(JSON.stringify({ data: { ok: true } }), {
+        headers: { 'content-type': `application/json` },
+      }))
+    }
+    const client = new GraphQLClient(`/graphql`, { fetch: customFetch })
+    await client.request(`{ ok }`)
+    expect(requestedUrl).toEqual(`https://example.org/graphql`)
   })
 })
