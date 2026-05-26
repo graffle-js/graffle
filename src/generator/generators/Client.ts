@@ -31,6 +31,13 @@ export const ModuleGeneratorClient = createModuleGenerator(
         from: config.paths.imports.grafflePackage.extensionDocumentBuilder,
       }),
     )
+    code(
+      Syn.TS.importNamed({
+        names: 'Create',
+        from: config.paths.imports.grafflePackage.client,
+        type: true,
+      }),
+    )
 
     code`
       const context = ${$.$$Utilities}.pipe(
@@ -77,7 +84,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
        * const result = await client.query.pokemon({ name: true })
        * \`\`\`
        */
-      export const create = ${$.$$Utilities}.createConstructorWithContext(context)
+      export const create: Create<typeof context> = ${$.$$Utilities}.createConstructorWithContext(context)
     `
   },
 )
