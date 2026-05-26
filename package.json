@@ -27,7 +27,20 @@
     "./extensions/schema-errors": "./build/exports/extensions/schema-errors/runtime.js",
     "./extensions/transport-http": "./build/exports/extensions/transport-http/runtime.js",
     "./extensions/transport-memory": "./build/exports/extensions/transport-memory/runtime.js",
-    "./extensions/upload": "./build/exports/extensions/upload/runtime.js"
+    "./extensions/upload": "./build/exports/extensions/upload/runtime.js",
+    "./build/client/client.js": "./build/client/client.js",
+    "./build/client/handle.js": "./build/client/handle.js",
+    "./build/context/fragments/configuration/check/check.js": "./build/context/fragments/configuration/check/check.js",
+    "./build/context/fragments/configuration/fragment.js": "./build/context/fragments/configuration/fragment.js",
+    "./build/context/fragments/configuration/output/configuration.js": "./build/context/fragments/configuration/output/configuration.js",
+    "./build/context/fragments/configuration/schema/configuration.js": "./build/context/fragments/configuration/schema/configuration.js",
+    "./build/context/fragments/extensions/fragment.js": "./build/context/fragments/extensions/fragment.js",
+    "./build/context/fragments/properties/fragment.js": "./build/context/fragments/properties/fragment.js",
+    "./build/context/fragments/requestInterceptors/helpers.js": "./build/context/fragments/requestInterceptors/helpers.js",
+    "./build/context/fragments/transports/dataType/data.js": "./build/context/fragments/transports/dataType/data.js",
+    "./build/context/fragments/transports/__.js": "./build/context/fragments/transports/__.js",
+    "./build/client/methods/gql/DocumentSender.js": "./build/client/methods/gql/DocumentSender.js",
+    "./build/lib/graphql-kit/document/__.js": "./build/lib/graphql-kit/document/__.js"
   },
   "files": [
     "build",

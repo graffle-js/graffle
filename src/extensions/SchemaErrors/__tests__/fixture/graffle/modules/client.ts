@@ -1,3 +1,4 @@
+import type { Create } from '#graffle/client'
 import { DocumentBuilder } from '#graffle/extensions/document-builder'
 import { TransportHttp } from '#graffle/extensions/transport-http'
 import * as $$Utilities from '#graffle/utilities-for-generated'
@@ -49,4 +50,4 @@ const context = $$Utilities.pipe(
  * const result = await client.query.pokemon({ name: true })
  * ```
  */
-export const create = $$Utilities.createConstructorWithContext(context)
+export const create: Create<typeof context> = $$Utilities.createConstructorWithContext(context)
