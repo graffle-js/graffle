@@ -33,11 +33,18 @@ jobs:
       matrix:
         node: [18, 20]
         environment: [jsdom, node]
-    name: Node ${{ matrix.node }} @env ${{matrix.environment}}
+        graphql: ['16.9.0']
+        include:
+          - node: 24
+            environment: node
+            graphql: '17.0.2'
+    name: Node ${{ matrix.node }} @env ${{matrix.environment}} @graphql ${{ matrix.graphql }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node }}
+      - if: matrix.graphql == '17.0.2'
+        run: pnpm add --save-dev --save-exact graphql@${{ matrix.graphql }} --lockfile=false
       - run: pnpm build
       - run: pnpm test -- --environment ${{ matrix.environment }}
