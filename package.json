@@ -62,10 +62,9 @@
     "@graphql-typed-document-node/core": "^3.2.0"
   },
   "peerDependencies": {
-    "graphql": "14 - 16"
+    "graphql": "14 - 17"
   },
   "devDependencies": {
-    "dprint": "^0.50.2",
     "@arethetypeswrong/cli": "^0.15.3",
     "@pothos/core": "^3.41.1",
     "@pothos/plugin-simple-objects": "^3.7.0",
@@ -80,6 +79,7 @@
     "apollo-server-express": "^3.13.0",
     "body-parser": "^1.20.2",
     "doctoc": "^2.2.1",
+    "dprint": "^0.50.2",
     "dripip": "^0.10.0",
     "eslint": "^9.5.0",
     "eslint-config-prisma": "^0.6.0",
@@ -91,7 +91,7 @@
     "eslint-typescript": "^1.1.0",
     "express": "^4.19.2",
     "get-port": "^7.1.0",
-    "graphql": "^16.9.0",
+    "graphql": "^17.0.2",
     "graphql-scalars": "^1.23.0",
     "graphql-tag": "^2.12.6",
     "jsdom": "^24.1.0",
