@@ -62,7 +62,7 @@
     "@graphql-typed-document-node/core": "^3.2.0"
   },
   "peerDependencies": {
-    "graphql": "14 - 16"
+    "graphql": "14 - 17"
   },
   "devDependencies": {
     "dprint": "^0.50.2",
