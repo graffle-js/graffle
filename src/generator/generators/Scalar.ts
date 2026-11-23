@@ -141,7 +141,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       ? `$$Utilities.Schema.Scalars.Registry<
           ${Syn.TS.TermObject.termObject(buildtimeMap)},
           ${Syn.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetEncoded<${renderName(_.name)}['codec']>`))},
-          ${Syn.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetDecoded<${renderName(_.name)}['codec']>`))},
+          ${Syn.TS.unionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Codec.GetDecoded<${renderName(_.name)}['codec']>`))}
         >`
       : `$$Utilities.Schema.Scalars.Registry.Empty`
 

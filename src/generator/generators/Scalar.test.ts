@@ -1,5 +1,6 @@
 import { Env, Fs } from '@wollybeard/kit'
 import { Effect } from 'effect'
+import { Project } from 'ts-morph'
 import { describe, expect, test } from 'vitest'
 import { defaults } from '../config/defaults.js'
 import { generate } from '../generator/generate.js'
@@ -48,6 +49,36 @@ const readGeneratedFiles = Effect.gen(function*() {
   const schema = yield* Fs.readString(Fs.Path.join(base, p(`./schema/_.ts`)))
   const sddm = yield* Fs.readString(Fs.Path.join(base, p(`./schema-driven-data-map.ts`)))
   return { scalar, schema, sddm }
+})
+
+describe('Issue #1482 - Trailing comma in scalar registry type arguments', () => {
+  test.each([
+    ['one', schemas.bigintOnly],
+    ['multiple', schemas.withReservedScalars],
+  ])('unformatted %s-scalar registry has no TS1009 diagnostic', async (_, sdl) => {
+    const layout = Fs.Builder.spec(Env.env.cwd)
+      .file('scalars.ts', customScalarsCode)
+      .toLayout()
+
+    const program = Effect.gen(function*() {
+      yield* generate({ format: false, schema: { type: 'sdl', sdl } })
+      return yield* readGeneratedFiles
+    })
+
+    const { scalar } = await Effect.runPromise(
+      program.pipe(Effect.provide(Fs.Memory.layer(layout))),
+    )
+
+    expect(scalar).toContain('$$Utilities.Schema.Scalars.Registry<')
+
+    const project = new Project({ useInMemoryFileSystem: true })
+    const scalarFile = project.createSourceFile('scalar.ts', scalar)
+    const trailingCommaDiagnostics = scalarFile.getPreEmitDiagnostics()
+      .filter(diagnostic => diagnostic.getCode() === 1009)
+      .map(diagnostic => diagnostic.getMessageText())
+
+    expect(trailingCommaDiagnostics).toEqual([])
+  })
 })
 
 describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
